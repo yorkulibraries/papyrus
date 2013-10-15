@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hello, <%= @student.name %></h1>
+    <p>
+      This is a message from Library's Accessibility Application - Papyrus      
+    </p>
+	<p><strong>Message</strong></p>
+	<%= simple_format @message %>
+	<hr/>
+    <p>
+      To login to the site, just follow this link: <a href="<%= @url %>"><%= @url %></a>. You must have a Passport York Account to Log in.
+    </p>
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>

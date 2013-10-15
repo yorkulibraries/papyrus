@@ -1,0 +1,46 @@
+<% title "Users" %>
+<% title_html do %>
+	<h1>All Users</h1>
+<% end %>
+<% sidebar do %>	
+	<%= link_to "Add a New User", new_user_path, :class => "btn btn-huge" %>
+	<div class="push-down">
+		<h3>Adding Users</h3>
+		<p class="indent">An administrator can add a new user to the system. Users must be assigned roles, which will determine their access level.</p>
+		<span class="strong">Roles</span>
+		<hr/>
+		<ul class="indent bullets">
+			<% User::ROLE_NAMES.each do |role| %>
+				<li><%= role.humanize %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+
+<div class="btn-group">
+		<%= link_to "Active Users", users_path, :class => "btn #{"active" if controller.action_name == "index"}" %>
+		<%= link_to "Inactive Users", inactive_users_path, :class => "btn #{"active" if controller.action_name == "inactive"}" %>
+</div>
+<div class="push-down">
+	<table class="table table-condensed">
+	  <tr>
+	 	<th>Name</th>
+	    <th>Role</th>
+	    <th>Username</th>	   
+		<th>Joined On</th>
+		<th></th>
+	  </tr>
+	  <% for user in @users %>
+	    <tr>	      
+	      <td><%= user.name %></td>
+	      <td><%= user.role %></td>
+		  <td><%= user.username %></td>
+		  <td><%= user.created_at.strftime("%b %d, %Y") %></td>
+	      <td><%= link_to "Edit User Details", edit_user_path(user), :class => "btn btn-primary btn-mini" %></td>
+	    </tr>
+	  <% end %>
+	</table>
+</div>
+
+

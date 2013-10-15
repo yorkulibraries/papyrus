@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %> | <%= controller.controller_name.humanize %> - Papyrus | LAS</title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  </head>
+  <body>
+	
+	<%= render :template => "layouts/navbar"%>
+	
+	
+	<% if content_for?(:splash_section) %>
+		<div class="container">
+			<%=  yield (:splash_section) %>
+		</div>		
+	<% end %>
+	
+	
+
+
+	
+	 <div class="container">
+		
+		<% flash.each do |name, msg| %>
+		  <div class="push-down"></div>
+		  <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+		    <a class="close" data-dismiss="alert">×</a>
+		    <%= msg %>
+		  </div>
+		<% end %>
+		
+		<div class="page-header">
+	    	<%= content_tag :h1, yield(:title) if show_title? && !content_for?(:title_html) %>
+			<%= yield (:title_html) if content_for?(:title_html)%>	     
+	    </div>
+		<div class="row">
+			<div class="<%= content_for?(:sidebar) ? "span9" : "span12" %>">									    					
+					<%= yield %>
+			</div>
+			<% if content_for?(:sidebar) %>
+			<div class="span3">			
+					<%=  yield (:sidebar) %>								
+			</div>
+			<% end %>
+		</div>
+	  	<section class="weak push-down">Papyrus - Library Accessibility Services. v.<%= papyrus_version %></section>	
+	  </div>
+	  
+  
+  </body>
+</html>

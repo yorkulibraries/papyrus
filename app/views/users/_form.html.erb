@@ -1,0 +1,35 @@
+
+<%= simple_form_for @user, :html => { :class => "form-horizontal standout" } do |f| %>
+
+	<div class="row"> 
+		<div class="span4">
+			<%= f.input :name %>
+
+		    <%= f.input :username, :hint => "Passport York Username"  %>
+		</div>
+
+	  	<div class="span4">
+			<%= f.input :email, :hint => "York Email" %>
+
+	    	<%= f.input :role, :collection => User::ROLES %>
+		</div>
+	</div>
+	<div class="form-actions">
+		<%= f.button :submit, :class => "btn btn-primary" %> <%= link_to "Cancel", users_path, :class  => "btn " %>
+		
+		<div class="float-right">
+			<%  unless @user.inactive %>
+				
+				<%= link_to "Disable Access", @user, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" unless @user.new_record?%>
+			<% else %>
+				<%= link_to "Activate This User", activate_user_path(@user), :class => "btn btn-info", :method => :post  %>
+			<% end %>
+			
+		</div>
+	</div>
+	
+
+<% end %>
+<p class="float-right">
+	<span class="label label-important">Warning:</span> You can disable this user's access to the system. This action can be reversed.
+</p>

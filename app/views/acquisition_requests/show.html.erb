@@ -1,0 +1,70 @@
+<% title "Acquisition Request" %>
+<% title_html do%>
+	<h1><small>Acquisition Request</small></h1>
+<% end %>
+
+<div class="actions">
+	<% unless @acquisition_request.fulfilled? || @acquisition_request.cancelled? %>
+		<%= link_to "Fulfill Request", fulfill_acquisition_request_path(@acquisition_request), :class => "btn btn-success", :method => :post %>
+		<%= link_to "Cancel", @acquisition_request, :confirm => "Are you sure? This can't be undone.", :method => :delete,  :class => "btn btn-danger float-right" %>
+	<% end %>
+	<%= link_to "Add A Note", edit_acquisition_request_path(@acquisition_request), :class => "btn" %>
+</div>
+
+<div class="acquisition_requests well push-down">
+	<%= render :partial => @acquisition_request %>
+	
+	
+	<table class="table">
+		<tr>
+			<td class="trivial">requested by</td>
+			<td class="strong"><%= @acquisition_request.requested_by.username %></td>
+			<td>on <%= @acquisition_request.requested_by_date.strftime("%b %d, %Y") %></td>
+		</tr>
+		<% if  @acquisition_request.fulfilled? %>
+		<tr>
+			<td class="trivial">fulfilled by</td>
+			<td class="strong"><%= @acquisition_request.fulfilled_by.username %></td>
+			<td>on <%= @acquisition_request.fulfilled_by_date.strftime("%b %d, %Y") %></td>
+		</tr>
+		<% end %>
+		<% if @acquisition_request.cancelled? %>
+		<tr>
+			<td class="trivial">cancelled by</td>
+			<td class="strong"><%= @acquisition_request.cancelled_by.username %></td>
+			<td>on <%= @acquisition_request.cancelled_by_date.strftime("%b %d, %Y") %></td>
+		</tr>
+		<% end %>
+		<% if @acquisition_request.notes %>
+		<tr>
+			<td class="trivial">Note</td>
+			<td colspan="2">
+				<%= @acquisition_request.notes %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+
+
+<% if @acquisition_request.item  %>	
+	<%= render :partial => @acquisition_request.item %>
+
+	<% @item  = @acquisition_request.item %>
+	
+	<section class="attachments">
+		<h2>
+			Attached Files
+			<a href="<%= url_for new_item_attachment_path(@item) %>" class="btn btn-small" onclick="$('#upload_form').toggle(); return false;">Upload Files</a>
+		</h2>
+
+		<div id="upload_form" class="hide well">
+			<%= render :partial => "attachments/upload_files"%>
+		</div>
+
+		<% @item.attachments.available.each do |attachment| %>
+			<%= render :partial => attachment %>
+		<% end %> 		
+	</section>
+<% end %>
+

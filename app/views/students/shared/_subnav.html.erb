@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs">
+	<li class="<%= "active" if  controller.action_name == "show" %>">
+		<a href="#items" data-toggle="tab">Assigned Items</a>
+	</li>
+	<li class="<%= "active" if controller.controller_name == "student_details" %>">
+		<a href="#details" data-toggle="tab">Additional Details</a>
+	</li>
+	<li class="<%= "active" if controller.controller_name == "notes" %>">
+		<a href="#notes_list" data-toggle="tab">Notes</a>		
+	</li>
+	
+	<li class="with-icon">
+		<a href="<%= audit_trail_student_path(@student) %>" class="trivial">Audit Trail <i class="icon-cog"></i></a>
+	</li>
+	<li class="with-icon">
+		<a class="green" href="<%= admin_student_view_path(@student) %>">Student View <i class="icon-share-alt"></i></a>
+	</li>
+</ul>

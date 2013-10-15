@@ -1,0 +1,72 @@
+
+<div class="item standalone">
+	<div class="page-header">
+		<h2><%= link_to_unless controller.action_name == "show", item.title, item_path(item) do %><%= item.title %><% end %> <small><%= item.item_type%></small></h2>
+	</div>
+	
+	<div class="summary">
+		<div class="stats">
+			<%= item.attachments.available.count %> attached files, 
+			<%= item.courses.count %> courses, 
+			<%= item.students.count %> students <span class="divider"> | </span>
+			<span class="weak">created by <%= item.user.name %></span>
+		</div>
+	</div>
+
+	<% unless @short_view %>
+	<br/>
+	<table class="table table-condensed">		
+		<tbody>
+			<tr>
+				<td class="trivial">Author</td>
+				<td><strong><%= item.author %></strong></td>
+				<td class="trivial">Unique ID</td>
+				<td><strong><%= item.unique_id %></strong></td>
+			</tr>
+			<tr>
+				<td class="trivial">Call Number</td>
+				<td><strong><%= item.callnumber%></strong></td>
+				<td class="trivial">ISBN</td>
+				<td><strong><%= item.isbn %></strong></td>
+			</tr>
+			<tr>
+				<td class="trivial">Publisher</td>
+				<td><strong><%= item.publisher %></strong></td>
+				<td class="trivial">Published Date</td>
+				<td><strong><%= item.published_date %></strong></td>
+			</tr>
+			<tr>
+				<td class="trivial">Language Note</td>
+				<td colspan="3"><strong><%= item.language_note %></strong></td>
+			</tr>
+			<% unless item.edition.blank? %>
+			<tr>
+			 	<td class="trivial">Edition</td> 
+				<td colspan="3"><strong><%= item.edition%></strong></td>			
+			</tr>
+			<% end %>	
+			<% unless item.physical_description.blank? %>
+			<tr>
+			 	<td class="trivial">Physical Description</td> 
+				<td colspan="3"><strong><%= item.physical_description %></strong></td>			
+			</tr>
+			<% end %>
+			<% unless item.source.blank? && item.source_note.blank? %> 
+			<tr>
+			 	<td class="trivial">Source</td> 
+				<td><strong><%= item.source %></strong></td>			
+			 	<td class="trivial">Source Note</td> 
+				<td><strong><%= item.source_note %></strong></td>			
+			</tr>
+			<% end %>
+		</tbody>		
+	</table>
+	<% end %>
+	
+	<% if controller.action_name == "show" && controller.controller_name == "items" && can?(:edit, @item) %>			
+		<%= link_to edit_item_path(@item), :class=> "btn btn-small" do %><i class="icon-edit"></i> Edit This Item<% end%>
+	<% end %>
+	
+</div>
+
+

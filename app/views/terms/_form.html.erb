@@ -1,0 +1,22 @@
+
+<%= simple_form_for @term, :html => { :class => "form-horizontal standout" }  do |f| %>
+
+    <%= f.input :name, :input_html => { :class => "input-xxlarge"} %>
+
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+
+
+	<div class="form-actions">
+     	<%= f.button :submit,  :class => 'btn btn-primary' %>
+     	<%= link_to 'Cancel', @term.new_record? ? terms_path : term_path(@term), :class => 'btn' %>
+
+
+		<% unless @term.new_record? %>
+			<div class="float-right">
+				<%= link_to "Delete This Term", @term, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" %>			
+			</div>
+		<% end %>
+   </div>
+ 
+<% end %>

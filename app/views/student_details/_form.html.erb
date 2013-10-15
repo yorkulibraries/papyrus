@@ -1,0 +1,135 @@
+
+
+
+<%= simple_form_for @student_details, :url => student_details_path(@student), :html => { :class => "form-vertical standout" } do |f| %>
+
+<fieldset> 
+	
+   	
+  	<div class="row">  
+	
+		<div class="span5">
+			<strong>Contact Information</strong>	
+	    	<%= f.input :home_phone %>
+	    	<%= f.input :campus_phone %>
+	    	<%= f.input :work_phone %>
+		</div>
+	
+		<div class="span6">
+			<strong>Disability Information</strong>
+			
+			<div class="controll-group">			
+				<div class="controls">
+					<label class="checkbox inline">
+		                <%= f.check_box :di_ld %> LD 
+		            </label>
+		 			<label class="checkbox inline">
+						<%= f.check_box :di_low_vision %> Low Vision
+					</label>
+		 			<label class="checkbox inline">
+						<%= f.check_box :di_blind %> Blind
+					</label>
+		 			<label class="checkbox inline">
+						<%= f.check_box :di_braille_labels_required %> Braille Labels Required
+					</label>
+					<br/>
+		 			<label class="checkbox inline">
+						<%= f.check_box :di_head_injury %> Head Injury
+					</label>
+		 			<label class="checkbox inline">
+						<%= f.check_box :di_partially_sighted %> Partially Sighted
+					</label>
+		 			<label class="checkbox inline">
+						<%= f.check_box :di_other %> Other
+					</label>
+				</div>
+			</div>         						
+			<br/>				
+			<%= f.input :di_note, :as => :text,  :label => "Note", :input_html => {:rows => 5, :class=> "span5" } %>
+		</div>
+  	</div>
+	
+	<hr/>
+	
+	
+	<div class="row">
+		<div class="span5">
+			<strong>Service Provider</strong>
+			
+			<div class="controll-group">			
+				<div class="controls">
+					<label class="checkbox inline">
+						<%= f.check_box :sp_psmds %> PSMDS
+					</label>
+			 		<label class="checkbox inline">
+						<%= f.check_box :sp_lds %> LDS
+  				    </label>
+			 		<label class="checkbox inline">	
+						<%= f.check_box :sp_mhds %> MHDS 
+			 		</label>
+			 		<label class="checkbox inline">
+						<%= f.check_box :sp_glendon_counselling %> GLENDON COUNSELLING
+			  		</label>
+				</div>
+			</div>
+			<br/>
+			<%= f.input :wrms_ref_number, :label => "WRMS REF #" %>
+		</div>
+		<div class="span6">
+			<strong>Preferred Format</strong>
+			<div class="controll-group">			
+				<div class="controls">
+					<label class="checkbox inline">			
+						<%= f.check_box :format_pdf %> PDF 
+					</label>
+	 				<label class="checkbox inline">				
+						<%= f.check_box :format_kurzweil %> KURZWEIL 
+					</label>
+	 				<label class="checkbox inline">				
+						<%= f.check_box :format_daisy %> DAISY
+					</label>
+	 				<label class="checkbox inline">				
+						<%= f.check_box :format_braille %> BRAILLE 
+					</label>
+	 				<label class="checkbox inline">				
+						<%= f.check_box :format_word %> WORD DOCUMENT
+					</label>
+					
+					<label class="checkbox inline">				
+						<%= f.check_box :format_large_print %> LARGE PRINT
+					</label>
+				</div>
+			</div>
+			<br/>		
+			<%= f.input :pf_note, :as => :text, :label => "Note", :input_html => {:rows => 5, :class=> "span5" } %>
+		</div>
+	</div>
+	
+	<hr/>
+	
+	<div class="row">
+		<div class="span5">
+			<strong>Important Dates</strong>
+			<%= f.input :request_form_signed_on, :as => :string, :label => "Request Form Signed" , :input_html =>{ :class=> "datepicker"}  %>
+			<%= f.input :intake_appointment_on, :as => :string, :label => "Intake Appointment", :input_html =>{ :class=> "datepicker"}   %>
+		</div>
+		<div class="span6">
+			<strong>Manager Use</strong>
+			<%= f.input :ppy_access_granted_on, :as => :string, :label => "PPY Access Granted", :input_html =>{ :class=> "datepicker"}   %>
+			<%= f.input :adaptive_computed_access_granted_on, :as => :string, :label => "Adaptive Computer Access Granted", :input_html =>{ :class=> "datepicker"}  %>
+		</div>
+	</div>
+
+   <div class="form-actions">
+     <%= f.button :submit, :class => 'btn btn-primary' %>
+     <%= link_to 'Cancel', student_path(@student), :class => 'btn' %>
+   </div>
+ </fieldset>
+
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });	
+	});
+</script>

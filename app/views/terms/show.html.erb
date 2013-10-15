@@ -1,0 +1,48 @@
+<% title "School Term - #{@term.name}" %>
+<% title_html do %>
+	<h1><small>School Term Details</small> <%= link_to edit_term_path(@term), :class=> "btn btn-small float-right" do %><i class="icon-edit"></i> Update Term Information<% end %></h1>
+<% end %>
+
+<% if @term.end_date < Date.today %>
+<div class="alert alert-info">
+	<h3>Term Expired</h3>
+	<p>This term expired on  <strong><%= @term.end_date.strftime("%b %d, %Y") %></strong>. All courses from this term will not be searchable in the items screen.</p>
+</div>
+<% end %>
+
+
+<table class="table terms">
+	<thead>
+		<tr>
+			<td><h3><%= @term.name%></h3>
+			<span class="trivial"><%= @term.start_date.strftime("%b %d, %Y") %> <span class="weak">to</span> <%= @term.end_date.strftime("%b %d, %Y") %></span>	
+			</td>			
+		</tr>
+	</thead>
+</table>
+
+<% if @term.courses.size > 10 %>	
+
+	<form class="form-search well">
+	    <input type="text" id="courses_search" class="input-xlarge search-query" placeholder="Search Course Code or Name">
+	</form>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input#courses_search').quicksearch('.courses .course', { selector: "h5.title" });
+		});
+	</script>
+
+<% end %>
+<section class="courses">
+	<h2>Courses <%= link_to new_term_course_path(@term), :id=> "new_course", :class => "btn btn-small" do %>Add a new course<% end %></h2>
+	
+	<p><strong><%= pluralize(@term.courses.count, "Course") %></strong></p>
+	<ul class="thumbnails">
+		<% @term.courses.each do |course| %>
+			<li class="span6">
+				<%= render :partial => course %>
+			</li>
+		<% end %>
+	</ul>
+</section>

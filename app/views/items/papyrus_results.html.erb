@@ -1,0 +1,19 @@
+<div>
+<strong>Found <%= " #{@items.total_count}" if @items %> items, showing <%= @items.count%></strong>
+	<% if params[:order] == "alpha" %>
+		<%= link_to "Date", items_url, :class => "float-right" %>
+	<% else %>
+		<%= link_to "A-z", items_url(:order => "alpha"), :class => "float-right" %>
+	<% end %>
+</div>
+<%= paginate @items %>
+
+<div class="items">
+<% @items.each_with_index do |item, index| %>	
+
+	<%= render :partial => item %>			
+
+<% end %>
+</div>
+
+<%= paginate @items %>

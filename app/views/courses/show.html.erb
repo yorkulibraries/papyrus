@@ -1,0 +1,23 @@
+<% title "School Term - #{@term.name} - #{@course.title}" %>
+<% title_html do %>
+	<h1><small>School Term - Course Details</small> 
+		<%= link_to edit_term_course_path(@term, @course), :class=> "btn btn-small float-right" do %><i class="icon-edit"></i> Update Course Information<% end %></h1>
+<% end %>
+
+<% if @term.end_date < Date.today %>
+<div class="alert alert-info">
+	<h3>Term Expired</h3>
+	<p>This term expired on  <strong><%= @term.end_date.strftime("%b %d, %Y") %></strong>. All courses from this term will not be searchable in the items screen.</p>
+</div>
+<% end %>
+
+<h3><%= @term.name%></h3>
+<h4><%= @course.title %></h4>
+<h5 class="trivial"><%= @course.code %></h5>
+
+
+<ul>
+	<% @course.items.each do |item| %>
+		<li><%= link_to item.title, item_path(item) %></li>
+	<% end %>
+</ul>

@@ -1,0 +1,13 @@
+<% if @note.valid? %>
+	$('#notes').prepend('<%=escape_javascript render(@note) %>');
+	$('#new_note_form').modal('hide')
+<% else %>
+	$("#note_errors").empty();
+	$("#note_errors").append("<div id=\"list_of_errors\"></div>");
+	
+	$("#list_of_errors").addClass("alert alert-error");
+	$("#list_of_errors").append("<a class=\"close\" data-dismiss=\"alert\">×</a>");
+	<% @note.errors.each do | error | %>
+		$("#list_of_errors").append("<%= @note.errors[error.to_sym].join(", ") %> <br/>");
+	<% end %>
+<% end %> 

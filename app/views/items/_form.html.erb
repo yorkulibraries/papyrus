@@ -1,0 +1,100 @@
+
+<%= simple_form_for @item, :html => { :class => "form-vertical standout" }  do |f| %> 
+
+<fieldset> 
+	
+   
+	<div class="row">
+		<div class="span4">
+			 <%= f.input :item_type, :collection => Item::TYPES, :hint => "Select the type of this item." %>
+			
+			 <%= f.input :title, :label => "Title", :input_html => { :class => "span4" } %>
+		</div>
+		
+		
+		<div class="span4">
+  		  <% if @item.new_record? %>
+			
+			   <%= f.input :unique_id, :label => "Unique ID", :hint => "Unique ID must follow the guidelines listed in the sidebar." %>
+			   <%= link_to_function "Click Here To Generate A Unique ID", "assign_unique_id('item_unique_id')"%>
+			
+		  <% else %>
+				<%= f.label "Unique ID", :unique_id %><br/>
+				<%= @item.unique_id %>
+		  <% end %>
+		
+	
+		</div>	
+	</div>
+	
+	<hr/>
+	
+	
+	<div class="row">
+		
+		
+		<div class="span4">
+			
+			
+			 <%= f.input :author, :label => "Author(s)", :input_html => { :class => "input-xlarge" } %>	
+			
+			 <%= f.input :isbn, :label => "ISBN Number" %>	
+			
+			 <%= f.input :published_date, :label => "Published Date" %>	
+			
+			 <%= f.input :publisher, :label => "Publisher", :input_html => { :class => "input-xlarge" } %>	
+			
+			 <%= f.input :edition, :label => "Edition", :input_html => { :class => "input-xlarge" } %>
+		</div>
+		<div class="span4">
+			 <%= f.input :callnumber, :label => "Callnumber", :input_html => { :class => "input-xlarge" } %>
+						
+			 <%= f.input :language_note, :label => "Language Note", :input_html => { :class => "input-xlarge" } %>
+		
+		  
+		
+		  	 <%= f.input :physical_description, :label => "Physical Description", :input_html => { :class => "input-xlarge" } %>
+		  
+			 <%= f.input :source, :collection => ["Publisher", "AERO", "Student Purchase", "LAS Purchase", "YUL Copy Scanned", "YUL E-Resource"], :label => "Source" %>
+		
+			 <%= f.input :source_note, :label => "Source Note", :input_html => { :class => "input-xlarge" } %>
+		
+		</div>
+	</div>
+	
+	
+	<% if @item.new_record? %>	
+		<p><input type="checkbox" name="create_acquisition_request" value="yes"/> Send An Acquisitions Request</p>
+	<% end %>
+		
+	
+
+
+	<div class="form-actions">
+     	<%= f.button :submit,  @item.new_record? ? "Create Item" : "Update Item" , :class => 'btn btn-primary' %>
+     	
+		<%= link_to 'Cancel', @item.new_record? ? items_path : item_path(@item), :class => 'btn' %>
+		
+		<%  if can?(:destroy, Item) && !@item.new_record? %>	
+			<div class="float-right">
+				<%= link_to "Remove Item", @item, :confirm => 'Are you sure?', :method => :delete, :class=> "btn btn-danger" %>	
+			</div>
+		<% end %>
+				
+   </div>
+
+	<% if can?(:destroy, Item) && !@item.new_record?  %> 
+		<div class="float-right">
+			<p><span class="label label-warning">Warning:</span> Removing this item will delete any of the files associated with it. <strong>This action can't be reversed</strong>.</p>
+		</div>
+	<% end %>
+</fieldset>
+  
+<% end %>
+
+
+<script type="text/javascript">
+	function assign_unique_id(id) {
+		$("#" + id).val("i-" + guidGenerator(true));
+	}
+</script>

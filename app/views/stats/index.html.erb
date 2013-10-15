@@ -1,0 +1,37 @@
+<% title "Quick Statistics" %>
+
+<div class="nav">
+	<%= link_to "Generate Reports", stats_generate_path %>
+</div>
+
+<div class="stats well">
+	<h3>Item Statistics</h3>
+	<dl>
+		<dt>Total Number of Items</dt>
+		<dd><%= Item.count %></dd>
+		<dt>Items with Files Attached</dt>
+		<dd><%= @has_attachments_count %></dd>
+		<dt>Items Assigned to Students</dt>	
+		<dd><%= @has_students_count %></dd>
+	</dl>
+	
+</div>
+
+<div class="stats well">
+	<h3>Students Statistics</h3>
+	<dl>
+		<dt>Total Number of Students</dt>
+		<dd><%= Student.count %></dd>			
+	</dl>			
+</div>
+
+<div class="stats well">
+	<h3>Miscellaneous Statistics</h3>
+	<dl>
+		<dt>Number of Papyrus Users</dt>
+		<dd><%= User.not_students.count %> (<%= User.not_students.active.count%> active, <%= User.not_students.inactive.count %> inactive)</dd>		
+		<dt>Number Courses &amp; Terms</dt>
+		<dd><%= Course.count%> courses, <%= Term.count %> terms</dd>
+	</dl>
+	
+</div>

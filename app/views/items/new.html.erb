@@ -1,0 +1,12 @@
+<% title "New Item" %>
+<% title_html do %>
+	<h1><small>New Item</small></h1>
+<% end %>
+
+
+
+<% sidebar do %>
+	<%= render :partial => "items/shared/edit_sidebar"%>
+<% end %>
+
+<%= render 'form' %>

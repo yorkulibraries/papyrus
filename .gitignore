@@ -1,0 +1,12 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
+public/uploads/**/*
+MissingDrawer.tmplugin
+.sass-cache/
+config/papyrus_config.yml
+config/database.yml
+config/deploy.rb
+.DS_Store
+

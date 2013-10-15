@@ -1,0 +1,21 @@
+<% title "Courses" %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Code</th>
+    <th>Term</th>
+  </tr>
+  <% for course in @courses %>
+    <tr>
+      <td><%= course.title %></td>
+      <td><%= course.code %></td>
+      <td><%= course.term %></td>
+      <td><%= link_to "Show", course %></td>
+      <td><%= link_to "Edit", edit_course_path(course) %></td>
+      <td><%= link_to "Destroy", course, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Course", new_course_path %></p>

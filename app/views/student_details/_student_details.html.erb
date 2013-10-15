@@ -1,0 +1,134 @@
+<% student_details = @student.student_details || StudentDetails.new%>
+
+<section class="student_details">
+	<h2>Additional Details <%= link_to "Edit Details", edit_student_details_path(@student), :class => "btn btn-small"%></h2>
+
+	<table class="table table-condensed">
+		<tbody>
+			<tr>
+				<td class="distinct"><strong>Disability Information</strong></td>
+				<td>
+					<% disability_array = Array.new %>
+					<% disability_array.push "LD" if student_details.di_ld %>
+					<% disability_array.push "Blind" if student_details.di_blind %>
+					<% disability_array.push  "Low Vision" if student_details.di_low_vision %>
+					<% disability_array.push  "Braille Labels Required" if student_details.di_braille_labels_required %>
+					<% disability_array.push  "Partially Sighted" if student_details.di_partially_sighted %>
+					<% disability_array.push  "Head Injury" if student_details.di_head_injury %>
+					<% disability_array.push  "Other" if student_details.di_other %>
+					
+					<div>
+						<% disability_array.each do | disability| %>					
+							<span class="tag"><%= disability%></span>
+						<% end %>
+					</div>
+					
+					
+					<% unless student_details.di_note.blank? %>
+						<blockquote class="notes">
+							<%= student_details.di_note %>
+						</blockquote>
+					<% end %>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="distinct"><strong>Service Providers</strong></td>
+				<td>
+					<% providers_array = Array.new %>
+					<% providers_array.push "PSMDS" if student_details.sp_psmds %>
+					<% providers_array.push "LDS" if student_details.sp_lds %>
+					<% providers_array.push "MHDS" if student_details.sp_mhds %>
+					<% providers_array.push "Glendon Counselling" if student_details.sp_glendon_counselling %>
+
+
+					<div>
+						<% providers_array.each do | provider| %>
+							<span class="tag"><%= provider %></span>
+						<% end %>
+					</div>
+					
+					<% unless student_details.cds_adviser.blank? %>
+						<blockquote class="notes">
+							<strong>CDS Adviser</strong><br/>
+							<%= student_details.cds_adviser %>
+						</blockquote>
+					<% end %>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="distinct"><strong>Contact Information</strong></td>
+				<td>							
+					<dl>
+						<dt>Home</dt>
+						<dd><%= student_details.home_phone %> </dd>
+						<dt>Campus</dt>
+						<dd><%= student_details.campus_phone %> </dd>
+						<dt>Work</dt>
+						<dd><%= student_details.work_phone %></dd>
+					</dl>												
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="distinct"><strong>Preferred Formats</strong></td>
+				<td>
+						<% formats_array = Array.new %>
+						<% formats_array.push "PDF" if student_details.format_pdf %>
+						<% formats_array.push "KURZWEIL" if student_details.format_kurzweil %>
+						<% formats_array.push "DAISY" if student_details.format_daisy %>
+						<% formats_array.push "BRAILLE" if student_details.format_braille %>				
+						<% formats_array.push "WORD DOCUMENT" if student_details.format_word %>
+						<% formats_array.push "LARGE PRINT" if student_details.format_large_print %>
+						<div>
+							<% formats_array.each do | format| %>
+								<span class="tag"><%= format.downcase %></span>
+							<% end %>
+						</div>
+
+						<% unless student_details.pf_note.blank? %>
+							<blockquote class="notes">
+								<%= student_details.pf_note %>
+							</blockquote>
+						<% end %>
+					
+					<% unless student_details.wrms_ref_number.blank? %>
+						<strong>WRMS Ref Number</strong><br/>
+						<%= student_details.wrms_ref_number%>
+					<% end %>
+				</td>
+			</tr>		
+			
+			<tr>
+				<td class="distinct"><strong>Important Dates</strong></td>
+				<td>
+					
+					<dl>
+						<dt>Request Form Signed On</dt>
+						<dd><%= student_details.request_form_signed_on ? student_details.request_form_signed_on.strftime("%b %d, %Y") : "n/a" %></dd>
+						
+						<dt>Intake Appointment On</dt>
+						<dd><%=  student_details.intake_appointment_on ? student_details.intake_appointment_on.strftime("%b %d, %Y") : "n/a"%></dd>
+					</dl>									
+				</td>
+			</tr>
+			
+			
+			
+			<tr>
+				<td class="distinct"><strong>Manager Use</strong></td>
+				<td>
+					<dl>
+						<dt>PPY access granted on</dt>	
+						<dd><%= student_details.ppy_access_granted_on ? student_details.ppy_access_granted_on.strftime("%b %d, %Y") : "n/a"%></dd>
+						<dt>Adaptive computed access granted on</dt>
+						<dd><%= student_details.adaptive_computed_access_granted_on ? student_details.adaptive_computed_access_granted_on.strftime("%b %d, %Y") : "n/a" %></dd>
+					</dl>							
+				</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	
+</section>

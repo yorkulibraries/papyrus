@@ -1,0 +1,15 @@
+<% title "Edit Note" %>
+
+<% title_html do %>
+	<%= link_to @student do %>
+		&laquo; Back to student details
+	<% end %>
+<% end %>
+
+<% stylesheet "forms" %>
+<%= simple_form_for [@student, @note] do |f| %>
+  <%= f.label :note, "Update a note about #{@student.name}" %>
+  <%= f.input :note, :label => false %><br/>
+  <%= f.button :submit %>
+<% end %>
+

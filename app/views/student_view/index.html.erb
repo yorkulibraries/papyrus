@@ -1,0 +1,24 @@
+<% title "Papyrus Terms Of Use" %>
+<% title_html do %>
+	<h1>Terms of Use</h1>
+<% end %>
+	<blockquote>
+		<p>Digitized readings are supplied by LAS for your express use only and are protected by the Copyright Act.  </p>
+
+		<p>&nbsp;</p>
+		<ol>
+			<li>You do not have permission to print or to make copies for the purpose of sharing or selling. </li>
+			<li>You must delete the digitized material once the course is completed.  </li>
+		</ol>
+		
+		<p>&nbsp;</p>
+		<h5>I AGREE TO COMPLY WITH THE TERMS OF USE AS STATED ABOVE.</h5>
+	</blockquote>
+	<div class="form-actions">
+	<% unless session[:terms_accepted] %>
+		<%= link_to "I accept these terms", accept_student_terms_path, :class => "btn btn-primary", :disable_with => 'loading papyrus...' %> 
+		<%= link_to "I do not", logout_path, :class => "btn"%>
+	<% else %>
+		<p class="trivial">Terms accepted for current Papyrus session.</p>
+	<% end %>
+	</div>

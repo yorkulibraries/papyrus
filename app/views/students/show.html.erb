@@ -1,0 +1,101 @@
+<% title @student.name %>
+<% title_html do %>
+	<h1><small>Student Registration Record</small></h1>	
+<% end%>
+
+
+
+<% if can? :manage, ItemConnection %>
+	<% sidebar do %>
+		<section>
+			<div class="well">
+				<p><strong>Send a Message</strong></p>
+				<p>Send a message to the student. </p>
+				<%= form_tag notify_students_path  do %>
+				
+					<input class="student_notification" type="hidden" name="students[]" value="<%= @student.id %>">					
+					<input type="hidden" name="student" value="<%= @student.id %>"/>			
+					<p>Message: <br/><%= text_area_tag 'message', nil, :rows => 8 %></p>
+					<p><%= submit_tag "Send...", :class => "btn" %></p>
+				
+				<% end %>											
+			</div>
+		</section>
+		
+		<% if can?(:block, Student) && @student.blocked == false %>
+			<a href="<%= block_student_path(@student) %>" class="float-right btn btn-danger">Block</a>
+		<% end %>
+	<% end %>
+<% end %>
+
+
+<div class="student-details">
+	<% if @student.blocked %>
+		<div class="blocked">
+			
+			<div class="message">
+				<span>This user has been temporarily blocked from being edited by the staff.</span>
+				<% if can? :unblock, Student %>
+					<a href="<%= unblock_student_path(@student) %>" class="float-right btn btn-danger">Unblock</a>
+				<% end %>
+			</div>			
+		</div>
+	<% end %>
+
+
+
+	<%= render :partial => @student %>			
+	
+
+	<%= render :partial => "students/shared/subnav"%>
+
+	<div class="tab-content">
+		<div class="tab-pane active" id="items">
+			<%= render :partial => "items"%>		
+		</div>
+	
+		<div class="tab-pane" id="details">
+			<%= render :partial => "student_details/student_details"%>
+		</div>
+		
+	
+		<div class="tab-pane" id="notes_list">
+			<section class="notes">
+				<h2>Notes <a data-toggle="modal" href="#new_note_form" class='btn btn-small'>New Note</a></h2>
+			
+				<div id="new_note_form" class="hide modal">
+				
+					<div class="modal-header">
+						<h2>Add a new note</h2>
+					</div>
+					<div class="modal-body">
+						<% @note = Note.new %>
+						<%= render :partial => "notes/form"%>
+
+					</div>
+
+					<div class="modal-footer">
+						<a href="#" class="btn" data-dismiss="modal">Close</a>
+					</div>								
+				</div>
+			
+			
+				<table id="notes" class="notes">
+					<% @student.notes.each do |note| %>		
+						<%= render :partial => note %>
+					<% end %>
+				
+				</table>
+			
+			</section>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+

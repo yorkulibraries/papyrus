@@ -1,0 +1,43 @@
+<% title "All Students" %>
+<% title_html do %>
+		<h1>Students</h2>
+<% end %>
+
+<% sidebar do %>
+	<div class="new-item">
+		<%= link_to new_student_path,  :class=> "btn btn-huge green" do %>
+			+	
+		<% end %>
+		<span>New <br/>Student</span>
+	</div>
+<% end %>
+
+
+<form class="well form-search"  action="<%= search_students_path %>">
+
+	<input type="text" name="q" class="input-xlarge search-query" value="<%= params[:q] %>" placeholder="Search Name or Username"/>
+	<input type="submit" value="Search" class="btn"/>
+
+
+</form>
+
+<p><strong>Search results <%= "- Total: #{@students.total_count}" if @students%></strong></p>
+<%= paginate @students %>
+
+<section>
+	<% @students.each do |student| %>
+		<div class="clearfix thumbnail <%= cycle("odd", "even") %>" style="margin-bottom: 10px;">
+			<%= image_tag "icons/user_default.png", :class => "float-left" %>
+			<div style="margin-left: 50px;">
+				<h3><a href="<%= student_path(student) %>"><%= student.name %></a></h3>
+				<span class="trivial"><%= pluralize(student.current_items.size, "item")%> assigned</span>
+			</div>
+		</div>
+
+	<% end %>
+</section>
+
+<%= paginate @students %>
+
+
+

@@ -1,0 +1,17 @@
+<% title "Edit Student" %>
+<% title_html do %>
+	<h1><small>Update Student Registration</small></h1>
+<% end %>
+
+<% sidebar do %>
+	<p>Update Student Registration</p>
+<% end %>
+
+<%= render 'form' %>
+
+
+<%  if can? :destroy, Student %> 
+	<div class="float-right">
+		<p><span class="label label-warning">Warning:</span> You can disable this student's access to the system. This action can be reversed.</p>
+	</div>
+<% end %>

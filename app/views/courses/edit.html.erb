@@ -1,0 +1,22 @@
+<% title "Edit Course" %>
+<% title_html do %>
+		<h1><small>Edit School Course - <%= @term.name %> Term</small></h1>
+<% end %>
+
+
+<%= render 'form' %>
+
+
+<section class="items">
+	<h2>Assigned Items</h2>
+	
+	<% if @course.items.count == 0 %>
+		<p>No Items Have Been Assigned Yet</p>
+	<% end %>
+	<ul>
+		<% @course.items.each do |item| %>
+			<li><%= link_to item.title, item_path(item) %></li>
+		<% end %>
+	</ul>
+	
+</section>

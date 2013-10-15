@@ -1,0 +1,86 @@
+require 'test_helper'
+
+class TermsControllerTest < ActionController::TestCase
+  
+  context "as admin" do
+    setup do 
+      @admin_user = Factory.create(:user)
+      log_user_in(@admin_user)
+    end
+    
+    should "be able to create term" do
+     
+      assert_difference "Term.count", 1 do
+        attrs = Factory.attributes_for(:term)       
+        post :create, :term => attrs
+      end                  
+
+      assert_redirected_to term_path(assigns(:term))
+    end
+    
+    should "be able to edit" do
+       term = Factory.create(:term)
+       term.name = "woot"
+       
+       
+       post :update, {:id => term.id, :term => { :name => term.name, :start_date => term.start_date, :end_date => term.end_date } }
+       assert_redirected_to term_path(term)
+       t = Term.find(term.id)
+       assert_equal "woot", t.name      
+    end
+    
+    should "be able to destroy" do
+      term = Factory.create(:term)
+      assert_difference "Term.count", -1 do 
+        post :destroy, {:id => term.id}
+      end
+    end
+    
+    
+    should "show term and list all courses alphabetically" do
+      term = Factory.create(:term)
+      Factory.create(:course, :title => "a", :term => term)
+      Factory.create(:course, :title => "x", :term => term)
+      
+       get :show, :id => term.id
+       term = assigns(:term)
+       assert term
+       assert_equal term.courses.size, 2
+       assert_equal term.courses.first.title, "a"
+       assert_equal term.courses.last.title, "x"
+    end
+    
+    should "show all active and last 10 archived terms" do
+      FactoryGirl.create_list(:term, 10)
+      FactoryGirl.create_list(:term, 20, :end_date => Date.today - 2.months, :start_date => Date.today - 1.year)
+      
+      get :index
+      
+      assert_response :success
+      terms = assigns(:terms)
+      archived_terms = assigns(:archived_terms)
+      
+      assert terms, "terms can't be null"
+      assert archived_terms, "archived terms can't be null"
+      
+      assert_equal 10, terms.size, "Active terms should show all"
+      assert_equal 10, archived_terms.size, "Archived should only show max 10"
+            
+    end
+    
+    
+    should "not return courses if the term is expired when searching" do
+      term = Factory.create(:term, :name => "expired", :start_date => Date.today - 1.year, :end_date => Date.today - 2.months)
+      Factory.create(:course, :title => "search for me", :term => term)
+      
+      get :search_courses, :q => "search"
+      
+      assert_response :success
+      courses = assigns(:courses)
+      assert_equal 0, courses.size
+            
+    end    
+    
+  end
+      
+end

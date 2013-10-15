@@ -1,0 +1,31 @@
+<% title "All Items" %>
+
+<% sidebar do %>
+	<div class="new-item">
+		<%= link_to new_item_path,  :class=> "btn btn-huge green" do %>
+			+	
+		<% end %>
+		<span>New Item</span>
+	</div>
+<% end %>
+
+
+<%= render partial: "search_items/search_box" %>
+
+<% if  @search_results == "local" %>			
+	<%= render :template => "items/papyrus_results"%>
+<% elsif @search_results == BibRecord::SOLR %>	
+	<%= render :template => "items/solr_results"%>
+<% end %>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+	$(".search_items_button").click(function() { 		
+		$("#omni_search_form").attr("action", $(this).attr("href"));	
+		$("#omni_search_form").submit();
+		return false;
+	});	
+});
+	
+</script>

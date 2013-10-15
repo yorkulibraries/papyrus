@@ -1,0 +1,44 @@
+
+<%= simple_form_for @student, :html => { :class => "form-vertical standout" } do |f| %>
+ 
+<fieldset> 
+	
+   
+	<div class="row">
+		<div class="span4">	
+			<%= f.input :name, :required => false %>
+			<%= f.input :email, :required => false %>
+			<%= f.input :username, :hint => "Passport York Username", :required => false, :hint_html => { :class => "trivial"}  %>
+	  	</div>	
+
+		<div class="span4">	
+			<%= f.fields_for :student_details do |builder| %>
+		
+				<%= builder.input :student_number, :label => "Student Number", :required => false  %>	
+				<%= builder.input :cell_phone, :label => "Cell Phone", :required => false %>	
+				<%= builder.input :cds_adviser, :label => "CDS Counsellor", :required => false %>
+				<%= builder.input :transcription_coordinator_id, :label => "Transcription Coordinator", :collection => User.transcription_assitants %>		
+				<%= builder.input :transcription_assistant_id, :label => "Transcription Assistant", :collection => User.transcription_assitants %>
+
+			<% end %>
+		</div>
+	</div>
+	
+	<p class="trivial">All field are required</p>
+	
+	<div class="form-actions">
+     	<%= f.button :submit,  @student.new_record? ? "Register Student" : "Update Student Registration" , :class => 'btn btn-primary' %>
+     	<%= link_to 'Cancel', @student.new_record? ? students_path : student_path(@student), :class => 'btn' %>
+		
+		<%  if can? :destroy, Student && !@student.new_record? %>	
+		<div class="float-right">
+			<%= link_to "Disable access", @student, :confirm => 'Are you sure?', :method => :delete, :class=> "btn btn-danger" %>	
+		</div>
+		<% end %>
+   </div>
+
+</fieldset>
+<% end %>
+
+	
+

@@ -1,0 +1,13 @@
+<tr class="item">
+	<td class="icon" align="center" width="32px">
+		<%= image_tag "icons/item_types/#{item.item_type.downcase}.png", :width => "32px"%>
+		<p class="weak" align="center"><%= item.item_type%></p>
+	</td>		
+	<td class="details">
+		<h4><%= link_to_unless controller.action_name == "show", item.title, item_path(item) do %><%= item.title %><% end %></h4>
+		<% unless item.author.blank?%>
+			<span class="weak">by <%= item.author %>	</span> 
+		<% end %>	
+		<p class="weak clear">Item was added by <%= item.user.name %></p>		
+	</td>
+</tr>

@@ -1,0 +1,25 @@
+<% title "My Assigned Items" %>
+
+
+<ul class="nav nav-pills">
+	<li  class="<%= "active" unless params[:course] %>"><%= link_to "All Items", student_view_path, title: "Show all items" %></li>
+	
+	<% @courses_grouped.sort.each do |group,  courses| %> 
+	<li class="dropdown <%= "active" if !params[:course].blank? && params[:course].split("_").first == group %>">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#select_courses" title="Select a <%= group %> course">	<%= group %>
+			<i class="caret"></i>
+		</a>
+		<ul class="dropdown-menu">
+			<% courses.each do |course| %>	
+				<li class="<%= "active" if !params[:course].blank? && params[:course].gsub("_", " ") == course %>">
+					<%= link_to "#{course}", student_view_path(:course => course.gsub(" ", "_")), title: "Show assigned items for #{course}" %></li>
+			<% end %>
+		</ul>
+	</li>
+	<% end %>
+</ul>
+
+
+<div id="items">	
+	<%= render :partial => "items"%>		
+</div>

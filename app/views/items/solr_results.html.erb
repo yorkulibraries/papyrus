@@ -1,0 +1,69 @@
+<% unless @docs.nil? %>
+	<p><strong>Displaying <%= " #{@docs.count}" if @docs %> closest matches</strong></p>
+	
+	
+	<table class="table">
+		<thead>
+			
+		</thead>
+		<tbody>
+			<% @docs.each_with_index do |item, index| %>
+				<tr>
+					<td class="span1"><%= index + 1 %></td>
+					<td class="span8">
+						
+						<h2 style="color: #9D261D; margin-bottom: 5px; border-bottom: 1px dashed; "><%= item["title"] %></h2>			
+						
+					    <div class="tabbable tabs-below">
+						    <div class="tab-content">
+						    	<div class="tab-pane active" id="brief_<%= index %>">
+									<dl>
+										<dt>Author</dt>
+										<dd><%=  item["author"] ? item["author"] : item["author2"] ? item["author2"].join(", ") : "" %></dd>
+										<dt>Publisher &amp; Published Date</dt>
+										<dd><%= item["publisher"].join(", ") if item["publisher"]%>  &nbsp;&nbsp;&nbsp;<em><%= item["publishDate"].join(", ") if item["publishDate"]%></em></dd>
+										<dt>ISBN &amp; Call Number</dt>
+										<dd><%= item["isbn"].join(", ") if item["isbn"]%>  &nbsp;&nbsp;&nbsp;<em><%= item["callnumber"] if item["callnumber"]%></em></dd>
+										<dt>Format &amp; Physical Description</dt>
+										<dd><%=  item["format"].join(", ").to_s if item["format"]%>  &nbsp;&nbsp;&nbsp;<em><%= item["physical"].join(", ") if item["physical"]%></em></dd>
+										<dt>Edition &amp; Language</dt>
+										<dd><%= item["edition"] if item["edition"]%> &nbsp;&nbsp;&nbsp;<em><%= item["language"].join(", ") if item["language"]%></em></dd>
+									</dl>
+								</div>
+								<div class="tab-pane" id="additional_<%= index %>">
+									<dl>
+										<dt>Vufind ID &amp; Collection</dt>
+										<dd><%= item["id"] if item["id"]%> &nbsp;&nbsp;&nbsp;<em><%= item["collection"].join(", ") if item["collection"]%></em></dd>
+										<dt>Online Access</dt>
+										<dd><%= item["online-access"] if item["online-access"]%></dd>
+										<dt>Location</dt>
+										<dd><%= item["location"].join(", ") if item["location"]%></dd>
+										<dt>Full Title</dt>
+										<dd><%= item["title_full"] if item["title_full"]%></dd>
+										<dt>Item Type &amp; Subject</dt>
+										<dd><%= item["item-type"].join(", ") if item["item-type"]%> &nbsp;&nbsp;&nbsp;<em><%= item["callnumber-first"] if item["callnumber-first"]%></em></dd>						
+									</dl>
+								</div>
+						    </div>
+						
+						    <ul class="nav nav-tabs">
+						  		<li class="active"><a href="#brief_<%= index %>" data-toggle="tab">Details</a></li>
+								<li><a href="#additional_<%= index %>" data-toggle="tab">Additional Info</a></li>
+								<li><a href="<%= new_item_path %>?bib_record_id=<%= item["id"] %>" data-confirm="Are you sure?">
+									Add this <%= item["format"] ? item["format"][0].to_s : "item"  %> <i class="icon-share-alt"></i></a></li>								
+						    </ul>
+					    </div>
+						
+						
+					</td>
+					<td class="span1">
+						<%= image_tag "http://www.library.yorku.ca/find/bookcover.php?isn=#{item["isbn"].first.gsub(/[^0-9]+/, '') if item["isbn"]}&size=medium" %>				
+					</td>
+				</tr>
+				
+			<% end %>
+		</tbody>
+	</table>	
+<% else %>
+	<span>You must specify Vufind term to search</span>
+<% end %>

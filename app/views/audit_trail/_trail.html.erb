@@ -1,0 +1,23 @@
+<table class="audit-trail">
+	
+	<% audits_grouped.each do |date, events| %>
+		<tr class="date">
+			<td colspan="4">
+				<span class="trivial"><%= date.strftime('%b %e, %Y')%></span>
+			</td>
+		</tr>
+		<% events.each do |event| %>
+			<% event.auditable_type == "User" ? type = "Student" : type = event.auditable_type %>
+			
+			<% type = "AssignedItem" if type == "ItemConnection" %>
+		<tr>
+			<td class="trivial time"><%= event.created_at.strftime("%R")%></td>
+			<td class="what">
+				<span class="badge <%= type.underscore.downcase %>"><%= defined?(audit_what) ? audit_what : type.tableize.singularize.humanize %></span>
+			</td>
+			<td class="distinct"><%= event.comment %></td>
+			<td class="who"><code title="<%= event.action %> "><%= event.user.name if event.user %></code></td>		
+		</tr>	
+		<% end %>
+	<% end %>
+</table>
