@@ -12,15 +12,18 @@ if APP_CONFIG[:organization] == nil || APP_CONFIG[:organization][:full_name] == 
    APP_CONFIG[:organization][:short_name] = "SHORT NAME"
 end
 
+if APP_CONFIG[:organization] != nil && APP_CONFIG[:organization][:papyrus_url] == nil
+  APP_CONFIG[:ogranization][:papyrus_url] = "http://localhost:3000/"
+end
 
 # Exception Notification For Production 
 if Rails.env.production? 
   
   Papyrus::Application.configure do
     config.middleware.use ExceptionNotifier,
-         :email_prefix =>  APP_CONFIG[:error_notification][:email_subject_prefix],
-         :sender_address => APP_CONFIG[:error_notification][:sender_address],
-         :exception_recipients => APP_CONFIG[:error_notification][:error_recipients]
+         :email_prefix =>  APP_CONFIG[:errors][:email_subject_prefix],
+         :sender_address => APP_CONFIG[:errors][:sender_address],
+         :exception_recipients => APP_CONFIG[:errors][:error_recipients]
   end       
   
 end

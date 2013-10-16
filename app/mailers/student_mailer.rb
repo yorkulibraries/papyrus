@@ -1,27 +1,26 @@
 class StudentMailer < ActionMailer::Base
  
-  default :from => "papyrus-las@library.yorku.ca"
+  default from: APP_CONFIG[:notifications][:from_email]
 
    def notification_email(student, message)
      @student = student
-     @url  = "http://www.library.yorku.ca/papyrus/"
+     @url  = APP_CONFIG[:ogranization][:papyrus_url]
      @message = message
-     mail(:to => student.email, :subject => "York Libraries Transcription Services - Papyrus Notification")
+     mail( to: student.email, subject: APP_CONFIG[:notifications][:notification_subject])
    end
   
   def welcome_email(student)
     @student = student
-    @url  = "http://www.library.yorku.ca/papyrus/"
-    mail(:to => student.email, :subject => "Welcome to Transcription Services")
+    @url  = APP_CONFIG[:ogranization][:papyrus_url]
+    mail(to: student.email, subject: APP_CONFIG[:notifications][:welcome_subject])
   end
   
   def items_assigned_email(student, items)
     @student = student
     @items = items
-    @url  = "http://www.library.yorku.ca/papyrus/"
-    items.size > 1 ? subject = "Multiple items have now been assigned to you" : subject = "#{items.first.title} has now been assigned to you"
+    @url  = APP_CONFIG[:ogranization][:papyrus_url]
     
-    mail(:to => student.email, :subject => subject)
+    mail(to: student.email, subject: APP_CONFIG[:notifications][items_assigned_subject])
   end
   
 end

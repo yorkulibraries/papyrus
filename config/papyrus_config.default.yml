@@ -1,13 +1,19 @@
 organization:
   full_name: "Your Institution/Department Name"
   short_name: "SHORT"
+	papyrus_url: "http://your-institution.website/papyrus/"
 authentication:
   cas_header_name:  "REMOTE-USER"    
   after_logout_redirect_to: "http://www.your-instituttion.website"
-error_notification:
+errors:
   email_subject_prefix: "[Papyrus Error] "
   sender_address: "'Papyrus Notifier' <papyrus-errors@your-instituttion.website>"
   error_recipients: ["your.email@your-instituttion.email"]  
+notifications:
+	from_email: "papyrus@your-insitution.email"
+	welcome_subject: "Welcome to Transcription Services"
+	notification_subject: Your Institution/Department Name Transcription Services - Papyrus Notification"
+	items_assigned_subject: "Multiple item(s) have now been assigned to you"	
 bib_search:
   type: "solr"
   label: "Your Catalogue"
