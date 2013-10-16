@@ -75,10 +75,11 @@ This is a simple YAML file that contains settings for the application's name, au
 
 ### Organization
 
-| OPTION     | Description                                                        | Usage             |
-|------------|--------------------------------------------------------------------|-------------------|
-| full_name  | The Full name of your organization. i.e. York University Libraries | Used in copyright |
-| short_name | Short name of your ogranization, i.e. yul                          | Used internally   | 
+| OPTION      | Description                                                        | Usage              |
+|-------------|--------------------------------------------------------------------|--------------------|
+| full_name   | The Full name of your organization. i.e. York University Libraries | Used in copyright  |
+| short_name  | Short name of your ogranization, i.e. yul                          | Used internally    | 
+| papyrus_url | The url where Papyrus is deployed.                                 | Email notifcations |
 
 ### Authentication
 
