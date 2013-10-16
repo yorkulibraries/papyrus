@@ -66,9 +66,63 @@ Configuration Options
 =====================
 
 
-The configuration options are located in 
+The configuration options are located in:
 
 ```
 config/papyrus_config.yml
 ```
+This is a simple YAML file that contains settings for the application's name, authentication, error handling and bibliographic search.
+
+### Organization
+
+| OPTION      | Description                                                        | Usage              |
+|-------------|--------------------------------------------------------------------|--------------------|
+| full_name   | The Full name of your organization. i.e. York University Libraries | Used in copyright  |
+| short_name  | Short name of your ogranization, i.e. yul                          | Used internally    | 
+| papyrus_url | The url where Papyrus is deployed.                                 | Email notifcations |
+
+### Authentication
+
+| OPTION                      | Description                                        | Usage                 |
+|-----------------------------|----------------------------------------------------|-----------------------|
+| cas\_header\_name           | The name of the CAS header to autneticate the user | Authentication module |
+| after\_logout\_redirect\_to | The url to redirect the user to after logout       | Logout function       |
+
+
+### Errors
+
+| OPTION                 | Description                                               | 
+|------------------------|-----------------------------------------------------------|
+| email\_subject\_prefix | The prefix to use in the email subject                    |
+| sender_address         | Address of the sender for error emails                    |
+| error_recipients       | An array of email addresses to receive error notifactions |
+
+### Notifications
+
+| OPTION                   | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| from_email               | The From email address to use when sending out notifications                |
+| welcome_subject          | The subject for the welcome email                                           |
+| notification_subject     | The subject for Notifications email, when sending notifications to students |
+| items\_assigned\_subject | The subject of items have been assigned to you email                        |
+
+
+### Bibliographic Search (bib search)
+
+| OPTION                   | Description                                                       | Related to     |
+|--------------------------|-------------------------------------------------------------------|----------------|
+| type           | The type of bib search supported. Currently only 'solr' search is supported | solr, worldcat |
+| label          | The label to use on the front end when searching.                           | any |
+| id_prefix      | The prefix to use when storing the id of the item in database               | any |
+| url            | The url of the bib search server (i.e. solr/vufind)                         | any |
+| query_fields   | The list of fields to query and when searching for items                    | SOLR |
+| phrase_fields  | The list of phrase fields to search with the boost assigned                 | SOLR |
+| boost_function | Custom boost function for                                                   | SOLR |
+| sort           | How to sort search results                                                  | SOLR |
+ 
+
+
+
+
+
 
