@@ -65,3 +65,10 @@ After the setup is finished and configuration options are changed, you can start
 Configuration Options
 =====================
 
+
+The configuration options are located in 
+
+```
+config/papyrus_config.yml
+```
+
