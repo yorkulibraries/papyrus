@@ -66,9 +66,17 @@ Configuration Options
 =====================
 
 
-The configuration options are located in 
+The configuration options are located in:
 
 ```
 config/papyrus_config.yml
 ```
+This is a simple YAML file that contains settings for the application's name, authentication, error handling and bibliographic search.
+
+### Organization
+
+| OPTION     | Description                                                        | Usage             |
+|------------|--------------------------------------------------------------------|-------------------|
+| full_name  | The Full name of your organization. i.e. York University Libraries | Used in copyright |
+| short_name | Short name of your ogranization, i.e. yul                          | Used internally   | 
 
