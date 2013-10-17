@@ -35,6 +35,7 @@ To run Papyrus in the development mode:
 
 ```sh
 $ cd papyrus
+$ bundle
 $ rake app:setup
 ## after the setup has copied the files
 $ rake db:migrate
