@@ -1,0 +1,36 @@
+## SAMPLE CONFIGURATION OPTIONS
+
+PapyrusConfig.configure do |config|
+
+  ## ORGANIZATION
+    
+  config.organization.full_name = "Your Institution/Department Name"
+  config.organization.short_name = "SHORT_NAME"
+  config.organication.app_url = "http://your-institution.website/papyrus/"
+  
+  ## AUTHENTICATION
+  config.authentication.cas_header_name = "REMOTE-USER"
+  config.authentication.after_logout_redirect_to = "http://www.your-instituttion.website"
+  
+  ## ERRORS
+  # config.errors.email_subject_prefix ="[Papyrus Error] "
+  # config.errors.sender_address ="'Papyrus Notifier' <papyrus-errors@your-instituttion.website>"
+  # config.errors.error_recipients = ["your.email@your-instituttion.email"]  
+  
+  ## NOTIFICATIONS
+	# config.notifications.from_email = "papyrus@your-insitution.email"
+	# config.notifications.welcome_subject = "Welcome to Transcription Services"
+	# config.notifications.notification_subject = "Your Institution/Department Name Transcription Services - Papyrus Notification"
+	# config.notifications.items_assigned_subject = "Multiple item(s) have now been assigned to you"	
+  
+  ## BIB SEARCH
+  # config.bib_search.type = "solr"
+  # config.bib_search.label = "Your Catalogue"
+  # config.bib_search.id_prefix = "vufind"
+  # config.bib_search.url = "http://localhost:8080/solr/biblio"
+  # config.bib_search.sort = [ "score, descending", "_docid_, descending" ]
+  # config.bib_search.phrase_fields = "title_txtP^100"
+  # config.bib_search.boost_functions = "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0"
+  # config.bib_search.query_fields = "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
+  
+end

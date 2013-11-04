@@ -14,9 +14,9 @@ if Rails.env.production?
   
   Papyrus::Application.configure do
     config.middleware.use ExceptionNotifier,
-         :email_prefix =>  APP_CONFIG[:errors][:email_subject_prefix],
-         :sender_address => APP_CONFIG[:errors][:sender_address],
-         :exception_recipients => APP_CONFIG[:errors][:error_recipients]
+         :email_prefix => PapyrusConfig.errors.email_subject_prefix,
+         :sender_address => PapyrusConfig.errors.sender_address,
+         :exception_recipients => PapyrusConfig.errors.error_recipients
   end       
   
 end
