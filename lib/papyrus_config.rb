@@ -7,7 +7,12 @@ class PapyrusConfig
   attr_accessor :organization, :authentication, :errors, :notifications, :bib_search
   
   DEFAULT_ORGANIZATION =  { full_name: "Your Institution/Department Name", short_name: "SHORT_NAME", app_url: "http://your-institution.website/papyrus/" }
-  DEFAULT_AUTHENTICATION = {  cas_header_name:  "REMOTE-USER", after_logout_redirect_to: "http://www.your-instituttion.website" }
+  DEFAULT_AUTHENTICATION = {  
+    cas_header_name:  "REMOTE-USER", 
+    after_logout_redirect_to: "http://www.your-instituttion.website", 
+    cookies_domain: "your-domain.com"
+  }
+  
   DEFAULT_ERRORS = { 
     email_subject_prefix: "[Papyrus Error] ",
     sender_address: "'Papyrus Notifier' <papyrus-errors@your-instituttion.website>", 
@@ -26,7 +31,7 @@ class PapyrusConfig
     label: "Your Catalogue",
     id_prefix: "vufind",
     url: "http://localhost:8080/solr/biblio",
-    sort: [ "score, descending", "_docid_, descending" ],
+    sort: [ { score: "descending" } , { _docid_: "descending" } ],
     phrase_fields: "title_txtP^100",
     boost_functions: "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0",
     query_fields: "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"

@@ -30,6 +30,7 @@ class PapyrusConfigTest < ActiveSupport::TestCase
     ## AUTHENTICATION
     assert_equal "REMOTE-USER", instance.authentication.cas_header_name
     assert_equal "http://www.your-instituttion.website", instance.authentication.after_logout_redirect_to    
+    assert_equal "your-domain.com", instance.authentication.cookies_domain
     
     ## ERRORS
     assert_equal "[Papyrus Error] ", instance.errors.email_subject_prefix
@@ -53,7 +54,7 @@ class PapyrusConfigTest < ActiveSupport::TestCase
     
     assert_equal  "title_txtP^100", instance.bib_search.phrase_fields
     assert_equal "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0", instance.bib_search.boost_functions
-    assert_equal ["score, descending", "_docid_, descending"], instance.bib_search.sort
+    assert_equal [ { score: "descending" } , { _docid_: "descending" } ], instance.bib_search.sort
     
     
   end
