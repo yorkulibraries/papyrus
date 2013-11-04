@@ -70,9 +70,9 @@ Configuration Options
 The configuration options are located in:
 
 ```
-config/papyrus_config.yml
+config/papyrus\_app\_config.rb
 ```
-This is a simple YAML file that contains settings for the application's name, authentication, error handling and bibliographic search.
+This is a simple RUBY configuration file that contains settings for the application's name, authentication, error handling and bibliographic search.
 
 ### Organization
 
@@ -80,7 +80,7 @@ This is a simple YAML file that contains settings for the application's name, au
 |-------------|--------------------------------------------------------------------|---------------------|
 | full_name   | The full name of your organization. i.e. York University Libraries | Used in copyright   |
 | short_name  | Short name of your organization, i.e. yul                          | Used internally     |
-| papyrus_url | The URL where Papyrus is deployed.                                 | Email notifications |
+| app_url     | The URL where Papyrus is deployed.                                 | Email notifications |
 
 ### Authentication
 
@@ -88,6 +88,7 @@ This is a simple YAML file that contains settings for the application's name, au
 |-----------------------------|-----------------------------------------------------|-----------------------|
 | cas\_header\_name           | The name of the CAS header to authenticate the user | Authentication module |
 | after\_logout\_redirect\_to | The URL to redirect the user to after logout        | Logout function       |
+| cookies_domain              | The domain to use for cookies                       | Not implemented yet   |
 
 
 ### Errors
