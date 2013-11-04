@@ -10,6 +10,7 @@ rescue
   LoadError 
 end
 
+PapyrusConfig.reset_defaults 
 
 # Test::Unit
 class Test::Unit::TestCase

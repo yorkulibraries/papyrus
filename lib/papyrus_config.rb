@@ -46,6 +46,13 @@ class PapyrusConfig
     @bib_search = OpenStruct.new DEFAULT_BIB_SEARCH                       
   end
   
+  def self.reset_defaults
+    PapyrusConfig.instance.organization = OpenStruct.new DEFAULT_ORGANIZATION
+    PapyrusConfig.instance.authentication = OpenStruct.new DEFAULT_AUTHENTICATION
+    PapyrusConfig.instance.errors = OpenStruct.new DEFAULT_ERRORS
+    PapyrusConfig.instance.notifications = OpenStruct.new DEFAULT_NOTIFICATIONS
+    PapyrusConfig.instance.bib_search = OpenStruct.new DEFAULT_BIB_SEARCH                           
+  end
   
   ### CONFIGURE the instance for the startup
   def self.configure(&block)
