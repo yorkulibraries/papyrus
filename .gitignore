@@ -5,7 +5,7 @@ tmp/
 public/uploads/**/*
 MissingDrawer.tmplugin
 .sass-cache/
-config/papyrus_app_config.rb 
+config/papyrus_app_config.rb
 config/database.yml
 config/deploy.rb
 .DS_Store
