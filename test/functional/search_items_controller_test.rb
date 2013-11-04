@@ -5,6 +5,7 @@ class SearchItemsControllerTest < ActionController::TestCase
   setup do
     @user = create(:user)
     log_user_in(@user)
+     PapyrusConfig.reset_defaults
   end
   
   should "search items database if no type was specified" do

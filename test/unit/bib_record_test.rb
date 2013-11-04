@@ -2,7 +2,9 @@ require 'test_helper'
 
 class BibRecordTest < ActiveSupport::TestCase
   
-  setup do                      
+  setup do  
+    PapyrusConfig.reset_defaults                    
+    
     @solr_result = { id: "1234", title: "Some Title", callnumber: "AD 23433", author: "Some Person", author2: ["author 2", "Another Person"], isbn: "123456789012",
                      publisher: "Printing Inc.", publishDate: "2002", edition: "1st edition", physical: ["343 pages"], language: ["english", "french"] }                                                                    
   end

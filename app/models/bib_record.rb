@@ -8,16 +8,18 @@ class BibRecord
   WORLDCAT = "worldcat"
   
   def initialize(config)
+      
     @config = config || OpenStruct.new
     @config.type = config.nil? || config.type.blank? ? SOLR : config.type # default to Solr
     @type = @config.type
-    
+      
     ensure_config_defaults
   end
   
   
   ## COMMON INTERFACE
   def search_items(search_string)
+   
     if @config.type == SOLR
       search_solr_items(search_string)
     elsif @config.type == WORLDCAT

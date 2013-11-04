@@ -3,6 +3,9 @@ require "papyrus_config"
 
 class PapyrusConfigTest < ActiveSupport::TestCase
 
+  setup do
+    PapyrusConfig.reset_defaults
+  end
   
   should "create one instance of PapyrusConfig" do
     instance = PapyrusConfig.config
