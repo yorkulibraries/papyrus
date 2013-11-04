@@ -2,10 +2,10 @@ require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
   
-  should "FOR PASSPORT YORK: create a new session and log user in if valid user" do
+  should "FOR CAS: create a new session and log user in if valid user" do
     user = create(:user, username: "someuser")
     
-    @request.env['HTTP_PYORK_USER'] = user.username
+    @request.env['REMOTE-USER'] = user.username
     
     get :new
     
@@ -14,9 +14,9 @@ class SessionsControllerTest < ActionController::TestCase
     assert_redirected_to root_url, "For regular user go to root url"
   end
   
-  should "FOR PASSPORT YORK: redirect Student to student view section if valid student" do
+  should "FOR CAS: redirect Student to student view section if valid student" do
     student = create(:student)
-    @request.env['HTTP_PYORK_USER'] = student.username
+    @request.env['REMOTE-USER'] = student.username
     
     get :new
     
@@ -26,7 +26,7 @@ class SessionsControllerTest < ActionController::TestCase
   end
   
   should "Show invalid login page if user is not found" do
-    @request.env["HTTP_PYORK_USER"] = "somecooldude"
+    @request.env["REMOTE-USER"] = "somecooldude"
     
     get :new
     assert_nil session[:user_id], "Session user id was not set"

@@ -87,7 +87,7 @@ class BibRecord
     item = Item.new
     
     item.item_type = item_type
-    item.unique_id = id_prefix << "_" << result["id"]
+    item.unique_id = "#{id_prefix}_#{result["id"]}"
     item.title = result["title"]    
     item.callnumber = result["callnumber"]
     

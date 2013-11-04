@@ -4,21 +4,21 @@ class StudentMailer < ActionMailer::Base
 
    def notification_email(student, message)
      @student = student
-     @url  = PapyrusConfing.ogranization.app_url
+     @url  = PapyrusConfig.organization.app_url
      @message = message
      mail( to: student.email, subject: PapyrusConfig.notifications.notification_subject)
    end
   
   def welcome_email(student)
     @student = student
-    @url  = PapyrusConfing.ogranization.app_url
+    @url  = PapyrusConfig.organization.app_url
     mail(to: student.email, subject: PapyrusConfig.notifications.welcome_subject)
   end
   
   def items_assigned_email(student, items)
     @student = student
     @items = items
-    @url  = PapyrusConfing.ogranization.app_url
+    @url  = PapyrusConfig.organization.app_url
     
     mail(to: student.email, subject: PapyrusConfig.notifications.items_assigned_subject)
   end

@@ -39,7 +39,8 @@ class SearchItemsControllerTest < ActionController::TestCase
   
   should "search solr if solr is selected" do
     ## if this test fails, first check if there is a test solr config
-
+    PapyrusConfig.config.bib_search.url = "http://iota.library.yorku.ca/solr/biblio"
+    
     get :index, type: BibRecord::SOLR, q: "caesar"
     search_results = assigns(:search_results)    
     assert_equal "solr", search_results, "search results should be set to solr"

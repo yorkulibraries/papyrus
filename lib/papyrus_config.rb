@@ -23,7 +23,7 @@ class PapyrusConfig
   	from_email: "papyrus@your-insitution.email",
   	welcome_subject: "Welcome to Transcription Services",
   	notification_subject: "Your Institution/Department Name Transcription Services - Papyrus Notification",
-  	items_assigned_subject: "Multiple item(s) have now been assigned to you"	
+  	items_assigned_subject: "Multiple items have now been assigned to you"	
   }
   
   DEFAULT_BIB_SEARCH = {
@@ -60,7 +60,7 @@ class PapyrusConfig
   ## Class method shortcuts for instance objects, auto defining these methods using a SELF call to define
   %w(organization authentication errors notifications bib_search).each do |method|
     self.class.send(:define_method, "#{method}".downcase) do      # use param
-      return PapyrusConfig.instance.send(method)
+      return PapyrusConfig.instance.send(method).clone
      end
    end
 end

@@ -14,7 +14,7 @@ class StudentMailerTest < ActionMailer::TestCase
 
     # Test the body of the sent email contains what we expect it to
     assert_equal [student.email], email.to
-    assert_equal "York Libraries Transcription Services - Papyrus Notification", email.subject
+    assert_equal "Your Institution/Department Name Transcription Services - Papyrus Notification", email.subject
     assert_match(/Some Unique Student Message/, email.encoded)
         
   end
@@ -51,6 +51,6 @@ class StudentMailerTest < ActionMailer::TestCase
     
     email = StudentMailer.items_assigned_email(student, items).deliver
     
-    assert_equal "#{items.first.title} has now been assigned to you", email.subject
+    assert_equal "Multiple items have now been assigned to you", email.subject
   end
 end

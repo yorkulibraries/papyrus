@@ -2,6 +2,7 @@ require 'test_helper'
 require "papyrus_config"
 
 class PapyrusConfigTest < ActiveSupport::TestCase
+
   
   should "create one instance of PapyrusConfig" do
     instance = PapyrusConfig.config
@@ -41,7 +42,7 @@ class PapyrusConfigTest < ActiveSupport::TestCase
     assert_equal "papyrus@your-insitution.email", instance.notifications.from_email
     assert_equal "Welcome to Transcription Services", instance.notifications.welcome_subject
     assert_equal "Your Institution/Department Name Transcription Services - Papyrus Notification", instance.notifications.notification_subject
-    assert_equal "Multiple item(s) have now been assigned to you", instance.notifications.items_assigned_subject             
+    assert_equal "Multiple items have now been assigned to you", instance.notifications.items_assigned_subject             
     
     ## BIB_SEARCH
     assert_equal "solr", instance.bib_search.type

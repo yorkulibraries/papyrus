@@ -30,7 +30,7 @@ class BibRecordTest < ActiveSupport::TestCase
     
     assert_equal Item::BOOK, item.item_type
     assert_equal @solr_result[:title], item.title
-    assert_equal PapyrusConfig.bib_search.id_prefix << "_" << @solr_result[:id], item.unique_id
+    assert_equal "#{PapyrusConfig.bib_search.id_prefix}_#{@solr_result[:id]}", item.unique_id
     assert_equal @solr_result[:isbn], item.isbn
 
   end

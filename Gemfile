@@ -1,13 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.11'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '0.3.11'
 gem 'nifty-generators'
-gem "carrierwave", "~> 0.5.8"
+gem "carrierwave", "0.6.2"
 gem "simple_form", "2.0.0"
 gem "mini_magick", "3.4"
 gem 'solr-ruby', "0.0.8"
