@@ -1,3 +1,5 @@
+require "ostruct"
+
 class BibRecord
   attr_reader :type, :config
   
@@ -6,8 +8,9 @@ class BibRecord
   WORLDCAT = "worldcat"
   
   def initialize(config)
-    @config = config || Hash.new
-    @type = @config[:type] || SOLR
+    @config = config || OpenStruct.new
+    @config.type = config.nil? || config.type.blank? ? SOLR : config.type # default to Solr
+    @type = @config.type
     
     ensure_config_defaults
   end
@@ -15,9 +18,9 @@ class BibRecord
   
   ## COMMON INTERFACE
   def search_items(search_string)
-    if self.type == SOLR
+    if @config.type == SOLR
       search_solr_items(search_string)
-    elsif self.type == WORLDCAT
+    elsif @config.type == WORLDCAT
       search_worldcat_items(search_string)
     else
       ["No Results Found"]
@@ -25,9 +28,9 @@ class BibRecord
   end
   
   def find_item(item_id)
-    if self.type == SOLR
+    if @config.type == SOLR
       find_solr_item(item_id)
-    elsif self.type == WORLDCAT
+    elsif @config.type == WORLDCAT
       find_worldcat_item(item_id)
     else
       "Record Not Found"
@@ -35,10 +38,10 @@ class BibRecord
   end
   
   def build_item_from_search_result(result, item_type)
-    if self.type == SOLR
-      BibRecord.build_item_from_solr_result(result, item_type, @config[:id_prefix])
-    elsif self.type == WORLDCAT
-      self.build_item_from_worldcat_result(result, item_type, @config[:id_prefix])
+    if @config.type == SOLR
+      BibRecord.build_item_from_solr_result(result, item_type, @config.id_prefix)
+    elsif @config.type == WORLDCAT
+      self.build_item_from_worldcat_result(result, item_type, @config.id_prefix)
     else
       "Item Can't be built"
     end
@@ -47,12 +50,12 @@ class BibRecord
   
   def search_solr_items(query)
     require 'solr'
-    solr = Solr::Connection.new(@config[:url])
+    solr = Solr::Connection.new(@config.url)
   
-    query_fields = @config[:query_fields]
-    phrase_fields = @config[:phrase_fields]
-    boost_functions = @config[:boost_functions]
-    sort = @config[:sort]
+    query_fields = @config.query_fields
+    phrase_fields = @config.phrase_fields
+    boost_functions = @config.boost_functions
+    sort = @config.sort
     
     unless query.blank?
       response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true,
@@ -67,7 +70,7 @@ class BibRecord
   
   def find_solr_item(item_id)
     require 'solr'
-    solr = Solr::Connection.new(@config[:url])
+    solr = Solr::Connection.new(@config.url)
     result = solr.query("id: #{item_id}")
     
     if result.hits.first 
@@ -119,17 +122,17 @@ class BibRecord
   end
   
   def ensure_config_defaults
-    if self.type == SOLR 
+    if @config.type == SOLR 
       
-      @config[:label] = @config[:label] || "DEFAULT_SOLR"
-      @config[:id_prefix] = @config[:id_prefix] || "default_solr"
-      @config[:url] = @config[:url] || "http://localhost:8080/solr/biblio"
-      @config[:query_fields] = @config[:query_fields] || "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
-      @config[:phrase_fields] = @config[:phrase_fields] || "title_txtP^100"
-      @config[:boost_functions] = @config[:boost_functions] || "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0";
-      @config[:sort] = @config[:sort] || [ { score: "descending" } , { _docid_: "descending" } ];
+      @config.label = @config.label || "DEFAULT_SOLR"
+      @config.id_prefix = @config.id_prefix || "default_solr"
+      @config.url = @config.url || "http://localhost:8080/solr/biblio"
+      @config.query_fields = @config.query_fields || "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
+      @config.phrase_fields = @config.phrase_fields || "title_txtP^100"
+      @config.boost_functions = @config.boost_functions || "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0";
+      @config.sort = @config.sort || [ { score: "descending" } , { _docid_: "descending" } ];
       
-    elsif self.type == WORLDCAT
+    elsif @config.type == WORLDCAT
       
     end
   end
