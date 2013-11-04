@@ -19,7 +19,7 @@ class SearchItemsController < ApplicationController
   
   private 
   def search_solr(query)
-    bib_record = BibRecord.new(APP_CONFIG[:bib_search])
+    bib_record = BibRecord.new(PapyrusConfig.bib_search)
     @bib_search = true
     
     @docs = bib_record.search_items(query)

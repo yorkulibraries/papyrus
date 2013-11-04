@@ -11,7 +11,7 @@ class BibRecordTest < ActiveSupport::TestCase
   end
   
   should "initialize bib record, with proper type" do        
-    record = BibRecord.new(@solr_config)
+    record = BibRecord.new(PapyrusConfig.bib_search)
     assert_equal BibRecord::SOLR, record.type    
   end
   
