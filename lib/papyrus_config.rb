@@ -9,6 +9,7 @@ class PapyrusConfig
   DEFAULT_ORGANIZATION =  { full_name: "Your Institution/Department Name", short_name: "SHORT_NAME", app_url: "http://your-institution.website/papyrus/" }
   DEFAULT_AUTHENTICATION = {  
     cas_header_name:  "REMOTE-USER", 
+    cas_user_id_name: "Authentication Username",
     after_logout_redirect_to: "http://www.your-instituttion.website", 
     cookies_domain: "your-domain.com"
   }

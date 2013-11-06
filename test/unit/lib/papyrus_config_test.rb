@@ -33,6 +33,7 @@ class PapyrusConfigTest < ActiveSupport::TestCase
   
     ## AUTHENTICATION
     assert_equal "REMOTE-USER", instance.authentication.cas_header_name
+    assert_equal "Authentication Username", instance.authentication.cas_user_id_name
     assert_equal "http://www.your-instituttion.website", instance.authentication.after_logout_redirect_to    
     assert_equal "your-domain.com", instance.authentication.cookies_domain
     

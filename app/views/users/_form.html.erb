@@ -5,11 +5,11 @@
 		<div class="span4">
 			<%= f.input :name %>
 
-		    <%= f.input :username, :hint => "Passport York Username"  %>
+		    <%= f.input :username, hint: username_hint %>
 		</div>
 
 	  	<div class="span4">
-			<%= f.input :email, :hint => "York Email" %>
+			<%= f.input :email, hint:  email_hint %>
 
 	    	<%= f.input :role, :collection => User::ROLES %>
 		</div>

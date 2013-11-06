@@ -15,4 +15,8 @@ module ApplicationHelper
   def papyrus_version
     "2.1"
   end
+  
+  def papyrus_institution
+    PapyrusConfig.organization.full_name
+  end
 end

@@ -8,7 +8,7 @@
 		<div class="span4">	
 			<%= f.input :name, :required => false %>
 			<%= f.input :email, :required => false %>
-			<%= f.input :username, :hint => "Passport York Username", :required => false, :hint_html => { :class => "trivial"}  %>
+			<%= f.input :username, hint: username_hint, :required => false, :hint_html => { :class => "trivial"}  %>
 	  	</div>	
 
 		<div class="span4">	
@@ -30,7 +30,7 @@
      	<%= f.button :submit,  @student.new_record? ? "Register Student" : "Update Student Registration" , :class => 'btn btn-primary' %>
      	<%= link_to 'Cancel', @student.new_record? ? students_path : student_path(@student), :class => 'btn' %>
 		
-		<%  if can? :destroy, Student && !@student.new_record? %>	
+		<%  if !@student.new_record? && can?(:manage, Student) %>	
 		<div class="float-right">
 			<%= link_to "Disable access", @student, :confirm => 'Are you sure?', :method => :delete, :class=> "btn btn-danger" %>	
 		</div>
