@@ -70,7 +70,7 @@ Configuration Options
 The configuration options are located in:
 
 ```
-config/papyrus\_app\_config.rb
+config/papyrus_app_config.rb
 ```
 This is a simple RUBY configuration file that contains settings for the application's name, authentication, error handling and bibliographic search.
 
