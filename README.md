@@ -87,6 +87,7 @@ This is a simple RUBY configuration file that contains settings for the applicat
 | OPTION                      | Description                                         | Usage                 |
 |-----------------------------|-----------------------------------------------------|-----------------------|
 | cas\_header\_name           | The name of the CAS header to authenticate the user | Authentication module |
+| cas\_user\_id\_\_name       | The name of user id to be use. i.e Passport York    | User module           |
 | after\_logout\_redirect\_to | The URL to redirect the user to after logout        | Logout function       |
 | cookies_domain              | The domain to use for cookies                       | Not implemented yet   |
 
