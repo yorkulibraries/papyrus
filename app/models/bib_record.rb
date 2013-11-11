@@ -58,17 +58,19 @@ class BibRecord
     phrase_fields = @config.phrase_fields
     boost_functions = @config.boost_functions
     sort = @config.sort
+
+    $logger.debug @config.url
+    $logger.debug @config.label
     
     unless query.blank?
-      response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true,
-                                          phrase_fields: phrase_fields, boost_functions: boost_functions)               
+      response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true, phrase_fields: phrase_fields, boost_functions: boost_functions)
+               
       results = response.hits
     else
       Array.new
     end
     
   end
-  
   
   def find_solr_item(item_id)
     require 'solr'
@@ -106,25 +108,20 @@ class BibRecord
     item
   end
   
-
-  
-
-  
-  
   private 
  
   def self.array_or_string(result, field_name)
-    return "" unless result[field_name]
+    return "" unless result[field_name] 
     
-    if result[field_name].kind_of? Array
+    if result[field_name].kind_of? Array 
       result[field_name].join(", ")
     else
       result[field_name]
     end
-  end
+  end 
   
   def ensure_config_defaults
-    if @config.type == SOLR 
+    if @config.type == SOLR
       
       @config.label = @config.label || "DEFAULT_SOLR"
       @config.id_prefix = @config.id_prefix || "default_solr"

@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   
   def index        
     page_number = params[:page] ||= 1
-    
+    @search_results = "local"
     if params[:order] && params[:order] == "alpha"     
       @items = Item.alphabetical.page(page_number)
     else

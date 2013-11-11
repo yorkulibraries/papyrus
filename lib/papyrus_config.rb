@@ -2,7 +2,8 @@ require 'ostruct'
 require 'singleton'
 
 class PapyrusConfig
-  include Singleton
+  
+  @@instance = nil
       
   attr_accessor :organization, :authentication, :errors, :notifications, :bib_search
   
@@ -47,6 +48,25 @@ class PapyrusConfig
     @bib_search = OpenStruct.new DEFAULT_BIB_SEARCH                   
   end
   
+  ## make new method protected
+  private_class_method :new 
+  
+  ## SINGLTON INSTANCE. WILL RAISE error if $papyrus_config is not setup
+  def self.instance
+    if @@instance == nil            
+      raise("Please call PapyrusConfig.load(path/to/papyrus/config) method first") if $papyrus_config_path == nil  
+      @@instance = new    
+      # try configuring it with a provided path
+      $config_logger.debug("INSTANCE: Loading configuration from #{$papyrus_config_path}")
+      $config_logger.debug("INSTANCE: #{@@instance}")
+            
+      ActiveSupport::Dependencies.load_file $papyrus_config_path
+      $config_logger.debug("DONE: Configuring #{@@instance}")
+    end
+      
+    @@instance 
+  end
+  
   def self.reset_defaults
     PapyrusConfig.instance.organization = OpenStruct.new DEFAULT_ORGANIZATION
     PapyrusConfig.instance.authentication = OpenStruct.new DEFAULT_AUTHENTICATION
@@ -55,20 +75,31 @@ class PapyrusConfig
     PapyrusConfig.instance.bib_search = OpenStruct.new DEFAULT_BIB_SEARCH                         
   end
   
+  
+  def self.load(config_path = nil)
+    raise("Please provide a valid config_path file") if config_path == nil
+    $papyrus_config_path = config_path    
+  end
+  
+  
   ### CONFIGURE the instance for the startup
   def self.configure(&block)
-    yield PapyrusConfig.instance
+    $config_logger.debug("Configuring with config file")
+    $config_logger.debug("INSTANCE IN CONFIGURE: #{@@instance}")
+    instance_eval &block
   end
   
-  ### Access configuration object
+  ### Access configuration object instance
   def self.config
-    PapyrusConfig.instance
+    $config_logger.debug("Calling config for #{PapyrusConfig.instance}")  
+    PapyrusConfig.instance    
   end
-  
+        
   ## Class method shortcuts for instance objects, auto defining these methods using a SELF call to define
   %w(organization authentication errors notifications bib_search).each do |method|
     self.class.send(:define_method, "#{method}".downcase) do      # use param
-      return PapyrusConfig.instance.send(method).clone
+      $config_logger.debug("Calling shortcut method for #{method}")
+      return PapyrusConfig.instance.send(method)
      end
    end
 end
