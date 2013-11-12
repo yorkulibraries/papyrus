@@ -64,7 +64,7 @@ class BibRecord
     
     unless query.blank?
       response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true, phrase_fields: phrase_fields, boost_functions: boost_functions)
-               
+      #$config_logger.debug("HERE  #{JSON.parse(response.raw_response)}")         
       results = response.hits
     else
       Array.new
@@ -129,7 +129,7 @@ class BibRecord
       @config.query_fields = @config.query_fields || "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
       @config.phrase_fields = @config.phrase_fields || "title_txtP^100"
       @config.boost_functions = @config.boost_functions || "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0";
-      @config.sort = @config.sort || [ { score: "descending" } , { _docid_: "descending" } ];
+      @config.sort = @config.sort || [ {score: :descending}, {_docid_: :descending} ]
       
     elsif @config.type == WORLDCAT
       
