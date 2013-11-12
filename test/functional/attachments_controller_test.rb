@@ -55,8 +55,8 @@ class AttachmentsControllerTest < ActionController::TestCase
     post :update, item_id: item.id, id: attachment.id, attachment: { file: fixture_file_upload("test_picture.jpg", "image/jpg") }
     
     attachment = assigns(:attachment)
-    file_name = "/uploads/items/book/#{item.unique_id}/test_picture.jpg"
-    assert_equal file_name, attachment.file.url, "new file uploaded"        
+
+    assert attachment.file.url.ends_with?("test_picture.jpg"), "new file uploaded"        
     
     assert_redirected_to item_url(item), "Redirects back to item"
   end
@@ -64,17 +64,20 @@ class AttachmentsControllerTest < ActionController::TestCase
   
   ##### DESTROYING ATTACHMENTS ######
   
-  should "not destroy but set to deleted" do
+  should "not destroy but set to deleted, but rename the file" do
     item = create(:item, item_type: Item::BOOK, title: "test")
     attachment = create(:attachment, name: "woot", item: item)
-   
+    
+    old_filename = attachment.file.file.filename
+    
     assert_no_difference "Attachment.count" do
       post :destroy, id: attachment.id, item_id: item.id
     end
-    
+  
     a = assigns(:attachment)
     assert a.deleted?, "Should have deleted flag set to true"
-    
+    #a.file.file.move_to(File.dirname(a.file.file.path) + "/deleted/" + a.id + "-" + a.file.file.filename)
+    assert_equal a.file.to_s, "/#{a.file.store_dir}/deleted/#{a.id}-#{old_filename}"
     assert_redirected_to item_url(item), "Redirects back to item"
   end
   

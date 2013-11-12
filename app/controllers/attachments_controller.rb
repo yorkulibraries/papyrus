@@ -23,7 +23,7 @@ class AttachmentsController < ApplicationController
     if @attachment.save
       
       respond_to do |format|
-            format.html { redirect_to @item, notice: "Successfully created attachment." }
+            format.html { redirect_to @item, notice: "Successfully created a file." }
             format.js do
                render :text => render_to_string(partial: @attachment)
             end
@@ -47,7 +47,7 @@ class AttachmentsController < ApplicationController
     @attachment.user = @current_user
     @attachment.audit_comment = "Updated an existing file"
     if @attachment.update_attributes(params[:attachment])
-      redirect_to @item, notice: "Successfully updated attachment."
+      redirect_to @item, notice: "Successfully updated a file."
     else
       render :action => 'edit'
     end
@@ -56,12 +56,17 @@ class AttachmentsController < ApplicationController
   def destroy
     @attachment = @item.attachments.find(params[:id]) 
     @attachment.deleted = true
+    @attachment.audit_comment = "Removing an existing file"
     @attachment.save(validate: false)
-      
+    
+    # rename file and move it deleted directory
+    new_filepath = "#{File.dirname(@attachment.file.file.path)}/deleted/#{@attachment.id}-#{@attachment.file.file.filename}"
+    @attachment.file.file.move_to(new_filepath)
+    
     # do not remove the attachment for now   
     #@attachment.destroy
     
-    redirect_to @item, notice: "Successfully removed attachment."
+    redirect_to @item, notice: "Successfully removed a file."
   end
   
   
