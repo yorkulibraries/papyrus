@@ -1,7 +1,7 @@
 /*
+*= require_tree ./plugins
 *= require bootstrap_and_overrides
 *= require styles
-*= require_tree ./plugins
 */
 
 
