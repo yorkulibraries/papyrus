@@ -106,7 +106,7 @@
 	<% end %>
  	
 </section>
-<% if @item.attachments.size > 0 %>
+<% if @item.attachments.available.size > 0 %>
 	<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-small"><i class="icon-download"></i> Download Zipped</a>
 <% else %>
 	<div class="alert alert-info">
