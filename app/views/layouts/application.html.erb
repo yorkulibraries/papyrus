@@ -12,45 +12,44 @@
   <body>
 	
 	<%= render :template => "layouts/navbar"%>
-	
-	
-	<% if content_for?(:splash_section) %>
-		<div class="container">
-			<%=  yield (:splash_section) %>
-		</div>		
-	<% end %>
-	
-	
-
-
-	
+		
 	 <div class="container">
 		
-		<% flash.each do |name, msg| %>
-		  <div class="push-down"></div>
-		  <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-		    <a class="close" data-dismiss="alert">×</a>
-		    <%= msg %>
-		  </div>
-		<% end %>
 		
-		<div class="page-header">
+		<div class="panel">
+			<div class="page-header">
 	    	<%= content_tag :h1, yield(:title) if show_title? && !content_for?(:title_html) %>
-			<%= yield (:title_html) if content_for?(:title_html)%>	     
-	    </div>
-		<div class="row">
-			<div class="<%= content_for?(:sidebar) ? "span9" : "span12" %>">									    					
-					<%= yield %>
+				<%= yield (:title_html) if content_for?(:title_html)%>	     
+	  	</div>
+			<div class="page-content">
+				
+				<% flash.each do |name, msg| %>
+				  <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+				    <a class="close" data-dismiss="alert">×</a>
+				    <%= msg %>
+				  </div>
+				<% end %>
+					
+				<div class="row">
+					<div class="<%= content_for?(:sidebar) ? "span8" : "span11" %>">									    					
+							<%= yield %>
+					</div>
+					<% if content_for?(:sidebar) %>
+						<div class="span3">			
+								<%=  yield (:sidebar) %>								
+						</div>
+					<% end %>
+				</div>
 			</div>
-			<% if content_for?(:sidebar) %>
-			<div class="span3">			
-					<%=  yield (:sidebar) %>								
-			</div>
-			<% end %>
 		</div>
-	  	<section class="weak push-down">Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %></section>	
-	  </div>
+	  	
+	 </div>
 	  
-  
+	 <footer>
+		<div class="container">
+			<section class="weak push-down">Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %></section>	
+		</div>			
+	 </footer>
+
   </body>
 </html>

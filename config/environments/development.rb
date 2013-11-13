@@ -42,5 +42,6 @@ Papyrus::Application.configure do
 
   config.log_tags = [:uuid, :remote_ip]
   
+  config.middleware.use Rack::LiveReload
 end
 

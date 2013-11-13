@@ -1,0 +1,43 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+
+/** STUDENTS SPECIFIC STYLING */
+
+
+.student {
+	
+	&.standalone {
+		.border-radius(5px);
+		.box-shadow(0 1px 5px rgba(0, 0, 0, 0.35));
+		padding: 5px 10px 10px; 
+		margin-bottom: 15px;
+		background-color: #fff;
+	}
+	 
+	.header { margin-top: 10px; padding-bottom: 0px; 
+		h2 a { color: @grayDarker; }
+	 }
+	.summary { xborder-bottom: 1px solid #EEEEEE; margin: -10px 0 0; padding: 0 0 10px 5px;
+		.stats { 
+			font-weight: bold; font-size: 14px; 
+			.divider { color: #999999;   padding: 0 5px; font-weight: normal; }
+		}
+	}
+	
+	&.list {
+		margin-bottom: 5px;
+		padding: 8px 6px;
+		
+		.title {
+			font-size: 14px;
+			a { color: @grayDark; font-weight: bold; }
+		}
+		
+		.summary {
+			margin: 0; 
+			padding: 5px 0 0;
+		}
+		
+	}	
+	
+}

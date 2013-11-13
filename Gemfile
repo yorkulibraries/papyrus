@@ -33,7 +33,9 @@ gem "exception_notification",
 
 
 
-gem 'twitter-bootstrap-rails', "2.0.4"
+gem 'twitter-bootstrap-rails', "2.2.8"
+gem "therubyracer", "0.11.4"
+gem "less-rails", "2.3.1"
 
 group :assets do
   gem 'sass-rails', "  ~> 3.2.3"
@@ -46,6 +48,7 @@ gem 'jquery-rails', "2.1.4"
 group :development do
 	gem "populator"
 	gem "faker"
+  gem "rack-livereload"
 end 
 
 group :test do
@@ -55,7 +58,7 @@ group :test do
   gem "minitest", "4.7.5"
   gem 'guard-test', "1.0.0"
   gem 'guard-livereload', require: false
-  gem "rack-livereload"
+ 
   gem 'spring', github: 'jonleighton/spring'
   gem "ruby-prof"  
   gem "turn"

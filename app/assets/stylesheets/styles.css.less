@@ -1,44 +1,12 @@
 @import "twitter/bootstrap/variables";
 @import "twitter/bootstrap/mixins";
 
-body {  background-color: #F4F1EC; }
 
 /** common classes **/
-.clear { clear: both; }
-.hide { display: none;}
-.weak { color: #797D7F !important; font-size: 10px !important;}
-.soft { font-weight: normal !important; }
-.trivial { color: #797D7F;  }
-.distinct { color: black; }
-.blend { color: #9F9B94; }
-.small { font-size: 11px; }
-.strong { font-weight: bold;}
-.odd { background-color: #F8F7F5; border: 1px solid #D4D1CC; }
-.float-right { float: right;}
-.float-left { float: left;}
-.half-column {float: left; width: 50%;}
-div.push-down { margin-top: 20px; }
-.well { background-color: #F8F7F5; border-color: #ccc; }
-code { background-color: #F8F7F5; }
-blockquote { border-color: #383433; }
 
-/** colors **/
-.red { color: #CC0000;}
-.green { color: @green; }
 
-section { 
-		&.push-down { padding-top: 20px; }
+section { 		
 		h2 { color: @red; font-size: 18px; font-weight: normal;  padding-bottom: 15px;}
-}
-
-
-.page-header { 
-	border-color: #D4D1CC; 
-	
-	h1 {
-		color: #383433;
-		small { color: #B2A793; }
-	}
 }
 
 
@@ -90,43 +58,7 @@ textarea#message { width: 95%; }
 		
 }
 
-.item, .student {
-	
-	&.standalone {
-		.border-radius(5px);
-		.box-shadow(0 1px 5px rgba(0, 0, 0, 0.35));
-		padding: 5px 10px 10px; 
-		margin-bottom: 15px;
-		background-color: #fff;
-	}
-	 
-	.page-header { margin-top: 10px; padding-bottom: 0px; 
-		h2 a { color: @grayDarker; }
-	 }
-	.summary { xborder-bottom: 1px solid #EEEEEE; margin: -10px 0 0; padding: 0 0 10px 5px;
-		.stats { 
-			font-weight: bold; font-size: 14px; 
-			.divider { color: #999999;   padding: 0 5px; font-weight: normal; }
-		}
-	}
-	
-	&.list {
-		margin-bottom: 5px;
-		padding: 8px 6px;
-		
-		.title {
-			font-size: 14px;
-			a { color: @grayDark; font-weight: bold; }
-		}
-		
-		.summary {
-			margin: 0; 
-			padding: 5px 0 0;
-		}
-		
-	}	
-	
-}
+
 
 /** attachments **/
 

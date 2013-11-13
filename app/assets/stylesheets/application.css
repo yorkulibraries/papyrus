@@ -1,7 +1,11 @@
 /*
 *= require_tree ./plugins
 *= require bootstrap_and_overrides
+*= require plugin_overrides
+*= require common
+*= require layout
 *= require styles
+*= require_tree ./controllers
 */
 
 

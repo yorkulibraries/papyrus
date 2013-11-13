@@ -66,7 +66,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
-    commonjs (0.2.6)
+    commonjs (0.2.7)
     em-websocket (0.5.0)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.5.3)
@@ -113,13 +113,12 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
-    less (2.0.12)
-      commonjs (~> 0.2.0)
-      therubyracer (~> 0.9.9)
-    less-rails (2.1.8)
+    less (2.3.3)
+      commonjs (~> 0.2.6)
+    less-rails (2.3.1)
       actionpack (>= 3.1)
-      less (~> 2.0.7)
-    libv8 (3.3.10.4)
+      less (~> 2.3.1)
+    libv8 (3.11.8.17)
     listen (2.2.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -186,6 +185,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.5)
     ruby-prof (0.13.0)
     rubyzip (0.9.9)
     sass (3.2.9)
@@ -215,8 +215,9 @@ GEM
       polyamorous (~> 0.5.0)
     subexec (0.2.3)
     test-unit (2.5.5)
-    therubyracer (0.9.10)
-      libv8 (~> 3.3.10)
+    therubyracer (0.11.4)
+      libv8 (~> 3.11.8.12)
+      ref
     thor (0.18.1)
     tilt (1.4.1)
     timers (1.1.0)
@@ -225,9 +226,10 @@ GEM
       polyglot (>= 0.3.1)
     turn (0.9.6)
       ansi
-    twitter-bootstrap-rails (2.0.4)
+    twitter-bootstrap-rails (2.2.8)
       actionpack (>= 3.1)
-      less-rails (~> 2.1.8)
+      execjs
+      rails (>= 3.1)
       railties (>= 3.1)
     tzinfo (0.3.38)
     uglifier (2.1.1)
@@ -256,6 +258,7 @@ DEPENDENCIES
   guard-test (= 1.0.0)
   jquery-rails (= 2.1.4)
   kaminari (= 0.13.0)
+  less-rails (= 2.3.1)
   mimetype-fu
   mini_magick (= 3.4)
   minitest (= 4.7.5)
@@ -273,7 +276,8 @@ DEPENDENCIES
   spring!
   sqlite3
   squeel (= 0.9.5)
+  therubyracer (= 0.11.4)
   turn
-  twitter-bootstrap-rails (= 2.0.4)
+  twitter-bootstrap-rails (= 2.2.8)
   uglifier (>= 1.0.3)
   webrat (= 0.7.3)

@@ -1,6 +1,7 @@
 
+
 <div class="item standalone">
-	<div class="page-header">
+	<div class="header">
 		<h2><%= link_to_unless controller.action_name == "show", item.title, item_path(item) do %><%= item.title %><% end %> <small><%= item.item_type%></small></h2>
 	</div>
 	
