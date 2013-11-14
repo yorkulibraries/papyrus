@@ -1,0 +1,31 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+
+.search-box {
+	border: 1px solid #aaa; background-color: #F8F7F5; padding: 8px 10px; margin-bottom: 10px; 
+	form { margin-bottom: 0; }
+	
+	.input-prepend {
+		margin-bottom: 0;
+		span { border-radius: 0; background-color: inherit; border:none; }
+		
+		input.search-input { 
+			border: none; background: inherit; border-bottom: 1px dotted #aaa; .box-shadow(none); .border-radius(0); 
+			padding: 5px 5px 2px 5px; max-width: 400px; min-width: 100px; 
+		}
+		
+		.btn { 
+			border: none; background: inherit; color: #0764EA; .border-radius(0); .box-shadow(none); border: 1px solid; border-color: #F8F7F5; 
+			margin-right: 0;
+			
+			&.active, &:hover { box-shadow: none; border: 1px dotted #ccc; color: #222;   }
+			
+			&#search_submit { margin-left: 20px; z-index:999; }
+		}
+	}
+	
+}
+
+.pagination-stats {
+	padding: 10px 5px;
+}

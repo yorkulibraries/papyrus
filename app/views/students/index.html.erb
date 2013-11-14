@@ -4,22 +4,22 @@
 <% end %>
 
 <% sidebar do %>
-	<div class="new-item">
-		<%= link_to new_student_path,  :class=> "btn btn-huge green" do %>
-			+	
-		<% end %>
-		<span>New <br/>Student</span>
-	</div>
+	<%= link_to new_student_path, class: "action-btn green input-block-level" do %>
+		<i class="icon-plus"></i> Register New Student
+	<% end %>
+	<h3>Registering New Studnets</h3>
+	<p>A blurb about registering new students</p>
 <% end %>
 
-
-<form class="well form-search"  action="<%= search_students_path %>">
-
-	<input type="text" name="q" class="input-xlarge search-query" value="<%= params[:q] %>" placeholder="Search Name or Username"/>
-	<input type="submit" value="Search" class="btn"/>
-
-
-</form>
+<div class="search-box">
+	<form action="<%= search_students_path %>">
+		<div class="input-prepend input-block-level">
+			<button class="btn pull-right" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
+			<span class="add-on">	<i class="icon-search"></i></span>
+			<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Name or Username"/>			
+		</div>
+	</form>
+</div>
 
 <p><strong>Search results <%= "- Total: #{@students.total_count}" if @students%></strong></p>
 <%= paginate @students %>

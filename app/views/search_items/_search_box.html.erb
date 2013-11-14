@@ -1,12 +1,14 @@
-<form class="well form-search"  action="<%= search_items_path(type: bib_search_type) %>" id="omni_search_form">
-
-	<input type="text" name="q" value="<%= params[:q] %>" class="input-medium search-query span4" placeholder="Search By Title, Author, Unique ID, ISBN"/>
-	<input type="submit" class="btn" value="Search"/>
-	
-	
-	<p style="margin: 20px 0 0;">	
-		<a href="<%= search_items_path %>" class="btn <%= "active" if @search_results == "local" %> search_items_button">Papyrus</a>
-		<a href="<%= search_items_path(type: bib_search_type) %>" class="btn <%= "active" if @search_results == bib_search_type %> search_items_button"><%= bib_search_label %></a>
-	</p>
-</form>
-
+<div class="search-box">
+	<form action="<%= search_items_path(type: bib_search_type) %>" id="omni_search_form">
+		<div class="input-prepend input-block-level">			
+			<button class="btn pull-right" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
+			<a href="<%= search_items_path %>" class="btn <%= "active" if @search_results == "local" %> search_items_button">Papyrus</a>
+			<a href="<%= search_items_path(type: bib_search_type) %>" class="btn <%= "active" if @search_results == bib_search_type %> search_items_button">
+				<%= bib_search_label %>
+			</a>
+			<span class="add-on">	<i class="icon-search"></i></span>
+			<input type="text" name="q" class="search-input  input-xxlarge" placeholder="Search By Title, Author, Unique ID, ISBN"/>
+			
+		</div>
+	</form>
+</div>

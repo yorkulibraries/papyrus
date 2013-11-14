@@ -13,7 +13,19 @@ body { background-color: #E8EBEF; }
 	.page-header { 
 		border-color: #D4D1CC;  margin: 0; padding: 20px 30px 0px 30px; position: relative; 
 		
-		h1 { color: #000; margin: 0 0 20px 0; }
+		h1 { color: #000; margin: 0 0 20px 0; font-size: 25px; }
 	}
 	.page-content { padding: 20px 35px 20px }
+	
+	.sidebar {
+		h3 { border-bottom: 1px solid #CCCCCC; color: #222222; font-size: 20px; line-height: 40px; padding: 0 5px; }
+		p { color: #333333; font-size: 14px; line-height: 20px; padding: 0 5px; }
+		
+		.action-btn { 
+			i { font-size: 13px; }
+			.border-radius(3px); font-weight: 400; font-size: 15px; height: 42px; line-height: 42px; padding: 0 21px; text-align: center; white-space: nowrap;
+			&.green { background-color: #96BF48; border: 1px solid #8BB43F; color: #fff; text-shadow: 0 1px 0 #80A53A; }
+			&.green:hover { background-color: #90AC4F; }
+		}
+	}
 }

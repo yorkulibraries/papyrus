@@ -28,6 +28,11 @@ body { padding-top: 40px;  font-size: 13px; line-height: 18px;}
 @navbarLinkColorHover: 	darken(@navbarLinkColor, 10%);
 
 
+/** NAVBAR **/
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus, 
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle   
+	{ color: #fff; }
+
 /** disabling the default table row hover highlighting, it was annoying */
 .table tbody tr:hover td, .table tbody tr:hover th { background: none; }
 .nav-tabs > li.with-icon { margin-top: -2px; }

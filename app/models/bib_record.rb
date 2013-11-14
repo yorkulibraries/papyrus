@@ -58,9 +58,6 @@ class BibRecord
     phrase_fields = @config.phrase_fields
     boost_functions = @config.boost_functions
     sort = @config.sort
-
-    $logger.debug @config.url
-    $logger.debug @config.label
     
     unless query.blank?
       response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true, phrase_fields: phrase_fields, boost_functions: boost_functions)

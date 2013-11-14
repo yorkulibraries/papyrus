@@ -1,4 +1,4 @@
-<div>
+<div class="pagination-stats">
 	<strong>Found <%= " #{@items.total_count}" if @items %> items, showing <%= @items.count%></strong>
 		<% if params[:order] == "alpha" %>
 			<%= link_to "Date", items_url, :class => "float-right" %>
@@ -19,15 +19,8 @@
 		<th><i class="icon-file-alt"></i></th>
 	</tr>
 	<% @items.each_with_index do |item, index| %>	
-		<%= render "item_row", item: item %>			
+		<%= render "items/item_row", item: item %>			
 	<% end %>
 </table>
-
-
-<div class="items hide">
-<% @items.each_with_index do |item, index| %>	
-	<%= render :partial => item %>			
-<% end %>
-</div>
 
 <%= paginate @items %>
