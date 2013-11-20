@@ -1,13 +1,13 @@
 <% title "#{@student.name} - Audit Trail" %>
 <% title_html do %>
-	<h1><small>Student Registration Record - Audit Trail</small></h1>	
+	<h1>Student Registration Record - Audit Trail</h1>	
 <% end%>
 
 <% @short_view = true %>
-<%= render :partial => @student %>			
+<%= render partial: @student %>			
 
 <section id="audit_trail">
 	<h2>Audit Trail</h2>
 	
-	<%= render :partial => "audit_trail/trail", :locals => {:audits_grouped => @audits_grouped}%>	
+	<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>	
 </section>
