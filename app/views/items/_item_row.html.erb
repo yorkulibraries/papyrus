@@ -1,5 +1,5 @@
 <tr class="item" id="item_<%= item.id %>">
-	<td class="icon" title="<%= item.item_type %>" data-id="<%= item.id %>">		
+	<td class="icon  hidden-phone" title="<%= item.item_type %>" data-id="<%= item.id %>">		
 		<i class="icon-<%= display_icon(item.item_type) %>"></i>
 	</td>		
 	<td class="title">
@@ -8,13 +8,13 @@
 	<td class="author">
 		<%= format_field item.author %>		
 	</td>
-	<td class="extra">
+	<td class="extra hidden-phone">
 		<%= format_field item.isbn %>
 	</td>
-	<td class="students">
+	<td class="students hidden-phone">
 		<%= item.students.count %>
 	</td>
-	<td class="files">
+	<td class="files hidden-phone">
 		<%= item.attachments.available.count %>
 	</td>
 </tr>

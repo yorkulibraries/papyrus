@@ -7,7 +7,21 @@
 	<% end %>
 	
 	<h3>Adding a new item</h3>
-	<p>A little blurb about adding a new item should be here.</p>
+	<p>There are two ways to add a new item:</p>
+	<ol>
+		<li><%= bib_search_label%> Item</li>
+		<li>Brand New Item</li>
+	</ol>
+	<p>
+		<strong><%= bib_search_label%> Item</strong><br/>
+		You can add this item by first searching for it using <%= bib_search_label%> and then clickin on the Add This Item link.
+	</p>
+	
+	<p>
+		<strong>Brand New Item</strong><br/>
+		To add a new blank item, just click on the link above.
+	</p>
+	
 <% end %>
 
 <%= render partial: "search_items/search_box" %>

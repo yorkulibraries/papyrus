@@ -31,7 +31,7 @@
 				<% end %>
 					
 				<div class="row">
-					<div class="<%= content_for?(:sidebar) ? "span8" : "span11" %>">									    					
+					<div class="content <%= content_for?(:sidebar) ? "span8" : "span11" %>">									    					
 							<%= yield %>
 					</div>
 					<% if content_for?(:sidebar) %>
