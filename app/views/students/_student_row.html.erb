@@ -1,9 +1,0 @@
-<li class="span3">
-	<div class="thumbnail clearfix">
-		<%= image_tag "icons/user_default.png", :class => "float-left" %>
-		<div style="margin-left: 50px;">
-			<h4><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
-			<span><%= pluralize(student.items.size, "item")%> assigned</span>
-		</div>
-	</div>
-</li>

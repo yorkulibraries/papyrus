@@ -12,42 +12,44 @@
 <% end %>
 
 <% if @students.size > 0 %>
-<div class="search-box">
-	<form action="<%= search_students_path %>">
-		<div class="search-field  input-prepend">			
-			<span class="add-on">	<i class="icon-search"></i></span>
-			<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Name or Username"/>			
-			<button class="btn hidden-phone" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
-		</div>
-	</form>
-</div>
-
-<p><strong>Search results <%= "- Total: #{@students.total_count}" if @students%></strong></p>
-<%= paginate @students %>
-
-<section>
-	<% @students.each do |student| %>
-		<div class="clearfix thumbnail <%= cycle("odd", "even") %>" style="margin-bottom: 10px;">
-			<%= image_tag "icons/user_default.png", :class => "float-left" %>
-			<div style="margin-left: 50px;">
-				<h3><a href="<%= student_path(student) %>"><%= student.name %></a></h3>
-				<span class="trivial"><%= pluralize(student.current_items.size, "item")%> assigned</span>
+	<div class="search-box">
+		<form action="<%= search_students_path %>">
+			<div class="search-field  input-prepend">			
+				<span class="add-on">	<i class="icon-search"></i></span>
+				<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Name or Username"/>			
+				<button class="btn hidden-phone" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
 			</div>
+		</form>
+	</div>
+
+	<p><strong>Search results <%= "- Total: #{@students.total_count}" if @students%></strong></p>
+	<%= paginate @students %>
+	<div class="students">
+		<div class="list-group">
+			<% @students.each do |student| %>
+			  <div  class="list-group-item <%= cycle("odd", "even") %>">
+						<%= image_tag "icons/user_default.png", class: "pull-left" %>
+						<span class="badge"><%= pluralize(student.current_items.size, "item")%></span>
+			     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
+			     <p class="list-group-item-text">
+						<span class="trivial weak">Email: </span><%= student.email %>
+						<span class="trivial weak">Phone: </span><%= student.student_details.cell_phone %>
+					 	<span class="hidden-phone">
+							<span class="trivial weak">Transcription Coordinator: </span><%= student.student_details.transcription_coordinator.name%>									
+						</span>
+					</p>
+			   </div>
+			 <% end %>
 		</div>
+	</div>
 
-	<% end %>
-</section>
-
-<%= paginate @students %>
+	<%= paginate @students %>
+	
 <% else %>
-
-
-
-<div class="blank-slate">
-	<i class="icon-user"></i>
-	<h1>Students</h1>
-	<p>There are no students registerd in Papyrus right now.</p>
-	<p>You can <%= link_to "Register a New Student", new_student_path %> to begin using Papyrus.</p>
-</div>
-
+	<div class="blank-slate">
+		<i class="icon-user"></i>
+		<h1>Students</h1>
+		<p>There are no students registerd in Papyrus right now.</p>
+		<p>You can <%= link_to "Register a New Student", new_student_path %> to begin using Papyrus.</p>
+	</div>
 <% end %>
