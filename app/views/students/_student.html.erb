@@ -1,6 +1,6 @@
 <div class="student standalone">
-	<div class="page-header">
-		<h2> <%= image_tag "icons/user_default.png", :width => "22px"%> <%=  link_to_unless controller.action_name == "show", @student.name, @student %></h2>	
+	<div class="header">
+		<h2><%= image_tag "icons/user_default.png", width: "22px"%> <%=  link_to_unless controller.action_name == "show", @student.name, @student %></h2>	
 	</div>
 	<div class="summary">
 		<div class="stats">
@@ -52,7 +52,7 @@
 					</td>
 					<td colspan="2">
 						<%  if can? :create, Student %>
-							<%= link_to send_welcome_email_student_url(@student), :disable_with => 'sending ...', :class => "small" do %>
+							<%= link_to send_welcome_email_student_url(@student), disable_with: 'sending ...', class: "small" do %>
 								Send Welcome Email <i class="icon-envelope"></i>
 							<% end %>
 						
@@ -62,12 +62,12 @@
 			</tbody>
 		</table>		
 		<% if can? :edit, @student %>
-			<%= link_to edit_student_path(@student), :class=> "btn btn-small" do %><i class="icon-edit"></i> Update Registration<% end %>				
+			<%= link_to edit_student_path(@student), class: "btn btn-small btn-success" do %><i class="icon-edit"></i> Update Registration<% end %>				
 		<% end %>
 		
 		<% end %>	
 		
-		<%= link_to "Back To Student Record", @student, :class=> "btn btn-small" if controller.action_name == "audit_trail" %>
+		<%= link_to "Back To Student Record", @student,  class: "btn btn-small" if controller.action_name == "audit_trail" %>
 	</div>
 
 </div>

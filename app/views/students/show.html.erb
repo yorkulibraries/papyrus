@@ -1,6 +1,6 @@
 <% title @student.name %>
 <% title_html do %>
-	<h1><small>Student Registration Record</small></h1>	
+	<h1>Student Registration Record</h1>	
 <% end%>
 
 
@@ -23,7 +23,7 @@
 		</section>
 		
 		<% if can?(:block, Student) && @student.blocked == false %>
-			<a href="<%= block_student_path(@student) %>" class="float-right btn btn-danger">Block</a>
+			<a href="<%= block_student_path(@student) %>" class="float-right btn btn-danger">Block Editing</a>
 		<% end %>
 	<% end %>
 <% end %>
