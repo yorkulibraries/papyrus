@@ -46,8 +46,12 @@ Papyrus::Application.routes.draw do
 
   
   resources :students do
-    resources :notes, :except => [:show, :new]
-    resource :student_details, :as => :details, :path => "details", :except => [:index, :destroy]
+    resources :notes, except: [:show, :new]
+    
+    resource :student_details, as: :details, path: "details", except: [:index, :destroy] do
+      
+    end
+    
     post 'notify', :on => :collection
     get 'items', :on => :member
     get 'search', :on => :collection

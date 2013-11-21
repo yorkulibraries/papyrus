@@ -1,18 +1,7 @@
-<ul class="nav nav-tabs">
-	<li class="<%= "active" if  controller.action_name == "show" %>">
-		<a href="#items" data-toggle="tab">Assigned Items</a>
-	</li>
-	<li class="<%= "active" if controller.controller_name == "student_details" %>">
-		<a href="#details" data-toggle="tab">Additional Details</a>
-	</li>
-	<li class="<%= "active" if controller.controller_name == "notes" %>">
-		<a href="#notes_list" data-toggle="tab">Notes</a>		
-	</li>
-	
-	<li class="with-icon">
-		<a href="<%= audit_trail_student_path(@student) %>" class="trivial">Audit Trail <i class="icon-cog"></i></a>
-	</li>
-	<li class="with-icon">
-		<a class="green" href="<%= admin_student_view_path(@student) %>">Student View <i class="icon-share-alt"></i></a>
-	</li>
-</ul>
+<div class="sub-navigation">
+	<a href="<%= student_path(@student) %>" class="<%= is_controller_and_action?("students", "show", "active" ) %>">Assigned Items</a></span>
+	<a href="<%= student_details_path(@student) %>" class="<%= is_controller?("student_details", "active")%>">Additional Details</a>
+	<a href="<%= student_notes_path(@student) %>" class="<%= is_controller?("notes", "active")%>">Notes</a>		
+	<a href="<%= audit_trail_student_path(@student) %>" class="<%= is_action?("audit_trail", "active")%> grey">Audit Trail <i class="icon-th-list"></i></a>		
+	<a href="<%= admin_student_view_path(@student) %>" class="green">Student View <i class="icon-share-alt"></i></a>		
+</div>

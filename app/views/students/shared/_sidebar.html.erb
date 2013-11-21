@@ -1,0 +1,23 @@
+<% if can? :manage, ItemConnection %>
+	<section>
+		<div class="well">
+			<p><strong>Send a Message</strong></p>
+			<p>Send a message to the student. </p>
+			<%= form_tag notify_students_path  do %>
+		
+				<input class="student_notification" type="hidden" name="students[]" value="<%= @student.id %>">					
+				<input type="hidden" name="student" value="<%= @student.id %>"/>			
+				<p>Message: <br/><%= text_area_tag 'message', nil, :rows => 8 %></p>
+				<p><%= submit_tag "Send...", :class => "btn" %></p>
+		
+			<% end %>											
+		</div>
+	</section>
+
+	<% if can?(:block, Student) && @student.blocked == false %>
+		<a href="<%= block_student_path(@student) %>" class="float-right btn btn-danger">Block Editing</a>
+	<% end %>
+<% else %>
+	<h3>Student Record Details</h3>
+	
+<% end %>

@@ -8,17 +8,31 @@ class StudentDetails < ActiveRecord::Base
                     :ppy_access_granted_on, :adaptive_computed_access_granted_on
                     
   belongs_to :student
-  belongs_to :transcription_coordinator, :class_name => "User", :foreign_key => "transcription_coordinator_id"
-  belongs_to :transcription_assistant, :class_name => "User", :foreign_key => "transcription_assistant_id"
+  belongs_to :transcription_coordinator, class_name: "User", foreign_key: "transcription_coordinator_id"
+  belongs_to :transcription_assistant, class_name: "User", foreign_key: "transcription_assistant_id"
   
-  acts_as_audited :associated_with => :student
+  acts_as_audited associated_with: :student
   
 
   validates_presence_of :student_number, :cell_phone, :cds_adviser
-  validates_presence_of  :transcription_coordinator, :message => "You must specify a transcription coordinator."
-  validates_presence_of :transcription_assistant, :message => "You must specify a transcritpion assistant"
+  validates_presence_of  :transcription_coordinator, message: "You must specify a transcription coordinator."
+  validates_presence_of :transcription_assistant, message: "You must specify a transcritpion assistant"
   
   
- 
+  def coordinator
+    if self.transcription_coordinator.blank?      
+      return User.new 
+    else
+      return self.transcription_coordinator
+    end
+  end
+  
+  def assistant
+    if self.transcription_assistant.blank?      
+      return User.new 
+    else
+      return self.transcription_assistant
+    end
+  end
   
 end

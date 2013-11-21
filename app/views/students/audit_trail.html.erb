@@ -6,8 +6,13 @@
 <% @short_view = true %>
 <%= render partial: @student %>			
 
-<section id="audit_trail">
-	<h2>Audit Trail</h2>
+<div class="student-extended">
+	<%= render partial: "students/shared/subnav" %>
+
+	<section id="audit_trail">
+		<h2>Audit Trail</h2>
 	
-	<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>	
-</section>
+		<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>	
+	</section>
+
+</div>

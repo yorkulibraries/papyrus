@@ -53,7 +53,7 @@ class StudentDetailsControllerTest < ActionController::TestCase
     details = assigns(:student_details)
     assert_equal 0, details.errors.size, "No errors"
     assert_equal "345", details.campus_phone, "Campus phone should be changed"
-    assert_redirected_to student_path(@student), "Redirects to student show page"
+    assert_redirected_to student_details_path(@student), "Redirects to student details page"
     
   end
   

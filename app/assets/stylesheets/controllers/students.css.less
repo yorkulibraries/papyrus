@@ -7,74 +7,48 @@
 	.list-group {
 		img { margin-right: 10px; }
 		.list-group-item-text { font-size: 14px; }
-	}
-	
+	}	
 }
 
 
 
 .student {
-	
-	&.standalone {
-		.border-radius(5px);
-		.box-shadow(0 1px 5px rgba(0, 0, 0, 0.35));
-		padding: 5px 10px 10px; 
-		margin-bottom: 15px;
-		background-color: #fff;
-	}
-	 
-	.header { margin-top: 10px; padding-bottom: 0px; 
+ 
+	.header { padding-bottom: 0px; 
 		h2 { 
-			color: #000; font-size: 26px; line-height: 36px; 
-			img { margin-right: 10px; }
+			color: #000; font-size: 26px; line-height: 36px; margin-top: 0; 
+			a { margin-top: 8px; }
 		}
 		
 	}
-	.summary { xborder-bottom: 1px solid #EEEEEE; margin: -10px 0 0; padding: 0 0 10px 5px;
-		.stats { 
-			font-weight: bold; font-size: 14px; 
-			.divider { color: #999999;   padding: 0 5px; font-weight: normal; }
-		}
+	.summary { 
+		.stats { margin-bottom: 10px; span { margin-top: 4px; }}
+		.details { }
 	}
 	
-	&.list {
-		margin-bottom: 5px;
-		padding: 8px 6px;
-		
-		.title {
-			font-size: 14px;
-			a { color: @grayDark; font-weight: bold; }
-		}
-		
-		.summary {
-			margin: 0; 
-			padding: 5px 0 0;
-		}
-		
-	}	
+}
+
+.student-extended {
+	.sub-navigation { border-top: 2px solid #eee; border-bottom: 2px solid #eee; line-height: 30px; 
+		a { 
+			padding: 5px 10px; font-weight: bold; 
+			&:hover, &.active { color: #000; text-decoration: none; }
+			
+		} 
+	}
 	
-}
-
-
-/** student details section */
-.student_details {
-	span.tag { background-color: #F7F7F9; color: @grayDarker;  border: 1px solid #E1E1E8; @radius: 5px;  padding: 3px 4px; }
-	.notes { margin-top: 15px; }
-	table {
-		td { padding: 10px 0;}
+	/* Student Notes */
+	table.notes {
+		width: 100%;
+		tr + tr td { border-top: 1px solid #ECECEC; }	
+		td { font-size: 13px; padding: 4px 0; vertical-align: top;  }
+		td.avatar { width: 40px; }
+		td.who { width: 1%; white-space: nowrap; padding: 9px 14px 5px 0; text-align: left; font-size: 11px; }
+		td.what { max-width: 500px; line-height: 18px; padding: 5px 14px 5px 0;
+			p { font-size: 14px; line-height: 24px; }
+		}
+		td.when { width: 1%; white-space: nowrap; text-align: right; padding: 8px 14px 5px 0;}
 	}
 }
 
-/* Student Notes */
 
-table.notes {
-	width: 100%;
-	tr + tr td { border-top: 1px solid #ECECEC; }	
-	td { font-size: 13px; padding: 4px 0; vertical-align: top;  }
-	td.avatar { width: 40px; }
-	td.who { width: 1%; white-space: nowrap; padding: 9px 14px 5px 0; text-align: left; font-size: 11px; }
-	td.what { max-width: 500px; line-height: 18px; padding: 5px 14px 5px 0;
-		p { font-size: 14px; line-height: 24px; }
-	}
-	td.when { width: 1%; white-space: nowrap; text-align: right; padding: 8px 14px 5px 0;}
-}

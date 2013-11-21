@@ -1,6 +1,16 @@
 <% title "#{@student.name} - Details" %>
 <% title_html do %>
-	<h1><small>Student Details</small></h1>
+	<h1><%= @student.name %> - Details</h1>
 <% end%>
 
-<%= render :partial => "student_details"%>
+<% sidebar do %>
+	<%= render partial: "students/shared/sidebar"%>
+<% end %>
+
+
+<%= render partial: @student %>	
+
+<div class="student-extended">
+	<%= render partial: "students/shared/subnav" %>
+	<%= render partial: "student_details"%>
+</div>

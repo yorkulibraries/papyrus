@@ -32,5 +32,13 @@ class Student < User
   def to_csv
     [id, name, email, student_details.student_number, student_details.cds_adviser, created_at]
   end
+  
+  def details
+    if self.student_details.blank?      
+      return StudentDetails.new 
+    else
+      return self.student_details
+    end
+  end
 
 end
