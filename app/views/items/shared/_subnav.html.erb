@@ -1,13 +1,7 @@
-<ul class="nav nav-tabs">
-	<li class="<%= "active" if controller_name == "items" && action_name == "show" %>">
-		<a href="<%= item_path(@item) %>">Files</a>
-	</li>
-	<li class="<%= "active" if controller_name == "items" && action_name == "courses" %>">
-		<a href="<%= courses_item_path(@item) %>">Courses</a>
-	</li>
+<div class="sub-navigation">
+	<a href="<%= item_path(@item) %>" class="<%= is_action?("show", "active") %>">Files</a>
+	<a href="<%= courses_item_path(@item) %>" class="<%= is_action?("courses", "active") %>">Courses</a>
 	<% if can? :read, AcquisitionRequest %>
-		<li class="<%= "active" if controller_name == "items" && action_name == "acquisition_requests" %>">
-			<a href="<%= acquisition_requests_item_path(@item)  %>">Acquisition Requests</a>
-		</li>
+		<a href="<%= acquisition_requests_item_path(@item)  %>" class="<%= is_action?("acquisition_requests", "active") %>">Acquisition Requests</a>
 	<% end %>
-</ul>
+</div>

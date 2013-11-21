@@ -1,34 +1,35 @@
-<div class="row attachment">
-	<div class="span attachment-icon">
-		<a href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>">
-        	<%= image_tag("icons/files/#{attachment.file.file.extension.downcase}_file.png", :alt => "#{attachment.file.file.extension.downcase}") %>
-		</a>
-	</div>	
-	<div class="span6 attachment-details">
-		<h4>
-			<a href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>"><%= attachment.name %></a> 
-			<span class="weak"><%= number_to_human_size attachment.file.file.size %></span>
-		</h4>
-		<p>Updated <abbr title="<%= attachment.created_at.strftime("%b %e %Y, %l:%M %p") %>"><%= time_ago_in_words attachment.created_at %></abbr> ago by <%= attachment.user.name %></p>
-	</div>
-	<div class="span2 attachment-actions float-right">
-		<% if can? :update, Attachment %>
-		<div class="btn-group">
-	    	<a class="btn btn-mini" href="<%= edit_item_attachment_path(attachment.item, attachment) %>">Update File</a>
-	
-			<%  if can? :destroy, Attachment %>
-		    <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-		    	<span class="caret"></span>
-		    </a>
-
-		    <ul class="dropdown-menu">
-		    	<li><%= link_to [attachment.item, attachment], :confirm => 'Are you sure?', :method => :delete, :class => "red" do %>
-					<i class="icon-trash"></i> Remove File
-					<% end %>
-				</li>
-		    </ul>
+<div class="attachment">
+	<div class="row">
+		<div class="span attachment-icon hidden-phone">
+			<a href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>">
+	        	<%= image_tag("icons/files/#{attachment.file.file.extension.downcase}_file.png", :alt => "#{attachment.file.file.extension.downcase}") %>
+			</a>
+		</div>	
+		<div class="span4 attachment-details">
+			<h4>
+				<a href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>"><%= attachment.name %></a> 
+				<span class="weak"><%= number_to_human_size attachment.file.file.size %></span>
+			</h4>
+			<p>Updated <abbr title="<%= attachment.created_at.strftime("%b %e %Y, %l:%M %p") %>"><%= time_ago_in_words attachment.created_at %></abbr> ago by <%= attachment.user.name %></p>
+		</div>
+		<div class="span2 attachment-actions pull-right">
+		
+			<a class="action" href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>">
+				<i class="icon-download"></i> Download File
+			</a> 
+		
+			<% if can? :update, Attachment %>
+				<a class="action small hidden-phone" href="<%= edit_item_attachment_path(attachment.item, attachment) %>">
+					<i class="icon-edit"></i> Update
+				</a>
 			<% end %>
-	    </div>
-		<% end %>
+
+			<%  if can? :destroy, Attachment %>
+				<%= link_to [attachment.item, attachment], confirm: 'Are you sure?',meothd: :delete, class: "action small hidden-phone" do %>
+						<i class="icon-trash"></i> Delete
+				<% end %>
+			<% end %>
+						
+		</div>
 	</div>
 </div>

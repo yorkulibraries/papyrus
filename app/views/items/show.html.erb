@@ -1,47 +1,52 @@
 <% title @item.title %>
 
 <% title_html do %>	
-	<h1><small>Item Details</small></h1>
+	<h1>Item Details</h1>
 <% end%>
 
 
 
 <% sidebar do %>
-	<p><a class="btn btn-small" data-toggle="modal" href="#assign_students_modal" > <i class="icon-user"></i> Assign To Students</a></p>
-
-	<section>
-		<h2>Students With Access</h2>
-
+		
+	<h3>Students With Access</h3>
+	<% if @item.students.size < 1 %>
+		<p class="alert alert-info">This item has not been assigned to any students</p>
+	<% else %>
+		<p>The following students have been assigned this item.</p>
+	<% end %>	
+	
+	
 	<%= form_tag notify_students_path  do %>
 		<ul class="unstyled">
 			<% @item.students.unique_usernames.each do |student| %>
-				<li><input class="student_notification" type="checkbox" name="students[]" value="<%= student.id %>">
+				<li>
+					<input class="student_notification" type="checkbox" name="students[]" value="<%= student.id %>">
 					<a href="<%= student_path(student) %>"><%= student.name %></a>
 					<%= link_to withhold_from_student_item_path(@item, :student_id => student.id), :confirm => 'Are you sure?', :method => :delete, :class => "tooltips close",
 					:rel =>"tooltip",  :title => "Bar the student from accessing this item." do %>
 						&times;
 					<% end %>
 					</li>
-			<% end %>
-			<% if @item.students.size < 1 %>
-			<li>This item has not been assigned to any students</li>
-			<% end %>
+			<% end %>			
 			<input type="hidden" name="item" value="<%= @item.id %>"/>
 		</ul>	
-		</section>
+		
+		<p>
+			<% if @item.students.size > 0 %>
+				<a class="btn btn-small" data-toggle="visibility" href="#send_message"> <i class="icon-bullhorn"></i> Notify</a>
+			<% end %>
+			
+			<a class="btn btn-small btn-inverse" data-toggle="modal" href="#assign_students_modal" > <i class="icon-user"></i> Assign To More Students</a>		
+		</p>
 		
 		
 		<% if @item.students.size > 0 %>
-		<section class="push-down">
-			<div class="well">
-		
+			<div id="send_message" class="well fitted hide">	
 				<p><strong>Send a Message</strong></p>
 				<p>Select students to send a notification about this item.</p>
 				<p>Message: <br/><%= text_area_tag 'message', nil, :rows => 8 %></p>
-				<p><%= submit_tag "Send...", :class => "btn" %></p>
-			
+				<p><%= submit_tag "Send...", :class => "btn" %></p>		
 			</div>
-		</section>
 		<% end %>
 		
 	<% end %>
@@ -75,42 +80,48 @@
 	
 <% end %>
 
-<div id="item">
-	<%= render :partial => @item %>		
-</div>
 
-<%= render :partial => "items/shared/subnav"%>
+<%= render partial: @item %>		
 
-<section class="attachments">
-	<h2>
-		Attached Files
-		<a href="<%= url_for new_item_attachment_path(@item) %>" class="btn btn-small" onclick="$('#upload_form').toggle(); return false;">Upload Files</a>
-	</h2>
+<div class="item-extended">
+	<%= render partial: "items/shared/subnav"%>	
+	
+	<section>
+		<h2>Attached Files
+			<a href="<%= url_for new_item_attachment_path(@item) %>" class="btn btn-small hidden-phone" onclick="$('#upload_form').toggle(); return false;">
+					Upload Files
+			</a>
+		</h2>
 
-	<div id="upload_form" class="hide well">
-		<%= render :partial => "attachments/upload_files"%>
-	</div>
-
-	<% if @item.attachments.full_text.available.size > 0 %>
-		<div class="full-text">
-			<h4>Full Text</h4>
+		<div id="upload_form" class="hide well">
+			<%= render partial: "attachments/upload_files"%>
+		</div>
 		
-			<% @item.attachments.full_text.available.each do |attachment| %>
-				<%= render :partial => attachment %>
+		<div class="attachments">
+			<% if @item.attachments.full_text.available.size > 0 %>
+				<div class="full-text">
+					<h4>Full Text</h4>
+		
+					<% @item.attachments.full_text.available.each do |attachment| %>
+						<%= render partial: attachment %>
+					<% end %>
+				</div>
+			<% end %>
+	
+			<% @item.attachments.not_full_text.available.each do |attachment| %>
+				<%= render partial: attachment %>
 			<% end %>
 		</div>
-	<% end %>
+		
+		<% if @item.attachments.available.size > 0 %>
+			<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-small hidden-phone"><i class="icon-download"></i> Download Zipped</a>
+		<% else %>
+			<div class="well">	
+				No File have been uploaded yet. Start by clicking on Upload Files button.
+			</div>
+		<% end %>
+	</section>
 	
-	<% @item.attachments.not_full_text.available.each do |attachment| %>
-		<%= render :partial => attachment %>
-	<% end %>
- 	
-</section>
-<% if @item.attachments.available.size > 0 %>
-	<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-small"><i class="icon-download"></i> Download Zipped</a>
-<% else %>
-	<div class="alert alert-info">
-		<a class="close" data-dismiss="alert">&times;</a>
-		No File have been uploaded yet. Start by clicking on Upload Files button.
-	</div>
-<% end %>
+</div>
+
+

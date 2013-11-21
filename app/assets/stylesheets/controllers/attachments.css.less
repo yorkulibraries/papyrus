@@ -1,0 +1,36 @@
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+
+/** attachments **/
+
+.attachments {	
+	
+	padding-top: 10px;
+	
+	.attachment { 
+		margin-bottom: 20px; 
+		
+		.attachment-details { 
+			margin-left: 10px; 
+			h4 { margin: 0;  font-size: 18px; a { color: #000; }}
+			p { color: #666; font-size: 12px; }
+		}
+		
+		.attachment-actions {
+			a.action { 
+				background-color: #777; font-size: 13px; .border-radius(3px); color: #fff; display: block; padding: 4px 10px;  margin-bottom: 5px; 
+				
+				&.small { background: none; color: #444; padding: 0 10px; display: inline; font-size: 12px;  }
+			}
+		}
+	}
+	
+	.full-text {
+		border: 1px solid #ccc;
+		background-color: #efefef;
+		padding: 5px 10px;
+		margin-bottom: 20px;
+		
+		> h4 { margin-bottom: 10px; }
+	}	
+}

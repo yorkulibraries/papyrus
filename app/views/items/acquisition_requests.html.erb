@@ -1,60 +1,62 @@
 <% title "Acquisition Requests for #{@item.title}" %>
 <% title_html do %>
-	<h1><small>Item Details - Acquisition Requests</small></h1>
+	<h1>Item Details - Acquisition Requests</h1>
 <% end%>
 
-<div id="item">
-	<% @short_view = true %>
-	<%= render :partial => @item %>	
-</div>
+<% sidebar do %>
+	<h3>Acquisition Requests</h3>
+	<p></p>
+<% end %>
+<%= render partial: @item %>	
+<div class="item-extended">
+	<%= render partial: "items/shared/subnav"%>
 
-<%= render :partial => "items/shared/subnav"%>
-
-<section class="acquisition_requests">
-	<h2>Acquisition Requests 	<%= link_to for_item_acquisition_requests_path(:item_id => @item.id), :class=>"btn btn-small", :confirm => "Are you sure?" do %>Make An Acquisition Request<% end %></h2>
+	<section class="acquisition_requests">
+		<h2>Acquisition Requests 	<%= link_to for_item_acquisition_requests_path(:item_id => @item.id), :class=>"btn btn-small", :confirm => "Are you sure?" do %>Make An Acquisition Request<% end %></h2>
 	
-	<div class="well">
-		<h5>Pending</h5>
-		<% if @pending_acquisition_requests.size > 0 %>
-			<div class="acquisition_requests">
-				<%  @pending_acquisition_requests.each do |acquisition_request| %>
-					<%= render :partial =>  acquisition_request %>
-				<% end %>
-			</div>
-		<% else %>	
-			<p>You have no pending requests</p>
-		<% end %>
-	</div>
+		<div class="well">
+			<h5>Pending</h5>
+			<% if @pending_acquisition_requests.size > 0 %>
+				<div class="acquisition_requests">
+					<%  @pending_acquisition_requests.each do |acquisition_request| %>
+						<%= render :partial =>  acquisition_request %>
+					<% end %>
+				</div>
+			<% else %>	
+				<p>You have no pending requests</p>
+			<% end %>
+		</div>
 	
-	<div class="well push-down">
-		<h5>Recently Fulfilled</h5>
-		<% if @fulfilled_acquisition_requests.size > 0 %>
+		<div class="well push-down">
+			<h5>Recently Fulfilled</h5>
+			<% if @fulfilled_acquisition_requests.size > 0 %>
 
-			<div class="acquisition_requests">
-				<%  @fulfilled_acquisition_requests.each do |acquisition_request| %>
-					<%= render :partial =>  acquisition_request %>
-				<% end %>
-			</div>
+				<div class="acquisition_requests">
+					<%  @fulfilled_acquisition_requests.each do |acquisition_request| %>
+						<%= render :partial =>  acquisition_request %>
+					<% end %>
+				</div>
 
-		<% else %>	
-			<p>You have no recently fulfilled requests</p>
-		<% end %>
-	</div>
+			<% else %>	
+				<p>You have no recently fulfilled requests</p>
+			<% end %>
+		</div>
 	
 	
-	<div class="well push-down">
-		<h5>Recently Cancelled</h5>
-		<% if @cancelled_acquisition_requests.size > 0 %>
+		<div class="well push-down">
+			<h5>Recently Cancelled</h5>
+			<% if @cancelled_acquisition_requests.size > 0 %>
 
-			<div class="acquisition_requests">
-				<%  @cancelled_acquisition_requests.each do |acquisition_request| %>
-					<%= render :partial =>  acquisition_request %>
-				<% end %>
-			</div>
+				<div class="acquisition_requests">
+					<%  @cancelled_acquisition_requests.each do |acquisition_request| %>
+						<%= render :partial =>  acquisition_request %>
+					<% end %>
+				</div>
 
-		<% else %>	
-			<p>You have no recently cancelled requests</p>
-		<% end %>
+			<% else %>	
+				<p>You have no recently cancelled requests</p>
+			<% end %>
 		
-	</div>
-</section>
+		</div>
+	</section>
+</div>

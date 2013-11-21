@@ -11,6 +11,7 @@
 		<div class="items push-down">
 			<% @recently_worked_with_items.each do |item| %>
 				<% @short_view = true %>
+				<% @item = item %>
 				<%= render :partial => "items/item", :locals => {:item => item } %>
 				<% end %>
 				

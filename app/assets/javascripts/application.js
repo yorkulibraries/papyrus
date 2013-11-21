@@ -14,6 +14,13 @@ $(document).ready(function() {
 	// disable in browser form validations
 	$('form').find('input').removeAttr('required');
 	
+	$("a[data-toggle=visibility]").click(function() {
+		var id = $(this).attr("href");
+		$(id).toggle();
+		return false;
+	});
+	
+	
 });
 
 

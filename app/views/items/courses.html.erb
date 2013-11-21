@@ -1,6 +1,6 @@
 <% title "Courses for #{@item.title}" %>
 <% title_html do %>
-	<h1><small>Item Details - Courses</small></h1>
+	<h1>Item Details - Courses</h1>
 <% end%>
 
 
@@ -26,26 +26,26 @@
 	</script>
 <% end %>
 
-<div id="item">
-	<% @short_view = true %>
-	<%= render :partial => @item %>	
-</div>
 
-<%= render :partial => "items/shared/subnav"%>
-
-<section class="courses">
-	<h2>Courses</h2>
-
-	<% @course_grouped.each do |term, courses| %>
-		<h3><%= term %></h3>
+<%= render partial: @item %>	
+<div class="item-extended">
+	<%= render partial: "items/shared/subnav"%>
 	
-		<ul class="thumbnails">
-			<% courses.each do |course|%>   	 	
-				<li class="span4">	
-					<%= render :partial => course %>
-			    </li>
-			<% end %>
-    	</ul>
+	<section class="courses">
+		<h2>Courses</h2>
+
+		<% @course_grouped.each do |term, courses| %>
+			<h3><%= term %></h3>
+	
+			<ul class="thumbnails">
+				<% courses.each do |course|%>   	 	
+					<li class="span4">	
+						<%= render partial: course %>
+				    </li>
+				<% end %>
+	    	</ul>
 		
-	<% end %>
-</section>
+		<% end %>
+	</section>
+	
+</div>
