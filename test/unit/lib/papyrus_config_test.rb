@@ -30,11 +30,13 @@ class PapyrusConfigTest < ActiveSupport::TestCase
     assert_equal "Your Institution/Department Name", instance.organization.full_name
     assert_equal "SHORT_NAME", instance.organization.short_name
     assert_equal "http://your-institution.website/papyrus/", instance.organization.app_url
+    assert_equal "2011_AP_ADMS_F_1000__3_A", instance.organization.course_code_sample
+    assert_equal "http:://your-institution.website/coursecode-lookup", instance.organization.course_code_lookup_link
   
     ## AUTHENTICATION
     assert_equal "REMOTE-USER", instance.authentication.cas_header_name
     assert_equal "Authentication Username", instance.authentication.cas_user_id_name
-    assert_equal "http://www.your-instituttion.website", instance.authentication.after_logout_redirect_to    
+    assert_equal "http://www.your-institution.website", instance.authentication.after_logout_redirect_to    
     assert_equal "your-domain.com", instance.authentication.cookies_domain
     
     ## ERRORS

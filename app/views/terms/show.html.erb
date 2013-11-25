@@ -1,6 +1,12 @@
 <% title "School Term - #{@term.name}" %>
 <% title_html do %>
-	<h1><small>School Term Details</small> <%= link_to edit_term_path(@term), :class=> "btn btn-small float-right" do %><i class="icon-edit"></i> Update Term Information<% end %></h1>
+	<h1>School Term Details</h1>
+<% end %>
+
+<% sidebar do %>
+	<h3>Term Details</h3>
+	<p>Here's a list of term details and it's courses. You can update term details by clicking on the button below.</p>
+	<%= link_to edit_term_path(@term), class: "btn btn-small flat" do %><i class="icon-edit"></i> Update Term Information<% end %>
 <% end %>
 
 <% if @term.end_date < Date.today %>
@@ -11,15 +17,10 @@
 <% end %>
 
 
-<table class="table terms">
-	<thead>
-		<tr>
-			<td><h3><%= @term.name%></h3>
-			<span class="trivial"><%= @term.start_date.strftime("%b %d, %Y") %> <span class="weak">to</span> <%= @term.end_date.strftime("%b %d, %Y") %></span>	
-			</td>			
-		</tr>
-	</thead>
-</table>
+<p><%= link_to terms_path do %>&laquo; All terms<% end %></p>
+
+<h3><%= @term.name%></h3>
+<p class="trivial"><%= @term.start_date.strftime("%b %d, %Y") %> <span class="weak">to</span> <%= @term.end_date.strftime("%b %d, %Y") %></p>	
 
 <% if @term.courses.size > 10 %>	
 
@@ -35,13 +36,13 @@
 
 <% end %>
 <section class="courses">
-	<h2>Courses <%= link_to new_term_course_path(@term), :id=> "new_course", :class => "btn btn-small" do %>Add a new course<% end %></h2>
+	<h2>Courses <%= link_to new_term_course_path(@term), id: "new_course", class: "btn btn-small" do %>Add a new course<% end %></h2>
 	
 	<p><strong><%= pluralize(@term.courses.count, "Course") %></strong></p>
 	<ul class="thumbnails">
 		<% @term.courses.each do |course| %>
 			<li class="span6">
-				<%= render :partial => course %>
+				<%= render partial: course %>
 			</li>
 		<% end %>
 	</ul>

@@ -1,20 +1,17 @@
 <% title "School Terms and Courses" %>
 <% title_html do %>
-	<h1><small>School Terms &amp; Courses</small> 
+	<h1>School Terms &amp; Courses 
 			<%= link_to new_term_path, :class => "btn btn-small float-right" do %><i class="icon-plus"></i> Add a new term<% end %></h1>
 <% end %>
 
 
 <% sidebar do %>
-	<section>
-		<h2>Recently Expired Terms</h2>
-
-		<ul>
-			<% @archived_terms.each do |term| %>
-				<li><%= link_to "#{term.name}", term %> <br/><span class="trivial">expired on  <%= term.end_date.strftime("%b %d, %Y") %></span></li>
-			<% end %>
-		</ul>
-	</section>
+	<h3>Recently Expired Terms</h3>
+	<ul>
+		<% @archived_terms.each do |term| %>
+			<li><%= link_to "#{term.name}", term %> <br/><span class="trivial">expired on  <%= term.end_date.strftime("%b %d, %Y") %></span></li>
+		<% end %>
+	</ul>
 <% end %>
 
 

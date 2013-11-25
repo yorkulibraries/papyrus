@@ -7,6 +7,8 @@ PapyrusConfig.configure do
   organization.full_name = "Your Institution/Department Name"
   organization.short_name = "SHORT_NAME"
   organization.app_url = "http://your-institution.website/papyrus/"
+	organization.course_code_sample = "2011_AP_ADMS_F_1000__3_A"
+	organization.course_code_lookup_link = "http:://your-institution.website/coursecode-lookup"
   
   ## AUTHENTICATION
   authentication.cas_header_name = "REMOTE-USER"
