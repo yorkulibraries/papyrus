@@ -4,7 +4,6 @@
 *= require plugin_overrides
 *= require common
 *= require layout
-*= require styles
 *= require_tree ./controllers
 */
 

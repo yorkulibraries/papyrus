@@ -20,17 +20,17 @@
 						<li class="item list <%= cycle("odd", "event") %>">
 							
 							<div class="title">
-								<%= link_to item.title, item_path(item) %>
+								<%= link_to item.title, item_path(item), class: "" %>
 
 								<% if @student %>
-									<%= link_to withhold_from_student_item_path(item, :student_id => @student.id, :return_to_student=>true),  
-										:confirm => 'Are you sure?', :class=>"close", :method => :delete, :title => "Remove Access" do %>
+									<%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),  
+										confirm: 'Are you sure?', class: "close", method: :delete, title: "Remove Access" do %>
 										&times;
 									<% end %>
 								<% end %>
 							</div>
 							<div class="summary">
-								<a href="<%= zipped_files_item_path(item)%>" class="trivial"> <%= pluralize(item.attachments.size, "file")%> <i class="icon-file"></i></a>
+								<a href="<%= zipped_files_item_path(item)%>" class="trivial"> <%= pluralize(item.attachments.size, "file")%> <i class="icon-file-alt"></i></a>
 								
 								<% connection = item.item_connections.current.find_by_student_id(@student.id) %>
 								<% if connection %>

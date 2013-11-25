@@ -92,7 +92,7 @@
 							<%= @current_user.name if @current_user%> <b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<%= link_to "Logout", logout_path%>
+								<li><%= link_to "Logout", logout_path%></li>
 								<% if Rails.env.development? %>
 									<li class="divider"></li>
 									<li class="nav-header">Log in as </li>

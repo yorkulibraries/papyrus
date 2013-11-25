@@ -5,7 +5,10 @@
 
 <% sidebar do %>
 	<h3>Acquisition Requests</h3>
-	<p></p>
+	<p>You can see the acquisition requests made for this item.</p>
+	<% if can? :create, AcquisitionRequest %>
+		<p>To send a new acquisition request, click on the Make An Acquisition Request button.</p>
+	<% end %>
 <% end %>
 <%= render partial: @item %>	
 <div class="item-extended">
