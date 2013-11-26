@@ -1,43 +1,56 @@
 
-<%= simple_form_for @student, :html => { :class => "form-vertical standout" } do |f| %>
- 
-<fieldset> 
-	
-   
-	<div class="row">
-		<div class="span4">	
-			<%= f.input :name, :required => false %>
-			<%= f.input :email, :required => false %>
-			<%= f.input :username, hint: username_hint, :required => false, :hint_html => { :class => "trivial"}  %>
-	  	</div>	
+<%= simple_form_for @student do |f| %>
 
-		<div class="span4">	
-			<%= f.fields_for :student_details do |builder| %>
-		
-				<%= builder.input :student_number, :label => "Student Number", :required => false  %>	
-				<%= builder.input :cell_phone, :label => "Cell Phone", :required => false %>	
-				<%= builder.input :cds_adviser, :label => "CDS Counsellor", :required => false %>
-				<%= builder.input :transcription_coordinator_id, :label => "Transcription Coordinator", :collection => User.transcription_assitants %>		
-				<%= builder.input :transcription_assistant_id, :label => "Transcription Assistant", :collection => User.transcription_assitants %>
+  <div class="standout"> 
+		<div class="row">
+			<div class="span4">	
+				<%= f.label :name, "Full Name" %>
+				<%= f.input :name, label: false, input_html: { class: "input-block-level" } %>
+				<%= f.label :email, "Email Address" %>
+				<%= f.input :email,label: false, input_html: { class: "input-block-level" } %>
+				<%= f.label :username, "Login Username" %>
+				<%= f.input :username, hint: username_hint, label: false, input_html: { class: "input-block-level" } %>
+		  	</div>	
 
-			<% end %>
+			<div class="span4">	
+				<%= f.fields_for :student_details do |builder| %>
+					<%= builder.label :student_number, "Student Number" %>
+					<%= builder.input :student_number, label: false, input_html: { class: "input-block-level" }  %>	
+
+					<%= builder.label :cell_phone, "Cellphone Number" %>
+					<%= builder.input :cell_phone, label: false, input_html: { class: "input-block-level" } %>	
+				
+					<%= builder.label :cds_adviser, "Disablities Counsellor" %>
+					<%= builder.input :cds_adviser, hint: "Disablities Counsellor is in charge of the student record.", label: false, input_html: { class: "input-block-level" } %>			
+
+				<% end %>
+			</div>
 		</div>
+	
+		<hr/>
+		
+		<%= f.fields_for :student_details do |builder| %>
+			<div class="row">
+				<div class="span4">
+					<%= builder.label :transcription_coordinator_id, "Transcription Coordinator" %>
+					<%= builder.input :transcription_coordinator_id, label: false,  collection: User.transcription_assitants, input_html: { class: "input-xlarge" }  %>		
+				</div>
+				<div class="span4">
+					<%= builder.label :transcription_assistant_id, "Transcription Assistant" %>
+					<%= builder.input :transcription_assistant_id, label: false, collection: User.transcription_assitants, input_html: { class: "input-xlarge" }  %>
+				</div>
+			</div>
+		<% end %>
 	</div>
 	
-	<p class="trivial">All field are required</p>
-	
-	<div class="form-actions">
-     	<%= f.button :submit,  @student.new_record? ? "Register Student" : "Update Student Registration" , :class => 'btn btn-primary' %>
-     	<%= link_to 'Cancel', @student.new_record? ? students_path : student_path(@student), :class => 'btn' %>
-		
-		<%  if !@student.new_record? && can?(:manage, Student) %>	
-		<div class="float-right">
-			<%= link_to "Disable access", @student, :confirm => 'Are you sure?', :method => :delete, :class=> "btn btn-danger" %>	
+	<hr/>
+	<div class="row">
+		<div class="span4 offset4" style="text-align: right;">
+     	<%= f.button :submit,  @student.new_record? ? "Register Student" : "Update Student Registration" , class: 'btn btn-primary' %>
+     	<%= link_to 'Cancel', @student.new_record? ? students_path : student_path(@student), class: 'btn' %>
 		</div>
-		<% end %>
-   </div>
+	</div>
 
-</fieldset>
 <% end %>
 
 	

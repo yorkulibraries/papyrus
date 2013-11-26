@@ -1,17 +1,25 @@
 <% title "Edit Student" %>
 <% title_html do %>
-	<h1><small>Update Student Registration</small></h1>
+	<h1>Update Student Registration</h1>
 <% end %>
 
 <% sidebar do %>
-	<p>Update Student Registration</p>
+	<h3>Update Student Details</h3>
+	<p>You can update student registration details on this screen.</p>
+	<p class="alert alert-info"><span class="strong">Remember:</span> All fields must be filled in.</p>
+
+	<%  if !@student.new_record? && can?(:manage, Student) %>		
+		<p><strong>Disable Acces</strong></p>
+		<p>You can disable student's access to their account. This does not delete the student, just disables their ability to access Papyrus.</p>
+		
+		<p><%= link_to @student, confirm: 'Are you sure?', method: :delete, class: 'red' do %>	
+			<i class="icon-lock"></i> Disable access?
+		<% end %></p>
+		
+		<p class="alert alert-warning"><span class="strong">Warning:</span> This action can be reversed.</p>	
+	<% end %>
+	
+	
 <% end %>
 
 <%= render 'form' %>
-
-
-<%  if can? :destroy, Student %> 
-	<div class="float-right">
-		<p><span class="label label-warning">Warning:</span> You can disable this student's access to the system. This action can be reversed.</p>
-	</div>
-<% end %>
