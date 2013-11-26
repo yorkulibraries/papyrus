@@ -10,13 +10,14 @@
 		<div class="row">
 			<div class="span4">
 				<%= f.label :item_type, "Item Type"%>
-				<%= f.input :item_type, label: false, collection: Item::TYPES, hint: "Select the type of this item." %>
+				<%= f.input :item_type, label: false, collection: Item::TYPES, hint: "Select the type of this item.", input_html: { class: "input-xlarge" } %>
 			</div>
 			<div class="span4">
 			  <% if @item.new_record? %>
-
-			   <%= f.input :unique_id, :label => "Unique ID", :hint => "Unique ID must follow the guidelines listed in the sidebar." %>
-			   <%= link_to_function "Click Here To Generate A Unique ID", "assign_unique_id('item_unique_id')"%>
+				  <%= f.label :unique_id, "Unique ID" %>
+			    <%= f.input :unique_id, label: false, input_html: { class: "input-xlarge", placeholder: "auto generated..." }, 
+					 hint: "You can fill in the unique id manually, if you must." %>
+			    <%= link_to_function "Click Here To Generate A Unique ID", "assign_unique_id('item_unique_id')"%>
 
 				<% else %>
 					<%= f.label "Unique ID", :unique_id %><br/>
@@ -32,10 +33,10 @@
 			<%= f.input :author, label: false, input_html: { class: "input-xlarge" } %>	
 			
 			<%= f.label :isbn, "ISBN Number" %>
-			<%= f.input :isbn, label: false %>	
+			<%= f.input :isbn, label: false, input_html: { class: "input-xlarge" } %>	
 			
 			<%= f.label :published_date, "Published Date" %>
-			<%= f.input :published_date, label: false %>	
+			<%= f.input :published_date, label: false, input_html: { class: "input-xlarge" } %>	
 			
 			<%= f.label :publisher, "Publisher" %>
 			<%= f.input :publisher, label: false, input_html: { class: "input-xlarge" } %>	
@@ -55,7 +56,7 @@
 			<%= f.input :physical_description,label: false, input_html: { class: "input-xlarge" } %>
 
 			<%= f.label :source, "Source" %>
-			<%= f.input :source, collection: ["Publisher", "AERO", "Student Purchase", "LAS Purchase", "YUL Copy Scanned", "YUL E-Resource"],  label: false %>
+			<%= f.input :source, collection: ["Publisher", "AERO", "Student Purchase", "LAS Purchase", "YUL Copy Scanned", "YUL E-Resource"],  label: false, input_html: { class: "input-xlarge" } %>
 
 			<%= f.label :source_note, "Source Note" %>
 			<%= f.input :source_note, label: false, input_html: { class: "input-xlarge" } %>
