@@ -5,7 +5,21 @@
 
 
 <% sidebar do %>
-	<%= render :partial => "items/shared/edit_sidebar"%>	
+
+	<%  if can?(:destroy, Item) && !@item.new_record? %>	
+		<div class="float-right">
+			<%= link_to "Remove Item", @item, :confirm => 'Are you sure?', :method => :delete, :class=> "btn btn-danger" %>	
+		</div>
+	<% end %>
+			
+
+<% if can?(:destroy, Item) && !@item.new_record?  %> 
+
+		<p><span class="label label-warning">Warning:</span> Removing this item will delete any of the files associated with it. <strong>This action can't be reversed</strong>.</p>
+
+<% end %>
+
+	<%= render partial: "items/shared/edit_sidebar"%>	
 <% end %>
 
 <%= render 'form' %>

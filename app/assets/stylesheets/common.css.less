@@ -48,3 +48,15 @@ blockquote { border-color: #383433; }
 
 /** FORMS **/
 textarea#message { width: 95%; }
+label { font-size: 14px; color: #000; font-weight: bold; }
+input[type]:not([type="submit"]), select, textarea { 
+	.box-shadow(0 1px 2px rgba(0, 0, 0, 0.18) inset); .border-radius(0px); border: 1px solid #aaa; 
+	color: #222; font-size: 18px; padding: 8px 8px; height: auto;
+}
+input[type="checkbox"] { margin-top: -5px; margin-right: 5px; }
+
+form div.standout { 
+	background-color: #E8EBEF; margin: 0 -10px 30px -10px; padding: 10px; 
+	.box-shadow(~"0 0 0 1px rgba(14, 41, 57, 0.12), 0 2px 5px rgba(14, 41, 57, 0.44), 0 -1px 2px rgba(14, 41, 57, 0.15) inset")
+}
+
