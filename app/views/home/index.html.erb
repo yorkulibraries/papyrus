@@ -36,6 +36,10 @@
 					</td>
 				</tr>	
 			<% end %>
+			
+			<% if @recently_worked_with_items.size == 0  %>
+				<span class="trivial">	You have not worked on any items recently.</span>
+			<% end %>
 		</table>
 	
 	</div>
@@ -50,7 +54,7 @@
 		</section>
 		
 		<% if @students.size == 0  %>
-			<span class="weak">	You have no students assigned to you.</span>
+			<span class="trivial">	You have no students assigned to you.</span>
 		<% end %>
 	</div>
 </div>
