@@ -1,24 +1,29 @@
 <div class="acquistion_request">
 	<% if acquisition_request.item %>
-	<h3><%= link_to_unless @acquisition_request, acquisition_request.item.title, acquisition_request %></h3>
-	<div><% unless acquisition_request.item.author.blank?  %>
-			by <%= acquisition_request.item.author %>
-		<% else %>
-			unique id: <%= acquisition_request.item.unique_id%>
-		<% end %>
-	</div>
-	<p class="trivial">
-		<% if acquisition_request.fulfilled %>
-			<span>Fulfilled</span>		
-			<%=  acquisition_request.fulfilled_by_date.strftime("%b %d, %Y")%>
-		<% elsif acquisition_request.cancelled %>
-			<span>Cancelled</span>		
-			<%=  acquisition_request.cancelled_by_date.strftime("%b %d, %Y")%>
-		<% else%>
-			<span>Requested</span>		
-			<%=  acquisition_request.requested_by_date.strftime("%b %d, %Y")%>
-		<% end %>		
-	</p>
+	
+		<div class="status pull-right">
+			<% if acquisition_request.fulfilled %>
+				<span>Fulfilled</span>		
+				<%=  acquisition_request.fulfilled_by_date.strftime("%b %d, %Y")%>
+			<% elsif acquisition_request.cancelled %>
+				<span>Cancelled</span>		
+				<%=  acquisition_request.cancelled_by_date.strftime("%b %d, %Y")%>
+			<% else%>
+				<span>Requested</span>		
+				<%=  acquisition_request.requested_by_date.strftime("%b %d, %Y")%>
+			<% end %>		
+		</div>
+	
+		<h3><%= link_to_unless @acquisition_request, acquisition_request.item.title, acquisition_request %></h3>
+		
+		<div class="author trivial">
+			<% unless acquisition_request.item.author.blank?  %>
+				by <%= acquisition_request.item.author %>
+			<% else %>
+				unique id: <%= acquisition_request.item.unique_id%>
+			<% end %>
+		</div>
+	
 	<% else %>
 		<h3><%= link_to_unless @acquisition_request, "Request Details", acquisition_request %></h3>
 		<p class="distinct">=== No Item was specified. === </p>	
