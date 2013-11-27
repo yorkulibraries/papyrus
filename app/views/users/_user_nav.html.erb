@@ -1,0 +1,6 @@
+<div class="users-nav">
+	<div class="btn-group">
+			<%= link_to "Active Users", users_path, class: "btn #{"btn-inverse " if controller.action_name == "index"}" %>
+			<%= link_to "Inactive Users", inactive_users_path, class: "btn #{"btn-inverse" if controller.action_name == "inactive"}" %>
+	</div>
+</div>

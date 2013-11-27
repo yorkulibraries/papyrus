@@ -5,32 +5,27 @@
 <% end %>
 
 
-<div class="btn-group">
-	<%= link_to "Active Users", users_path, :class => "btn #{"active" if controller.action_name == "index"}" %>
-	<%= link_to "Inactive Users", inactive_users_path, :class => "btn #{"active" if controller.action_name == "inactive"}" %>
-</div>
 
+<%= render partial: "user_nav" %>
 
 
 <% if @users.size == 0 %>
-	<p class="push-down">You have no Inactive users.</p>
+	<p>There are not inactive users.</p>
 <% end %>
 
-<div class="push-down">
-	<table class="table table-condensed">
+<table class="table table-condensed">
+	<tr>
+	  <th>Name</th>
+	  <th>Role</th>
+		<th>Joined On</th>
+		<th></th>
+	</tr>
+	<% @users.each do |user| %>
 		<tr>
-		    <th>Name</th>
-		    <th>Role</th>
-			<th>Joined On</th>
-			<th></th>
-		  </tr>
-		<% @users.each do |user| %>
-			<tr>
-				<td><%= user.name %></td>
-				<td><%= user.role %></td>
-				<td><%= user.created_at.strftime("%b %d, %Y") %></td>
-				<td><%= link_to "Activate User", edit_user_path(user), :class=> "btn btn-mini"%></td>
-			</tr>
-		<% end %>
-	</table>
-</div>
+			<td><%= user.name %></td>
+			<td><%= user.role %></td>
+			<td><%= user.created_at.strftime("%b %d, %Y") %></td>
+			<td><%= link_to "Activate User", edit_user_path(user), :class=> "btn btn-mini"%></td>
+		</tr>
+	<% end %>
+</table>
