@@ -2,11 +2,10 @@
 	<h2>Assigned Items <%= "- " + params[:course].gsub("_", " ") if params[:course]%></h2>
 	
 	<div class="tabbable" title="navigation for items">
-    	<ul class="nav nav-tabs">
-    	
-			<li class="active"><a href="#book" data-toggle="tab" title="List All Books">Books</a></li>
-			<li><a href="#course_kit" data-toggle="tab" title="List All Course Kits">Course Kits</a></li>
-			<li><a href="#article" data-toggle="tab" title="List All Articles">Articles</a></li>			
+    	<ul class="nav nav-tabs">    	
+				<li class="active"><a href="#book" data-toggle="tab" title="List All Books">Books</a></li>
+				<li><a href="#course_kit" data-toggle="tab" title="List All Course Kits">Course Kits</a></li>
+				<li><a href="#article" data-toggle="tab" title="List All Articles">Articles</a></li>			
     	</ul>
     	<div class="tab-content">
 			<% @items_by_type = Hash.new %>
@@ -35,7 +34,7 @@
 										<%= pluralize(item.attachments.available.size, "file")%> zipped
 									</a><i class="icon-download"></i>						 
 									or 
-									<a href="#" onclick="$('#attachments-<%=item.id %>').toggle(); return false;" title="Download files individually">
+									<a href="#" onclick="$('#attachments_<%=item.id %>').toggle(); return false;" title="Download files individually">
 										individual files
 									</a><i class="icon-file"></i>			
 								
