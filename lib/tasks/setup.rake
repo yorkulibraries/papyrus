@@ -8,7 +8,7 @@ namespace :app do
 
     Dir.glob("#{Rails.root}/config/*.default").each do |file|
       template_file = File.basename(file)
-       file = File.basename(template_file, '.default') # cut out default.yml
+       file = File.basename(template_file, '.default') # cut out .default
       if File.exists?(Rails.root.join('config', file))
         input = ''
         puts "#{file} already exists."
