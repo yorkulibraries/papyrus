@@ -25,7 +25,7 @@
 			<% end %>
 
 			<%  if can? :destroy, Attachment %>
-				<%= link_to [attachment.item, attachment], confirm: 'Are you sure?',meothd: :delete, class: "action small hidden-phone" do %>
+				<%= link_to [attachment.item, attachment], confirm: 'Are you sure?',method: :delete, class: "action small hidden-phone" do %>
 						<i class="icon-trash"></i> Delete
 				<% end %>
 			<% end %>

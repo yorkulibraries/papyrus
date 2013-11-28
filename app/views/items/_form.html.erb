@@ -16,8 +16,7 @@
 			  <% if @item.new_record? %>
 				  <%= f.label :unique_id, "Unique ID" %>
 			    <%= f.input :unique_id, label: false, input_html: { class: "input-xlarge", placeholder: "auto generated..." }, 
-					 hint: "You can fill in the unique id manually, if you must." %>
-			    <%= link_to_function "Click Here To Generate A Unique ID", "assign_unique_id('item_unique_id')"%>
+					 hint: "You can fill in the unique id manually, if you must." %>			   
 
 				<% else %>
 					<%= f.label "Unique ID", :unique_id %><br/>
@@ -78,10 +77,3 @@
 	</div>
 	
 <% end %>
-
-
-<script type="text/javascript">
-	function assign_unique_id(id) {
-		$("#" + id).val("i-" + guidGenerator(true));
-	}
-</script>

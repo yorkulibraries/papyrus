@@ -14,11 +14,12 @@
 		<p>&nbsp;</p>
 		<h5>I AGREE TO COMPLY WITH THE TERMS OF USE AS STATED ABOVE.</h5>
 	</blockquote>
-	<div class="form-actions">
+	<hr/>
+
 	<% unless session[:terms_accepted] %>
-		<%= link_to "I accept these terms", accept_student_terms_path, :class => "btn btn-primary", :disable_with => 'loading papyrus...' %> 
-		<%= link_to "I do not", logout_path, :class => "btn"%>
+		<%= link_to "I accept these terms", accept_student_terms_path, class: "btn btn-primary", disable_with: 'loading papyrus...' %> 
+		<%= link_to "I do not", logout_path, class: "btn"%>
 	<% else %>
 		<p class="trivial">Terms accepted for current Papyrus session.</p>
 	<% end %>
-	</div>
+

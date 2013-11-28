@@ -1,7 +1,7 @@
 <% title "Home" %>
 <% title_html do %>
 	<h1>Dashboard
-		<%= link_to "Quick Stats", stats_path, :class => "btn float-right" if can? :show, :stats %>
+		<%= link_to "Quick Stats", stats_path, class: "btn pull-right hidden-phone" if can? :show, :stats %>
 	</h1>
 <% end %>
 
@@ -45,13 +45,25 @@
 	</div>
 	<div class="span5">
 		<h4>My Students</h4>
-		<section class="students push-down">	
-			<ul class="thumbnails">
-				<% @students.each do |student| %>					
-					<%= render :partial => "students/student_row", :locals => { :student => student } %>
-				<% end %>
-			</ul>
-		</section>
+	
+		<% @students.each do |student| %>		
+		<div class="students">
+			<div class="list-group">
+				<% @students.each do |student| %>
+				  <div  class="list-group-item <%= cycle("odd", "even") %>">
+							<%= image_tag "icons/user_default.png", class: "pull-left" %>
+							<span class="badge badge-success"><%= pluralize(student.current_items.size, "item")%></span>
+				     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
+				     <p class="list-group-item-text">
+							<span class="trivial weak">Email: </span><%= student.email %>
+							<span class="trivial weak">Phone: </span><%= student.student_details.cell_phone %>						
+						</p>
+				   </div>
+				 <% end %>
+			</div>
+		</div>
+		<% end %>
+
 		
 		<% if @students.size == 0  %>
 			<span class="trivial">	You have no students assigned to you.</span>
