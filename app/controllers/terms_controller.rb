@@ -7,7 +7,7 @@ class TermsController < ApplicationController
     #Course.joins(:term).where("terms.end_date >= '#{Date.today}'").where("courses.title like \"%#{@query}%\" || courses.code like \"%#{@query}%\" ")
 
       respond_to do |format|
-        format.json { render :json => @courses.map { |course| {:id => course.id, :name => "#{course.title}  <br/> <span class='weak'>#{course.term.name}</span>" } } }        
+        format.json { render json: @courses.map { |course| { id: course.id, name: "#{course.title}  <br/> <span class='weak'>#{course.term.name}</span>" } } }        
         format.html
       end                        
   end
@@ -31,9 +31,9 @@ class TermsController < ApplicationController
     @term = Term.new(params[:term])
     
     if @term.save
-      redirect_to @term, :notice => "Successfully created term."
+      redirect_to @term, notice: "Successfully created term."
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -44,15 +44,15 @@ class TermsController < ApplicationController
   def update
     @term = Term.find(params[:id])
     if @term.update_attributes(params[:term])
-      redirect_to @term, :notice  => "Successfully updated term."
+      redirect_to @term, notice: "Successfully updated term."
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
   def destroy
     @term = Term.find(params[:id])
     @term.destroy
-    redirect_to terms_path, :notice => "Successfully destroyed term."
+    redirect_to terms_path, notice: "Successfully destroyed term."
   end
 end
