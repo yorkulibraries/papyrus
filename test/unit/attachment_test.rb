@@ -65,8 +65,8 @@ class AttachmentTest < ActiveSupport::TestCase
     attachment = create(:attachment, file:  fixture_file_upload('test_pdf.pdf', 'application/pdf'), item: item)
     
     assert attachment.file, "File was saved"
-    assert_equal "test_pdf.pdf", attachment.file.filename, "File name should include unique_id, title and file name"
-    assert_equal "/uploads/items/book/#{item.unique_id}/test_pdf.pdf", attachment.file.to_s, "Full file path should match"
+    assert attachment.file.filename.end_with?("-test_pdf.pdf"), "File name should include the timestamp and end with file name"
+    assert_equal "/uploads/items/book/#{item.unique_id}/#{attachment.file.filename}", attachment.file.to_s, "Full file path should match"
 
   end
 end

@@ -1,7 +1,7 @@
 <div class="sub-navigation">
-	<a href="<%= student_path(@student) %>" class="<%= is_controller_and_action?("students", "show", "active" ) %>">Assigned Items</a></span>
+	<a href="<%= student_path(@student) %>" class="<%= is_controller_and_action?("students", "show", "active" ) %>">Assigned Items</a>
 	<a href="<%= student_details_path(@student) %>" class="<%= is_controller?("student_details", "active")%>">Additional Details</a>
 	<a href="<%= student_notes_path(@student) %>" class="<%= is_controller?("notes", "active")%>">Notes</a>		
-	<a href="<%= audit_trail_student_path(@student) %>" class="<%= is_action?("audit_trail", "active")%> purple">Audit Trail <i class="icon-th-list"></i></a>		
+	<a href="<%= audit_trail_student_path(@student) %>" class="<%= is_action?("audit_trail", "active")%>">Audit Trail</a>		
 	<a href="<%= admin_student_view_path(@student) %>" class="green">Student View <i class="icon-share-alt"></i></a>		
 </div>
