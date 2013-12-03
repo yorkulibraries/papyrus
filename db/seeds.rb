@@ -9,7 +9,7 @@
 # admin user 
 admin = User.new
 admin.username = "admin"
-admin.email = "admin@library-york-test.ca"
+admin.email = "admin@library-test.ca"
 admin.name = "Admin User"
 admin.role = User::ADMIN
 admin.inactive = false

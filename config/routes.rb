@@ -1,16 +1,6 @@
 Papyrus::Application.routes.draw do
   
 
-
-
-
-
-
-
- 
-
-
-
   match "stats" => "stats#index"
   match "stats/generate" =>"stats#generate"
   
