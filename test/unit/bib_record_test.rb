@@ -10,18 +10,18 @@ class BibRecordTest < ActiveSupport::TestCase
   end
   
   should "initialize bib record, with proper type" do        
-    record = BibRecord.new(PapyrusConfig.bib_search)
-    assert_equal PapyrusConfig.bib_search.type, record.config.type    
+    record = BibRecord.new(PapyrusConfig.bib_search)   
+    assert_equal PapyrusConfig.bib_search.type, record.type    
   end
   
   
   should "have sensible default if config is not provided" do
     record = BibRecord.new(nil)
     
-    assert_equal BibRecord::SOLR, record.config.type, "Type is SOLR by default"
+    assert_equal BibRecord::SOLR, record.type, "Type is SOLR by default"
     assert_equal "http://localhost:8080/solr/biblio", record.config.url, "Default url is localhost"
-    assert_equal "DEFAULT_SOLR", record.config.label, "Default label is set"
-    assert_equal "default_solr", record.config.id_prefix, "Default prefix is set"
+    assert_equal "DEFAULT_SOLR", record.label, "Default label is set"
+    assert_equal "default_solr", record.id_prefix, "Default prefix is set"
     
   end
   

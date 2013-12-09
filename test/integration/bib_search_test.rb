@@ -6,7 +6,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
   setup do
     PapyrusConfig.configure do |config|
       config.bib_search.type = "solr"
-      config.bib_search.url = "http://iota.library.yorku.ca/solr/biblio"
+      config.bib_search.solr.url = "http://iota.library.yorku.ca/solr/biblio"
     end
   end
 

@@ -1,18 +1,30 @@
 require "ostruct"
 
 class BibRecord
-  attr_reader :type, :config
+  attr_reader :type, :config, :label, :id_prefix
   
   ## CONSTANTS
   SOLR = "solr"
   WORLDCAT = "worldcat"
   
+  
   def initialize(config)
-      
-    @config = config || OpenStruct.new
-    @config.type = config.nil? || config.type.blank? ? SOLR : config.type # default to Solr
-    @type = @config.type
-      
+    config = OpenStruct.new if config == nil # config can't be nil
+    t = config.type.nil? ? SOLR : config.type # ensure config type is set
+       
+    
+    if t == SOLR
+      @config = config.solr || OpenStruct.new      
+      @type = SOLR
+    else
+      @config = config.worldcat || Openstruct.new
+      @type = WORLDCAT
+    end
+    
+    @label = config.label || "DEFAULT_SOLR"
+    @id_prefix = config.id_prefix || "default_solr"
+    
+ 
     ensure_config_defaults
   end
   
@@ -20,7 +32,7 @@ class BibRecord
   ## COMMON INTERFACE
   def search_items(search_string)
    
-    if @config.type == SOLR
+    if @type == SOLR
       search_solr_items(search_string)
     elsif @config.type == WORLDCAT
       search_worldcat_items(search_string)
@@ -30,7 +42,7 @@ class BibRecord
   end
   
   def find_item(item_id)
-    if @config.type == SOLR
+    if @type == SOLR
       find_solr_item(item_id)
     elsif @config.type == WORLDCAT
       find_worldcat_item(item_id)
@@ -40,9 +52,9 @@ class BibRecord
   end
   
   def build_item_from_search_result(result, item_type)
-    if @config.type == SOLR
+    if @type == SOLR
       BibRecord.build_item_from_solr_result(result, item_type, @config.id_prefix)
-    elsif @config.type == WORLDCAT
+    elsif @type == WORLDCAT
       self.build_item_from_worldcat_result(result, item_type, @config.id_prefix)
     else
       "Item Can't be built"
@@ -118,18 +130,16 @@ class BibRecord
   end 
   
   def ensure_config_defaults
-    if @config.type == SOLR
-      
-      @config.label = @config.label || "DEFAULT_SOLR"
-      @config.id_prefix = @config.id_prefix || "default_solr"
+    if @type == SOLR
+          
       @config.url = @config.url || "http://localhost:8080/solr/biblio"
       @config.query_fields = @config.query_fields || "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
       @config.phrase_fields = @config.phrase_fields || "title_txtP^100"
       @config.boost_functions = @config.boost_functions || "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0";
       @config.sort = @config.sort || [ {score: :descending}, {_docid_: :descending} ]
       
-    elsif @config.type == WORLDCAT
-      
+    elsif @type == WORLDCAT
+      @config.sort = @config.sort || "title asc"
     end
   end
   

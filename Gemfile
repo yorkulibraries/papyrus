@@ -24,6 +24,8 @@ gem "rubyzip", "0.9.9"
 
 gem "acts_as_audited", "2.0.0"
 
+gem "worldcat", "0.0.1"
+
 # Deploy with Capistrano
 gem 'capistrano'
 

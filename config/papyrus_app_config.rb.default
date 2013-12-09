@@ -27,14 +27,26 @@ PapyrusConfig.configure do
 	# notifications.notification_subject = "Your Institution/Department Name Transcription Services - Papyrus Notification"
 	# notifications.items_assigned_subject = "Multiple item(s) have now been assigned to you"	
   
-  ## BIB SEARCH
-  # bib_search.type = "solr"
+  ## BIB SEARCH SOLR
+  # bib_search.type = "solr" # or worldcat
   # bib_search.label = "Your Catalogue"
-  # bib_search.id_prefix = "vufind"
-  # bib_search.url = "http://localhost:8080/solr/biblio"
-  # bib_search.sort = [ {score: :descending}, {_docid_: :descending} ]
-  # bib_search.phrase_fields = "title_txtP^100"
-  # bib_search.boost_functions = "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0"
-  # bib_search.query_fields = "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
+  # bib_search.id_prefix = "solr"
   
+	# SOLR SPECIFIC
+	
+	# bib_search.solr.url = "http://localhost:8080/solr/biblio"
+  # bib_search.solr.sort = [ {score: :descending}, {_docid_: :descending} ]
+  # bib_search.solr.phrase_fields = "title_txtP^100"
+  # bib_search.solr.boost_functions = "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0"
+  # bib_search.solr.query_fields = "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
+  
+	
+	## BIB SEARCH WORLDCAT
+	# bib_search.type = "worldcat"
+	# bib_search.label = "Worlcat Search"
+	# bib_search.id_prefix = "worldcat"
+	
+	# WORLDCAT SPECIFIC
+	# bib_search.worlcat.key = "worldcatkey-from-worldcat.org"
+	# bib_search.worldcat.sort = "sort"
 end
