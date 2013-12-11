@@ -51,17 +51,9 @@ You can access this application by going to [http://localhost:3000/login](http:/
 Production Mode
 ---------------
 
-By default Papyrus comes with a Capistrano deployment file. If you are familiar with Capistrano and deployment to Apache/Passenger system, you can change the values and set up your server to be ready to deploy Papyrus.
+Checkout this guide on how to setup Papyrus in production.
 
-In production you still have to run the following commands in order to set up the configuration files, database tables and default user data.
-
-```
-## ON THE PRODUCTION SERVER in papyrus directory
-$ rake app:setup
-## Follow Printed instructions to finish the setup
-```
-
-After the setup is finished and configuration options are changed, you can start using Papyrus.
+[Setup Papyrus in Production](https://github.com/yorkulcs/papyrus/wiki/Setup-Papyrus-in-Production)
 
 Configuration Options
 =====================

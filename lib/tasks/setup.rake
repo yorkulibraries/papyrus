@@ -29,7 +29,7 @@ namespace :app do
     puts "\n====================================================="
     puts "  Follow the following steps to complete the installation."
     puts "======================================================\n\n"
-    puts "1) Create Your Database & User\n"
+    puts "1) Create Your Database & User (If not created)\n"
     puts "2) Modify config/database.yml to match your database settings\n"
     puts "3) Run: rake db:migrate\n"
     puts "4) Modify config/papyrus_app_config.rb \n"
