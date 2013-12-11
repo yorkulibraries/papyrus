@@ -1,7 +1,7 @@
 ### load papyrus_app_config.rb file if it exsits
 papyrus_configuration =  File.expand_path('../../papyrus_app_config.rb', __FILE__)
 
-$config_logger =  Rails.env.production? ? Logger.new(STDOUT) : Logger.new("#{Rails.root}/log/config.log")
+$config_logger =  Rails.env.production? ? Logger.new(STDERR) : Logger.new("#{Rails.root}/log/config.log")
 $logger = Rails.logger
 $papyrus_config_path = nil
 
