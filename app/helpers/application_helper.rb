@@ -36,7 +36,7 @@ module ApplicationHelper
     PapyrusConfig.organization.full_name
   end
   
-  def organizaition
+  def org_short_name
     PapyrusConfig.organization.short_name
   end
 end

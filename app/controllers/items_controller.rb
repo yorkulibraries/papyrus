@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
       item.assign_to_student(student, date)
     end 
     
-    redirect_to item, :notice => "Assigned this item to students"   
+    redirect_to item, notice:  "Assigned this item to students"   
   end
   
   def assign_many_to_student
@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
       item.assign_to_student(student, date)
     end
     
-    redirect_to student, :notice => "Assigned items to this student"
+    redirect_to student, notice: "Assigned items to this student"
   end  
   
   def withhold_from_student
@@ -57,8 +57,8 @@ class ItemsController < ApplicationController
     
     item.withhold_from_student(student)
     
-    redirect_to item, :notice => "Removed student access" unless params[:return_to_student]
-    redirect_to student, :notice =>"Removed item access" if params[:return_to_student]
+    redirect_to item, notice: "Removed student access" unless params[:return_to_student]
+    redirect_to student, notice: "Removed item access" if params[:return_to_student]
   end
   
   
@@ -105,7 +105,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.audit_comment = "Updated an existing item."
     if @item.update_attributes(params[:item])
-      redirect_to @item, :notice  => "Successfully updated item."
+      redirect_to @item, notice:  "Successfully updated item."
     else
       render :action => 'edit'
     end
@@ -115,7 +115,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.audit_comment = "Removed the item."
     @item.destroy
-    redirect_to items_path, :notice => "Successfully destroyed item."
+    redirect_to items_path, notice:  "Successfully destroyed item."
   end
   
   
@@ -143,7 +143,7 @@ class ItemsController < ApplicationController
         end
       end
       
-      send_data File.read(zipfile_name), :type => 'application/zip', :disposition => 'attachment', :filename => show_file_name
+      send_data File.read(zipfile_name), type: 'application/zip', disposition: 'attachment', filename: show_file_name
       
   end
   

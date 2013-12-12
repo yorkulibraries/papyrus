@@ -12,6 +12,8 @@ class BibRecord
     config = OpenStruct.new if config == nil # config can't be nil
     t = config.type.nil? ? SOLR : config.type # ensure config type is set
        
+    @label = config.label || "DEFAULT_SOLR"
+    @id_prefix = config.id_prefix || "default_solr"
     
     if t == SOLR
       @config = config.solr || OpenStruct.new      
@@ -21,9 +23,7 @@ class BibRecord
       @type = WORLDCAT
     end
     
-    @label = config.label || "DEFAULT_SOLR"
-    @id_prefix = config.id_prefix || "default_solr"
-    
+   
  
     ensure_config_defaults
   end
@@ -53,9 +53,9 @@ class BibRecord
   
   def build_item_from_search_result(result, item_type)
     if @type == SOLR
-      BibRecord.build_item_from_solr_result(result, item_type, @config.id_prefix)
+      BibRecord.build_item_from_solr_result(result, item_type, @id_prefix)
     elsif @type == WORLDCAT
-      self.build_item_from_worldcat_result(result, item_type, @config.id_prefix)
+      self.build_item_from_worldcat_result(result, item_type, @id_prefix)
     else
       "Item Can't be built"
     end
@@ -93,10 +93,8 @@ class BibRecord
     end    
   end
   
-  def self.build_item_from_solr_result(result, item_type, id_prefix = nil)
+  def self.build_item_from_solr_result(result, item_type, id_prefix = "solr")
     return if result == nil
-    
-    id_prefix = id_prefix.nil ? @id_prefix : id_prefix
     
     result = HashWithIndifferentAccess.new(result)
     item = Item.new
