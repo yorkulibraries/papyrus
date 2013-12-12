@@ -93,8 +93,10 @@ class BibRecord
     end    
   end
   
-  def self.build_item_from_solr_result(result, item_type, id_prefix = "solr")
+  def self.build_item_from_solr_result(result, item_type, id_prefix = nil)
     return if result == nil
+    
+    id_prefix = id_prefix.nil ? @id_prefix : id_prefix
     
     result = HashWithIndifferentAccess.new(result)
     item = Item.new

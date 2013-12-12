@@ -8,40 +8,40 @@
 <div class="row">
 	<div class="span6">
 		<h4>Recent Items</h4>
+		<% if @recently_worked_with_items.size == 0  %>
+			<span class="trivial">	You have not worked on any items recently.</span>
+		<% else %>
+				
+			<table class="items">
+				<tr class="heading">
+					<th class="hidden-phone"></th>
+					<th>title</th>
+					<th>author</th>			
+					<th class="hidden-phone"><i class="icon-user"></i></th>
+					<th class="hidden-phone"><i class="icon-file-alt"></i></th>
+				</tr>
+				<% @recently_worked_with_items.each_with_index do |item, index| %>	
+					<tr class="item" id="item_<%= item.id %>">
+						<td class="icon  hidden-phone" title="<%= item.item_type %>" data-id="<%= item.id %>">		
+							<i class="icon-<%= display_icon(item.item_type) %>"></i>
+						</td>		
+						<td class="title">
+							<%= link_to_unless controller.action_name == "show", item.title, item_path(item) do %><%= item.title %><% end %>
+						</td>
+						<td class="extra hidden-phone">
+							<%= format_field item.isbn %>
+						</td>
+						<td class="students hidden-phone">
+							<%= item.students.count %>
+						</td>
+						<td class="files hidden-phone">
+							<%= item.attachments.available.count %>
+						</td>
+					</tr>	
+				<% end %>			
 		
-		<table class="items">
-			<tr class="heading">
-				<th class="hidden-phone"></th>
-				<th>title</th>
-				<th>author</th>			
-				<th class="hidden-phone"><i class="icon-user"></i></th>
-				<th class="hidden-phone"><i class="icon-file-alt"></i></th>
-			</tr>
-			<% @recently_worked_with_items.each_with_index do |item, index| %>	
-				<tr class="item" id="item_<%= item.id %>">
-					<td class="icon  hidden-phone" title="<%= item.item_type %>" data-id="<%= item.id %>">		
-						<i class="icon-<%= display_icon(item.item_type) %>"></i>
-					</td>		
-					<td class="title">
-						<%= link_to_unless controller.action_name == "show", item.title, item_path(item) do %><%= item.title %><% end %>
-					</td>
-					<td class="extra hidden-phone">
-						<%= format_field item.isbn %>
-					</td>
-					<td class="students hidden-phone">
-						<%= item.students.count %>
-					</td>
-					<td class="files hidden-phone">
-						<%= item.attachments.available.count %>
-					</td>
-				</tr>	
-			<% end %>
-			
-			<% if @recently_worked_with_items.size == 0  %>
-				<span class="trivial">	You have not worked on any items recently.</span>
-			<% end %>
-		</table>
-	
+			</table>
+		<% end %>
 	</div>
 	<div class="span5">
 		<h4>My Students</h4>

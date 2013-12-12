@@ -55,7 +55,7 @@
 			<%= f.input :physical_description,label: false, input_html: { class: "input-xlarge" } %>
 
 			<%= f.label :source, "Source" %>
-			<%= f.input :source, collection: ["Publisher", "AERO", "Student Purchase", "LAS Purchase", "YUL Copy Scanned", "YUL E-Resource"],  label: false, input_html: { class: "input-xlarge" } %>
+			<%= f.input :source, collection: ["Publisher", "AERO", "Student Purchase", "#{org_short_name} Purchase", "#{org_short_name} Copy Scanned", "#{org_short_name} E-Resource"],  label: false, input_html: { class: "input-xlarge" } %>
 
 			<%= f.label :source_note, "Source Note" %>
 			<%= f.input :source_note, label: false, input_html: { class: "input-xlarge" } %>
