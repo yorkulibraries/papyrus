@@ -109,9 +109,9 @@ This is a simple RUBY configuration file that contains settings for the applicat
 | OPTION              | Description                                                                 | Related to     |
 |---------------------|-----------------------------------------------------------------------------|----------------|
 | type                | The type of bib search supported. Currently only 'solr' search is supported | solr, worldcat |
-| label               | The label to use on the front end when searching.                           | any |
-| id_prefix           | The prefix to use when storing the id of the item in database               | any |
-| solr.url            | The URL of the bib search server (i.e. Solr/VuFind)                         | any |
+| label               | The label to use on the front end when searching.                           | any  |
+| id_prefix           | The prefix to use when storing the id of the item in database               | any  |
+| solr.url            | The URL of the bib search server (i.e. Solr/VuFind)                         | SOLR |
 | solr.query_fields   | The list of fields to query and when searching for items                    | SOLR |
 | solr.phrase_fields  | The list of phrase fields to search with the boost assigned                 | SOLR |
 | solr.boost_function | Custom boost function for                                                   | SOLR |
