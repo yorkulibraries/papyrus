@@ -30,7 +30,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('input#courses_search').quicksearch('.courses .course', { selector: "h5.title" });
+			$('input#courses_search').quicksearch('.courses li.course-wrapper', { selector: "h5.title" });
 		});
 	</script>
 
@@ -41,7 +41,7 @@
 	<p><strong><%= pluralize(@term.courses.count, "Course") %></strong></p>
 	<ul class="thumbnails">
 		<% @term.courses.each do |course| %>
-			<li class="span6">
+			<li class="span6 course-wrapper">
 				<%= render partial: course %>
 			</li>
 		<% end %>
