@@ -104,7 +104,7 @@ This is a simple RUBY configuration file that contains settings for the applicat
 
 ### Bibliographic Search (bib search)
 
->  NOTE:  There was a configuration change for bib search section. Solr specific configuration now live sunder solr. prefix. Ensure you update you config if you pull the latest code.
+>  NOTE:  There was a configuration change for bib search section. Solr specific configuration now lives under solr. prefix. Ensure you update you config if you pull the latest code.
 
 | OPTION              | Description                                                                 | Related to     |
 |---------------------|-----------------------------------------------------------------------------|----------------|
