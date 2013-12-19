@@ -2,17 +2,19 @@ class StudentMailer < ActionMailer::Base
  
   default from: PapyrusConfig.notifications.from_email
 
-   def notification_email(student, message)
+   def notification_email(student, sender, message)
      @student = student
+     @sender = sender
      @url  = PapyrusConfig.organization.app_url
      @message = message
-     mail( to: student.email, subject: PapyrusConfig.notifications.notification_subject)
+     mail( to: student.email, cc: sender.email, subject: PapyrusConfig.notifications.notification_subject)
    end
   
-  def welcome_email(student)
+  def welcome_email(student, sender)
     @student = student
+    @sender = sender
     @url  = PapyrusConfig.organization.app_url
-    mail(to: student.email, subject: PapyrusConfig.notifications.welcome_subject)
+    mail(to: student.email, cc: sender.email, subject: PapyrusConfig.notifications.welcome_subject)
   end
   
   def items_assigned_email(student, items)

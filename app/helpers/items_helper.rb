@@ -20,4 +20,12 @@ module ItemsHelper
     end
   end
   
+  
+  def isbn_for_image_cover(item)
+    begin
+      item.isbn.split(",").first.gsub(/[^0-9]+/, '')
+    rescue
+      ""
+    end    
+  end
 end

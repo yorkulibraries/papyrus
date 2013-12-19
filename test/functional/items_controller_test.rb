@@ -153,7 +153,7 @@ class ItemsControllerTest < ActionController::TestCase
     ## if this test fails, first check if there is a test solr config, second make sure vufind_item with the id exists
     
     bib_record_id = "2246622"
-    PapyrusConfig.config.bib_search.url = "http://iota.library.yorku.ca/solr/biblio"
+    PapyrusConfig.config.bib_search.solr.url = "http://iota.library.yorku.ca/solr/biblio"
     
     get :new, bib_record_id: bib_record_id
     
