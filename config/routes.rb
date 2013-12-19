@@ -38,17 +38,22 @@ Papyrus::Application.routes.draw do
   resources :students do
     resources :notes, except: [:show, :new]
     
-    resource :student_details, as: :details, path: "details", except: [:index, :destroy] do
-      
+    resource :student_details, as: :details, path: "details", except: [:index, :destroy] 
+        
+    collection do 
+      get "inactive"
+      get "search"
+      post "notify"
     end
-    
-    post 'notify', :on => :collection
-    get 'items', :on => :member
-    get 'search', :on => :collection
-    post "send_welcome_email", :on => :member
-    get "audit_trail", :on => :member
-    get :block, :on => :member
-    get :unblock, :on => :member
+
+    member do
+      get 'items'
+      post "send_welcome_email"
+      get "audit_trail"
+      get :block
+      get :unblock
+      get :reactivate
+    end
   end
 
   resources :items do 

@@ -29,7 +29,7 @@
 							<%= link_to_unless controller.action_name == "show", item.title, item_path(item) do %><%= item.title %><% end %>
 						</td>
 						<td class="extra hidden-phone">
-							<%= format_field item.isbn %>
+							<%= format_field item.author %>
 						</td>
 						<td class="students hidden-phone">
 							<%= item.students.count %>

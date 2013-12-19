@@ -9,12 +9,20 @@
 	<p class="alert alert-info"><span class="strong">Remember:</span> All fields must be filled in.</p>
 
 	<%  if !@student.new_record? && can?(:manage, Student) %>		
-		<p><strong>Disable Acces</strong></p>
-		<p>You can disable student's access to their account. This does not delete the student, just disables their ability to access Papyrus.</p>
+		<p><strong>Deactivate or Reactivate</strong></p>
+		<p>You can deactivate a student. This does not delete the student record, just disables their ability to access Papyrus and hides the record from general view.</p>
 		
-		<p><%= link_to @student, confirm: 'Are you sure?', method: :delete, class: 'red' do %>	
-			<i class="icon-lock"></i> Disable access?
-		<% end %></p>
+		<% if ! @student.inactive? %>
+			<p><%= link_to @student, confirm: 'Are you sure?', method: :delete, class: 'red' do %>	
+				<i class="icon-lock"></i> Deactivate Student
+			<% end %></p>
+		<% else %>
+			<p>
+				<%= link_to reactivate_student_path(@student), confirm: 'Are you sure?', class: 'red' do %>	
+				<i class="icon-lock"></i> Reactivate Student
+				<% end %>
+			</p>
+		<% end %>
 		
 		<p class="alert alert-warning"><span class="strong">Warning:</span> This action can be reversed.</p>	
 	<% end %>

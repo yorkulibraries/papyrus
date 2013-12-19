@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
   end
   
   def assign_many_to_student
-    student = Student.find(params[:student_id])
+    student = Student.active.find(params[:student_id])
     item_ids = params[:item_ids]
     date = params[:expires_on][:date] if params[:expires_on]
     

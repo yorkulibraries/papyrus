@@ -1,25 +1,21 @@
-<% title "All Students" %>
+<% title "Inactive Students" %>
 <% title_html do %>
-		<h1>Students</h2>
+		<h1>Inactive Students</h2>
 <% end %>
 
 <% sidebar do %>
-	<%= link_to new_student_path, class: "action-btn green input-block-level" do %>
-		<i class="icon-plus"></i> Register New Student
-	<% end %>
-	<h3>Registering New Stuents</h3>
-	<p>Registering a student requires you to fill in some basic information about the person, as well as the login credentials.</p>
-	
-	<hr/>
-	<p>To see a list of inactive students, <%= link_to "click here.", inactive_students_path %></p>
+	<h3>Inactive Students</h3>
+	<p>Students that have been inactived, are no longer able to log in to use papyrus and will not show in the student listing or the dashboard.</p>
+	<p>To enable the student, click on the reactive link</p>	
 <% end %>
 
 <% if @students.size > 0 %>
 	<div class="search-box">
 		<form action="<%= search_students_path %>">
 			<div class="search-field  input-prepend">			
+				<input type="hidden" name="inactive" value="true"/>
 				<span class="add-on">	<i class="icon-search"></i></span>
-				<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Name or Username"/>			
+				<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Inactive Students"/>			
 				<button class="btn hidden-phone" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
 			</div>
 		</form>
@@ -32,8 +28,12 @@
 			<% @students.each do |student| %>
 			  <div  class="list-group-item <%= cycle("odd", "even") %>">
 						<%= image_tag "icons/user_default.png", class: "pull-left" %>
-						<span class="badge badge-success"><%= pluralize(student.current_items.size, "item")%></span>
-			     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
+						<span class="badge badge-success">
+							<%= link_to reactivate_student_path(student), confirm: 'Are you sure?', class: "white no-text-shadow" do %>	
+							Reactivate Student
+							<% end %>
+						</span>
+			     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a> <span class="red">Inactive</span></h4>
 			     <p class="list-group-item-text">
 						<span class="trivial weak">Email: </span><%= student.email %>
 						<span class="trivial weak">Phone: </span><%= student.student_details.cell_phone %>
@@ -51,8 +51,7 @@
 <% else %>
 	<div class="blank-slate">
 		<i class="icon-user"></i>
-		<h1>Students</h1>
-		<p>There are no students registerd in Papyrus right now.</p>
-		<p>You can <%= link_to "Register a New Student", new_student_path %> to begin using Papyrus.</p>
+		<h1>Inactive Students</h1>
+		<p>There are no inactive students in Papyrus right now.</p>
 	</div>
 <% end %>

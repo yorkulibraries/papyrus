@@ -58,6 +58,15 @@ class StudentsControllerTest < ActionController::TestCase
     students = assigns(:students)
     assert_equal 4, students.size, "There should be four active students"
   end
+  
+  should "show a list of inactive students" do
+    create_list(:student, 2, inactive: false)
+    create_list(:student, 5, inactive: true)
+    
+    get :inactive
+    students = assigns(:students)
+    assert_equal 5, students.size, "There should be 5 inactive students"
+  end
       
   
   should "display student details and only current items, not expired ones" do
@@ -117,7 +126,7 @@ class StudentsControllerTest < ActionController::TestCase
     
   end
   
-  should "not delete a student when calling destroy" do
+  should "deactivate a student when calling destroy" do
     student = create(:student)
     
     assert_no_difference "Student.count" do
@@ -126,6 +135,15 @@ class StudentsControllerTest < ActionController::TestCase
     
     student = assigns(:student)
     assert student.inactive?, "Student should be set to inactive"
+  end
+  
+  should "reactivate a student" do
+    student = create(:student, inactive: false)
+    
+    post :reactivate, id: student.id
+    student = assigns(:student)
+    assert ! student.inactive?, "Student should be active"
+    assert_redirected_to student, "Should redirect to student path"
   end
   
   
@@ -171,6 +189,31 @@ class StudentsControllerTest < ActionController::TestCase
     post :notify
     assert_response :redirect
     assert_redirected_to root_url
+  end
+  
+  
+  ######### SEARCH STUDENTS #######
+  
+  should "find students based on name or username and use inactive or active status" do
+    create(:student, name: "Terry Jones", username: "terryjones", email: "tj@yorku.ca", inactive: false)
+    create(:student, name: "Valmar Garry", username: "vgarry", email: "vg@university.ca", inactive: true)
+    
+    get :search, q: "Terry Jones"
+    students = assigns(:students)
+    assert_equal 1, students.size, "One student found with that name"
+    
+    get :search, q: "vgarry"
+    students = assigns(:students)
+    assert_equal 0, students.size, "No one should be found, since vgarry is inactive"
+    
+    get :search, q: "vg@university.ca", inactive: true
+    students = assigns(:students)
+    assert_equal 1, students.size, "Should find one inactive student"
+
+    get :search, q: "terry", inactive: true
+    students = assigns(:students)
+    assert_equal 0, students.size, "Should find no student student since Terry is active"
+    
   end
   
 end

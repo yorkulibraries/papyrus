@@ -10,6 +10,10 @@ class HomeControllerTest < ActionController::TestCase
   should "display index page with assigned students and recently worked on items" do      
     student = create(:student)
     details = create(:student_details, student: student, transcription_coordinator: @current_user)
+    
+    student2 = create(:student, inactive: true)
+    details2 = create(:student_details, student: student2, transcription_coordinator: @current_user)
+    
 
     get :index
     

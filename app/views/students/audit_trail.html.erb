@@ -1,6 +1,11 @@
 <% title "#{@student.name} - Audit Trail" %>
 <% title_html do %>
-	<h1>Student Registration Record - Audit Trail</h1>	
+	<h1>Student Registration Record - Audit Trail
+		<% if @student.inactive? %>
+			<span class="red">Inactive</span>
+		<% end %>
+	
+	</h1>	
 <% end%>
 
 <% @short_view = true %>

@@ -7,6 +7,12 @@ class StudentsController < ApplicationController
      @students = Student.active.page(page_number)
   end
   
+  def inactive
+    page_number = params[:page] ||= 1
+
+    @students = Student.inactive.page(page_number)      
+  end
+  
   def notify
     if params[:students]
       params[:students].each do |id|
@@ -48,12 +54,14 @@ class StudentsController < ApplicationController
   def search 
     page_number = params[:page] ||= 1
     query = params[:q].strip
+    inactive_status = params[:inactive].blank? ? false : true
+    
     @students = Student.where{
       { name.matches => "%#{query}%"} | 
       { username.matches => "#{query}"} |     
-      { email.matches => "%#{query}%"} }
-      .page page_number
-
+      { email.matches => "%#{query}%"}  } 
+      .where(inactive: inactive_status).page page_number  
+           
     respond_to do |format|
       format.json { render :json => @students.map { |student| {:id => student.id, :name => student.name } } }        
       format.html {  render :template => "students/index" }
@@ -91,7 +99,7 @@ class StudentsController < ApplicationController
     @student.student_details.audit_comment = "Saved student details."
     
     if @student.save
-      redirect_to @student, :notice => "Successfully registered a student."
+      redirect_to @student, notice: "Successfully registered a student."
     else     
       render :action => 'new'
     end
@@ -104,7 +112,7 @@ class StudentsController < ApplicationController
     @student.email_sent_at = Time.zone.now
     @student.save!
     
-    redirect_to @student, :notice => "Sent welcome email."    
+    redirect_to @student, notice: "Sent welcome email."    
   end
 
 
@@ -117,7 +125,7 @@ class StudentsController < ApplicationController
     @student.audit_comment = "Updated the student"  
     @student.student_details.audit_comment = "Updated student details."
     if @student.update_attributes(params[:student])
-      redirect_to @student, :notice  => "Successfully updated student."
+      redirect_to @student, notice:  "Successfully updated student."
     else      
       render :action => 'edit'
     end
@@ -127,6 +135,13 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @student.inactive = true
     @student.save     
-    redirect_to students_url, :notice => "Successfully removed student."
+    redirect_to students_url, notice: "This student's access has been disabled."
+  end
+  
+  def reactivate
+    @student = Student.find(params[:id])
+    @student.inactive = false
+    @student.save
+    redirect_to @student, notice: "Student has been reactivated, and can now use Papyrus"
   end
 end

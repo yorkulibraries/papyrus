@@ -1,6 +1,10 @@
 <% title "#{@student.name} - Details" %>
 <% title_html do %>
-	<h1><%= @student.name %> - Details</h1>
+	<h1><%= @student.name %> - Additional Details
+		<% if @student.inactive? %>
+			<span class="red">Inactive</span>
+		<% end %>
+	</h1>
 <% end%>
 
 <% sidebar do %>
