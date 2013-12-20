@@ -3,8 +3,9 @@
 		<div class="well">
 			<p><strong>Send a Message</strong></p>
 			<p>Send a message to the student. </p>
+			<p>CC: <%= @current_user.email %></p>
 			<%= form_tag notify_students_path  do %>
-		
+			
 				<input class="student_notification" type="hidden" name="students[]" value="<%= @student.id %>">					
 				<input type="hidden" name="student" value="<%= @student.id %>"/>			
 				<p>Message: <br/><%= text_area_tag 'message', nil, :rows => 8 %></p>
