@@ -8,7 +8,7 @@
 	<p>You can update student registration details on this screen.</p>
 	<p class="alert alert-info"><span class="strong">Remember:</span> All fields must be filled in.</p>
 
-	<%  if !@student.new_record? && can?(:manage, Student) %>		
+	<%  if !@student.new_record? && can?(:reactivate, Student) %>		
 		<p><strong>Deactivate or Reactivate</strong></p>
 		<p>You can deactivate a student. This does not delete the student record, just disables their ability to access Papyrus and hides the record from general view.</p>
 		

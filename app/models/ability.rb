@@ -23,7 +23,7 @@ class Ability
       can :manage, [Term, Course]
       can [:read, :create, :update], Note
       can :manage, [Item, Attachment, ItemConnection]
-      can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail], Student     
+      can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail, :reactivate, :inactive, :destroy], Student     
       can :login_as, :student
     elsif user.role == User::PART_TIME
       can :show, :dashboard
