@@ -12,6 +12,10 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean  :blocked, default: false
       t.timestamps
     end
+    
+    add_index :users, :inactive
+    add_index :users, :username
+    add_index :users, [:type, :inactive]
   end
 
 

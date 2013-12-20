@@ -38,6 +38,10 @@ class CreateStudentDetails < ActiveRecord::Migration
       
       t.timestamps
     end
+    
+    add_index :student_details, [:transcription_coordinator_id]
+    add_index :student_details, [:transcription_assistant_id]
+    add_index :student_details, [:student_id]
   end    
 
   def self.down

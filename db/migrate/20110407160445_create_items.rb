@@ -17,6 +17,9 @@ class CreateItems < ActiveRecord::Migration
       t.string   :source_note
       t.timestamps
     end
+    
+    add_index :items, :unique_id
+    add_index :items, :user_id
   end
 
 

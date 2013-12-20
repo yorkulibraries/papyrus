@@ -149,6 +149,10 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "updated_at",                                         :null => false
   end
 
+  add_index "student_details", ["student_id"], :name => "index_student_details_on_student_id"
+  add_index "student_details", ["transcription_assistant_id"], :name => "index_student_details_on_transcription_assistant_id"
+  add_index "student_details", ["transcription_coordinator_id"], :name => "index_student_details_on_transcription_coordinator_id"
+
   create_table "students", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -180,5 +184,9 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
   end
+
+  add_index "users", ["inactive"], :name => "index_users_on_inactive"
+  add_index "users", ["type", "inactive"], :name => "index_users_on_type_and_inactive"
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end
