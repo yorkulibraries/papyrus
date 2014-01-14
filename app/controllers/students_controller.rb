@@ -5,6 +5,7 @@ class StudentsController < ApplicationController
      page_number = params[:page] ||= 1
 
      @students = Student.active.page(page_number)
+     @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
   end
   
   def inactive
@@ -61,7 +62,9 @@ class StudentsController < ApplicationController
       { username.matches => "#{query}"} |     
       { email.matches => "%#{query}%"}  } 
       .where(inactive: inactive_status).page page_number  
-           
+    
+    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")       
+    
     respond_to do |format|
       format.json { render :json => @students.map { |student| {:id => student.id, :name => student.name } } }        
       format.html {  render :template => "students/index" }
@@ -134,8 +137,8 @@ class StudentsController < ApplicationController
   def destroy
     @student = Student.find(params[:id])
     @student.inactive = true
-    @student.save     
-    redirect_to students_url, notice: "This student's access has been disabled."
+    @student.save(validate: false)     
+    redirect_to @student, notice: "This student's access has been disabled."
   end
   
   def reactivate

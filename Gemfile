@@ -47,6 +47,7 @@ group :development do
 	gem "populator"
 	gem "faker"
   gem "rack-livereload"
+  gem "bullet"
 end 
 
 group :test do

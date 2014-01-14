@@ -51,4 +51,25 @@ class StudentTest < ActiveSupport::TestCase
     
   end
   
+  
+  ## RETRIEVE item counts, current, expired or all for a group of students - SOLIVNG N+1 ISSUE
+  should "return a map of student id and current, expired or all item counts" do
+    students = create_list(:student, 4)
+    students.each do |student|
+      create_list(:item_connection, 10, expires_on: 1.year.from_now, student: student)
+      create_list(:item_connection, 5, expires_on: 1.year.ago, student: student)    
+    end
+    
+    current_counts = Student.item_counts(students.collect { |s| s.id }, "current")
+    
+    assert_equal 4, current_counts.size, "Should be 4 count entries"
+    assert_equal 10, current_counts[students.first.id], "should be 10 current items"
+    
+    current_counts = Student.item_counts(students.collect { |s| s.id }, "expired")
+    assert_equal 5, current_counts[students.first.id], "should be 5 expired items"
+    
+    current_counts = Student.item_counts(students.collect { |s| s.id }, "all")
+    assert_equal 15, current_counts[students.first.id], "should be 15 all items"
+  end
+  
 end

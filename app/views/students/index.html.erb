@@ -32,7 +32,7 @@
 			<% @students.each do |student| %>
 			  <div  class="list-group-item <%= cycle("odd", "even") %>">
 						<%= image_tag "icons/user_default.png", class: "pull-left" %>
-						<span class="badge badge-success"><%= pluralize(student.current_items.size, "item")%></span>
+						<span class="badge badge-success"><%= pluralize(@current_items_counts[student.id], "item")%></span>
 			     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
 			     <p class="list-group-item-text">
 						<span class="trivial weak">Email: </span><%= student.email %>
