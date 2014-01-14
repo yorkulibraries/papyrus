@@ -48,14 +48,14 @@ namespace :db do
           
           puts "Uploading Files..."
           # Upload the actual files 
-          files = ["test/test_pdf.pdf", "test/test_picture.jpg", "test/test_word.doc"]          
+          files = ["test/fixtures/test_pdf.pdf", "test/fixtures/test_picture.jpg", "test/fixtures/test_word.doc"]          
           Attachment.all.each do |a|            
             a.file = File.open(files[(0..files.size-1).to_a.sample])
             a.save!
           end
           
           puts "Populating students..."
-          Student.populate 40 do |student|
+          Student.populate 440 do |student|
             student.name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
             student.email = Faker::Internet.email
             student.username = Faker::Internet.user_name            
@@ -67,7 +67,7 @@ namespace :db do
         				sd.cell_phone = 333..444
         				sd.cds_adviser = Faker::Name.name
         				sd.student_id = student.id
-        				sd.transcription_coordinator_id = 1..5
+        				sd.transcription_coordinator_id = 1
             end
             
             Note.populate 2..4 do |note|
