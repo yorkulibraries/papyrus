@@ -10,7 +10,8 @@ class PapyrusConfig
   DEFAULT_ORGANIZATION =  { 
     full_name: "Your Institution/Department Name", short_name: "SHORT_NAME", app_url: "http://your-institution.website/papyrus/", 
     course_code_sample: "2011_AP_ADMS_F_1000__3_A",
-    course_code_lookup_link: "http:://your-institution.website/coursecode-lookup"
+    course_code_lookup_link: "http:://your-institution.website/coursecode-lookup",
+    item_sources: ["Publisher", "AERO", "Student Purchase"]
   }
   
   DEFAULT_AUTHENTICATION = {  

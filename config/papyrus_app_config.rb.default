@@ -9,6 +9,7 @@ PapyrusConfig.configure do
   organization.app_url = "http://your-institution.website/papyrus/"
 	organization.course_code_sample = "2011_AP_ADMS_F_1000__3_A"
 	organization.course_code_lookup_link = "http:://your-institution.website/coursecode-lookup"
+	organization.item_sources = ["Publisher", "AERO", "Student Purchase"]
   
   ## AUTHENTICATION
   authentication.cas_header_name = "REMOTE_USER"

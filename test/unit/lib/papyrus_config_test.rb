@@ -32,6 +32,8 @@ class PapyrusConfigTest < ActiveSupport::TestCase
     assert_equal "http://your-institution.website/papyrus/", instance.organization.app_url
     assert_equal "2011_AP_ADMS_F_1000__3_A", instance.organization.course_code_sample
     assert_equal "http:://your-institution.website/coursecode-lookup", instance.organization.course_code_lookup_link
+    assert_equal 3, instance.organization.item_sources.size
+    assert_equal "Publisher", instance.organization.item_sources.first
   
     ## AUTHENTICATION
     assert_equal "REMOTE-USER", instance.authentication.cas_header_name
