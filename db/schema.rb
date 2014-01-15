@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111031150545) do
+ActiveRecord::Schema.define(:version => 20140115155417) do
 
   create_table "acquisition_requests", :force => true do |t|
     t.integer  "item_id"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "updated_at",                           :null => false
   end
 
+  add_index "acquisition_requests", ["item_id"], :name => "index_acquisition_requests_on_item_id"
+
   create_table "attachments", :force => true do |t|
     t.string   "name"
     t.integer  "item_id"
@@ -38,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
+
+  add_index "attachments", ["item_id", "deleted"], :name => "index_attachments_on_item_id_and_deleted"
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -68,6 +72,8 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "courses", ["term_id"], :name => "index_courses_on_term_id"
+
   create_table "item_connections", :force => true do |t|
     t.integer  "item_id"
     t.integer  "student_id"
@@ -76,12 +82,18 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "item_connections", ["expires_on", "item_id"], :name => "index_item_connections_on_expires_on_and_item_id"
+  add_index "item_connections", ["expires_on", "student_id"], :name => "index_item_connections_on_expires_on_and_student_id"
+  add_index "item_connections", ["student_id", "item_id", "expires_on"], :name => "index_item_connections_on_student_id_and_item_id_and_expires_on"
+
   create_table "item_course_connections", :force => true do |t|
     t.integer  "item_id"
     t.integer  "course_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "item_course_connections", ["course_id", "item_id"], :name => "index_item_course_connections_on_course_id_and_item_id"
 
   create_table "items", :force => true do |t|
     t.string   "title"
@@ -109,6 +121,8 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
+
+  add_index "notes", ["student_id"], :name => "index_notes_on_student_id"
 
   create_table "student_details", :force => true do |t|
     t.integer  "student_id"
@@ -171,6 +185,8 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "terms", ["end_date"], :name => "index_terms_on_end_date"
+
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "name"
@@ -185,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20111031150545) do
     t.datetime "updated_at",                            :null => false
   end
 
+  add_index "users", ["inactive", "role"], :name => "index_users_on_inactive_and_role"
   add_index "users", ["inactive"], :name => "index_users_on_inactive"
   add_index "users", ["type", "inactive"], :name => "index_users_on_type_and_inactive"
   add_index "users", ["username"], :name => "index_users_on_username"
