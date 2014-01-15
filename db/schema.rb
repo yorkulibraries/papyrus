@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140115155417) do
+ActiveRecord::Schema.define(:version => 20140115164742) do
 
   create_table "acquisition_requests", :force => true do |t|
     t.integer  "item_id"
@@ -68,8 +68,9 @@ ActiveRecord::Schema.define(:version => 20140115155417) do
     t.string   "title"
     t.string   "code"
     t.integer  "term_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "items_count", :default => 0, :null => false
   end
 
   add_index "courses", ["term_id"], :name => "index_courses_on_term_id"
@@ -112,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20140115155417) do
     t.string   "source_note"
     t.datetime "created_at",                          :null => false
     t.datetime "updated_at",                          :null => false
+    t.integer  "attachments_count",    :default => 0, :null => false
   end
 
   create_table "notes", :force => true do |t|
@@ -175,14 +177,16 @@ ActiveRecord::Schema.define(:version => 20140115155417) do
     t.integer  "user_id",        :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.integer  "notes_count",    :default => 0, :null => false
   end
 
   create_table "terms", :force => true do |t|
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "courses_count", :default => 0, :null => false
   end
 
   add_index "terms", ["end_date"], :name => "index_terms_on_end_date"
