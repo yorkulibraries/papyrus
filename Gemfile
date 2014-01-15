@@ -69,4 +69,6 @@ group :test do
   gem 'shoulda', "3.0.1"
 end
 
+#gem "rack-mini-profiler"
+
 
