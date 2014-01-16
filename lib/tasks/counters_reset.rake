@@ -4,7 +4,8 @@ namespace :db do
   
   task :reset_cache_counters => :environment do 
     Item.find_each(select: :id) do |item|
-      item.update_attribute(:attachments_count, item.attachments.available.size)
+      count = item.attachments.available.size
+      item.connection.execute("update items set attachments_count=#{count} where id = #{item.id}")
     end
   end
     
