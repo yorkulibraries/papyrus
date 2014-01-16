@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
   attr_accessible :title, :code
   
-  belongs_to :term
+  belongs_to :term, counter_cache: true
   
   validates_presence_of :title, :code, :term_id
   validates_uniqueness_of :code

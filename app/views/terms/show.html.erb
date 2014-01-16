@@ -22,7 +22,7 @@
 <h3><%= @term.name%></h3>
 <p class="trivial"><%= @term.start_date.strftime("%b %d, %Y") %> <span class="weak">to</span> <%= @term.end_date.strftime("%b %d, %Y") %></p>	
 
-<% if @term.courses.size > 10 %>	
+<% if @courses.size > 10 %>	
 
 	<form class="form-search well">
 	    <input type="text" id="courses_search" class="input-xlarge search-query" placeholder="Search Course Code or Name">
@@ -38,9 +38,9 @@
 <section class="courses">
 	<h2>Courses <%= link_to new_term_course_path(@term), id: "new_course", class: "btn btn-small" do %>Add a new course<% end %></h2>
 	
-	<p><strong><%= pluralize(@term.courses.count, "Course") %></strong></p>
+	<p><strong><%= pluralize(@courses.count, "Course") %></strong></p>
 	<ul class="thumbnails">
-		<% @term.courses.each do |course| %>
+		<% @courses.each do |course| %>
 			<li class="span6 course-wrapper">
 				<%= render partial: course %>
 			</li>

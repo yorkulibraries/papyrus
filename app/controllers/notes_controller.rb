@@ -3,7 +3,7 @@ class NotesController < ApplicationController
   before_filter :load_student
   
   def index
-    @notes = @student.notes
+    @notes = @student.notes.includes(:user)
   end
   
   def create
