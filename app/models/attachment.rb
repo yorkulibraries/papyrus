@@ -24,6 +24,7 @@ class Attachment < ActiveRecord::Base
   
   def destroy 
     update_attribute(:deleted, true)        
+    Item.decrement_counter(:attachments_count, self[:item_id])
   end
   
 end

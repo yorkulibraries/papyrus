@@ -3,8 +3,8 @@ namespace :db do
  
   
   task :reset_cache_counters => :environment do 
-    Item.find_each(select: :id) do |result|
-      Item.reset_counters(result.id, :attachments)
+    Item.find_each(select: :id) do |item|
+      item.update_attribute(:attachments_count, item.attachments.available.size)
     end
   end
     
