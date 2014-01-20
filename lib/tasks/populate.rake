@@ -28,7 +28,7 @@ namespace :db do
           
           puts "Generating Items and Files"
           
-          Item.populate 50..100 do |item|
+          Item.populate 10..100 do |item|
             item.title = Populator.words(4..6).titleize
             item.unique_id = 1000..100000
             item.user_id = 1..User::ROLE_NAMES.size
@@ -37,20 +37,24 @@ namespace :db do
             item.callnumber = "GH 457 1981 AB"
             item.author = Faker::Name.name
             
+            attachment_counter = 0
             Attachment.populate 1..4 do |attachment|
               attachment.item_id = item.id
               attachment.name = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Ch1", "Ch2", "Ch4", "Ch3"]
               attachment.deleted = false
               attachment.user_id = 1..User::ROLE_NAMES.size
+              
+              attachment_counter = attachment_counter + 1
             end
             
+            item.attachments_count = attachment_counter
           end
           
           puts "Uploading Files..."
           # Upload the actual files 
           files = ["test/fixtures/test_pdf.pdf", "test/fixtures/test_picture.jpg", "test/fixtures/test_word.doc"]          
           Attachment.all.each do |a|            
-            a.file = File.open(files[(0..files.size-1).to_a.sample])
+            a.file = File.open(files[(0..files.size-1).to_a.sample])            
             a.save!
           end
           
@@ -103,6 +107,7 @@ namespace :db do
               term_start = term_end
               term_end = term_end + 3.months
               
+              term.courses_count = 0
               
               courses = ["HIST", "MATH", "HUMA", "POLS", "ECON", "COMP", "ITEC", "NATS", "ARTS", "SOSC", "PSYC", "EDUC"]
               codes = ["1000", "1010", "1020", "2000", "2010", "2020", "2030", "3000", "3010", "3020", "4000", "4010", "4020", "4030"]
@@ -115,6 +120,7 @@ namespace :db do
                 course.title = "#{courses[course_num]} #{codes[code_num]}"
                 course.code = "#{term.start_date.year}_AP_#{courses[course_num]}_Y_#{codes[code_num]}__6_A"
                 course.term_id = term.id
+                course.items_count = 0
               end  
               
           end
