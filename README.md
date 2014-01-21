@@ -68,11 +68,14 @@ This is a simple RUBY configuration file that contains settings for the applicat
 
 ### Organization
 
-| OPTION      | Description                                                        | Usage               |
-|-------------|--------------------------------------------------------------------|---------------------|
-| full_name   | The full name of your organization. i.e. York University Libraries | Used in copyright   |
-| short_name  | Short name of your organization, i.e. yul                          | Used internally     |
-| app_url     | The URL where Papyrus is deployed.                                 | Email notifications |
+| OPTION                    | Description                                                        | Usage               |
+|---------------------------|--------------------------------------------------------------------|---------------------|
+| full_name                 | The full name of your organization. i.e. York University Libraries | Used in copyright   |
+| short_name                | Short name of your organization, i.e. yul                          | Used internally     |
+| app_url                   | The URL where Papyrus is deployed.                                 | Email notifications |
+| course\_code\_sample      | The format for a course to shown as a hint on courses page.        | Courses and Terms   |
+| course\_code\_lookup_link | A link where to find the proper course code												 | Courses and Terms   |
+| item_sources              | An array of sources for the electronic files of an Item            | Adding new Item     |
 
 ### Authentication
 
