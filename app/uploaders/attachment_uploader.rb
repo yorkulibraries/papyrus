@@ -25,9 +25,14 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  def filename 
-    timestamp = Time.now.to_i      
+  def filename     
     "#{timestamp}-#{original_filename}" if original_filename
+  end
+
+  protected
+  def timestamp
+    var = :"@#{mounted_as}_timestamp"
+    model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.to_i)
   end
 
 end
