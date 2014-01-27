@@ -3,6 +3,15 @@ Papyrus
 
 Papyrus is an accessible content delivery and student management application. It was originally developed by Taras Danylak at York University Libraries. Its core purpose is to provide a delivery system for online books, articles and course kits to students with disabilities. Another prominent function of Papyrus is to keep track of and help manage student accessibility information, as well as act as a repository for electronic books, articles and course kits.
 
+Downloading The Lastet Version
+------------------------------
+
+The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.1.2 is the most recent production ready version. 
+
+[Download v2.1.2 Zip File](https://github.com/yorkulcs/papyrus/archive/v2.1.2.zip)
+
+Checkout the [Wiki Pages](https://github.com/yorkulcs/papyrus/wiki) for more details on how to deploy Papyrus.
+
 Deploying Papyrus
 ------------------
 
