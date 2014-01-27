@@ -12,6 +12,16 @@ The latest Papyrus version can be found by clicking on the [Releases](https://gi
 
 Checkout the [Wiki Pages](https://github.com/yorkulcs/papyrus/wiki) for more details on how to deploy Papyrus.
 
+Demo
+----
+
+You can checkout a demo of Papyrus. [Papyrus Demo](http://demos.library.yorku.ca/papyrus/)
+
+Username: demo
+Password: demo
+
+Please report abuse of the demo instance [here](https://github.com/yorkulcs/papyrus/issues)
+
 Deploying Papyrus
 ------------------
 
