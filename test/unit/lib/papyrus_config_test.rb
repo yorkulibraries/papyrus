@@ -53,14 +53,15 @@ class PapyrusConfigTest < ActiveSupport::TestCase
     assert_equal "Multiple items have now been assigned to you", instance.notifications.items_assigned_subject             
     
     ## BIB_SEARCH
-    assert_equal "solr", instance.bib_search.type
-    assert_equal "Your Catalogue", instance.bib_search.label    
-    assert_equal "vufind", instance.bib_search.id_prefix
+    assert_not_nil instance.bib_search.solr
+    assert_not_nil instance.bib_search.worldcat
     
     ## SOLR   
     assert_equal "http://localhost:8080/solr/biblio", instance.bib_search.solr.url    
     query_fields = "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
     assert_equal query_fields, instance.bib_search.solr.query_fields
+    assert_equal "Your Catalogue", instance.bib_search.solr.label    
+    assert_equal "vufind", instance.bib_search.solr.id_prefix
     
     assert_equal  "title_txtP^100", instance.bib_search.solr.phrase_fields
     assert_equal "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0", instance.bib_search.solr.boost_functions
@@ -68,19 +69,17 @@ class PapyrusConfigTest < ActiveSupport::TestCase
     
     ## WORLDCAT
     assert_equal "change-me", instance.bib_search.worldcat.key
-    assert_equal nil, instance.bib_search.worldcat.sort
-    
+    assert_equal "worldcat", instance.bib_search.worldcat.id_prefix
+    assert_equal "Worldcat", instance.bib_search.worldcat.label    
   end
   
   should "update configuration options using configure" do
     PapyrusConfig.configure do |config|
-      config.bib_search.type = "worldcat"
       config.organization.short_name = "new_name"
       config.notifications.from_email = "new@email.com"
     end
     
-    assert_equal "worldcat", PapyrusConfig.config.bib_search.type, "Type changed"
-    assert_equal "vufind", PapyrusConfig.config.bib_search.id_prefix, "ID Prefix hasn't changed"
+    assert_equal "vufind", PapyrusConfig.config.bib_search.solr.id_prefix, "ID Prefix hasn't changed"
     
     assert_equal "new_name", PapyrusConfig.config.organization.short_name, "Organization short name changed"
     assert_equal "new@email.com", PapyrusConfig.config.notifications.from_email, "From Email changed"

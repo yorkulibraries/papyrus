@@ -35,14 +35,13 @@ class PapyrusConfig
   }
   
   DEFAULT_BIB_SEARCH = {
-    type: "solr",
-    label: "Your Catalogue",
-    id_prefix: "vufind",
     solr: nil,
     worldcat: nil
   }
   
   DEFAULT_SOLR_CONFIG =  { 
+    id_prefix: "vufind",
+    label: "Your Catalogue",
     url: "http://localhost:8080/solr/biblio",
     sort: [ { score: "descending" } , { _docid_: "descending" } ],
     phrase_fields: "title_txtP^100",
@@ -51,8 +50,9 @@ class PapyrusConfig
   }
   
   DEFAULT_WORLDCAT_CONFIG = {
-    key: "change-me",
-    sort: nil
+    id_prefix: "worldcat",
+    label: "Worldcat",
+    key: "change-me"
   }
   
   def initialize
