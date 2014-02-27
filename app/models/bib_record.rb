@@ -41,7 +41,7 @@ class BibRecord
     end
   end
   
-  def build_item_from_search_result(result, source)
+  def build_item_from_search_result(result, item_type, source = SOLR)
     if source == SOLR
       BibRecord.build_item_from_solr_result(result, item_type, @config_solr.id_prefix)
     elsif source == WORLDCAT
@@ -83,7 +83,7 @@ class BibRecord
     end    
   end
   
-  def self.build_item_from_solr_result(result, item_type, id_prefix = "solr")
+  def self.build_item_from_solr_result(result, item_type, id_prefix = SOLR)
     return if result == nil
     
     result = HashWithIndifferentAccess.new(result)
@@ -143,6 +143,7 @@ class BibRecord
       
     # Check WORLDCAT
     @config_worldcat.id_prefix = @config_worldcat.id_prefix || PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:id_prefix]
+    @config_worldcat.label = @config_worldcat.label || PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:label]    
     
   end
   

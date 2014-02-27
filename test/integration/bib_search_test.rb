@@ -10,10 +10,10 @@ class BibSearchTest < ActionDispatch::IntegrationTest
   end
 
   
-  should "search for multiple items" do
+  should "search SOLR for multiple items" do
     search_string = "Caesar"
     record = BibRecord.new(PapyrusConfig.bib_search)
-    results = record.search_items(search_string)
+    results = record.search_items(search_string, BibRecord::SOLR)
     
     assert results.size > 0, "At least one result"
   end
@@ -21,7 +21,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
   should "search for single item" do
     item_id = "1970385"
     record = BibRecord.new(PapyrusConfig.bib_search)
-    item = record.find_item(item_id)
+    item = record.find_item(item_id, BibRecord::SOLR)
     
     assert_not_nil item
     assert_equal item_id, item["id"]

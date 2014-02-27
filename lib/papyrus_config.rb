@@ -51,7 +51,7 @@ class PapyrusConfig
   
   DEFAULT_WORLDCAT_CONFIG = {
     id_prefix: "worldcat",
-    label: "Worldcat",
+    label: "WorldCat",
     key: "change-me"
   }
   

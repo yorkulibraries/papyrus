@@ -53,5 +53,6 @@ module Papyrus
     
     config.less.paths << "#{Rails.root}/app/assets/stylesheets"
   
+    config.i18n.enforce_available_locales = false
   end
 end

@@ -70,7 +70,7 @@ class PapyrusConfigTest < ActiveSupport::TestCase
     ## WORLDCAT
     assert_equal "change-me", instance.bib_search.worldcat.key
     assert_equal "worldcat", instance.bib_search.worldcat.id_prefix
-    assert_equal "Worldcat", instance.bib_search.worldcat.label    
+    assert_equal "WorldCat", instance.bib_search.worldcat.label    
   end
   
   should "update configuration options using configure" do

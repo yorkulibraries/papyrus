@@ -16,13 +16,16 @@ class BibRecordTest < ActiveSupport::TestCase
   end
   
   
-  should "have sensible default if config is not provided" do
+  should "have sensible default if config is not provided SOLR AND WORLDCAT" do
     record = BibRecord.new(nil)
     
     assert_equal "http://localhost:8080/solr/biblio", record.config_solr.url, "Default url is localhost"
     assert_equal PapyrusConfig::DEFAULT_SOLR_CONFIG[:label], record.config_solr.label, "Default label is set"
     assert_equal PapyrusConfig::DEFAULT_SOLR_CONFIG[:id_prefix], record.config_solr.id_prefix, "Default prefix is set"
     
+    
+    assert_equal PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:id_prefix], record.config_worldcat.id_prefix, "Default prefix for worldcat"
+    assert_equal PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:label], record.config_worldcat.label, "Default label for worldcat"    
   end
   
   ### SOLR CONVERSION
