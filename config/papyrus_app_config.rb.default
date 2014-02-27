@@ -29,12 +29,9 @@ PapyrusConfig.configure do
 	# notifications.items_assigned_subject = "Multiple item(s) have now been assigned to you"	
   
   ## BIB SEARCH SOLR
-  # bib_search.type = "solr" # or worldcat
-  # bib_search.label = "Your Catalogue"
-  # bib_search.id_prefix = "solr"
-  
-	# SOLR SPECIFIC
-	
+
+  # bib_search.solr.label = "Your Catalogue"
+  # bib_search.solr.id_prefix = "solr"	
 	# bib_search.solr.url = "http://localhost:8080/solr/biblio"
   # bib_search.solr.sort = [ {score: :descending}, {_docid_: :descending} ]
   # bib_search.solr.phrase_fields = "title_txtP^100"
@@ -43,11 +40,8 @@ PapyrusConfig.configure do
   
 	
 	## BIB SEARCH WORLDCAT
-	# bib_search.type = "worldcat"
-	# bib_search.label = "Worlcat Search"
-	# bib_search.id_prefix = "worldcat"
-	
-	# WORLDCAT SPECIFIC
+	# bib_search.worldcat.label = "Worlcat Search"
+	# bib_search.worldcat.id_prefix = "worldcat"
 	# bib_search.worlcat.key = "worldcatkey-from-worldcat.org"
-	# bib_search.worldcat.sort = "sort"
+
 end

@@ -11,28 +11,28 @@ class BibRecordTest < ActiveSupport::TestCase
   
   should "initialize bib record, with proper type" do        
     record = BibRecord.new(PapyrusConfig.bib_search)   
-    assert_equal PapyrusConfig.bib_search.type, record.type    
+    assert_not_nil record.config_solr, "Solr config set up"
+    assert_not_nil record.config_worldcat, "Worldcat config setup"
   end
   
   
   should "have sensible default if config is not provided" do
     record = BibRecord.new(nil)
     
-    assert_equal BibRecord::SOLR, record.type, "Type is SOLR by default"
-    assert_equal "http://localhost:8080/solr/biblio", record.config.url, "Default url is localhost"
-    assert_equal "DEFAULT_SOLR", record.label, "Default label is set"
-    assert_equal "default_solr", record.id_prefix, "Default prefix is set"
+    assert_equal "http://localhost:8080/solr/biblio", record.config_solr.url, "Default url is localhost"
+    assert_equal PapyrusConfig::DEFAULT_SOLR_CONFIG[:label], record.config_solr.label, "Default label is set"
+    assert_equal PapyrusConfig::DEFAULT_SOLR_CONFIG[:id_prefix], record.config_solr.id_prefix, "Default prefix is set"
     
   end
   
   ### SOLR CONVERSION
   should "build item from proper solr result" do
     item_type = Item::BOOK
-    item = BibRecord.build_item_from_solr_result(@solr_result, item_type, PapyrusConfig.bib_search.id_prefix)   
+    item = BibRecord.build_item_from_solr_result(@solr_result, item_type, PapyrusConfig.bib_search.solr.id_prefix)   
     
     assert_equal Item::BOOK, item.item_type
     assert_equal @solr_result[:title], item.title
-    assert_equal "#{PapyrusConfig.bib_search.id_prefix}_#{@solr_result[:id]}", item.unique_id
+    assert_equal "#{PapyrusConfig.bib_search.solr.id_prefix}_#{@solr_result[:id]}", item.unique_id
     assert_equal @solr_result[:isbn], item.isbn
 
   end

@@ -1,7 +1,7 @@
 require "ostruct"
 
 class BibRecord
-  attr_reader :type, :config, :label, :id_prefix
+  attr_reader :config_solr, :config_worldcat
   
   ## CONSTANTS
   SOLR = "solr"
@@ -10,52 +10,42 @@ class BibRecord
   
   def initialize(config)
     config = OpenStruct.new if config == nil # config can't be nil
-    t = config.type.nil? ? SOLR : config.type # ensure config type is set
-       
-    @label = config.label || "DEFAULT_SOLR"
-    @id_prefix = config.id_prefix || "default_solr"
-    
-    if t == SOLR
-      @config = config.solr || OpenStruct.new      
-      @type = SOLR
-    else
-      @config = config.worldcat || Openstruct.new
-      @type = WORLDCAT
-    end
-    
-   
  
+    @config_solr = config.solr
+    @config_worldcat = config.worldcat     
+        
     ensure_config_defaults
+        
   end
   
   
   ## COMMON INTERFACE
-  def search_items(search_string)
+  def search_items(search_string, source = SOLR)
    
-    if @type == SOLR
+    if source == SOLR
       search_solr_items(search_string)
-    elsif @config.type == WORLDCAT
+    elsif source == WORLDCAT
       search_worldcat_items(search_string)
     else
       ["No Results Found"]
     end
   end
   
-  def find_item(item_id)
-    if @type == SOLR
+  def find_item(item_id, source = SOLR)
+    if source == SOLR
       find_solr_item(item_id)
-    elsif @config.type == WORLDCAT
+    elsif source == WORLDCAT
       find_worldcat_item(item_id)
     else
       "Record Not Found"
     end
   end
   
-  def build_item_from_search_result(result, item_type)
-    if @type == SOLR
-      BibRecord.build_item_from_solr_result(result, item_type, @id_prefix)
-    elsif @type == WORLDCAT
-      self.build_item_from_worldcat_result(result, item_type, @id_prefix)
+  def build_item_from_search_result(result, source)
+    if source == SOLR
+      BibRecord.build_item_from_solr_result(result, item_type, @config_solr.id_prefix)
+    elsif source == WORLDCAT
+      BibRecord.build_item_from_worldcat_result(result, item_type, @config_worldcat.id_prefix)
     else
       "Item Can't be built"
     end
@@ -64,12 +54,12 @@ class BibRecord
   
   def search_solr_items(query)
     require 'solr'
-    solr = Solr::Connection.new(@config.url)
+    solr = Solr::Connection.new(@config_solr.url)
   
-    query_fields = @config.query_fields
-    phrase_fields = @config.phrase_fields
-    boost_functions = @config.boost_functions
-    sort = @config.sort
+    query_fields = @config_solr.query_fields
+    phrase_fields = @config_solr.phrase_fields
+    boost_functions = @config_solr.boost_functions
+    sort = @config_solr.sort
     
     unless query.blank?
       response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true, phrase_fields: phrase_fields, boost_functions: boost_functions)
@@ -83,7 +73,7 @@ class BibRecord
   
   def find_solr_item(item_id)
     require 'solr'
-    solr = Solr::Connection.new(@config.url)
+    solr = Solr::Connection.new(@config_solr.url)
     result = solr.query("id: #{item_id}")
     
     if result.hits.first 
@@ -130,17 +120,30 @@ class BibRecord
   end 
   
   def ensure_config_defaults
-    if @type == SOLR
-          
-      @config.url = @config.url || "http://localhost:8080/solr/biblio"
-      @config.query_fields = @config.query_fields || "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
-      @config.phrase_fields = @config.phrase_fields || "title_txtP^100"
-      @config.boost_functions = @config.boost_functions || "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0";
-      @config.sort = @config.sort || [ {score: :descending}, {_docid_: :descending} ]
-      
-    elsif @type == WORLDCAT
-      @config.sort = @config.sort || "title asc"
+    # Check to make sure they are not nil
+
+    
+    if @config_solr == nil
+      @config_solr = OpenStruct.new(PapyrusConfig::DEFAULT_SOLR_CONFIG)
     end
+    
+    if @config_worldcat == nil
+      @config_worldcat = OpenStruct.new(PapyrusConfig::DEFAULT_WORLDCAT_CONFIG)
+    end
+    
+    
+    #Check SOLR
+    @config_solr.label = @config_solr.label || PapyrusConfig::DEFAULT_SOLR_CONFIG[:label]
+    @config_solr.id_prefix = @config_solr.id_prefix || PapyrusConfig::DEFAULT_SOLR_CONFIG[:id_prefix]
+    @config_solr.url = @config_solr.url || PapyrusConfig::DEFAULT_SOLR_CONFIG[:url]
+    @config_solr.query_fields = @config_solr.query_fields || PapyrusConfig::DEFAULT_SOLR_CONFIG[:query_fields]
+    @config_solr.phrase_fields = @config_solr.phrase_fields || PapyrusConfig::DEFAULT_SOLR_CONFIG[:phrase_fields]
+    @config_solr.boost_functions = @config_solr.boost_functions || PapyrusConfig::DEFAULT_SOLR_CONFIG[:boost_functions]
+    @config_solr.sort = @config_solr.sort || PapyrusConfig::DEFAULT_SOLR_CONFIG[:sort]
+      
+    # Check WORLDCAT
+    @config_worldcat.id_prefix = @config_worldcat.id_prefix || PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:id_prefix]
+    
   end
   
 end
