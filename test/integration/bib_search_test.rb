@@ -47,7 +47,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
     item = record.find_item(item_id, BibRecord::WORLDCAT)
     
     assert_not_nil item    
-    assert_equal item_id, item[:id]
+    assert_equal item_id, item.id
   end
   
   

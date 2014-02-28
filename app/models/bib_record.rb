@@ -102,7 +102,7 @@ class BibRecord
     
     client = WORLDCATAPI::Client.new(key: @config_worldcat.key, debug: false)
     record = client.GetRecord(type: "oclc", id: item_id)
-    
+        
     if record.record
       record.record
     else
@@ -132,6 +132,29 @@ class BibRecord
     item.language_note = array_or_string(result, "language")
 
     item
+  end
+  
+  def self.build_item_from_worldcat_result(record, item_type, id_prefix = "oclc")
+    return if record == nil
+    
+    item = Item.new
+    item.item_type = item_type
+    item.unique_id = "#{id_prefix}_#{record.id}"
+    item.title = record.title    
+    # item.callnumber = result.callnumber
+    
+    item.author = record.author.first
+    
+    item.isbn = record.isbn
+    item.publisher = record.publisher
+    # item.published_date = record.published_date
+    item.edition = record.edition
+    item.physical_description = record.physical_description
+    
+    # item.language_note = array_or_string(result, "language")
+
+    item
+    
   end
   
   private 

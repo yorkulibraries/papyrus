@@ -6,7 +6,11 @@ class BibRecordTest < ActiveSupport::TestCase
     PapyrusConfig.reset_defaults                    
     
     @solr_result = { id: "1234", title: "Some Title", callnumber: "AD 23433", author: "Some Person", author2: ["author 2", "Another Person"], isbn: "123456789012",
-                     publisher: "Printing Inc.", publishDate: "2002", edition: "1st edition", physical: ["343 pages"], language: ["english", "french"] }                                                                    
+                     publisher: "Printing Inc.", publishDate: "2002", edition: "1st edition", physical: ["343 pages"], language: ["english", "french"] }   
+                     
+    @worldcat_result = OpenStruct.new id: "671660984", title: "Julius Caesar", author: ["Shakespeare, William,"], 
+                        summary: "Title from PDF title page (viewed Oct. 25, 2010).", link: "http://www.worldcat.org/oclc/671660984", 
+                        isbn: "9781775413158 (electronic bk.)", publisher: "[Waiheke Island] :Floating Press,c2008.", physical_description: "1 online resource (182 p.)"                                                                                        
   end
   
   should "initialize bib record, with proper type" do        
@@ -40,6 +44,18 @@ class BibRecordTest < ActiveSupport::TestCase
 
   end
   
+  
+  # WORLDCAT CONVERSION
+  should "build item from Proper WORLDCAT record" do
+    item_type = Item::BOOK
+    item = BibRecord.build_item_from_worldcat_result(@worldcat_result, item_type, PapyrusConfig.bib_search.worldcat.id_prefix)
+    
+    assert_equal Item::BOOK, item.item_type
+    assert_equal @worldcat_result.title, item.title
+    assert_equal "#{PapyrusConfig.bib_search.worldcat.id_prefix}_#{@worldcat_result.id}", item.unique_id
+    assert_equal @worldcat_result.isbn, item.isbn
+    
+  end
   
   ### METHODS COMMUNICATING WITH SOLR OR WORLDCAT ARE INSIDE INTEGRATION TEST
 
