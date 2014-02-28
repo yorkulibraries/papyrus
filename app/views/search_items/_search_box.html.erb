@@ -3,8 +3,11 @@
 
 			<div class="sources">
 				<a href="<%= search_items_path %>" class="btn <%= "active" if @search_results == "local" %> search_items_button">Papyrus</a>
-				<a href="<%= search_items_path(type: bib_search_type) %>" class="btn <%= "active" if @search_results == bib_search_type %> search_items_button">
-					<%= bib_search_label %>
+				<a href="<%= search_items_path(type: BibRecord::SOLR) %>" class="btn <%= "active" if @search_results == BibRecord::SOLR %> search_items_button">
+					<%= bib_search_solr_label %>
+				</a>
+				<a href="<%= search_items_path(type: BibRecord::WORLDCAT) %>" class="btn <%= "active" if @search_results == BibRecord::WORLDCAT %> search_items_button">
+					<%= bib_search_worldcat_label %>
 				</a>
 			</div>
 			<div class="search-field input-prepend">

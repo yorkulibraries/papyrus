@@ -7,7 +7,8 @@ class SearchItemsController < ApplicationController
     @search_results = params[:type] || "local"
     
     case params[:type]
-    when BibRecord::WORLDCAT      
+    when BibRecord::WORLDCAT 
+      search_worldcat(params[:q])     
     when BibRecord::SOLR
       search_solr(params[:q])
     else
@@ -22,11 +23,18 @@ class SearchItemsController < ApplicationController
     bib_record = BibRecord.new(PapyrusConfig.bib_search)
     @bib_search = true
     
-    @docs = bib_record.search_items(query)
+    @docs = bib_record.search_items(query, BibRecord::SOLR)
     
     respond_to do |format|
-      format.json { render :json => ActiveSupport::JSON.encode(@docs, {} ) }   
-      format.html { render :template => "items/index" }   
+      format.json { render json: ActiveSupport::JSON.encode(@docs, {} ) }   
+      format.html { render template: "items/index" }   
+    end
+  end
+  
+  def search_worldcat(query)
+    respond_to do |format|
+      format.json { render json:  ActiveSupport::JSON.encode(@docs, {} ) }   
+      format.html { render template: "items/index" }   
     end
   end
   

@@ -71,8 +71,16 @@
 										<a href="<%= new_item_path %>"><i class="icon-pencil"></i> Create Blank Item</a>
 									</li>
 									<li>
-										<a href="<%= search_items_path(type: bib_search_type) %>"><i class="icon-search"></i> Item From <%= bib_search_label %> Search </a>
+										<a href="<%= search_items_path(type: BibRecord::SOLR) %>">
+											<i class="icon-search"></i> Item From <%= bib_search_solr_label %> Search 
+										</a>
 									</li>
+									<li>
+										<a href="<%= search_items_path(type: BibRecord::WORLDCAT) %>">
+											<i class="icon-search"></i> Item From <%= bib_search_worldcat_label %> Search 
+										</a>
+									</li>
+									
 								</ul>
 							</li>
 						<% end%>

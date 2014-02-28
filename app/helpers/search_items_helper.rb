@@ -1,12 +1,12 @@
 module SearchItemsHelper
   
-  def bib_search_label
-    PapyrusConfig.bib_search.label
+  def bib_search_solr_label
+    PapyrusConfig.bib_search.solr.label
+  end
+  def bib_search_worldcat_label
+    PapyrusConfig.bib_search.worldcat.label
   end
   
-  def bib_search_type
-    PapyrusConfig.bib_search.type
-  end
   
   def format_solr_field(field, field_name = nil)
     if field.blank? 

@@ -7,14 +7,19 @@
 	<% end %>
 	
 	<h3>Adding a new item</h3>
-	<p>There are two ways to add a new item:</p>
+	<p>There are three ways to add a new item:</p>
 	<ol>
-		<li><%= bib_search_label%> Item</li>
+		<li><%= bib_search_solr_label%> Item</li>
+		<li><%= bib_search_worldcat_label%> Item</li>	
 		<li>Brand New Item</li>
 	</ol>
 	<p>
-		<strong><%= bib_search_label%> Item</strong><br/>
-		You can add this item by first searching for it using <%= bib_search_label%> and then clickin on the Add This Item link.
+		<strong><%= bib_search_solr_label%> Item</strong><br/>
+		You can add this item by first searching for it using <%= bib_search_solr_label%> and then clickin on the Add This Item link.
+	</p>
+	<p>
+		<strong><%= bib_search_worldcat_label%> Item</strong><br/>
+		You can add this item by first searching for it using <%= bib_search_worldcat_label%> and then clickin on the Add This Item link.
 	</p>
 	
 	<p>
@@ -30,6 +35,8 @@
 	<%= render template: "items/papyrus_results"%>
 <% elsif @search_results == BibRecord::SOLR %>	
 	<%= render  template: "items/solr_results"%>
+<% elsif @search_results == BibRecord::WORLDCAT %>
+	<%= render  template: "items/solr_results"%>	
 <% end %>
 
 
