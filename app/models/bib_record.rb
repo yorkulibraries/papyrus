@@ -83,6 +83,33 @@ class BibRecord
     end    
   end
   
+  ## WORLDCAT SPECIFIC METHODS
+  def search_worldcat_items(query)
+    require 'worldcatapi'
+    
+    client = WORLDCATAPI::Client.new(key: @config_worldcat.key, debug: false)
+    response = client.OpenSearch(q: query, format: 'atom', start: '1', count: '25', cformat: 'all')
+
+    if response.records.size > 0
+      response.records
+    else
+      Array.new
+    end
+  end
+  
+  def find_worldcat_item(item_id)
+    require 'worldcatapi'
+    
+    client = WORLDCATAPI::Client.new(key: @config_worldcat.key, debug: false)
+    record = client.GetRecord(type: "oclc", id: item_id)
+    
+    if record.record
+      record.record
+    else
+      nil
+    end
+  end
+  
   def self.build_item_from_solr_result(result, item_type, id_prefix = SOLR)
     return if result == nil
     

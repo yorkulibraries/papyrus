@@ -15,7 +15,7 @@ gem "friendly_id", "3.3.2.0"
 gem 'kaminari', "0.13.0"
 gem 'mimetype-fu', require: 'mimetype_fu'
 
-gem "worldcatapi", "1.0.0"
+gem "worldcatapi", "1.0.1"
 
 gem "flash_cookie_session", "1.1.3"
 gem "cancan", "1.6.7"
