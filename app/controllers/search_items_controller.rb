@@ -32,6 +32,12 @@ class SearchItemsController < ApplicationController
   end
   
   def search_worldcat(query)
+    
+    bib_record = BibRecord.new(PapyrusConfig.bib_search)
+    @bib_search = true
+    
+    @docs = bib_record.search_items(query, BibRecord::WORLDCAT)
+    
     respond_to do |format|
       format.json { render json:  ActiveSupport::JSON.encode(@docs, {} ) }   
       format.html { render template: "items/index" }   

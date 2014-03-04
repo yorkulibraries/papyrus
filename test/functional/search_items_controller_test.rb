@@ -53,5 +53,21 @@ class SearchItemsControllerTest < ActionController::TestCase
     assert docs.size > 0, "At least one result"
   end
   
+  
+  should "search worldcat if worldcat search type is selected" do
+    ## if this test fails, ensure the worldcat key is provided
+    PapyrusConfig.config.bib_search.worldcat.key = ENV["WORLDCAT_KEY"]
+    
+    get :index, type: BibRecord::WORLDCAT, q: "caesar"
+    search_results = assigns(:search_results)
+    assert_equal BibRecord::WORLDCAT, search_results, "search results should be set to worldcat"
+    assert_response :success
+    assert_template :index
+    assert_template :worldcat_results
+    
+    docs = assigns(:docs)
+    assert docs, "Doc ain't nil"
+    assert docs.size > 0, "At least one result"
+  end
 
 end

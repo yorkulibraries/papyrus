@@ -24,4 +24,6 @@ module SearchItemsHelper
     end
     
   end
+  alias :format_worldcat_field :format_solr_field
+  
 end

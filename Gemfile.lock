@@ -252,7 +252,7 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
-    worldcatapi (1.0.1)
+    worldcatapi (1.0.2)
       marc (~> 0.8.1)
       nokogiri (~> 1.5.7)
 
@@ -298,4 +298,4 @@ DEPENDENCIES
   twitter-bootstrap-rails (= 2.2.8)
   uglifier (>= 1.0.3)
   webrat (= 0.7.3)
-  worldcatapi (= 1.0.1)
+  worldcatapi (= 1.0.2)
