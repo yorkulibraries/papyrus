@@ -50,7 +50,7 @@ class PapyrusConfig
   }
   
   DEFAULT_WORLDCAT_CONFIG = {
-    id_prefix: "worldcat",
+    id_prefix: "oclc",
     label: "WorldCat",
     key: "change-me"
   }

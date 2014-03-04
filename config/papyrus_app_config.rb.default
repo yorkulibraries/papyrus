@@ -41,7 +41,7 @@ PapyrusConfig.configure do
 	
 	## BIB SEARCH WORLDCAT
 	# bib_search.worldcat.label = "Worlcat Search"
-	# bib_search.worldcat.id_prefix = "worldcat"
+	# bib_search.worldcat.id_prefix = "oclc"
 	# bib_search.worlcat.key = "worldcatkey-from-worldcat.org"
 
 end

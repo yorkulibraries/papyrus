@@ -88,7 +88,7 @@ class BibRecord
     require 'worldcatapi'
     
     client = WORLDCATAPI::Client.new(key: @config_worldcat.key, debug: false)
-    response = client.OpenSearch(q: query, format: 'atom', start: '1', count: '25', cformat: 'all')
+    response = client.SRUSearch(query: "\"#{query}\"")
 
     if response.records.size > 0
       response.records
@@ -147,7 +147,7 @@ class BibRecord
     
     item.isbn = record.isbn
     item.publisher = record.publisher
-    # item.published_date = record.published_date
+    item.published_date = record.published_date
     item.edition = record.edition
     item.physical_description = record.physical_description
     
