@@ -54,8 +54,8 @@
 					<% end %>
 								
 					
-					<% if @current_user.role == User::STUDENT_USER %>
-						<%= render :partial => "student_view/student_menu" %>
+					<% if @current_user.type == Student.to_s %>
+						<%= render partial: "student_view/student_menu" %>
 					<% end %>
 																									
 			    </ul>

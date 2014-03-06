@@ -42,11 +42,12 @@ class StudentViewController < ApplicationController
     if @student
       # ensure that we can get back to whatever we were before
       session[:return_to_user_id] = current_user.id
+      
       # then sign in as student
       session[:user_id] = @student.id
-      redirect_to student_view_path
+      redirect_to student_view_path, notice: "Logged in as student #{@student.name}"
     else
-      redirect_to students_path, :error => "No such student found"
+      redirect_to students_path, error: "No such student found"
     end
   end
   

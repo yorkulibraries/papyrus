@@ -20,8 +20,9 @@ namespace :db do
             index = index + 1
             
             if user.role == User::STUDENT_USER
-                user.type = "Student"
+                user.type = Student.to_s
                 user.created_by_user_id = 1
+                user.role = User::STUDENT_USER
             end  
           end 
                               
