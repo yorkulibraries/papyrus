@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140115164742) do
+ActiveRecord::Schema.define(:version => 20140320134916) do
 
   create_table "acquisition_requests", :force => true do |t|
     t.integer  "item_id"
@@ -161,8 +161,11 @@ ActiveRecord::Schema.define(:version => 20140115164742) do
     t.date     "responsibilities_document_signed_on"
     t.date     "ppy_access_granted_on"
     t.date     "adaptive_computed_access_granted_on"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
+    t.boolean  "requires_orientation",                               :default => true,  :null => false
+    t.boolean  "orientation_completed",                              :default => false, :null => false
+    t.date     "orientation_completed_at"
   end
 
   add_index "student_details", ["student_id"], :name => "index_student_details_on_student_id"

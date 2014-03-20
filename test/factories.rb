@@ -51,6 +51,9 @@ FactoryGirl.define do
     work_phone "12345"
     cds_adviser "some person"
     student nil
+    requires_orientation true
+    orientation_completed true
+    orientation_completed_at 20.days.ago
     association :transcription_coordinator, factory: :user
     association :transcription_assistant, factory: :user
     
