@@ -118,6 +118,9 @@ class StudentsController < ApplicationController
     redirect_to @student, notice: "Sent welcome email."    
   end
 
+  def complete_registration
+    
+  end
 
   def edit
     @student = Student.find(params[:id])

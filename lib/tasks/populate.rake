@@ -73,6 +73,7 @@ namespace :db do
         				sd.cds_adviser = Faker::Name.name
         				sd.student_id = student.id
         				sd.transcription_coordinator_id = 1
+                sd.transcription_assistant_id = 1
             end
             
             Note.populate 2..4 do |note|

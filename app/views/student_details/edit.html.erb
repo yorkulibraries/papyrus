@@ -1,10 +1,16 @@
 <% title "Edit Student Details" %>
-
 <% title_html do %>
-	<h1><small><%= @student.name %></small></h1>
+	<h1><%= @student.name %> - Update Student Details</h1>
 <% end %>
 
+
 <% sidebar do %>
+	<h3>Update Student Details</h3>
+	<p>You can update student details on this screen.</p>
+	<p class="alert alert-info"><span class="strong">Remember:</span> These fields are used to keep track of confidential student information.</p>
+	<p><strong>Service Provider</strong></p>
+	<p>The options for service provider are specific to York University, you can choose to omit using this feature.</p>
+	
 <% end %>
 
 
