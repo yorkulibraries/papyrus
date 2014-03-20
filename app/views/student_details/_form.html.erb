@@ -8,7 +8,7 @@
 		<div class="span4">
 			<h5 class="section">Registration Details</h5>
 			<%= f.label :requires_orientation %>
-			<%= f.input :requires_orientation, label: false, as: :radio %>
+			<%= f.input :requires_orientation, label: false, as: :radio_buttons %>
 			<%= f.input :request_form_signed_on, as: :string, label:  "Request Form Signed On" , input_html: { class: "datepicker" }  %>
 			<%= f.input :intake_appointment_on, as: :string, label: "Intake Appointment Date", input_html: { class: "datepicker" }   %>
 		</div>
