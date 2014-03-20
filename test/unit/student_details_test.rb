@@ -48,4 +48,14 @@ class StudentDetailsTest < ActiveSupport::TestCase
     end
   end
   
+  
+  should "complete orientation, set the field to true and add a date" do
+    details = create(:student_details, orientation_completed: false, orientation_completed_at: nil)
+    
+    details.complete_orientation
+    assert details.orientation_completed, "Orientation completed should be set to true"
+    assert_not_nil details.orientation_completed_at, "A date should be recorded"
+    
+  end
+  
 end

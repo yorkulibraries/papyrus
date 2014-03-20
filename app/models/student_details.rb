@@ -5,7 +5,7 @@ class StudentDetails < ActiveRecord::Base
                     :format_large_print, :format_pdf, :format_kurzweil, :format_daisy, :format_braille, :format_word, :pf_note, :wrms_ref_number, 
                     :transcription_coordinator_id, :transcription_assistant_id, :cds_adviser,
                     :request_form_signed_on, :intake_appointment_on, :responsibilities_document_signed_on, 
-                    :ppy_access_granted_on, :adaptive_computed_access_granted_on
+                    :ppy_access_granted_on, :adaptive_computed_access_granted_on, :requires_orientation, :orientation_completed, :orientation_completed_at
                     
   belongs_to :student
   belongs_to :transcription_coordinator, class_name: "User", foreign_key: "transcription_coordinator_id"
@@ -34,5 +34,11 @@ class StudentDetails < ActiveRecord::Base
       return self.transcription_assistant
     end
   end
+  
+  
+  def complete_orientation
+    update_attributes(orientation_completed: true, orientation_completed_at: Date.today)
+  end
+  
   
 end
