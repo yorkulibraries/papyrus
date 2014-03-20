@@ -216,4 +216,21 @@ class StudentsControllerTest < ActionController::TestCase
     
   end
   
+  
+  ######### COMPLETE ORIENTATION ######
+  should "complete student orientation field" do
+    student = create(:student, name: "Terry Jones", username: "terryjones", email: "tj@yorku.ca", inactive: false)
+    student.details.update_attributes(orientation_completed: false, orientation_completed_at: nil)
+    
+    get :complete_orientation, id: student.id
+    assert_response :redirect
+    assert_redirected_to student_path(student), "Should redirect back to student view"
+    
+    student.reload
+    
+    assert student.details.orientation_completed, "Should be true"
+    assert_not_nil student.details.orientation_completed_at, "Should not be nil"
+    
+  end
+  
 end

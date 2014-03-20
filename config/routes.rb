@@ -53,6 +53,7 @@ Papyrus::Application.routes.draw do
       get :block
       get :unblock
       get :reactivate
+      get :complete_orientation
     end
   end
 

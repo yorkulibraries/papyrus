@@ -80,6 +80,30 @@
 						<% end %>
 					</td>						
 				</tr>
+				<tr>
+					<td class="trivial hidden-phone">
+						Requires Orientation? 
+					</td>
+					<td class="strong">
+						<% if @student.details.requires_orientation %>
+							Orientation is required
+						<% else %>
+							Orientation is not required
+						<% end %>
+					</td>
+					<td class="trivial hidden-phone">
+						Orientation Status
+					</td>
+					<td class="">
+						<% if @student.details.orientation_completed %>
+							
+							Completed on <strong><%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") rescue nil%></strong>
+						<% else %>
+							<span class="weak">Not completed.</span>
+							<%= link_to "Complete orientation", complete_orientation_student_path(@student), disable_with: 'completing ...', class: "small" %>
+						<% end %>
+					</td>
+				</tr>
 			</tbody>
 		</table>		
 		

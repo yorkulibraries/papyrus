@@ -118,8 +118,10 @@ class StudentsController < ApplicationController
     redirect_to @student, notice: "Sent welcome email."    
   end
 
-  def complete_registration
-    
+  def complete_orientation
+    @student = Student.find(params[:id])
+    @student.details.complete_orientation
+    redirect_to @student, notice: "Orientation has been completed"    
   end
 
   def edit
