@@ -82,6 +82,21 @@ class AttachmentsControllerTest < ActionController::TestCase
   end
   
   
+  should "delete multiple attachments" do
+    item = create(:item)
+    list = create_list(:attachment, 5, item: item, deleted: false)
+    
+    assert_no_difference "Attachment.count" do
+      post :delete_multiple, ids: [list[0].id, list[1].id, list[2].id], item_id: item.id
+      assert_response :redirect
+      assert_redirected_to item_path(item)
+    end
+    
+    assert_equal item.attachments.deleted.size, 3, "Three deleted" 
+    assert_equal item.attachments.available.size, 2, "Two not deleted"
+  end
+  
+  
   ##### DOWNLOADING ATTACHMENT ########
 
   should "let you download attachment" do

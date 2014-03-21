@@ -70,6 +70,22 @@ class AttachmentsController < ApplicationController
   end
   
   
+  def delete_multiple
+    ids = params[:ids]
+    ids.each do |id|
+      a = @item.attachments.find(id)
+      a.deleted = true
+      a.audit_comment = "Removing existing file"
+      a.save(validate: false)
+      
+      # rename file and move it deleted directory
+      new_filepath = "#{File.dirname(a.file.file.path)}/deleted/#{a.id}-#{a.file.file.filename}"
+      a.file.file.move_to(new_filepath)
+    end
+    
+    redirect_to @item, notice: "Successfully deleted multiple files"
+  end
+  
   def get_file
     @attachment = @item.attachments.find(params[:id])    
     file = "#{@attachment.file.path}"    

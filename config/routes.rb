@@ -66,8 +66,9 @@ Papyrus::Application.routes.draw do
     get 'acquisition_requests', :on => :member 
     #get 'search', :on => :collection
     #get 'search_vufind', :on => :collection
-    resources :attachments, :path => "files", :except => [:index, :show] do
-      get 'get_file', :on => :member
+    resources :attachments, path: "files", except: [:index, :show] do
+      get 'get_file', on: :member
+      post 'delete_multiple', on: :collection
     end
     
   end
