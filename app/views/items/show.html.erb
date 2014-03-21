@@ -99,6 +99,7 @@
 			<%= render partial: "attachments/upload_files"%>
 		</div>
 		
+		<%= form_tag delete_multiple_item_attachments_path(@item) do %>
 		<div class="attachments">
 			<% if @item.attachments.full_text.available.size > 0 %>
 				<div class="full-text">
@@ -117,10 +118,19 @@
 		
 		<% if @item.attachments.available.size > 0 %>
 			<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-small hidden-phone"><i class="icon-download"></i> Download Zipped</a>
+			<a href="#" class="delete_multiple float-right red"><i class="icon-trash"></i> Delete multiple files</a>
+			
+			<div class="float-right">
+				<a href="#" class="submit_delete_multiple red hide"><i class="icon-trash"></i> Delete these files?</a>
+				<a href="#" class="cancel_delete_multiple hide">&times; Cancel</a>		
+			</div>
 		<% else %>
 			<div class="well">	
 				No File have been uploaded yet. Start by clicking on Upload Files button.
 			</div>
+		<% end %>
+		
+		<% #### END OF FORM ###%>
 		<% end %>
 	</section>
 	

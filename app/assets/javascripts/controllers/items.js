@@ -16,4 +16,34 @@ $(document).ready(function() {
 		$("tr#item_extra_" + id).toggle();
 	});
 	
+	
+	$("a.delete_multiple").click(function() {
+		$(".attachment .attachment-actions").hide();
+		$(".attachment .select-multiple").show();
+		$(this).hide();
+		$("a.cancel_delete_multiple").show();
+		$("a.submit_delete_multiple").show();
+		return false;
+	})
+	
+	
+	$("a.cancel_delete_multiple").click(function() {
+		$(".attachment .attachment-actions").show();
+		$(".attachment .select-multiple").hide();
+		$(this).hide();
+		$("a.delete_multiple").show();
+		$("a.submit_delete_multiple").hide();
+		return false;
+	});
+	
+	$("a.submit_delete_multiple").click(function() {
+		var result = confirm("Are you sure?");
+		if (result) {
+			$(this).closest('form').submit();		
+		} else {
+			return false;
+		}									
+	});
+	
+	
 });
