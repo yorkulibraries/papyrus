@@ -124,13 +124,38 @@ This is a simple RUBY configuration file that contains settings for the applicat
 | items\_assigned\_subject | The subject of items that have been assigned to you email                   |
 
 
-### Bibliographic Search (bib search)
+### Version 2.2 - Bibliographic Search (bib search)
+> NOTE: Version 2.2 introduces Worldcat Search as an alternative to SOLR for looking up Bib Information for items. This requires a minor change in configuration to accomodate Worldcat and SOLR options. 
+
+###### SOLR
+
+| OPTION              | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| solr.label          | The label to use on the front end when searching. (VuFind)                  | 
+| solr.id_prefix      | The prefix to use when storing the id of the item in the database           |
+| solr.url            | The URL of the bib search server (i.e. Solr/VuFind)                         |
+| solr.query_fields   | The list of fields to query and when searching for items                    |
+| solr.phrase_fields  | The list of phrase fields to search with the boost assigned                 |
+| solr.boost_function | Custom boost function for                                                   |
+| solr.sort           | How to sort search results                                                  |
+
+###### Worldcat
+> NOTE: Worldcat integration requires an API key. If you're instution subscribes to OCLC services, you should already have an api key.
+
+| OPTION             | Description (Defaults)                                                       |
+|--------------------|------------------------------------------------------------------------------|
+| worldcat.label     | The label to use on the front end when searching (Worldcat Search)           |
+| worldcat.id_prefix | The prefix to sue when saving the id of the item in the database  (oclc)     |
+| worldcat.key       | To access Worldcat you need an API key. Put the key here. (no key provided)  |
+
+
+#### Version. 2.1 - Bibliographic Search (bib search)
 
 >  NOTE:  There was a configuration change for bib search section. Solr specific configuration now lives under solr. prefix. Ensure you update you config if you pull the latest code.
 
 | OPTION              | Description                                                                 | Related to     |
 |---------------------|-----------------------------------------------------------------------------|----------------|
-| type                | The type of bib search supported. Currently only 'solr' search is supported | solr, worldcat |
+| type                | The type of bib search supported. Currently only 'solr' search is supported | solr |
 | label               | The label to use on the front end when searching.                           | any  |
 | id_prefix           | The prefix to use when storing the id of the item in database               | any  |
 | solr.url            | The URL of the bib search server (i.e. Solr/VuFind)                         | SOLR |
