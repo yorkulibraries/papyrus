@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
     
     @recently_worked_with_items = Item.recently_worked_with(current_user.id).limit(10)   
-  end
+  end 
 
   private
   def authorize_controller

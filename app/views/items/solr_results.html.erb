@@ -67,7 +67,9 @@
 							</a>
 							 <div class="thumbnail">
 								<% if item["isbn"] %>
-									<%= image_tag "http://www.library.yorku.ca/find/bookcover.php?isn=#{item["isbn"].first.gsub(/[^0-9]+/, '')}&size=medium" %>				
+									
+									<%= image_tag "icons/files/photo.png", 
+									data: { isbn: item["isbn"].first.gsub(/[^0-9]+/, ''), size: "large"}, class: "google-bookcover" %> 	
 								<% else %>
 									<span class="trivial">Unvailable</span><br/>
 									Cover Image 
