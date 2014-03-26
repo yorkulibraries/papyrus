@@ -23,6 +23,13 @@ class StatsController < ApplicationController
       format.xls 
     end
   end
+  
+  
+  def item_usage
+    sql = 'SELECT  count(item_connections.student_id) as assigned_count, items.title, items.id FROM "item_connections" INNER JOIN  "items" ON "item_connections"."item_id" = "items"."id" GROUP BY item_connections.item_id'
+    @items_usage = ActiveRecord::Base.connection.execute(sql)
+    
+  end
 
   private
   def authorize_check

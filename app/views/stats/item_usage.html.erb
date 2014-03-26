@@ -1,0 +1,14 @@
+<% title "Item Usage" %>
+
+<table>
+	<tr>
+		<th>Item Title</th>
+		<th>Assigned Count</th>
+	</tr>
+	<% @items_usage.each do |item| %>
+		<tr>		
+				<td><%= item["title"] %></td>
+				<td><%= item["assigned_count"]%></td>
+		</tr>
+	<% end %>
+</table>

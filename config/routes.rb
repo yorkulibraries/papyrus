@@ -3,6 +3,7 @@ Papyrus::Application.routes.draw do
 
   match "stats" => "stats#index"
   match "stats/generate" =>"stats#generate"
+  match "stats/item_usage" => "stats#item_usage"
   
   match "dashboard" => "home#index"
   
