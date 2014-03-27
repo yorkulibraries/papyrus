@@ -26,9 +26,15 @@ class StatsController < ApplicationController
   
   
   def item_usage
-    sql = 'SELECT  count(item_connections.student_id) as assigned_count, items.title, items.id FROM "item_connections" INNER JOIN  "items" ON "item_connections"."item_id" = "items"."id" GROUP BY item_connections.item_id'
-    @items_usage = ActiveRecord::Base.connection.execute(sql)
+    select_item_fields = "items.title, items.id, items.callnumber, items.isbn, items.source"
+    select_item_connections_fields = "count(item_connections.student_id) as assigned_count, item_connections.created_at as assigned_at"
+    select_fields = select_item_connections_fields + ", " + select_item_fields
     
+    sql = 'SELECT ' + select_fields + ' FROM "item_connections" INNER JOIN  "items" ON "item_connections"."item_id" = "items"."id" GROUP BY item_connections.item_id'
+    @assigned_items = ActiveRecord::Base.connection.execute(sql)
+    @items_count = Item.count
+    
+    @unassigned_items = Item.where("id not in (?)", @assigned_items.collect{ |i| i["id"] })
   end
 
   private

@@ -1,14 +1,45 @@
 <% title "Item Usage" %>
 
-<table>
+<p>All items <strong><%= @items_count%></strong>. <br/>Assigned to students <strong><%= @assigned_items.count %></strong>.</p>
+
+<h4>All Assigned Items <small><%= @assigned_items.count %></small></h4>
+<table class="table table-striped">
 	<tr>
 		<th>Item Title</th>
+		<th>Callnumber</th>
+		<th>Source</th>
+		<th>ISBN</th>
 		<th>Assigned Count</th>
 	</tr>
-	<% @items_usage.each do |item| %>
+	<% @assigned_items.each do |item| %>
 		<tr>		
 				<td><%= item["title"] %></td>
+				<td><%= item["callnumber"]%></td>
+				<td><%= item["source"]%></td>
+				<td><%= item["isbn"]%></td>
 				<td><%= item["assigned_count"]%></td>
 		</tr>
 	<% end %>
 </table>
+
+
+<h4>All Unassigned Items <small><%= @unassigned_items.count%></small></h4>
+
+<table class="table table-striped">
+	<tr>
+		<th>Item Title</th>
+		<th>Callnumber</th>
+		<th>Source</th>
+		<th>ISBN</th>
+	</tr>
+	<% @unassigned_items.each do |item| %>
+		<tr>		
+				<td><%= item.title%></td>
+				<td><%= item.callnumber %></td>
+				<td><%= item.source%></td>
+				<td><%= item.isbn%></td>
+		</tr>
+	<% end %>
+</table>
+
+		
