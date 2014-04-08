@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Assigend Items In Range">
+    <Table>
+      <% @assigned_items.each do |item| %>
+					<% unless @show_header %>
+						<Row>
+						  <Cell><Data ss:Type="String">Item Title</Data></Cell>
+						  <Cell><Data ss:Type="String">Callnumber</Data></Cell>
+						  <Cell><Data ss:Type="String">Source</Data></Cell>
+						  <Cell><Data ss:Type="String">ISBN</Data></Cell>
+						  <Cell><Data ss:Type="String">Assigned Count</Data></Cell>						  
+						</Row>
+						<% @show_header = true %>
+					<% end %>
+	
+					<Row>
+					  <Cell><Data ss:Type="String"><%= item["title"] %></Data></Cell>
+					  <Cell><Data ss:Type="String"><%= item["callnumber"] %></Data></Cell>
+					  <Cell><Data ss:Type="String"><%= item["source"] %></Data></Cell>
+					  <Cell><Data ss:Type="String"><%= item["isbn"] %></Data></Cell>
+						<Cell><Data ss:Type="Number"><%= item["assigned_count"] %></Data></Cell>						
+					</Row>			
+			<% end %>
+			<Row>
+			  <Cell><Data ss:Type="String">Total: <%= @items_count %></Data></Cell>
+			</Row>	
+			<Row>
+			  <Cell><Data ss:Type="String">Date Range: <%= @start_date %> to <%= @end_date %></Data></Cell>
+			</Row>		
+    </Table>
+		
+  </Worksheet>
+  <Worksheet ss:Name="Not Assigned Items In Range">
+    <Table>
+      <% @unassigned_items.each do |item| %>
+				<% unless @show_header %>
+					<Row>
+					  <Cell><Data ss:Type="String">Item Title</Data></Cell>
+					  <Cell><Data ss:Type="String">Callnumber</Data></Cell>
+					  <Cell><Data ss:Type="String">Source</Data></Cell>
+					  <Cell><Data ss:Type="String">ISBN</Data></Cell>
+					</Row>
+					<% @show_header = true %>
+				<% end %>
+				<Row>
+				  <Cell><Data ss:Type="String"><%= item.title %></Data></Cell>
+				  <Cell><Data ss:Type="String"><%= item.callnumber %></Data></Cell>
+				  <Cell><Data ss:Type="String"><%= item.source %></Data></Cell>
+				  <Cell><Data ss:Type="String"><%= item.isbn %></Data></Cell>					
+				</Row>				
+			<% end %>
+			<Row>
+			  <Cell><Data ss:Type="String">Total: <%= @unassigned_items.count %></Data></Cell>
+			</Row>
+    </Table>
+  </Worksheet>
+	
+	
+</Workbook>

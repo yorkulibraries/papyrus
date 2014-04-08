@@ -13,7 +13,7 @@ namespace :reports do
     where_clause = "where item_connections.created_at >= '#{start_date}' AND item_connections.created_at < '#{end_date + 1.day}'"
     
     sql = "SELECT #{select_fields} FROM item_connections INNER JOIN items ON item_connections.item_id = items.id #{where_clause} GROUP BY item_connections.item_id"
-    puts sql
+    
     @export_items = @assigned_items = ActiveRecord::Base.connection.exec_query(sql)    
     
     

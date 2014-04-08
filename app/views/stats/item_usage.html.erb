@@ -1,8 +1,22 @@
 <% title "Item Usage" %>
+<% title_html do %>
+	<h1>Item Usage 
+		<small class="pull-right">
+			<a href="<%=stats_item_usage_path(start_date: @start_date, end_date: @end_date, format: "xls") %>"><i class="icon-table"></i> Download Exel </a>
+		</small>
+	</h1>	
+<% end %>
 
-<p>All items <strong><%= @items_count%></strong>. <br/>Assigned to students <strong><%= @assigned_items.count %></strong>.</p>
+<p>Total Items <strong><%= @items_count%></strong></p>
+<h5>Date Range</h5>
 
-<h4>All Assigned Items <small><%= @assigned_items.count %></small></h4>
+<form action="<%= stats_item_usage_path %>" method="get" class="simple_form">
+	<input type="text" name="start_date" value="<%= @start_date %>" class="datepicker"/> - 
+	<input type="text" name="end_date" value="<%= @end_date %>" class="datepicker"/>
+	<input type="submit" value="Generate" class="btn btn-large" style="margin-top: -8px;">
+</form>
+
+<h4>Assigned Items <small><%= @assigned_items.count %> (showing first 10)</small></h4>
 <table class="table table-striped">
 	<tr>
 		<th>Item Title</th>
@@ -11,7 +25,7 @@
 		<th>ISBN</th>
 		<th>Assigned Count</th>
 	</tr>
-	<% @assigned_items.each do |item| %>
+	<% @assigned_items.first(10).each do |item| %>
 		<tr>		
 				<td><%= item["title"] %></td>
 				<td><%= item["callnumber"]%></td>
@@ -21,9 +35,9 @@
 		</tr>
 	<% end %>
 </table>
+<a href="<%=stats_item_usage_path(start_date: @start_date, end_date: @end_date, format: "xls") %>"><i class="icon-table"></i> Download Exel </a>
 
-
-<h4>All Unassigned Items <small><%= @unassigned_items.count%></small></h4>
+<h4>Not Assigned Items <small><%= @unassigned_items.count%> (showing first 10)</small></h4>
 
 <table class="table table-striped">
 	<tr>
@@ -32,7 +46,7 @@
 		<th>Source</th>
 		<th>ISBN</th>
 	</tr>
-	<% @unassigned_items.each do |item| %>
+	<% @unassigned_items.first(10).each do |item| %>
 		<tr>		
 				<td><%= item.title%></td>
 				<td><%= item.callnumber %></td>
@@ -41,5 +55,6 @@
 		</tr>
 	<% end %>
 </table>
+<a href="<%=stats_item_usage_path(start_date: @start_date, end_date: @end_date, format: "xls") %>"><i class="icon-table"></i> Download Exel </a>
 
 		
