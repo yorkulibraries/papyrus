@@ -100,8 +100,10 @@ FactoryGirl.define do
      full_text false
      file { fixture_file_upload( Rails.root + 'test/fixtures/test_pdf.pdf','application/pdf') }      
      association :item, factory: :item
-     association :user, factory: :user    
-     
+     association :user, factory: :user   
+     is_url false
+     access_code_required false
+     url nil     
    
   end
 

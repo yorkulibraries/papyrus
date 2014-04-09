@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140320134916) do
+ActiveRecord::Schema.define(:version => 20140409162638) do
 
   create_table "acquisition_requests", :force => true do |t|
     t.integer  "item_id"
@@ -34,11 +34,14 @@ ActiveRecord::Schema.define(:version => 20140320134916) do
     t.string   "name"
     t.integer  "item_id"
     t.string   "file"
-    t.boolean  "full_text",  :default => false
-    t.boolean  "deleted",    :default => false
-    t.integer  "user_id",    :default => 0
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "full_text",            :default => false
+    t.boolean  "deleted",              :default => false
+    t.integer  "user_id",              :default => 0
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.boolean  "is_url",               :default => false
+    t.string   "url"
+    t.boolean  "access_code_required", :default => false
   end
 
   add_index "attachments", ["item_id", "deleted"], :name => "index_attachments_on_item_id_and_deleted"

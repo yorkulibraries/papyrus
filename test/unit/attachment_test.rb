@@ -13,18 +13,15 @@ class AttachmentTest < ActiveSupport::TestCase
     
   end
   
-  should "Not create an invalid attachment" do
-    attachment = build(:attachment, file: nil, name: nil)
+  should "Not create an invalid file attachment" do
+      
+    assert ! build(:attachment, file: nil, name: nil, is_url: false).valid?    
+    assert ! build(:attachment, file: nil, name: "whatever", is_url: false).valid?
     
-    assert !attachment.valid?
-    
-    attachment.name = "some name"
-    assert !attachment.valid?
-    
-    assert_no_difference "Attachment.count" do
-      attachment.save
-    end    
-    
+  end
+  
+  should "not create an invalid url attachment" do
+    assert ! build(:attachment, is_url: true, url: nil).valid?, "URL is required"
   end
   
   
@@ -68,6 +65,15 @@ class AttachmentTest < ActiveSupport::TestCase
     assert attachment.file.filename.end_with?("-test_pdf.pdf"), "File name should include the timestamp and end with file name"
     assert_equal "/uploads/items/book/#{item.unique_id}/#{attachment.file.filename}", attachment.file.to_s, "Full file path should match"
 
+  end
+  
+  should "separate between urls and regular files" do
+    create(:attachment, is_url: true, url: "whatever")
+    create_list(:attachment, 2, is_url: false)
+    
+    assert_equal Attachment.urls.size, 1, "1 URL"
+    assert_equal Attachment.files.size, 2, "Two files"
+    assert_equal Attachment.all.size, 3, "All together 3"    
   end
 end
  
