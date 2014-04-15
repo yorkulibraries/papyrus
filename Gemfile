@@ -26,8 +26,6 @@ gem "rubyzip", "0.9.9"
 
 gem "acts_as_audited", "2.0.0"
 
-gem "nokogiri", "1.6.1"
-
 # Deploy with Capistrano
 gem 'capistrano', "2.15.5"
 
