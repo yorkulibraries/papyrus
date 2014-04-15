@@ -136,7 +136,7 @@ class ItemsController < ApplicationController
       File.delete(zipfile_name) if File.exists?(zipfile_name)
       counter = 0
       Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
-        @item.attachments.available.each do |filename|
+        @item.attachments.files.available.each do |filename|
           # Two arguments:
           # - The name of the file as it will appear in the archive
           # - The original file, including the path to find it

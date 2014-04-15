@@ -31,13 +31,19 @@
 			
 					<div class="title pull-left" title="Files for <%= item.title %>">
 						<h4><%= item.title %></h4>
-						<% if item.attachments.available.size > 0 %>
+						
+						<div class="trivial" style="margin-bottom: 10px;">		
 							<a href="#" class="trivial" onclick="$('#attachments_<%=item.id %>').toggle(); return false;" title="Download files individually">
-								<i class="icon-file-alt"></i> Click here to download individual files. 
-							</a>	
-						<% else %>
-							<span class="trivial">No files have been added for this item yet. Check back soon.</span>
-						<% end %>
+								<i class="icon-file-alt"></i> Show individual files. 
+							</a>
+							&nbsp; &nbsp; 
+							<a href="#" class="trivial" onclick="$('#urls_<%=item.id %>').toggle(); return false;" title="Show Links">
+								<i class="icon-link"></i> Show Links
+							</a>								
+						</div>
+						
+						<%= render partial: "urls", locals: { item: item } %>
+						<%= render partial: "files", locals: { item: item } %>
 						
 					</div>
 					<div class="attachment-actions pull-right">						
@@ -49,7 +55,7 @@
 							</p>						
 						<% end %>												
 						
-						<% if item.attachments.available.size > 0 %>							
+						<% if item.attachments.files.available.size > 0 %>							
 							<a class="action" href="<%= zipped_files_item_path(item)%>" title="Download Zipped File">
 								<i class="icon-download"></i> Download File
 							</a> 	
@@ -59,30 +65,7 @@
 							</a>
 						<% end %>
 					</div>
-					
-					<ol class="individual_files" id="attachments_<%=item.id%>" title="Individual Files">
-						<% item.attachments.available.full_text.each do |attachment| %>
-						<li>
-							<a href="<%= get_file_item_attachment_url(item, attachment) if attachment.file? %>" title="Download full text <%= attachment.file.file.extension %> file">
-							 	<%= attachment.name %>
-							</a> 
-							<span title="extension" class="label label-success extension hidden-phone"><%= attachment.file.file.extension %></span>
-							<span title="file size" class="label hidden-phone"><%= number_to_human_size attachment.file.file.size %> </span>
-							<span title="full text" class="label label-inverse hidden-phone">full text</span>
-						</li>
-						<% end %>
-						
-						<% item.attachments.available.not_full_text.each do |attachment| %>
-						<li>
-							<a href="<%= get_file_item_attachment_url(item, attachment) if attachment.file? %>" title="Download <%= attachment.file.file.extension %> file">
-							 	<%= attachment.name %>
-							</a>
-							<span title="extension" class="label label-success extension  hidden-phone"><%= attachment.file.file.extension %></span>
-							<span title="file size" class="label hidden-phone"><%= number_to_human_size attachment.file.file.size %> </span>					
-						</li>
-						<% end %>
-					</ol>
-
+									
 				</li>
 			<% end %>
 			</ul>

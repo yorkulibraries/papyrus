@@ -25,44 +25,9 @@
 							<% end %>
 
 							<h4><%= item.title %></h4>
-							
-
-							<div class="summary" title="Download Item Files">
-								<% if item.attachments.size > 0 %>								
-									Download
-									<a href="<%= zipped_files_item_path(item)%>" title="Download a zipped file">
-										<%= pluralize(item.attachments.available.size, "file")%> zipped
-									</a><i class="icon-download"></i>						 
-									or 
-									<a href="#" onclick="$('#attachments_<%=item.id %>').toggle(); return false;" title="Download files individually">
-										individual files
-									</a><i class="icon-file"></i>			
+								<%= render "items_files" %>
+								<%= render "items_urls" %>																																								
 								
-									<div class="hide" id="attachments-<%=item.id%>" title="Individual Files">
-										<ol class="attachments">
-											<% item.attachments.available.full_text.each do |attachment| %>
-											<li>
-												<a href="<%= get_file_item_attachment_url(item, attachment) if attachment.file? %>" title="Download full text file">
-												 	<%= attachment.name %> (<%= attachment.file.file.extension %>) <%= number_to_human_size attachment.file.file.size %> 
-												</a> &laquo; full text &raquo;
-											</li>
-											<% end %>
-											
-											<% item.attachments.available.not_full_text.each do |attachment| %>
-											<li>
-												<a href="<%= get_file_item_attachment_url(item, attachment) if attachment.file? %>" title="Download file">
-												 	<%= attachment.name %> (<%= attachment.file.file.extension %>) <%= number_to_human_size attachment.file.file.size %>
-												</a>
-											</li>
-											<% end %>
-										</ol>
-									</div>
-								<% else %>
-									<span class="trivial">No files have been added for this item yet. Check back soon.</span>
-								<% end %>
-																																		
-								
-							</div>			
 
 						</li>
 					<% end %>

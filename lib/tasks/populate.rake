@@ -46,6 +46,7 @@ namespace :db do
               attachment.user_id = 1..User::ROLE_NAMES.size
               
               attachment_counter = attachment_counter + 1
+              attachment.full_text = false
             end
             
             item.attachments_count = attachment_counter
