@@ -1,0 +1,27 @@
+
+<%= simple_form_for [@item, @attachment], html: { class: "form-horizonta" }, remote: (request.xhr? ? true : false ) do |f| %>
+	<div class="standout">	
+		<%= f.input :name, input_html: { class: "input-block-level"} %>
+		<%= f.input :url, input_html: { class: "input-block-level"} %>
+	</div >
+	<div class="row">
+		<div class="span8">
+			<%= f.label :access_code_required, "Access Code Required? "%>
+			<%= f.input :access_code_required, label: false, as: :radio_buttons %>
+		</div>
+	</div>
+	
+	<hr/>
+	<div class="row">
+		<div class="span4">
+			<%= f.button :submit, "Save URL", class: "btn btn-primary" %> 
+	
+			<% if request.xhr? %>
+				<%= link_to "Cancel", "#", class: "btn", onclick: "$('#url_form_holder').hide(); return false;" %>
+			<% else %>
+				<%= link_to "Cancel", item_path(@item), class: "btn" %>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+</div>

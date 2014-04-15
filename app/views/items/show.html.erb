@@ -91,11 +91,19 @@
 	<%= render partial: "items/shared/subnav"%>	
 	
 	<section>
-		<h2>Attached Files
-			<a href="<%= url_for new_item_attachment_path(@item) %>" class="btn btn-small hidden-phone" onclick="$('#upload_form').toggle(); return false;">
-					Upload Files
-			</a>
+		<h2>Attached Files &amp; URLs
+			<div class="btn-group">
+				<a href="<%= url_for new_item_attachment_path(@item) %>" class="btn btn-small hidden-phone" onclick="$('#upload_form').toggle(); return false;">
+						Upload Files
+				</a>
+				<a href="<%= url_for new_item_attachment_path(@item, url: true) %>" class="btn btn-small" data-remote="true">
+					Add a URL
+				</a>
+			</div>
+			 
 		</h2>
+		
+		<div id="url_form_holder" class="hide well"></div>
 
 		<div id="upload_form" class="hide well">
 			<%= render partial: "attachments/upload_files"%>
@@ -118,7 +126,7 @@
 			<% end %>
 		</div>
 		
-		<% if @item.attachments.available.size > 0 %>
+		<% if @item.attachments.files.available.size > 0 %>
 			<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-small hidden-phone"><i class="icon-download"></i> Download Zipped</a>
 			<a href="#" class="delete_multiple float-right red"><i class="icon-trash"></i> Delete multiple files</a>
 			

@@ -1,0 +1,12 @@
+<% title "Add a URL" %>
+
+
+<% title_html do %>
+	<%= link_to item_path(@item) do %> &laquo; Back to item details <% end %>
+<% end %>
+
+
+<div id="single_attachment">
+	<h3>Add A URL</h3>
+	<%= render 'form_url' %>
+</div>

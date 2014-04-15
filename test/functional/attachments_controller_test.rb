@@ -18,6 +18,13 @@ class AttachmentsControllerTest < ActionController::TestCase
     assert_template :new
   end
   
+  should "show new url form if params[url]" do
+    item = create(:item)
+    get :new, item_id: item.id, url: true
+    assert_template :new_url
+  end
+  
+  
   should "show edit form" do
     item = create(:item)
     attachment = create(:attachment, item: item)
@@ -25,6 +32,15 @@ class AttachmentsControllerTest < ActionController::TestCase
     get :edit, item_id: item.id, id: attachment.id
     
     assert_template :edit
+  end
+  
+  should "show edit form for url" do
+    item = create(:item)
+    attachment = create(:attachment, item: item, is_url: true, url: "http:://WOOT.com")
+    
+    get :edit, item_id: item.id, id: attachment.id
+    assert_template :edit
+    assert_template :form_url, "Should be edit with form url partial "
   end
   
   ######### CREATING AND UPDATING ############
@@ -40,6 +56,18 @@ class AttachmentsControllerTest < ActionController::TestCase
     assert_equal item.id, attachment.item_id, "The item id is set"
     assert_redirected_to item_path(item), "Redirects to item after success"
     
+  end
+  
+  should "createa a URL attachment" do 
+    item = create(:item)
+    
+    assert_difference "Attachment.count", 1 do
+      post :create, item_id: item.id, attachment: { name: "NAME", url: "http:://wwwo.com", access_code_required: true }
+      attachment = assigns(:attachment)
+      assert_equal 0, attachment.errors.size, "No errors should be"
+      assert attachment.is_url?, "SHould be a URL"
+      assert_redirected_to item_path(item)
+    end
   end
   
   should "update an existing file" do
@@ -61,6 +89,8 @@ class AttachmentsControllerTest < ActionController::TestCase
     assert_redirected_to item_url(item), "Redirects back to item"
   end
   
+  
+
   
   ##### DESTROYING ATTACHMENTS ######
   

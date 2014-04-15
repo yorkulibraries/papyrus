@@ -5,6 +5,7 @@ class Attachment < ActiveRecord::Base
   validates_presence_of :name, message: "Enter the name of for this file.", unless: lambda { is_url? }
   
   validates_presence_of :url, message: "URL Address is required", if: lambda { is_url? }
+  
   mount_uploader :file, AttachmentUploader
   
   acts_as_audited associated_with: :item

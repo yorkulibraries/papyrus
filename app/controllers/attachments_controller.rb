@@ -4,6 +4,8 @@ class AttachmentsController < ApplicationController
   
   def new
     @attachment = @item.attachments.build
+    
+    render "new_url" if params[:url]
   end
 
   def create
@@ -11,15 +13,25 @@ class AttachmentsController < ApplicationController
     @attachment.user = @current_user
     
     logger.debug @attachment.user.inspect
+   
+    ## URL LINK OR FILE UPLOAD
     
-    begin
-      @attachment.name = File.basename(@attachment.file_url, ".*") if (params[:multi])
-    rescue
-      @attachment.name = @attachment.file_url
+    if @attachment.url.blank? 
+   
+      begin
+        @attachment.name = File.basename(@attachment.file_url, ".*") if (params[:multi])
+      rescue
+        @attachment.name = @attachment.file_url
+      end
+      
+      @attachment.audit_comment = "Uploaded a new file"
+    else
+      
+      @attachment.is_url = true
+      @attachment.audit_comment = "Adding a new URL"
     end
     
-    @attachment.audit_comment = "Uploaded a new file"
-     
+        
     if @attachment.save
       
       respond_to do |format|

@@ -1,7 +1,18 @@
-<% title "Update File" %>
+<% if @attachment.is_url? %>
+	<% title "Update URL" %>
 
-<% title_html do %>
-	<h1><%= @item.title %> <small>Update File</small></h1>
+	<% title_html do %>
+		<h1><%= @item.title %> <small>Update URL</small></h1>
+	<% end %>
+
+
+	<%= render 'form_url' %>
+<% else %>
+	<% title "Update File" %>
+
+	<% title_html do %>
+		<h1><%= @item.title %> <small>Update File</small></h1>
+	<% end %>
+
+	<%= render 'form' %>
 <% end %>
-
-<%= render 'form' %>
