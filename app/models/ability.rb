@@ -21,7 +21,7 @@ class Ability
       can :show, :dashboard
       
       can :manage, [Term, Course]
-      can [:read, :create, :update], Note
+      can [:read, :create, :update], [Note, AccessCode]
       can :manage, [Item, Attachment, ItemConnection]
       can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail, :reactivate, :inactive, :destroy], Student     
       can :login_as, :student

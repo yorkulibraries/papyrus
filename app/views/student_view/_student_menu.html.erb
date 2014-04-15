@@ -13,5 +13,8 @@
 	<li class="<%= "active" if controller_name == "student_view" && action_name =="details"%>">
 		<a href="<%= student_view_details_path %>">My Details</a>
 	</li>	
+	<li class="<%= "active" if controller_name == "student_view" && action_name =="access_codes"%>">
+		<a href="<%= student_view_access_codes_path %>">My Access Codes</a>
+	</li>
 <% end %>
 

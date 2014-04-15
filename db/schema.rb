@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140409162638) do
+ActiveRecord::Schema.define(:version => 20140415152628) do
+
+  create_table "access_codes", :force => true do |t|
+    t.string   "for"
+    t.string   "code"
+    t.date     "expires_at"
+    t.integer  "student_id"
+    t.integer  "created_by_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "acquisition_requests", :force => true do |t|
     t.integer  "item_id"

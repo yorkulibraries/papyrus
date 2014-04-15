@@ -73,3 +73,5 @@ end
 #gem "rack-mini-profiler"
 
 
+
+gem "mocha", "0.12", :group => :test

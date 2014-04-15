@@ -1,0 +1,4 @@
+$("#access_code_form_holder").empty();
+$('#access_code_form_holder').prepend('<%=escape_javascript render("access_codes/form") %>');
+
+$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });

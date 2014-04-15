@@ -1,6 +1,8 @@
 Papyrus::Application.routes.draw do
   
 
+  
+
   match "stats" => "stats#index"
   match "stats/generate" =>"stats#generate"
   match "stats/item_usage" => "stats#item_usage"
@@ -19,7 +21,7 @@ Papyrus::Application.routes.draw do
   match "my/details" => "student_view#details", :as => :student_view_details
   match "my/terms" => "student_view#index", :as => :show_student_terms
   match "my/accept_terms" => "student_view#accept_terms", :as => :accept_student_terms
-  
+  match "my/access_codes" => "student_view#access_codes", as: :student_view_access_codes
     
   resources :users do
     post "activate", :on => :member
@@ -37,6 +39,7 @@ Papyrus::Application.routes.draw do
 
   
   resources :students do
+    resources :access_codes
     resources :notes, except: [:show, :new]
     
     resource :student_details, as: :details, path: "details", except: [:index, :destroy] 
@@ -50,7 +53,7 @@ Papyrus::Application.routes.draw do
     member do
       get 'items'
       post "send_welcome_email"
-      get "audit_trail"
+      get "audit_trail"    
       get :block
       get :unblock
       get :reactivate

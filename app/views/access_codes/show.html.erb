@@ -1,0 +1,28 @@
+<% title "Access Code" %>
+
+<p>
+  <strong>For:</strong>
+  <%= @access_code.for %>
+</p>
+<p>
+  <strong>Code:</strong>
+  <%= @access_code.code %>
+</p>
+<p>
+  <strong>Expires At:</strong>
+  <%= @access_code.expires_at %>
+</p>
+<p>
+  <strong>Student:</strong>
+  <%= @access_code.student_id %>
+</p>
+<p>
+  <strong>Created By:</strong>
+  <%= @access_code.created_by_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_access_code_path(@access_code) %> |
+  <%= link_to "Destroy", @access_code, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", access_codes_path %>
+</p>

@@ -1,0 +1,13 @@
+one:
+  for: MyString
+  code: MyString
+  expires_at: 2014-04-15
+  student_id: 1
+  created_by_id: 1
+
+two:
+  for: MyString
+  code: MyString
+  expires_at: 2014-04-15
+  student_id: 1
+  created_by_id: 1

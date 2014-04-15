@@ -7,6 +7,7 @@ class Student < User
   has_associated_audits
   
   has_many :notes
+  has_many :access_codes
   
   has_one :student_details
   accepts_nested_attributes_for :student_details, allow_destroy: true

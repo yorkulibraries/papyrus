@@ -106,5 +106,13 @@ FactoryGirl.define do
      url nil     
    
   end
+  
+  factory :access_code do
+    sequence(:for) { |n| "Access Code"}
+    code "some code"
+    expires_at 1.month.from_now
+    association :student, factory: :student
+    association :created_by, factory: :user
+  end
 
 end
