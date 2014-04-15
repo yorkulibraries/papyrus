@@ -28,7 +28,7 @@ gem "acts_as_audited", "2.0.0"
 
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem 'capistrano', "2.15.5"
 
 gem "exception_notification", git: "git://github.com/rails/exception_notification.git", require: "exception_notifier"
 
