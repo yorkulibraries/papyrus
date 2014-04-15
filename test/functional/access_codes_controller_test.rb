@@ -22,7 +22,7 @@ class AccessCodesControllerTest < ActionController::TestCase
     assert expired_access_codes, "Expired access codes must be assigned"
     
     assert_equal 2, active_access_codes.size, "Only two active access codes for this student"
-    assert_equal 4, expired_access_does.size, "4 Expired codes"
+    assert_equal 4, expired_access_codes.size, "4 Expired codes"
     
   end
   
