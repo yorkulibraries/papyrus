@@ -1,5 +1,5 @@
 
-<%= simple_form_for [@item, @attachment], html: { class: "form-horizonta" }, remote: (request.xhr? ? true : false ) do |f| %>
+<%= simple_form_for [@item, @attachment], html: { class: "form-horizonta" }, remote: false do |f| %>
 	<div class="standout">	
 		<%= f.input :name, input_html: { class: "input-block-level"} %>
 		<%= f.input :url, input_html: { class: "input-block-level"} %>

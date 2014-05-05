@@ -37,7 +37,7 @@ class AttachmentsController < ApplicationController
       respond_to do |format|
             format.html { redirect_to @item, notice: "Successfully created a file." }
             format.js do
-               render :text => render_to_string(partial: @attachment)
+               render text: render_to_string(partial: @attachment)
             end
         end      
     else
@@ -70,10 +70,12 @@ class AttachmentsController < ApplicationController
     @attachment.deleted = true
     @attachment.audit_comment = "Removing an existing file"
     @attachment.save(validate: false)
-    
-    # rename file and move it deleted directory
-    new_filepath = "#{File.dirname(@attachment.file.file.path)}/deleted/#{@attachment.id}-#{@attachment.file.file.filename}"
-    @attachment.file.file.move_to(new_filepath)
+      
+    unless @attachment.is_url?
+      # rename file and move it deleted directory
+      new_filepath = "#{File.dirname(@attachment.file.file.path)}/deleted/#{@attachment.id}-#{@attachment.file.file.filename}"
+      @attachment.file.file.move_to(new_filepath)          
+    end
     
     # do not remove the attachment for now   
     #@attachment.destroy
@@ -90,9 +92,11 @@ class AttachmentsController < ApplicationController
       a.audit_comment = "Removing existing file"
       a.save(validate: false)
       
-      # rename file and move it deleted directory
-      new_filepath = "#{File.dirname(a.file.file.path)}/deleted/#{a.id}-#{a.file.file.filename}"
-      a.file.file.move_to(new_filepath)
+      unless a.is_url?
+        # rename file and move it deleted directory
+        new_filepath = "#{File.dirname(a.file.file.path)}/deleted/#{a.id}-#{a.file.file.filename}"
+        a.file.file.move_to(new_filepath)
+      end
     end
     
     redirect_to @item, notice: "Successfully deleted multiple files"

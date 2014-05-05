@@ -56,6 +56,8 @@ class StudentsController < ApplicationController
     page_number = params[:page] ||= 1
     query = params[:q].strip
     inactive_status = params[:inactive].blank? ? false : true
+    @searching = true
+    @query = query
     
     @students = Student.where{
       { name.matches => "%#{query}%"} | 
