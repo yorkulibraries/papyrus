@@ -75,6 +75,8 @@ namespace :db do
         				sd.student_id = student.id
         				sd.transcription_coordinator_id = 1
                 sd.transcription_assistant_id = 1
+                sd.requires_orientation = true
+                sd.orientation_completed = false
             end
             
             Note.populate 2..4 do |note|
