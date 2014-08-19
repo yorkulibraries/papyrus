@@ -20,7 +20,7 @@
 				</h4>
 				<p title="<%= attachment.url %>">
 					<%= truncate(attachment.url, length: 35) %> 
-					<span class="weak hidden-phone">Created <%= time_ago_in_words attachment.created_at %></abbr> ago by <%= attachment.user.name %></span>
+					<span class="weak hidden-phone">Updated <%= time_ago_in_words attachment.updated_at %></abbr> ago by <%= attachment.user.name %></span>
 				</p>
 			</div>
 		<% else %>
@@ -30,7 +30,7 @@
 					<span class="weak"><%= number_to_human_size attachment.file.file.size %></span>
 				</h4>
 				<p>Updated <abbr title="<%= attachment.created_at.strftime("%b %e %Y, %l:%M %p") %>">
-					<%= time_ago_in_words attachment.created_at %></abbr> ago by <%= attachment.user.name %></p>
+					<%= time_ago_in_words attachment.updated_at %></abbr> ago by <%= attachment.user.name %></p>
 			</div>
 		<% end %>
 		<div class="span2 attachment-actions pull-right">
