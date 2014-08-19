@@ -37,7 +37,9 @@ class StudentDetails < ActiveRecord::Base
   
   
   def complete_orientation
-    update_attributes(orientation_completed: true, orientation_completed_at: Date.today)
+    self.orientation_completed = true
+    self.orientation_completed_at = Date.today
+    save(valudate: false)    
   end
   
   

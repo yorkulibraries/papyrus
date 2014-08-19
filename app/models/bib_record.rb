@@ -145,7 +145,7 @@ class BibRecord
     
     item.author = record.author.first
     
-    item.isbn = record.isbn
+    item.isbn = record.isbn.kind_of?(Array) ? record.isbn.join(", ") : record.isbn
     item.publisher = record.publisher
     item.published_date = record.published_date
     item.edition = record.edition
