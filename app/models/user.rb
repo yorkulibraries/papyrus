@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :username, :name, :role, :email
   acts_as_audited
-  
+
   
   ADMIN = "admin"
   MANAGER = "manager"

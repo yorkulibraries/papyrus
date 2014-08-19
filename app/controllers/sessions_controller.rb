@@ -18,6 +18,11 @@ class SessionsController < ApplicationController
     user = User.active.find_by_username(username)
     if user
       session[:user_id] = user.id
+      
+      user.last_logged_in_at = Time.now
+      user.audit_comment = user.last_logged_in_at.strftime("Logged in on %b %d, %Y at %I:%M%p")  
+      user.save(validate: false)
+      
       if user.role == User::STUDENT_USER
         redirect_to student_view_path
       else

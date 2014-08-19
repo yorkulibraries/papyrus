@@ -9,6 +9,8 @@ class SessionsControllerTest < ActionController::TestCase
     
     get :new
     
+    user.reload
+    assert Date.today >= user.last_logged_in_at.to_date, "Logged in date should be set"
     assert_not_nil session[:user_id], "session user id should not be nil"
     assert_equal user.id, session[:user_id], "session user id should be set"
     assert_redirected_to root_url, "For regular user go to root url"
@@ -20,6 +22,8 @@ class SessionsControllerTest < ActionController::TestCase
     
     get :new
     
+    student.reload
+    assert Date.today >= student.last_logged_in_at.to_date, "Logged in date should be set"
     assert_equal User::STUDENT_USER, student.role
     assert_equal student.id, session[:user_id], "Session user id is student's id"
     assert_redirected_to student_view_url, "Redirects to student view url"

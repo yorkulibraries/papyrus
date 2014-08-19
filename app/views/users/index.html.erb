@@ -23,6 +23,7 @@
 	  <th>Role</th>
 	  <th>Username</th>	   
 		<th class="hidden-phone">Joined On</th>
+		<th class="hidden-phone">Last Logged in</th>
 		<th></th>
   </tr>
   <% for user in @users %>
@@ -31,6 +32,7 @@
       <td><%= user.role %></td>
 	  	<td><%= user.username %></td>
 	 	 	<td class="hidden-phone"><%= user.created_at.strftime("%b %d, %Y") %></td>
+			<td class="hidden-phone"><%= user.last_logged_in_at.strftime("%b %d, %Y at %I:%M%p") rescue nil %>
       <td><%= link_to "Edit User Details", edit_user_path(user), class: "btn btn-small btn-success" %></td>
     </tr>
   <% end %>

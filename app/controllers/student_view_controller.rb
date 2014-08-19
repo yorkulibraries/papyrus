@@ -45,6 +45,11 @@ class StudentViewController < ApplicationController
       
       # then sign in as student
       session[:user_id] = @student.id
+      
+      @student.last_logged_in_at = Time.now
+      @student.audit_comment = "#{current_user.name} logged in as this student"
+      @student.save(validate: false)
+      
       redirect_to student_view_path, notice: "Logged in as student #{@student.name}"
     else
       redirect_to students_path, error: "No such student found"

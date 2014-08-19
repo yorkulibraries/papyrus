@@ -38,6 +38,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def audit_trail
+    @user = User.not_students.find(params[:id])
+    @audits = @user.audits 
+    @audits.sort! { |a, b| a.created_at <=> b.created_at }
+        
+    @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])

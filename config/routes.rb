@@ -25,6 +25,7 @@ Papyrus::Application.routes.draw do
     
   resources :users do
     post "activate", :on => :member
+    get "audit_trail", :on => :member
     get "inactive", :on => :collection
   end
   
