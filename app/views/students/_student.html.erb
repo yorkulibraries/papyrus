@@ -47,17 +47,17 @@
 					<td class="trivial hidden-phone">Transcription Coordinator</td>
 					<td>
 						<label class="visible-phone weak">Transcription Coordinator</label>
-						<strong title="<%= @student.student_details.coordinator.email %>">
-						<%= format_field @student.details.coordinator.name%>
+						<strong title="<%= @student.student_details.coordinator.email rescue nil %>">
+						<%= format_field @student.details.coordinator.name rescue nil %>
 						</strong>
-						<br/><%= format_field @student.details.coordinator.email %>
+						<br/><%= format_field @student.details.coordinator.email rescue nil %>
 		
 					</td>
 					<td class="trivial hidden-phone">Transcription Assistant</td>
 					<td>
 						<label class="visible-phone weak">Transcription Assistant</label>
-						<strong title="<%= @student.student_details.assistant.email %>"><%= @student.details.assistant.name %></strong>
-						<br/><%= @student.details.assistant.email %>
+						<strong title="<%= @student.student_details.assistant.email rescue nil  %>"><%= @student.details.assistant.name rescue nil %></strong>
+						<br/><%= @student.details.assistant.email rescue nil %>
 			
 					</td>
 				</tr>

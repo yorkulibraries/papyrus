@@ -38,9 +38,9 @@
 			     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
 			     <p class="list-group-item-text">
 						<span class="trivial weak">Email: </span><%= student.email %>
-						<span class="trivial weak">Phone: </span><%= student.student_details.cell_phone %>
+						<span class="trivial weak">Phone: </span><%= student.details.cell_phone %>
 					 	<span class="hidden-phone">
-							<span class="trivial weak">Transcription Coordinator: </span><%= student.student_details.transcription_coordinator.name%>									
+							<span class="trivial weak">Transcription Coordinator: </span><%= student.details.transcription_coordinator.name rescue nil%>									
 						</span>
 					</p>
 			   </div>
