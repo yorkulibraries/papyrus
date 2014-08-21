@@ -39,6 +39,8 @@ class AccessCodesController < ApplicationController
 
   def update
     @access_code =  @student.access_codes.find(params[:id])
+    @access_code.audit_comment = "Updating access code information"
+    
     if @access_code.update_attributes(params[:access_code])
       redirect_to @access_code, notice: "Successfully updated access code."
     else
@@ -48,8 +50,9 @@ class AccessCodesController < ApplicationController
 
   def destroy
     @access_code =  @student.access_codes.find(params[:id])
-    @access_code.destroy
     @access_code.audit_comment = "Removed Access Code For #{@access_code.for}"
+    @access_code.destroy
+    
     
     respond_to do |format|
       format.html { redirect_to student_access_codes_path(@student), notice: "Successfully destroyed access code." }
