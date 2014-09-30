@@ -135,7 +135,7 @@ class ItemsController < ApplicationController
       # zipfile_name = "/tmp/papyrus-#{file_name}"
       # File.delete(zipfile_name) if File.exists?(zipfile_name)  
       begin 
-        temp_file = Tempfile.new("papyrus-#{file_name}")
+        temp_file = Tempfile.new("temp-papyrus-#{file_name}")
       
         #Initialize the temp file as a zip file
         Zip::ZipOutputStream.open(temp_file) { |zos| }
