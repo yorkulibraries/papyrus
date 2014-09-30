@@ -123,6 +123,7 @@ class ItemsController < ApplicationController
   
   def zipped_files
       require 'zip/zip'
+      
       @item = Item.find(params[:id])
       file_name = "#{@item.unique_id}.zip"
       show_file_name = "#{@item.title.parameterize}.zip"
@@ -131,22 +132,30 @@ class ItemsController < ApplicationController
        file_name = file_name[0..150]
       end
       
-      zipfile_name = "/tmp/papyrus-#{file_name}"
+      # zipfile_name = "/tmp/papyrus-#{file_name}"
+      # File.delete(zipfile_name) if File.exists?(zipfile_name)  
+      begin 
+        temp_file = Tempfile.new("papyrus-#{file_name}")
       
-      File.delete(zipfile_name) if File.exists?(zipfile_name)
-      counter = 0
-      Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
-        @item.attachments.files.available.each do |filename|
-          # Two arguments:
-          # - The name of the file as it will appear in the archive
-          # - The original file, including the path to find it
-          zipfile.add("#{counter}-" + File.basename(filename.file_url), "#{filename.file.path}")
-          counter += 1
+        #Initialize the temp file as a zip file
+        Zip::ZipOutputStream.open(temp_file) { |zos| }
+       
+        counter = 0
+        Zip::ZipFile.open(temp_file.path, Zip::ZipFile::CREATE) do |zipfile|
+          @item.attachments.files.available.each do |filename|
+            # Two arguments:
+            # - The name of the file as it will appear in the archive
+            # - The original file, including the path to find it
+            zipfile.add("#{counter}-" + File.basename(filename.file_url), "#{filename.file.path}")
+            counter += 1
+          end
         end
+      
+        send_data File.read(temp_file), type: 'application/zip', disposition: 'attachment', filename: show_file_name
+      ensure
+        temp_file.close
+        temp_file.unlink
       end
-      
-      send_data File.read(zipfile_name), type: 'application/zip', disposition: 'attachment', filename: show_file_name
-      
   end
   
 end
