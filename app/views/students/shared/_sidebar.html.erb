@@ -1,8 +1,6 @@
-<%= link_to edit_student_path(@student), class: "btn btn-small btn-success pull-right hidden-phone" do %>
-	<i class="icon-edit"></i> Active
+<%= link_to edit_student_path(@student), class: "btn btn-block" do %>
+	<i class="icon-edit"></i> Update Student Record
 <% end %>
-
-<a href="<%= admin_student_view_path(@student) %>" class="green">Student View <i class="icon-share-alt"></i></a>
 
 <% if @student.inactive? %>
 	<div class="alert alert-error">
@@ -11,8 +9,37 @@
 	</div>
 <% end %>
 
+<div class="student">
+	<h5>Additional Details</h5>
+	<dl class="attributes">
+		<dt>Username</dt>
+		<dd><%= @student.username %></dd>
+		<dt>Student ID</dt>
+		<dd><%= @student.details.student_number %></dd>
+		<dt>Orientaion</dt>
+		<dd>
+			<% if @student.requires_orientation? %>
+				<%= @student.orientation_completed? ?  @student.orientation_completed_at : "Complete Orientaion" %>
+			<% else %>
+				Orientation Not Required
+			<% end %>
+		</dd>
+		<dt>Welcome Email</dt>
+		<dd><%= @student.email_sent_at %></dd>
+		<dt>Registered By</dt>
+		<dd><%= @student.created_by.name %></dd>
+		<dt>Registered On</dt>
+		<dd><%= @student.created_at %></dd>
+		<dt>Status</dt>
+		<dd><%= @student.inactive? %></dd>
+	</dl>
+</div>
+
+<a href="<%= admin_student_view_path(@student) %>" class="btn btn-success btn-block"><i class="icon-share-alt"></i> Login as student </a>
+
+
 <% if can? :manage, ItemConnection %>
-	<section>
+	<section class="hide">
 		<div class="well">
 			<p><strong>Send a Message</strong></p>
 			<p>Send a message to the student. </p>
