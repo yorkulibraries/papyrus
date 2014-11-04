@@ -7,62 +7,101 @@
 	.list-group {
 		img { margin-right: 10px; }
 		.list-group-item-text { font-size: 14px; }
-	}	
+	}
 }
-
 
 
 .student {
- 
-	.header { padding-bottom: 0px; 
-		h2 { 
-			color: #000; font-size: 26px; line-height: 36px; margin-top: 0; 
-			a { margin-top: 8px; }
-		}
-		
-	}
-	.summary { 
-		.stats { margin-bottom: 10px; span { margin-top: 4px; }}
-		.details { }
-		
-		table.table { 
-			th, td {
-				border-top: 1px dotted #ccc; 
-			}
-		}
-	}
-	
-}
+	margin-bottom: 40px;
+	font-family: "Helvetica Neue", Helvetica, sans-serif !important;
 
-.student-extended {
-	.sub-navigation { border-top: 2px solid #eee; border-bottom: 2px solid #eee; line-height: 30px; 
-		a { 
-			padding: 5px 10px; font-weight: bold; 
-			&:hover, &.active { color: #000; text-decoration: none; }
-			
-		} 
+	h1 { color: #000; margin-top: 0; margin-bottom: 25px;   }
+
+	.attributes {
+
+
+		>div { padding: 10px 0; &.top-border { border-top: 1px solid #ddd; } }
+
+		.key {color: #888; font-family: "Helvetica Neue", Helvetica, sans-serif; font-size: 10px; font-weight: 500; text-align: right; text-transform: uppercase;}
+		.value { font-size: 16px; color: #000; font-weight: 500; }
+
+		.tag { background: #444; color: #fff; padding: 2px 4px; font-size: 12px; font-weight: 300; }
 	}
-	
-	/* Student Notes */
-	table.notes {
-		width: 100%;
-		tr + tr td { border-top: 1px solid #ECECEC; }	
-		td { font-size: 13px; padding: 4px 0; vertical-align: top;  }
-		td.avatar { width: 40px; }
-		td.who { width: 1%; white-space: nowrap; padding: 9px 14px 5px 0; text-align: left; font-size: 11px; }
-		td.what { max-width: 500px; line-height: 18px; padding: 5px 14px 5px 0;
-			p { font-size: 14px; line-height: 24px; }
+
+
+	.student-subnav {
+		margin-top: 40px;  background-color: #f3f3f3; border: 1px solid #bbb;
+
+		.column { float: left; width: 191px;  min-height: 1px;  border-right : 1px solid #bbb; &.last { border-right: none;  width: 192px; } }
+
+		.resource {
+
+		 display: inline-block; text-align: center; width: 100%; font-size: 14px; color: #949494; padding-bottom: 6px;
+		 border-top: 4px solid #f3f3f3;
+
+			&.active, &:hover { background: #fff; border-top: 4px solid #bc4c3b; text-decoration: none;  color: #000; }
+
+			i { display: block; font-size: 28px; padding: 5px 0; }
 		}
-		td.when { width: 1%; white-space: nowrap; text-align: right; padding: 8px 14px 5px 0;}
+
+		clear: both;
 	}
-	
-	.items { 
-		li.item { 
-			padding: 5px; 
+
+
+
+	.items {
+		margin-top: 40px;
+
+		li.item {
+			padding: 5px; margin-bottom: 10px;
 			.title { font-size: 14px; margin-bottom: 5px; a { line-height: 18px; } }
+			.item-type { display: inline-block; margin-left: 20px; }
 		}
 	}
-	
+
+
+	/* Student Notes */
+	.notes {
+		margin-top: 40px;
+
+		table {
+			margin-top: 20px; width: 100%;
+			tr + tr td { border-top: 1px solid #ECECEC; }
+			td { font-size: 13px; padding: 4px 0; vertical-align: top;  }
+			td.avatar { width: 40px; }
+			td.who { width: 1%; white-space: nowrap; padding: 9px 14px 5px 0; text-align: left; font-size: 11px; }
+			td.what { max-width: 500px; line-height: 18px; padding: 5px 14px 5px 0;
+				p { font-size: 14px; line-height: 24px; }
+			}
+			td.when { width: 1%; white-space: nowrap; text-align: right; padding: 8px 14px 5px 0;}
+		}
+	}
+
+	.audit_trail { margin-top: 40px; }
+
+	.access_codes {
+		margin-top: 40px;
+		h2 { margin-bottom: 20px; }
+
+		.access_code {
+			padding-bottom: 10px;   margin-bottom: 10px;
+			> div { border-bottom: 1px dotted #e0e0e0; }
+
+			.for { color: #000; font-size: 16px; font-weight: 500; }
+			.expires_date { font-size: 11px; color: #999; }
+			.code { color: #222; font-size: 16px; }
+			.type { font-size: 9px; font-weight: 500;  text-transform: uppercase; color: #999; }
+			.remove { margin-left: 20px; text-transform: uppercase; font-size: 9px; font-weight: 500; &:hover { text-decoration: none; color: #000; } }
+		}
+
+		.expired_codes {
+			margin-top: 50px;
+
+
+
+			h5 { opacity: 0.8; margin-bottom: 10px; }
+			.access_code { opacity: 0.5; }
+		}
+	}
+
 }
-
-

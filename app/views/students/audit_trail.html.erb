@@ -1,23 +1,24 @@
 <% title "#{@student.name} - Audit Trail" %>
 <% title_html do %>
-	<h1>Student Registration Record - Audit Trail
-		<% if @student.inactive? %>
-			<span class="red">Inactive</span>
-		<% end %>
-	
-	</h1>	
+	<h1>Audit Trail <small>/ <%= @student.name %></small></h1>
 <% end%>
 
-<% @short_view = true %>
-<%= render partial: @student %>			
 
-<div class="student-extended">
+<% sidebar do %>
+
+	<%= render partial: "students/shared/sidebar"%>
+
+<% end %>
+
+<%= render partial: @student %>
+
+<div class="student">
 	<%= render partial: "students/shared/subnav" %>
 
-	<section id="audit_trail">
+	<section class="audit_trail">
 		<h2>Audit Trail</h2>
-	
-		<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>	
+
+		<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>
 	</section>
 
 </div>

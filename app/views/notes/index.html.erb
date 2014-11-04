@@ -1,11 +1,6 @@
 <% title "#{@student.name} - Notes" %>
 <% title_html do %>
-	<h1><%= @student.name %> - Notes
-		<% if @student.inactive? %>
-			<span class="red">Inactive</span>
-		<% end %>
-	</h1>
-
+	<h1>Notes <small>/ <%= @student.name %> </h1>
 <% end%>
 
 <% sidebar do %>
@@ -13,16 +8,18 @@
 <% end %>
 
 
-<%= render partial: @student %>	
+<%= render partial: @student %>
 
-<div class="student-extended">
+<div class="student">
 	<%= render partial: "students/shared/subnav" %>
 
 	<section class="notes">
-		<h2>Notes <a data-toggle="modal" href="#new_note_form" class='btn btn-small'>New Note</a></h2>
-	
+		<h2>Notes <a data-toggle="modal" href="#new_note_form" class='btn btn-small float-right btn-primary'>
+			<i class="icon-plus-sign icon-white"></i> New Note</a>
+		</h2>
+
 		<div id="new_note_form" class="hide modal">
-		
+
 			<div class="modal-header">
 				<h2>Add a new note</h2>
 			</div>
@@ -34,17 +31,16 @@
 
 			<div class="modal-footer">
 				<a href="#" class="btn" data-dismiss="modal">Close</a>
-			</div>								
+			</div>
 		</div>
-	
-	
-		<table id="notes" class="notes">
-			<% @notes.each do |note| %>		
+
+
+		<table>
+			<% @notes.each do |note| %>
 				<%= render partial: note %>
 			<% end %>
-		
+
 		</table>
-	
+
 	</section>
 </div>
-

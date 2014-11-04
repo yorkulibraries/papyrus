@@ -1,8 +1,30 @@
-<div class="sub-navigation">
-	<a href="<%= student_path(@student) %>" class="<%= is_controller_and_action?("students", "show", "active" ) %>">Assigned Items</a>
-	<a href="<%= student_details_path(@student) %>" class="<%= is_controller?("student_details", "active")%>">Additional Details</a>
-	<a href="<%= student_notes_path(@student) %>" class="<%= is_controller?("notes", "active")%>">Notes</a>		
-	<a href="<%= audit_trail_student_path(@student) %>" class="<%= is_action?("audit_trail", "active")%>">Audit Trail</a>		
-	<a href="<%= admin_student_view_path(@student) %>" class="green">Student View <i class="icon-share-alt"></i></a>		
-	<a href="<%= student_access_codes_path(@student) %>" class="red">Acces Codes <i class="icon-lock"></i></a>		
+<div class="student-subnav clearfix">
+	<div class="column">
+		<a href="<%= student_path(@student) %>" class="resource <%= is_controller_and_action?("students", "show", "active" ) %>">
+			<i class="icon-book"></i>
+			Assigned Items
+		</a>
+	</div>
+
+	<div class="column">
+		<a href="<%= student_notes_path(@student) %>" class="resource <%= is_controller?("notes", "active")%>">
+			<i class="icon-pencil"></i>
+			Notes
+		</a>
+	</div>
+
+	<div class="column">
+		<a href="<%= audit_trail_student_path(@student) %>" class="resource <%= is_action?("audit_trail", "active")%>">
+			<i class="icon-list"></i>
+			Audit Trail
+		</a>
+	</div>
+
+	<div class="column last">
+		<a href="<%= student_access_codes_path(@student) %>" class="resource <%= is_controller_and_action?("access_codes", "index", "active")%>">
+			<i class="icon-lock"></i>
+			Access Codes
+		</a>
+	</div>
+
 </div>

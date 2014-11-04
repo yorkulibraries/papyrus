@@ -1,3 +1,16 @@
+<%= link_to edit_student_path(@student), class: "btn btn-small btn-success pull-right hidden-phone" do %>
+	<i class="icon-edit"></i> Active
+<% end %>
+
+<a href="<%= admin_student_view_path(@student) %>" class="green">Student View <i class="icon-share-alt"></i></a>
+
+<% if @student.inactive? %>
+	<div class="alert alert-error">
+		<p><strong>WARNING:</strong> This student has been deactivated. You will not be able to assign items to this student or see the student record listed in your dashboard or in the student listing.</p>
+		<p>To reactive, click on update user registration button and then on the Reactivate Student link in the sidebar.</p>
+	</div>
+<% end %>
+
 <% if can? :manage, ItemConnection %>
 	<section>
 		<div class="well">
@@ -5,13 +18,13 @@
 			<p>Send a message to the student. </p>
 			<p>CC: <%= @current_user.email %></p>
 			<%= form_tag notify_students_path  do %>
-			
-				<input class="student_notification" type="hidden" name="students[]" value="<%= @student.id %>">					
-				<input type="hidden" name="student" value="<%= @student.id %>"/>			
+
+				<input class="student_notification" type="hidden" name="students[]" value="<%= @student.id %>">
+				<input type="hidden" name="student" value="<%= @student.id %>"/>
 				<p>Message: <br/><%= text_area_tag 'message', nil, :rows => 8 %></p>
 				<p><%= submit_tag "Send...", :class => "btn" %></p>
-		
-			<% end %>											
+
+			<% end %>
 		</div>
 	</section>
 
@@ -20,5 +33,5 @@
 	<% end %>
 <% else %>
 	<h3>Student Record Details</h3>
-	
+
 <% end %>

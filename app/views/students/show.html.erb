@@ -4,50 +4,20 @@
 		<% if @student.inactive? %>
 			<span class="red">Inactive</span>
 		<% end %>
-	</h1>	
+	</h1>
 <% end%>
 
 
 
 <% sidebar do %>
+
 	<%= render partial: "students/shared/sidebar"%>
+
 <% end %>
 
+<%= render partial: @student %>
 
-
-
-<% if @student.blocked %>
-	<div class="blocked">
-		
-		<div class="message">
-			<span>This user has been temporarily blocked from being edited by the staff.</span>
-			<% if can? :unblock, Student %>
-				<a href="<%= unblock_student_path(@student) %>" class="float-right btn btn-danger">Unblock</a>
-			<% end %>
-		</div>			
-	</div>
-<% end %>
-
-
-<% if @student.inactive? %>
-	<div class="alert alert-error">
-		<p><strong>WARNING:</strong> This student has been deactivated. You will not be able to assign items to this student or see the student record listed in your dashboard or in the student listing.</p>
-		<p>To reactive, click on update user registration button and then on the Reactivate Student link in the sidebar.</p>
-	</div>
-<% end %>
-<%= render partial: @student %>			
-	
-<div class="student-extended">
-		
-		<%= render partial: "students/shared/subnav"%>
-		<%= render partial: "items"%>		
-		
+<div class="student">
+	<%= render partial: "students/shared/subnav"%>
+	<%= render partial: "items"%>
 </div>
-
-
-
-
-
-
-
-

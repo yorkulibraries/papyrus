@@ -1,57 +1,59 @@
 <% title "#{@student.name} - Student Access Codes" %>
 <% title_html do %>
-	<h1><%= @student.name %> <small> / Access Codes</small></h1>	
+	<h1>Access Codes <small> / <%= @student.name %></small></h1>
 <% end%>
 
-<% @short_view = true %>
-<%= render partial: @student %>			
+<% sidebar do %>
 
-<div class="student-extended">
+	<%= render partial: "students/shared/sidebar"%>
+
+<% end %>
+
+<%= render partial: @student %>
+
+<div class="student">
 	<%= render partial: "students/shared/subnav" %>
-	
-	<br/>
-	<section id="access_codes">
-		<h2>Access Codes <%= link_to  new_student_access_code_path(@student), class: "btn btn-small", data: { remote: true } do %>
+
+	<section class="access_codes">
+		<h2>Access Codes
+
+			<%= link_to  new_student_access_code_path(@student), class: "btn btn-small float-right btn-primary", data: { remote: true } do %>
 			<i class="icon-plus-sign icon-white"></i> New Access Code
 			<% end %>
 		</h2>
-	
-		<div id="access_code_form_holder"></div>
-		
-		<h5 class="title">Current</h5>
-		<div class="access_code heading strong row" id="current_codes">
-			<div class="span4">For</div>
-			<div class="span3">Code</div>	
-			<div class="span2">Expires</div>
-			<div class="span1">Action</div>
-		</div>
-		
-		<% @active_access_codes.active.each do |access_code| %>
-			<%= render partial: access_code %>
-		<% end %>
 
-		<hr/>
-		<h5>Expired</h5>
-		<div class="access_code strong row">
-			<div class="span4">For</div>
-			<div class="span3">Code</div>	
-			<div class="span2">Expires</div>
-			<div class="span1">Action</div>
+		<div id="access_code_form_holder"></div>
+
+		<div id="current_codes">
+			<% @active_access_codes.active.each do |access_code| %>
+				<%= render partial: access_code %>
+			<% end %>
 		</div>
-		<hr/>
-		<% @expired_access_codes.expired.each do |access_code| %>
-			<%= render partial: access_code %>
-		<% end %>
+
+
+		<div class="expired_codes">
+			<h5>Expired Codes</h5>
+
+			<% @expired_access_codes.expired.each do |access_code| %>
+				<div class="access_code row" id="access_code_<%= access_code.id %>">
+					<div class="span4">
+						<span class="for"><%= access_code.for %></span>
+						<br/>
+						<span class="expires_date">
+							<i class="icon-calendar"></i> Expired on <%= access_code.expires_at rescue nil %>
+						</span>
+
+
+					</div>
+					<div class="span4">
+						<span class="code"><%= access_code.code %></span><br/>
+						<span class="type">personal code</span>
+					</div>
+				</div>
+
+			<% end %>
+		</div>
 
 	</section>
 
 </div>
-
-
-
-
-
-
-
-
-

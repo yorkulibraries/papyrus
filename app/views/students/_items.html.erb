@@ -1,98 +1,73 @@
 <section class="items">
-	<h2>Assigned Items <% unless @student.inactive? %><a data-toggle="modal" href="#assign_items_modal" class="btn btn-small">Assign Items</a> <% end %></h2>
-	
-	<div class="tabbable">
-    	<ul class="nav nav-tabs">
-    	
-			<li class="active"><a href="#book" data-toggle="tab">Books</a></li>
-			<li><a href="#course_kit" data-toggle="tab">Course Kits</a></li>
-			<li><a href="#article" data-toggle="tab">Articles</a></li>			
-    	</ul>
-    	<div class="tab-content">
-			<% @items_by_type = Hash.new %>
-	
-			<% 	@items_grouped.each do |type, items| %>
-				
-				<% @items_by_type["#{type}"] = capture do %>							
-					
-					<ul class="unstyled">
-					<% items.each do |item| %>
-						<li class="item list <%= cycle("odd", "event") %>">
-							
-							<div class="title">
-								<%= link_to item.title, item_path(item), class: "" %>
+	<h2>Assigned Items
+		<% unless @student.inactive? %>
+			<a data-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-right">
+				<i class="icon-plus-sign icon-white"></i> Assign Items</a>
+		<% end %>
+	</h2>
 
-								<% if @student %>
-									<%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),  
-										confirm: 'Are you sure?', class: "close", method: :delete, title: "Remove Access" do %>
-										&times;
-									<% end %>
-								<% end %>
-							</div>
-							<div class="summary">
-								<a href="<%= zipped_files_item_path(item)%>" class="trivial"> <%= pluralize(item.attachments.size, "file")%> <i class="icon-file-alt"></i></a>
-								
-								<% connection = item.item_connections.current.find_by_student_id(@student.id) %>
-								<% if connection %>
-								<span class="trivial float-right">
-									<%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
-									<%= "Unlimited Access" unless connection.expires_on %>
-								</span>
-								<% end %>	
-								
-							</div>			
+	<ul class="unstyled">
+	<% @items.each do |item| %>
+		<li class="item list <%= cycle("odd", "event") %>">
 
-						</li>
+			<div class="title">
+				<%= link_to item.title, item_path(item), class: "" %>
+
+				<% if @student %>
+					<%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
+						confirm: 'Are you sure?', class: "close", method: :delete, title: "Remove Access" do %>
+						&times;
 					<% end %>
-					</ul>
-			
-				<% end %>
-				
-			<% end %>
-				
-			
-			<div id="book" class="tab-pane active">
-				<% if @items_by_type["book"] %>
-					<%= @items_by_type["book"] %>
-				<% else %>
-					<p>There are no books assigned.</p>												
 				<% end %>
 			</div>
-			<div id="course_kit" class="tab-pane">
-				<% if @items_by_type["course_kit"] %>
-					<%= @items_by_type["course_kit"] %>
-				<% else %>
-					<p>There are no course kits assigned.</p>												
+			<div class="summary">
+				<a href="<%= zipped_files_item_path(item)%>" class="trivial"> <i class="icon-file-alt"></i> <%= pluralize(item.attachments.size, "file")%> </a>
+				<span class="trivial item-type">
+					<i class="icon-<%= display_icon(item.item_type) %>"></i> <%= item.item_type.humanize %>
+				</span>
+
+				<% connection = item.item_connections.current.find_by_student_id(@student.id) %>
+				<% if connection %>
+				<span class="trivial float-right">
+					<%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
+					<%= "Unlimited Access" unless connection.expires_on %>
+				</span>
 				<% end %>
+
 			</div>
-			<div id="article" class="tab-pane">
-				<% if @items_by_type["article"] %>
-					<%= @items_by_type["article"] %>
-				<% else %>
-					<p>There are no articles assigned.</p>												
-				<% end %>
-			</div>
-			
-    	</div>
-    </div>	
+
+		</li>
+	<% end %>
+	</ul>
+
+	<% if @items.size == 0 %>
+		<div class="blank-slate">
+			<i class="icon-info-sign"></i>
+			<h1>No Items Assigned</h1>
+			<p>Click <a data-toggle="modal" href="#assign_items_modal">Assign Items</a>  to begin assigning items.</p>
+		</div>
+	<% end %>
 </section>
+
+
+
 <div id="assign_items_modal" class="hide modal">
 	<div class="modal-header">
 		<h2>Assign Items To This Student</h2>
 	</div>
 	<div class="modal-body">
-		<p>To assign a new item to this student, search for the item in the search box.</p>		
-		<%= form_tag assign_many_to_student_items_path(:student_id => @student) do |f| %>	
+		<p>To assign a new item to this student, search for the item in the search box.</p>
+		<%= form_tag assign_many_to_student_items_path(:student_id => @student) do |f| %>
 			<p><input type="text" id="assign-items-list" name="item_ids"/></p>
-			
-			<p>Expires at the end of 
+
+			<p>Expires at the end of
 			<br/><%= collection_select(:expires_on, :date, Term.active, :end_date, :name, options ={:prompt => " Never"}, :class =>"terms") %>
-			</p>		
+			</p>
 			<p><%= submit_tag "Assign These Items", :class => "btn" %></p>
 		<% end %>
 
 	</div>
-	
+
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a>
 	</div>
