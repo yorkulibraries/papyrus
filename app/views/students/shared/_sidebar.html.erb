@@ -9,7 +9,7 @@
 	</div>
 <% end %>
 
-<div class="student">
+<div class="student clearfix">
 	<h5>Additional Details</h5>
 	<dl class="attributes">
 		<dt>Username</dt>
@@ -22,8 +22,11 @@
 
 				<%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") if @student.details.orientation_completed_at == nil %>
 
-				<%= link_to "Complete orientation", complete_orientation_student_path(@student), disable_with: 'completing ...',
-						class: "small" if @student.details.orientation_completed_at != nil  %>
+				<%  if @student.details.orientation_completed_at != nil && can?(:create, Student)  %>
+					<%= link_to complete_orientation_student_path(@student), disable_with: 'completing ...', class: "small" do %>
+						<i class="icon-certificate"></i>	Complete orientation
+					<% end %>
+				<% end %>
 
 			<% else %>
 				Orientation Not Required
@@ -44,8 +47,9 @@
 		<dt>Registered On</dt>
 		<dd><%= @student.created_at.strftime(" %b %d, %Y") %></dd>
 		<dt>Status</dt>
-		<dd><%= @student.inactive? %></dd>
+		<dd><%= @student.inactive? ? "INACTIVE" : "ACTIVE" %></dd>
 	</dl>
+
 </div>
 
 <a href="<%= admin_student_view_path(@student) %>" class="btn btn-success btn-block"><i class="icon-share-alt"></i> Login as student </a>
