@@ -3,7 +3,7 @@
 	<div class="header">
 		<h2>
 			<%= @student.name %>
-		</h2>	
+		</h2>
 	</div>
 	<div class="summary clearfix">
 		<div class="stats">
@@ -20,7 +20,7 @@
 						<label class="visible-phone weak">Student Number</label>
 						<strong><%= @student.details.student_number %></strong>
 					</td>
-					<td class="trivial hidden-phone">Username</td>					
+					<td class="trivial hidden-phone">Username</td>
 					<td>
 						<label class="visible-phone weak">Username</label>
 						<strong><%= @student.username %></strong>
@@ -32,10 +32,10 @@
 						<label class="visible-phone weak">Email Address</label>
 						<strong><%= @student.email %></strong>
 					</td>
-					<td class="trivial hidden-phone">Cell Phone</td>
+					<td class="trivial hidden-phone">Preferred Phone</td>
 					<td>
 						<label class="visible-phone weak">Cell Phone</label>
-						<strong><%= @student.details.cell_phone %></strong>
+						<strong><%= @student.details.preferred_phone %></strong>
 					</td>
 				</tr>
 				<tr>
@@ -46,7 +46,7 @@
 						<%= format_field @student.details.coordinator.name%>
 						</strong>
 						<br/><%= format_field @student.details.coordinator.email %>
-		
+
 					</td>
 					<td class="trivial hidden-phone">Transcription Assistant</td>
 					<td>
@@ -60,9 +60,9 @@
 					<td class="trivial hidden-phone">Welcome Email</td>
 					<td>
 						<label class="visible-phone weak">Welcome Email</label>
-						<% if @student.email_sent_at %>							
+						<% if @student.email_sent_at %>
 						Sent on <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %></strong>
-						<% else %>					
+						<% else %>
 							<strong>Not Sent Yet.</strong>
 						<% end %>
 					</td>
@@ -71,19 +71,19 @@
 							<%= link_to send_welcome_email_student_url(@student), disable_with: 'sending ...', class: "small" do %>
 								Send Welcome Email <i class="icon-envelope"></i>
 							<% end %>
-						
+
 						<% end %>
-					</td>						
+					</td>
 				</tr>
 			</tbody>
-		</table>		
-		
+		</table>
+
 		<%= link_to edit_student_path(@student), class: "btn btn-small btn-success btn-block visible-phone" do %>
 			<i class="icon-edit"></i> Update Registration
-		<% end %>			
-		
-		<% end %>	
-		
+		<% end %>
+
+		<% end %>
+
 	</div>
 
 </div>

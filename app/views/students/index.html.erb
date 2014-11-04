@@ -9,21 +9,21 @@
 	<% end %>
 	<h3>Registering New Students</h3>
 	<p>Registering a student requires you to fill in some basic information about the person, as well as the login credentials.</p>
-	
+
 	<hr/>
 	<p>To see a list of inactive students, <%= link_to "click here.", inactive_students_path %></p>
 <% end %>
 
 <div class="search-box">
 	<form action="<%= search_students_path %>">
-		<div class="search-field  input-prepend">			
+		<div class="search-field  input-prepend">
 			<span class="add-on">	<i class="icon-search"></i></span>
-			<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Name or Username"/>			
+			<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Name or Username"/>
 			<button class="btn hidden-phone" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
 		</div>
 	</form>
 </div>
-	
+
 <% if @students.size > 0 %>
 
 
@@ -38,9 +38,9 @@
 			     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
 			     <p class="list-group-item-text">
 						<span class="trivial weak">Email: </span><%= student.email %>
-						<span class="trivial weak">Phone: </span><%= student.details.cell_phone %>
+						<span class="trivial weak">Phone: </span><%= student.details.preferred_phone %>
 					 	<span class="hidden-phone">
-							<span class="trivial weak">Transcription Coordinator: </span><%= student.details.transcription_coordinator.name rescue nil%>									
+							<span class="trivial weak">Transcription Coordinator: </span><%= student.details.transcription_coordinator.name rescue nil%>
 						</span>
 					</p>
 			   </div>
@@ -49,7 +49,7 @@
 	</div>
 
 	<%= paginate @students %>
-	
+
 <% else %>
 	<div class="blank-slate">
 		<i class="icon-user"></i>
