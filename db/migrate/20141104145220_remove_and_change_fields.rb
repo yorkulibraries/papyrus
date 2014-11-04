@@ -1,6 +1,12 @@
 class RemoveAndChangeFields < ActiveRecord::Migration
   def change
 
+   # Rename Indexes
+   remove_index :student_details, [:transcription_coordinator_id]
+   remove_index :student_details, [:transcription_assistant_id]
+   add_index :student_details, [:transcription_assistant_id], name: "ta_id"
+   add_index :student_details, [:transcription_coordinator_id], name: "tc_id"
+
     # contact phone numbers
     remove_column :student_details, :campus_phone
     remove_column :student_details, :work_phone

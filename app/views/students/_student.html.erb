@@ -5,9 +5,9 @@
 			<% if can?(:edit, @student) && is_controller_and_action?("students", "show")%>
 				<%= link_to edit_student_path(@student), class: "btn btn-small btn-success pull-right hidden-phone" do %>
 					<i class="icon-edit"></i> Update Registration
-				<% end %>				
+				<% end %>
 			<% end %>
-		</h2>	
+		</h2>
 	</div>
 	<div class="summary clearfix">
 		<div class="stats">
@@ -25,7 +25,7 @@
 						<label class="visible-phone weak">Student Number</label>
 						<strong><%= @student.details.student_number %></strong>
 					</td>
-					<td class="trivial hidden-phone">Username</td>					
+					<td class="trivial hidden-phone">Username</td>
 					<td>
 						<label class="visible-phone weak">Username</label>
 						<strong><%= @student.username %></strong>
@@ -37,10 +37,10 @@
 						<label class="visible-phone weak">Email Address</label>
 						<strong><%= @student.email %></strong>
 					</td>
-					<td class="trivial hidden-phone">Cell Phone</td>
+					<td class="trivial hidden-phone">Preferred Phone</td>
 					<td>
-						<label class="visible-phone weak">Cell Phone</label>
-						<strong><%= @student.details.cell_phone %></strong>
+						<label class="visible-phone weak">Preferred Phone</label>
+						<strong><%= @student.details.preferred_phone %></strong>
 					</td>
 				</tr>
 				<tr>
@@ -51,23 +51,23 @@
 						<%= format_field @student.details.coordinator.name rescue nil %>
 						</strong>
 						<br/><%= format_field @student.details.coordinator.email rescue nil %>
-		
+
 					</td>
 					<td class="trivial hidden-phone">Transcription Assistant</td>
 					<td>
 						<label class="visible-phone weak">Transcription Assistant</label>
 						<strong title="<%= @student.student_details.assistant.email rescue nil  %>"><%= @student.details.assistant.name rescue nil %></strong>
 						<br/><%= @student.details.assistant.email rescue nil %>
-			
+
 					</td>
 				</tr>
 				<tr>
 					<td class="trivial hidden-phone">Welcome Email</td>
 					<td>
 						<label class="visible-phone weak">Welcome Email</label>
-						<% if @student.email_sent_at %>							
+						<% if @student.email_sent_at %>
 						Sent on <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %></strong>
-						<% else %>					
+						<% else %>
 							<strong>Not Sent Yet.</strong>
 						<% end %>
 					</td>
@@ -76,13 +76,13 @@
 							<%= link_to send_welcome_email_student_url(@student), disable_with: 'sending ...', class: "small" do %>
 								Send Welcome Email <i class="icon-envelope"></i>
 							<% end %>
-						
+
 						<% end %>
-					</td>						
+					</td>
 				</tr>
 				<tr>
 					<td class="trivial hidden-phone">
-						Requires Orientation? 
+						Requires Orientation?
 					</td>
 					<td class="strong">
 						<% if @student.details.requires_orientation %>
@@ -96,7 +96,7 @@
 					</td>
 					<td class="">
 						<% if @student.details.orientation_completed %>
-							
+
 							Completed on <strong><%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") rescue nil%></strong>
 						<% else %>
 							<span class="weak">Not completed.</span>
@@ -105,14 +105,14 @@
 					</td>
 				</tr>
 			</tbody>
-		</table>		
-		
+		</table>
+
 		<%= link_to edit_student_path(@student), class: "btn btn-small btn-success btn-block visible-phone" do %>
 			<i class="icon-edit"></i> Update Registration
-		<% end %>			
-		
-		<% end %>	
-		
+		<% end %>
+
+		<% end %>
+
 	</div>
 
 </div>
