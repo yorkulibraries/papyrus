@@ -73,10 +73,10 @@
 
       <div class="row">
         <div class="span4">
-          <%= builder.input :accessibility_lab_access, as: :radio, label: "Allow Access to Accessibility Lab?", input_html: { class: "" } %>
+          <%= builder.input :accessibility_lab_access, label: "Allow Access to Accessibility Lab?"%>
         </div>
         <div class="span4">
-          <%= builder.input :book_retrieval, as: :radio, label: "Book Retrieval", input_html: { class: "" } %>
+          <%= builder.input :book_retrieval,  label: "Book Retrieval" %>
         </div>
       </div>
     <% end %>
@@ -91,5 +91,11 @@
      	<%= link_to 'Cancel', @student.new_record? ? students_path : student_path(@student), class: 'btn' %>
 		</div>
 	</div>
-  <%= @student.errors.messages.inspect %>
+
+  <% if @student.errors.size > 0 %>
+    <div class="hide">
+      <%= @student.errors.messages.inspect %>
+    </div>
+  <% end %>
+
 <% end %>

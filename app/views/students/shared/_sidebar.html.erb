@@ -41,13 +41,19 @@
 			<% else %>
 				Orientation Not Required
 			<% end %>
-		</dd>	
+		</dd>
 		<dt>Registered By:</dt>
 		<dd><%= @student.created_by.name %></dd>
 		<dt>Registered On:</dt>
 		<dd><%= @student.created_at.strftime(" %b %d, %Y") %></dd>
+		<dt>Lab Access:</dt>
+		<dd><%= @student.details.accessibility_lab_access? ? "Yes" : "No" %></dd>
+		<dt>Book Retrieval:</dt>
+		<dd><%= @student.details.book_retrieval? ? "Yes" : "No" %></dd>
 		<dt>Status:</dt>
 		<dd class="tag <%= @student.inactive? ? "red" : "green" %>"><%= @student.inactive? ? "INACTIVE" : "ACTIVE" %></dd>
+
+	</dl>
 	</dl>
 
 

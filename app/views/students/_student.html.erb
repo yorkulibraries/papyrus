@@ -10,7 +10,7 @@
 			<div class="span1 key top-border">Assistant: </div><div class="span3 value top-border"> <%= format_field @student.details.assistant.name rescue nil %></div>
 	</div>
 	<div class="attributes row">
-			<div class="span1 key">Councillor:</div><div class="span3 value"><%= @student.details.cds_counsellor %></div>
+			<div class="span1 key">Councillor:</div><div class="span3 value" title="<%= @student.details.cds_counsellor_email %>"><%= @student.details.cds_counsellor %></div>
 			<div class="span1 key">Format:</div><div class="span3 value">
 				<% formats_array = Array.new %>
 				<% formats_array.push "PDF" if @student.details.format_pdf %>
@@ -22,6 +22,11 @@
 				<div>
 					<% formats_array.each do | format| %>
 						<span class="tag"><%= format.downcase %></span>
+					<% end %>
+					<% unless @student.details.format_note.blank? %>
+						<a href="#" class="btn btn-link grey popover-link" data-content="<%= @student.details.format_note %>" data-original-title="Format Note" rel="popover">
+							<i class="icon-info-sign"></i>
+						</a>
 					<% end %>
 				</div>
 			</div>
