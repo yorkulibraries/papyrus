@@ -10,20 +10,30 @@
 <% end %>
 
 <div class="student clearfix">
-	<h5>Additional Details</h5>
+	<hr/>
 	<dl class="attributes">
-		<dt>Username</dt>
+		<dt>Username:</dt>
 		<dd><%= @student.username %></dd>
-		<dt>Student ID</dt>
+		<dt>Student ID:</dt>
 		<dd><%= @student.details.student_number %></dd>
-		<dt>Orientaion</dt>
+		<dt>Welcome Email:</dt>
+		<dd>
+			<%  if @student.email_sent_at %>
+				Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %>
+			<% elsif  can?(:create, Student) %>
+				<%= link_to send_welcome_email_student_url(@student), disable_with: 'sending ...', class: "small", confirm: "Are you sure?" do %>
+					<i class="icon-envelope"></i>	Send Welcome Email
+				<% end %>
+			<% end %>
+		</dd>
+		<dt>Orientaion:</dt>
 		<dd>
 			<% if @student.details.requires_orientation? %>
 
-				<%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") if @student.details.orientation_completed_at == nil %>
+				<%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") if @student.details.orientation_completed_at != nil %>
 
-				<%  if @student.details.orientation_completed_at != nil && can?(:create, Student)  %>
-					<%= link_to complete_orientation_student_path(@student), disable_with: 'completing ...', class: "small" do %>
+				<%  if @student.details.orientation_completed_at == nil && can?(:create, Student)  %>
+					<%= link_to complete_orientation_student_path(@student), disable_with: 'completing ...', class: "small", confirm: "Completing this orientation will record today's date. Are you sure?" do %>
 						<i class="icon-certificate"></i>	Complete orientation
 					<% end %>
 				<% end %>
@@ -31,50 +41,47 @@
 			<% else %>
 				Orientation Not Required
 			<% end %>
-		</dd>
-		<dt>Welcome Email</dt>
-		<dd>
-			<%  if @student.email_sent_at %>
-				Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %>
-			<% elsif  can?(:create, Student) %>
-				<%= link_to send_welcome_email_student_url(@student), disable_with: 'sending ...', class: "small" do %>
-					<i class="icon-envelope"></i>	Send Welcome Email
-				<% end %>
-			<% end %>
-		</dd>
-		<dt>Registered By</dt>
+		</dd>	
+		<dt>Registered By:</dt>
 		<dd><%= @student.created_by.name %></dd>
-		<dt>Registered On</dt>
+		<dt>Registered On:</dt>
 		<dd><%= @student.created_at.strftime(" %b %d, %Y") %></dd>
-		<dt>Status</dt>
-		<dd><%= @student.inactive? ? "INACTIVE" : "ACTIVE" %></dd>
+		<dt>Status:</dt>
+		<dd class="tag <%= @student.inactive? ? "red" : "green" %>"><%= @student.inactive? ? "INACTIVE" : "ACTIVE" %></dd>
 	</dl>
 
+
 </div>
-
-<a href="<%= admin_student_view_path(@student) %>" class="btn btn-success btn-block"><i class="icon-share-alt"></i> Login as student </a>
-
-
+<hr/>
 <% if can? :manage, ItemConnection %>
-	<section class="hide">
+
+	<p align="center">
+		<a href="<%= admin_student_view_path(@student) %>" class="btn btn-link"><i class="icon-share-alt"></i> Login As Student  </a>
+		<a href="#" onclick="$('#message_center').toggle(); return false;" class="btn btn-link"><i class="icon-bullhorn"></i> Message  </a>
+	</p>
+
+	<section id="message_center" class="hide">
+		<hr/>
 		<div class="well">
-			<p><strong>Send a Message</strong></p>
-			<p>Send a message to the student. </p>
-			<p>CC: <%= @current_user.email %></p>
+			<p><strong>Send a Message to this student</strong></p>
+			<p>To: <strong><%= @student.email %></strong></p>
+			<p>From: <strong><%= @current_user.email %></strong></p>
 			<%= form_tag notify_students_path  do %>
 
 				<input class="student_notification" type="hidden" name="students[]" value="<%= @student.id %>">
 				<input type="hidden" name="student" value="<%= @student.id %>"/>
-				<p>Message: <br/><%= text_area_tag 'message', nil, :rows => 8 %></p>
-				<p><%= submit_tag "Send...", :class => "btn" %></p>
+				<p>Brief Message: <br/><%= text_area_tag 'message', nil, :rows => 10 %></p>
+
+				<p>
+					<%= submit_tag "Send...", :class => "btn" %>
+					or <a href="#" onclick="$('#message_center').hide(); return false;"> Cancel </a>
+				</p>
 
 			<% end %>
 		</div>
 	</section>
 
-	<% if can?(:block, Student) && @student.blocked == false %>
-		<a href="<%= block_student_path(@student) %>" class="float-right btn btn-danger">Block Editing</a>
-	<% end %>
+
 <% else %>
 	<h3>Student Record Details</h3>
 

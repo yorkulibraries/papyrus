@@ -1,17 +1,15 @@
 <% title "My Access Codes" %>
 
-<section id="access_codes">
-	<h2>Current Access Codes</h2>
+<div class="student">
+	<section class="access_codes">
+		<h2>Active Access Codes</h2>
 
-	<div id="access_code_form_holder"></div>
-	
-	<div class="access_code heading strong row" id="current_codes">
-		<div class="span4">For</div>
-		<div class="span3">Code</div>	
-		<div class="span2">Expires</div>		
-	</div>
-	
-	<% @student.access_codes.active.each do |access_code| %>
-		<%= render partial: access_code %>
+		<% @student.access_codes.active.each do |access_code| %>
+			<%= render partial: access_code %>
+		<% end %>
+	</section>
+
+	<% if @student.access_codes.active.size == 0 %>
+		<p>You currently do not have any <strong>active</strong> access codes.</p>
 	<% end %>
-</section>
+</div>
