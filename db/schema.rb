@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.date     "expires_at"
     t.integer  "student_id"
     t.integer  "created_by_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "global",        :default => false
   end
 
   create_table "acquisition_requests", :force => true do |t|
@@ -129,6 +130,9 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.integer  "attachments_count",    :default => 0, :null => false
   end
 
+  add_index "items", ["unique_id"], :name => "index_items_on_unique_id"
+  add_index "items", ["user_id"], :name => "index_items_on_user_id"
+
   create_table "notes", :force => true do |t|
     t.text     "note"
     t.integer  "student_id"
@@ -143,7 +147,7 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.integer  "student_id"
     t.integer  "student_number"
     t.string   "preferred_phone"
-    t.string   "cds_adviser"
+    t.string   "cds_counsellor"
     t.boolean  "format_pdf"
     t.boolean  "format_kurzweil"
     t.boolean  "format_daisy"
@@ -159,10 +163,13 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.boolean  "requires_orientation",                        :default => true,  :null => false
     t.boolean  "orientation_completed",                       :default => false, :null => false
     t.date     "orientation_completed_at"
+    t.boolean  "book_retrieval",                              :default => false
+    t.boolean  "accessibility_lab_access",                    :default => false
+    t.string   "cds_counsellor_email"
   end
 
   add_index "student_details", ["student_id"], :name => "index_student_details_on_student_id"
-  add_index "student_details", ["transcription_assistant_id"], :name => "index_student_details_on_transcription_assistant_id"
+  add_index "student_details", ["transcription_assistant_id"], :name => "ta_id"
   add_index "student_details", ["transcription_coordinator_id"], :name => "tc_id"
 
   create_table "students", :force => true do |t|
@@ -173,7 +180,6 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.integer  "user_id",        :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.integer  "notes_count",    :default => 0, :null => false
   end
 
   create_table "terms", :force => true do |t|

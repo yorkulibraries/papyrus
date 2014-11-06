@@ -31,8 +31,19 @@
 		</div>
 
 
+		<% if @active_access_codes.size == 0 %>
+			<div class="blank-slate">
+				<i class="icon-lock"></i>
+				<h1>No access codes added.</h1>
+				<p>Click on the <strong>New Access Code</strong> button to add one.</p>
+			</div>
+		<% end %>
+
+
 		<div class="expired_codes">
+			<% if @expired_access_codes.size > 0 %>
 			<h5>Expired Codes</h5>
+			<% end %>
 
 			<% @expired_access_codes.expired.each do |access_code| %>
 				<div class="access_code row" id="access_code_<%= access_code.id %>">

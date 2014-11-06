@@ -39,5 +39,14 @@ class RemoveAndChangeFields < ActiveRecord::Migration
     # Rename format field
     rename_column :student_details, :pf_note, :format_note
 
+    # Add CDS Fields
+    add_column :student_details, :book_retrieval, :boolean, default: false
+    add_column :student_details, :accessibility_lab_access, :boolean, default: false
+    add_column :student_details, :cds_counsellor_email, :string
+    rename_column :student_details, :cds_adviser, :cds_counsellor
+
+    # Additional field for access_codes
+    add_column :access_codes, :global, :boolean, default: false
+
   end
 end

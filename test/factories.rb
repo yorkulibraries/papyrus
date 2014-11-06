@@ -46,7 +46,7 @@ FactoryGirl.define do
     # partially filled
     student_number 12343
     preferred_phone "12345"
-    cds_adviser "some person"
+    cds_counsellor "some person"
     student nil
     requires_orientation true
     orientation_completed true
@@ -107,6 +107,7 @@ FactoryGirl.define do
   factory :access_code do
     sequence(:for) { |n| "Access Code"}
     code "some code"
+    global false
     expires_at 1.month.from_now
     association :student, factory: :student
     association :created_by, factory: :user

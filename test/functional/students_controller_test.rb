@@ -10,7 +10,7 @@ class StudentsControllerTest < ActionController::TestCase
   ############# CREATE AND UPDATE TESTS ###############
 
   should "create a new student" do
-    student_details = { student_number: '123232', preferred_phone: '11232', cds_adviser: 'dadf', transcription_coordinator_id: @user.id,
+    student_details = { student_number: '123232', preferred_phone: '11232', cds_counsellor: 'dadf', transcription_coordinator_id: @user.id,
       transcription_assistant_id: @user.id }
 
     assert_difference ["Student.count", "StudentDetails.count"], 1 do
@@ -26,7 +26,7 @@ class StudentsControllerTest < ActionController::TestCase
     student = create(:student, name: "old")
     details = create(:student_details, student: student, student_number: "000")
 
-    student_details = { student_number: '111', preferred_phone: '11232', cds_adviser: 'dadf', transcription_coordinator_id: @user.id,
+    student_details = { student_number: '111', preferred_phone: '11232', cds_counsellor: 'dadf', transcription_coordinator_id: @user.id,
         transcription_assistant_id: @user.id }
     post :update, id: student.id, student: { name: "new", student_details_attributes: student_details}
 
@@ -93,20 +93,6 @@ class StudentsControllerTest < ActionController::TestCase
 
   ########## BLOCK AND UNBLOCK TESTS ##################
 
-
-  should "block student and display blocked message" do
-    student = create(:student)
-
-    get :block, :id => student.id
-
-    assert_redirected_to student
-    student.reload
-
-    assert student.blocked
-
-    get :show, :id => student.id
-    assert_select '.blocked .message span', "This user has been temporarily blocked from being edited by the staff."
-  end
 
 
   should "unblock the student and not display the block message" do

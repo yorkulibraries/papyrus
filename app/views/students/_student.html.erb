@@ -10,7 +10,7 @@
 			<div class="span1 key top-border">Assistant: </div><div class="span3 value top-border"> <%= format_field @student.details.assistant.name rescue nil %></div>
 	</div>
 	<div class="attributes row">
-			<div class="span1 key">CDS Adviser:</div><div class="span3 value"><%= @student.details.cds_adviser %></div>
+			<div class="span1 key">Councillor:</div><div class="span3 value"><%= @student.details.cds_counsellor %></div>
 			<div class="span1 key">Format:</div><div class="span3 value">
 				<% formats_array = Array.new %>
 				<% formats_array.push "PDF" if @student.details.format_pdf %>

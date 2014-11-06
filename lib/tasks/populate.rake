@@ -6,7 +6,7 @@ namespace :db do
           require 'populator'
           require 'faker'
 
-          [Item, Attachment, Student, StudentDetails, ItemConnection, Note, User, Term, Course, ItemCourseConnection].each(&:delete_all)
+          [Item, Attachment, Student, StudentDetails, ItemConnection, Note, User, Term, Course, ItemCourseConnection, AccessCode].each(&:delete_all)
 
           puts "Create all user accounts"
 
@@ -15,6 +15,7 @@ namespace :db do
           User.populate User::ROLE_NAMES.size do |user|
             user.username = User::ROLE_NAMES[index]
             user.name = "#{User::ROLE_NAMES[index].titleize} User"
+            user.email = "#{user.username}@utest.yorku.ca"
             user.inactive = false
             user.role = User::ROLE_NAMES[index]
             index = index + 1
@@ -62,21 +63,34 @@ namespace :db do
 
           puts "Populating students..."
           Student.populate 440 do |student|
-            student.name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
-            student.email = Faker::Internet.email
-            student.username = Faker::Internet.user_name
+            fname = "#{Faker::Name.first_name}"
+            lname = "#{Faker::Name.last_name}"
+            student.name = "#{fname} #{lname}"
+            student.email = "#{fname}.#{lname}@test.yorku.ca"
+            student.username = "#{fname}#{lname}"
+            student.role = "student"
             student.created_by_user_id = 1..2
             student.inactive = false
 
             StudentDetails.populate 1 do |sd|
-        				sd.student_number = 10000..100000
-        				sd.preferred_phone = 333..444
-        				sd.cds_adviser = Faker::Name.name
+        				sd.student_number = 100000000..900000000
+        				sd.preferred_phone = 5551111111..5559999999
+        				sd.cds_counsellor = Faker::Name.name
+                sd.cds_counsellor_email = "#{Faker::Internet.email}"
         				sd.student_id = student.id
         				sd.transcription_coordinator_id = 1
                 sd.transcription_assistant_id = 1
                 sd.requires_orientation = true
                 sd.orientation_completed = false
+                sd.format_pdf = [true, false]
+                sd.format_kurzweil = [true, false]
+                sd.format_daisy = [true, false]
+                sd.format_braille = [true, false]
+                sd.format_word = [true, false]
+                sd.format_large_print = [true, false]
+
+                sd.book_retrieval = [true, false]
+                sd.accessibility_lab_access = [true, false]
             end
 
             Note.populate 2..4 do |note|

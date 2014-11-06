@@ -1,17 +1,17 @@
 <% if result.is_a?(Student) %>
 	<% unless @show_header %>
 		<tr>
-			<th>Name</th><th>Email</th><th>Student Number</th><th>CDS Adviser</th><th>Created On</th>
+			<th>Name</th><th>Email</th><th>Student Number</th><th>CDS Counsellor</th><th>Created On</th>
 		</tr>
 		<% @show_header = true %>
 	<% end %>
-	
+
 	<% student = result %>
 	<tr>
 		<td><%= student.name %></td>
 		<td><%= student.email %></td>
 		<td><%= student.student_details.student_number%></td>
-		<td><%= student.student_details.cds_adviser%></td>	
+		<td><%= student.student_details.cds_counsellor%></td>
 		<td><%= student.created_at.strftime(" %b %d, %Y")%></td>
 	</tr>
 <% else %>
