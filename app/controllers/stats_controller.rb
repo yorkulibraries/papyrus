@@ -8,7 +8,9 @@ class StatsController < ApplicationController
   end
 
   def generate
-    if params[:assigned_to] != "all"
+
+
+    if params[:assigned_to] != nil && params[:assigned_to] != "all"
       id = params[:assigned_to]
       assigned_to = User.find(id)
       @title = "Students Assgined to #{assigned_to.name}"
