@@ -6,9 +6,9 @@ Papyrus is an accessible content delivery and student management application. It
 Downloading The Latest Version
 ------------------------------
 
-The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.3.0 is the most recent production ready version. 
+The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.3.0 is the most recent production ready version.
 
-[Download v2.3.0 Zip File](https://github.com/yorkulcs/papyrus/archive/v2.3.0.zip)
+[Download v2.3.2 Zip File](https://github.com/yorkulcs/papyrus/archive/v2.3.2.tar.gz)
 
 Checkout the [Wiki Pages](https://github.com/yorkulcs/papyrus/wiki) for more details on how to deploy Papyrus.
 
@@ -125,13 +125,13 @@ This is a simple RUBY configuration file that contains settings for the applicat
 
 
 ### Version 2.2 - Bibliographic Search (bib search)
-> NOTE: Version 2.2 introduces Worldcat Search as an alternative to SOLR for looking up Bib Information for items. This requires a minor change in configuration to accomodate Worldcat and SOLR options. 
+> NOTE: Version 2.2 introduces Worldcat Search as an alternative to SOLR for looking up Bib Information for items. This requires a minor change in configuration to accomodate Worldcat and SOLR options.
 
 ###### SOLR
 
 | OPTION              | Description                                                                 |
 |---------------------|-----------------------------------------------------------------------------|
-| solr.label          | The label to use on the front end when searching. (VuFind)                  | 
+| solr.label          | The label to use on the front end when searching. (VuFind)                  |
 | solr.id_prefix      | The prefix to use when storing the id of the item in the database           |
 | solr.url            | The URL of the bib search server (i.e. Solr/VuFind)                         |
 | solr.query_fields   | The list of fields to query and when searching for items                    |
