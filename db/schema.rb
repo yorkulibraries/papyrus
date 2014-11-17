@@ -129,6 +129,9 @@ ActiveRecord::Schema.define(:version => 20140819181859) do
     t.integer  "attachments_count",    :default => 0, :null => false
   end
 
+  add_index "items", ["unique_id"], :name => "index_items_on_unique_id"
+  add_index "items", ["user_id"], :name => "index_items_on_user_id"
+
   create_table "notes", :force => true do |t|
     t.text     "note"
     t.integer  "student_id"
@@ -193,7 +196,6 @@ ActiveRecord::Schema.define(:version => 20140819181859) do
     t.integer  "user_id",        :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
-    t.integer  "notes_count",    :default => 0, :null => false
   end
 
   create_table "terms", :force => true do |t|
