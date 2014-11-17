@@ -15,12 +15,8 @@ Checkout the [Wiki Pages](https://github.com/yorkulcs/papyrus/wiki) for more det
 Demo
 ----
 
-You can checkout a demo of Papyrus. [Papyrus Demo](http://demos.library.yorku.ca/papyrus/)
+We had to remove the demo of Papyrus. However if you would like to see it again, send us an email (tdanylak@yorku.ca)
 
-Username: demo
-Password: demo
-
-Please report abuse of the demo instance [here](https://github.com/yorkulcs/papyrus/issues)
 
 Deploying Papyrus
 ------------------
