@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Papyrus by yorkulcs</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Papyrus</h1>
+        <h2>Papyrus is an Accessible Conten Delivery and Student Management Application</h2>
+        <a href="https://github.com/yorkulcs/papyrus" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="papyrus" class="anchor" href="#papyrus" aria-hidden="true"><span class="octicon octicon-link"></span></a>Papyrus</h1>
+
+<p>Papyrus is an accessible content delivery and student management application. It was originally developed by Taras Danylak at York University Libraries. Its core purpose is to provide a delivery system for online books, articles and course kits to students with disabilities. Another prominent function of Papyrus is to keep track of and help manage student accessibility information, as well as act as a repository for electronic books, articles and course kits.</p>
+
+<h2>
+<a id="downloading-the-latest-version" class="anchor" href="#downloading-the-latest-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Downloading The Latest Version</h2>
+
+<p>The latest Papyrus version can be found by clicking on the <a href="https://github.com/yorkulcs/papyrus/releases">Releases</a> link at the top of this page. Currently v2.3.2 is the most recent production ready version.</p>
+
+<p><a href="https://github.com/yorkulcs/papyrus/archive/v2.3.2.tar.gz">Download v2.3.2 Zip File</a></p>
+
+<p>Checkout the <a href="https://github.com/yorkulcs/papyrus/wiki">Wiki Pages</a> for more details on how to deploy Papyrus.</p>
+
+<h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>We had to remove the demo of Papyrus. However if you would like to see it again, send us an email (<a href="mailto:tdanylak@yorku.ca">tdanylak@yorku.ca</a>)</p>
+
+<h2>
+<a id="deploying-papyrus" class="anchor" href="#deploying-papyrus" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploying Papyrus</h2>
+
+<p>There are two ways to install and test out Papyrus. The first one lets you start up the server on your computer and check out the features in development mode. The second way requires the setup of Papyrus on a Linux server with a MySQL database and Ruby on Rails installed.</p>
+
+<h2>
+<a id="prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<ul>
+<li>Ruby 1.9.3</li>
+<li>Rails 3.2.x</li>
+<li>MySQL 5.5 or PostgreSQL (This method requires changing of the configuration files)</li>
+<li>SQLite (For development/testing mode)</li>
+</ul>
+
+<h2>
+<a id="installing" class="anchor" href="#installing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installing</h2>
+
+<p>To install Papyrus, you must first download the source code via a git clone mechanism.</p>
+
+<div class="highlight highlight-sh"><pre>$ <span class="pl-sf">cd</span> directory/where/papyrus/will/live
+$ git clone git://github.com/yorkulcs/papyrus.git</pre></div>
+
+<h2>
+<a id="development-mode" class="anchor" href="#development-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development Mode</h2>
+
+<p>After Papyrus source code has been cloned onto your system, you can run the setup tasks and follow that immediately by running Papyrus in development mode.</p>
+
+<p>To run Papyrus in the development mode:</p>
+
+<div class="highlight highlight-sh"><pre>$ <span class="pl-sf">cd</span> papyrus
+$ bundle
+$ rake app:setup
+<span class="pl-c"><span class="pl-pdc">#</span># after the setup has copied the files</span>
+$ rake db:migrate
+<span class="pl-c"><span class="pl-pdc">#</span># setup default development data</span>
+$ rake db:populate
+$ rails s</pre></div>
+
+<p>The last command will run the Rails development server which will load the application.
+You can access this application by going to <a href="http://localhost:3000/login">http://localhost:3000/login</a>.</p>
+
+<h2>
+<a id="production-mode" class="anchor" href="#production-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Production Mode</h2>
+
+<p>Checkout this guide on how to setup Papyrus in production.</p>
+
+<p><a href="https://github.com/yorkulcs/papyrus/wiki/Setup-Papyrus-in-Production">Setup Papyrus in Production</a></p>
+
+<h1>
+<a id="configuration-options" class="anchor" href="#configuration-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration Options</h1>
+
+<p>The configuration options are located in:</p>
+
+<pre><code>config/papyrus_app_config.rb
+</code></pre>
+
+<p>This is a simple RUBY configuration file that contains settings for the application's name, authentication, error handling and bibliographic search.</p>
+
+<h3>
+<a id="organization" class="anchor" href="#organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Organization</h3>
+
+<table>
+<thead>
+<tr>
+<th>OPTION</th>
+<th>Description</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>full_name</td>
+<td>The full name of your organization. i.e. York University Libraries</td>
+<td>Used in copyright</td>
+</tr>
+<tr>
+<td>short_name</td>
+<td>Short name of your organization, i.e. yul</td>
+<td>Used internally</td>
+</tr>
+<tr>
+<td>app_url</td>
+<td>The URL where Papyrus is deployed.</td>
+<td>Email notifications</td>
+</tr>
+<tr>
+<td>course_code_sample</td>
+<td>The format for a course to shown as a hint on courses page.</td>
+<td>Courses and Terms</td>
+</tr>
+<tr>
+<td>course_code_lookup_link</td>
+<td>A link where to find the proper course code</td>
+<td>Courses and Terms</td>
+</tr>
+<tr>
+<td>item_sources</td>
+<td>An array of sources for the electronic files of an Item</td>
+<td>Adding new Item</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication</h3>
+
+<table>
+<thead>
+<tr>
+<th>OPTION</th>
+<th>Description</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cas_header_name</td>
+<td>The name of the CAS header to authenticate the user</td>
+<td>Authentication module</td>
+</tr>
+<tr>
+<td>cas_user_id_name</td>
+<td>The name of user id to be use. i.e Passport York</td>
+<td>User module</td>
+</tr>
+<tr>
+<td>after_logout_redirect_to</td>
+<td>The URL to redirect the user to after logout</td>
+<td>Logout function</td>
+</tr>
+<tr>
+<td>cookies_domain</td>
+<td>The domain to use for cookies</td>
+<td>Not implemented yet</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="errors" class="anchor" href="#errors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Errors</h3>
+
+<table>
+<thead>
+<tr>
+<th>OPTION</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>email_subject_prefix</td>
+<td>The prefix to use in the email subject</td>
+</tr>
+<tr>
+<td>sender_address</td>
+<td>Address of the sender for error emails</td>
+</tr>
+<tr>
+<td>error_recipients</td>
+<td>An array of email addresses to receive error notifications</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="notifications" class="anchor" href="#notifications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notifications</h3>
+
+<table>
+<thead>
+<tr>
+<th>OPTION</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from_email</td>
+<td>The From email address to use when sending out notifications</td>
+</tr>
+<tr>
+<td>welcome_subject</td>
+<td>The subject for the welcome email</td>
+</tr>
+<tr>
+<td>notification_subject</td>
+<td>The subject for notifications email, when sending notifications to students</td>
+</tr>
+<tr>
+<td>items_assigned_subject</td>
+<td>The subject of items that have been assigned to you email</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="version-22---bibliographic-search-bib-search" class="anchor" href="#version-22---bibliographic-search-bib-search" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version 2.2 - Bibliographic Search (bib search)</h3>
+
+<blockquote>
+<p>NOTE: Version 2.2 introduces Worldcat Search as an alternative to SOLR for looking up Bib Information for items. This requires a minor change in configuration to accomodate Worldcat and SOLR options.</p>
+</blockquote>
+
+<h6>
+<a id="solr" class="anchor" href="#solr" aria-hidden="true"><span class="octicon octicon-link"></span></a>SOLR</h6>
+
+<table>
+<thead>
+<tr>
+<th>OPTION</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>solr.label</td>
+<td>The label to use on the front end when searching. (VuFind)</td>
+</tr>
+<tr>
+<td>solr.id_prefix</td>
+<td>The prefix to use when storing the id of the item in the database</td>
+</tr>
+<tr>
+<td>solr.url</td>
+<td>The URL of the bib search server (i.e. Solr/VuFind)</td>
+</tr>
+<tr>
+<td>solr.query_fields</td>
+<td>The list of fields to query and when searching for items</td>
+</tr>
+<tr>
+<td>solr.phrase_fields</td>
+<td>The list of phrase fields to search with the boost assigned</td>
+</tr>
+<tr>
+<td>solr.boost_function</td>
+<td>Custom boost function for</td>
+</tr>
+<tr>
+<td>solr.sort</td>
+<td>How to sort search results</td>
+</tr>
+</tbody>
+</table>
+
+<h6>
+<a id="worldcat" class="anchor" href="#worldcat" aria-hidden="true"><span class="octicon octicon-link"></span></a>Worldcat</h6>
+
+<blockquote>
+<p>NOTE: Worldcat integration requires an API key. If you're instution subscribes to OCLC services, you should already have an api key.</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th>OPTION</th>
+<th>Description (Defaults)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>worldcat.label</td>
+<td>The label to use on the front end when searching (Worldcat Search)</td>
+</tr>
+<tr>
+<td>worldcat.id_prefix</td>
+<td>The prefix to sue when saving the id of the item in the database  (oclc)</td>
+</tr>
+<tr>
+<td>worldcat.key</td>
+<td>To access Worldcat you need an API key. Put the key here. (no key provided)</td>
+</tr>
+</tbody>
+</table>
+
+<h4>
+<a id="version-21---bibliographic-search-bib-search" class="anchor" href="#version-21---bibliographic-search-bib-search" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version. 2.1 - Bibliographic Search (bib search)</h4>
+
+<blockquote>
+<p>NOTE:  There was a configuration change for bib search section. Solr specific configuration now lives under solr. prefix. Ensure you update you config if you pull the latest code.</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th>OPTION</th>
+<th>Description</th>
+<th>Related to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>The type of bib search supported. Currently only 'solr' search is supported</td>
+<td>solr</td>
+</tr>
+<tr>
+<td>label</td>
+<td>The label to use on the front end when searching.</td>
+<td>any</td>
+</tr>
+<tr>
+<td>id_prefix</td>
+<td>The prefix to use when storing the id of the item in database</td>
+<td>any</td>
+</tr>
+<tr>
+<td>solr.url</td>
+<td>The URL of the bib search server (i.e. Solr/VuFind)</td>
+<td>SOLR</td>
+</tr>
+<tr>
+<td>solr.query_fields</td>
+<td>The list of fields to query and when searching for items</td>
+<td>SOLR</td>
+</tr>
+<tr>
+<td>solr.phrase_fields</td>
+<td>The list of phrase fields to search with the boost assigned</td>
+<td>SOLR</td>
+</tr>
+<tr>
+<td>solr.boost_function</td>
+<td>Custom boost function for</td>
+<td>SOLR</td>
+</tr>
+<tr>
+<td>solr.sort</td>
+<td>How to sort search results</td>
+<td>SOLR</td>
+</tr>
+</tbody>
+</table>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/yorkulcs/papyrus/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/yorkulcs/papyrus/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/yorkulcs/papyrus"></a> is maintained by <a href="https://github.com/yorkulcs">yorkulcs</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
