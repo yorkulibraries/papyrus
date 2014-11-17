@@ -6,7 +6,7 @@ Papyrus is an accessible content delivery and student management application. It
 Downloading The Latest Version
 ------------------------------
 
-The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.3.0 is the most recent production ready version.
+The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.3.2 is the most recent production ready version.
 
 [Download v2.3.2 Zip File](https://github.com/yorkulcs/papyrus/archive/v2.3.2.tar.gz)
 
