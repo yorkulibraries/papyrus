@@ -7,9 +7,11 @@
 			<td>Student</td>
 			<td>Assigned To: </td>
 			<td>
+
 				<select name="assigned_to">
-					<% User.transcription_assitants.each do |u| %>									
-						<option value="<%= u.id %>"><%= u.name %></option>
+					<option value="all">All</option>
+					<% User.transcription_assitants.each do |u| %>
+						<option value="<%= u.id %>"  <%= "selected" if params["assigned_to"] == u.id.to_s %> ><%= u.name %></option>
 					<% end %>
 				</select>
 			</td>
@@ -34,9 +36,8 @@
 	</div>
 <% end %>
 <table class="table results">
-	
-	<% @results.each do |r| %>		
+
+	<% @results.each do |r| %>
 		<%= render partial: "result", locals: { result: r}  %>
 	<% end %>
 </table>
-

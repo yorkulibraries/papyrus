@@ -7,17 +7,19 @@
 		  <Cell><Data ss:Type="String">Name</Data></Cell>
 		  <Cell><Data ss:Type="String">Email</Data></Cell>
 		  <Cell><Data ss:Type="String">Student Number</Data></Cell>
+			<Cell><Data ss:Type="String">Formats</Data></Cell>
 		  <Cell><Data ss:Type="String">CDS Adviser</Data></Cell>
 		  <Cell><Data ss:Type="String">Created On Date</Data></Cell>
 		</Row>
 		<% @show_header = true %>
 	<% end %>
-	
+
 	<Row>
 	  <Cell><Data ss:Type="Number"><%= student.id %></Data></Cell>
 	  <Cell><Data ss:Type="String"><%= student.name %></Data></Cell>
 	  <Cell><Data ss:Type="String"><%= student.email %></Data></Cell>
 	  <Cell><Data ss:Type="Number"><%= student.student_details.student_number %></Data></Cell>
+		<Cell><Data ss:Type="String"><%= student.student_details.formats.join(", ") %></Data></Cell>
 		<Cell><Data ss:Type="String"><%= student.student_details.cds_adviser %></Data></Cell>
 		<Cell><Data ss:Type="String"><%= student.created_at.strftime(" %b %d, %Y") %></Data></Cell>
 	</Row>
