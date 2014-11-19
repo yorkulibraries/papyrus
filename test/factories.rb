@@ -107,7 +107,7 @@ FactoryGirl.define do
   factory :access_code do
     sequence(:for) { |n| "Access Code"}
     code "some code"
-    global false
+    shared false
     expires_at 1.month.from_now
     association :student, factory: :student
     association :created_by, factory: :user

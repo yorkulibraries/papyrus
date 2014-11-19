@@ -4,7 +4,7 @@
 	<section class="access_codes">
 		<h2>Active Access Codes</h2>
 
-		<% @student.access_codes.active.each do |access_code| %>
+		<% (@student.access_codes.active + AccessCode.active.shared).each do |access_code| %>
 			<%= render partial: access_code %>
 		<% end %>
 	</section>

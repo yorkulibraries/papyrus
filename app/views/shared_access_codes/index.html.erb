@@ -2,3 +2,59 @@
 <% title_html do %>
   <h1>Shared Access Codes</h1>
 <% end%>
+
+
+<div class="student">
+  <section class="access_codes">
+    <h2>Shared Access Codes
+
+      <%= link_to  new_shared_access_code_path, class: "btn btn-small float-right btn-primary", data: { remote: true } do %>
+      <i class="icon-plus-sign icon-white"></i> New Shared Access Code
+      <% end %>
+    </h2>
+
+    <div id="access_code_form_holder"></div>
+
+    <div id="current_codes">
+      <% @access_codes.each do |access_code| %>
+        <%= render partial: access_code %>
+      <% end %>
+    </div>
+
+
+    <% if @access_codes.size == 0 %>
+      <div class="blank-slate">
+        <i class="icon-lock"></i>
+        <h1>No shared access codes added.</h1>
+        <p>Click on the <strong>New Shared Access Code</strong> button to add one.</p>
+      </div>
+    <% end %>
+
+
+    <div class="expired_codes">
+      <% if @expired_access_codes.size > 0 %>
+      <h5>Expired Shared Codes</h5>
+      <% end %>
+
+      <% @expired_access_codes.each do |access_code| %>
+        <div class="access_code row" id="access_code_<%= access_code.id %>">
+          <div class="span4">
+            <span class="for"><%= access_code.for %></span>
+            <br/>
+            <span class="expires_date">
+              <i class="icon-calendar"></i> Expired on <%= access_code.expires_at rescue nil %>
+            </span>
+
+
+          </div>
+          <div class="span4">
+            <span class="code"><%= access_code.code %></span><br/>
+            <span class="type">personal code</span>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+
+  </section>
+</div>

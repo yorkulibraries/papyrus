@@ -40,7 +40,7 @@ Papyrus::Application.routes.draw do
      get "search_courses", :on => :collection
   end
 
-  resources :shared_access_codes, only: [:index, :create, :destroy]
+  resources :shared_access_codes, only: [:index, :new, :create, :destroy]
 
   resources :students do
     resources :access_codes

@@ -25,7 +25,7 @@
 		<div id="access_code_form_holder"></div>
 
 		<div id="current_codes">
-			<% @active_access_codes.active.each do |access_code| %>
+			<% @active_access_codes.each do |access_code| %>
 				<%= render partial: access_code %>
 			<% end %>
 		</div>
@@ -45,7 +45,7 @@
 			<h5>Expired Codes</h5>
 			<% end %>
 
-			<% @expired_access_codes.expired.each do |access_code| %>
+			<% @expired_access_codes.each do |access_code| %>
 				<div class="access_code row" id="access_code_<%= access_code.id %>">
 					<div class="span4">
 						<span class="for"><%= access_code.for %></span>
