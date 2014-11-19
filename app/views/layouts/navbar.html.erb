@@ -13,10 +13,10 @@
 
 			<!-- Everything you want hidden at 940px or less, place within here -->
 			<div class="nav-collapse">
-				
+
 				<!-- .nav, .navbar-search, .navbar-form, etc -->
 				<ul class="nav">
-				    
+
 					<li class="divider-vertical"></li>
 					<% if can? :show, :dashboard %>
 					<li class="home <%= "active" if controller_name == "home" %>">
@@ -25,39 +25,39 @@
 						</a>
 					</li>
 					<% end %>
-					
-					
+
+
 					<% if can? :read, Item %>
 					<li class="<%= "active" if controller_name == "items" && action_name !="new"%>">
-						<a href="<%= items_path %>">Items</a>											
+						<a href="<%= items_path %>">Items</a>
 					</li>
 					<% end %>
-					
+
 					<% if can? :read, Student %>
 					<li class="<%= "active" if controller_name == "students" && action_name !="new"%>">
 						<a href="<%= students_path %>">Students</a>
-					</li>	
-					<% end %>		
-					
+					</li>
+					<% end %>
+
 					<% if can? :read, Term %>
 					<li class="<%= "active" if controller_name == "terms"%>">
 						<a href="<%= terms_path %>">Terms &amp; Courses</a>
-					</li>	
+					</li>
 					<% end %>
-					
-				
-					
+
+
+
 					<% if can? :read, AcquisitionRequest %>
 						<li class="<%= "active" if controller_name == "acquisition_requests" %>">
 							<a href="<%= acquisition_requests_path %>">Acquisitions</a>
 						</li>
 					<% end %>
-								
-					
+
+
 					<% if @current_user.type == Student.to_s %>
 						<%= render partial: "student_view/student_menu" %>
 					<% end %>
-																									
+
 			    </ul>
 				<ul class="nav  pull-right">
 						<% if can? :create, Item %>
@@ -72,15 +72,15 @@
 									</li>
 									<li>
 										<a href="<%= search_items_path(type: BibRecord::SOLR) %>">
-											<i class="icon-search"></i> Item From <%= bib_search_solr_label %> Search 
+											<i class="icon-search"></i> Item From <%= bib_search_solr_label %> Search
 										</a>
 									</li>
 									<li>
 										<a href="<%= search_items_path(type: BibRecord::WORLDCAT) %>">
-											<i class="icon-search"></i> Item From <%= bib_search_worldcat_label %> Search 
+											<i class="icon-search"></i> Item From <%= bib_search_worldcat_label %> Search
 										</a>
 									</li>
-									
+
 								</ul>
 							</li>
 						<% end%>
@@ -90,14 +90,12 @@
 							</li>
 						<% end%>
 						<li class="divider-vertical"></li>
-						<% if can? :manage, User %>
-						<li class="<%= "active" if controller_name == "users" %>">
-							<a href="<%= users_path %>">Papyrus Users</a>
-						</li>
-						<% end %>
+
+						<%= render template: "layouts/admin_menu" %>
+
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Current User">
-							<%= @current_user.name if @current_user%> <b class="caret"></b>
+								<div class="user-initials"><%= @current_user.initials if @current_user %></div>
 							</a>
 							<ul class="dropdown-menu">
 								<li><%= link_to "Logout", logout_path%></li>
@@ -106,12 +104,12 @@
 									<li class="nav-header">Log in as </li>
 									<% User::ROLE_NAMES.each do |role| %>
 										<li><%=link_to role, login_path(:as => role)%></li>
-									<% end %>										
+									<% end %>
 								<% end %>
 							</ul>
 						</li>
 				</ul>
-			</div>	
+			</div>
 		</div>
 	</div>
 </div>
