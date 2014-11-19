@@ -8,7 +8,7 @@
         <a href="<%= users_path %>">Papyrus Users</a>
       </li>
       <li class="<%= "active" if controller_name == "access_codes" %>">
-        <a href="<%= users_path %>">Access Codes</a>
+        <a href="<%= shared_access_codes_path %>">Access Codes</a>
       </li>
       <%  if can? :show, :stats %>
         <li class="divider"></li>
