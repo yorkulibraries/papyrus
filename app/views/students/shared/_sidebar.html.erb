@@ -55,9 +55,6 @@
 
 	</dl>
 </div>
-
-
-</div>
 <hr/>
 <% if can? :manage, ItemConnection %>
 
@@ -69,7 +66,7 @@
 	<section id="message_center" class="hide">
 		<hr/>
 		<div class="well">
-			<p><strong>Send a Message to this student</strong></p>
+			<p><strong>Send a Message</strong></p>
 			<p>To: <strong><%= @student.email %></strong></p>
 			<p>From: <strong><%= @current_user.email %></strong></p>
 			<%= form_tag notify_students_path  do %>
@@ -86,9 +83,4 @@
 			<% end %>
 		</div>
 	</section>
-
-
-<% else %>
-	<h3>Student Record Details</h3>
-
 <% end %>
