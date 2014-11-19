@@ -46,7 +46,7 @@ class RemoveAndChangeFields < ActiveRecord::Migration
     rename_column :student_details, :cds_adviser, :cds_counsellor
 
     # Additional field for access_codes
-    add_column :access_codes, :global, :boolean, default: false
+    add_column :access_codes, :shared, :boolean, default: false
 
   end
 end

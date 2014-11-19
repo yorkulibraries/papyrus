@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.integer  "created_by_id"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
-    t.boolean  "global",        :default => false
+    t.boolean  "shared",        :default => false
   end
 
   create_table "acquisition_requests", :force => true do |t|
