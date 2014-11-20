@@ -34,6 +34,14 @@ class User < ActiveRecord::Base
   default_scope order("users.name asc")
 
   def initials
-    self.name.split(/\s+/).map(&:first).join.upcase    
+    self.name.split(/\s+/).map(&:first).join.upcase
+  end
+
+  def name
+    "#{self.first_name} #{self.last_name}".strip
+  end
+
+  def name=(name)
+    self.last_name = name
   end
 end

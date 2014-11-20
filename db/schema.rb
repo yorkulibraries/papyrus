@@ -166,6 +166,8 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.boolean  "book_retrieval",                              :default => false
     t.boolean  "accessibility_lab_access",                    :default => false
     t.string   "cds_counsellor_email"
+    t.boolean  "alternate_format_required",                   :default => true
+    t.string   "format_other"
   end
 
   add_index "student_details", ["student_id"], :name => "index_student_details_on_student_id"
@@ -195,7 +197,8 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
 
   create_table "users", :force => true do |t|
     t.string   "username"
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "role"
     t.boolean  "inactive",           :default => false
     t.string   "type"
@@ -205,7 +208,7 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.boolean  "blocked",            :default => false
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
-    t.datetime "last_logged_in_at"
+    t.datetime "last_logged_in_at"    
   end
 
   add_index "users", ["inactive", "role"], :name => "index_users_on_inactive_and_role"

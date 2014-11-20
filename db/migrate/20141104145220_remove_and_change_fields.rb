@@ -43,7 +43,13 @@ class RemoveAndChangeFields < ActiveRecord::Migration
     add_column :student_details, :book_retrieval, :boolean, default: false
     add_column :student_details, :accessibility_lab_access, :boolean, default: false
     add_column :student_details, :cds_counsellor_email, :string
+    add_column :student_details, :alternate_format_required, :boolean, default: true
+    add_column :student_details, :format_other, :string
     rename_column :student_details, :cds_adviser, :cds_counsellor
+
+    # Name to be split
+    add_column :users, :first_name, :string
+    rename_column :users, :name, :last_name
 
     # Additional field for access_codes
     add_column :access_codes, :shared, :boolean, default: false
