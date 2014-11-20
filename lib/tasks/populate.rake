@@ -63,7 +63,7 @@ namespace :db do
 
           puts "Populating students..."
           Student.populate 440 do |student|
-            student.first_name = Faker::Name.first_name}
+            student.first_name = Faker::Name.first_name
             student.last_name = Faker::Name.last_name
             student.email = "#{fname}.#{lname}@test.yorku.ca"
             student.username = "#{fname}#{lname}"
