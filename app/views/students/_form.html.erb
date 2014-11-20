@@ -3,9 +3,13 @@
 
   <div class="standout">
     <div class="row">
-      <div class="span8">
-        <%= f.label :name, "Full Name" %>
-        <%= f.input :name, label: false, input_html: { class: "input-block-level" } %>
+      <div class="span4">
+        <%= f.label :first_name, "First Name" %>
+        <%= f.input :first_name, label: false, input_html: { class: "input-block-level" } %>
+      </div>
+      <div class="span4">
+        <%= f.label :last_name, "Last Name" %>
+        <%= f.input :last_name, label: false, input_html: { class: "input-block-level" } %>
       </div>
     </div>
 		<div class="row">

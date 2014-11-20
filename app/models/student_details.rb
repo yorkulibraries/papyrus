@@ -1,8 +1,8 @@
 class StudentDetails < ActiveRecord::Base
   attr_accessible  :student_number, :preferred_phone,
-                   :format_large_print, :format_pdf, :format_kurzweil, :format_daisy, :format_braille, :format_word, :format_note,
+                   :format_large_print, :format_pdf, :format_kurzweil, :format_daisy, :format_braille, :format_word, :format_note, :format_other,
                    :transcription_coordinator_id, :transcription_assistant_id, :cds_counsellor, :cds_counsellor_email, :book_retrieval,
-                   :requires_orientation, :orientation_completed, :orientation_completed_at, :accessibility_lab_access
+                   :requires_orientation, :orientation_completed, :orientation_completed_at, :accessibility_lab_access, :alternate_format_required
 
   belongs_to :student
   belongs_to :transcription_coordinator, class_name: "User", foreign_key: "transcription_coordinator_id"

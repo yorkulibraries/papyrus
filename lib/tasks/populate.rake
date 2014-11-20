@@ -63,14 +63,14 @@ namespace :db do
 
           puts "Populating students..."
           Student.populate 440 do |student|
-            fname = "#{Faker::Name.first_name}"
-            lname = "#{Faker::Name.last_name}"
-            student.name = "#{fname} #{lname}"
+            student.first_name = Faker::Name.first_name}
+            student.last_name = Faker::Name.last_name
             student.email = "#{fname}.#{lname}@test.yorku.ca"
             student.username = "#{fname}#{lname}"
             student.role = "student"
             student.created_by_user_id = 1..2
             student.inactive = false
+            student.role = User::STUDENT_USER
 
             StudentDetails.populate 1 do |sd|
         				sd.student_number = 100000000..900000000
@@ -88,9 +88,11 @@ namespace :db do
                 sd.format_braille = [true, false]
                 sd.format_word = [true, false]
                 sd.format_large_print = [true, false]
+                sd.format_other = ["mp3", "wave", "mov"]
 
                 sd.book_retrieval = [true, false]
                 sd.accessibility_lab_access = [true, false]
+                sd.alternate_format_required = true
             end
 
             Note.populate 2..4 do |note|

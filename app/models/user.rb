@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :name, :role, :email
+  attr_accessible :username, :first_name, :last_name, :role, :email
   acts_as_audited
 
 
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   belongs_to :created_by, :foreign_key => "created_by_user_id"
 
-  validates_presence_of :name, :username, :role
+  validates_presence_of :first_name, :last_name, :username, :role
   validates_inclusion_of :role, in: ROLE_NAMES, allow_blank: false
   validates_format_of :username, :with => /^[-\w\._]+$/i, :allow_blank => false, :message => "should only contain letters, numbers, or .-_"
   validates_uniqueness_of :username
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 
 
 
-  default_scope order("users.name asc")
+  default_scope order("users.last_name asc")
 
   def initials
     self.name.split(/\s+/).map(&:first).join.upcase
