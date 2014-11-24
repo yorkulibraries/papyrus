@@ -60,7 +60,7 @@ namespace :import do
         student.details.transcription_coordinator_id = options.default_transcription_coordinator_id
         student.details.transcription_assistant_id = options.default_transcription_coordinator_id
         student.details.preferred_phone = "not provided"
-        student.created_by_id = options.created_by_id
+        student.created_by_user_id = options.created_by_id
 
         unless student.valid?
           log "#{student.errors.messages}"
