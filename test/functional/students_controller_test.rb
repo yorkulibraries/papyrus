@@ -14,7 +14,7 @@ class StudentsControllerTest < ActionController::TestCase
       transcription_assistant_id: @user.id }
 
     assert_difference ["Student.count", "StudentDetails.count"], 1 do
-      post :create, student: {name: "dude", email: "1@1.com", username: "dude", student_details_attributes: student_details}
+      post :create, student: {first_name: "dude", last_name: "test", email: "1@1.com", username: "dude", student_details_attributes: student_details}
     end
 
     student = assigns(:student)
@@ -28,12 +28,12 @@ class StudentsControllerTest < ActionController::TestCase
 
     student_details = { student_number: '111', preferred_phone: '11232', cds_counsellor: 'dadf', transcription_coordinator_id: @user.id,
         transcription_assistant_id: @user.id }
-    post :update, id: student.id, student: { name: "new", student_details_attributes: student_details}
+    post :update, id: student.id, student: { first_name: "new", student_details_attributes: student_details}
 
     assert_redirected_to student
 
     student = assigns(:student)
-    assert_equal "new", student.name, "New name"
+    assert_equal "new", student.first_name, "New name"
     assert_equal 111, student.student_details.student_number, "New student number"
 
   end

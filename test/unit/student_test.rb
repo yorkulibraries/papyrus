@@ -72,4 +72,47 @@ class StudentTest < ActiveSupport::TestCase
     assert_equal 15, current_counts[students.first.id], "should be 15 all items"
   end
 
+
+
+  should "update fields from array of fields" do
+    fields = [
+      "student_number", "first_name", "last_name", "email", "cds_counsellor", "cds_counsellor_email","request_form_signed_on",
+      "accessibility_lab_access", "book_retrieval", "alternate_format_required", "format_pdf", "format_large_print", "format_braille",
+      "format_word", "format_other", "format_note"
+    ]
+
+
+    data = [12323, "Johnny", "Smithy", "johnny@smitthy.com", "Jeremy Irons", "jeremy@irons.com", "2012-10-10", "True", "false", "True",
+            "True", "no", "False", "True", "True", "No Notes" ]
+
+    hash = Student.build_hash_from_array(data, fields)
+
+    student = OpenStruct.new(hash)
+    student_details = OpenStruct.new(student.student_details_attributes)
+
+
+    # student
+    assert_equal "Johnny", student.first_name
+    assert_equal "Smithy", student.last_name
+    assert_equal "johnny@smitthy.com", student.email
+
+    # student details
+    assert_equal 12323, student_details.student_number, "Student number should be unchanged"
+    assert_equal "Jeremy Irons", student_details.cds_counsellor
+    assert_equal "jeremy@irons.com", student_details.cds_counsellor_email
+    assert_equal "2012-10-10", student_details.request_form_signed_on, "Date should match"
+    assert_equal true, student_details.accessibility_lab_access
+    assert_equal false, student_details.book_retrieval
+    assert_equal true, student_details.alternate_format_required
+
+    # formats
+    assert_equal true, student_details.format_pdf, "PDF"
+    assert_equal false, student_details.format_large_print, "Large Print"
+    assert_equal false, student_details.format_braille, "Braille"
+    assert_equal true, student_details.format_word, "World"
+    assert_equal true, student_details.format_other, "Other"
+    assert_equal "No Notes", student_details.format_note, "notes"
+
+  end
+
 end
