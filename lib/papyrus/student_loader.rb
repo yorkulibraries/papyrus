@@ -23,9 +23,9 @@ module Papyrus
       process_options(options)
 
       # ignore first line if required
-      students_list.shift if @options[:csv_ignore_first_line]
+      students_list.shift if @options[:ignore_first_line]
 
-      stats = { updated: [], created: [] }
+      status = { updated: [], created: [], errors: [] }
 
       students_list.each do |student_array|
 
@@ -35,7 +35,7 @@ module Papyrus
 
         if student
           # if existing student, should update it
-          log "Found Student, Updatting params #{student.valid?} #{student.last_name} #{student.details.id}"
+          log "Found Student, Updatting Student # #{student.id}"
           params.keys.each do |key|
             if key == :student_details_attributes
               params[:student_details_attributes].keys.each do |i|
@@ -46,12 +46,11 @@ module Papyrus
             end
           end
 
-          log "#{student.details.id}"
-          stats[:updated].push student.id
+          status[:updated].push student.id
         else
           # if new student, should create it
 
-          log "New Student, Saving new student"
+          log "New Student, registering new student"
           student = Student.new(params)
           student.username = student.details.student_number
           student.role = User::STUDENT_USER
@@ -60,21 +59,19 @@ module Papyrus
           student.details.preferred_phone = "not provided"
           student.created_by_user_id = @options[:created_by_id]
 
-          unless student.valid?
-            log "#{student.errors.messages}"
+
+          if student.save
+            status[:created].push student.id
+            log "Saved: #{student.id}"
+          else
+            status[:errors].push student_array
           end
-
-          student.save
-
-          stats[:created].push student.id
-
-          log "Saved: #{student.id}"
         end
 
 
       end
 
-      return stats ## return statistics
+      return status ## return status
 
     end
 
