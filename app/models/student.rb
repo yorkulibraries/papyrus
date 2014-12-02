@@ -22,7 +22,7 @@ class Student < User
 
   # username, email, name and role are validated in the user class
 
-  default_scope proc { order("created_at desc").includes(student_details: { transcription_coordinator: [] }) }
+  default_scope proc { order("#{table_name}.created_at desc").includes(student_details: { transcription_coordinator: [] }) }
 
   scope :assigned_to, lambda { |user_id| joins(:student_details).
                               where("student_details.transcription_coordinator_id = ? OR student_details.transcription_assistant_id = ?", user_id, user_id)
