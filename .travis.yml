@@ -8,8 +8,8 @@ env:
   #- DB=mysql
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rake
+  - RAILS_ENV=test bundle exec rake db:test:prepare
+  - RAILS_ENV=test bundle exec rake
 before_script:
   - cp config/travis.database.yml config/database.yml
   - cp config/travis.papyrus_app_config.rb config/papyrus_app_config.rb

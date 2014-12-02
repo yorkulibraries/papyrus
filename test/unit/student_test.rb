@@ -34,8 +34,9 @@ class StudentTest < ActiveSupport::TestCase
     assert_equal csv[1], student.name, "name"
     assert_equal csv[2], student.email, "email"
     assert_equal csv[3], student.student_details.student_number, "student_number"
-    assert_equal csv[4], student.student_details.cds_adviser, "some person"
-    assert_equal csv[5], student.created_at, "created_at"
+    assert_equal csv[4], student.student_details.formats.join(", "), "Formarts listed"
+    assert_equal csv[5], student.student_details.cds_adviser, "some person"
+    assert_equal csv[6], student.created_at, "created_at"
 
   end
 
