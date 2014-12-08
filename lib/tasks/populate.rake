@@ -14,7 +14,8 @@ namespace :db do
 
           User.populate User::ROLE_NAMES.size do |user|
             user.username = User::ROLE_NAMES[index]
-            user.name = "#{User::ROLE_NAMES[index].titleize} User"
+            user.first_name = "#{User::ROLE_NAMES[index].titleize}"
+            user.last_name = "User"
             user.email = "#{user.username}@utest.yorku.ca"
             user.inactive = false
             user.role = User::ROLE_NAMES[index]
@@ -65,8 +66,8 @@ namespace :db do
           Student.populate 440 do |student|
             student.first_name = Faker::Name.first_name
             student.last_name = Faker::Name.last_name
-            student.email = "#{fname}.#{lname}@test.yorku.ca"
-            student.username = "#{fname}#{lname}"
+            student.email = "#{student.first_name}.#{student.last_name}@test.yorku.ca"
+            student.username = "#{student.first_name[0]}#{student.last_name}"
             student.role = "student"
             student.created_by_user_id = 1..2
             student.inactive = false
@@ -130,7 +131,7 @@ namespace :db do
 
               term.courses_count = 0
 
-              courses = ["HIST", "MATH", "HUMA", "POLS", "ECON", "COMP", "ITEC", "NATS", "ARTS", "SOSC", "PSYC", "EDUC"]
+              courses = ["HIST", "MATH", "HUMA", "POLS", "ECON", "COMP", "ITEC", "NATS", "ARTS", "SOSC", "PSYC", "EDUC", "SOCI", "MATH", "FEMS"]
               codes = ["1000", "1010", "1020", "2000", "2010", "2020", "2030", "3000", "3010", "3020", "4000", "4010", "4020", "4030"]
               Course.populate 30 do |course|
                 # attr_accessible :title, :code
