@@ -3,7 +3,7 @@ require Rails.root.join("lib", "papyrus", "student_loader.rb")
 
 class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
   setup do
-    @loader = Papyrus::StudentLoader.new    
+    @loader = Papyrus::StudentLoader.new
   end
 
   should "only accept an array" do
@@ -33,6 +33,7 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
 
 
   should "import students from csv data" do
+    c = create(:user, id: 1) # coordinator user, for testing mysql referential checks
     s = create(:student, first_name: "Joe", last_name: "Schmoe")
 
     ENV["FIELDS_ORDER"] = ["student_number", "first_name", "last_name", "email", "cds_counsellor"].join(" ")
