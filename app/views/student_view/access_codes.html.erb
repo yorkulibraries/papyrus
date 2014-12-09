@@ -9,7 +9,7 @@
 		<% end %>
 	</section>
 
-	<% if @student.access_codes.active.size == 0 %>
+	<% if (@student.access_codes.active.size + AccessCode.active.shared.size)== 0 %>
 		<p>You currently do not have any <strong>active</strong> access codes.</p>
 	<% end %>
 </div>
