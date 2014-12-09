@@ -49,6 +49,7 @@ namespace :db do
 
               attachment_counter = attachment_counter + 1
               attachment.full_text = false
+              attachment.is_url = false
             end
 
             item.attachments_count = attachment_counter
