@@ -1,48 +1,93 @@
 
 <%= simple_form_for @student do |f| %>
 
-  <div class="standout"> 
+  <div class="standout">
+    <div class="row">
+      <div class="span4">
+        <%= f.label :first_name, "First Name" %>
+        <%= f.input :first_name, label: false, input_html: { class: "input-block-level" } %>
+      </div>
+      <div class="span4">
+        <%= f.label :last_name, "Last Name" %>
+        <%= f.input :last_name, label: false, input_html: { class: "input-block-level" } %>
+      </div>
+    </div>
 		<div class="row">
-			<div class="span4">	
-				<%= f.label :name, "Full Name" %>
-				<%= f.input :name, label: false, input_html: { class: "input-block-level" } %>
+			<div class="span4">
 				<%= f.label :email, "Email Address" %>
 				<%= f.input :email,label: false, input_html: { class: "input-block-level" } %>
 				<%= f.label :username, "Login Username" %>
 				<%= f.input :username, hint: username_hint, label: false, input_html: { class: "input-block-level" } %>
-		  	</div>	
+		  	</div>
 
-			<div class="span4">	
+			<div class="span4">
 				<%= f.fields_for :student_details do |builder| %>
-					<%= builder.label :student_number, "Student Number" %>
-					<%= builder.input :student_number, label: false, input_html: { class: "input-block-level" }  %>	
+          <%= builder.label :preferred_phone, "Preferred Number" %>
+          <%= builder.input :preferred_phone, label: false, input_html: { class: "input-block-level" } %>
 
-					<%= builder.label :cell_phone, "Cellphone Number" %>
-					<%= builder.input :cell_phone, label: false, input_html: { class: "input-block-level" } %>	
-				
-					<%= builder.label :cds_adviser, "Disablities Counsellor" %>
-					<%= builder.input :cds_adviser, hint: "Disablities Counsellor is in charge of the student record.", label: false, input_html: { class: "input-block-level" } %>			
+          <%= builder.label :student_number, "Student Number" %>
+					<%= builder.input :student_number, label: false, input_html: { class: "input-block-level" }  %>
 
 				<% end %>
 			</div>
 		</div>
-	
+
 		<hr/>
-		
+
 		<%= f.fields_for :student_details do |builder| %>
 			<div class="row">
 				<div class="span4">
-					<%= builder.label :transcription_coordinator_id, "Transcription Coordinator" %>
-					<%= builder.input :transcription_coordinator_id, label: false,  collection: User.transcription_assitants, input_html: { class: "input-xlarge" }  %>		
+          <%= builder.label :transcription_coordinator_id, "Transcription Coordinator" %>
+          <%= builder.input :transcription_coordinator_id, label: false,  collection: User.transcription_assitants, input_html: { class: "input-xlarge" }  %>
+
+          <%= builder.label :cds_counsellor, "Disablities Counsellor" %>
+          <%= builder.input :cds_counsellor, label: false, input_html: { class: "input-block-level" } %>
+
 				</div>
 				<div class="span4">
+
 					<%= builder.label :transcription_assistant_id, "Transcription Assistant" %>
 					<%= builder.input :transcription_assistant_id, label: false, collection: User.transcription_assitants, input_html: { class: "input-xlarge" }  %>
+
+          <%= builder.label :cds_counsellor_email, "Disablities Counsellor Email" %>
+          <%= builder.input :cds_counsellor_email, label: false, input_html: { class: "input-block-level" } %>
 				</div>
 			</div>
 		<% end %>
+
+    <hr/>
+
+    <%= f.fields_for :student_details do |builder| %>
+      <div class="row">
+        <div class="span4">
+          <label>Preferred Format</label>
+          <label class="checkbox inline"><%= builder.check_box :format_pdf %> PDF</label>
+          <label class="checkbox inline"><%= builder.check_box :format_kurzweil %> KURZWEIL</label>
+          <label class="checkbox inline"><%= builder.check_box :format_daisy %> DAISY</label>
+          <label class="checkbox inline"><%= builder.check_box :format_braille %> BRAILLE</label>
+          <label class="checkbox inline"><%= builder.check_box :format_word %> WORD DOCUMENT</label>
+          <label class="checkbox inline"><%= builder.check_box :format_large_print %> LARGE PRINT</label>
+        </div>
+        <div class="span4">
+          <%= builder.input :format_note, as: :string, label: "Format Note", input_html: { class: "span4" } %>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div class="row">
+        <div class="span4">
+          <%= builder.input :accessibility_lab_access, label: "Allow Access to Accessibility Lab?"%>
+        </div>
+        <div class="span4">
+          <%= builder.input :book_retrieval,  label: "Book Retrieval" %>
+        </div>
+      </div>
+    <% end %>
+
+
 	</div>
-	
+
 	<hr/>
 	<div class="row">
 		<div class="span4 offset4" style="text-align: right;">
@@ -51,7 +96,10 @@
 		</div>
 	</div>
 
+  <% if @student.errors.size > 0 %>
+    <div class="hide">
+      <%= @student.errors.messages.inspect %>
+    </div>
+  <% end %>
+
 <% end %>
-
-	
-

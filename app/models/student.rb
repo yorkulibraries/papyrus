@@ -30,7 +30,7 @@ class Student < User
   scope :unique_usernames, group: "username"
 
   def to_csv
-    [id, name, email, student_details.student_number, student_details.formats.join(", "), student_details.cds_adviser, created_at]
+    [id, name, email, student_details.student_number, student_details.formats.join(", "), student_details.cds_counsellor, created_at]
   end
 
   def details
@@ -39,6 +39,8 @@ class Student < User
     else
       return self.student_details
     end
+
+    return self.student_details
   end
 
 
@@ -59,5 +61,59 @@ class Student < User
     end
 
     counts
+  end
+
+  # Take in array of fields, and build a student attributes has with it
+  def Student.build_hash_from_array(data, fields)
+    hash = { student_details_attributes: {} }
+
+    fields.each_with_index do |field, index|
+      break if index > data.size
+
+      case field
+      when "first_name"
+        hash[:first_name] = data[index]
+      when "last_name"
+        hash[:last_name] = data[index]
+      when "email"
+        hash[:email] = data[index]
+      when "student_number"
+        hash[:student_details_attributes][:student_number] = data[index]
+      when "cds_counsellor"
+        hash[:student_details_attributes][:cds_counsellor]  = data[index]
+      when "cds_counsellor_email"
+        hash[:student_details_attributes][:cds_counsellor_email]  = data[index]
+      when "request_form_signed_on"
+        hash[:student_details_attributes][:request_form_signed_on]  = data[index]
+      when "accessibility_lab_access"
+        hash[:student_details_attributes][:accessibility_lab_access]  =  data[index].try(:downcase) == "true" ? true : false
+      when "book_retrieval"
+        hash[:student_details_attributes][:book_retrieval]  =  data[index].try(:downcase) == "true" ? true : false
+      when "alternate_format_required"
+        hash[:student_details_attributes][:alternate_format_required]  =  data[index].try(:downcase) == "true" ? true : false
+      when "format_pdf"
+        hash[:student_details_attributes][:format_pdf]  =  data[index].try(:downcase) == "true" ? true : false
+      when "format_large_print"
+        hash[:student_details_attributes][:format_large_print]  = data[index].try(:downcase) == "true" ? true : false
+      when "format_daisy"
+        hash[:student_details_attributes][:format_daisy]  = data[index].try(:downcase) == "true" ? true : false
+      when "format_braille"
+        hash[:student_details_attributes][:format_braille]  = data[index].try(:downcase) == "true" ? true : false
+      when "format_kurzweil"
+        hash[:student_details_attributes][:format_kurzweil] = data[index].try(:downcase) == "true" ? true : false
+      when "format_word"
+        hash[:student_details_attributes][:format_word]  =  data[index].try(:downcase) == "true" ? true : false
+      when "format_other"
+        hash[:student_details_attributes][:format_other]  =  data[index].try(:downcase) == "true" ? true : false
+      when "format_note"
+        hash[:student_details_attributes][:format_note]  = data[index]
+      else
+        # can't update the field
+      end
+    end
+
+    # return HASH
+    hash
+
   end
 end

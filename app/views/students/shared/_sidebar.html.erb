@@ -1,24 +1,86 @@
+<%= link_to edit_student_path(@student), class: "btn btn-block" do %>
+	<i class="icon-edit"></i> Update Student Record
+<% end %>
+
+<% if @student.inactive? %>
+	<div class="alert alert-error">
+		<p><strong>WARNING:</strong> This student has been deactivated. You will not be able to assign items to this student or see the student record listed in your dashboard or in the student listing.</p>
+		<p>To reactive, click on update user registration button and then on the Reactivate Student link in the sidebar.</p>
+	</div>
+<% end %>
+
+<div class="student clearfix">
+	<hr/>
+	<dl class="attributes">
+		<dt>Username:</dt>
+		<dd><%= @student.username %></dd>
+		<dt>Student ID:</dt>
+		<dd><%= @student.details.student_number %></dd>
+		<dt>Welcome Email:</dt>
+		<dd>
+			<%  if @student.email_sent_at %>
+				Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %>
+			<% elsif  can?(:create, Student) %>
+				<%= link_to send_welcome_email_student_url(@student), disable_with: 'sending ...', class: "small", confirm: "Are you sure?" do %>
+					<i class="icon-envelope"></i>	Send Welcome Email
+				<% end %>
+			<% end %>
+		</dd>
+		<dt>Orientaion:</dt>
+		<dd>
+			<% if @student.details.requires_orientation? %>
+
+				<%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") if @student.details.orientation_completed_at != nil %>
+
+				<%  if @student.details.orientation_completed_at == nil && can?(:create, Student)  %>
+					<%= link_to complete_orientation_student_path(@student), disable_with: 'completing ...', class: "small", confirm: "Completing this orientation will record today's date. Are you sure?" do %>
+						<i class="icon-certificate"></i>	Complete orientation
+					<% end %>
+				<% end %>
+
+			<% else %>
+				Orientation Not Required
+			<% end %>
+		</dd>
+		<dt>Registered By:</dt>
+		<dd><%= @student.created_by.name %></dd>
+		<dt>Registered On:</dt>
+		<dd><%= @student.created_at.strftime(" %b %d, %Y") %></dd>
+		<dt>Lab Access:</dt>
+		<dd><%= @student.details.accessibility_lab_access? ? "Yes" : "No" %></dd>
+		<dt>Book Retrieval:</dt>
+		<dd><%= @student.details.book_retrieval? ? "Yes" : "No" %></dd>
+		<dt>Status:</dt>
+		<dd class="tag <%= @student.inactive? ? "red" : "green" %>"><%= @student.inactive? ? "INACTIVE" : "ACTIVE" %></dd>
+
+	</dl>
+</div>
+<hr/>
 <% if can? :manage, ItemConnection %>
-	<section>
+
+	<p align="center">
+		<a href="<%= admin_student_view_path(@student) %>" class="btn btn-link"><i class="icon-share-alt"></i> Login As Student  </a>
+		<a href="#" onclick="$('#message_center').toggle(); return false;" class="btn btn-link"><i class="icon-bullhorn"></i> Message  </a>
+	</p>
+
+	<section id="message_center" class="hide">
+		<hr/>
 		<div class="well">
 			<p><strong>Send a Message</strong></p>
-			<p>Send a message to the student. </p>
-			<p>CC: <%= @current_user.email %></p>
+			<p>To: <strong><%= @student.email %></strong></p>
+			<p>From: <strong><%= @current_user.email %></strong></p>
 			<%= form_tag notify_students_path  do %>
-			
-				<input class="student_notification" type="hidden" name="students[]" value="<%= @student.id %>">					
-				<input type="hidden" name="student" value="<%= @student.id %>"/>			
-				<p>Message: <br/><%= text_area_tag 'message', nil, :rows => 8 %></p>
-				<p><%= submit_tag "Send...", :class => "btn" %></p>
-		
-			<% end %>											
+
+				<input class="student_notification" type="hidden" name="students[]" value="<%= @student.id %>">
+				<input type="hidden" name="student" value="<%= @student.id %>"/>
+				<p>Brief Message: <br/><%= text_area_tag 'message', nil, :rows => 10 %></p>
+
+				<p>
+					<%= submit_tag "Send...", :class => "btn" %>
+					or <a href="#" onclick="$('#message_center').hide(); return false;"> Cancel </a>
+				</p>
+
+			<% end %>
 		</div>
 	</section>
-
-	<% if can?(:block, Student) && @student.blocked == false %>
-		<a href="<%= block_student_path(@student) %>" class="float-right btn btn-danger">Block Editing</a>
-	<% end %>
-<% else %>
-	<h3>Student Record Details</h3>
-	
 <% end %>

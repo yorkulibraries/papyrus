@@ -1,89 +1,67 @@
 <% title "My Details" %>
+
+
 <div class="student">
-	<div class="header">
-		<h2>
-			<%= @student.name %>
-		</h2>	
-	</div>
-	<div class="summary clearfix">
-		<div class="stats">
-			<span class="badge badge-success"><%= @student.current_items.count %> items</span>
-			<span class="badge badge-info">Registered by <%= @student.created_by.name %></span>
-		</div>
 
-		<% unless @short_view %>
-		<table class="table condensed">
-			<tbody>
-				<tr>
-					<td class="trivial hidden-phone">Student Number</td>
-					<td>
-						<label class="visible-phone weak">Student Number</label>
-						<strong><%= @student.details.student_number %></strong>
-					</td>
-					<td class="trivial hidden-phone">Username</td>					
-					<td>
-						<label class="visible-phone weak">Username</label>
-						<strong><%= @student.username %></strong>
-					</td>
-				</tr>
-				<tr>
-					<td class="trivial hidden-phone">Email Address</td>
-					<td>
-						<label class="visible-phone weak">Email Address</label>
-						<strong><%= @student.email %></strong>
-					</td>
-					<td class="trivial hidden-phone">Cell Phone</td>
-					<td>
-						<label class="visible-phone weak">Cell Phone</label>
-						<strong><%= @student.details.cell_phone %></strong>
-					</td>
-				</tr>
-				<tr>
-					<td class="trivial hidden-phone">Transcription Coordinator</td>
-					<td>
-						<label class="visible-phone weak">Transcription Coordinator</label>
-						<strong title="<%= @student.student_details.transcription_coordinator.email %>">
-						<%= format_field @student.details.coordinator.name%>
-						</strong>
-						<br/><%= format_field @student.details.coordinator.email %>
-		
-					</td>
-					<td class="trivial hidden-phone">Transcription Assistant</td>
-					<td>
-						<label class="visible-phone weak">Transcription Assistant</label>
-						<strong title="<%= @student.student_details.assistant.email %>"><%= @student.details.assistant.name %></strong>
-						<br/><%= @student.details.assistant.email %>
-			
-					</td>
-				</tr>
-				<tr>
-					<td class="trivial hidden-phone">Welcome Email</td>
-					<td>
-						<label class="visible-phone weak">Welcome Email</label>
-						<% if @student.email_sent_at %>							
-						Sent on <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %></strong>
-						<% else %>					
-							<strong>Not Sent Yet.</strong>
-						<% end %>
-					</td>
-					<td colspan="2">
-						<%  if can? :create, Student %>
-							<%= link_to send_welcome_email_student_url(@student), disable_with: 'sending ...', class: "small" do %>
-								Send Welcome Email <i class="icon-envelope"></i>
-							<% end %>
-						
-						<% end %>
-					</td>						
-				</tr>
-			</tbody>
-		</table>		
-		
-		<%= link_to edit_student_path(@student), class: "btn btn-small btn-success btn-block visible-phone" do %>
-			<i class="icon-edit"></i> Update Registration
-		<% end %>			
-		
-		<% end %>	
-		
+	<h1><%= @student.name %></h1>
+	<div class="attributes row">
+			<div class="span2 key">email: </div><div class="span3 value"><%= @student.email %></div>
+			<div class="span2 key">phone: </div><div class="span3 value"><%= @student.details.preferred_phone %></div>
+	</div>
+	<div class="attributes row">
+			<div class="span2 key">Student Number: </div><div class="span3 value"><%=  @student.details.student_number %></div>
+			<div class="span2 key">Username: </div><div class="span3 value"> <%=  @student.username %></div>
+	</div>
+	<div class="attributes row">
+			<div class="span2 key top-border">Coordinator: </div><div class="span3 value top-border">
+				<%= format_field @student.details.coordinator.name rescue nil %><br/>
+				<span class="weak"><%= @student.details.coordinator.email %></span>
+			</div>
+			<div class="span2 key top-border">Assistant: </div><div class="span3 value top-border">
+				<%= format_field @student.details.assistant.name rescue nil %><br/>
+				<span class="weak"><%= @student.details.assistant.email %></span>
+			</div>
+	</div>
+	<div class="attributes row">
+			<div class="span2 key">CDS Councellor:</div><div class="span3 value"><%= @student.details.cds_counsellor %></div>
+			<div class="span2 key">Preferred Format:</div><div class="span3 value">
+				<% formats_array = Array.new %>
+				<% formats_array.push "PDF" if @student.details.format_pdf %>
+				<% formats_array.push "KURZWEIL" if @student.details.format_kurzweil %>
+				<% formats_array.push "DAISY" if @student.details.format_daisy %>
+				<% formats_array.push "BRAILLE" if @student.details.format_braille %>
+				<% formats_array.push "WORD" if @student.details.format_word %>
+				<% formats_array.push "LARGE PRINT" if @student.details.format_large_print %>
+				<div>
+					<% formats_array.each do | format| %>
+						<span class="tag"><%= format.downcase %></span>
+					<% end %>
+				</div>
+			</div>
 	</div>
 
+	<div class="attributes row">
+			<div class="span2 key top-border">Welcome Email: </div>
+			<div class="span3 value top-border">
+				<%  if @student.email_sent_at %>
+					Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %>
+				<% else %>
+					Not sent yet
+				<% end %>
+			</div>
+			<div class="span2 key top-border">Orientation: </div>
+			<div class="span3 value top-border">
+				<% if @student.details.requires_orientation? %>
+
+					<%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") if @student.details.orientation_completed_at != nil %>
+
+					<%  if @student.details.orientation_completed_at == nil && can?(:create, Student)  %>
+						Orientation Pending
+					<% end %>
+
+				<% else %>
+					Orientation Not Required
+				<% end %>
+			</div>
+	</div>
 </div>

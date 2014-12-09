@@ -1,23 +1,42 @@
 <div class="access_code row" id="access_code_<%= access_code.id %>">
 	<div class="span4">
-		<%= access_code.for %>
-	</div>
-	<div class="span3">
-		<%= access_code.code %>
-	</div>
-	<div class="span2">
-		<% if access_code.expires_at.nil? %>
-			Never Expires
-		<% else %>
-			<%= access_code.expires_at %>
-		<% end %>
-	</div>	
-	<% if can? :manage, access_code %>
-		<div class="span1">
-			<%= link_to student_access_code_path(@student, access_code), method: :delete, class: "red", data: {remote: true, confirm: "Are you sure?"} do %>
-				<i class="icon-trash"></i> Remove
-			<% end %>
-		</div>			
-	<% end %>
-</div>
+		<span class="for"><%= access_code.for %></span>
+		<br/>
+		<span class="expires_date">
+			<% if access_code.expires_at.nil? %>
+					Never Expires
+				<% else %>
+					<i class="icon-calendar"></i> Expires on <%= access_code.expires_at rescue nil %>
+				<% end %>
+		</span>
 
+
+	</div>
+	<div class="span4">
+		<span class="code"><%= access_code.code %></span><br/>
+
+		<% if can? :manage, access_code %>
+
+			<% if access_code.shared? %>
+
+				<span class="type">shared code</span>
+				<% if is_controller?("shared_access_codes")  %>
+					<%= link_to shared_access_code_path(access_code), method: :delete, class: "grey small remove float-right", data: {remote: true, confirm: "Are you sure?"} do %>
+						remove <i class="icon-remove"></i>
+					<% end %>
+				<% end %>
+				
+			<% else %>
+
+				<span class="type">Individual Code</span>
+				<%= link_to student_access_code_path(@student, access_code), method: :delete, class: "grey small remove float-right", data: {remote: true, confirm: "Are you sure?"} do %>
+					remove <i class="icon-remove"></i>
+				<% end %>
+
+			<% end %>
+
+		<% else %>
+			<span class="type">DO NOT SHARE</span>
+		<% end %>
+	</div>
+</div>

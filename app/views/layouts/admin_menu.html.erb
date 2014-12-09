@@ -1,0 +1,27 @@
+<% if can? :manage, User %>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Current User">
+      <i class="icon-cog"></i> <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li class="<%= "active" if controller_name == "users" %>">
+        <a href="<%= users_path %>">Papyrus Users</a>
+      </li>
+      <li class="<%= "active" if controller_name == "access_codes" %>">
+        <a href="<%= shared_access_codes_path %>">Shared Access Codes</a>
+      </li>
+      <%  if can? :show, :stats %>
+        <li class="divider"></li>
+        <li class="<%= "active" if controller_name == "stats" %>">
+          <%= link_to "Reports", stats_path %>
+        </li>
+      <% end %>
+      <li class="hide divider"></li>
+      <%  if can? :show, :stats %>
+        <li class="hide <%= "active" if controller_name == "settings" %>">
+          <%= link_to "Settings", stats_path %>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+<% end %>

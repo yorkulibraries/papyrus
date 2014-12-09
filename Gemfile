@@ -26,6 +26,8 @@ gem "rubyzip", "0.9.9"
 
 gem "acts_as_audited", "2.0.0"
 
+gem "roo", "1.13.2"
+
 # Deploy with Capistrano
 gem 'capistrano', "2.15.5"
 
@@ -48,22 +50,22 @@ group :development do
 	gem "faker"
   gem "rack-livereload"
   gem "bullet"
-end 
+end
 
 group :test do
-	
-  
+
+
   # Autottesting with Guard
   gem "minitest", "4.7.5"
   gem 'guard-test', "1.0.0"
   gem 'guard-livereload', require: false
- 
+
   gem 'spring', github: 'jonleighton/spring'
-  gem "ruby-prof"  
+  gem "ruby-prof"
   gem "turn"
-  
+
   # Database and test helpers
-  gem 'sqlite3'  
+  gem 'sqlite3'
 	gem 'webrat', "0.7.3"
   gem 'factory_girl_rails', "1.7.0"
   gem 'shoulda', "3.0.1"

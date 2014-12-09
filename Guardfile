@@ -12,7 +12,7 @@ end
 
 guard :test,  all_after_pass: false, all_on_start: false, cli: "color" do
   watch(%r{^lib/(.+)\.rb$})     { |m| "test/unit/lib/#{m[1]}_test.rb" }
-  watch(%r{^lib/etd/(.+)\.rb$})     { |m| "test/unit/etd/#{m[1]}_test.rb" }
+  watch(%r{^lib/papyrus/(.+)\.rb$})     { |m| "test/unit/lib/papyrus/#{m[1]}_test.rb" }
   watch(%r{^test/.+_test\.rb$})
   watch('test/test_helper.rb')  { "test" }
 

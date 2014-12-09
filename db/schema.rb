@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140819181859) do
+ActiveRecord::Schema.define(:version => 20141104145220) do
 
   create_table "access_codes", :force => true do |t|
     t.string   "for"
@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(:version => 20140819181859) do
     t.date     "expires_at"
     t.integer  "student_id"
     t.integer  "created_by_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "shared",        :default => false
   end
 
   create_table "acquisition_requests", :force => true do |t|
@@ -145,48 +146,33 @@ ActiveRecord::Schema.define(:version => 20140819181859) do
   create_table "student_details", :force => true do |t|
     t.integer  "student_id"
     t.integer  "student_number"
-    t.string   "home_phone"
-    t.string   "campus_phone"
-    t.string   "cell_phone"
-    t.string   "work_phone"
-    t.boolean  "di_ld"
-    t.boolean  "di_low_vision"
-    t.boolean  "di_blind"
-    t.boolean  "di_braille_labels_required"
-    t.boolean  "di_head_injury"
-    t.boolean  "di_partially_sighted"
-    t.boolean  "di_other"
-    t.text     "di_note"
-    t.boolean  "sp_psmds"
-    t.boolean  "sp_lds"
-    t.boolean  "sp_mhds"
-    t.boolean  "sp_glendon_counselling"
-    t.string   "cds_adviser"
+    t.string   "preferred_phone"
+    t.string   "cds_counsellor"
     t.boolean  "format_pdf"
     t.boolean  "format_kurzweil"
     t.boolean  "format_daisy"
     t.boolean  "format_braille"
     t.boolean  "format_word"
     t.boolean  "format_large_print"
-    t.text     "pf_note"
-    t.string   "wrms_ref_number"
-    t.integer  "transcription_coordinator_id",        :limit => 255
+    t.text     "format_note"
+    t.integer  "transcription_coordinator_id", :limit => 255
     t.integer  "transcription_assistant_id"
     t.date     "request_form_signed_on"
-    t.date     "intake_appointment_on"
-    t.date     "responsibilities_document_signed_on"
-    t.date     "ppy_access_granted_on"
-    t.date     "adaptive_computed_access_granted_on"
-    t.datetime "created_at",                                                            :null => false
-    t.datetime "updated_at",                                                            :null => false
-    t.boolean  "requires_orientation",                               :default => true,  :null => false
-    t.boolean  "orientation_completed",                              :default => false, :null => false
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
+    t.boolean  "requires_orientation",                        :default => true,  :null => false
+    t.boolean  "orientation_completed",                       :default => false, :null => false
     t.date     "orientation_completed_at"
+    t.boolean  "book_retrieval",                              :default => false
+    t.boolean  "accessibility_lab_access",                    :default => false
+    t.string   "cds_counsellor_email"
+    t.boolean  "alternate_format_required",                   :default => true
+    t.string   "format_other"
   end
 
   add_index "student_details", ["student_id"], :name => "index_student_details_on_student_id"
-  add_index "student_details", ["transcription_assistant_id"], :name => "index_student_details_on_transcription_assistant_id"
-  add_index "student_details", ["transcription_coordinator_id"], :name => "index_student_details_on_transcription_coordinator_id"
+  add_index "student_details", ["transcription_assistant_id"], :name => "ta_id"
+  add_index "student_details", ["transcription_coordinator_id"], :name => "tc_id"
 
   create_table "students", :force => true do |t|
     t.string   "name"
@@ -211,7 +197,7 @@ ActiveRecord::Schema.define(:version => 20140819181859) do
 
   create_table "users", :force => true do |t|
     t.string   "username"
-    t.string   "name"
+    t.string   "last_name"
     t.string   "role"
     t.boolean  "inactive",           :default => false
     t.string   "type"
@@ -222,6 +208,7 @@ ActiveRecord::Schema.define(:version => 20140819181859) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.datetime "last_logged_in_at"
+    t.string   "first_name"
   end
 
   add_index "users", ["inactive", "role"], :name => "index_users_on_inactive_and_role"

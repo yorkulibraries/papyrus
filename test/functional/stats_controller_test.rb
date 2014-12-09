@@ -28,7 +28,7 @@ class StatsControllerTest < ActionController::TestCase
   should "generate a csv report based on assigned_to" do
     user = create(:user)
     student = create(:student)
-    details = create(:student_details, student: student, transcription_coordinator: user, cds_adviser: "tom")
+    details = create(:student_details, student: student, transcription_coordinator: user, cds_counsellor: "tom")
 
     get :generate, assigned_to: user.id
 
