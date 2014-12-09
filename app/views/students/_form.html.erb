@@ -22,7 +22,7 @@
 
 			<div class="span4">
 				<%= f.fields_for :student_details do |builder| %>
-          <%= builder.label :preferred_phone, "Preferred Number" %>
+          <%= builder.label :preferred_phone, "Preferred Phone Number" %>
           <%= builder.input :preferred_phone, label: false, input_html: { class: "input-block-level" } %>
 
           <%= builder.label :student_number, "Student Number" %>
@@ -64,9 +64,10 @@
           <label class="checkbox inline"><%= builder.check_box :format_pdf %> PDF</label>
           <label class="checkbox inline"><%= builder.check_box :format_kurzweil %> KURZWEIL</label>
           <label class="checkbox inline"><%= builder.check_box :format_daisy %> DAISY</label>
-          <label class="checkbox inline"><%= builder.check_box :format_braille %> BRAILLE</label>
+          <label class="checkbox inline"><%= builder.check_box :format_braille %> BRAILLE</label><br/>
           <label class="checkbox inline"><%= builder.check_box :format_word %> WORD DOCUMENT</label>
           <label class="checkbox inline"><%= builder.check_box :format_large_print %> LARGE PRINT</label>
+          <label class="checkbox inline"><%= builder.check_box :format_other %> OTHER</label>
         </div>
         <div class="span4">
           <%= builder.input :format_note, as: :string, label: "Format Note", input_html: { class: "span4" } %>

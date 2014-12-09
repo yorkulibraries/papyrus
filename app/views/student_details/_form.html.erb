@@ -21,9 +21,10 @@
 		<label class="checkbox inline"><%= f.check_box :format_pdf %> PDF</label>
 		<label class="checkbox inline"><%= f.check_box :format_kurzweil %> KURZWEIL</label>
 		<label class="checkbox inline"><%= f.check_box :format_daisy %> DAISY</label>
-		<label class="checkbox inline"><%= f.check_box :format_braille %> BRAILLE</label>		
+		<label class="checkbox inline"><%= f.check_box :format_braille %> BRAILLE</label>
 		<label class="checkbox inline"><%= f.check_box :format_word %> WORD DOCUMENT</label>
 		<label class="checkbox inline"><%= f.check_box :format_large_print %> LARGE PRINT</label>
+		<label class="checkbox inline"><%= f.check_box :format_other %> Other</label>
 		<hr/>
 		<%= f.input :format_note, as: :string, label: "Format Note", input_html: { class: "span4" } %>
 	</div>
