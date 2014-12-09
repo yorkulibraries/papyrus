@@ -21,18 +21,18 @@ Papyrus::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
-  
+
   # set delivery method to :smtp, :sendmail or :test
-  config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.default_url_options = { :host => "www.library.yorku.ca" }
-  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
   
   # Do not compress assets
   config.assets.compress = false
 
   # Expands the lines which load the assets
   config.assets.debug = true
-  
+
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
 
@@ -41,7 +41,6 @@ Papyrus::Application.configure do
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.log_tags = [:uuid, :remote_ip]
-  
+
   config.middleware.use Rack::LiveReload
 end
-

@@ -21,7 +21,7 @@
 			<%  if @student.email_sent_at %>
 				Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %>
 			<% elsif  can?(:create, Student) %>
-				<%= link_to send_welcome_email_student_url(@student), disable_with: 'sending ...', class: "small", confirm: "Are you sure?" do %>
+				<%= link_to send_welcome_email_student_url(@student), method: :post, disable_with: 'sending ...', class: "small", confirm: "Are you sure?" do %>
 					<i class="icon-envelope"></i>	Send Welcome Email
 				<% end %>
 			<% end %>

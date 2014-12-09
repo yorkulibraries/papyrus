@@ -69,6 +69,7 @@ group :test do
 	gem 'webrat', "0.7.3"
   gem 'factory_girl_rails', "1.7.0"
   gem 'shoulda', "3.0.1"
+  gem "mailcatcher", "0.5.12"
 end
 
 #gem "rack-mini-profiler"

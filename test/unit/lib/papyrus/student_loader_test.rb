@@ -3,7 +3,7 @@ require Rails.root.join("lib", "papyrus", "student_loader.rb")
 
 class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
   setup do
-    @loader = Papyrus::StudentLoader.new
+    @loader = Papyrus::StudentLoader.new    
   end
 
   should "only accept an array" do
@@ -36,7 +36,9 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
     s = create(:student, first_name: "Joe", last_name: "Schmoe")
 
     ENV["FIELDS_ORDER"] = ["student_number", "first_name", "last_name", "email", "cds_counsellor"].join(" ")
+
     sample_data = [
+      ["ignore", "first", "line", "by", "default"],
       ["111111", "jerome", "iron", "j@i.com", "Smitthy"],
       ["222222", "richard", "hammer", "r@h.com", "Smitthy"],
       [s.details.student_number, "Joseph", "Schmoesef", "jo@shmo.com", "Smitthy"]
@@ -46,7 +48,7 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
       # should create two new students
       result = @loader.from_list(sample_data)
 
-      assert_equal 2, result[:created].size, "2 Created"
+      assert_equal 2, result[:created].size, "2 Created, #{result[:errors]}"
       assert_equal 1, result[:updated].size, "1 updated"
     end
 

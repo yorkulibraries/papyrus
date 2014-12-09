@@ -26,7 +26,7 @@ module Papyrus
       students_list.shift if @options[:ignore_first_line]
 
       status = { updated: [], created: [], errors: [] }
-
+      
       students_list.each do |student_array|
 
         params = Student.build_hash_from_array(student_array, @options[:fields_order])
