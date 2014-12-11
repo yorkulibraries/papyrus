@@ -15,11 +15,13 @@
 	<%= render :template => "layouts/navbar"%>
 
 	 <div class="container">
-     <% Announcement.current(cookies.signed[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
-       <%= div_for announcement do %>
+     <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
+       <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement'>
          <%= announcement.message %>
-         <%= link_to "hide announcement", hide_announcement_path(announcement), remote: true %>
-       <% end %>
+         <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
+          ×
+         <% end %>
+       </div>
      <% end %>
 
 		<div class="panel">

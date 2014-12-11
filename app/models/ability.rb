@@ -10,6 +10,7 @@ class Ability
       can :manage, :all
     elsif user.role == User::MANAGER
       can :show, :dashboard
+      can :manage, Announcement
 
       can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course]
       can :show, :stats
@@ -49,13 +50,14 @@ class Ability
       can :zipped_files, Item
     else
       can :show, :student
+      can :hide, Announcement
       can :zipped_files, Item
       can :get_file, Attachment
     end
 
+    can :hide, Announcement
 
     # global search
-
     can [:search, :search_courses], :all
 
     # Define abilities for the passed in user here. For example:

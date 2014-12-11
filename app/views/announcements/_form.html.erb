@@ -1,10 +1,14 @@
 <%= simple_form_for @announcement, url: announcements_path, remote: (request.xhr? ? true: false ) do |f| %>
 <div class="alert alert-block alert-info">
   <div class="row">
-    <div class="span4"><%= f.input :message, input_html: { class: "input-block-level"} %></div>
-    <div class="span3"><%= f.input :audience, collection: Announcement::AUDIENCES, input_html: { class: "input-block-level"} %></div>
+    <div class="span10">
+      <%= f.input :message, as: :string, input_html: { class: "input-block-level"} %>
+    </div>
+  </div>
+  <div class="row">
     <div class="span3"><%= f.input :starts_at, as: :string, input_html: { class: "input-block-level datepicker"} %></div>
     <div class="span3"><%= f.input :ends_at, as: :string, input_html: { class: "input-block-level datepicker"} %></div>
+    <div class="span3"><%= f.input :audience, collection: Announcement::AUDIENCES, input_html: { class: "input-block-level"} %></div>
   </div>
   <div class="row">
     <div class="span4">

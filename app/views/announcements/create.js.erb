@@ -5,3 +5,5 @@ $("#announcement_form_holder").empty();
 <% else %>
   $('#announcement_form_holder').prepend('<%=escape_javascript render("announcements/form") %>');
 <% end %>
+
+$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });

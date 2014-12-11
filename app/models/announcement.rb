@@ -1,5 +1,5 @@
 class Announcement < ActiveRecord::Base
-  attr_accessible :ends_at, :message, :starts_at, :audience
+  attr_accessible :ends_at, :message, :starts_at, :audience, :active
 
   ## AUDIT TRAIL
   acts_as_audited associated_with: :user
@@ -18,6 +18,7 @@ class Announcement < ActiveRecord::Base
 
   ## SCOPES
   scope :expired,  where("ends_at < ?", Date.today)
+  scope :active, where("active = ?", true)
 
 
   ## INSTANCE METHODS

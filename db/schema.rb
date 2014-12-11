@@ -44,11 +44,12 @@ ActiveRecord::Schema.define(:version => 20141211170331) do
   create_table "announcements", :force => true do |t|
     t.text     "message"
     t.string   "audience"
+    t.boolean  "active",     :default => false
     t.integer  "user_id"
     t.datetime "starts_at"
     t.datetime "ends_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "attachments", :force => true do |t|

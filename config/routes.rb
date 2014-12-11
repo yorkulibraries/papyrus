@@ -17,7 +17,7 @@ Papyrus::Application.routes.draw do
 
 
   # Anouncements
-  resources :announcements, only: [:index, :new, :create, :destroy] do
+  resources :announcements do
     get "hide", on: :member
   end
 

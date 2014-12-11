@@ -53,6 +53,15 @@ class AnnouncementTest < ActiveSupport::TestCase
     assert_equal 1, Announcement.expired.size, "Should only be one"
   end
 
+  should "only show active announcements" do
+    create_list(:announcement, 2, active: false)
+    create_list(:announcement, 3, active: true)
+
+    assert_equal 3, Announcement.active.size, "Should be 3"
+
+  end
+
+
 
 
 end

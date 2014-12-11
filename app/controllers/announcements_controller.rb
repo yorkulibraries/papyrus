@@ -1,6 +1,6 @@
 class AnnouncementsController < ApplicationController
 
-  authorize_resource  User
+  authorize_resource
 
   def index
     @announcements = Announcement.current
@@ -9,6 +9,10 @@ class AnnouncementsController < ApplicationController
 
   def new
     @announcement = Announcement.new
+  end
+
+  def edit
+    @announcement = Announcement.find(params[:id])
   end
 
   def create
@@ -30,6 +34,22 @@ class AnnouncementsController < ApplicationController
 
   end
 
+  def update
+    @announcement = Announcement.find(params[:id])
+
+    if @announcement.update_attributes(params[:announcement])
+      respond_to do |format|
+        format.html { redirect_to  @announcement, notice: "Successfully updated course." }
+        format.js { render  nothing: true }
+      end
+    else
+      respond_to do |format|
+        format.html { render action: 'edit' }
+        format.js
+      end
+    end
+  end
+
   def destroy
     @announcement =  Announcement.find(params[:id])
     @announcement.audit_comment = "Removed Announcement message for #{@announcement.audience}"
@@ -44,8 +64,17 @@ class AnnouncementsController < ApplicationController
 
 
   def hide
-    ids = [params[:id], *cookies.signed[:hidden_announcement_ids]]
-    cookies.permanent.signed[:hidden_announcement_ids] = ids
+    #ids = [params[:id], *cookies.signed[:hidden_announcement_ids]]
+    #cookies.permanent.signed[:hidden_announcement_ids] = ids
+
+    if session[:hidden_announcement_ids] != nil
+      ids = session[:hidden_announcement_ids].push params[:id]
+    else
+      ids = [params[:id]]
+    end
+
+    session[:hidden_announcement_ids] = ids
+
     respond_to do |format|
       format.html { redirect_to :back }
       format.js
