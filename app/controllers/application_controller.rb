@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
 
     # record active stamp if hasn't been updated in the last 5 minutes
-    if @current_user.last_active_at < 5.minutes.ago
+    if @current_user != nil && (@current_user.last_active_at == nil || @current_user.last_active_at < 5.minutes.ago)
       @current_user.active_now!
     end
 
