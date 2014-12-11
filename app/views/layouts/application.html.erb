@@ -15,7 +15,12 @@
 	<%= render :template => "layouts/navbar"%>
 
 	 <div class="container">
-
+     <% Announcement.current(cookies.signed[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
+       <%= div_for announcement do %>
+         <%= announcement.message %>
+         <%= link_to "hide announcement", hide_announcement_path(announcement), remote: true %>
+       <% end %>
+     <% end %>
 
 		<div class="panel">
 			<div class="page-header">
@@ -50,7 +55,7 @@
 		<div class="container">
 			<section class="weak push-down"
       title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user.last_active_at != nil %>">
-        Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> <br/>        
+        Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> <br/>
       </section>
 		</div>
 	 </footer>

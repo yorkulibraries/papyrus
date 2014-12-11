@@ -29,7 +29,7 @@ FactoryGirl.define do
 
   factory :user do
     sequence(:first_name) { |n| "First #{n}"  }
-    sequence(:last_name) { |n| "Last #{n}"  }  
+    sequence(:last_name) { |n| "Last #{n}"  }
     sequence(:email) { |n| "foo#{n}@email.com" }
     sequence(:username) { |n| "username#{n}" }
     role User::MANAGER
@@ -112,6 +112,14 @@ FactoryGirl.define do
     expires_at 1.month.from_now
     association :student, factory: :student
     association :created_by, factory: :user
+  end
+
+  factory :announcement do
+    message "some message"
+    ends_at 5.minutes.from_now
+    starts_at 2.minutes.ago
+    audience Announcement::AUDIENCE_USER
+    association :user, factory: :user
   end
 
 end

@@ -1,0 +1,4 @@
+$("#announcement_form_holder").empty();
+$('#announcement_form_holder').prepend('<%=escape_javascript render("announcements/form") %>');
+
+$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });

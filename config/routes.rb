@@ -10,11 +10,18 @@ Papyrus::Application.routes.draw do
   match "stats/item_usage" => "stats#item_usage"
 
   match "dashboard" => "home#index"
-  match "active_users" => "home#active_users"
+  match "active_users" => "home#active_users", as: :active_users
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
+
+  # Anouncements
+  resources :announcements, only: [:index, :new, :create, :destroy] do
+    get "hide", on: :member
+  end
+
+  # match 'announcements/:id/hide', to: 'announcements#hide', as: 'hide_announcement'
 
 
   # Student View

@@ -1,0 +1,60 @@
+<% title "Announcements" %>
+<% title_html do %>
+  <h1>Announcements</h1>
+<% end%>
+
+
+<div class="student">
+  <section class="access_codes">
+    <h2>Current Announcements
+
+      <%= link_to  new_announcement_path, class: "btn btn-small float-right btn-primary", data: { remote: true } do %>
+      <i class="icon-plus-sign icon-white"></i> New Announcement
+      <% end %>
+    </h2>
+
+    <div id="announcement_form_holder"></div>
+
+    <div id="current_announcements">
+      <% @announcements.each do |announcement| %>
+        <%= render partial: announcement %>
+      <% end %>
+    </div>
+
+
+    <% if @announcements.size == 0 %>
+      <div class="blank-slate">
+        <i class="icon-bullhorn"></i>
+        <h1>No announcements added.</h1>
+        <p>Click on the <strong>New Announcement</strong> button to add one.</p>
+      </div>
+    <% end %>
+
+
+    <div class="expired_announcements">
+      <% if @expired_announcements.size > 0 %>
+        <h5>Expired Announcements</h5>
+      <% end %>
+
+      <% @expired_announcements.each do |announcement| %>
+      <div class="announcement row" id="announcement_<%= announcement.id %>">
+        <div class="span4">
+          <span class="for"><%= announcement.message %></span>
+          <br/>
+          <span class="expires_date">
+            <i class="icon-calendar"></i> Expired on <%= announcement.ends_at rescue nil %>
+          </span>
+
+
+        </div>
+        <div class="span4">
+          <span class="code"><%= announcement.user.name %></span><br/>
+          <span class="type"><%= announcement.audience %></span>
+        </div>
+      </div>
+
+      <% end %>
+    </div>
+
+  </section>
+</div>

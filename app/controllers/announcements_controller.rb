@@ -1,0 +1,55 @@
+class AnnouncementsController < ApplicationController
+
+  authorize_resource  User
+
+  def index
+    @announcements = Announcement.current
+    @expired_announcements = Announcement.expired.limit(20)
+  end
+
+  def new
+    @announcement = Announcement.new
+  end
+
+  def create
+    @announcement =  Announcement.new(params[:announcement])
+    @announcement.user = current_user
+    @announcement.audit_comment = "Adding a new Annoucement message for #{@announcement.audience}"
+
+    if @announcement.save
+      respond_to do |format|
+        format.html { redirect_to announcements_path, notice: "Successfully created announcement" }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render action: 'new' }
+        format.js
+      end
+    end
+
+  end
+
+  def destroy
+    @announcement =  Announcement.find(params[:id])
+    @announcement.audit_comment = "Removed Announcement message for #{@announcement.audience}"
+    @announcement.destroy
+
+
+    respond_to do |format|
+      format.html { redirect_to announcements_path, notice: "Successfully removed Announcement message for #{@announcement.audience}" }
+      format.js
+    end
+  end
+
+
+  def hide
+    ids = [params[:id], *cookies.signed[:hidden_announcement_ids]]
+    cookies.permanent.signed[:hidden_announcement_ids] = ids
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
+  end
+
+end

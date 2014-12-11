@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141211152243) do
+ActiveRecord::Schema.define(:version => 20141211170331) do
 
   create_table "access_codes", :force => true do |t|
     t.string   "for"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(:version => 20141211152243) do
   end
 
   add_index "acquisition_requests", ["item_id"], :name => "index_acquisition_requests_on_item_id"
+
+  create_table "announcements", :force => true do |t|
+    t.text     "message"
+    t.string   "audience"
+    t.integer  "user_id"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "attachments", :force => true do |t|
     t.string   "name"

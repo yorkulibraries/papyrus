@@ -1,0 +1,17 @@
+<div class="announcement row" id="announcement_<%= announcement.id %>">
+  
+  <div class="span4">
+    <span class="for"><%= announcement.message %></span>
+    <br/>
+    <span class="expires_date">
+      <i class="icon-calendar"></i> Expired on <%= announcement.ends_at rescue nil %>
+    </span>
+
+  </div>
+
+  <div class="span4">
+    <span class="code"><%= announcement.user.name %></span><br/>
+    <span class="type"><%= announcement.audience %></span>
+  </div>
+
+</div>

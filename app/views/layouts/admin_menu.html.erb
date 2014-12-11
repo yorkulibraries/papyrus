@@ -10,18 +10,26 @@
       <li class="<%= "active" if controller_name == "access_codes" %>">
         <a href="<%= shared_access_codes_path %>">Shared Access Codes</a>
       </li>
+
+      <li class="divider"></li>
+
+      <li class="<%= "active" if controller_name == "settings" %>">
+        <%= link_to "Active Users", active_users_path %>
+      </li>
+      <li class="<%= "active" if controller_name == "settings" %>">
+        <%= link_to "Announcements", announcements_path %>
+      </li>      
+
       <%  if can? :show, :stats %>
         <li class="divider"></li>
         <li class="<%= "active" if controller_name == "stats" %>">
           <%= link_to "Reports", stats_path %>
         </li>
       <% end %>
-      <li class="hide divider"></li>
-      <%  if can? :show, :stats %>
-        <li class="hide <%= "active" if controller_name == "settings" %>">
-          <%= link_to "Settings", stats_path %>
-        </li>
-      <% end %>
+
+      <li class="hide <%= "active" if controller_name == "settings" %>">
+        <%= link_to "Settings", stats_path %>
+      </li>
     </ul>
   </li>
 <% end %>

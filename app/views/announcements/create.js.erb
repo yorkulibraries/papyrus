@@ -1,0 +1,7 @@
+$("#announcement_form_holder").empty();
+<% if @announcement.errors.size == 0 %>
+  $("#current_announcements").after('<%=escape_javascript render @announcement %>')
+  $(".blank-slate").hide();
+<% else %>
+  $('#announcement_form_holder').prepend('<%=escape_javascript render("announcements/form") %>');
+<% end %>
