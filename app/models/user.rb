@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   acts_as_audited
 
 
+  ## CONTSTANTS
+
+  # Roles
+
   ADMIN = "admin"
   MANAGER = "manager"
   COORDINATOR = "coordinator"
@@ -14,7 +18,17 @@ class User < ActiveRecord::Base
   ROLES = [[ADMIN.titleize, ADMIN], [MANAGER.titleize, MANAGER],  [COORDINATOR.titleize, COORDINATOR], [STAFF.titleize, STAFF],
         [PART_TIME.titleize, PART_TIME], [ACQUISITIONS.titleize, ACQUISITIONS]]
 
+  # Activity Names
+  ACTIVITY_GENERAL = "general"
+  ACTIVITY_LOGIN = "login"
+  ACTIVITY_LOGOUT = "logout"
+
+  ## RELATIONS
+
   belongs_to :created_by, :foreign_key => "created_by_user_id"
+
+
+  ## VALIDATIONS
 
   validates_presence_of :first_name, :last_name, :username, :role
   validates_inclusion_of :role, in: ROLE_NAMES, allow_blank: false
@@ -24,14 +38,16 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /^[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}$/i
   validates_uniqueness_of :email
 
+  ## SCOPES
+
   scope :active, where(:inactive => false).order("users.created_at desc")
   scope :inactive, where(:inactive => true).order("users.created_at desc")
   scope :not_students, where("users.role <> '#{STUDENT_USER}'")
   scope :transcription_assitants, where("users.role <> '#{STUDENT_USER}'").where("users.role <> '#{ACQUISITIONS}'")
 
-
-
   default_scope order("users.last_name asc")
+
+  ## INSTANCE FUNCTIONS
 
   def initials
     self.name.split(/\s+/).map(&:first).join.upcase
@@ -44,4 +60,21 @@ class User < ActiveRecord::Base
   def name=(name)
     self.last_name = name
   end
+
+  def active_now!(action=ACTIVITY_GENERAL)
+    now = Time.now
+
+    self.last_active_at = now
+
+    if action == ACTIVITY_LOGIN
+      self.last_logged_in_at = now
+      self.audit_comment = self.last_logged_in_at.strftime("Logged in on %b %d, %Y at %I:%M%p")
+    end
+
+    save(validate: false)
+
+  end
+
+  ## CLASS FUNCTIONS
+
 end

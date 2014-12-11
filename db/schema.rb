@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141104145220) do
+ActiveRecord::Schema.define(:version => 20141211152243) do
 
   create_table "access_codes", :force => true do |t|
     t.string   "for"
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(:version => 20141104145220) do
     t.datetime "updated_at",                            :null => false
     t.datetime "last_logged_in_at"
     t.string   "first_name"
+    t.datetime "last_active_at"
   end
 
   add_index "users", ["inactive", "role"], :name => "index_users_on_inactive_and_role"

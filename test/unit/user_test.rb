@@ -95,4 +95,16 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+
+  should "record activity time, based on action" do
+    u = create(:user)
+    u.active_now!
+    u.reload
+    assert Time.now >= u.last_active_at, "Should record last active time"
+
+    u.active_now!(User::ACTIVITY_LOGIN)
+    u.reload
+    assert Time.now >= u.last_logged_in_at, "Should record last logged in time"
+  end
+
 end

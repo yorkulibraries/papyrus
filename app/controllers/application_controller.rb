@@ -1,14 +1,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   check_authorization
-  
-  before_filter :login_required   
-  
-  def current_user      
-    @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]     
-  end   
-  
-  
+
+  before_filter :login_required
+
+  def current_user
+    @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
+
+    # record active stamp if hasn't been updated in the last 5 minutes
+    if @current_user.last_active_at < 5.minutes.ago
+      @current_user.active_now!
+    end
+
+    return @current_user
+  end
+
+
   def logged_in?
       current_user
   end

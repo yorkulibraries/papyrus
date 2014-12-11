@@ -8,9 +8,9 @@ class HomeController < ApplicationController
     @recently_worked_with_items = Item.recently_worked_with(current_user.id).limit(10)
   end
 
-  def active_sessions
-    @sessions = session.to_hash
-    render text: @sessions.inspect
+  def active_users
+    @users = User.where("last_active_at > ?", 10.minutes.ago)
+    @students = Student.where("last_active_at > ?", 10.minutes.ago)
   end
 
   private
