@@ -164,6 +164,16 @@ class StudentsControllerTest < ActionController::TestCase
 
   end
 
+  should "save notification comment without validation" do
+    student = create(:student)
+    student.first_name = nil
+    student.save(validate: false)
+
+    post :notify, students: [student.id], student:student.id
+    assert_redirected_to student_path(student), "redirects to student"
+
+  end
+
   should "redirect to item or student path if no student ids were provided" do
     post :notify, student: 1
     assert_response :redirect

@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
         student = Student.find(id)
         StudentMailer.notification_email(student, current_user, params[:message]).deliver
         student.audit_comment = "Sent notification email"
-        student.save!
+        student.save(validate: false)
       end
       redirect_to item_path(params[:item]),  notice: "Notification Sent" if params[:item]
       redirect_to student_path(params[:student]),  notice: "Message Sent" if params[:student]
@@ -40,7 +40,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @student.blocked = true
     @student.audit_comment = "Student blocked by #{@current_user.name}"
-    @student.save(:validate => false)
+    @student.save(validate: false)
     redirect_to @student
   end
 
@@ -61,7 +61,7 @@ class StudentsController < ApplicationController
 
     @students = Student.where{
       { first_name.matches => "%#{query}%"} |
-      { last_name.matches => "%#{query}%"} | 
+      { last_name.matches => "%#{query}%"} |
       { username.matches => "#{query}"} |
       { email.matches => "%#{query}%"}  }
       .where(inactive: inactive_status).page page_number
