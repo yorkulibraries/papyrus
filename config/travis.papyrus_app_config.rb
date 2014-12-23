@@ -13,6 +13,7 @@ PapyrusConfig.configure do
 
   ## AUTHENTICATION
   authentication.cas_header_name = "REMOTE_USER"
+  authentication.cas_alt_header_name = "REMOTE_USER_ID"
   authentication.cas_user_id_name = "Authentication Username"
   authentication.after_logout_redirect_to = "http://www.your-instituttion.website"
   authentication.cookies_domain = "your-domain.com"
