@@ -43,7 +43,6 @@ class Student < User
     return self.student_details
   end
 
-
   def self.item_counts(student_ids, type = "current")
     counts = Hash.new
     connections = ItemConnection.select("student_id, count(*) as items_count").group(:student_id)

@@ -12,20 +12,6 @@ class StudentDetailsControllerTest < ActionController::TestCase
     assert_template :new
   end
 
-  should "create a new student details if without student details" do
-    student = create(:student, student_details: nil)
-    assert_difference "StudentDetails.count", 1 do
-      post :create, student_id: student.id,
-                    student_details: attributes_for(:student_details,
-                             transcription_coordinator_id: @manager_user.id, transcription_assistant_id: @manager_user.id ).except(:student)
-
-      details = assigns(:student_details)
-      assert_equal 0, details.errors.count, "No errors, #{details.errors.messages}"
-      assert_response :redirect, "Should redirect"
-      assert_redirected_to student_path(student.id), "Should redirect to student"
-    end
-
-  end
 
   should "not create student details if there is one already" do
     assert_no_difference "StudentDetails.count" do

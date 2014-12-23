@@ -10,13 +10,19 @@ class SessionsController < ApplicationController
         else
           username = params[:as]
         end
+        alt_username = username
     else
        username = request.headers[PapyrusConfig.authentication.cas_header_name]
+       alt_username = request.headers[PapyrusConfig.authentication.cas_alt_header_name]
     end
 
 
-    user = User.active.find_by_username(username)
-    if user
+    users = User.active.where("username = ? OR username = ?", username, alt_username)
+    
+    if users.size == 1
+
+      user = users.first
+
       session[:user_id] = user.id
 
       user.active_now!(User::ACTIVITY_LOGIN)

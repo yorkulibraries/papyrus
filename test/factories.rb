@@ -41,11 +41,12 @@ FactoryGirl.define do
      role User::STUDENT_USER
      association :created_by, factory: :user
      association :student_details, factory: :student_details
+     username { student_details.student_number }
    end
 
   factory :student_details do
     # partially filled
-    student_number 12343
+    sequence(:student_number) { |n| n }
     preferred_phone "12345"
     cds_counsellor "some person"
     student nil
