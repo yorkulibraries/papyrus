@@ -1,65 +1,65 @@
 <div class="solr-results">
 	<% unless @docs.nil? || @docs.size == 0 %>
 		<p><strong>Displaying <%= " #{@docs.count}" if @docs %> closest matches</strong></p>
-	
-	
+
+
 		<table class="table">
 			<tbody>
 				<% @docs.each_with_index do |item, index| %>
 					<tr>
 						<td class="count hidden-phone"><%= index + 1 %>.</td>
-						<td class="record">						
-							<h2><%= item["title_full"] %></h2>			
-						
+						<td class="record">
+							<h2><%= format_solr_field item["title_full"] %></h2>
+
 							<div class="list-group">
-	
+
 								<li class="list-group-item">
 									<span class="badge">Author</span>
-									<p class="list-group-item-text"><%=  item["author"] ? item["author"] : item["author2"] ? item["author2"].join(", ") : "" %></p>
+									<p class="list-group-item-text"><%= format_solr_field (item["author"] ? item["author"] : item["author2"] ? item["author2"].join(", ") : "") %></p>
 								</li>
-	
+
 								<li class="list-group-item">
 									<span class="badge">Publisher</span>
 									<p class="list-group-item-text">
 										<%= format_solr_field item["publisher"] %> <span class="trivial">Published: <%= format_solr_field item["publishDate"] %></span></p>
 								</li>
-								
+
 								<li class="list-group-item">
 									<span class="badge">Subject</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["callnumber-first"], "Subject" %>  								
+										<%= format_solr_field item["callnumber-first"], "Subject" %>
 									</p>
 								</li>
-								
+
 								<li class="list-group-item">
 									<span class="badge">Edition + Language</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["edition"], "Edition" %>  
+										<%= format_solr_field item["edition"], "Edition" %>
 										<span class="trivial">[<%= format_solr_field item["language"], "Language" %>]</span>
 									</p>
 								</li>
-								
+
 								<li class="list-group-item">
 									<span class="badge">ISBN + Call Number</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["isbn"], "ISBN" %> &amp; 
+										<%= format_solr_field item["isbn"], "ISBN" %> &amp;
 										<%= format_solr_field item["callnumber"], "Call Number" %>
 									</p>
 								</li>
-					
-								
+
+
 								<li class="list-group-item">
 									<span class="badge">Format + Description</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["format"], "Format" %>  
+										<%= format_solr_field item["format"], "Format" %>
 										<span class="trivial">[<%= format_solr_field item["physical"], "Description" %>]</span>
 									</p>
 								</li>
-																												
+
 							</div>
 							<a href="<%= new_item_path %>?bib_record_id=<%= item["id"] %>" data-confirm="Are you sure?" class="visible-phone btn">
 								Add This Item <i class="icon-caret-right"></i>
-							</a>																																								  
+							</a>
 						</td>
 						<td class="cover hidden-phone">
 							<a href="<%= new_item_path %>?bib_record_id=<%= item["id"] %>" data-confirm="Are you sure?" class="hidden-phone btn">
@@ -67,20 +67,20 @@
 							</a>
 							 <div class="thumbnail">
 								<% if item["isbn"] %>
-									
-									<%= image_tag "icons/files/photo.png", 
-									data: { isbn: item["isbn"].first.gsub(/[^0-9]+/, ''), size: "large"}, class: "google-bookcover" %> 	
+
+									<%= image_tag "icons/files/photo.png",
+									data: { isbn: item["isbn"].first.gsub(/[^0-9]+/, ''), size: "large"}, class: "google-bookcover" %>
 								<% else %>
 									<span class="trivial">Unvailable</span><br/>
-									Cover Image 
+									Cover Image
 								<% end %>
 							</div>
 						</td>
 					</tr>
-				
+
 				<% end %>
 			</tbody>
-		</table>	
+		</table>
 	<% else %>
 		<div class="blank-slate">
 			<i class="icon-question-sign"></i>
