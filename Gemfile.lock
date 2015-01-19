@@ -127,7 +127,7 @@ GEM
     less-rails (2.3.1)
       actionpack (>= 3.1)
       less (~> 2.3.1)
-    libv8 (3.11.8.17)
+    libv8 (3.16.14.7)
     listen (2.6.2)
       celluloid (>= 0.15.2)
       celluloid-io (>= 0.15.0)
@@ -255,8 +255,8 @@ GEM
       polyamorous (~> 0.5.0)
     subexec (0.2.3)
     test-unit (2.5.5)
-    therubyracer (0.11.4)
-      libv8 (~> 3.11.8.12)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
       ref
     thin (1.5.1)
       daemons (>= 1.0.9)
@@ -331,7 +331,7 @@ DEPENDENCIES
   spring!
   sqlite3
   squeel (= 0.9.5)
-  therubyracer (= 0.11.4)
+  therubyracer (= 0.12.1)
   turn
   twitter-bootstrap-rails (= 2.2.8)
   uglifier (>= 1.0.3)

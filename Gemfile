@@ -34,7 +34,7 @@ gem 'capistrano', "2.15.5"
 gem "exception_notification", git: "git://github.com/rails/exception_notification.git", require: "exception_notifier"
 
 gem 'twitter-bootstrap-rails', "2.2.8"
-gem "therubyracer", "0.11.4"
+gem "therubyracer", "0.12.1"
 gem "less-rails", "2.3.1"
 
 group :assets do
