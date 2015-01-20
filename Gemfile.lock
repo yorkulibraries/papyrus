@@ -334,7 +334,7 @@ DEPENDENCIES
   minitest (= 4.7.5)
   mocha (= 0.14)
   mysql2 (~> 0.3.14)
-  nifty-generators
+  nifty-generators (= 0.4.6)
   populator!
   protected_attributes
   rack-livereload
