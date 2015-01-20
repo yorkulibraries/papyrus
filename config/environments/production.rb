@@ -1,5 +1,6 @@
 Papyrus::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  config.eager_load = true
 
   # The production environment is meant for finished, "live" apps.
   # Code is not reloaded between requests
@@ -46,11 +47,11 @@ Papyrus::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
   # set delivery method to :smtp, :sendmail or :test
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.default_url_options = { :host => "www.library.yorku.ca" }
-                  
+
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
@@ -58,7 +59,9 @@ Papyrus::Application.configure do
   config.assets.compile = true
 
   # Generate digests for assets URLs
-  config.assets.digest = true        
-  
-  
+  config.assets.digest = true
+
+  config.assets.compressor = :uglifier
+
+
 end
