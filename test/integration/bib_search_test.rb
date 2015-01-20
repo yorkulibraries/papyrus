@@ -4,11 +4,9 @@ class BibSearchTest < ActionDispatch::IntegrationTest
 
   if ENV["WORLDCAT_KEY"] == nil || ENV["SOLR_PATH"] == nil
     puts "To run integration test for Bib Search set the two params"
-    puts  "PREREQ: ENV[WORLCAT_KEY] is set to a key"
+    puts  "PREREQ: ENV[WORLDCAT_KEY] is set to a key"
     puts "PREREQ: ENV[SOLR_PATH] is set to a path for solr"
   else
-    puts "HERE I AM "
-
     setup do
       PapyrusConfig.configure do |config|
         config.bib_search.solr.url = ENV["SOLR_PATH"]
