@@ -8,7 +8,7 @@ class StudentDetails < ActiveRecord::Base
   belongs_to :transcription_coordinator, class_name: "User", foreign_key: "transcription_coordinator_id"
   belongs_to :transcription_assistant, class_name: "User", foreign_key: "transcription_assistant_id"
 
-  acts_as_audited associated_with: :student
+  audited associated_with: :student
 
   validates_presence_of :student_number, :preferred_phone, :cds_counsellor
   validates_presence_of  :transcription_coordinator, message: "You must specify a transcription coordinator."

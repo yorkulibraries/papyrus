@@ -5,12 +5,12 @@ Papyrus::Application.routes.draw do
 
 
 
-  match "stats" => "stats#index"
-  match "stats/generate" =>"stats#generate"
-  match "stats/item_usage" => "stats#item_usage"
+  get "stats" => "stats#index"
+  get "stats/generate" =>"stats#generate"
+  get "stats/item_usage" => "stats#item_usage"
 
-  match "dashboard" => "home#index"
-  match "active_users" => "home#active_users", as: :active_users
+  get "dashboard" => "home#index"
+  get "active_users" => "home#active_users", as: :active_users
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
@@ -25,13 +25,13 @@ Papyrus::Application.routes.draw do
 
 
   # Student View
-  match "login_as_student/:id" => "student_view#login_as_student", :as => :admin_student_view
-  match "logout_as_student" => "student_view#logout_as_student", :as => :logout_as_student
-  match "my/" => "student_view#show", :as => :student_view
-  match "my/details" => "student_view#details", :as => :student_view_details
-  match "my/terms" => "student_view#index", :as => :show_student_terms
-  match "my/accept_terms" => "student_view#accept_terms", :as => :accept_student_terms
-  match "my/access_codes" => "student_view#access_codes", as: :student_view_access_codes
+  match "login_as_student/:id" => "student_view#login_as_student", :as => :admin_student_view, via: [:get, :post]
+  match "logout_as_student" => "student_view#logout_as_student", :as => :logout_as_student, via: [:get, :post]
+  get "my/" => "student_view#show", :as => :student_view
+  get "my/details" => "student_view#details", :as => :student_view_details
+  match "my/terms" => "student_view#index", :as => :show_student_terms, via: [:get, :post]
+  match "my/accept_terms" => "student_view#accept_terms", :as => :accept_student_terms, via: [:get, :post]
+  match "my/access_codes" => "student_view#access_codes", as: :student_view_access_codes, via: [:get, :post]
 
   resources :users do
     post "activate", :on => :member

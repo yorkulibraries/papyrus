@@ -31,7 +31,7 @@ gem 'jquery-turbolinks', "2.0.2"
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
 gem 'twitter-bootstrap-rails', "2.2.8"
-gem "less-rails", "2.3.1"
+gem "less-rails", "2.6.0"
 gem "simple_form", "3.0.0"
 gem "flash_cookie_session", "1.1.6"
 
@@ -43,7 +43,7 @@ gem 'kaminari', "0.15.1"
 gem "cancan", "1.6.9"
 gem "friendly_id", "3.3.2.0"
 gem "roo", "1.13.2"
-gem "acts_as_audited", "2.0.0"
+gem "audited-activerecord", "~> 4.0"
 gem "squeel", "1.2.2"
 gem "rubyzip", "0.9.9"
 gem 'nifty-generators', "0.4.6"

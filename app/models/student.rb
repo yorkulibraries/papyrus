@@ -3,7 +3,7 @@ class Student < User
   paginates_per 18
 
 
-  acts_as_audited
+  audited
   has_associated_audits
 
   has_many :notes

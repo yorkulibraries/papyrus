@@ -8,7 +8,7 @@ class AccessCode < ActiveRecord::Base
   belongs_to :created_by, class_name: "User"
 
   ## AUDIT TRAIL
-  acts_as_audited associated_with: :student
+  audited associated_with: :student
 
   ## VALIDATIONS
   validates_presence_of :created_by
@@ -19,7 +19,7 @@ class AccessCode < ActiveRecord::Base
   default_scope order("expires_at ASC")
   scope :active,  where("expires_at >= ? OR expires_at is NULL", Date.today)
   scope :expired,  where("expires_at < ?", Date.today)
-  
+
   scope :shared, where(shared: true)
   scope :personal, where(shared: false)
 end

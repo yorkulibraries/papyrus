@@ -2,7 +2,7 @@ class Announcement < ActiveRecord::Base
   attr_accessible :ends_at, :message, :starts_at, :audience, :active
 
   ## AUDIT TRAIL
-  acts_as_audited associated_with: :user
+  audited associated_with: :user
 
   ## CONSTANTS
   AUDIENCE_STUDENT = "Student"

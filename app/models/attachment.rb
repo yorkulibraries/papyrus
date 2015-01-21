@@ -8,7 +8,7 @@ class Attachment < ActiveRecord::Base
 
   mount_uploader :file, AttachmentUploader
 
-  acts_as_audited associated_with: :item
+  audited associated_with: :item
 
   belongs_to :item, counter_cache: true
   belongs_to :user
