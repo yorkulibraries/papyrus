@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121183742) do
+ActiveRecord::Schema.define(version: 20150121185107) do
 
   create_table "access_codes", force: true do |t|
     t.string   "for"
@@ -110,9 +110,9 @@ ActiveRecord::Schema.define(version: 20150121183742) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "item_connections", ["expires_on", "item_id"], name: "index_item_connections_on_expires_on_and_item_id"
-  add_index "item_connections", ["expires_on", "student_id"], name: "index_item_connections_on_expires_on_and_student_id"
-  add_index "item_connections", ["student_id", "item_id", "expires_on"], name: "index_item_connections_on_student_id_and_item_id_and_expires_on"
+  add_index "item_connections", ["expires_on", "item_id"], name: "ic_e_i_index"
+  add_index "item_connections", ["expires_on", "student_id"], name: "ic_e_s_index"
+  add_index "item_connections", ["student_id", "item_id", "expires_on"], name: "ic_s_i_e_index"
 
   create_table "item_course_connections", force: true do |t|
     t.integer  "item_id"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20150121183742) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "item_course_connections", ["course_id", "item_id"], name: "index_item_course_connections_on_course_id_and_item_id"
+  add_index "item_course_connections", ["course_id", "item_id"], name: "icc_c_i_index"
 
   create_table "items", force: true do |t|
     t.string   "title"

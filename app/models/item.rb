@@ -13,10 +13,11 @@ class Item < ActiveRecord::Base
   has_many :attachments
 
   has_many :item_connections
-  has_many :students, :through => :item_connections, :conditions =>  [ "item_connections.expires_on >= ? OR item_connections.expires_on IS ?", Date.today, nil]
+  # has_many :students, :through => :item_connections, :conditions =>  [ "item_connections.expires_on >= ? OR item_connections.expires_on IS ?", Date.today, nil]
+  has_many :students, -> { where("item_connections.expires_on >= ? OR item_connections.expires_on IS ?", Date.today, nil) }, :through => :item_connections
 
   has_many :item_course_connections
-  has_many :courses, :through => :item_course_connections
+  has_many :courses, through: :item_course_connections
 
   has_many :acquisition_requests
 

@@ -14,8 +14,9 @@ class Student < User
 
   has_many :item_connections
   has_many :items, through: :item_connections
-  has_many :current_items, through: :item_connections, source: :item, conditions: [ "item_connections.expires_on >= ? OR item_connections.expires_on IS ?", Date.today, nil]
-  has_many :expired_items, through: :item_connections, source: :item, conditions: [ "item_connections.expires_on < ?", Date.today]
+
+  has_many :current_items, -> { where("item_connections.expires_on >= ? OR item_connections.expires_on IS ?", Date.today, nil) }, through: :item_connections, source: :item
+  has_many :expired_items, -> { where("item_connections.expires_on < ?", Date.today) }, through: :item_connections, source: :item
 
   belongs_to :created_by, :foreign_key => "created_by_user_id", class_name: "User"
 
