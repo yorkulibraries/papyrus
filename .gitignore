@@ -8,5 +8,5 @@ MissingDrawer.tmplugin
 config/papyrus_app_config.rb
 config/database.yml
 config/deploy.rb
+config/deploy
 .DS_Store
-
