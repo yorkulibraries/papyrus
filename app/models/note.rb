@@ -1,7 +1,7 @@
 class Note < ActiveRecord::Base
   attr_accessible :note
 
-  default_scope order("created_at desc")
+  default_scope { order("created_at desc") }
   belongs_to :student
 
   validates_presence_of :note, :message => "Note field must not be empty"

@@ -16,10 +16,10 @@ class AccessCode < ActiveRecord::Base
   validates_presence_of :for, :code
 
   ## SCOPES
-  default_scope order("expires_at ASC")
-  scope :active,  where("expires_at >= ? OR expires_at is NULL", Date.today)
-  scope :expired,  where("expires_at < ?", Date.today)
+  default_scope { order("expires_at ASC") }
+  scope :active, -> { where("expires_at >= ? OR expires_at is NULL", Date.today) }
+  scope :expired, -> { where("expires_at < ?", Date.today) }
 
-  scope :shared, where(shared: true)
-  scope :personal, where(shared: false)
+  scope :shared, -> { where(shared: true) }
+  scope :personal, -> { where(shared: false) }
 end

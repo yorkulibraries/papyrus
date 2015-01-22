@@ -14,16 +14,16 @@ class Attachment < ActiveRecord::Base
   belongs_to :user
 
 
-  default_scope order("name")
+  default_scope { order("name") }
 
-  scope :deleted, where(deleted: true)
-  scope :available, where(deleted: false)
+  scope :deleted, -> { where(deleted: true) }
+  scope :available, -> { where(deleted: false) }
 
-  scope :full_text, where(full_text: true)
-  scope :not_full_text, where("full_text = 'f' or full_text IS NULL")
+  scope :full_text, -> { where(full_text: true)
+  scope :not_full_text, -> { where("full_text = 'f' or full_text IS NULL")
 
-  scope :urls, where(is_url: true)
-  scope :files, where("is_url = 'f' or is_url IS NULL")
+  scope :urls, -> { where(is_url: true) }
+  scope :files, -> { where("is_url = 'f' or is_url IS NULL") }
 
   def destroy
     update_attribute(:deleted, true)

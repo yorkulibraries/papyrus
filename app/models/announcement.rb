@@ -17,8 +17,8 @@ class Announcement < ActiveRecord::Base
   validates_presence_of :user
 
   ## SCOPES
-  scope :expired,  where("ends_at < ?", Date.today)
-  scope :active, where("active = ?", true)
+  scope :expired, -> {  where("ends_at < ?", Date.today) }
+  scope :active, -> { where("active = ?", true) }
 
 
   ## INSTANCE METHODS

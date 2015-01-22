@@ -23,10 +23,10 @@ class Item < ActiveRecord::Base
 
   belongs_to :user
 
-  scope :by_date, order("items.created_at desc")
-  scope :alphabetical, order("items.title asc")
+  scope :by_date, -> { order("items.created_at desc") }
+  scope :alphabetical, -> { order("items.title asc") }
 
-  scope :recently_worked_with, lambda { |user_id|
+  scope :recently_worked_with, -> { |user_id|
     joins("INNER JOIN audits ON (audits.auditable_id = items.id OR audits.associated_id = items.id) AND (audits.auditable_type = 'Item' OR audits.associated_type = 'Item')")
     .where("audits.user_id = ?", user_id).reorder("audits.created_at desc").group("items.id") }
 
