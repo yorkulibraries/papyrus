@@ -11,7 +11,7 @@ class CoursesControllerTest < ActionController::TestCase
 
     should "be able to create courses" do
       assert_difference "Course.count", 1 do
-        post :create, {:course => Factory.attributes_for(:course, :term => @term), :term_id => @term.id }
+        post :create, {:course => attributes_for(:course, :term => @term), :term_id => @term.id }
       end
 
       assert_redirected_to term_path(@term)
@@ -20,7 +20,7 @@ class CoursesControllerTest < ActionController::TestCase
     should "be able to update course" do
       course_title = "some other title"
 
-      course = Factory.create(:course, :term => @term)
+      course = create(:course, :term => @term)
       course.title = course_title
 
       post :update, {:id => course.id, :course => { :code => course.code, :title => course.title }, :term_id => @term.id }
@@ -35,7 +35,7 @@ class CoursesControllerTest < ActionController::TestCase
     end
 
     should "be able to delete course" do
-      course = Factory.create(:course, :term => @term)
+      course = create(:course, :term => @term)
       assert_difference "Course.count", -1 do
         post :destroy, {:id => course.id, :term_id => @term.id}
       end
@@ -57,7 +57,7 @@ class CoursesControllerTest < ActionController::TestCase
   ## TEST adding courses to items
   context "adding courses to item" do
     should "be able to add item " do
-      item = Factory.create(:item)
+      item = create(:item)
 
       assert_difference "ItemCourseConnection.count", 1 do
         post :add_item, :term_id => @term.id, :id => @course.id, :item_id => item.id
@@ -67,7 +67,7 @@ class CoursesControllerTest < ActionController::TestCase
 
 
     should "be able to remove an item" do
-      item = Factory.create(:item) 
+      item = create(:item)
       @course.add_item (item)
 
       assert_difference "ItemCourseConnection.count", -1 do
@@ -77,8 +77,8 @@ class CoursesControllerTest < ActionController::TestCase
     end
 
     should "be able to add many courses to one item" do
-      course2 = Factory.create(:course)
-      item = Factory.create(:item)
+      course2 = create(:course)
+      item = create(:item)
 
 
       assert_difference "ItemCourseConnection.count", 2 do
@@ -96,7 +96,7 @@ class CoursesControllerTest < ActionController::TestCase
     end
 
     should "not add duplicate courses" do
-      item = Factory.create(:item)
+      item = create(:item)
 
       # add two same courses but its should only add one
       assert_difference "ItemCourseConnection.count", 1 do

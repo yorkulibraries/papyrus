@@ -3,7 +3,7 @@ require 'test_helper'
 class StudentsControllerTest < ActionController::TestCase
 
   setup do
-    @user = Factory.create(:user, :role => User::ADMIN)
+    @user = create(:user, :role => User::ADMIN)
     log_user_in(@user)
   end
 

@@ -5,8 +5,8 @@ class ItemsControllerTest < ActionController::TestCase
 
 
   setup do
-     @manager_user = Factory.create(:user, :role => User::MANAGER)
-     @student_user = Factory.create(:student)
+     @manager_user = create(:user, :role => User::MANAGER)
+     @student_user = create(:student)
 
      log_user_in(@manager_user)
   end
@@ -14,7 +14,7 @@ class ItemsControllerTest < ActionController::TestCase
   #### ASSIGNING AND WITHHOLDING TESTS ########
 
   should "withhold an item from student" do
-     @item = Factory.create(:item)
+     @item = create(:item)
 
      @item.assign_to_student(@student_user)
 
@@ -27,10 +27,10 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   should "assign item to students" do
-    @item = Factory.create(:item)
+    @item = create(:item)
 
-    student_1 = Factory.create(:student)
-    student_2 = Factory.create(:student)
+    student_1 = create(:student)
+    student_2 = create(:student)
 
     assert_difference "ItemConnection.count", 3 do
       post :assign_to_students, { :id => @item.id, :student_ids => "#{student_1.id},#{student_2.id},#{@student_user.id}", :expires_on => { :date => 1.year.from_now} }
@@ -41,9 +41,9 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   should "assign one or more items to one student" do
-    @item = Factory.create(:item)
+    @item = create(:item)
 
-    item_1 = Factory.create(:item)
+    item_1 = create(:item)
 
     assert_difference "ItemConnection.count", 2 do
       post :assign_many_to_student, {:item_ids => "#{item_1.id},#{@item.id}", :student_id => @student_user.id, :expires_on => {:date => 1.year.from_now}}
@@ -56,7 +56,7 @@ class ItemsControllerTest < ActionController::TestCase
   ##### ACQUISITION TESTS ########
 
   should "create an Acquisition Request when creating a new item and the checkbox is checked" do
-    item_attrs = Factory.attributes_for(:item)
+    item_attrs = attributes_for(:item)
 
     assert_difference "AcquisitionRequest.count", 1 do
       post :create, :item => item_attrs, :create_acquisition_request => "yes"
@@ -71,11 +71,11 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   should "show acquisition requests for the item" do
-    @item = Factory.create(:item)
+    @item = create(:item)
 
-    Factory.create(:acquisition_request, :item => @item, :fulfilled => true) # fulfilled
-    Factory.create(:acquisition_request, :item => @item, :fulfilled => false) # pending
-    Factory.create(:acquisition_request, :item => @item, :fulfilled => false, :cancelled => true) # cancelled
+    create(:acquisition_request, :item => @item, :fulfilled => true) # fulfilled
+    create(:acquisition_request, :item => @item, :fulfilled => false) # pending
+    create(:acquisition_request, :item => @item, :fulfilled => false, :cancelled => true) # cancelled
 
     get :acquisition_requests, :id => @item.id
 
