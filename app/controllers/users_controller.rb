@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 
 
   def inactive
-    @users = User.inactive.not_students.all
+    @users = User.inactive.not_students.to_a
   end
-  
+
   def activate
     @user = User.find(params[:id])
     @user.inactive = false
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.active.not_students.all
+    @users = User.active.not_students.to_a
   end
 
   def show
@@ -40,9 +40,9 @@ class UsersController < ApplicationController
 
   def audit_trail
     @user = User.not_students.find(params[:id])
-    @audits = @user.audits 
+    @audits = @user.audits
     @audits.sort! { |a, b| a.created_at <=> b.created_at }
-        
+
     @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
   end
 

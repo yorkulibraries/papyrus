@@ -29,7 +29,7 @@
 			  <div  class="list-group-item <%= cycle("odd", "even") %>">
 						<%= image_tag "icons/user_default.png", class: "pull-left" %>
 						<span class="badge badge-success">
-							<%= link_to reactivate_student_path(student), confirm: 'Are you sure?', class: "white no-text-shadow" do %>
+							<%= link_to reactivate_student_path(student), data: { confirm: 'Are you sure?'}, class: "white no-text-shadow" do %>
 							Reactivate Student
 							<% end %>
 						</span>

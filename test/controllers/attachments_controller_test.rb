@@ -41,7 +41,7 @@ class AttachmentsControllerTest < ActionController::TestCase
     get :edit, item_id: item.id, id: attachment.id
     assert_template :edit
     assert attachment.is_url?, "Should be url"
-    assert_template "form_url", "Should be edit template with form url partial"
+    assert_template partial: "_form_url"
   end
 
   ######### CREATING AND UPDATING ############
