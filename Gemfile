@@ -68,7 +68,7 @@ group :development, :test do
   gem "minitest", "4.7.5"
 
   gem 'webrat', "0.7.3"
-  gem 'factory_girl_rails', "4.3.0"
+  gem 'factory_girl_rails', "4.5.0"
   gem 'shoulda', "3.5"
   gem 'shoulda-matchers'
   gem 'shoulda-context'
