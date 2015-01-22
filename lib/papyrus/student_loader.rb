@@ -30,7 +30,7 @@ module Papyrus
       students_list.each do |student_array|
 
         params = Student.build_hash_from_array(student_array, @options[:fields_order])
-        student = Student.where("student_details.student_number = ?", params[:student_details_attributes][:student_number]).includes(:student_details).first
+        student = Student.where("student_details.student_number = ?", params[:student_details_attributes][:student_number]).references(:student_details).includes(:student_details).first
 
 
         if student

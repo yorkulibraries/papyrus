@@ -2,8 +2,8 @@ class StatsController < ApplicationController
   before_filter :authorize_check
 
   def index
-    @has_attachments_count = Attachment.count("item_id", distinct: true)
-    @has_students_count = ItemConnection.count("item_id", distinct: true)
+    @has_attachments_count = Attachment.distinct.count("item_id")
+    @has_students_count = ItemConnection.distinct.count("item_id")
 
   end
 

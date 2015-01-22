@@ -6,7 +6,7 @@ class Course < ActiveRecord::Base
   validates_presence_of :title, :code, :term_id
   validates_uniqueness_of :code
 
-  default_scope  { order: 'title ASC' }
+  default_scope  { order('title ASC') }
 
   has_many :item_course_connections
   has_many :items, :through => :item_course_connections

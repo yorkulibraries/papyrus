@@ -12,6 +12,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
         config.bib_search.solr.url = ENV["SOLR_PATH"]
         config.bib_search.worldcat.key = ENV["WORLDCAT_KEY"]
       end
+      
     end
 
 

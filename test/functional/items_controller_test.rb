@@ -146,27 +146,10 @@ class ItemsControllerTest < ActionController::TestCase
 
     item = assigns(:item)
     assert_template :new
-    assert_blank item.title, "Title is not set"
+    assert item.title.blank?, "Title is not set"
   end
 
-  should "show new form with prefilled vufind values" do
-    ## if this test fails, first check if there is a test solr config, second make sure vufind_item with the id exists
 
-    bib_record_id = "2246622"
-    PapyrusConfig.config.bib_search.solr.url = "http://iota.library.yorku.ca/solr/biblio"
-
-    get :new, bib_record_id: bib_record_id
-
-    item = assigns(:item)
-    assert_template :new
-
-    assert item.unique_id.end_with? bib_record_id, "Unique ID will have a bib record id"
-    assert_present item.title, "Title should not be blank"
-    assert_present item.author, "Title should not be blank"
-    assert_present item.item_type, "Title should not be blank"
-    assert_present item.callnumber, "Title should not be blank"
-
-  end
 
   should "create a new item" do
 
@@ -215,10 +198,6 @@ class ItemsControllerTest < ActionController::TestCase
     assert_equal 0, item.errors.count, "Should be no errors"
     assert_redirected_to item
     assert_equal @manager_user, item.user, "User id hasn't changed"
-
-    assert_raises ActiveModel::MassAssignmentSecurity::Error do
-       post :update, id: item.id, item: { user_id: 333 }
-    end
 
   end
 

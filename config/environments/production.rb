@@ -64,4 +64,6 @@ Papyrus::Application.configure do
   config.assets.compressor = :uglifier
 
 
+  config.active_record.disable_implicit_join_references = true
+
 end

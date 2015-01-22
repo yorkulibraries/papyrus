@@ -22,7 +22,7 @@
 				<li>
 					<input class="student_notification" type="checkbox" name="students[]" value="<%= student.id %>">
 					<a href="<%= student_path(student) %>"><%= student.name %></a>
-					<%= link_to withhold_from_student_item_path(@item, :student_id => student.id), :confirm => 'Are you sure?', :method => :delete, :class => "tooltips close",
+					<%= link_to withhold_from_student_item_path(@item, :student_id => student.id), data: { confirm: 'Are you sure?' }, :method => :delete, :class => "tooltips close",
 					:rel =>"tooltip",  :title => "Bar the student from accessing this item." do %>
 						&times;
 					<% end %>
@@ -125,7 +125,7 @@
 				<%= render partial: attachment %>
 			<% end %>
 		</div>
-		
+
 		<% if @item.attachments.files.available.size > 0 %>
 			<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-small hidden-phone"><i class="icon-download"></i> Download Zipped</a>
 			<a href="#" class="delete_multiple float-right red"><i class="icon-trash"></i> Delete multiple files</a>

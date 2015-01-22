@@ -38,4 +38,7 @@ Papyrus::Application.configure do
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
 
+  config.active_record.disable_implicit_join_references = true
+
+
 end
