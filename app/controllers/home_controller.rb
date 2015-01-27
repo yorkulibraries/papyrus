@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
 
   def active_users
-    @users = User.where("last_active_at > ?", 10.minutes.ago)
+    @users = User.not_students.where("last_active_at > ?", 10.minutes.ago)
     @students = Student.where("last_active_at > ?", 10.minutes.ago)
   end
 

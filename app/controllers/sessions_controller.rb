@@ -18,12 +18,13 @@ class SessionsController < ApplicationController
 
 
     users = User.active.where("username = ? OR username = ?", username, alt_username)
-    
+
     if users.size == 1
 
       user = users.first
 
       session[:user_id] = user.id
+      session[:username] = user.name
 
       user.active_now!(User::ACTIVITY_LOGIN)
 
