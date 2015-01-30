@@ -28,21 +28,21 @@ class CreateStudentDetails < ActiveRecord::Migration
       t.boolean  :format_large_print
       t.text :pf_note
       t.string :wrms_ref_number
-      t.integer :transcription_coordinator_id, limit: 255
+      t.integer :transcription_coordinator_id
       t.integer  :transcription_assistant_id
       t.date :request_form_signed_on
       t.date :intake_appointment_on
       t.date :responsibilities_document_signed_on
       t.date :ppy_access_granted_on
       t.date :adaptive_computed_access_granted_on
-      
+
       t.timestamps
     end
-    
+
     add_index :student_details, [:transcription_coordinator_id]
     add_index :student_details, [:transcription_assistant_id]
     add_index :student_details, [:student_id]
-  end    
+  end
 
   def self.down
     drop_table :student_details
