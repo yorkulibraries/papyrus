@@ -4,11 +4,23 @@ class Item < ActiveRecord::Base
 
   audited
   has_associated_audits
+  paginates_per 20
 
+  ## VALIDATIONS ##
   validates_presence_of :title, :item_type
   validates_uniqueness_of :unique_id
+  validates :physical_description, length: { maximum: 250 }
+  validates :language_note, length: { maximum: 250 }
+  validates :edition, length: { maximum: 250 }
+  validates :source, length: { maximum: 250 }
+  validates :source_note, length: { maximum: 250 }
+  validates :publisher, length: { maximum: 250 }
+  validates :isbn, length: { maximum: 250 }
+  validates :callnumber, length: { maximum: 250 }
+  validates :title, length: { maximum: 250 }
+  validates :author, length: { maximum: 250 }
 
-  paginates_per 20
+  ## RELATIONS ##
 
   has_many :attachments
 
@@ -22,6 +34,8 @@ class Item < ActiveRecord::Base
   has_many :acquisition_requests
 
   belongs_to :user
+
+  ## SCOPES ##
 
   scope :by_date, -> { order("items.created_at desc") }
   scope :alphabetical, -> { order("items.title asc") }
