@@ -20,8 +20,10 @@ module SearchItemsHelper
       if field.kind_of?(Array)
         field.reject { |i| i.blank? }.join(", ")
       else
-        field = encode_field(field) rescue "#{Encoding.default_external}"
+        field = encode_field(field) rescue "Error Encoding: #{Encoding.default_external}"        
       end
+
+
     end
 
   end
@@ -30,8 +32,9 @@ module SearchItemsHelper
   def encode_field(field)
     if field.encoding.name != "UTF-8"
       field.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+    else
+      field
     end
-
   end
 
 end
