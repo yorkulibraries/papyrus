@@ -8,7 +8,7 @@
 	     <%= f.file_field :file, :id => "file_attachment_multiple" %>
 	<% end %>
 	<p>When finished, click on
-	<button onclick="javascript:$('input#file_attachment_multiple').uploadifyUpload();" class="btn btn-small">Upload These Files</button></p>	
+	<button onclick="javascript:$('input#file_attachment_multiple').uploadifyUpload();" class="btn btn-small">Upload These Files</button></p>
 </div>
 
 
@@ -17,20 +17,20 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	
+
 	var upload_params = {
       '<%= key %>' : encodeURIComponent('<%= u cookies[key] %>'),
 	  '_method': 'post',
       '<%= request_forgery_protection_token %>' : encodeURIComponent('<%= u form_authenticity_token %>'),
-      '_http_accept': 'application/javascript',	 
+      '_http_accept': 'application/javascript',
 	  'multi' :true
     };
-	
+
   var url = "<%= item_attachments_path(@item) %>"; //$('form#new_attachment').attr('action');
   $('input#file_attachment_multiple').uploadify({
-    'uploader'  : '<%= root_url %>assets/uploadify/uploadify.swf',
+    'uploader'  : '<%= asset_path("assets/uploadify/uploadify.swf") %>',
     'script'    : url,
-    'cancelImg' : '<%= root_url %>assets/uploadify/cancel.png',
+    'cancelImg' : '<%= asset_path("assets/uploadify/cancel.png") %>',
     'fileDataName' : 'attachment[file]',
 	'multi'        : true,
 	'scriptData'   : upload_params,
