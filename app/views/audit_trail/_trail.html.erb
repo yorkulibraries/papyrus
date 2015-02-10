@@ -27,7 +27,7 @@
 					<small class="trivial hide">
 						<% event.audited_changes.each do |key, value| %>
 							<% if value.kind_of?(Array) %>
-								<strong><%= key %></strong> changed from <em><%= value.first %></em> to <em><%= value.last %></em>
+								<strong><%= key %></strong> changed from <em><%= value.first  rescue nil %></em> to <em><%= value.last rescue nil %></em>
 							<% else %>
 								<strong><%= key %></strong> = <em> <%= value == nil ? "nothing" : value %></em>
 							<% end %>
