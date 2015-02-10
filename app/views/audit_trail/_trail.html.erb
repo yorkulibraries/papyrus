@@ -1,5 +1,5 @@
 <table class="audit-trail">
-	
+
 	<% audits_grouped.each do |date, events| %>
 		<tr class="date">
 			<td colspan="4">
@@ -8,16 +8,36 @@
 		</tr>
 		<% events.each do |event| %>
 			<% event.auditable_type == "User" ? type = "Student" : type = event.auditable_type %>
-			
+
 			<% type = "AssignedItem" if type == "ItemConnection" %>
-		<tr>
+
+
+
+		<tr class="audit_event">
 			<td class="trivial time"><%= event.created_at.strftime("%R")%></td>
 			<td class="what">
-				<span class="badge <%= type.underscore.downcase %>"><%= defined?(audit_what) ? audit_what : type.tableize.singularize.humanize %></span>
+				<span class="badge <%= type.underscore.downcase %>">
+					<%= defined?(audit_what) ? audit_what : type.tableize.singularize.humanize %>
+				</span>
 			</td>
-			<td class="distinct"><%= event.comment %></td>
-			<td class="who"><code title="<%= event.action %> "><%= event.user.name if event.user %></code></td>		
-		</tr>	
+			<td class="audit_comment distinct">
+				<%= event.comment %>
+				<% if event.audited_changes != nil %>
+					<br/>
+					<small class="trivial hide">
+						<% event.audited_changes.each do |key, value| %>
+							<% if value.kind_of?(Array) %>
+								<strong><%= key %></strong> changed from <em><%= value.first %></em> to <em><%= value.last %></em>
+							<% else %>
+								<strong><%= key %></strong> = <em> <%= value == nil ? "nothing" : value %></em>
+							<% end %>
+							<br/>
+						<% end %>
+					</small>
+				<% end %>
+			</td>
+			<td class="who"><code title="<%= event.action %> "><%= event.user.name if event.user %></code></td>
+		</tr>
 		<% end %>
 	<% end %>
 </table>
