@@ -26,7 +26,7 @@ $(document).ready(function() {
 	  'multi' :true
     };
 
-  var url = "<%= item_attachments_path(@item) %>"; //$('form#new_attachment').attr('action');
+  var url = "<%= item_attachments_path(@item, uploadify: true) %>"; //$('form#new_attachment').attr('action');
   $('input#file_attachment_multiple').uploadify({
     'uploader'  : '<%= asset_path("assets/uploadify/uploadify.swf") %>',
     'script'    : url,

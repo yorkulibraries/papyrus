@@ -35,9 +35,15 @@ class AttachmentsController < ApplicationController
     if @attachment.save
 
       respond_to do |format|
-            format.html { redirect_to @item, notice: "Successfully created a file." }
+
+            if params[:uploadify]
+              format.html { render text: render_to_string(partial: @attachment, layout: false) }
+            else
+              format.html { redirect_to @item, notice: "Successfully created a file." }
+            end
+
             format.js do
-               render text: render_to_string(partial: @attachment)
+               render text: render_to_string(partial: @attachment, layout: false)
             end
         end
     else
@@ -104,7 +110,7 @@ class AttachmentsController < ApplicationController
 
   def get_file
     @attachment = @item.attachments.find(params[:id])
-    file = "#{@attachment.file.path}"    
+    file = "#{@attachment.file.path}"
 
     begin
       mime_type = MIME::Types.type_for(file).first.content_type
