@@ -104,9 +104,13 @@ class AttachmentsController < ApplicationController
 
   def get_file
     @attachment = @item.attachments.find(params[:id])
-    file = "#{@attachment.file.path}"
-    #mime_type = File.mime_type?(file)
-    mime_type = MIME::Types.type_for(file).first.content_type 
+    file = "#{@attachment.file.path}"    
+
+    begin
+      mime_type = MIME::Types.type_for(file).first.content_type
+    rescue
+      mime_type = "unknown"
+    end
 
     send_data File.read(file), type: mime_type, disposition: 'attachment', filename: "#{File.basename(@attachment.file_url)}"
   end
