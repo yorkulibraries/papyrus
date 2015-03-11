@@ -4,9 +4,23 @@ module Papyrus
     DEFAULT_OPTIONS = {
       ignore_first_line: true,
       fields_order: [
-        "student_number", "first_name", "last_name", "email", "cds_counsellor", "cds_counsellor_email","request_form_signed_on",
-        "accessibility_lab_access", "book_retrieval", "alternate_format_required", "format_pdf", "format_large_print", "format_daisy", "format_braille",
-        "format_word", "format_other", "format_note"
+        "student_number",
+        "first_name",
+        "last_name",
+        "email",
+        "cds_counsellor",
+        "cds_counsellor_email",
+        "accessibility_lab_access",
+        "book_retrieval",
+        "alternate_format_required",
+        "format_pdf",
+        "format_large_print",
+        "format_word",
+        "format_braille",
+        "format_daisy",
+        "format_other",
+        "format_note",
+        "request_form_signed_on"
       ],
       coordinator_id: 1,
       created_by_id: 1
