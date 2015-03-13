@@ -21,7 +21,7 @@ namespace :import do
       exit
     end
 
-    report "--------- Begin #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} ---------"
+    report "\n\n--------- Begin #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} ---------\n\n"
 
     if ENV["FILE"]
       report "Import: #{ENV["FILE"]}"
@@ -81,7 +81,7 @@ namespace :import do
     total_processed = status[:updated].count + status[:created].count
     total_active_students = Student.active.count
 
-    report "--------- End #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} ---------"
+    report "\n\n--------- End #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} ---------"
 
 
     if ENV["EMAIL_REPORT_LOG_TO"]
