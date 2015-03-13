@@ -12,7 +12,9 @@ namespace :import do
 
     if ENV["HELP"]
       puts "Usage: rake import:s  tudents [ < file_path | FILE=file_path ]"
-      puts "Optional: SEND_WELCOME_MAIL id of user used to send this email."
+      puts "Optional: SEND_WELCOME_EMAIL=id of user used to send this email."
+      puts "Optional: REPORT=true print out import report."
+      puts "Optional: EMAIL_REPORT_LOG_TO=email address where to email the report"
 
       loader = Papyrus::StudentLoader.new
       puts "Optional ENV variables: #{loader.get_env_options_names}\n"
@@ -82,8 +84,8 @@ namespace :import do
     report "--------- End #{Time.now.strftime("%Y-%m-%d %H:%M:%S")} ---------"
 
 
-    if ENV["EMAIL_REPORT_LOG"]
-      ReportMailer.mail_report(ENV["EMAIL_REPORT_LOG"], @report_log.join("\n"), 'Papyrus Student Import Report').deliver
+    if ENV["EMAIL_REPORT_LOG_TO"]
+      ReportMailer.mail_report(ENV["EMAIL_REPORT_LOG_TO"], @report_log.join("\n"), 'Papyrus Student Import Report').deliver
     end
 
   end
