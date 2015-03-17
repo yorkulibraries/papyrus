@@ -11,7 +11,7 @@ namespace :import do
     students = Array.new
 
     if ENV["HELP"]
-      puts "Usage: rake import:s  tudents [ < file_path | FILE=file_path ]"
+      puts "Usage: rake import:students [ < file_path | FILE=file_path ]"
       puts "Optional: SEND_WELCOME_EMAIL=id of user used to send this email."
       puts "Optional: REPORT=true print out import report."
       puts "Optional: EMAIL_REPORT_LOG_TO=email address where to email the report"
