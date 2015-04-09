@@ -8,9 +8,9 @@ Papyrus is an accessible content delivery and student management application. It
 Downloading The Latest Version
 ------------------------------
 
-The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.5.2 is the most recent production ready version.
+The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.5.3 is the most recent production ready version.
 
-[Download v2.5.2 Zip File](https://github.com/yorkulcs/papyrus/archive/v2.5.2.tar.gz)
+[Download v2.5.3 Zip File](https://github.com/yorkulcs/papyrus/archive/v2.5.3.tar.gz)
 
 Checkout the [Wiki Pages](https://github.com/yorkulcs/papyrus/wiki) for more details on how to deploy Papyrus.
 
@@ -29,7 +29,7 @@ Prerequisites
 -------------
 
 - Ruby 1.9.3
-- Rails 3.2.x
+- Rails 4.0.x
 - MySQL 5.5 or PostgreSQL (This method requires changing of the configuration files)
 - SQLite (For development/testing mode)
 
