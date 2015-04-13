@@ -18,7 +18,21 @@ class SearchItemsController < ApplicationController
 
   end
 
-  private 
+  def test
+    bib_record = BibRecord.new(PapyrusConfig.bib_search)
+    @bib_search = true
+
+    @docs = bib_record.search_items(params[:q], BibRecord::SOLR)
+
+    if params[:no_layout]
+      render "test", layout: false
+    else
+      render "test", layout: true
+    end
+
+  end
+
+  private
   def search_solr(query)
     bib_record = BibRecord.new(PapyrusConfig.bib_search)
     @bib_search = true
