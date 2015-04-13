@@ -26,8 +26,10 @@ class SearchItemsController < ApplicationController
 
     if params[:no_layout]
       render "test", layout: false
+    elsif params[:layout]
+      render "test", layout: params[:layout]
     else
-      render "test", layout: true
+      render "test"
     end
 
   end

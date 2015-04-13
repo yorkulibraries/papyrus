@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %> | <%= controller.controller_name.humanize %> - Papyrus | LAS</title>
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tag %>
-    <%= yield(:head) %>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<meta charset="UTF-8">
-  </head>
-  <body>
 
   <h3> Without Encoding Fields</h3>
   <table class="table">
@@ -50,5 +38,3 @@
       <% end %>
     </tbody>
   </table>
-</body>
-</html>
