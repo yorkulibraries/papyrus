@@ -32,7 +32,8 @@ module SearchItemsHelper
   def encode_field(field)
     if field.encoding.name != "UTF-8"
       #field.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '?')
-      field.force_encoding("UTF-8")
+      #field.force_encoding("UTF-8")
+      field # for now do nothing
     else
       field
     end
