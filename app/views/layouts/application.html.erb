@@ -19,7 +19,7 @@
        <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement'>
          <%= announcement.message %>
          <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
-          ×
+          &times;
          <% end %>
        </div>
      <% end %>

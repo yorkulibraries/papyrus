@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery-migrate-1.0.0
 //= require twitter/bootstrap
 //= require_self
 //= require_tree .
@@ -26,7 +27,7 @@ $(document).ready(function() {
 	$('.submittable').click(function() {
 		$(this).parents('form:first').submit();
 	});
-	
+
 
 
 
