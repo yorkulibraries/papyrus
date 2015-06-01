@@ -47,6 +47,8 @@ gem "audited-activerecord", "~> 4.0"
 gem "squeel", "1.2.2"
 gem "rubyzip", "0.9.9"
 gem 'nifty-generators', "0.4.6"
+gem "axlsx", "2.0.0"
+gem 'axlsx_rails', "0.1.5"
 
 ## UPLOADING AND MANIPULATING FILES ##
 gem "carrierwave", "0.9.0"

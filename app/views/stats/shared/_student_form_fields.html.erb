@@ -1,0 +1,32 @@
+<table class="table">
+  <tr>
+    <td>
+      <h5>Coordinator</h5>
+
+      <select name="coordinator">
+        <option value="any">Any</option>
+        <%= options_from_collection_for_select(User.transcription_assitants, 'id', 'name' , @coordinator.try(:id)) %>
+      </select>
+    </td>
+    <td>
+      <h5>Assistant</h5>
+      <select name="assistant">
+        <option value="any">Any</option>
+        <%= options_from_collection_for_select(User.transcription_assitants, 'id', 'name' , @assistant.try(:id)) %>
+      </select>
+    </td>
+    <td>
+      <h5>Date Range [start - end]</h5>
+      <input type="text" name="start_date" value="<%= @start_date %>" class="datepicker"/> -
+      <input type="text" name="end_date" value="<%= @end_date %>" class="datepicker"/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <br/>
+      <div class="text-align-right">
+        <input type="submit" value="Generate" class="btn btn-large" style="margin-top: -8px;">
+      </div>
+    </td>
+  </tr>
+</table>
