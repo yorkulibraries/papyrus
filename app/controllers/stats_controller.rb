@@ -8,18 +8,17 @@ class StatsController < ApplicationController
   end
 
   def assigned_students
-    @assigned_to = User.find_by_id(params[:assigned_to]) || nil
+    @coordinator = User.find_by_id(params[:coordinator]) || nil
+    @assistant = User.find_by_id(params[:assistant]) || nil
     @start_date = params["start_date"] || Date.parse("2009-01-31")
     @end_date = params["end_date"] || Date.today
     @end_date = Date.parse(@end_date) if @end_date.is_a? String
 
     @students = Student.includes(:student_details).joins(:student_details).where("users.created_at >= ? AND users.created_at < ?", @start_date, @end_date)
 
-    unless @assigned_to == nil
-      id =  @assigned_to.id
-      @students = @students.where("transcription_coordinator_id = ? or transcription_assistant_id = ?", id,  id)
-    end
 
+    @students = @students.where("transcription_coordinator_id = ?", @coordinator.id) unless @coordinator == nil
+    @students = @students.where("transcription_assistant_id = ?", @assistant.id) unless @assistant == nil
 
     respond_to do |format|
       format.html
@@ -84,22 +83,4 @@ class StatsController < ApplicationController
      authorize! :show, :stats
   end
 
-  def to_csv(data)
-    require 'csv'
-
-    CSV.generate(Hash.new) do |csv|
-      added_headers = false
-
-      data.each do |result|
-        if result.is_a?(Student)
-          unless added_headers
-            csv << %w(id name email student_number preferred_formats cds_adviser created_on)
-            added_headers = true
-          end
-          csv << result.to_csv
-        end
-      end
-    end
-
-  end
 end

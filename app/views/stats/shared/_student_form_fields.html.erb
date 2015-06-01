@@ -1,11 +1,18 @@
 <table class="table">
   <tr>
     <td>
-      <h5>Assigned to</h5>
+      <h5>Coordinator</h5>
 
-      <select name="assigned_to">
+      <select name="coordinator">
         <option value="any">Any</option>
-        <%= options_from_collection_for_select(User.transcription_assitants, 'id', 'name' , @assigned_to.try(:id)) %>
+        <%= options_from_collection_for_select(User.transcription_assitants, 'id', 'name' , @coordinator.try(:id)) %>
+      </select>
+    </td>
+    <td>
+      <h5>Assistant</h5>
+      <select name="assistant">
+        <option value="any">Any</option>
+        <%= options_from_collection_for_select(User.transcription_assitants, 'id', 'name' , @assistant.try(:id)) %>
       </select>
     </td>
     <td>
@@ -15,7 +22,7 @@
     </td>
   </tr>
   <tr>
-    <td colspan="2">
+    <td colspan="3">
       <br/>
       <div class="text-align-right">
         <input type="submit" value="Generate" class="btn btn-large" style="margin-top: -8px;">
