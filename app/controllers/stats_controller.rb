@@ -7,23 +7,23 @@ class StatsController < ApplicationController
 
   end
 
-  def generate
+  def assigned_students
+    @assigned_to = User.find_by_id(params[:assigned_to]) || nil
+    @start_date = params["start_date"] || Date.parse("2009-01-31")
+    @end_date = params["end_date"] || Date.today
+    @end_date = Date.parse(@end_date) if @end_date.is_a? String
 
+    @students = Student.includes(:student_details).joins(:student_details).where("users.created_at >= ? AND users.created_at < ?", @start_date, @end_date)
 
-    if params[:assigned_to] != nil && params[:assigned_to] != "all"
-      id = params[:assigned_to]
-      assigned_to = User.find(id)
-      @title = "Students Assgined to #{assigned_to.name}"
-      @results = Student.includes(:student_details).joins(:student_details).where("transcription_coordinator_id = ? or transcription_assistant_id = ?", id, id)
-    else
-      @title = "All Students"
-      @results =  Student.active.includes(:student_details).joins(:student_details)
+    unless @assigned_to == nil
+      id =  @assigned_to.id
+      @students = @students.where("transcription_coordinator_id = ? or transcription_assistant_id = ?", id,  id)
     end
+
 
     respond_to do |format|
       format.html
-      format.csv { send_data to_csv(@results) }
-      format.xls
+      format.xlsx
     end
   end
 
@@ -33,25 +33,50 @@ class StatsController < ApplicationController
     @start_date = params["start_date"] || Date.parse("2009-01-31")
     @end_date = params["end_date"] || Date.today
     @end_date = Date.parse(@end_date) if @end_date.is_a? String
+    @source = params["source"] || nil
+    @items_count = Item.count
 
-    select_item_fields = "items.title, items.id, items.callnumber, items.isbn, items.source"
+    select_item_fields = "items.title, items.id, items.callnumber, items.isbn, items.source, items.created_at"
     select_item_connections_fields = "count(item_connections.student_id) as assigned_count, item_connections.created_at as assigned_at"
     select_fields = select_item_connections_fields + ", " + select_item_fields
+
     where_clause = "where item_connections.created_at >= '#{@start_date}' AND item_connections.created_at < '#{@end_date + 1.day}'"
+
+    where_clause = where_clause + " AND items.source = '#{@source}'"  unless @source == nil || @source == "All"
 
     sql = "SELECT #{select_fields} FROM item_connections INNER JOIN items ON item_connections.item_id = items.id #{where_clause} GROUP BY item_connections.item_id"
 
-    @export_items = @assigned_items = ActiveRecord::Base.connection.exec_query(sql)
-
-
-    @items_count = Item.count
+    @assigned_items = ActiveRecord::Base.connection.exec_query(sql)
 
     @unassigned_items = Item.where("id not in (?)", @assigned_items.collect{ |i| i["id"] })
 
+
     respond_to do |format|
       format.html
-      format.xls
+      format.xlsx
     end
+  end
+
+  def items_history
+    @start_date = params["start_date"] || Date.today - 1.year
+    @end_date = params["end_date"] || Date.today
+    @end_date = Date.parse(@end_date) if @end_date.is_a? String
+    @source = params["source"] || nil
+
+    @items_count = Item.count
+
+    @items = Item.where("created_at >= ? AND created_at < ?", @start_date, @end_date)
+
+    @items = @items.where("source = ?", params["source"]) unless @source == nil || @source == "All"
+
+
+    respond_to do |format|
+      format.html
+      format.xlsx {
+        render xlsx: "items_history", filename: "report_items_history.xlsx"
+      }
+    end
+
   end
 
   private

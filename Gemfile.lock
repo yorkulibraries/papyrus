@@ -50,6 +50,13 @@ GEM
     audited-activerecord (4.0.0)
       activerecord (~> 4.0)
       audited (= 4.0.0)
+    axlsx (2.0.0)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (= 0.9.9)
+    axlsx_rails (0.1.5)
+      axlsx
+      rails (>= 3.1)
     babosa (0.3.11)
     bcrypt (3.1.9)
     bcrypt-ruby (3.1.5)
@@ -135,6 +142,7 @@ GEM
       minitest (>= 3.0)
     hike (1.2.3)
     hitimes (1.2.2)
+    htmlentities (4.3.3)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     jbuilder (1.5.3)
@@ -309,6 +317,8 @@ PLATFORMS
 
 DEPENDENCIES
   audited-activerecord (~> 4.0)
+  axlsx (= 2.0.0)
+  axlsx_rails (= 0.1.5)
   bcrypt-ruby (~> 3.1.2)
   bullet
   cancan (= 1.6.9)

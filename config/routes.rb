@@ -6,8 +6,9 @@ Papyrus::Application.routes.draw do
 
 
   get "stats" => "stats#index"
-  get "stats/generate" =>"stats#generate"
+  get "stats/assigned_students" =>"stats#assigned_students"
   get "stats/item_usage" => "stats#item_usage"
+  get "stats/items_history" => "stats#items_history"
 
   get "dashboard" => "home#index"
   get "active_users" => "home#active_users", as: :active_users

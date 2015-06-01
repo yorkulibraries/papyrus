@@ -1,0 +1,15 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Items History") do |sheet|
+
+  sheet.add_row ["Item Title", "Source", "Callnumber", "ISBN", "Creator", "Date Added"]
+  @items.each do |item |
+    username = item.user.name if item.user
+    date = item.created_at.strftime("%b %d, %Y")
+
+    sheet.add_row [item.title, item.source, item.callnumber, item.isbn, username, date]
+  end
+
+  sheet.add_row []
+  sheet.add_row ["Date Range:", @start_date, "to", @end_date ]
+
+end

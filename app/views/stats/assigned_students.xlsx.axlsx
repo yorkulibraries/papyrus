@@ -1,0 +1,24 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Items History") do |sheet|
+
+  sheet.add_row ["ID", "Name", "Email", "Student Num", "Formats", "CDS Councillor", "Date Registered", "Coordinator", "Assistant"]
+  @students.each do |student |
+
+    id = student.id
+    registered_on = student.created_at.strftime("%b %d, %Y")
+    name = student.name
+    email = student.email
+    snum = student.details.student_number
+    formats = student.details.formats.join(", ")
+    counsellor = student.details.cds_counsellor
+    coordinator = student.details.coordinator.name
+    assistant = student.details.assistant.name
+
+    sheet.add_row [id, name, email, snum, formats, counsellor, registered_on, coordinator, assistant]
+  end
+
+  sheet.add_row []
+  sheet.add_row ["Date Range:", @start_date, "to", @end_date ]
+
+
+end
