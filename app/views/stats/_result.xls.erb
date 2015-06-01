@@ -20,7 +20,7 @@
 	  <Cell><Data ss:Type="String"><%= student.email %></Data></Cell>
 	  <Cell><Data ss:Type="Number"><%= student.student_details.student_number %></Data></Cell>
 		<Cell><Data ss:Type="String"><%= student.student_details.formats.join(", ") %></Data></Cell>
-		<Cell><Data ss:Type="String"><%= student.student_details.cds_adviser %></Data></Cell>
+		<Cell><Data ss:Type="String"><%= student.student_details.cds_counsellor %></Data></Cell>
 		<Cell><Data ss:Type="String"><%= student.created_at.strftime(" %b %d, %Y") %></Data></Cell>
 	</Row>
 <% else %>
