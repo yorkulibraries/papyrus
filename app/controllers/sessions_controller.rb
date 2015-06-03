@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
       if user.role == User::STUDENT_USER
         redirect_to student_view_path
       else
-        redirect_to root_url, :notice => "Logged in!"
+        redirect_to root_url, notice: "Logged in!"
       end
     else
       flash.now.alert = "Invalid email or password"

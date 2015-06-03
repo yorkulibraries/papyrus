@@ -2,7 +2,7 @@
 <% title_html do %>
 	<h1>All Users</h1>
 <% end %>
-<% sidebar do %>	
+<% sidebar do %>
 	<%= link_to "Add a New User", new_user_path,  class: "action-btn blue input-block-level" %>
 	<h3>Adding Users</h3>
 	<p>An administrator can add a new user to the system. Users must be assigned roles, which will determine their access level.</p>
@@ -21,22 +21,26 @@
   <tr>
 	 	<th>Name</th>
 	  <th>Role</th>
-	  <th>Username</th>	   
+	  <th>Username</th>
 		<th class="hidden-phone">Joined On</th>
 		<th class="hidden-phone">Last Logged in</th>
 		<th></th>
   </tr>
   <% for user in @users %>
-    <tr>	      
+    <tr>
       <td><%= user.name %></td>
       <td><%= user.role %></td>
 	  	<td><%= user.username %></td>
 	 	 	<td class="hidden-phone"><%= user.created_at.strftime("%b %d, %Y") %></td>
 			<td class="hidden-phone"><%= user.last_logged_in_at.strftime("%b %d, %Y at %I:%M%p") rescue nil %>
-      <td><%= link_to "Edit User Details", edit_user_path(user), class: "btn btn-small btn-success" %></td>
+      <td>
+				<%= link_to edit_user_path(user), class: "btn btn-small btn-success" do %>
+					<i class="icon-pencil" title="Edit Details"></i>
+				<% end %>
+				<%= link_to audit_trail_user_path(user), class: "btn btn-small" do %>
+					<i class="icon-list" tilte="Audit Trail"></i>
+				<% end %>
+			</td>
     </tr>
   <% end %>
 </table>
-
-
-

@@ -25,7 +25,12 @@
 			<td><%= user.name %></td>
 			<td><%= user.role %></td>
 			<td><%= user.created_at.strftime("%b %d, %Y") %></td>
-			<td><%= link_to "Activate User", edit_user_path(user), :class=> "btn btn-mini"%></td>
+			<td>
+				<%= link_to "Activate User", edit_user_path(user), :class=> "btn btn-small"%>				
+				<%= link_to audit_trail_user_path(user), class: "btn btn-small" do %>
+					<i class="icon-list" tilte="Audit Trail"></i>
+				<% end %>
+			</td>
 		</tr>
 	<% end %>
 </table>

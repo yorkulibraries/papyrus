@@ -64,14 +64,23 @@ class User < ActiveRecord::Base
   def active_now!(action=ACTIVITY_GENERAL)
     now = Time.now
 
-    self.last_active_at = now
+
 
     if action == ACTIVITY_LOGIN
       self.last_logged_in_at = now
+      self.last_active_at = now
       self.audit_comment = self.last_logged_in_at.strftime("Logged in on %b %d, %Y at %I:%M%p")
+      save(validate: false)
+    else
+
+      self.last_active_at = now
+      # Don't audit activity
+      self.without_auditing do
+        save(validate: false)
+      end
     end
 
-    save(validate: false)
+
 
   end
 

@@ -7,7 +7,7 @@
 			</td>
 		</tr>
 		<% events.each do |event| %>
-			<% event.auditable_type == "User" ? type = "Student" : type = event.auditable_type %>
+			<% type = event.auditable_type %>
 
 			<% type = "AssignedItem" if type == "ItemConnection" %>
 
