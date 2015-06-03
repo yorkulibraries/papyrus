@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def activate
     @user = User.find(params[:id])
     @user.inactive = false
+    @user.audit_comment = "Activated User Account"
     @user.save
     redirect_to users_path, notice: "#{@user.name} is now active in Papyrus"
   end
@@ -48,6 +49,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.audit_comment = "Updated User Details"
     if @user.update_attributes(params[:user])
       redirect_to users_path, notice: "Successfully updated user."
     else
@@ -58,6 +60,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.inactive = true
+    @user.audit_comment = "Deactivated User Account"
     @user.save
     redirect_to users_url, :notice => "Successfully disabled this user."
   end

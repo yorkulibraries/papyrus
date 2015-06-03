@@ -145,6 +145,7 @@ class StudentsController < ApplicationController
   def destroy
     @student = Student.find(params[:id])
     @student.inactive = true
+    @student.audit_comment = "Set Student account to INACTIVE"
     @student.save(validate: false)
     redirect_to @student, notice: "This student's access has been disabled."
   end
@@ -152,6 +153,7 @@ class StudentsController < ApplicationController
   def reactivate
     @student = Student.find(params[:id])
     @student.inactive = false
+    @student.audit_comment = "Set Student account to ACTIVE"
     @student.save
     redirect_to @student, notice: "Student has been reactivated, and can now use Papyrus"
   end
