@@ -1,0 +1,29 @@
+audits_grouped.each do |date, events|
+  date = date.strftime('%b %e, %Y')
+
+  events.each do |event|
+    time =  event.created_at.strftime("%R")
+
+    type = event.auditable_type
+    type = "AssignedItem" if type == "ItemConnection"
+    audit_what = type.tableize.singularize.humanize
+
+    author = event.user.name if event.user
+
+    changes = Array.new
+    event.audited_changes = Array.new if event.audited_changes == nil
+
+    event.audited_changes.each do |key, value|
+
+      if value.kind_of?(Array)
+        changes.push("#{key} changed from #{value.first rescue nil} to #{value.last rescue nil}")
+      else
+        changes.push("#{key} = #{value == nil ? "nothing" : value }")
+      end
+
+    end
+
+
+    sheet.add_row [date, time, audit_what, event.comment, changes.join("\n"), author]
+  end
+end

@@ -16,7 +16,9 @@
 	<%= render partial: "students/shared/subnav" %>
 
 	<section class="audit_trail">
-		<h2>Audit Trail</h2>
+		<h2>Audit Trail
+			<a href="<%= audit_trail_student_path(@student, format: "xlsx") %>"><i class="icon-table"></i> Exel </a>
+		</h2>
 
 		<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>
 	</section>
