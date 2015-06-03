@@ -36,7 +36,7 @@ class AnnouncementsController < ApplicationController
 
   def update
     @announcement = Announcement.find(params[:id])
-
+    @announcement.audit_comment = "Updating announcement"
     if @announcement.update_attributes(params[:announcement])
       respond_to do |format|
         format.html { redirect_to  @announcement, notice: "Successfully updated course." }

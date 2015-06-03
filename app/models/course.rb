@@ -16,6 +16,7 @@ class Course < ActiveRecord::Base
     unless item == nil
       item_course = item_course_connections.build
       item_course.item = item
+      item_course.audited_comment = "Added a Item to the course #{self["code"]}"
       item_course.save
     end
   end

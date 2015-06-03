@@ -54,6 +54,7 @@ class Item < ActiveRecord::Base
   after_create do
     if self.unique_id.blank?
       self.unique_id = "uid-#{self.id}"
+      self.audit_comment = "Created unique ID"
       save(validate: false)
     end
   end
