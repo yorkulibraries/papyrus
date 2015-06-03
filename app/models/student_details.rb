@@ -47,6 +47,7 @@ class StudentDetails < ActiveRecord::Base
   def complete_orientation
     self.orientation_completed = true
     self.orientation_completed_at = Date.today
+    self.audit_comment = "Orientation Completed"
     save(valudate: false)
   end
 
