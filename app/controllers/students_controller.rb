@@ -89,6 +89,14 @@ class StudentsController < ApplicationController
 
 
     @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
+
+    respond_to do |format|
+      format.html
+      format.xlsx {
+        response.headers['Content-Disposition'] = "attachment; filename=\"#{@student.details.student_number}_audit_trail.xlsx\""
+      }
+
+    end
   end
 
 

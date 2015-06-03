@@ -1,0 +1,13 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "#{@student.name} Audit Trail") do |sheet|
+
+  sheet.add_row ["Date", "Time", "Object", "Action", "Changes", "Reponsible User"]
+
+  render partial: 'audit_trail/trail', format: "xlsx", locals: { audits_grouped: @audits_grouped, sheet: sheet }
+
+  sheet.add_row []
+  sheet.add_row []
+  sheet.add_row ["STUDENT:" ,@student.name, @student.details.student_number]
+
+
+end
