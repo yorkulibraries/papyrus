@@ -1,0 +1,30 @@
+<% title "#{@item.id} - Audit Trail" %>
+<% title_html do %>
+	<h1>Audit Trail <small>/ <%= @item.title %></small></h1>
+<% end%>
+
+
+<% sidebar do %>
+
+	<h3>Audit Trail</h3>
+	<p>Here is a list of actions that have been performed on this item.</p>
+
+<% end %>
+
+<%= render partial: @item %>
+
+
+
+<%= render partial: "items/shared/subnav"%>
+
+<div class="item-extended">
+
+	<section class="audit_trail">
+		<h2>Audit Trail
+			<a href="<%= audit_trail_item_path(@item, format: "xlsx") %>"><i class="icon-table"></i> Exel </a>
+		</h2>
+
+		<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>
+	</section>
+
+</div>
