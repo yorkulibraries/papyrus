@@ -29,7 +29,7 @@ module ApplicationHelper
   end
 
   def papyrus_version
-    "2.5.6"
+    "2.5.7"
   end
 
   def papyrus_institution
