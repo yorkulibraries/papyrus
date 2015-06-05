@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html
       format.xlsx {
-        response.headers['Content-Disposition'] = "attachment; filename=\"#{@student.details.student_number}_audit_trail.xlsx\""
+        response.headers['Content-Disposition'] = "attachment; filename=\"#{@item.id}_audit_trail.xlsx\""
       }
 
     end
