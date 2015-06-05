@@ -79,6 +79,7 @@ Papyrus::Application.routes.draw do
     post 'assign_many_to_student', :on => :collection
     delete 'withhold_from_student', :on => :member
     get "courses", :on => :member
+    get "audit_trail", on: :member
     get 'zipped_files', :on => :member
     get 'acquisition_requests', :on => :member
     #get 'search', :on => :collection
@@ -99,7 +100,7 @@ Papyrus::Application.routes.draw do
   # ITEMS Search
   match "search/items(/:type)" => "search_items#index", as: "search_items", via: :get,  defaults: { type: "local" }
   match "search/test" => "search_items#test", via: :get
-  
+
   # Root
   root :to => "home#index"
 

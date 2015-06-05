@@ -29,6 +29,7 @@ module ApplicationHelper
   end
 
   def papyrus_version
+
     "2.6"
   end
 
