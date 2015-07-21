@@ -30,7 +30,8 @@ class Course < ActiveRecord::Base
 
 
   def Course.search(query)
-     Course.joins(:term).where("terms.end_date >= '#{Date.today}'").where("courses.title like \"%#{query}%\" OR courses.code like \"%#{query}%\" ")
+    q_like = "%#{query}%"
+     Course.joins(:term).where("terms.end_date >= '#{Date.today}'").where("courses.title like ? OR courses.code like ? ", q_like, q_like)
   end
 
 end

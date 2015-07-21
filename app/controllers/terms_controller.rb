@@ -1,18 +1,18 @@
 class TermsController < ApplicationController
   authorize_resource
-  
-  def search_courses  
+
+  def search_courses
     @query = params[:q].strip
     @courses = Course.search(@query)
     #Course.joins(:term).where("terms.end_date >= '#{Date.today}'").where("courses.title like \"%#{@query}%\" || courses.code like \"%#{@query}%\" ")
 
       respond_to do |format|
-        format.json { render json: @courses.map { |course| { id: course.id, name: "#{course.title}  <br/> <span class='weak'>#{course.term.name}</span>" } } }        
-        format.html
-      end                        
+        format.json { render json: @courses.map { |course| { id: course.id, name: "#{course.title}  <br/> <span class='weak'>#{course.term.name}</span>" } } }
+        format.html 
+      end
   end
-  
-  
+
+
   def index
     @terms = Term.active
     @archived_terms = Term.archived.limit(10)
@@ -28,9 +28,9 @@ class TermsController < ApplicationController
   end
 
   def create
-    
+
     @term = Term.new(params[:term])
-    
+
     if @term.save
       redirect_to @term, notice: "Successfully created term."
     else
