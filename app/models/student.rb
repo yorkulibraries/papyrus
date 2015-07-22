@@ -1,5 +1,5 @@
 class Student < User
-  attr_accessible :name, :email, :username, :student_details_attributes
+  #attr_accessible :name, :email, :username, :student_details_attributes
   paginates_per 18
 
 

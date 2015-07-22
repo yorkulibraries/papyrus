@@ -8,7 +8,7 @@ class TermsController < ApplicationController
 
       respond_to do |format|
         format.json { render json: @courses.map { |course| { id: course.id, name: "#{course.title}  <br/> <span class='weak'>#{course.term.name}</span>" } } }
-        format.html 
+        format.html
       end
   end
 
@@ -29,7 +29,7 @@ class TermsController < ApplicationController
 
   def create
 
-    @term = Term.new(params[:term])
+    @term = Term.new(term_params)
 
     if @term.save
       redirect_to @term, notice: "Successfully created term."
@@ -44,7 +44,7 @@ class TermsController < ApplicationController
 
   def update
     @term = Term.find(params[:id])
-    if @term.update_attributes(params[:term])
+    if @term.update_attributes(term_params)
       redirect_to @term, notice: "Successfully updated term."
     else
       render action: 'edit'
@@ -55,5 +55,10 @@ class TermsController < ApplicationController
     @term = Term.find(params[:id])
     @term.destroy
     redirect_to terms_path, notice: "Successfully destroyed term."
+  end
+
+  private
+  def term_params
+      params.require(:term).permit( :name, :start_date, :end_date)
   end
 end

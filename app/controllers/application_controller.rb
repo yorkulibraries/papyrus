@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def login_required
     unless logged_in? || controller_name == "sessions"
       store_target_location
-      redirect_to login_url, :alert => "You must first log in or sign up before accessing this page."
+      redirect_to login_url, alert: "You must first log in or sign up before accessing this page."
     end
   end
 

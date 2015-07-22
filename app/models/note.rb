@@ -1,5 +1,5 @@
 class Note < ActiveRecord::Base
-  attr_accessible :note
+  #attr_accessible :note
 
   default_scope { order("created_at desc") }
   belongs_to :student

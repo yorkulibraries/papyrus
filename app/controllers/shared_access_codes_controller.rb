@@ -11,7 +11,7 @@ class SharedAccessCodesController < ApplicationController
   end
 
   def create
-    @access_code =  AccessCode.new(params[:access_code])
+    @access_code =  AccessCode.new(access_code_params)
     @access_code.shared = true
     @access_code.created_by = current_user
     @access_code.audit_comment = "Adding a new Shared Access Code"
@@ -40,6 +40,10 @@ class SharedAccessCodesController < ApplicationController
       format.html { redirect_to shared_access_codes_path, notice: "Successfully removed shared access code." }
       format.js
     end
+  end
+
+  def access_code_params
+    params.require(:access_code).permit(:for, :code, :expires_at)
   end
 
 end

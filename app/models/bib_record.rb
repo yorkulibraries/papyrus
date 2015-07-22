@@ -2,26 +2,26 @@ require "ostruct"
 
 class BibRecord
   attr_reader :config_solr, :config_worldcat
-  
+
   ## CONSTANTS
   SOLR = "solr"
   WORLDCAT = "worldcat"
-  
-  
+
+
   def initialize(config)
     config = OpenStruct.new if config == nil # config can't be nil
- 
+
     @config_solr = config.solr
-    @config_worldcat = config.worldcat     
-        
+    @config_worldcat = config.worldcat
+
     ensure_config_defaults
-        
+
   end
-  
-  
+
+
   ## COMMON INTERFACE
   def search_items(search_string, source = SOLR)
-   
+
     if source == SOLR
       search_solr_items(search_string)
     elsif source == WORLDCAT
@@ -30,7 +30,7 @@ class BibRecord
       ["No Results Found"]
     end
   end
-  
+
   def find_item(item_id, source = SOLR)
     if source == SOLR
       find_solr_item(item_id)
@@ -40,7 +40,7 @@ class BibRecord
       "Record Not Found"
     end
   end
-  
+
   def build_item_from_search_result(result, item_type, source = SOLR)
     if source == SOLR
       BibRecord.build_item_from_solr_result(result, item_type, @config_solr.id_prefix)
@@ -51,42 +51,42 @@ class BibRecord
     end
   end
   ## SOLR SPECIFIC METHODS
-  
+
   def search_solr_items(query)
     require 'solr'
     solr = Solr::Connection.new(@config_solr.url)
-  
+
     query_fields = @config_solr.query_fields
     phrase_fields = @config_solr.phrase_fields
     boost_functions = @config_solr.boost_functions
     sort = @config_solr.sort
-    
+
     unless query.blank?
       response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true, phrase_fields: phrase_fields, boost_functions: boost_functions)
-      #$config_logger.debug("HERE  #{JSON.parse(response.raw_response)}")         
+      #$config_logger.debug("HERE  #{JSON.parse(response.raw_response)}")
       results = response.hits
     else
       Array.new
     end
-    
+
   end
-  
+
   def find_solr_item(item_id)
     require 'solr'
     solr = Solr::Connection.new(@config_solr.url)
     result = solr.query("id: #{item_id}")
-    
-    if result.hits.first 
-      result.hits.first 
+
+    if result.hits.first
+      result.hits.first
     else
       nil
-    end    
+    end
   end
-  
+
   ## WORLDCAT SPECIFIC METHODS
   def search_worldcat_items(query)
     require 'worldcatapi'
-    
+
     client = WORLDCATAPI::Client.new(key: @config_worldcat.key, debug: false)
     response = client.SRUSearch(query: "\"#{query}\"")
 
@@ -96,92 +96,91 @@ class BibRecord
       Array.new
     end
   end
-  
+
   def find_worldcat_item(item_id)
     require 'worldcatapi'
-    
+
     client = WORLDCATAPI::Client.new(key: @config_worldcat.key, debug: false)
     record = client.GetRecord(type: "oclc", id: item_id)
-        
+
     if record.record
       record.record
     else
       nil
     end
   end
-  
+
   def self.build_item_from_solr_result(result, item_type, id_prefix = SOLR)
     return if result == nil
-    
+
     result = HashWithIndifferentAccess.new(result)
     item = Item.new
-    
+
     item.item_type = item_type
     item.unique_id = "#{id_prefix}_#{result["id"]}"
-    item.title = result["title"]    
+    item.title = result["title"]
     item.callnumber = result["callnumber"]
-    
-    item.author = result["author"] 
+
+    item.author = result["author"]
     item.author = array_or_string(result, "author2") if item.author.blank?
-    
+
     item.isbn =  array_or_string(result, "isbn")
-    item.publisher = array_or_string(result, "publisher") 
-    item.published_date = array_or_string(result, "publishDate") 
+    item.publisher = array_or_string(result, "publisher")
+    item.published_date = array_or_string(result, "publishDate")
     item.edition = array_or_string(result, "edition")
     item.physical_description = array_or_string(result, "physical")
     item.language_note = array_or_string(result, "language")
 
     item
   end
-  
+
   def self.build_item_from_worldcat_result(record, item_type, id_prefix = "oclc")
     return if record == nil
-    
+
     item = Item.new
     item.item_type = item_type
     item.unique_id = "#{id_prefix}_#{record.id}"
-    item.title = record.title    
+    item.title = record.title
     # item.callnumber = result.callnumber
-    
+
     item.author = record.author.first
-    
+
     item.isbn = record.isbn.kind_of?(Array) ? record.isbn.join(", ") : record.isbn
     item.publisher = record.publisher
     item.published_date = record.published_date
     item.edition = record.edition
     item.physical_description = record.physical_description
     
-    # item.language_note = array_or_string(result, "language")
 
     item
-    
+
   end
-  
-  private 
- 
+
+  private
+
   def self.array_or_string(result, field_name)
-    return "" unless result[field_name] 
-    
-    if result[field_name].kind_of? Array 
+    return "" unless result[field_name]
+
+    if result[field_name].kind_of? Array
       result[field_name].join(", ")
     else
       result[field_name]
     end
-  end 
-  
+  end
+
   def ensure_config_defaults
     # Check to make sure they are not nil
 
-    
+
     if @config_solr == nil
       @config_solr = OpenStruct.new(PapyrusConfig::DEFAULT_SOLR_CONFIG)
     end
-    
+
     if @config_worldcat == nil
       @config_worldcat = OpenStruct.new(PapyrusConfig::DEFAULT_WORLDCAT_CONFIG)
     end
-    
-    
+
+
     #Check SOLR
     @config_solr.label = @config_solr.label || PapyrusConfig::DEFAULT_SOLR_CONFIG[:label]
     @config_solr.id_prefix = @config_solr.id_prefix || PapyrusConfig::DEFAULT_SOLR_CONFIG[:id_prefix]
@@ -190,11 +189,11 @@ class BibRecord
     @config_solr.phrase_fields = @config_solr.phrase_fields || PapyrusConfig::DEFAULT_SOLR_CONFIG[:phrase_fields]
     @config_solr.boost_functions = @config_solr.boost_functions || PapyrusConfig::DEFAULT_SOLR_CONFIG[:boost_functions]
     @config_solr.sort = @config_solr.sort || PapyrusConfig::DEFAULT_SOLR_CONFIG[:sort]
-      
+
     # Check WORLDCAT
     @config_worldcat.id_prefix = @config_worldcat.id_prefix || PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:id_prefix]
-    @config_worldcat.label = @config_worldcat.label || PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:label]    
-    
+    @config_worldcat.label = @config_worldcat.label || PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:label]
+
   end
-  
+
 end

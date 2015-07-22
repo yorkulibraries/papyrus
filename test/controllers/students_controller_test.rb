@@ -15,11 +15,12 @@ class StudentsControllerTest < ActionController::TestCase
 
     assert_difference ["Student.count", "StudentDetails.count"], 1 do
       post :create, student: {first_name: "dude", last_name: "test", email: "1@1.com", username: "dude", student_details_attributes: student_details}
+      student = assigns(:student)
+      assert student, "student object should not be nil"
+      assert_equal 0, student.errors.size, "Should be 0 errors"
+      assert_redirected_to student_url(student)
     end
-
-    student = assigns(:student)
-    assert student, "student object should not be nil"
-    assert_redirected_to student_url(student)
+  
   end
 
   should "update an existing student" do

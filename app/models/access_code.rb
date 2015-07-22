@@ -1,5 +1,5 @@
 class AccessCode < ActiveRecord::Base
-  attr_accessible :for, :code, :expires_at
+  #attr_accessible :for, :code, :expires_at
 
 
   ## RELATIONS

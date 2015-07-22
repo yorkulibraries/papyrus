@@ -5,7 +5,6 @@ class Ability
 
     user ||= User.new
 
-
     if user.role == User::ADMIN
       can :manage, :all
     elsif user.role == User::MANAGER

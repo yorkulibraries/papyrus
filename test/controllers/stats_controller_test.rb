@@ -25,23 +25,4 @@ class StatsControllerTest < ActionController::TestCase
 
   end
 
-  should "generate a csv report based on assigned_to" do
-    user = create(:user)
-    student = create(:student)
-    details = create(:student_details, student: student, transcription_coordinator: user, cds_counsellor: "tom")
-
-    get :generate, assigned_to: user.id
-
-    title = assigns(:title)
-    results = assigns(:results)
-
-    assert_not_nil title, "Title should be set"
-    assert_equal 1, results.count, "Should generate one result"
-
-
-    get :generate
-
-    results = assigns(:results)
-    assert_equal Student.active.count, results.count, "All active students"
-  end
 end

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :username, :first_name, :last_name, :role, :email
+  #attr_accessible :username, :first_name, :last_name, :role, :email
   audited
 
 

@@ -1,5 +1,5 @@
 class Term < ActiveRecord::Base
-  attr_accessible :name, :start_date, :end_date
+  #attr_accessible :name, :start_date, :end_date
 
 
   validates_presence_of :name, :start_date, :end_date

@@ -7,7 +7,7 @@ gem 'rails', '4.0.12'
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'email_validator', "1.4.0"
-gem 'protected_attributes' # To Transition procted attributes
+#gem 'protected_attributes' # To Transition procted attributes
 
 ## DEPLOYMENT ##
 gem 'capistrano', '~> 3.1.0'
@@ -41,7 +41,6 @@ gem "worldcatapi", "1.0.3"
 gem 'solr-ruby', "0.0.8"
 gem 'kaminari', "0.15.1"
 gem "cancan", "1.6.9"
-gem "friendly_id", "3.3.2.0"
 gem "roo", "1.13.2"
 gem "audited-activerecord", "~> 4.0"
 gem "squeel", "1.2.2"

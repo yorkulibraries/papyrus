@@ -97,7 +97,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(params[:item])
+    @item = Item.new(item_params)
     @item.user = @current_user
     @item.audit_comment = "Creating a new item."
     if @item.save
@@ -110,9 +110,9 @@ class ItemsController < ApplicationController
         @acquisition_request.item = @item
         @acquisition_request.save(:validate => false)
       end
-      redirect_to @item, :notice => "Successfully created item."
+      redirect_to @item, notice:  "Successfully created item."
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -123,10 +123,10 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @item.audit_comment = "Updated an existing item."
-    if @item.update_attributes(params[:item])
+    if @item.update_attributes(item_params)
       redirect_to @item, notice:  "Successfully updated item."
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
@@ -173,6 +173,12 @@ class ItemsController < ApplicationController
         temp_file.close
         temp_file.unlink
       end
+  end
+
+  private
+  def item_params
+    params.require(:item).permit( :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
+                                  :language_note, :edition, :physical_description, :source, :source_note)
   end
 
 end

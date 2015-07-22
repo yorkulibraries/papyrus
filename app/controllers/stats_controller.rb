@@ -16,7 +16,7 @@ class StatsController < ApplicationController
 
     @students = Student.includes(:student_details).joins(:student_details).where("users.created_at >= ? AND users.created_at < ?", @start_date, @end_date)
 
-
+ 
     @students = @students.where("transcription_coordinator_id = ?", @coordinator.id) unless @coordinator == nil
     @students = @students.where("transcription_assistant_id = ?", @assistant.id) unless @assistant == nil
 

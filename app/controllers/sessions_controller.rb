@@ -36,15 +36,15 @@ class SessionsController < ApplicationController
     else
       flash.now.alert = "Invalid email or password"
 
-      render :layout => "simple"
+      render layout: "simple"
     end
   end
 
   def destroy
     session[:user_id] = nil
     session[:terms_accepted] = nil
-    cookies.delete("mayaauth", :domain => PapyrusConfig.authentication.cookies_domain)
-    cookies.delete("pybpp", :domain => PapyrusConfig.authentication.cookies_domain)
+    cookies.delete("mayaauth", domain: PapyrusConfig.authentication.cookies_domain)
+    cookies.delete("pybpp", domain: PapyrusConfig.authentication.cookies_domain)
 
     redirect_to PapyrusConfig.authentication.after_logout_redirect_to || "http://www.google.ca"
   end

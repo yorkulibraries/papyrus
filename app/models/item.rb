@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
-  attr_accessible :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
-                  :language_note, :edition, :physical_description, :source, :source_note
+  #attr_accessible :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
+  #                :language_note, :edition, :physical_description, :source, :source_note
 
   audited
   has_associated_audits

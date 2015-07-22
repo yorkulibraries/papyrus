@@ -27,11 +27,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       redirect_to users_path, notice: "Successfully created user."
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -50,10 +50,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.audit_comment = "Updated User Details"
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       redirect_to users_path, notice: "Successfully updated user."
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
@@ -62,6 +62,12 @@ class UsersController < ApplicationController
     @user.inactive = true
     @user.audit_comment = "Deactivated User Account"
     @user.save
-    redirect_to users_url, :notice => "Successfully disabled this user."
+    redirect_to users_url, notice: "Successfully disabled this user."
   end
+
+  private
+  def user_params
+      params.require(:user).permit(  :username, :first_name, :last_name, :role, :email)
+  end
+
 end

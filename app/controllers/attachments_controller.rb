@@ -9,7 +9,7 @@ class AttachmentsController < ApplicationController
   end
 
   def create
-    @attachment = @item.attachments.build(params[:attachment])
+    @attachment = @item.attachments.build(attachment_params)
     @attachment.user = @current_user
 
     logger.debug @attachment.user.inspect
@@ -64,7 +64,7 @@ class AttachmentsController < ApplicationController
     @attachment = @item.attachments.find(params[:id])
     @attachment.user = @current_user
     @attachment.audit_comment = "Updated an existing file"
-    if @attachment.update_attributes(params[:attachment])
+    if @attachment.update_attributes(attachment_params)
       redirect_to @item, notice: "Successfully updated a file."
     else
       render :action => 'edit'
@@ -125,5 +125,9 @@ class AttachmentsController < ApplicationController
   private
   def load_item
     @item = Item.find(params[:item_id])
+  end
+
+  def attachment_params
+    params.require(:attachment).permit(:name, :item_id, :file, :file_cache, :full_text, :url, :access_code_required, :is_url)
   end
 end

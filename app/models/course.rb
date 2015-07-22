@@ -1,5 +1,5 @@
 class Course < ActiveRecord::Base
-  attr_accessible :title, :code
+  #attr_accessible :title, :code
 
   belongs_to :term, counter_cache: true
 

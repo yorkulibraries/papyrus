@@ -106,7 +106,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.new(params[:student])
+    @student = Student.new(student_params)
     @student.role = "student" # default hidden role
     @student.created_by = @current_user
     @student.audit_comment = "Registered the student"
@@ -143,7 +143,7 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @student.audit_comment = "Updated the student"
     @student.student_details.audit_comment = "Updated student details."
-    if @student.update_attributes(params[:student])
+    if @student.update_attributes(student_params)
       redirect_to @student, notice:  "Successfully updated student."
     else
       render :action => 'edit'
@@ -164,5 +164,13 @@ class StudentsController < ApplicationController
     @student.audit_comment = "Set Student account to ACTIVE"
     @student.save
     redirect_to @student, notice: "Student has been reactivated, and can now use Papyrus"
+  end
+
+  private
+  def student_params
+    params.require(:student).permit( :first_name, :last_name, :name, :email, :username, 
+          student_details_attributes: [ :student_number, :preferred_phone, :cds_counsellor,
+                                        :transcription_coordinator_id, :transcription_assistant_id]
+                                    )
   end
 end

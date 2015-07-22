@@ -1,5 +1,5 @@
 class Announcement < ActiveRecord::Base
-  attr_accessible :ends_at, :message, :starts_at, :audience, :active
+  #attr_accessible :ends_at, :message, :starts_at, :audience, :active
 
   ## AUDIT TRAIL
   audited associated_with: :user

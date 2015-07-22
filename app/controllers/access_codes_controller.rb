@@ -2,6 +2,7 @@ class AccessCodesController < ApplicationController
   authorize_resource
   before_filter :load_student
 
+
   def index
     @active_access_codes = @student.access_codes.active
     @shared_codes = AccessCode.shared.active
@@ -20,7 +21,7 @@ class AccessCodesController < ApplicationController
   end
 
   def create
-    @access_code =  @student.access_codes.new(params[:access_code])
+    @access_code =  @student.access_codes.new(access_code_params)
     @access_code.created_by = current_user
     @access_code.audit_comment = "Adding a new access code for #{@access_code.for}"
 
@@ -45,7 +46,7 @@ class AccessCodesController < ApplicationController
     @access_code =  @student.access_codes.find(params[:id])
     @access_code.audit_comment = "Updating access code information"
 
-    if @access_code.update_attributes(params[:access_code])
+    if @access_code.update_attributes(access_code_params)
       redirect_to @access_code, notice: "Successfully updated access code."
     else
       render  action: 'edit'
@@ -68,5 +69,9 @@ class AccessCodesController < ApplicationController
   private
   def load_student
     @student = Student.find(params[:student_id])
+  end
+
+  def access_code_params
+    params.require(:access_code).permit(:for, :code, :expires_at)
   end
 end

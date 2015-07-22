@@ -1,5 +1,5 @@
 class Attachment < ActiveRecord::Base
-  attr_accessible :name, :item_id, :file, :file_cache, :full_text, :url, :access_code_required, :is_url
+  #attr_accessible :name, :item_id, :file, :file_cache, :full_text, :url, :access_code_required, :is_url
 
   validates_presence_of :file, message: "Please select the file to upload.", unless: lambda { is_url? }
   validates_presence_of :name, message: "Enter the name of for this file.", unless: lambda { is_url? }

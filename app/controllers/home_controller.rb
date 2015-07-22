@@ -14,6 +14,7 @@ class HomeController < ApplicationController
   end
 
   private
+  
   def authorize_controller
       authorize! :show, :dashboard
    end

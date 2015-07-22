@@ -16,7 +16,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def create
-    @announcement =  Announcement.new(params[:announcement])
+    @announcement =  Announcement.new(announcement_params)
     @announcement.user = current_user
     @announcement.audit_comment = "Adding a new Annoucement message for #{@announcement.audience}"
 
@@ -37,7 +37,7 @@ class AnnouncementsController < ApplicationController
   def update
     @announcement = Announcement.find(params[:id])
     @announcement.audit_comment = "Updating announcement"
-    if @announcement.update_attributes(params[:announcement])
+    if @announcement.update_attributes(announcement_params)
       respond_to do |format|
         format.html { redirect_to  @announcement, notice: "Successfully updated course." }
         format.js { render  nothing: true }
@@ -79,6 +79,11 @@ class AnnouncementsController < ApplicationController
       format.html { redirect_to :back }
       format.js
     end
+  end
+
+  private
+  def announcement_params
+    params.require(:announcement).permit(:ends_at, :message, :starts_at, :audience, :active)
   end
 
 end

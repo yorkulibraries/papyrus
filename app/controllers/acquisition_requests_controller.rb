@@ -45,7 +45,7 @@ class AcquisitionRequestsController < ApplicationController
     @acquisition_request = AcquisitionRequest.find(params[:id])
 
 
-    if @acquisition_request.update_attributes(params[:acquisition_request])
+    if @acquisition_request.update_attributes(acquisition_request_params)
       redirect_to @acquisition_request, :notice  => "Successfully updated acquisition request."
     else
       render :action => 'edit'
@@ -76,5 +76,10 @@ class AcquisitionRequestsController < ApplicationController
 
     @acquisition_request.cancell(current_user)
     redirect_to acquisition_requests_url, :notice => "Successfully cancelled acquisition request."
+  end
+
+  private
+  def acquisition_request_params
+    params.require(:acquisition_request).permit(:notes)
   end
 end

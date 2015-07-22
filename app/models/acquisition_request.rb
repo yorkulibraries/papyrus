@@ -1,5 +1,5 @@
 class AcquisitionRequest < ActiveRecord::Base
-  attr_accessible :notes
+  #attr_accessible :notes
 
   belongs_to :item
   belongs_to :requested_by, :class_name => "User", :foreign_key => "requested_by_id"

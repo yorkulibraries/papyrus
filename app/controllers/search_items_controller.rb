@@ -75,14 +75,14 @@ class SearchItemsController < ApplicationController
 
 
     unless params[:books].nil? && params[:articles].nil? && params[:course_kits].nil?
-      @items = @items.where({:format => params[:books]} | {:format => params[:articles]} | {:format => params[:course_kits]})
+      @items = @items.where({ format: params[:books]} | {format: params[:articles]} | {format: params[:course_kits]})
     end
 
     @items = @items.page page_number
 
     respond_to do |format|
-      format.json { render :json =>  @items.map { |item| {:id => item.id, :name => "#{item.title}   <span>#{item.item_type}</span>" } } }
-      format.html { render :template => "items/index" }
+      format.json { render json:  @items.map { |item| {id: item.id, name: "#{item.title}   <span>#{item.item_type}</span>" } } }
+      format.html { render template: "items/index" }
     end
   end
 
