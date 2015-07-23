@@ -66,13 +66,8 @@ class SearchItemsController < ApplicationController
     query = query.strip unless query.blank?
 
 
-    @items = Item.where{
-        { title.matches => "%#{query}%"} |
-        { isbn.matches => "%#{query}%"} |
-        { unique_id => "#{query}"} |
-        { author.matches => "%#{query}%"}
-    }
-
+    @items = Item.where("title like ? OR isbn like ? or unique_id = ? or author like ?",
+                        "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")    
 
     unless params[:books].nil? && params[:articles].nil? && params[:course_kits].nil?
       @items = @items.where({ format: params[:books]} | {format: params[:articles]} | {format: params[:course_kits]})

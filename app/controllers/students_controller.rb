@@ -59,12 +59,11 @@ class StudentsController < ApplicationController
     @searching = true
     @query = query
 
-    @students = Student.where{
-      { first_name.matches => "%#{query}%"} |
-      { last_name.matches => "%#{query}%"} |
-      { username.matches => "#{query}"} |
-      { email.matches => "%#{query}%"}  }
-      .where(inactive: inactive_status).page page_number
+    @students = Student.where("users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ?",
+                              "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")
+                        .where(inactive: inactive_status).page page_number
+
+
 
     @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
 
@@ -168,7 +167,7 @@ class StudentsController < ApplicationController
 
   private
   def student_params
-    params.require(:student).permit( :first_name, :last_name, :name, :email, :username, 
+    params.require(:student).permit( :first_name, :last_name, :name, :email, :username,
           student_details_attributes: [ :student_number, :preferred_phone, :cds_counsellor,
                                         :transcription_coordinator_id, :transcription_assistant_id]
                                     )
