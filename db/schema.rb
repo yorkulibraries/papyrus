@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121185107) do
+ActiveRecord::Schema.define(version: 20150723153440) do
 
   create_table "access_codes", force: true do |t|
     t.string   "for"
@@ -155,6 +155,17 @@ ActiveRecord::Schema.define(version: 20150121185107) do
   end
 
   add_index "notes", ["student_id"], name: "index_notes_on_student_id"
+
+  create_table "settings", force: true do |t|
+    t.string   "var",                   null: false
+    t.text     "value"
+    t.integer  "thing_id"
+    t.string   "thing_type", limit: 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
 
   create_table "student_details", force: true do |t|
     t.integer  "student_id"

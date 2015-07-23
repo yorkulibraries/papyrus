@@ -212,6 +212,8 @@ GEM
       sprockets-rails (~> 2.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
+    rails-settings-cached (0.4.1)
+      rails (>= 4.0.0)
     railties (4.0.12)
       actionpack (= 4.0.12)
       activesupport (= 4.0.12)
@@ -341,6 +343,7 @@ DEPENDENCIES
   populator!
   rack-livereload
   rails (= 4.0.12)
+  rails-settings-cached (= 0.4.1)
   roo (= 1.13.2)
   ruby-prof
   rubyzip (= 0.9.9)
