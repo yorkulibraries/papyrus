@@ -2,8 +2,8 @@ require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
   setup do
-    @cas_header = PapyrusConfig.authentication.cas_header_name
-    @cas_alt_header = PapyrusConfig.authentication.cas_alt_header_name
+    @cas_header = PapyrusSettings.auth_cas_header
+    @cas_alt_header = PapyrusSettings.auth_cas_header_alt
   end
   should "FOR CAS: create a new session and log user in if valid user" do
     user = create(:user, username: "someuser")
@@ -22,7 +22,7 @@ class SessionsControllerTest < ActionController::TestCase
   should "FOR CAS: redirect Student to student view section if valid student" do
     student = create(:student)
     @request.env[@cas_header] = student.username
-        
+
     get :new
 
     student.reload

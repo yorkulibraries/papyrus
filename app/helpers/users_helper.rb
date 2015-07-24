@@ -1,9 +1,9 @@
 module UsersHelper
   def username_hint
-    PapyrusConfig.authentication.cas_user_id_name
+    PapyrusSettings.auth_cas_user_id_label
   end
-  
+
   def email_hint
-    "#{PapyrusConfig.organization.short_name} Email"
+    "#{PapyrusSettings.org_short_name} Email"
   end
 end

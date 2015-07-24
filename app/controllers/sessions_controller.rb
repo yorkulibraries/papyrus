@@ -12,8 +12,8 @@ class SessionsController < ApplicationController
         end
         alt_username = username
     else
-       username = request.headers[PapyrusConfig.authentication.cas_header_name]
-       alt_username = request.headers[PapyrusConfig.authentication.cas_alt_header_name]
+       username = request.headers[PapyrusSettings.auth_cas_header]
+       alt_username = request.headers[PapyrusSettings.auth_cas_header_alt]
     end
 
 
@@ -43,10 +43,10 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     session[:terms_accepted] = nil
-    cookies.delete("mayaauth", domain: PapyrusConfig.authentication.cookies_domain)
-    cookies.delete("pybpp", domain: PapyrusConfig.authentication.cookies_domain)
+    cookies.delete("mayaauth", domain: PapyrusSettings.auth_cookies_domain)
+    cookies.delete("pybpp", domain: PapyrusSettings.auth_cookies_domain)
 
-    redirect_to PapyrusConfig.authentication.after_logout_redirect_to || "http://www.google.ca"
+    redirect_to PapyrusSettings.auth_cas_logout_redirect || "http://www.google.ca"
   end
 
 

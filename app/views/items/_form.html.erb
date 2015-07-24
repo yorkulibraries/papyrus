@@ -1,6 +1,6 @@
 
-<%= simple_form_for @item  do |f| %> 
-	<div class="standout">	
+<%= simple_form_for @item  do |f| %>
+	<div class="standout">
 		<div class="row">
 			<div class="span8">
 				<%= f.label :title, "Full Title"%>
@@ -15,8 +15,8 @@
 			<div class="span4">
 			  <% if @item.new_record? %>
 				  <%= f.label :unique_id, "Unique ID" %>
-			    <%= f.input :unique_id, label: false, input_html: { class: "input-xlarge", placeholder: "auto generated..." }, 
-					 hint: "You can fill in the unique id manually, if you must." %>			   
+			    <%= f.input :unique_id, label: false, input_html: { class: "input-xlarge", placeholder: "auto generated..." },
+					 hint: "You can fill in the unique id manually, if you must." %>
 
 				<% else %>
 					<%= f.label "Unique ID", :unique_id %><br/>
@@ -25,28 +25,28 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="span4">
 			<%= f.label :author, "Author(s)" %>
-			<%= f.input :author, label: false, input_html: { class: "input-xlarge" } %>	
-			
+			<%= f.input :author, label: false, input_html: { class: "input-xlarge" } %>
+
 			<%= f.label :isbn, "ISBN Number" %>
-			<%= f.input :isbn, label: false, input_html: { class: "input-xlarge" } %>	
-			
+			<%= f.input :isbn, label: false, input_html: { class: "input-xlarge" } %>
+
 			<%= f.label :published_date, "Published Date" %>
-			<%= f.input :published_date, label: false, input_html: { class: "input-xlarge" } %>	
-			
+			<%= f.input :published_date, label: false, input_html: { class: "input-xlarge" } %>
+
 			<%= f.label :publisher, "Publisher" %>
-			<%= f.input :publisher, label: false, input_html: { class: "input-xlarge" } %>	
-			
+			<%= f.input :publisher, label: false, input_html: { class: "input-xlarge" } %>
+
 			<%= f.label :edition, "Edition" %>
 			<%= f.input :edition, label: false, input_html: { class: "input-xlarge" }%>
 		</div>
 		<div class="span4">
 			<%= f.label :callnumber, "Callnumber" %>
 			<%= f.input :callnumber, label: false, input_html: { class: "input-xlarge" }%>
-			
+
 			<%= f.label :language_note, "Language Note" %>
 			<%= f.input :language_note, label: false, input_html: { class: "input-xlarge" } %>
 
@@ -55,25 +55,25 @@
 			<%= f.input :physical_description,label: false, input_html: { class: "input-xlarge" } %>
 
 			<%= f.label :source, "Source" %>
-			<%= f.input :source, collection: PapyrusConfig.organization.item_sources,  label: false, input_html: { class: "input-xlarge" } %>
+			<%= f.input :source, collection: PapyrusSettings.item_sources,  label: false, input_html: { class: "input-xlarge" } %>
 
 			<%= f.label :source_note, "Source Note" %>
 			<%= f.input :source_note, label: false, input_html: { class: "input-xlarge" } %>
 		</div>
 	</div>
-	
+
 	<hr/>
-	
+
 	<div class="row">
 		<div class="span4">
-			<% if @item.new_record? %>	
+			<% if @item.new_record? %>
 				<p><input type="checkbox" name="create_acquisition_request" value="yes"/> Send An Acquisitions Request</p>
 			<% end %>
 		</div>
 		<div class="span4" style="text-align: right; ">
-     	<%= f.button :submit,  @item.new_record? ? "Create Item" : "Update Item" , class: 'btn-primary' %>     	
+     	<%= f.button :submit,  @item.new_record? ? "Create Item" : "Update Item" , class: 'btn-primary' %>
 			<%= link_to 'Cancel', @item.new_record? ? items_path : item_path(@item), class: 'btn' %>
 		</div>
 	</div>
-	
+
 <% end %>
