@@ -1,21 +1,14 @@
 require "ostruct"
 
 class BibRecord
-  attr_reader :config_solr, :config_worldcat
 
   ## CONSTANTS
   SOLR = "solr"
   WORLDCAT = "worldcat"
 
 
-  def initialize(config)
-    config = OpenStruct.new if config == nil # config can't be nil
-
-    @config_solr = config.solr
-    @config_worldcat = config.worldcat
-
-    ensure_config_defaults
-
+  def initialize()
+    
   end
 
 
@@ -43,9 +36,9 @@ class BibRecord
 
   def build_item_from_search_result(result, item_type, source = SOLR)
     if source == SOLR
-      BibRecord.build_item_from_solr_result(result, item_type, @config_solr.id_prefix)
+      BibRecord.build_item_from_solr_result(result, item_type, PapyrusSettings.solr_id_prefix)
     elsif source == WORLDCAT
-      BibRecord.build_item_from_worldcat_result(result, item_type, @config_worldcat.id_prefix)
+      BibRecord.build_item_from_worldcat_result(result, item_type, PapyrusSettings.worldcat_id_prefix)
     else
       "Item Can't be built"
     end
@@ -54,12 +47,12 @@ class BibRecord
 
   def search_solr_items(query)
     require 'solr'
-    solr = Solr::Connection.new(@config_solr.url)
+    solr = Solr::Connection.new(PapyrusSettings.solr_url)
 
-    query_fields = @config_solr.query_fields
-    phrase_fields = @config_solr.phrase_fields
-    boost_functions = @config_solr.boost_functions
-    sort = @config_solr.sort
+    query_fields = "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
+    phrase_fields = "title_txtP^100"
+    boost_functions = "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0"
+    sort = [ {score: :descending}, {_docid_: :descending} ]
 
     unless query.blank?
       response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true, phrase_fields: phrase_fields, boost_functions: boost_functions)
@@ -73,7 +66,7 @@ class BibRecord
 
   def find_solr_item(item_id)
     require 'solr'
-    solr = Solr::Connection.new(@config_solr.url)
+    solr = Solr::Connection.new(PapyrusSettings.solr_url)
     result = solr.query("id: #{item_id}")
 
     if result.hits.first
@@ -87,7 +80,7 @@ class BibRecord
   def search_worldcat_items(query)
     require 'worldcatapi'
 
-    client = WORLDCATAPI::Client.new(key: @config_worldcat.key, debug: false)
+    client = WORLDCATAPI::Client.new(key: PapyrusSettings.worldcat_key, debug: false)
     response = client.SRUSearch(query: "\"#{query}\"")
 
     if response.records.size > 0
@@ -100,7 +93,7 @@ class BibRecord
   def find_worldcat_item(item_id)
     require 'worldcatapi'
 
-    client = WORLDCATAPI::Client.new(key: @config_worldcat.key, debug: false)
+    client = WORLDCATAPI::Client.new(key: PapyrusSettings.worldcat_key, debug: false)
     record = client.GetRecord(type: "oclc", id: item_id)
 
     if record.record
@@ -150,7 +143,7 @@ class BibRecord
     item.published_date = record.published_date
     item.edition = record.edition
     item.physical_description = record.physical_description
-    
+
 
     item
 
@@ -168,32 +161,5 @@ class BibRecord
     end
   end
 
-  def ensure_config_defaults
-    # Check to make sure they are not nil
-
-
-    if @config_solr == nil
-      @config_solr = OpenStruct.new(PapyrusConfig::DEFAULT_SOLR_CONFIG)
-    end
-
-    if @config_worldcat == nil
-      @config_worldcat = OpenStruct.new(PapyrusConfig::DEFAULT_WORLDCAT_CONFIG)
-    end
-
-
-    #Check SOLR
-    @config_solr.label = @config_solr.label || PapyrusConfig::DEFAULT_SOLR_CONFIG[:label]
-    @config_solr.id_prefix = @config_solr.id_prefix || PapyrusConfig::DEFAULT_SOLR_CONFIG[:id_prefix]
-    @config_solr.url = @config_solr.url || PapyrusConfig::DEFAULT_SOLR_CONFIG[:url]
-    @config_solr.query_fields = @config_solr.query_fields || PapyrusConfig::DEFAULT_SOLR_CONFIG[:query_fields]
-    @config_solr.phrase_fields = @config_solr.phrase_fields || PapyrusConfig::DEFAULT_SOLR_CONFIG[:phrase_fields]
-    @config_solr.boost_functions = @config_solr.boost_functions || PapyrusConfig::DEFAULT_SOLR_CONFIG[:boost_functions]
-    @config_solr.sort = @config_solr.sort || PapyrusConfig::DEFAULT_SOLR_CONFIG[:sort]
-
-    # Check WORLDCAT
-    @config_worldcat.id_prefix = @config_worldcat.id_prefix || PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:id_prefix]
-    @config_worldcat.label = @config_worldcat.label || PapyrusConfig::DEFAULT_WORLDCAT_CONFIG[:label]
-
-  end
 
 end

@@ -1,10 +1,10 @@
 module SearchItemsHelper
 
   def bib_search_solr_label
-    PapyrusConfig.bib_search.solr.label
+    PapyrusSettings.solr_label
   end
   def bib_search_worldcat_label
-    PapyrusConfig.bib_search.worldcat.label
+    PapyrusSettings.worldcat_label
   end
 
 

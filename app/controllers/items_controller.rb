@@ -89,7 +89,7 @@ class ItemsController < ApplicationController
     if params[:bib_record_id]
      source = params[:source] || BibRecord::SOLR
 
-     bib_record = BibRecord.new(PapyrusConfig.bib_search)
+     bib_record = BibRecord.new
      bib_item = bib_record.find_item(params[:bib_record_id], source)
      @item = bib_record.build_item_from_search_result(bib_item, Item::BOOK, source)
     end

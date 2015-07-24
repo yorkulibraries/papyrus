@@ -48,7 +48,7 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:email_item_assigned_body,  "Item Assigned email text goes here")
 
 
-  ## SOLR 
+  ## SOLR
   PapyrusSettings.save_default(:solr_url, "http://localhost:8080/solr/biblio")
   PapyrusSettings.save_default(:solr_query_type, "dismax")
   PapyrusSettings.save_default(:solr_label, "Your Catalogue")
@@ -62,5 +62,17 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   ## Reporting
   PapyrusSettings.save_default(:reports_default_interval, 30.days)
   PapyrusSettings.save_default(:reports_fiscal_year_start, "May 1")
+
+end
+
+# Exception Notification For Production
+if Rails.env.production?
+
+  Papyrus::Application.configure do
+    config.middleware.use ExceptionNotifier,
+         email_prefix: PapyrusSettings.errors_email_subject_prefix,
+         sender_address: PapyrusSettings.errors_email_from,
+         exception_recipients: PapyrusSettings.errors_email_to
+  end
 
 end

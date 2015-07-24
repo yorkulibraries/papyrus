@@ -19,7 +19,7 @@ class SearchItemsController < ApplicationController
   end
 
   def test
-    bib_record = BibRecord.new(PapyrusConfig.bib_search)
+    bib_record = BibRecord.new
     @bib_search = true
 
     @docs = bib_record.search_items(params[:q], BibRecord::SOLR)
@@ -36,7 +36,7 @@ class SearchItemsController < ApplicationController
 
   private
   def search_solr(query)
-    bib_record = BibRecord.new(PapyrusConfig.bib_search)
+    bib_record = BibRecord.new
     @bib_search = true
 
     @docs = bib_record.search_items(query, BibRecord::SOLR)
@@ -49,7 +49,7 @@ class SearchItemsController < ApplicationController
 
   def search_worldcat(query)
 
-    bib_record = BibRecord.new(PapyrusConfig.bib_search)
+    bib_record = BibRecord.new
     @bib_search = true
 
     @docs = bib_record.search_items(query, BibRecord::WORLDCAT)
@@ -67,7 +67,7 @@ class SearchItemsController < ApplicationController
 
 
     @items = Item.where("title like ? OR isbn like ? or unique_id = ? or author like ?",
-                        "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")    
+                        "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")
 
     unless params[:books].nil? && params[:articles].nil? && params[:course_kits].nil?
       @items = @items.where({ format: params[:books]} | {format: params[:articles]} | {format: params[:course_kits]})

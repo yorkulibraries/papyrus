@@ -11,8 +11,6 @@ rescue LoadError
   puts 'Install the Turn gem for prettier test output.'
 end
 
-PapyrusConfig.reset_defaults
-
 # Test::Unit
 class Test::Unit::TestCase
   #include ActionDispatch::TestProcess

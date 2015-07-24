@@ -3,22 +3,22 @@
 
     <%= f.input :title, input_html:  { class: "input-xlarge" } %>
 
-    <%= f.input :code, hint: "Ex. #{PapyrusConfig.organization.course_code_sample}", input_html: { class: "input-xlarge" } %>
-	
+    <%= f.input :code, hint: "Ex. #{PapyrusSettings.course_code_sample}", input_html: { class: "input-xlarge" } %>
+
 	<div class="controls">
-		<a href="<%= PapyrusConfig.organization.course_code_lookup_link %>" target="_blank" class="green"> Look up courses &raquo;</a>
+		<a href="<%= PapyrusSettings.course_lookup_url %>" target="_blank" class="green"> Look up courses &raquo;</a>
 	</div>
-	
+
 	<div class="form-actions">
      	<%= f.button :submit,  class: 'btn btn-primary' %>
      	<%= link_to 'Cancel', term_path(@term), class: 'btn' %>
 
-		
+
 		<% unless @course.new_record? %>
 			<div class="float-right">
 				<%= link_to "Delete This Course?", [@term, @course], confirm: 'Are you sure?', method: :delete,  class: "btn btn-danger" %>
 			</div>
 		<% end %>
    </div>
-	
+
 <% end %>

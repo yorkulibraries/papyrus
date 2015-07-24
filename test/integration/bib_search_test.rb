@@ -7,18 +7,14 @@ class BibSearchTest < ActionDispatch::IntegrationTest
     puts  "PREREQ: ENV[WORLDCAT_KEY] is set to a key"
     puts "PREREQ: ENV[SOLR_PATH] is set to a path for solr"
   else
-    setup do
-      PapyrusConfig.configure do |config|
-        config.bib_search.solr.url = ENV["SOLR_PATH"]
-        config.bib_search.worldcat.key = ENV["WORLDCAT_KEY"]
-      end
-      
-    end
+
+    PapyrusSettings[:worldcat_key] = ENV["WORLDCAT_KEY"]
+    PapyrusSettings[:solr_url] = ENV["SOLR_PATH"]
 
 
     should "search SOLR for multiple items" do
       search_string = "Caesar"
-      record = BibRecord.new(PapyrusConfig.bib_search)
+      record = BibRecord.new
       results = record.search_items(search_string, BibRecord::SOLR)
 
       assert results.size > 0, "At least one result"
@@ -26,7 +22,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
 
     should "search SOLR for single item" do
       item_id = "1970385"
-      record = BibRecord.new(PapyrusConfig.bib_search)
+      record = BibRecord.new
       item = record.find_item(item_id, BibRecord::SOLR)
 
       assert_not_nil item
@@ -36,7 +32,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
 
     should "search WOLRDCAT for Multiple Items" do
       search_string = "Caesar"
-      record = BibRecord.new(PapyrusConfig.bib_search)
+      record = BibRecord.new
       results = record.search_items(search_string, BibRecord::WORLDCAT)
 
       assert results.size > 0, "At least one result should happen"
@@ -44,7 +40,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
 
     should "search WORLDCAT for single item" do
       item_id = "671660984"  # Julius Caesar by Shakespear
-      record = BibRecord.new(PapyrusConfig.bib_search)
+      record = BibRecord.new
       item = record.find_item(item_id, BibRecord::WORLDCAT)
 
       assert_not_nil item

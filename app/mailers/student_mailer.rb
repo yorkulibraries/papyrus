@@ -23,7 +23,7 @@ class StudentMailer < ActionMailer::Base
     @items = items
     @url  = PapyrusSettings.org_app_url
 
-    mail(to: student.email, subject: PapyrusSettings.notifications.email_item_assigned_subject)
+    mail(to: student.email, subject: PapyrusSettings.email_item_assigned_subject)
   end
 
 end
