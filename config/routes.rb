@@ -5,6 +5,7 @@ Papyrus::Application.routes.draw do
 
 
 
+
   get "stats" => "stats#index"
   get "stats/assigned_students" =>"stats#assigned_students"
   get "stats/item_usage" => "stats#item_usage"
@@ -16,6 +17,14 @@ Papyrus::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
+  
+  resource :settings, only: [:update] do
+    get :general
+    get :email
+    get :bib_search
+    get :item
+    get :system
+  end
 
   # Anouncements
   resources :announcements do
