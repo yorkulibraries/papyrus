@@ -7,18 +7,18 @@
       <li class="<%= "active" if controller_name == "users" %>">
         <a href="<%= users_path %>">Papyrus Users</a>
       </li>
-      <li class="<%= "active" if controller_name == "access_codes" %>">
+      <li class="<%= "active" if controller_name == "shared_access_codes" %>">
         <a href="<%= shared_access_codes_path %>">Shared Access Codes</a>
       </li>
 
       <li class="divider"></li>
 
-      <li class="<%= "active" if controller_name == "settings" %>">
+      <li class="<%= "active" if is_controller_and_action?("home", "active_users") %>">
         <%= link_to "Active Users", active_users_path %>
       </li>
-      <li class="<%= "active" if controller_name == "settings" %>">
+      <li class="<%= "active" if controller_name == "announcements" %>">
         <%= link_to "Announcements", announcements_path %>
-      </li>      
+      </li>
 
       <%  if can? :show, :stats %>
         <li class="divider"></li>
@@ -26,10 +26,24 @@
           <%= link_to "Reports", stats_path %>
         </li>
       <% end %>
-
-      <li class="hide <%= "active" if controller_name == "settings" %>">
-        <%= link_to "Settings", stats_path %>
-      </li>
+      <% if can? :show, PapyrusSettings %>
+        <li class="divider"></li>
+        <li class="<%= "active" if is_controller_and_action?("settings", "general") %>">
+          <%= link_to "Settings: General", general_settings_path %>
+        </li>
+        <li class="<%= "active" if is_controller_and_action?("settings", "item") %>">
+          <%= link_to "Settings: Item", item_settings_path %>
+        </li>
+        <li class="<%= "active" if is_controller_and_action?("settings", "email") %>">
+          <%= link_to "Settings: Email", email_settings_path %>
+        </li>
+        <li class="<%= "active" if is_controller_and_action?("settings", "bib_search") %>">
+          <%= link_to "Settings: Bib Search", bib_search_settings_path %>
+        </li>
+        <li class="<%= "active" if is_controller_and_action?("settings", "system") %>">
+          <%= link_to "Settings: System", system_settings_path %>
+        </li>
+      <% end %>
     </ul>
   </li>
 <% end %>

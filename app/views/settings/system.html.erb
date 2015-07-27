@@ -1,2 +1,72 @@
-<h1>Settings#system</h1>
-<p>Find me in app/views/settings/system.html.erb</p>
+<% title "System Settings" %>
+
+<% title_html do %>
+	<h1>System Settings</h1>
+<% end%>
+
+
+<% sidebar do %>
+  <h3>System Settings Help</h3>
+
+<% end %>
+
+
+<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+
+<h3>Authentication Settings</h3>
+<div class="standout">
+  <div class="row">
+    <div class="span4">
+      <%= f.label :auth_cas_header, "CAS Header"%>
+      <%= f.input :auth_cas_header, label: false, input_html: { class: "input-xlarge" }, hint: "Name of login header used by CAS" %>
+    </div>
+    <div class="span4">
+        <%= f.label :auth_cas_header_alt, "Alternate CAS Header" %>
+        <%= f.input :auth_cas_header_alt, label: false, input_html: { class: "input-xlarge" },
+         hint: "Alternate Name of login header used by CAS" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <%= f.label :auth_cas_user_id_label, "User ID Label"%>
+      <%= f.input :auth_cas_user_id_label, label: false, input_html: { class: "input-xlarge" }, hint: "Label used to describe a user's id" %>
+    </div>
+    <div class="span4">
+        <%= f.label :auth_cookies_domain, "Cookies Domain" %>
+        <%= f.input :auth_cookies_domain, label: false, input_html: { class: "input-xlarge" },
+         hint: "Domain used for cookies creation" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <%= f.label :auth_cas_logout_redirect, "Logout Redirect URL"%>
+      <%= f.input :auth_cas_logout_redirect, label: false, input_html: { class: "input-block-level" }%>
+    </div>
+  </div>
+
+</div>
+
+<h3>Error Notification</h3>
+
+<div class="row">
+  <div class="span8">
+    <%= f.label :errors_email_subject_prefix, "Error Email Subject Prerix"%>
+    <%= f.input :errors_email_subject_prefix, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+<div class="row">
+  <div class="span8">
+    <%= f.label :errors_email_from, "Error Email From Address"%>
+    <%= f.input :errors_email_from, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+<div class="row">
+  <div class="span8">
+    <%= f.label :errors_email_to, "Send Error Messages To"%>
+    <%= f.input :errors_email_to, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+
+	<input type="hidden" name="return_to" value="system"/>
+	<%= f.submit "Save Settings", class: "btn btn-success" %>
+<% end %>

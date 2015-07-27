@@ -18,7 +18,7 @@ class SettingsController < ApplicationController
   end
 
   def update
-    settings = params[:setting]
+    settings = params[:papyrus_settings]
 
     settings.each do |key, value|
       PapyrusSettings[key] = value
@@ -28,13 +28,13 @@ class SettingsController < ApplicationController
     when "email"
       redirect_to email_settings_path, notice: "Saved Email Settings"
     when "bib_search"
-      redirect_to bib_search_settings_path, notice: "Saved Catalog Search Settings"
+      redirect_to bib_search_settings_path, notice: "Saved Bib Search Settings"
     when "item"
       redirect_to item_settings_path, notice: "Saved Item Settings"
     when "system"
-      redirect_to system_settings_path, notice: "Saved Acquisition Requests Settings"
+      redirect_to system_settings_path, notice: "Saved System Settings"
     else
-      redirect_to general_settings_path
+      redirect_to general_settings_path, notice: "Saved General Settings"
     end
 
   end
