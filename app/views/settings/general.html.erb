@@ -13,53 +13,52 @@
 
 <%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
 
+	<h3>Application Settings</h3>
 
-<h3>Application Settings</h3>
+	<div class="row">
+	  <div class="span8">
+	    <%= f.label :app_name, "Application Name"%>
+	    <%= f.input :app_name, label: false, input_html: { class: "input-block-level" }%>
+	  </div>
+	</div>
 
-<div class="row">
-  <div class="span8">
-    <%= f.label :app_name, "Application Name"%>
-    <%= f.input :app_name, label: false, input_html: { class: "input-block-level" }%>
-  </div>
-</div>
+	<h3>Organization Settings</h3>
 
-<h3>Organization Settings</h3>
+	<div class="row">
+	  <div class="span8">
+	    <%= f.label :org_name, "Organization's Name"%>
+	    <%= f.input :org_name, label: false, input_html: { class: "input-block-level" }%>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="span8">
+	    <%= f.label :org_short_name, "Short Name of Organization"%>
+	    <%= f.input :org_short_name, label: false, input_html: { class: "input-block-level" }%>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="span8">
+	    <%= f.label :org_app_url, "URL of where Papyrus installed"%>
+	    <%= f.input :org_app_url, label: false, input_html: { class: "input-block-level" }%>
+	  </div>
+	</div>
 
-<div class="row">
-  <div class="span8">
-    <%= f.label :org_name, "Organization's Name"%>
-    <%= f.input :org_name, label: false, input_html: { class: "input-block-level" }%>
-  </div>
-</div>
-<div class="row">
-  <div class="span8">
-    <%= f.label :org_short_name, "Short Name of Organization"%>
-    <%= f.input :org_short_name, label: false, input_html: { class: "input-block-level" }%>
-  </div>
-</div>
-<div class="row">
-  <div class="span8">
-    <%= f.label :org_app_url, "URL of where Papyrus installed"%>
-    <%= f.input :org_app_url, label: false, input_html: { class: "input-block-level" }%>
-  </div>
-</div>
+	<h3>Reports</h3>
 
-<h3>Reports</h3>
-
-<div class="row">
-  <div class="span8">
-    <%= f.label :reports_default_interval, "Default Interval"%>
-    <%= f.input :reports_default_interval, label: false, input_html: { class: "input-block-level" }%>
-  </div>
-</div>
-<div class="row">
-  <div class="span8">
-    <%= f.label :reports_fiscal_year_start, "Fiscal Year Start Date"%>
-    <%= f.input :reports_fiscal_year_start, label: false, input_html: { class: "input-block-level" }%>
-  </div>
-</div>
+	<div class="row">
+	  <div class="span8">
+			<% interval = [["30 days", 30.days], ["60 days", 60.days], ["90 days", 90.days]] %>
+			<%= f.input :reports_default_interval, label: "Default Report Interval", include_blank: false, collection: interval %>
+	  </div>
+	</div>
+	<div class="row">
+	  <div class="span8">
+	    <%= f.label :reports_fiscal_year_start, "Fiscal Year Start Date"%>
+	    <%= f.input :reports_fiscal_year_start, label: false, input_html: { class: "input-block-level" }%>
+	  </div>
+	</div>
 
 
-  	<input type="hidden" name="return_to" value="general"/>
+  <input type="hidden" name="return_to" value="general"/>
 	<%= f.submit "Save Settings", class: "btn btn-success" %>
 <% end %>
