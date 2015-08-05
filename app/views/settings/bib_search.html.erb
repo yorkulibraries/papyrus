@@ -7,7 +7,24 @@
 
 <% sidebar do %>
   <h3>Bib Search Help</h3>
-
+	<p class="alert alert-danger"><strong>Warning:</strong> Changing these values might disable BibCat Search capabilities. Please be careful.</p>
+	<dl>
+		<dt>SORL Url</dt>
+		<dd>The url to SOLR index. This is where the search query would be sent</dd>
+		<dt>SOLR Query Type</dt>
+		<dd>The query type used when searching SOLR.</dd>
+		<dt>ID Prefix For SOLR Items</dt>
+		<dd>When importing from SOLR, <%= PapyrusSettings.app_name %> will use SOLR Item id with this prefix as a unique ID for new item.</dd>
+		<dt>SOLR Search Label</dt>
+		<dd>The Name of the SOLR Search to display in the Items search page. i.e. VuFind</dd>
+		<hr/>
+		<dt>API Key</dt>
+		<dd>A unique key that allows Papyrus to search WORLDCAT database.</dd>
+		<dt>ID Prefix For WORLDCAT Items</dt>
+		<dd>When importing from WORLDCAT, <%= PapyrusSettings.app_name %> will use WORLDCAT Item id with this prefix as a unique ID for new item.</dd>
+		<dt>WORLDCAT Search Label</dt>
+		<dd>The Name of the WORLDCAT Search to display in the Items search page. i.e. Worldcat</dd>
+	</dl>
 <% end %>
 
 

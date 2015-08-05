@@ -7,7 +7,26 @@
 
 <% sidebar do %>
   <h3>System Settings Help</h3>
-
+	<p class="alert alert-danger"><strong>Warning:</strong> Changing authentication settings might disable your access to Papyrus. Please be careful.</p>
+	<dl>
+		<dt>CAS Header</dt>
+		<dd>The name of the login HEADER used to authenticated <%= PapyrusSettings.app_name %> users. </dd>
+		<dt>Alternate CAS Header</dt>
+		<dd>The alternate name of the login HEADER used to authenticated <%= PapyrusSettings.app_name %> users.</dd>
+		<dt>User ID Label</dt>
+		<dd>A label used to describe the ID of the user.</dd>
+		<dt>Cookies Domain</dt>
+		<dd>The Domain used for creating login and session cookies</dd>
+		<dt>Logout Redirect URL</dt>
+		<dd>The logout url to which a user will be redirected after clicking logout link.</dd>
+		<hr/>
+		<dt>Error Email Subject Prefix</dt>
+		<dd>A prefix used on a error notification email.</dd>
+		<dt>Error Email From Address</dt>
+		<dd>Email Address used to identify <%= PapyrusSettings.app_name %> error emails.</dd>
+		<dt>Send Error Messages To</dt>
+		<dd>A list of email address used to notify about <%= PapyrusSettings.app_name %> errors.</dd>
+	</dl>
 <% end %>
 
 
