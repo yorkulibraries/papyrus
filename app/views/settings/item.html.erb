@@ -1,2 +1,44 @@
-<h1>Settings#item</h1>
-<p>Find me in app/views/settings/item.html.erb</p>
+<% title "Item Settings" %>
+
+<% title_html do %>
+	<h1>Item Settings</h1>
+<% end%>
+
+
+<% sidebar do %>
+  <h3>Item Settings Help</h3>
+
+<% end %>
+
+
+<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+  <h3>Item Settings</h3>
+
+  <div class="row">
+    <div class="span8">
+      <%= f.label :item_sources, "Item Sources"%>
+      <%= f.input :item_sources, label: false, as: :array, input_html: { class: "input-block-level" }%>
+      <p class="small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
+    </div>
+  </div>
+
+
+  <h3>Course Settings</h3>
+
+  <div class="row">
+    <div class="span8">
+      <%= f.label :course_lookup_url, "Course Code Lookup URL"%>
+      <%= f.input :course_lookup_url, label: false, input_html: { class: "input-block-level" }%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <%= f.label :course_code_sample, "Course Code Sample"%>
+      <%= f.input :course_code_sample, label: false, input_html: { class: "input-block-level" }%>
+    </div>
+  </div>
+
+
+  	<input type="hidden" name="return_to" value="item"/>
+	<%= f.submit "Save Settings", class: "btn btn-success" %>
+<% end %>

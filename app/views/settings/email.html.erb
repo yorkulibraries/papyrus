@@ -1,19 +1,64 @@
 <% title "General Settings" %>
 
 <% title_html do %>
-	<h1>General Settings</h1>
+	<h1>Email Settings</h1>
 <% end%>
 
 
 <% sidebar do %>
-  <h3>General Settings Help</h3>
+  <h3>Email Settings Help</h3>
 
 <% end %>
 
 
 <%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
 
+<ul class="nav nav-tabs" role="tablist">
+	<li class="active">
+		<a href="#general_email_settings" role="tab" data-toggle="tab">General</a>
+	</li>
+	<li><a href="#welcome_email_settings" role="tab" data-toggle="tab">Welcome Email</a></li>
+	<li><a href="#notification_email_settings" role="tab" data-toggle="tab">Notification Email</a></li>
+	<li><a href="#item_assigned_email_settings" role="tab" data-toggle="tab">Item Assigned Email</a></li>
+	<li><a href="#helpful_tags_settings" role="tab" data-toggle="tab">Helpful Tags</a></li>
+</ul>
 
-  <input type="hidden" name="return_to" value="general"/>
+<hr/>
+<!-- Tab panes -->
+<div class="tab-content">
+	<div class="tab-pane active" id="general_email_settings">
+		<%= f.input :email_allow, as: :radio_buttons, label: "Enable Email Communication?" %>
+		<%= f.input :email_from, label: "From Address", input_html: { class: "input-block-level" } %>
+	</div>
+	<div class="tab-pane" id="welcome_email_settings">
+		<h4>Welcome Email</h4>
+		<%= f.input :email_welcome_subject, label: "Subject", input_html: { class: "input-block-level" } %>
+		<%= f.input :email_welcome_body, as: :text, label: "Body", input_html: { rows: 20, class: "input-block-level"  } %>
+		<p class="help-block">Available Tags:
+			{{requestor_name}} | {{date}} | {{application_url}} | {{all_locations}}</p>
+	</div>
+<div class="tab-pane" id="notification_email_settings">
+		<h4>Notification Email</h4>
+		<%= f.input :email_notification_subject, label: "Subject", input_html: { class: "input-block-level" }  %>
+		<%= f.input :email_notification_body, as: :text, label: "Body", input_html: { rows: 20, class: "input-block-level" } %>
+		<p class="help-block">Available Tags:
+			{{request_url}} | {{requestor_name}} | {{date}} | {{status}} | {{admin_user_email}} | {{admin_user_name}} | {{course_name}} | {{location_name}} | {{all_locations}}</p>
+</div>
+<div class="tab-pane" id="item_assigned_email_settings">
+		<h4>Item Assigned Email</h4>
+		<%= f.input :email_item_assigned_subject, label: "Subject", input_html: { class: "input-block-level" } %>
+		<%= f.input :email_item_assigned_body, as: :text, label: "Body", input_html: { rows: 20, class: "input-block-level" } %>
+		<p class="help-block">Available Tags:
+			{{request_url}} | {{rollover_url}} | {{requestor_name}} | {{date}} | {{status}} | {{course_name}} | {{location_name}} | {{all_locations}}</p>
+</div>
+<div class="tab-pane" id="helpful_tags_settings">
+	<h4>Useful Tags For Email Text</h4>
+	<p>These tags will be processed and replace with the actual value before the email is sent out.</p>
+
+</div>
+</div>
+
+
+  <input type="hidden" name="return_to" value="email"/>
   <%= f.submit "Save Settings", class: "btn btn-success" %>
 <% end %>

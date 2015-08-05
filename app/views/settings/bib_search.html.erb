@@ -1,2 +1,69 @@
-<h1>Settings#bib_search</h1>
-<p>Find me in app/views/settings/bib_search.html.erb</p>
+<% title "Bib Search Settings" %>
+
+<% title_html do %>
+	<h1>Bib Search Settings</h1>
+<% end%>
+
+
+<% sidebar do %>
+  <h3>Bib Search Help</h3>
+
+<% end %>
+
+
+<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+
+
+<h3>SOLR Settings</h3>
+
+<div class="row">
+  <div class="span8">
+    <%= f.label :solr_url, "SOLR Url"%>
+    <%= f.input :solr_url, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <%= f.label :solr_query_type, "SORL Query Type"%>
+    <%= f.input :solr_query_type, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+<div class="row">
+  <div class="span8">
+    <%= f.label :solr_id_prefix, "ID Prefix For SOLR Items"%>
+    <%= f.input :solr_id_prefix, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+<div class="row">
+  <div class="span8">
+    <%= f.label :solr_label, "SOLR Search Label"%>
+    <%= f.input :solr_label, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+
+<h3>WORLDCAT Settings</h3>
+
+<div class="row">
+  <div class="span8">
+    <%= f.label :worldcat_key, "API Key"%>
+    <%= f.input :worldcat_key, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+<div class="row">
+  <div class="span8">
+    <%= f.label :worldcat_id_prefix, "ID Prefix for WORLDCAT Items"%>
+    <%= f.input :worldcat_id_prefix, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+<div class="row">
+  <div class="span8">
+    <%= f.label :worldcat_label, "WORLDCAT Search Label"%>
+    <%= f.input :worldcat_label, label: false, input_html: { class: "input-block-level" }%>
+  </div>
+</div>
+
+
+  	<input type="hidden" name="return_to" value="bib_search"/>
+	<%= f.submit "Save Settings", class: "btn btn-success" %>
+<% end %>
