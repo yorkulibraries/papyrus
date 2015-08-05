@@ -1,2 +1,19 @@
-<h1>Settings#email</h1>
-<p>Find me in app/views/settings/email.html.erb</p>
+<% title "General Settings" %>
+
+<% title_html do %>
+	<h1>General Settings</h1>
+<% end%>
+
+
+<% sidebar do %>
+  <h3>General Settings Help</h3>
+
+<% end %>
+
+
+<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+
+
+  <input type="hidden" name="return_to" value="general"/>
+  <%= f.submit "Save Settings", class: "btn btn-success" %>
+<% end %>

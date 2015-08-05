@@ -57,13 +57,13 @@
 <div class="row">
   <div class="span8">
     <%= f.label :errors_email_from, "Error Email From Address"%>
-    <%= f.input :errors_email_from, label: false, input_html: { class: "input-block-level" }%>
+    <%= f.input :errors_email_from, label: false, input_html: { class: "input-block-level" } %>
   </div>
 </div>
 <div class="row">
   <div class="span8">
     <%= f.label :errors_email_to, "Send Error Messages To"%>
-    <%= f.input :errors_email_to, label: false, input_html: { class: "input-block-level" }%>
+    <%= f.input :errors_email_to, as: :array, label: false,  input_html: { class: "input-block-level" }%>
   </div>
 </div>
 
