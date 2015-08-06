@@ -1,13 +1,3 @@
-Hello, <%= @student.name %>
-===============================================
- 
-This is a message from Library's Accessibility Application - Papyrus      
-
-Message
-===============================================
-<%= @message %>
-
------------------------------------------------
-To login to the site, just follow this link: <%= @url %>. You must have a Passport York Account to Log in.
- 
-Thanks and have a great day!
+<%=  @template.render( 'sender_name' => @sender.name, 'date' => @date, 'date-short' => @date_short,
+                  'application_name' => @app_name, 'application_url' => @url, 'student_name' => @student.name,
+                  'organization_name' => @org_name, 'message' => @message ) %>

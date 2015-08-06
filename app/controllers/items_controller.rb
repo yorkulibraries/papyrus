@@ -60,10 +60,15 @@ class ItemsController < ApplicationController
     item_ids = params[:item_ids]
     date = params[:expires_on][:date] if params[:expires_on]
 
+    items = Array.new
     item_ids.split(",").each do |id|
       item = Item.find(id)
       item.assign_to_student(student, date)
+      items << item
     end
+
+    ## DISABLED FOR NOW ##
+    #StudentMailer.items_assigned_email(student, items).deliver
 
     redirect_to student, notice: "Assigned items to this student"
   end

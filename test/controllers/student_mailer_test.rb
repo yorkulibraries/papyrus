@@ -4,6 +4,8 @@ class StudentMailerTest < ActionMailer::TestCase
 
 
   should "send out a notification email" do
+    PapyrusSettings.email_allow = true
+
     student = create(:student, email: "whatever@whatever.com")
     message = "Some Unique Student Message"
     sender = create(:user, email: "sender@sender.com")
@@ -17,11 +19,11 @@ class StudentMailerTest < ActionMailer::TestCase
     assert_equal [student.email], email.to
     assert_equal [sender.email], email.cc
     assert_equal PapyrusSettings.email_notification_subject, email.subject
-    assert_match(/Some Unique Student Message/, email.encoded)
-
   end
 
   should "send out welcome email" do
+    PapyrusSettings.email_allow = true
+
     student = create(:student, email: "whatever@whatever.com")
     sender = create(:user, email: "nothing@matters.com")
 
@@ -36,6 +38,8 @@ class StudentMailerTest < ActionMailer::TestCase
   end
 
   should "send out items assigned email" do
+    PapyrusSettings.email_allow = true
+
     student = create(:student, email: "whatever@whatever.com")
     items = create_list(:item, 3)
 
@@ -49,6 +53,8 @@ class StudentMailerTest < ActionMailer::TestCase
   end
 
   should "have a item title in sujbect if sending just one assigned item email" do
+    PapyrusSettings.email_allow = true
+
     student = create(:student, email: "whatever@whatever.com")
     items = create_list(:item, 1, title: "Test")
 

@@ -4,19 +4,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h2 style="margin-bottom:16px;">Hello <%= @student.name%>,</h2>
-    <p>The following material is available for download:</p>
-		<ul>
-			<li>Item 1</li>
-			<li>Item 2</li>
-		</ul>
-	
-	<p>Please login to the Papyrus website to access the material:</p>
-	<p><%= @url %></p>
-	<p>Should you have any questions please contact <%= @student.student_details.transcription_assistant.name %> your Transcription Assistant at <%= @student.student_details.transcription_assistant.email %></p>
-
-	<p style="margin-top:5px;font-size:10px;color:#888888;">
-		Please do not reply to this message; it was sent from an unmonitored email address.  This message is a service email related to your use of Papyrus. For general inquiries or to request support with your Papyrus, please visit us at the LAS office during normal office hours.
-	</p>
+    <%=  simple_format @template.render( 'date' => @date, 'date-short' => @date_short,
+                      'application_name' => @app_name, 'application_url' => @url, 'student_name' => @student.name,
+                      'organization_name' => @org_name, 'items' => @items ) %>
 </body>
 </html>

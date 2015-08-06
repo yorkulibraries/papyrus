@@ -48,6 +48,7 @@ gem 'nifty-generators', "0.4.6"
 gem "axlsx", "2.0.0"
 gem 'axlsx_rails', "0.1.5"
 gem "rails-settings-cached", "0.4.1"
+gem 'liquid', '2.6.1'
 
 ## UPLOADING AND MANIPULATING FILES ##
 gem "carrierwave", "0.9.0"

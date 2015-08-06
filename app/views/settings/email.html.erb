@@ -18,7 +18,7 @@
 		<dt>Notification Email Subject and Body</dt>
 		<dd>The subject and body of an email sent out via student communcation box.</dd>
 		<dt>Item Assigned Email Subject and Body</dt>
-		<dd>The subject and body of an email sent out when an item is assigned to a student.</dd>		
+		<dd>The subject and body of an email sent out when an item is assigned to a student.</dd>
 	</dl>
 <% end %>
 
@@ -45,23 +45,24 @@
 	<div class="tab-pane" id="welcome_email_settings">
 		<h4>Welcome Email</h4>
 		<%= f.input :email_welcome_subject, label: "Subject", input_html: { class: "input-block-level" } %>
+		<p class="help-block">Available Body Tags:
+			{{sender_name}} | {{student_name}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
 		<%= f.input :email_welcome_body, as: :text, label: "Body", input_html: { rows: 20, class: "input-block-level"  } %>
-		<p class="help-block">Available Tags:
-			{{requestor_name}} | {{date}} | {{application_url}} | {{all_locations}}</p>
 	</div>
 <div class="tab-pane" id="notification_email_settings">
 		<h4>Notification Email</h4>
 		<%= f.input :email_notification_subject, label: "Subject", input_html: { class: "input-block-level" }  %>
+		<p class="help-block">Available Body Tags:
+			{{sender_name}} | {{student_name}} | {{message}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
 		<%= f.input :email_notification_body, as: :text, label: "Body", input_html: { rows: 20, class: "input-block-level" } %>
-		<p class="help-block">Available Tags:
-			{{request_url}} | {{requestor_name}} | {{date}} | {{status}} | {{admin_user_email}} | {{admin_user_name}} | {{course_name}} | {{location_name}} | {{all_locations}}</p>
+
 </div>
 <div class="tab-pane" id="item_assigned_email_settings">
 		<h4>Item Assigned Email</h4>
 		<%= f.input :email_item_assigned_subject, label: "Subject", input_html: { class: "input-block-level" } %>
+		<p class="help-block">Available Body Tags:
+			{{student_name}} | {{items}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
 		<%= f.input :email_item_assigned_body, as: :text, label: "Body", input_html: { rows: 20, class: "input-block-level" } %>
-		<p class="help-block">Available Tags:
-			{{request_url}} | {{rollover_url}} | {{requestor_name}} | {{date}} | {{status}} | {{course_name}} | {{location_name}} | {{all_locations}}</p>
 </div>
 <div class="tab-pane" id="helpful_tags_settings">
 	<h4>Useful Tags For Email Text</h4>

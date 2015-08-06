@@ -4,28 +4,8 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-   <h2 style="margin-bottom:16px;">Hello <%= @student.name%>!</h2>
-   <p>You have been registered with Library Accessibility Services to receive Transcription Services via Papyrus our new, automated delivery system.</p>
-
-   <p>This is an email confirmation you have been registered with Library Accessibility Services.
-     We are here to provide equitable access to the full range of library services, resources and facilities for students, faculty and staff.
-     You will be receiving a communication email which will have contact information of your Library Accessibility Services team member who will be assisting you.
-   </p>
-
-   <p>Sincerely,<br/>
-     Library Accessibility Services
-   </p>
-
-    <p>
-      <a href="http://www.library.yorku.ca/web/ask-services/accessibility-services/?utm_source=LAS%20-%20New%20email%20&utm_medium=email&utm_campaign=LAS%20new%20email%20Final">
-      Please see our website Library Accessibility Services for more information
-      </a>
-    </p>
-
-
-
-    <p style="margin-top:5px;font-size:10px;color:#888888;">
-    	Please do not reply to this message; it was sent from an unmonitored email address.  This message is a service email related to your use of Papyrus. For general inquiries or to request support with your Papyrus, please visit us at the LAS office during normal office hours.
-    </p>
+    <%=  simple_format @template.render( 'sender_name' => @sender.name, 'date' => @date, 'date-short' => @date_short,
+                      'application_name' => @app_name, 'application_url' => @url, 'student_name' => @student.name,
+                      'organization_name' => @org_name ) %>
 </body>
 </html>
