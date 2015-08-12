@@ -8,7 +8,7 @@ class BibRecord
 
 
   def initialize()
-    
+
   end
 
 
@@ -46,35 +46,52 @@ class BibRecord
   ## SOLR SPECIFIC METHODS
 
   def search_solr_items(query)
-    require 'solr'
-    solr = Solr::Connection.new(PapyrusSettings.solr_url)
+
+    require 'rsolr'
+
+    query = "*:*" if query.blank?
+
+    solr = RSolr.connect url: PapyrusSettings.solr_url
+
 
     query_fields = "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
-    phrase_fields = "title_txtP^100"
+    filter_query = ["source_str:Catalogue"]
     boost_functions = "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0"
-    sort = [ {score: :descending}, {_docid_: :descending} ]
+    phrase_fields = "title_txtP^100"
 
-    unless query.blank?
-      response = solr.search("#{query}", sort: sort, query_fields: query_fields, debug_query:  true, phrase_fields: phrase_fields, boost_functions: boost_functions)
-      #$config_logger.debug("HERE  #{JSON.parse(response.raw_response)}")
-      results = response.hits
+    result = solr.get 'select', :params => {
+      :q => "#{query}",
+      :defType => "dismax",
+      :bf => "#{boost_functions}",
+      :pf => phrase_fields,
+      :qf => query_fields,
+      :start=>0,
+      :rows=> 20,
+      :fq => filter_query
+    }
+
+    if (result["response"]["numFound"] > 0)
+      return result["response"]["docs"]
     else
-      Array.new
+      return Array.new
     end
 
   end
 
-  def find_solr_item(item_id)
-    require 'solr'
-    solr = Solr::Connection.new(PapyrusSettings.solr_url)
-    result = solr.query("id: #{item_id}")
 
-    if result.hits.first
-      result.hits.first
+  def find_solr_item(item_id)
+    require 'rsolr'
+
+    solr = RSolr.connect url: PapyrusSettings.solr_url
+    result = solr.get 'select', :params => {:q => "id: #{item_id}"}
+
+    if (result["response"]["numFound"] > 0)
+      return result["response"]["docs"].first
     else
       nil
     end
   end
+
 
   ## WORLDCAT SPECIFIC METHODS
   def search_worldcat_items(query)
