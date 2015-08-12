@@ -50,6 +50,7 @@ class ItemsController < ApplicationController
       student = Student.new
       student.id = id
       item.assign_to_student(student, date)
+      StudentMailer.items_assigned_email(student, [item]).deliver
     end
 
     redirect_to item, notice:  "Assigned this item to students"
@@ -67,8 +68,7 @@ class ItemsController < ApplicationController
       items << item
     end
 
-    ## DISABLED FOR NOW ##
-    #StudentMailer.items_assigned_email(student, items).deliver
+    StudentMailer.items_assigned_email(student, items).deliver
 
     redirect_to student, notice: "Assigned items to this student"
   end
