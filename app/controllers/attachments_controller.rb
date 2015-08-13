@@ -12,6 +12,24 @@ class AttachmentsController < ApplicationController
     @attachment = @item.attachments.build(attachment_params)
     @attachment.user = @current_user
 
+    if @attachment.save
+      respond_to do |format|
+        format.html { redirect_to item_path(@Item), notice: "Successfully uploaded a file" }
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html { render action: 'new' }
+        format.js
+      end
+    end
+
+  end
+
+  def old_create
+    @attachment = @item.attachments.build(attachment_params)
+    @attachment.user = @current_user
+
     logger.debug @attachment.user.inspect
 
     ## URL LINK OR FILE UPLOAD

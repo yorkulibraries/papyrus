@@ -1,5 +1,6 @@
 class Attachment < ActiveRecord::Base
   #attr_accessible :name, :item_id, :file, :file_cache, :full_text, :url, :access_code_required, :is_url
+  before_create :default_name
 
   validates_presence_of :file, message: "Please select the file to upload.", unless: lambda { is_url? }
   validates_presence_of :name, message: "Enter the name of for this file.", unless: lambda { is_url? }
@@ -30,4 +31,10 @@ class Attachment < ActiveRecord::Base
     Item.decrement_counter(:attachments_count, self[:item_id])
   end
 
+
+
+
+  def default_name
+    self.name ||= File.basename(file.filename, '.*').titleize if file
+  end
 end

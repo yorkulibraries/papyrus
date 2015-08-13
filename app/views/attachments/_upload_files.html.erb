@@ -1,46 +1,15 @@
-<% stylesheet "/assets/uploadify/uploadify.css"%>
-<% javascript "/assets/uploadify/swfobject.js", "/assets/uploadify/jquery.uploadify.v2.1.4"%>
+<%= form_for [@item, Attachment.new] do |f| %>
+  <%= f.label :file, "Upload a file:" %>
+  <%= f.file_field :file, multiple: true, name: "attachment[file]" %>	
+<% end %>
 
-<div id="many_attachments_at_once">
-	<h3>Upload Files</h3>
-	<p>You can select multiple files.</p>
-	<%=  fields_for Attachment.new do |f| %>
-	     <%= f.file_field :file, :id => "file_attachment_multiple" %>
-	<% end %>
-	<p>When finished, click on
-	<button onclick="javascript:$('input#file_attachment_multiple').uploadifyUpload();" class="btn btn-small">Upload These Files</button></p>
-</div>
-
-
-
-<% key = Rails.application.config.session_options[:key] %>
-<script type="text/javascript">
-$(document).ready(function() {
-
-
-	var upload_params = {
-      '<%= key %>' : encodeURIComponent('<%= u cookies[key] %>'),
-	  '_method': 'post',
-      '<%= request_forgery_protection_token %>' : encodeURIComponent('<%= u form_authenticity_token %>'),
-      '_http_accept': 'application/javascript',
-	  'multi' :true
-    };
-
-  var url = "<%= item_attachments_path(@item, uploadify: true) %>"; //$('form#new_attachment').attr('action');
-  $('input#file_attachment_multiple').uploadify({
-    'uploader'  : '<%= asset_path("assets/uploadify/uploadify.swf") %>',
-    'script'    : url,
-    'cancelImg' : '<%= asset_path("assets/uploadify/cancel.png") %>',
-    'fileDataName' : 'attachment[file]',
-	'multi'        : true,
-	'scriptData'   : upload_params,
-    'auto'      : false,
-	'onComplete' : function(e, id, obj, response, data) {
-	        $('.attachments').append(response);
-	      },
-	'onError'     : function (event,ID,fileObj,errorObj) {
-      alert(errorObj.type + ' Error: ' + errorObj.info);
-    }
-  });
-});
+<script id="template-upload" type="text/x-tmpl">
+	<div class="upload">
+	  {%=o.name%}
+	  <div class="progress"><div class="bar" style="width: 0%"></div></div>
+	</div>
 </script>
+
+<div id="uploaded_attachments" class="attachments">
+
+</div>

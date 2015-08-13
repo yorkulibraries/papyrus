@@ -2,9 +2,9 @@
 *= require_tree ./plugins
 *= require bootstrap_and_overrides
 *= require plugin_overrides
+*= require jquery.fileupload
+*= require jquery.fileupload-ui
 *= require common
 *= require layout
 *= require_tree ./controllers
 */
-
-
