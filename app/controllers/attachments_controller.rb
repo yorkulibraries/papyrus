@@ -12,9 +12,22 @@ class AttachmentsController < ApplicationController
     @attachment = @item.attachments.build(attachment_params)
     @attachment.user = @current_user
 
+
+    if @attachment.url.blank?
+
+      @attachment.name =  File.basename(@attachment.file_url, ".*")
+      @attachment.is_url = false
+
+      @attachment.audit_comment = "Uploaded a new file"
+    else
+
+      @attachment.is_url = true
+      @attachment.audit_comment = "Adding a new URL"
+    end
+
     if @attachment.save
       respond_to do |format|
-        format.html { redirect_to item_path(@Item), notice: "Successfully uploaded a file" }
+        format.html { redirect_to item_path(@item), notice: "Successfully uploaded a file" }
         format.js
       end
     else

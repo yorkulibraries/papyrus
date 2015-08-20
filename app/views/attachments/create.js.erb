@@ -1,5 +1,5 @@
 $("#announcement_form_holder").empty();
-<% if @announcement.errors.size == 0 %>
+<% if @attachment.errors.size == 0 %>
   $("#uploaded_attachments").append('<%=escape_javascript render @attachment %>')
   $(".blank-slate").hide();
 <% else %>
