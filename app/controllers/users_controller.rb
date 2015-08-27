@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.inactive = true
     @user.audit_comment = "Deactivated User Account"
-    @user.save
+    @user.save(validate: false)
     redirect_to users_url, notice: "Successfully disabled this user."
   end
 
