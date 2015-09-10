@@ -48,11 +48,10 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:email_item_assigned_body,  "Item Assigned email text goes here")
 
 
-  ## SOLR
-  PapyrusSettings.save_default(:solr_url, "http://localhost:8080/solr/biblio")
-  PapyrusSettings.save_default(:solr_query_type, "dismax")
-  PapyrusSettings.save_default(:solr_label, "Your Catalogue")
-  PapyrusSettings.save_default(:solr_id_prefix, "solr")
+  ## VuFIND
+  PapyrusSettings.save_default(:vufind_url, "https://www.library.yorku.ca/find/Search/Results")
+  PapyrusSettings.save_default(:vufind_label, "Your Catalogue")
+  PapyrusSettings.save_default(:vufind_id_prefix, "vufind")
 
   ## WORLDCAT
   PapyrusSettings.save_default(:worldcat_key, "enter-your-key-here")

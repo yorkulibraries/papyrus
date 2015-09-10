@@ -9,8 +9,8 @@ class SearchItemsController < ApplicationController
     case params[:type]
     when BibRecord::WORLDCAT
       search_worldcat(params[:q])
-    when BibRecord::SOLR
-      search_solr(params[:q])
+    when BibRecord::VUFIND
+      search_vufind(params[:q])
     else
       search_local(params[:q])
     end
@@ -22,7 +22,7 @@ class SearchItemsController < ApplicationController
     bib_record = BibRecord.new
     @bib_search = true
 
-    @docs = bib_record.search_items(params[:q], BibRecord::SOLR)
+    @docs = bib_record.search_items(params[:q], BibRecord::VUFIND)
 
     if params[:no_layout]
       render "test", layout: false
@@ -35,11 +35,11 @@ class SearchItemsController < ApplicationController
   end
 
   private
-  def search_solr(query)
+  def search_vufind(query)
     bib_record = BibRecord.new
     @bib_search = true
 
-    @docs = bib_record.search_items(query, BibRecord::SOLR)
+    @docs = bib_record.search_items(query, BibRecord::VUFIND)
 
     respond_to do |format|
       format.json { render json: ActiveSupport::JSON.encode(@docs, {} ) }

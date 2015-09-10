@@ -1,56 +1,56 @@
-<div class="solr-results">
+<div class="vufind-results">
 	<% unless @docs.nil? || @docs.size == 0 %>
 		<p><strong>Displaying <%= " #{@docs.count}" if @docs %> closest matches</strong></p>
-	
+
 
 		<table class="table">
 			<tbody>
 				<% @docs.each_with_index do |item, index| %>
 					<tr>
 						<td class="count hidden-phone"><%= index + 1 %>.</td>
-						<td class="record">						
-							<h2><%= item.title %></h2>			
-						
+						<td class="record">
+							<h2><%= item.title %></h2>
+
 							<div class="list-group">
-	
+
 								<li class="list-group-item">
 									<span class="badge">Author</span>
 									<p class="list-group-item-text"><%= format_worldcat_field item.author %></p>
 								</li>
-	
+
 								<li class="list-group-item">
 									<span class="badge">Publisher</span>
 									<p class="list-group-item-text">
 										<%= format_worldcat_field item.publisher %></p>
 								</li>
-								
-								
+
+
 								<li class="list-group-item">
 									<span class="badge">Edition</span>
 									<p class="list-group-item-text">
-										<%= format_worldcat_field item.edition, "Edition" %>  									
+										<%= format_worldcat_field item.edition, "Edition" %>
 									</p>
 								</li>
-								
+
 								<li class="list-group-item">
 									<span class="badge">ISBN</span>
 									<p class="list-group-item-text">
-										<%= format_worldcat_field item.isbn, "ISBN" %> 
+										<%= format_worldcat_field item.isbn, "ISBN" %>
 									</p>
 								</li>
-					
-								
+
+
 								<li class="list-group-item">
 									<span class="badge">Description</span>
 									<p class="list-group-item-text">
-										<%= format_worldcat_field item.physical_description, "Description" %>  
+										<%= format_worldcat_field item.physical_description, "Description" %>
 									</p>
 								</li>
-																												
+
 							</div>
 							<a href="<%= new_item_path %>?bib_record_id=<%= item.id%>&amp;source=<%= BibRecord::WORLDCAT %>" data-confirm="Are you sure?" class="visible-phone btn">
 								Add This Item <i class="icon-caret-right"></i>
-							</a>																																								  
+							</a>
 						</td>
 						<td class="cover hidden-phone">
 							<a href="<%= new_item_path %>?bib_record_id=<%= item.id %>&amp;source=<%= BibRecord::WORLDCAT %>" data-confirm="Are you sure?" class="hidden-phone btn">
@@ -58,18 +58,18 @@
 							</a>
 							 <div class="thumbnail">
 								<% if item.isbn.first %>
-									<%= image_tag "http://www.library.yorku.ca/find/bookcover.php?isn=#{item.isbn.first.gsub(/[^0-9]+/, '')}&size=medium" %>				
+									<%= image_tag "http://www.library.yorku.ca/find/bookcover.php?isn=#{item.isbn.first.gsub(/[^0-9]+/, '')}&size=medium" %>
 								<% else %>
 									<span class="trivial">Unvailable</span><br/>
-									Cover Image 
+									Cover Image
 								<% end %>
 							</div>
 						</td>
 					</tr>
-				
+
 				<% end %>
 			</tbody>
-		</table>	
+		</table>
 	<% else %>
 		<div class="blank-slate">
 			<i class="icon-question-sign"></i>

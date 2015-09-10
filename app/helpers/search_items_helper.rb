@@ -1,14 +1,14 @@
 module SearchItemsHelper
 
-  def bib_search_solr_label
-    PapyrusSettings.solr_label
+  def bib_search_vufind_label
+    PapyrusSettings.vufind_label
   end
   def bib_search_worldcat_label
     PapyrusSettings.worldcat_label
   end
 
 
-  def format_solr_field(field, field_name = nil)
+  def format_vufind_field(field, field_name = nil)
 
     if field.blank?
        if field_name == nil
@@ -27,7 +27,7 @@ module SearchItemsHelper
     end
 
   end
-  alias :format_worldcat_field :format_solr_field
+  alias :format_worldcat_field :format_vufind_field
 
   def encode_field(field)
     if field.encoding.name != "UTF-8"

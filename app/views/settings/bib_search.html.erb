@@ -9,14 +9,12 @@
   <h3>Bib Search Help</h3>
 	<p class="alert alert-danger"><strong>Warning:</strong> Changing these values might disable BibCat Search capabilities. Please be careful.</p>
 	<dl>
-		<dt>SORL Url</dt>
-		<dd>The url to SOLR index. This is where the search query would be sent</dd>
-		<dt>SOLR Query Type</dt>
-		<dd>The query type used when searching SOLR.</dd>
-		<dt>ID Prefix For SOLR Items</dt>
-		<dd>When importing from SOLR, <%= PapyrusSettings.app_name %> will use SOLR Item id with this prefix as a unique ID for new item.</dd>
-		<dt>SOLR Search Label</dt>
-		<dd>The Name of the SOLR Search to display in the Items search page. i.e. VuFind</dd>
+		<dt>VuFIND Url</dt>
+		<dd>The url to VuFIND index. This is where the search query would be sent</dd>
+		<dt>ID Prefix For VuFIND Items</dt>
+		<dd>When importing from VuFIND, <%= PapyrusSettings.app_name %> will use VuFIND Item id with this prefix as a unique ID for new item.</dd>
+		<dt>VuFIND Search Label</dt>
+		<dd>The Name of the VuFIND Search to display in the Items search page. i.e. VuFind</dd>
 		<hr/>
 		<dt>API Key</dt>
 		<dd>A unique key that allows Papyrus to search WORLDCAT database.</dd>
@@ -31,31 +29,24 @@
 <%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
 
 
-<h3>SOLR Settings</h3>
+<h3>VuFIND Settings</h3>
 
 <div class="row">
   <div class="span8">
-    <%= f.label :solr_url, "SOLR Url"%>
-    <%= f.input :solr_url, label: false, input_html: { class: "input-block-level" }%>
-  </div>
-</div>
-
-<div class="row">
-  <div class="span8">
-    <%= f.label :solr_query_type, "SORL Query Type"%>
-    <%= f.input :solr_query_type, label: false, input_html: { class: "input-block-level" }%>
+    <%= f.label :vufind_url, "VuFIND Url"%>
+    <%= f.input :vufind_url, label: false, input_html: { class: "input-block-level" }%>
   </div>
 </div>
 <div class="row">
   <div class="span8">
-    <%= f.label :solr_id_prefix, "ID Prefix For SOLR Items"%>
-    <%= f.input :solr_id_prefix, label: false, input_html: { class: "input-block-level" }%>
+    <%= f.label :vufind_id_prefix, "ID Prefix For VuFIND Items"%>
+    <%= f.input :vufind_id_prefix, label: false, input_html: { class: "input-block-level" }%>
   </div>
 </div>
 <div class="row">
   <div class="span8">
-    <%= f.label :solr_label, "SOLR Search Label"%>
-    <%= f.input :solr_label, label: false, input_html: { class: "input-block-level" }%>
+    <%= f.label :vufind_label, "VuFIND Search Label"%>
+    <%= f.input :vufind_label, label: false, input_html: { class: "input-block-level" }%>
   </div>
 </div>
 

@@ -2,45 +2,45 @@
 @import "twitter/bootstrap/mixins";
 
 .search-box {
-	border: 1px solid #aaa; background-color: #F8F7F5; padding: 8px 10px; margin-bottom: 10px; overflow: hidden; 
-	
-	
+	border: 1px solid #aaa; background-color: #F8F7F5; padding: 8px 10px; margin-bottom: 10px; overflow: hidden;
+
+
 	form {
 		margin-bottom: 0;
 		.sources { float: left; }
-		
+
 		.search-field {
-			float: left; min-width: 200px; width: auto; margin-bottom: 0; padding-right: 10px;  
+			float: left; min-width: 200px; width: auto; margin-bottom: 0; padding-right: 10px;
 			span.add-on { border-radius: 0; background-color: inherit; border:none; }
-		
-			input.search-input { 
-				border: none; background: inherit; border-bottom: 1px dotted #aaa; .box-shadow(none); .border-radius(0); 
-				padding: 5px 5px 2px 5px; width: 100%; font-size: 14px; 
-			}		
+
+			input.search-input {
+				border: none; background: inherit; border-bottom: 1px dotted #aaa; .box-shadow(none); .border-radius(0);
+				padding: 5px 5px 2px 5px; width: 100%; font-size: 14px;
+			}
 		}
-		
-		.btn { 
-			border: none; background: inherit; color: #0764EA; .border-radius(0); .box-shadow(none); border: 1px solid; border-color: #F8F7F5; 
+
+		.btn {
+			border: none; background: inherit; color: #0764EA; .border-radius(0); .box-shadow(none); border: 1px solid; border-color: #F8F7F5;
 			margin-right: 0;
-			
+
 			&.active, &:hover { box-shadow: none; border: 1px dotted #ccc; color: #222;   }
-			
+
 			&#search_submit { margin-left: 20px; }
 		}
 	}
-	
+
 }
 
 .pagination-stats {
 	padding: 10px 5px;
 }
 
-.solr-results {
-	margin-top: 30px; 
+.vufind-results {
+	margin-top: 30px;
 	td { padding-top: 20px; }
 	.count { width: 20px; color: #000; font-weight: bold; font-size: 14px; line-height: 25px; padding-right: 0;}
-	.record { 
-		width: auto; 		
+	.record {
+		width: auto;
 		h2 { color: #000; font-size: 18px; line-height: 24px; margin-top: 0; }
 	}
 	.cover { text-align: center; .thumbnail { margin-top: 20px; }}

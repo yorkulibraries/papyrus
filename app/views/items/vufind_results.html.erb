@@ -1,4 +1,4 @@
-<div class="solr-results">
+<div class="vufind-results">
 	<% unless @docs.nil? || @docs.size == 0 %>
 		<p><strong>Displaying <%= " #{@docs.count}" if @docs %> closest matches</strong></p>
 
@@ -9,41 +9,41 @@
 					<tr>
 						<td class="count hidden-phone"><%= index + 1 %>.</td>
 						<td class="record">
-							<h2><%= format_solr_field item["title_full"], "Title" %></h2>
+							<h2><%= format_vufind_field item["title_full"], "Title" %></h2>
 
 							<div class="list-group">
 
 								<li class="list-group-item">
 									<span class="badge">Author</span>
-									<p class="list-group-item-text"><%= format_solr_field (item["author"] ? item["author"] : item["author2"] ? item["author2"].join(", ") : "") %></p>
+									<p class="list-group-item-text"><%= format_vufind_field (item["author"] ? item["author"] : item["author2"] ? item["author2"].join(", ") : "") %></p>
 								</li>
 
 								<li class="list-group-item">
 									<span class="badge">Publisher</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["publisher"] %> <span class="trivial">Published: <%= format_solr_field item["publishDate"] %></span></p>
+										<%= format_vufind_field item["publisher"] %> <span class="trivial">Published: <%= format_vufind_field item["publishDate"] %></span></p>
 								</li>
 
 								<li class="list-group-item">
 									<span class="badge">Subject</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["callnumber-first"], "Subject" %>
+										<%= format_vufind_field item["callnumber-first"], "Subject" %>
 									</p>
 								</li>
 
 								<li class="list-group-item">
 									<span class="badge">Edition + Language</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["edition"], "Edition" %>
-										<span class="trivial">[<%= format_solr_field item["language"], "Language" %>]</span>
+										<%= format_vufind_field item["edition"], "Edition" %>
+										<span class="trivial">[<%= format_vufind_field item["language"], "Language" %>]</span>
 									</p>
 								</li>
 
 								<li class="list-group-item">
 									<span class="badge">ISBN + Call Number</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["isbn"], "ISBN" %> &amp;
-										<%= format_solr_field item["callnumber"], "Call Number" %>
+										<%= format_vufind_field item["isbn"], "ISBN" %> &amp;
+										<%= format_vufind_field item["callnumber"], "Call Number" %>
 									</p>
 								</li>
 
@@ -51,8 +51,8 @@
 								<li class="list-group-item">
 									<span class="badge">Format + Description</span>
 									<p class="list-group-item-text">
-										<%= format_solr_field item["format"], "Format" %>
-										<span class="trivial">[<%= format_solr_field item["physical"], "Description" %>]</span>
+										<%= format_vufind_field item["format"], "Format" %>
+										<span class="trivial">[<%= format_vufind_field item["physical"], "Description" %>]</span>
 									</p>
 								</li>
 

@@ -92,7 +92,7 @@ class ItemsController < ApplicationController
 
     @item = Item.new
     if params[:bib_record_id]
-     source = params[:source] || BibRecord::SOLR
+     source = params[:source] || BibRecord::VUFIND
 
      bib_record = BibRecord.new
      bib_item = bib_record.find_item(params[:bib_record_id], source)

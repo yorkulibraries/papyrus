@@ -38,7 +38,6 @@ gem "flash_cookie_session", "1.1.6"
 
 ## TOOLS AND UTILITIES ##
 gem "worldcatapi", "1.0.3"
-gem "rsolr", "1.0.10"
 gem 'kaminari', "0.15.1"
 gem "cancan", "1.6.9"
 gem "roo", "1.13.2"

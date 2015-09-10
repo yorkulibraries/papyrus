@@ -3,7 +3,7 @@ require "ostruct"
 class BibRecord
 
   ## CONSTANTS
-  SOLR = "solr"
+  VUFIND = "vufind"
   WORLDCAT = "worldcat"
 
 
@@ -13,10 +13,10 @@ class BibRecord
 
 
   ## COMMON INTERFACE
-  def search_items(search_string, source = SOLR)
+  def search_items(search_string, source = VUFIND)
 
-    if source == SOLR
-      search_solr_items(search_string)
+    if source == VUFIND
+      search_vufind_items(search_string)
     elsif source == WORLDCAT
       search_worldcat_items(search_string)
     else
@@ -24,9 +24,9 @@ class BibRecord
     end
   end
 
-  def find_item(item_id, source = SOLR)
-    if source == SOLR
-      find_solr_item(item_id)
+  def find_item(item_id, source = VUFIND)
+    if source == VUFIND
+      find_vufind_item(item_id)
     elsif source == WORLDCAT
       find_worldcat_item(item_id)
     else
@@ -34,61 +34,39 @@ class BibRecord
     end
   end
 
-  def build_item_from_search_result(result, item_type, source = SOLR)
-    if source == SOLR
-      BibRecord.build_item_from_solr_result(result, item_type, PapyrusSettings.solr_id_prefix)
+  def build_item_from_search_result(result, item_type, source = VUFIND)
+    if source == VUFIND
+      BibRecord.build_item_from_vufind_result(result, item_type, PapyrusSettings.vufind_id_prefix)
     elsif source == WORLDCAT
       BibRecord.build_item_from_worldcat_result(result, item_type, PapyrusSettings.worldcat_id_prefix)
     else
       "Item Can't be built"
     end
   end
-  ## SOLR SPECIFIC METHODS
 
-  def search_solr_items(query)
+  def search_vufind_items(query)
 
-    require 'rsolr'
+    url = "#{PapyrusSettings.vufind_url}?json=true&view=rss&lookfor=#{URI.encode(query.squish)}"
+    results = JSON.load(open(url))
 
-    query = "*:*" if query.blank?
-
-    solr = RSolr.connect url: PapyrusSettings.solr_url
-
-
-    query_fields = "title_short_txtP^757.5   title_short^750  title_full_unstemmed^404   title_full^400   title_txtP^750   title^500   title_alt_txtP_mv^202   title_alt^200   title_new_txtP_mv^101   title_new^100   series^50   series2^30   author^500   author_fuller^150   contents^10   topic_unstemmed^404   topic^400   geographic^300   genre^300   allfields_unstemmed^10   fulltext_unstemmed^10   allfields isbn issn"
-    filter_query = ["source_str:Catalogue"]
-    boost_functions = "recip(ms(NOW,publishDateBoost_tdate),3.16e-11,1,1)^1.0"
-    phrase_fields = "title_txtP^100"
-
-    result = solr.get 'select', :params => {
-      :q => "#{query}",
-      :defType => "dismax",
-      :bf => "#{boost_functions}",
-      :pf => phrase_fields,
-      :qf => query_fields,
-      :start=>0,
-      :rows=> 20,
-      :fq => filter_query
-    }
-
-    if (result["response"]["numFound"] > 0)
-      return result["response"]["docs"]
+    if results.size > 0
+      return results
     else
       return Array.new
     end
-
   end
 
 
-  def find_solr_item(item_id)
-    require 'rsolr'
+  def find_vufind_item(item_id)
+    query = "id:#{item_id}"
 
-    solr = RSolr.connect url: PapyrusSettings.solr_url
-    result = solr.get 'select', :params => {:q => "id: #{item_id}"}
+    url = "#{PapyrusSettings.vufind_url}?json=true&view=rss&lookfor=#{URI.encode(query.squish)}"
+    results = JSON.load(open(url))
 
-    if (result["response"]["numFound"] > 0)
-      return result["response"]["docs"].first
+    if results.size > 0
+      return results.first
     else
-      nil
+      return Array.new
     end
   end
 
@@ -120,7 +98,7 @@ class BibRecord
     end
   end
 
-  def self.build_item_from_solr_result(result, item_type, id_prefix = SOLR)
+  def self.build_item_from_vufind_result(result, item_type, id_prefix = VUFIND)
     return if result == nil
 
     result = HashWithIndifferentAccess.new(result)
