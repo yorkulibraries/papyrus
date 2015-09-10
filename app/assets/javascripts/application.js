@@ -2,9 +2,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery-migrate-1.0.0
-//= require jquery-fileupload/basic-plus
-//= require jquery-fileupload/jquery.fileupload-ui
-//= require jquery-fileupload/vendor/tmpl
 //= require twitter/bootstrap
 //= require_self
 //= require_tree ./vendor/

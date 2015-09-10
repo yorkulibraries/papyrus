@@ -27,7 +27,6 @@ gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', "3.1.3"
 gem 'jquery-ui-rails', "5.0.5"
 gem 'jquery-turbolinks', "2.0.2"
-gem "jquery-fileupload-rails", "0.4.5"
 
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
