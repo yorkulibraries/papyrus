@@ -44,7 +44,9 @@ class BibRecord
     end
   end
 
-  def search_vufind_items(query)
+  def search_vufind_items(query = "")
+
+    query = "" if query == nil
 
     url = "#{PapyrusSettings.vufind_url}?json=true&view=rss&lookfor=#{URI.encode(query.squish)}"
     results = JSON.load(open(url))
