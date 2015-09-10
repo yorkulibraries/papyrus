@@ -1,38 +1,12 @@
-<%= form_for [@item, Attachment.new], html: { id: "new_multiple_attachments" } do |f| %>
-  <h4>Upload Multiple Files</h4>
+<div class='formstone_upload' data-url="<%= url_for item_attachments_path(@item, format: "js") %>"
+    data-label="Click to select files. Upload will begin immediately after clicking on the Open button.">
+</div>
 
-  <span class="btn btn-success fileinput-button">
-    <i class="icon-plus"></i>
-    <span>Add files...</span>
-    <%= f.file_field :file, multiple: true, name: "attachment[file]" %>
-  </span>
-
-
-  <% f.button "upload", class: 'btn btn-primary', id: "add_attachment_button" do %>
-    <i class="icon-upload"></i>
-    <span>Start upload</span>
-  <% end %>
-
-  <button class="btn btn-primary" id = "add_attachment_button" type="button">
-    <i class="icon-upload"></i>
-    <span>Start upload</span>
-  </button>
-
-  <button class="btn btn-default cancel" type="reset" id= "cancel_upload_button">
-    <i class="icon-ban-circle"></i>
-    <span>Cancel upload</span>
-  </button>
-<% end %>
-
-
-
-<script id="template-upload" type="text/x-tmpl">
-	<div class="upload">
-	  {%=o.name%}
-	  <div class="progress"><div class="bar" style="width: 0%"></div></div>
-	</div>
-</script>
-
-<div id="uploaded_attachments" class="attachments">
-
+<div class="formstone_upload_queue hide">
+  <h5>Queued</h5>
+  <ol>
+  </ol>
+</div>
+<div id="uploaded_attachments" class="attachments hide">
+  <h5>Recently Uploaded Files</h5>
 </div>

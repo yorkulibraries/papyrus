@@ -117,7 +117,11 @@ class AttachmentsController < ApplicationController
     # do not remove the attachment for now
     #@attachment.destroy
 
-    redirect_to @item, notice: "Successfully removed a file."
+    respond_to do |format|
+      format.html { redirect_to @item, notice: "Successfully removed a file." }
+      format.js
+    end
+
   end
 
 
