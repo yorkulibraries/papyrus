@@ -1,0 +1,2 @@
+$("#attachment_<%= @attachment.id %> .attachment-actions").remove();
+$("#attachment_<%= @attachment.id %>").fadeOut(1000,function() { $(this).remove(); });
