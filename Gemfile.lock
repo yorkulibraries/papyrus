@@ -229,8 +229,6 @@ GEM
       nokogiri
       rubyzip
       spreadsheet (> 0.6.4)
-    rsolr (1.0.10)
-      builder (>= 2.1.2)
     ruby-ole (1.2.11.8)
     ruby-prof (0.15.3)
     rubyzip (0.9.9)
@@ -348,7 +346,6 @@ DEPENDENCIES
   rails (= 4.0.12)
   rails-settings-cached (= 0.4.1)
   roo (= 1.13.2)
-  rsolr (= 1.0.10)
   ruby-prof
   rubyzip (= 0.9.9)
   sass-rails (~> 4.0.0)
