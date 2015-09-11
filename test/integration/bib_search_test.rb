@@ -15,7 +15,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
     should "search SOLR for multiple items" do
       search_string = "Caesar"
       record = BibRecord.new
-      results = record.search_items(search_string, BibRecord::SOLR)
+      results = record.search_items(search_string, BibRecord::VUFIND)
 
       assert results.size > 0, "At least one result"
     end
@@ -23,7 +23,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
     should "search SOLR for single item" do
       item_id = "1970385"
       record = BibRecord.new
-      item = record.find_item(item_id, BibRecord::SOLR)
+      item = record.find_item(item_id, BibRecord::VUFIND)
 
       assert_not_nil item
       assert_equal item_id, item["id"]

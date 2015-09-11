@@ -21,13 +21,13 @@ class BibRecordTest < ActiveSupport::TestCase
 
 
   ### SOLR CONVERSION
-  should "build item from proper solr result" do
+  should "build item from proper vufind result" do
     item_type = Item::BOOK
-    item = BibRecord.build_item_from_solr_result(@solr_result, item_type, PapyrusSettings.solr_id_prefix)
+    item = BibRecord.build_item_from_vufind_result(@solr_result, item_type, PapyrusSettings.vufind_id_prefix)
 
     assert_equal Item::BOOK, item.item_type
     assert_equal @solr_result[:title], item.title
-    assert_equal "#{PapyrusSettings.solr_id_prefix}_#{@solr_result[:id]}", item.unique_id
+    assert_equal "#{PapyrusSettings.vufind_id_prefix}_#{@solr_result[:id]}", item.unique_id
     assert_equal @solr_result[:isbn], item.isbn
 
   end
