@@ -12,6 +12,5 @@ script:
   - RAILS_ENV=test bundle exec rake test:units
   - RAILS_ENV=test bundle exec rake test:functionals
 before_script:
-  - cp config/travis.database.yml config/database.yml
-  - cp config/travis.papyrus_app_config.rb config/papyrus_app_config.rb
+  - cp config/travis.database.yml config/database.yml  
   - mysql -e 'create database papyrus_test'
