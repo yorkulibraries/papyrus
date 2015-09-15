@@ -168,8 +168,11 @@ class StudentsController < ApplicationController
   private
   def student_params
     params.require(:student).permit( :first_name, :last_name, :name, :email, :username,
-          student_details_attributes: [ :student_number, :preferred_phone, :cds_counsellor,
-                                        :transcription_coordinator_id, :transcription_assistant_id]
+          student_details_attributes: [  :student_number, :preferred_phone, :request_form_signed_on,
+                           :format_large_print, :format_pdf, :format_kurzweil, :format_daisy, :format_braille, :format_word, :format_note, :format_other,
+                           :transcription_coordinator_id, :transcription_assistant_id, :cds_counsellor, :cds_counsellor_email, :book_retrieval,
+                           :requires_orientation, :orientation_completed, :orientation_completed_at, :accessibility_lab_access, :alternate_format_required
+                                      ]
                                     )
   end
 end
