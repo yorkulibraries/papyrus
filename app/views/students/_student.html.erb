@@ -19,7 +19,7 @@
 				<% formats_array.push "BRAILLE" if @student.details.format_braille %>
 				<% formats_array.push "WORD" if @student.details.format_word %>
 				<% formats_array.push "LARGE PRINT" if @student.details.format_large_print %>
-				<% formats_array.push "OTHER" if @student.details.format_other %>
+				<% formats_array.push "OTHER" if @student.details.format_other == "1" %>				
 				<div>
 					<% formats_array.each do | format| %>
 						<span class="tag"><%= format.downcase %></span>
