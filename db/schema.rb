@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723153440) do
+ActiveRecord::Schema.define(version: 20150121185107) do
 
   create_table "access_codes", force: true do |t|
     t.string   "for"
