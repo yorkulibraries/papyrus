@@ -1,48 +1,29 @@
 @import "twitter/bootstrap/bootstrap";
-body { padding-top: 40px;  font-size: 13px; line-height: 18px;}
-@import "twitter/bootstrap/responsive";
 
-/* Set the correct sprite paths */
-/* @iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings");
-   @iconWhiteSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings-white");
-*/
+// Set the correct sprite paths
+@iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
 
-/* Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
-// Note: If you use asset_path() here, your compiled bootstrap_and_overrides.css will not
-//       have the proper paths. So for now we use the absolute path. */
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+@fontAwesomeEotPath: font-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: font-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: font-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: font-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: font-url("fontawesome-webfont.svg#fontawesomeregular");
+
 // Font Awesome
-@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
-@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot?#iefix");
-@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
-@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
-@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
 @import "fontawesome/font-awesome";
 
-@linkColor: #0047B3;
+// Glyphicons
+//@import "twitter/bootstrap/glyphicons.less";
 
-@navbarBackground: 	#900;
-@navbarBackgroundHighlight:  lighten(@navbarBackground, 5%);
-@navbarLinkBackgroundHover:  transparent;
-@navbarText:		@white;
-@navbarLinkColor:		@white;
-@navbarLinkColorHover: 	darken(@navbarLinkColor, 10%);
-
-
-/** NAVBAR **/
-.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus,
-.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle
-	{ color: #fff; }
-
-/** disabling the default table row hover highlighting, it was annoying */
-.table tbody tr:hover td, .table tbody tr:hover th { background: none; }
-.nav-tabs > li.with-icon { margin-top: -2px; }
-
-/** tabs */
-.nav-tabs > .active > a, .nav-tabs > .active > a:hover { background: #fff; }
-.nav-tabs > li > a:hover {   background: #fff; }
-
-/** modal */
-.modal-header { h2 { color: #222; font-size: 18px; line-height: 28px; } }
-
-/** Popover link */
-.popover-link:hover, .popover-link:focus { text-decoration: none !important; }
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @link-color: #ff0000;
