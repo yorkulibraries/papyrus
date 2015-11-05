@@ -49,7 +49,7 @@ class BibRecord
     query = "" if query == nil
 
     # CRUD ISBN search
-    if query =~ /\A\d+\Z/ && (query.strip.length == 10 || query.strip.length == 13)
+    if query =~ /[0-9|x]{8}/i || query =~ /[0-9|x]{10}/i || query =~ /[0-9|x]{13}/i
       type = "type=ISN&"
     else
       type = ""
