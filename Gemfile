@@ -49,7 +49,7 @@ gem "axlsx", "2.0.0"
 gem 'axlsx_rails', "0.1.5"
 
 ## UPLOADING AND MANIPULATING FILES ##
-gem "carrierwave", "1.0.0"
+gem "carrierwave", "0.10.0"
 gem "mini_magick", "3.7.0"
 gem "mime-types", "1.25.1"
 
