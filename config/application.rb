@@ -16,6 +16,10 @@ module Papyrus
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.assets.paths << Rails.root.join("vendor", "assets", "stylesheets")
+    config.assets.paths << Rails.root.join("vendor", "assets", "javascripts")
+
+    config.less.paths << "#{Rails.root}/app/assets/stylesheets"
 
     config.assets.initialize_on_precompile = false
 
@@ -46,7 +50,7 @@ module Papyrus
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    config.less.paths << "#{Rails.root}/app/assets/stylesheets"
+
 
     config.i18n.enforce_available_locales = false
 

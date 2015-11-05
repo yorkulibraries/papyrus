@@ -1,9 +1,11 @@
 /*
+*= require ./vendor/bootstrap.min
+*= require ./vendor/formstone.upload.css
+*= require ./vendor/jquery.autocomplete.css
+*= require_tree ./vendor/jquery-token-input
 *= require bootstrap_and_overrides
 *= require plugin_overrides
-*= require_tree ./plugins
 *= require common
-* require layout
 *= require font-awesome
 *= require papyrus_theme
 *= require_tree ./controllers
