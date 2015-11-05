@@ -1,6 +1,5 @@
 language: ruby
-rvm:
-  - "1.9.3"
+rvm:  
   - "2.0.0"
   - "2.1.5"
 env:
@@ -12,5 +11,5 @@ script:
   - RAILS_ENV=test bundle exec rake test:units
   - RAILS_ENV=test bundle exec rake test:functionals
 before_script:
-  - cp config/travis.database.yml config/database.yml  
+  - cp config/travis.database.yml config/database.yml
   - mysql -e 'create database papyrus_test'
