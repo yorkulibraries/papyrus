@@ -48,7 +48,14 @@ class BibRecord
 
     query = "" if query == nil
 
-    url = "#{PapyrusSettings.vufind_url}?json=true&view=rss&lookfor=#{URI.encode(query.squish)}"
+    # CRUD ISBN search
+    if query =~ /\A\d+\Z/ && (query.strip.length == 10 || query.strip.length == 13)
+      type = "type=ISN&"
+    else
+      type = ""
+    end
+
+    url = "#{PapyrusSettings.vufind_url}?#{type}json=true&view=rss&lookfor=#{URI.encode(query.squish)}"
     results = JSON.load(open(url))
 
     if results.size > 0
