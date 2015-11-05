@@ -1,12 +1,15 @@
 /*
+*
+* VENDOR CSS
+*
 *= require ./vendor/bootstrap.min
 *= require ./vendor/formstone.upload.css
 *= require ./vendor/jquery.autocomplete.css
 *= require_tree ./vendor/jquery-token-input
 *= require bootstrap_and_overrides
-*= require plugin_overrides
-*= require common
 *= require font-awesome
-*= require papyrus_theme
-*= require_tree ./controllers
+*
+* THEME - BOOTSTRAP3
+*
+*= require themes/bootstrap3/base_theme.css
 */

@@ -30,7 +30,7 @@ gem 'jquery-ui-rails', "5.0.5"
 gem 'twitter-bootstrap-rails', "3.2.0"
 gem "less-rails", "2.6.0"
 gem "simple_form", "3.1.0"
-gem 'font-awesome-less', "4.0.2"
+gem "font-awesome-rails", '4.4.0'
 gem "flash_cookie_session", "1.1.6"
 
 ## TOOLS AND UTILITIES ##
