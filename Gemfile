@@ -24,7 +24,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', "3.0.4"
-gem 'jquery-ui-rails', "4.2.0"
+gem 'jquery-ui-rails', "5.0.5"
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
 gem 'twitter-bootstrap-rails', "2.2.8"
@@ -82,6 +82,6 @@ group :development, :test do
 
   gem 'spring', "1.3.6"
   gem "ruby-prof"
-  gem "turn"
+  #gem "turn", "0.9.7"
 
 end

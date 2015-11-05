@@ -10,7 +10,7 @@ class StudentMailerTest < ActionMailer::TestCase
     message = "Some Unique Student Message"
     sender = create(:user, email: "sender@sender.com")
 
-    email = StudentMailer.notification_email(student, sender, message).deliver
+    email = StudentMailer.notification_email(student, sender, message).deliver_now
 
     # Test delivery
     assert !ActionMailer::Base.deliveries.empty?
@@ -27,7 +27,7 @@ class StudentMailerTest < ActionMailer::TestCase
     student = create(:student, email: "whatever@whatever.com")
     sender = create(:user, email: "nothing@matters.com")
 
-    email = StudentMailer.welcome_email(student, sender).deliver
+    email = StudentMailer.welcome_email(student, sender).deliver_now
 
     # Test delivery
     assert !ActionMailer::Base.deliveries.empty?
@@ -43,7 +43,7 @@ class StudentMailerTest < ActionMailer::TestCase
     student = create(:student, email: "whatever@whatever.com")
     items = create_list(:item, 3)
 
-    email = StudentMailer.items_assigned_email(student, items).deliver
+    email = StudentMailer.items_assigned_email(student, items).deliver_now
 
     # Test delivery
     assert !ActionMailer::Base.deliveries.empty?
@@ -58,7 +58,7 @@ class StudentMailerTest < ActionMailer::TestCase
     student = create(:student, email: "whatever@whatever.com")
     items = create_list(:item, 1, title: "Test")
 
-    email = StudentMailer.items_assigned_email(student, items).deliver
+    email = StudentMailer.items_assigned_email(student, items).deliver_now
 
     assert_equal PapyrusSettings.email_item_assigned_subject, email.subject
   end

@@ -18,7 +18,7 @@ class StudentsController < ApplicationController
     if params[:students]
       params[:students].each do |id|
         student = Student.find(id)
-        StudentMailer.notification_email(student, current_user, params[:message]).deliver
+        StudentMailer.notification_email(student, current_user, params[:message]).deliver_later
         student.audit_comment = "Sent notification email"
         student.save(validate: false)
       end
@@ -121,7 +121,7 @@ class StudentsController < ApplicationController
   def send_welcome_email
     @student = Student.find(params[:id])
     @student.audit_comment = "Sent welcome email."
-    StudentMailer.welcome_email(@student, current_user).deliver
+    StudentMailer.welcome_email(@student, current_user).deliver_later
     @student.email_sent_at = Time.zone.now
     @student.save!
 

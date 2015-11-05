@@ -4,17 +4,14 @@ require 'rails/test_help'
 include ActionDispatch::TestProcess
 
 
-begin
-  require 'turn/autorun'
-  Turn.config.format = :progress
-rescue LoadError
-  puts 'Install the Turn gem for prettier test output.'
-end
+#begin
+  #require 'turn/autorun'
+  #Turn.config.format = :progress
+#rescue LoadError
+  #puts 'Install the Turn gem for prettier test output.'
+#end
 
-# Test::Unit
-class Test::Unit::TestCase
-  #include ActionDispatch::TestProcess
-end
+include ActionDispatch::TestProcess
 
 
 class ActiveSupport::TestCase

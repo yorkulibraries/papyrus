@@ -71,7 +71,7 @@ namespace :import do
       status[:created].each do |id|
 
         student = Student.find(id)
-        StudentMailer.welcome_email(student, sender).deliver
+        StudentMailer.welcome_email(student, sender).deliver_later
         report "Mail sent to #{student.name} by #{sender.name}"
       end
 
