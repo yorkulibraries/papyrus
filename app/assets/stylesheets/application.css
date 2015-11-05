@@ -1,8 +1,10 @@
 /*
-*= require_tree ./plugins
 *= require bootstrap_and_overrides
 *= require plugin_overrides
+*= require_tree ./plugins
 *= require common
-*= require layout
+* require layout
+*= require font-awesome
+*= require papyrus_theme
 *= require_tree ./controllers
 */
