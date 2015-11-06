@@ -1,0 +1,63 @@
+/** LAYOUT AND BASIC OVERRIDES */
+
+body {
+  background-color: #fefefe;
+  color: #767676;
+  font-family: "Helvetica Neue",Arial,sans-serif; 
+
+}
+
+/** CONTENT **/
+#page-wrapper {
+  border-left: 2px solid #e5e5e5;
+  background-color: #f3f3f3;
+}
+
+/** HEADER */
+.page-header {
+  margin: 0 0 10px;
+  h1 { margin: 0; font-size: 28px; }
+}
+
+/** NAVIGATION **/
+nav.navbar-red {
+  background-color: #4F0101;
+  border-color: #280000;
+  color: #fff;
+
+  .navbar-toggle { border-color: #fff; }
+  .navbar-brand { color: #fff; }
+  > .navbar-nav > li > a { color: #fff; }
+}
+.navbar .side-nav {
+  background-color: #fefefe;
+
+  li > a {
+    border-bottom: 1px solid #e5e5e5;
+    color: #767676;
+    display: block;
+    height: 50px;
+    padding: 15px;
+
+    i.fa {
+      border-right: 1px solid #e5e5e5;
+      display: block;
+      float: left;
+      height: 50px;
+      line-height: 50px;
+      margin: -15px 10px -15px -15px;
+      position: relative;
+      text-align: center;
+      width: 50px;
+    }
+  }
+
+  li > a:hover, li > a:focus, li.active > a, li.active > a:hover, li.active > a:focus {
+    background-color: #f1f1f1 !important;;
+    color: #767676;
+
+    .fa { background-color: #23ae89; color: #fff; }
+  }
+
+
+}

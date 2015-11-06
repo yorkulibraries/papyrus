@@ -1,0 +1,28 @@
+.panel {
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+
+
+  .panel-heading {
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+    padding: 10px 15px;
+  }
+
+
+
+  &.panel-default {
+    border-color: #e9e9e9;
+
+    > .panel-heading {
+       background-color: #f6f6f6;
+       border-color: #e9e9e9;
+       color: #767676;
+   }
+  }
+}

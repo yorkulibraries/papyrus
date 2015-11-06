@@ -44,27 +44,29 @@
     <div id="page-wrapper">
       <div class="container-fluid">
         <!-- Page Heading -->
+        <% if show_title? || content_for?(:title_html) %>
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">
-                    Dashboard <small>Statistics Overview</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-dashboard"></i> Dashboard
-                    </li>
-                </ol>
+                <div class="page-header">
+                  <%= content_tag :h1, yield(:title) if !content_for?(:title_html) %>
+                  <%= yield (:title_html) if content_for?(:title_html)%>
+                </div>
             </div>
         </div>
+        <% end %>
         <!-- /.row -->
 
         <div class="row">
             <div class="col-lg-12">
+                <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
+                  <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement'>
+                    <%= announcement.message %>
+                    <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
+                     &times;
+                    <% end %>
+                  </div>
+                <% end %>
                 <%= bootstrap_flash %>
-                <div class="alert alert-info alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
-                </div>
             </div>
         </div>
         <!-- /.row -->

@@ -11,5 +11,7 @@
 *
 * THEME - BOOTSTRAP3
 *
-*= require themes/bootstrap3/base_theme.css
+*= require themes/bootstrap3/base_theme
+*= require themes/bootstrap3/layout
+*= require themes/bootstrap3/components
 */
