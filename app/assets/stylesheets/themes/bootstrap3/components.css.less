@@ -1,3 +1,4 @@
+/** BASIC PANEL **/
 .panel {
   background-color: #fff;
   border: 1px solid transparent;
@@ -12,9 +13,19 @@
     border-top-left-radius: 1px;
     border-top-right-radius: 1px;
     padding: 10px 15px;
+
+    strong {  font-weight: 500; }
   }
 
+  &.panel-info {
+    border-color: #d0f2f7;
 
+    > .panel-heading {
+      background-color: #eef8fc;
+      border-color: #d0f2f7;
+      color: #26929c;
+    }
+  }
 
   &.panel-default {
     border-color: #e9e9e9;
@@ -24,5 +35,42 @@
        border-color: #e9e9e9;
        color: #767676;
    }
+  }
+}
+
+/** TABLE IN PANEL **/
+.panel .table  {
+  margin-bottom: 10px;
+
+  tr > th {
+    border-top: none !important;
+    border-bottom: 2px solid #ddd;
+    vertical-align: bottom;
+    line-height: 1.42857;
+    padding: 10px;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  tr > td {
+    border-top: 1px solid #ddd;
+    line-height: 1.42857;
+    padding: 10px;
+    vertical-align: top;
+  }
+}
+
+/** LIST GROUP IN PANEL **/
+.panel .list-group {
+  margin-bottom: 0;
+
+  .list-group-item {
+    border-radius: 0;
+    border-left-width: 0 ; border-right-width: 0;
+    font-weight: 300;
+
+    &:first-child { border-top-width: 0; }
+
+    .list-group-item-text i { color: #111; }
   }
 }

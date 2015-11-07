@@ -39,4 +39,17 @@ module LayoutHelper
          yield block
      end
   end
+
+  def panel(title:, icon: 'th', style: 'default', &block)
+    icon_tag = content_tag(:i, "", class: "fa fa-#{icon}")
+    title_tag = content_tag(:strong, icon_tag + " #{title}")
+
+    heading_div = content_tag(:div, title_tag, class: "panel-heading")
+    body_div = content_tag :div, class: "panel-body" do
+      yield block
+    end
+
+    content_tag :div, heading_div + body_div, class: "panel panel-#{style}"
+
+  end
 end

@@ -1,19 +1,29 @@
-<div class="search-box">
+<div class="search-box row">
 	<form action="<%= search_items_path(type: params[:type]) %>" id="omni_search_form">
-
-			<div class="sources">
-				<a href="<%= search_items_path %>" class="btn <%= "active" if @search_results == "local" %> search_items_button">Papyrus</a>
-				<a href="<%= search_items_path(type: BibRecord::VUFIND) %>" class="btn <%= "active" if @search_results == BibRecord::VUFIND %> search_items_button">
-					<%= bib_search_vufind_label %>
-				</a>
-				<a href="<%= search_items_path(type: BibRecord::WORLDCAT) %>" class="btn <%= "active" if @search_results == BibRecord::WORLDCAT %> search_items_button">
-					<%= bib_search_worldcat_label %>
-				</a>
+		<div class="col-sm-4 col-xs-4">
+			<div class="input-group">
+        <span class="input-group-addon">@</span>
+        <input type="text" placeholder="Search By Title, Author, Unique ID, ISBN" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
 			</div>
-			<div class="search-field input-prepend">
-				<span class="add-on">	<i class="icon-search"></i></span>
-				<input type="text" name="q" value="<%= params[:q].try(:strip) %>" class="search-input xinput-block-level" placeholder="Search By Title, Author, Unique ID, ISBN"/>
-				<button class="btn hidden-phone" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
-			</div>
+		</div>
+		<div class="col-sm-4 col-xs-4">
+			<a href="<%= search_items_path %>" class="btn btn-default <%= "disabled" if @search_results == "local" %> search_items_button">Papyrus</a>
+			<a href="<%= search_items_path(type: BibRecord::VUFIND) %>" class="btn btn-default  <%= "disabled" if @search_results == BibRecord::VUFIND %> search_items_button">
+				<%= bib_search_vufind_label %>
+			</a>
+			<a href="<%= search_items_path(type: BibRecord::WORLDCAT) %>" class="btn btn-default <%= "disabled" if @search_results == BibRecord::WORLDCAT %> search_items_button">
+				<%= bib_search_worldcat_label %>
+			</a>
+		</div>
+		<div class="col-sm-4 col-xs-4 results-info">
+			<% if  @search_results == "local" %>
+				Showing <%= @items.count%> / <%= " #{@items.total_count}" if @items %> items
+			<% elsif @search_results == BibRecord::VUFIND %>
+				Showing <%= " #{@docs.count}" if @docs %> closest matches
+			<% elsif @search_results == BibRecord::WORLDCAT %>
+				Displaying <%= " #{@docs.count}" if @docs %> closest matches
+			<% end %>
+		</div>
 	</form>
+
 </div>

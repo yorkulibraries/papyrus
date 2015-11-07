@@ -1,0 +1,179 @@
+/** FORM CLASSES **/
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+    background-color: #fff;
+    border: 1px solid #cbd5dd; border-radius: 2px;
+    box-shadow: none;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+
+    &:focus { box-shadow: none; border-color: #1c7ebb; }
+}
+
+/** HTML TAGS **/
+
+.radio, .checkbox {
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  position: relative;
+
+  label {
+    cursor: pointer;
+    font-weight: normal;
+    margin-bottom: 0;
+    min-height: 20px;
+    padding-left: 20px;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    margin-left: -20px;
+    position: absolute;
+    line-height: normal;
+  }
+}
+
+
+label {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    max-width: 100%;
+}
+
+input {
+  margin: 0;
+
+  .input-primary { border-color: #1c7ebb; &:focus { border-color: #1c7ebb; } }
+  .input-info {  border-color: #2ec1cc; &:focus { border-color: #2ec1cc; } }
+  .input-success { border-color: #23ae89; &:focus { border-color: #23ae89; } }
+  .input-warning { border-color: #ffb61c; &:focus { border-color: #ffb61c; } }
+  .input-danger { border-color: #e94b3b; &:focus { border-color: #e94b3b; } }
+}
+
+/** BUTTONS **/
+
+.btn {
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857;
+  margin-bottom: 0;
+  padding: 6px 12px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &.btn-default {
+    background-color: #fff; border-color: #ccc; color: #333;
+
+    &:hover, &:focus, &.focus, &:active, &.active {
+      background-color: #e6e6e6; border-color: #adadad; color: #333;
+    }
+
+    &.disabled, &.disabled:hover, &.disabled:focus {
+      background-color: #fff; border-color: #ccc;
+    }
+
+    .badge { background-color: #333; color: #fff; }
+  }
+
+  &.btn-primary {
+    background-color: #1c7ebb; border-color: #196fa5; color: #fff;
+
+    &:hover, &:focus, &.focus, &:active, &.active {
+      background-color: #15608f; border-color: #114b70; color: #fff;
+    }
+
+    &.disabled, &.disabled:hover, &.disabled:focus {
+      background-color: #1c7ebb; border-color: #196fa5;
+    }
+
+    .badge { background-color: #fff; color: #1c7ebb; }
+  }
+
+  &.btn-success {
+    background-color: #23ae89; border-color: #1f9978; color: #fff;
+
+    &:hover, &:focus, &.focus, &:active, &.active {
+      background-color: #1a8468; border-color: #146650; color: #fff;
+    }
+
+    &.disabled, &.disabled:hover, &.disabled:focus {
+      background-color: #23ae89; border-color: #1f9978;
+    }
+
+    .badge { background-color: #fff; color: #23ae89; }
+  }
+
+  &.btn-info {
+    background-color: #2ec1cc; border-color: #29adb7; color: #fff;
+
+    &:hover, &:focus, &.focus, &:active, &.active {
+      background-color: #259aa2; border-color: #1e7e85; color: #fff;
+    }
+
+    &.disabled, &.disabled:hover, &.disabled:focus {
+      background-color: #2ec1cc; border-color: #29adb7;
+    }
+
+    .badge { background-color: #fff; color: #2ec1cc; }
+  }
+
+  &.btn-warning {
+    background-color: #ffb61c; border-color: #ffae02; color: #fff;
+
+    &:hover, &:focus, &.focus, &:active, &.active {
+      background-color: #e89d00; border-color: #c48500; color: #fff;
+    }
+
+    &.disabled, &.disabled:hover, &.disabled:focus {
+      background-color: #ffb61c; border-color: #ffae02;
+    }
+
+    .badge { background-color: #fff; color: #ffb61c; }
+  }
+
+  &.btn-danger {
+    background-color: #e94b3b;
+    border-color: #e63624;
+    color: #fff;
+
+    &:hover, &:focus, &.focus, &:active, &.active {
+      background-color: #e89d00; border-color: #b92415; color: #fff;
+    }
+
+    &.disabled, &.disabled:hover, &.disabled:focus {
+      background-color: #e94b3b; border-color: #e63624;
+    }
+
+    .badge { background-color: #fff; color: #e94b3b; }
+  }
+
+  &.btn-link {
+    border-radius: 0; color: #333; font-weight: normal;
+
+    &:hover, &:focus, &.focus, &:active, &.active {
+      background-color: transparent; border-color: none; box-shadow: none; color: #0d0d0d; text-decoration: underline;
+    }
+
+    &.disabled, &.disabled:hover, &.disabled:focus {
+      color: #777; text-decoration: none;
+    }
+
+    .badge { background-color: #333; color: #fff; }
+  }
+}
