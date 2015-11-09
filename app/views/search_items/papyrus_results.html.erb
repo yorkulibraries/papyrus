@@ -8,7 +8,7 @@
     <th><i class="fa fa-users"></i></th>
     <th><i class="fa fa-file"></i></th>
   </tr>
-  <% @items.each_with_index do |item, index| %>
-    <%= render "items/item_row", item: item %>
+  <% @results.each_with_index do |item, index| %>
+    <%= render partial: "items/item", locals: { item: item, show: "tr" } %>
   <% end %>
 </table>

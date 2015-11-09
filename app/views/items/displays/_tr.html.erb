@@ -1,0 +1,20 @@
+<tr class="item" id="item_<%= item.id %>">
+	<td>
+		<%= link_to item.title, item_path(item) %>
+	</td>
+	<td>
+		<%= format_field item.author %>
+	</td>
+	<td class="hidden-phone">
+		<%= format_field item.edition %>
+	</td>
+	<td class="hidden-phone">
+		<%= format_field item.isbn %>
+	</td>
+	<td class="hidden-phone">
+		<%= item.students.count %>
+	</td>
+	<td class="hidden-phone">
+		<%= item.attachments.available.count %>
+	</td>
+</tr>

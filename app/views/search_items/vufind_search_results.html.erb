@@ -1,0 +1,74 @@
+<!-- WORLDCAT RESULTS -->
+
+<% unless @results.nil? || @results.size == 0 %>
+  <div class="cat-search-results">
+
+    <% @results.each_with_index do |item, index| %>
+
+    <div class="media">
+      <a href="javascript:;" class="pull-left">
+        <% if item["isbn"] %>
+          <div class="book-cover">
+            <%= image_tag "icons/files/photo.png",
+            data: { isbn: item["isbn"].first.gsub(/[^0-9]+/, ''), size: "large"}, class: "google-bookcover" %>
+          </div>
+        <% else %>
+          <div class="book-cover unavailable">
+            <span class="fa fa-book fa-5x"></span><br/>
+            No Cover Available
+          </div>
+        <% end %>
+
+
+      </a>
+      <div class="media-body">
+          <h4 class="media-heading"><%= format_vufind_field item["title_full"], "Title" %></h4>
+          <ul class="list-unstyled list-info">
+            <li class="ng-binding">
+                <span class="fa fa-user fa-fw"></span>
+                <label>Author</label>
+                <%= format_vufind_field (item["author"] ? item["author"] : item["author2"] ? item["author2"].join(", ") : "") %>
+            </li>
+            <li>
+                <span class="fa fa-print fa-fw"></span>
+                <label>Publisher</label>
+                <%= format_vufind_field item["publisher"] %> <span class="trivial">Published: <%= format_vufind_field item["publishDate"] %></span>
+            </li>
+            <li>
+                <span class="fa fa-tags fa-fw"></span>
+                <label>Subject</label>
+                <%= format_vufind_field item["callnumber-first"], "Subject" %>
+            </li>
+            <li>
+                <span class="fa fa-language fa-fw"></span>
+                <label>Edition + Language</label>
+                <%= format_vufind_field item["edition"], "Edition" %>
+                <span class="trivial">[<%= format_vufind_field item["language"], "Language" %>]</span>
+            </li>
+            <li>
+                <span class="fa fa-barcode fa-fw"></span>
+                <label>ISBN + Call Number</label>
+                <%= format_vufind_field item["isbn"], "ISBN" %> &amp;
+                <%= format_vufind_field item["callnumber"], "Call Number" %>
+            </li>
+            <li>
+                <span class="fa fa-file-text fa-fw"></span>
+                <label>Format + Description</label>
+                <%= format_vufind_field item["format"], "Format" %>
+                <span class="trivial">[<%= format_vufind_field item["physical"], "Description" %>]</span>
+            </li>
+          </ul>
+      </div>
+    </div>
+
+    <% end %>
+
+  </div>
+
+<% else %>
+  <div class="blank-slate">
+    <i class="icon-question-sign"></i>
+    <h1>No Search Terms</h1>
+    <p>Please specify a search term in the search box.</p>
+  </div>
+<% end %>

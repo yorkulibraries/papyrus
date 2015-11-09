@@ -1,2 +1,18 @@
-<h1>SearchItems#index</h1>
-<p>Find me in app/views/search_items/index.html.erb</p>
+<% title "Search Items", false %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Search Items", icon: "book") do %>
+			<%= render partial: "search_items/search_box" %>
+
+			<% if  @search_results == "local" %>
+				<%= render template: "search_items/papyrus_results"%>
+			<% elsif @search_results == BibRecord::VUFIND %>
+				<%= render  template: "search_items/vufind_search_results"%>
+			<% elsif @search_results == BibRecord::WORLDCAT %>
+					<%= render  template: "search_items/worldcat_search_results"%>
+			<% end %>
+
+		<% end %>
+	</div>
+</div>

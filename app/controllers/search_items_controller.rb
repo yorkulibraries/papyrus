@@ -5,16 +5,28 @@ class SearchItemsController < ApplicationController
 
   def index
     @search_results = params[:type] || "local"
+    page_number = params[:page] ||= 1
 
     case params[:type]
     when BibRecord::WORLDCAT
-      search_worldcat(params[:q])
+      @results = search_worldcat(params[:q])
     when BibRecord::VUFIND
-      search_vufind(params[:q])
+      @results = search_vufind(params[:q])
     else
-      search_local(params[:q])
+      @results = search_local(params[:q])
     end
 
+
+    respond_to do |format|
+
+      if @search_results == "local"
+        format.json { render json:  @results.map { |item| {id: item.id, name: "#{item.title}   <span>#{item.item_type}</span>" } } }
+      else
+        format.json { render json:  ActiveSupport::JSON.encode(@docs, {} ) }
+      end
+
+      format.html
+    end
 
   end
 
@@ -41,10 +53,7 @@ class SearchItemsController < ApplicationController
 
     @docs = bib_record.search_items(query, BibRecord::VUFIND)
 
-    respond_to do |format|
-      format.json { render json: ActiveSupport::JSON.encode(@docs, {} ) }
-      format.html { render template: "items/index" }
-    end
+    return @docs
   end
 
   def search_worldcat(query)
@@ -54,10 +63,7 @@ class SearchItemsController < ApplicationController
 
     @docs = bib_record.search_items(query, BibRecord::WORLDCAT)
 
-    respond_to do |format|
-      format.json { render json:  ActiveSupport::JSON.encode(@docs, {} ) }
-      format.html { render template: "items/index" }
-    end
+    return @docs
   end
 
   def search_local(query)
@@ -75,10 +81,7 @@ class SearchItemsController < ApplicationController
 
     @items = @items.page page_number
 
-    respond_to do |format|
-      format.json { render json:  @items.map { |item| {id: item.id, name: "#{item.title}   <span>#{item.item_type}</span>" } } }
-      format.html { render template: "items/index" }
-    end
+    return @items
   end
 
 

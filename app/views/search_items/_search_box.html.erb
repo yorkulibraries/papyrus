@@ -2,7 +2,7 @@
 	<form action="<%= search_items_path(type: params[:type]) %>" id="omni_search_form">
 		<div class="col-sm-4 col-xs-4">
 			<div class="input-group">
-        <span class="input-group-addon">@</span>
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
         <input type="text" placeholder="Search By Title, Author, Unique ID, ISBN" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
 			</div>
 		</div>
@@ -17,11 +17,11 @@
 		</div>
 		<div class="col-sm-4 col-xs-4 results-info">
 			<% if  @search_results == "local" %>
-				Showing <%= @items.count%> / <%= " #{@items.total_count}" if @items %> items
+				Showing <%= @results.count%> / <%= " #{@results.total_count}" %> items
 			<% elsif @search_results == BibRecord::VUFIND %>
-				Showing <%= " #{@docs.count}" if @docs %> closest matches
+				Showing <%= " #{@results.count}" if @results %> closest matches
 			<% elsif @search_results == BibRecord::WORLDCAT %>
-				Displaying <%= " #{@docs.count}" if @docs %> closest matches
+				Displaying <%= " #{@results.count}" if @results %> closest matches
 			<% end %>
 		</div>
 	</form>

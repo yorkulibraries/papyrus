@@ -26,6 +26,12 @@
               </li>
               <% end %>
 
+              <% if can? :read, Item %>
+              <li class="<%= "active" if controller_name == "search_items" %>">
+                  <a href="<%= search_items_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
+              </li>
+              <% end %>
+
               <% if can? :read, Student %>
     					<li class="<%= "active" if controller_name == "students" && action_name !="new"%>">
     						<a href="<%= students_path %>"><i class="fa fa-fw fa-users"></i> Students</a>
@@ -40,7 +46,7 @@
 
               <% if can? :read, AcquisitionRequest %>
     						<li class="<%= "active" if controller_name == "acquisition_requests" %>">
-    							<a href="<%= acquisition_requests_path %>"><i class="fa fa-fw fa-list"></i> Acquisitions</a>
+    							<a href="<%= acquisition_requests_path %>"><i class="fa fa-fw fa-shopping-cart"></i> Acquisitions</a>
     						</li>
     					<% end %>
 

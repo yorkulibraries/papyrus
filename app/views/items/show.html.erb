@@ -4,8 +4,8 @@
 	<h1>Item Details</h1>
 <% end%>
 
-
-
+<%= render partial: "item", locals: { show: "div", item: @item } %>
+<hr/>
 <% sidebar do %>
 
 	<h3>Students With Access</h3>
