@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Search Items", icon: "book") do %>
+		<%= panel(title: "Search #{@search_results.humanize } Items", icon: "book") do %>
 			<%= render partial: "search_items/search_box" %>
 
 			<% if  @search_results == "local" %>

@@ -22,7 +22,14 @@
 
       </a>
       <div class="media-body">
-          <h4 class="media-heading"><%= format_vufind_field item["title_full"], "Title" %></h4>
+          <h4 class="media-heading">
+            <span class="badge badge-success">
+              <a href="<%= new_item_path %>?bib_record_id=<%= item["id"] %>" data-confirm="Are you sure?" class="hidden-phone">
+								<i class="fa fa-plus-square fa-fw "></i> item 
+							</a>
+            </span>
+            <%= format_vufind_field item["title_full"], "Title" %>
+          </h4>
           <ul class="list-unstyled list-info">
             <li class="ng-binding">
                 <span class="fa fa-user fa-fw"></span>

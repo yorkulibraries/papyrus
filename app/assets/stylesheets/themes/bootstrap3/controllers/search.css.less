@@ -10,7 +10,17 @@
 .cat-search-results {
   margin-top: 20px;
 
-  .media { margin-bottom: 30px; padding-bottom: 0px; border-bottom: 2px solid #eee; }
+  .media {
+    margin-bottom: 30px; padding-bottom: 0px; border-bottom: 2px solid #eee;
+    .media-heading .badge {
+      background-color: #1EA075; float: right;
+      font-size: 11px; font-weight: 500;
+      &:hover { background-color: #23AE89;  }
+      a { color: #fff; text-transform: uppercase; letter-spacing: 1px;
+        &:hover { text-decoration: none; color: #f1f1f1; }
+      }
+    }
+  }
 
   .book-cover {
       width: 128px;
@@ -27,7 +37,7 @@
   .list-info li {
     border-bottom: 1px solid #eee;
     padding: 5px;
-    font-size: 12px;
+    font-size: 13px;
     &:last-child { border-bottom: none; }
 
     .fa { color: #1c7ebb; }
