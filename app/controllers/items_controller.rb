@@ -87,7 +87,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @courses_grouped = @item.courses.group_by { |c| c.term.name }
+    @courses_grouped = @item.courses.group_by { |c| { name: c.term.name, id: c.term.id } }
   end
 
   def new

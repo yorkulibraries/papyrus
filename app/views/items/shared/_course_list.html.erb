@@ -1,7 +1,7 @@
 <%= panel(title: "Courses", icon: "university",  icon_class: "fa-2x", title_class: "panel-top text-center", styles:"panel-warning") do %>
   <ul class="list-unstyled list-info" id="courses">
     <% courses_grouped.each do |term, courses| %>
-    <li><label class="term"><%= term %></label></li>
+    <li id="term_<%= term[:id] %>"><label class="term"><%= term[:name] %></label></li>
       <% courses.each do |course|%>
         <%= render course, show: "li" %>
       <% end %>

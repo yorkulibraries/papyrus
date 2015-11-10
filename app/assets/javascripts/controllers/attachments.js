@@ -1,6 +1,8 @@
 var $filequeue;
 
 $(document).ready(function() {
+
+
 	$filequeue = $(".formstone_upload_queue ol");
 	$(".formstone_upload").upload({
 			action: $(".formstone_upload").data("url"),
@@ -17,7 +19,7 @@ $(document).ready(function() {
 
 });
 
-
+/*** FORMSTONE UPLOAD EVENT HANDLES **/
 function onStart(e,  files) {
 	var html = '';
 	for (var i = 0; i < files.length; i++) {

@@ -25,6 +25,11 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$("a[data-toggle-visible]").click(function(){
+		var toggle = $(this).data("toggle-visible");	
+		$(toggle).toggleClass("hide");return false;
+	});
+
 
 
 	$('.submittable').click(function() {
