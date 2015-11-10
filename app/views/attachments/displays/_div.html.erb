@@ -1,65 +1,68 @@
-<div class="attachment" id="attachment_<%= attachment.id %>">
-	<div class="row">
-		<div class="span attachment-icon hidden-phone">
-			<% if attachment.is_url? %>
-				<a href="<%= attachment.url %>">
-					<%= image_tag("icons/files/web_file.png", alt: "URL") %>
-				</a>
-			<% else %>
-				<a href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>">
-		    	<%= image_tag("icons/files/#{attachment.file.file.extension.downcase}_file.png", alt: "#{attachment.file.file.extension.downcase}") %>
-				</a>
-			<% end %>
-		</div>
-
+<div class="attachment" id="attachment_<%= attachment.id %>" data-id="<%= attachment.id %>">
+	<div class="media">
 		<% if attachment.is_url? %>
-			<div class="span4 attachment-details">
-				<h4>
-					<%= attachment.name %>
-					<span class="weak"><%= "Access Code Required" if attachment.access_code_required? %></span>
-				</h4>
-				<p title="<%= attachment.url %>">
-					<%= truncate(attachment.url, length: 35) %>
-					<span class="weak hidden-phone">Updated <%= time_ago_in_words attachment.updated_at %></abbr> ago by <%= attachment.user.name %></span>
-				</p>
-			</div>
+			<a href="<%= attachment.url %>" class="pull-left icon icon-url">
+				<i class="fa fa-link fa-2x fa-fw"></i> URL
+			</a>
 		<% else %>
-			<div class="span4 attachment-details">
-				<h4>
-					<a href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>"><%= attachment.name %></a>
-					<span class="weak"><%= number_to_human_size attachment.file.file.size %></span>
-				</h4>
-				<p>Updated <abbr title="<%= attachment.created_at.strftime("%b %e %Y, %l:%M %p") %>">
-					<%= time_ago_in_words attachment.updated_at %></abbr> ago by <%= attachment.user.name %></p>
-			</div>
+			<a class="icon pull-left icon-<%= attachment.file.file.extension.downcase %>" href="<%= get_file_item_attachment_url(attachment.item, attachment) %>">
+				<i class="fa fa-file fa-2x fa-fw"></i>
+				<%= attachment.file.file.extension.upcase %>
+			</a>
 		<% end %>
-		<div class="span2 attachment-actions pull-right">
 
+
+		<div class="pull-right actions">
 			<% if attachment.is_url? %>
-				<a class="action" href="<%= attachment.url %>">
-					<i class="icon-link"></i> Visit URL
+				<a class="btn btn-default btn-sm" href="<%= attachment.url %>" title="Go to this URL">
+					<i class="fa fa-link"></i>
 				</a>
 			<% else %>
-				<a class="action" href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>">
-					<i class="icon-download"></i> Download File
+				<a class="btn btn-sm btn-default " title="Download this file"
+						href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>">
+					<i class="fa fa-download"></i>
 				</a>
 			<% end %>
 
 			<% if can? :update, Attachment %>
-				<a class="action small hidden-phone" href="<%= edit_item_attachment_path(attachment.item, attachment) %>">
-					<i class="icon-edit"></i> Update
+				<a class="btn btn-sm btn-default hidden-phone" title="Edit File or URL"
+						href="<%= edit_item_attachment_path(attachment.item, attachment) %>">
+					<i class="fa fa-edit"></i>
 				</a>
 			<% end %>
 
 			<%  if can? :destroy, Attachment %>
-				<%= link_to [attachment.item, attachment], confirm: 'Are you sure?',method: :delete, remote: true, class: "action small hidden-phone" do %>
-						<i class="icon-trash"></i> Delete
+				<%= link_to [attachment.item, attachment], confirm: 'Are you sure?',method: :delete,
+						remote: true, class: "btn btn-sm btn-default red hidden-phone", title: "Delete this file or URL?" do %>
+						<i class="fa fa-trash"></i>
 				<% end %>
 			<% end %>
 
+			<div class="span2 select-multiple pull-right hide">
+				<input type="checkbox" name="ids[]" value="<%= attachment.id %>"/> Deleted this one?
+			</div>
+
 		</div>
-		<div class="span2 select-multiple pull-right hide">
-			<input type="checkbox" name="ids[]" value="<%= attachment.id %>"/> Deleted this one?
+
+		<div class="media-body">
+
+				<h4 class="media-heading">
+					<% href = attachment.is_url? ? attachment.url : get_file_item_attachment_url(attachment.item, attachment) if  %>
+					<a href="<%= href %> "><%= attachment.name %></a>
+				</h4>
+				<p>Updated <span title="<%= attachment.created_at.strftime("%b %e %Y, %l:%M %p") %>">
+					<%= time_ago_in_words attachment.updated_at %></span> ago by <%= attachment.user.name %>
+					<br/>
+					<% if attachment.is_url? %>
+						<span title="<%= attachment.url %>">	<%= truncate(attachment.url, length: 45) %></span>
+							<span class="text-muted"><%= "Access Code Required" if attachment.access_code_required? %></span>
+						<% else %>
+							<span class="text-muted">File size: <%= number_to_human_size attachment.file.file.size %></span>
+					<% end %>
+				</p>
+
 		</div>
+
+
 	</div>
 </div>
