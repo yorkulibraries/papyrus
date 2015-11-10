@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   def index
     page_number = params[:page] ||= 1
     @search_results = "local"
+
     if params[:order] && params[:order] == "alpha"
       @items = Item.alphabetical.page(page_number)
     else
@@ -86,6 +87,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @courses_grouped = @item.courses.group_by { |c| c.term.name }
   end
 
   def new

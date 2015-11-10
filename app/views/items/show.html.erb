@@ -1,151 +1,17 @@
-<% title @item.title %>
+<% title @item.title, false %>
 
-<% title_html do %>
-	<h1>Item Details</h1>
-<% end%>
+<%= render @item, show: "div", item: @item  %>
 
-<%= render partial: "item", locals: { show: "div", item: @item } %>
-<hr/>
-<% sidebar do %>
-
-	<h3>Students With Access</h3>
-	<% if @item.students.size < 1 %>
-		<p class="alert alert-info">This item has not been assigned to any students</p>
-	<% else %>
-		<p>The following students have been assigned this item.</p>
-	<% end %>
-
-
-	<%= form_tag notify_students_path  do %>
-		<ul class="unstyled">
-			<% @item.students.unique_usernames.each do |student| %>
-				<li>
-					<input class="student_notification" type="checkbox" name="students[]" value="<%= student.id %>">
-					<a href="<%= student_path(student) %>"><%= student.name %></a>
-					<%= link_to withhold_from_student_item_path(@item, :student_id => student.id), data: { confirm: 'Are you sure?' }, :method => :delete, :class => "tooltips close",
-					:rel =>"tooltip",  :title => "Bar the student from accessing this item." do %>
-						&times;
-					<% end %>
-					</li>
-			<% end %>
-			<input type="hidden" name="item" value="<%= @item.id %>"/>
-		</ul>
-
-		<p>
-			<% if @item.students.size > 0 %>
-				<a class="btn btn-small" data-toggle="visibility" href="#send_message"> <i class="icon-bullhorn"></i> Notify</a>
-			<% end %>
-
-			<a class="btn btn-small btn-inverse" data-toggle="modal" href="#assign_students_modal" > <i class="icon-user"></i> Assign To More Students</a>
-		</p>
-
-
-		<% if @item.students.size > 0 %>
-			<div id="send_message" class="well fitted hide">
-				<p><strong>Send a Message</strong></p>
-				<p>Select students to send a notification about this item.</p>
-				<p>Message: <br/><%= text_area_tag 'message', nil, :rows => 8 %></p>
-				<p><%= submit_tag "Send...", :class => "btn" %></p>
-			</div>
-		<% end %>
-
-		<hr/>
-		<p align="center">
-			<%= image_tag "icons/files/photo.png", data: { isbn: isbn_for_image_cover(@item), size: "large"}, class: "google-bookcover" %>
-		</p>
-	<% end %>
-
-
-	<div class="modal hide" id="assign_students_modal">
-    	<div class="modal-header">
-    		<a class="close" data-dismiss="modal">×</a>
-    		<h3>Assign This Item To Students</h3>
-    	</div>
-    	<div class="modal-body">
-	    	<p>Type the name of the student in the box to search for students.</p>
-			<%= form_tag assign_to_students_item_path(@item) do %>
-				<p><input type="text" id="assign-students-list" name="student_ids"/></p>
-				<p>Expires at the end of <br/><%= collection_select(:expires_on, :date, Term.all, :end_date, :name, options ={:prompt => " Never"}, :class =>"terms") %></p>
-				<p><%= submit_tag "Give Access To These Students", :class => "btn" %></p>
-			<% end %>
-	    </div>
-	    <div class="modal-footer">
-	    	<a href="#" class="btn" data-dismiss="modal">Close</a>
-	    </div>
-    </div>
-
-	<script type="text/javascript">
-		$(document).ready(function () {
-		    $("#assign-students-list").tokenInput("<%= search_students_path %>");
-			$("#assign_students_modal").modal({show: false});
-			$(".tooltips").tooltip();
-		});
-	</script>
-
-<% end %>
-
-
-<%= render partial: @item %>
-
-<%= render partial: "items/shared/subnav"%>
-
-<div class="item-extended item">
-
-
-	<section>
-		<h2>Attached Files &amp; URLs
-			<div class="btn-group">
-				<a href="<%= url_for new_item_attachment_path(@item) %>" class="btn btn-small hidden-phone" onclick="$('#upload_form').toggle(); return false;">
-						Upload Files
-				</a>
-				<a href="<%= url_for new_item_attachment_path(@item, url: true) %>" class="btn btn-small" data-remote="true">
-					Add a URL
-				</a>
-			</div>
-
-		</h2>
-
-		<div id="url_form_holder" class="hide well"></div>
-
-		<div id="upload_form" class="hide well">
-			<%= render partial: "attachments/upload_files"%>
+<div class="row item-meta">
+	<div class="col-md-8">
+		<%= render partial: "items/shared/file_list", locals: { item: @item } %>
+	</div>
+	<div class="col-md-4">
+		<div class="students-with-access">
+			<%= render partial: "items/shared/student_list", locals: { item: @item } %>
+		<div>
+		<div class="course-list">
+			<%= render partial: "items/shared/course_list", locals: { item: @item, courses_grouped: @courses_grouped } %>
 		</div>
-
-
-
-		<%= form_tag delete_multiple_item_attachments_path(@item) do %>
-		<div class="attachments">
-			<% if @item.attachments.full_text.available.size > 0 %>
-				<div class="full-text">
-					<h4>Full Text</h4>
-
-					<% @item.attachments.full_text.available.each do |attachment| %>
-						<%= render partial: attachment %>
-					<% end %>
-				</div>
-			<% end %>
-
-			<% @item.attachments.not_full_text.available.each do |attachment| %>
-				<%= render partial: attachment %>
-			<% end %>
-		</div>
-
-		<% if @item.attachments.files.available.size > 0 %>
-			<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-small hidden-phone"><i class="icon-download"></i> Download Zipped</a>
-			<a href="#" class="delete_multiple float-right red"><i class="icon-trash"></i> Delete multiple files</a>
-
-			<div class="float-right">
-				<a href="#" class="submit_delete_multiple red hide"><i class="icon-trash"></i> Delete these files?</a>
-				<a href="#" class="cancel_delete_multiple hide">&times; Cancel</a>
-			</div>
-		<% else %>
-			<div class="well">
-				No File have been uploaded yet. Start by clicking on Upload Files button.
-			</div>
-		<% end %>
-
-		<% #### END OF FORM ###%>
-		<% end %>
-	</section>
-
+	</div>
 </div>

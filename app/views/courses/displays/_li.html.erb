@@ -1,0 +1,11 @@
+<li id="course_<%= course.id %>" data-id="<%= course.id %>">
+  <% if @item %>
+    <%= link_to remove_item_term_course_path(1, course.id, item_id: @item.id),  confirm: 'Are you sure?', :class=> "close", :method => "post" do%>
+      &times;
+    <% end %>
+  <% end %>
+
+  <i class="fa fa-university fa-fw"></i>
+  <label><%= short_course_code(course.code) %></label>
+  <%= course.title %>
+</li>

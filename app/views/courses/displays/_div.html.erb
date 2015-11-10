@@ -1,0 +1,16 @@
+<div class="thumbnail course">
+	<h5 class="title">
+		<%= link_to course.title, edit_term_course_path(course.term, course) %>
+
+		<% unless @term %>
+			<%= course.term.name %>
+		<% end %>
+
+		<% if @item %>
+			<%= link_to remove_item_term_course_path(1, course.id, :item_id => @item.id),  :confirm => 'Are you sure?', :class=> "close", :method => "post" do%>
+				&times;
+			<% end %>
+		<% end %>
+	</h5>
+	<div class="code trivial"><%= course.code %> <span class="trivial float-right"><%= course.items.count %> items</span></div>
+</div>

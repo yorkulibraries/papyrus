@@ -1,0 +1,51 @@
+<%= panel(title: "Students With Access", icon: "users", icon_class: "fa-2x", title_class: "panel-top text-center", styles:"panel-primary") do %>
+
+  <a class="btn btn-sm btn-primary" data-toggle="modal" href="#assign_students_modal">
+    <i class="fa fa-user-plus"></i> Grant Access To Students?</a>
+  <hr/>
+
+
+  <ul class="list-unstyled list-info">
+    <% item.students.unique_usernames.each do |student| %>
+    <li>      
+      <span class="fa fa-user fa-fw"></span>
+      <%= link_to withhold_from_student_item_path(item, student_id: student.id), data: { confirm: 'Are you sure?' }, :method => :delete, :class => "tooltips close",
+      rel: "tooltip",  title: "Bar the student from accessing this item." do %>
+        &times;
+      <% end %>
+      <label><a href="<%= student_path(student) %>"><%= student.name %></a></label>
+    </li>
+    <% end %>
+  </ul>
+
+  <% if item.students.size == 0 %>
+    <p class="text-center">There are no students with access to this item.</p>
+  <% end %>
+<% end %>
+
+
+<div class="modal hide" id="assign_students_modal">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>Assign This Item To Students</h3>
+    </div>
+    <div class="modal-body">
+      <p>Type the name of the student in the box to search for students.</p>
+    <%= form_tag assign_to_students_item_path(@item) do %>
+      <p><input type="text" id="assign-students-list" name="student_ids"/></p>
+      <p>Expires at the end of <br/><%= collection_select(:expires_on, :date, Term.all, :end_date, :name, options ={:prompt => " Never"}, :class =>"terms") %></p>
+      <p><%= submit_tag "Give Access To These Students", :class => "btn" %></p>
+    <% end %>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+      $("#assign-students-list").tokenInput("<%= search_students_path %>");
+    $("#assign_students_modal").modal({show: false});
+    $(".tooltips").tooltip();
+  });
+</script>

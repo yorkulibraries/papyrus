@@ -1,6 +1,6 @@
 module CoursesHelper
 
-  def short_name(code)
+  def short_course_code(code)
     if code
       chunks = code.split("_")
       return "#{chunks[2]} #{chunks[4]}"

@@ -16,7 +16,9 @@
 			</a>
 		</div>
 		<div class="col-sm-4 col-xs-4 results-info">
+
 			<% if  @search_results == "local" %>
+				<% @results = @items if @items %>
 				Showing <%= @results.count%> / <%= " #{@results.total_count}" %> items
 			<% elsif @search_results == BibRecord::VUFIND %>
 				Showing <%= " #{@results.count}" if @results %> closest matches

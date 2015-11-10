@@ -1,33 +1,11 @@
 <% title "Listing all items", false %>
 
-	<div class="row">
-		<div class="col-md-12">
-			<%= panel(title: "Papyrus Items", icon: "book") do %>
-				<%= render partial: "search_items/search_box" %>
-
-				<% if  @search_results == "local" %>
-					<%= render template: "search_items/papyrus_results"%>
-				<% elsif @search_results == BibRecord::VUFIND %>
-					<%= render  template: "items/vufind_results"%>
-				<% elsif @search_results == BibRecord::WORLDCAT %>
-					<%= render  template: "items/worldcat_results"%>
-				<% end %>
-
-			<% end %>
-		</div>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Papyrus Items", icon: "book") do %>
+			<%= render partial: "search_items/search_box" %>
+			<% @results = @items %>
+			<%= render template: "search_items/papyrus_results"%>
+		<% end %>
 	</div>
-
-
-
-
-
-<script type="text/javascript">
-$(document).ready(function(){
-	$(".search_items_button").click(function() {
-		$("#omni_search_form").attr("action", $(this).attr("href"));
-		$("#omni_search_form").submit();
-		return false;
-	});
-});
-
-</script>
+</div>
