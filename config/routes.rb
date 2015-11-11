@@ -108,8 +108,8 @@ Papyrus::Application.routes.draw do
 
   # ITEMS Search
   match "search/items(/:type)" => "search#items", as: "search_items", via: :get,  defaults: { type: "local" }
-  match "search/students(/:type)" => "search#students", as: "search_students", via: :get,  defaults: { type: "active" }
-  
+  match "search/students(/:type)" => "search#students", as: "ssearch_students", via: :get,  defaults: { type: "active" }
+
 
   # Root
   root :to => "home#index"

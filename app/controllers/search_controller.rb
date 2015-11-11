@@ -6,6 +6,11 @@ class SearchController < ApplicationController
   def index
   end
 
+
+  def students
+
+  end
+
   def items
     @search_results = params[:type] || "local"
     page_number = params[:page] ||= 1
