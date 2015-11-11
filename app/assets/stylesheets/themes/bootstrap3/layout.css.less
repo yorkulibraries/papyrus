@@ -3,7 +3,7 @@
 body {
   background-color: #fefefe;
   color: #767676;
-  font-family: "Helvetica Neue",Arial,sans-serif; 
+  font-family: "Helvetica Neue",Arial,sans-serif;
 
 }
 
@@ -28,7 +28,18 @@ nav.navbar-red {
   .navbar-toggle { border-color: #fff; }
   .navbar-brand { color: #fff; }
   > .navbar-nav > li > a { color: #fff; }
+
+  > .navbar-nav > li.active > a,
+  > .navbar-nav > li.active > a:focus,
+  > .navbar-nav > li.active > a:hover  { background-color: #761414; }
+
+  > .navbar-nav > li.open > a, > .navbar-nav > li.open > a:hover, > .navbar-nav > li.open > a:focus,
+  > .navbar-nav > li > a:hover, > .navbar-nav > li > a:focus,
+  > .navbar-nav > li > a:active { background-color: #2E0000; }
+
+
 }
+
 .navbar .side-nav {
   background-color: #fefefe;
 

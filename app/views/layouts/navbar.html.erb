@@ -11,7 +11,7 @@
       </div>
       <!-- Top Menu Items -->
 
-      <%= render template: "layouts/admin_menu" %>
+      <%= render template: "layouts/top_menu" %>
 
       <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -21,23 +21,19 @@
               </li>
 
               <% if can? :read, Item %>
-              <li class="<%= "active" if controller_name == "items" && action_name !="new"%>">
+              <li class="<%= "active" if controller_name == "items"%>">
                   <a href="<%= items_path %>"><i class="fa fa-fw fa-book"></i> Items</a>
               </li>
               <% end %>
 
-              <% if can? :read, Item %>
-              <li class="<%= "active" if controller_name == "search_items" %>">
-                  <a href="<%= search_items_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
-              </li>
-              <% end %>
 
               <% if can? :read, Student %>
-    					<li class="<%= "active" if controller_name == "students" && action_name !="new"%>">
+    					<li class="<%= "active" if controller_name == "students" %>">
     						<a href="<%= students_path %>"><i class="fa fa-fw fa-users"></i> Students</a>
     					</li>
     					<% end %>
 
+              
               <% if can? :read, Term %>
               <li class="<%= "active" if controller_name == "terms"%>">
                 <a href="<%= terms_path %>"><i class="fa fa-fw fa-university"></i> Terms &amp; Courses</a>
@@ -49,6 +45,12 @@
     							<a href="<%= acquisition_requests_path %>"><i class="fa fa-fw fa-shopping-cart"></i> Acquisitions</a>
     						</li>
     					<% end %>
+
+              <% if can? :read, Item %>
+              <li class="<%= "active" if controller_name == "search_items" %>">
+                  <a href="<%= search_items_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
+              </li>
+              <% end %>
 
           </ul>
       </div>  <!-- /.navbar-collapse -->

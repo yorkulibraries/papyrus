@@ -1,33 +1,37 @@
-<% title "Edit Student" %>
-<% title_html do %>
-	<h1>Update Student Registration</h1>
-<% end %>
+<% title "Update Student Information", false %>
 
-<% sidebar do %>
-	<h3>Update Student Details</h3>
-	<p>You can update student registration details on this screen.</p>
-	<p class="alert alert-info"><span class="strong">Remember:</span> All fields must be filled in.</p>
 
-	<%  if !@student.new_record? && can?(:reactivate, Student) %>		
-		<p><strong>Deactivate or Reactivate</strong></p>
-		<p>You can deactivate a student. This does not delete the student record, just disables their ability to access Papyrus and hides the record from general view.</p>
-		
-		<% if ! @student.inactive? %>
-			<p><%= link_to @student, confirm: 'Are you sure?', method: :delete, class: 'red' do %>	
-				<i class="icon-lock"></i> Deactivate Student
-			<% end %></p>
-		<% else %>
-			<p>
-				<%= link_to reactivate_student_path(@student), confirm: 'Are you sure?', class: 'red' do %>	
-				<i class="icon-lock"></i> Reactivate Student
-				<% end %>
-			</p>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Update Student Information", icon: "edit") do %>
+			<%= render 'form' %>
 		<% end %>
-		
-		<p class="alert alert-warning"><span class="strong">Warning:</span> This action can be reversed.</p>	
-	<% end %>
-	
-	
-<% end %>
+	</div>
+</div>
 
-<%= render 'form' %>
+
+
+<%  if !@student.new_record? && can?(:reactivate, Student) %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Deactivate or Reactivate Student", icon: "lock", styles:"panel-danger") do %>
+			<p><strong>Deactivate or Reactivate</strong></p>
+			<p>You can deactivate a student. This does not delete the student record, just disables their ability to access Papyrus and hides the record from general view.</p>
+
+			<% if ! @student.inactive? %>
+				<p><%= link_to @student, confirm: 'Are you sure?', method: :delete, class: 'btn btn-lg btn-warning' do %>
+					<i class="fa fa-lock"></i> Deactivate Student
+				<% end %></p>
+			<% else %>
+				<p>
+					<%= link_to reactivate_student_path(@student), confirm: 'Are you sure?', class: 'btn btn-lg btn-warning' do %>
+					<i class="fa fa-unlock"></i> Reactivate Student
+					<% end %>
+				</p>
+			<% end %>
+
+			<p class="alert alert-warning"><span class="strong">Warning:</span> This action can be reversed.</p>
+		<% end %>
+	</div>
+</div>
+<% end %>

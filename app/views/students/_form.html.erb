@@ -1,106 +1,99 @@
 
 <%= simple_form_for @student do |f| %>
 
-  <div class="standout">
+  <div class="row">
+    <div class="col-md-6">
+        <%= f.input :first_name %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :last_name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+        <%= f.input :email%>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :username, hint: "Same as student number" %>
+    </div>
+  </div>
+
+  <%= f.fields_for :student_details do |builder| %>
     <div class="row">
-      <div class="span4">
-        <%= f.label :first_name, "First Name" %>
-        <%= f.input :first_name, label: false, input_html: { class: "input-block-level" } %>
+      <div class="col-md-6">
+            <%= builder.input :preferred_phone, label: "Preferred Phone #" %>
       </div>
-      <div class="span4">
-        <%= f.label :last_name, "Last Name" %>
-        <%= f.input :last_name, label: false, input_html: { class: "input-block-level" } %>
+      <div class="col-md-6">
+        <%= builder.input :student_number, label: "Student Number"  %>
       </div>
     </div>
-		<div class="row">
-			<div class="span4">
-				<%= f.label :email, "Email Address" %>
-				<%= f.input :email,label: false, input_html: { class: "input-block-level" } %>
-				<%= f.label :username, "Login Username" %>
-				<%= f.input :username, hint: "Same as student number", label: false, input_html: { class: "input-block-level" } %>
-		  	</div>
+    <hr/>
 
-			<div class="span4">
-				<%= f.fields_for :student_details do |builder| %>
-          <%= builder.label :preferred_phone, "Preferred Phone Number" %>
-          <%= builder.input :preferred_phone, label: false, input_html: { class: "input-block-level" } %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= builder.input :transcription_coordinator_id, required: true,  label: "Transcription Coordinator",  collection: User.transcription_assitants %>
+      </div>
+      <div class="col-md-6">
+        <%= builder.input :cds_counsellor, label: "Disabilities Counsellor" %>
+      </div>
+    </div>
 
-          <%= builder.label :student_number, "Student Number" %>
-					<%= builder.input :student_number, label: false, input_html: { class: "input-block-level" }  %>
-
-				<% end %>
-			</div>
-		</div>
-
-		<hr/>
-
-		<%= f.fields_for :student_details do |builder| %>
-			<div class="row">
-				<div class="span4">
-          <%= builder.label :transcription_coordinator_id, "Transcription Coordinator" %>
-          <%= builder.input :transcription_coordinator_id, label: false,  collection: User.transcription_assitants, input_html: { class: "input-xlarge" }  %>
-
-          <%= builder.label :cds_counsellor, "Disablities Counsellor" %>
-          <%= builder.input :cds_counsellor, label: false, input_html: { class: "input-block-level" } %>
-
-				</div>
-				<div class="span4">
-
-					<%= builder.label :transcription_assistant_id, "Transcription Assistant" %>
-					<%= builder.input :transcription_assistant_id, label: false, collection: User.transcription_assitants, input_html: { class: "input-xlarge" }  %>
-
-          <%= builder.label :cds_counsellor_email, "Disablities Counsellor Email" %>
-          <%= builder.input :cds_counsellor_email, label: false, input_html: { class: "input-block-level" } %>
-				</div>
-			</div>
-		<% end %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= builder.input :transcription_assistant_id, required: true, label: "Transcription Assistant", collection: User.transcription_assitants %>
+      </div>
+      <div class="col-md-6">
+        <%= builder.input :cds_counsellor_email, required: true, label: "Disabilities Counsellor Email" %>
+      </div>
+    </div>
 
     <hr/>
 
-    <%= f.fields_for :student_details do |builder| %>
-      <div class="row">
-        <div class="span4">
-          <label>Preferred Format</label>
-          <label class="checkbox inline"><%= builder.check_box :format_pdf %> PDF</label>
-          <label class="checkbox inline"><%= builder.check_box :format_kurzweil %> KURZWEIL</label>
-          <label class="checkbox inline"><%= builder.check_box :format_daisy %> DAISY</label>
-          <label class="checkbox inline"><%= builder.check_box :format_braille %> BRAILLE</label><br/>
-          <label class="checkbox inline"><%= builder.check_box :format_word %> WORD DOCUMENT</label>
-          <label class="checkbox inline"><%= builder.check_box :format_large_print %> LARGE PRINT</label>
-          <label class="checkbox inline"><%= builder.check_box :format_other %> OTHER</label>
-        </div>
-        <div class="span4">
-          <%= builder.input :format_note, as: :string, label: "Format Note", input_html: { class: "span4" } %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="control-group">
+          <label>Preferred Format</label><br/>
+          <%= builder.check_box :format_pdf %> PDF
+          <%= builder.check_box :format_kurzweil %> KURZWEIL
+          <%= builder.check_box :format_daisy %> DAISY
+          <%= builder.check_box :format_braille %> BRAILLE<br/>
+          <%= builder.check_box :format_word %> WORD DOCUMENT
+          <%= builder.check_box :format_large_print %> LARGE PRINT
+          <%= builder.check_box :format_other %> OTHER
         </div>
       </div>
-
-      <hr/>
-
-      <div class="row">
-        <div class="span4">
-          <%= builder.input :accessibility_lab_access, label: "Allow Access to Accessibility Lab?"%>
-        </div>
-        <div class="span4">
-          <%= builder.input :book_retrieval,  label: "Book Retrieval" %>
-        </div>
+      <div class="col-md-6">
+        <%= builder.input :format_note, as: :string, label: "Format Note" %>
       </div>
-    <% end %>
+    </div>
 
+    <hr/>
 
-	</div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Additional Info</label><br/>
+        <%= builder.check_box :accessibility_lab_access %> Allow Access to Accessibility Lab?
+      </div>
+      <div class="col-md-6">
+        <br/>
+        <%= builder.check_box :book_retrieval%> Book Retrieval
+      </div>
+    </div>
 
-	<hr/>
-	<div class="row">
-		<div class="span4 offset4" style="text-align: right;">
-     	<%= f.button :submit,  @student.new_record? ? "Register Student" : "Update Student Registration" , class: 'btn btn-primary' %>
-     	<%= link_to 'Cancel', @student.new_record? ? students_path : student_path(@student), class: 'btn' %>
-		</div>
-	</div>
+  <% end %>
 
   <% if @student.errors.size > 0 %>
+    <hr/>
     <div class="hide">
       <%= @student.errors.messages.inspect %>
     </div>
   <% end %>
+
+  <hr/>
+
+  <%= f.button :submit,  @student.new_record? ? "Register Student" : "Update Student Registration" , class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', @student.new_record? ? students_path : student_path(@student), class: 'btn' %>
 
 <% end %>

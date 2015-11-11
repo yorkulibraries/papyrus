@@ -1,17 +1,9 @@
-<% title "Register A Student" %>
-<% title_html do %>
-	<h1>Register A New Student</h1>
-<% end %>
+<% title "Register A Student", false %>
 
-
-<% sidebar do %>
-	<h3>Register New Student</h3>
-	<p>To register a new student you must provide Papyrus with some basic information about the person.</p>
-	<p class="alert alert-info">All fields in the form are required.</p>
-	
-	<p><strong>Login Username</strong> is used to allow the student to login and access their assign items and files. </p>
-	<p>It is most likely the username used to login to other institutional services, such as email.</p>
-	
-<% end %>
-<%= render 'form' %>
-
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Register A Student", icon: "edit") do %>
+			<%= render 'form' %>
+		<% end %>
+	</div>
+</div>
