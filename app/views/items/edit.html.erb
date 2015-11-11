@@ -1,8 +1,35 @@
-<% title "Update Item" %>
-<% title_html do %>
-	<h1>Update Item Details</h1>
-<% end %>
+<% title "Update Item Details", false %>
 
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Update Item Details", icon: "edit") do %>
+			<%= render 'form' %>
+		<% end %>
+	</div>
+</div>
+
+<% if can?(:destroy, Item) && !@item.new_record?  %>
+	<div class="row">
+		<div class="col-md-12">
+			<%= panel(title: "Remove This Item", icon: "trash", styles:"panel-danger") do %>
+
+				<p><strong>Removing Items</strong></p>
+				<p>You have the ability to remove this item. Please ensure that you absolutely certain you want to do this.</p>
+				<p class="alert alert-info">
+					<span class="strong">Warning:</span> Removing this item will delete any of the files associated with it. <br/> <strong>This action can't be reversed</strong>.
+				</p>
+				<hr/>
+				<p>
+					<%= link_to  @item, data: { confirm: 'Are you sure you want to do this?' }, method: :delete, class: "btn btn-lg btn-danger" do%>
+						<i class="fa fa-trash"></i> Remove this item?
+					<% end %>
+				</p>
+
+			<% end %>
+
+		</div>
+	</div>
+<% end %>
 
 <% sidebar do %>
 
@@ -13,21 +40,7 @@
 
 
 
-<% if can?(:destroy, Item) && !@item.new_record?  %>
-	<p><strong>Removing and Item</strong></p>
-	<p>You have the ability to remove this item. Please ensure that you absolutely certain you want to do this.</p>
-	<p>
-		<%= link_to  @item, data: { confirm: 'Are you sure you want to do this?' }, method: :delete, class: "red" do%>
-			<i class="icon icon-trash"></i> Remove this item?
-		<% end %>
-	</p>
-	<p class="alert alert-info">
-		<span class="strong">Warning:</span> Removing this item will delete any of the files associated with it. <br/> <strong>This action can't be reversed</strong>.
-	</p>
 
-<% end %>
 
 
 <% end %>
-
-<%= render 'form' %>

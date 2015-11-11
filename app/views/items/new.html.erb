@@ -1,26 +1,9 @@
-<% title "New Item" %>
-<% title_html do %>
-	<h1>New Item</h1>
-<% end %>
+<% title "New Item", false %>
 
-
-
-<% sidebar do %>
-	<h3>Creating a new item</h3>
-	<p><strong><%= bib_search_vufind_label %></strong></p>
-	<p>If you have chosen to add an item from <%= bib_search_vufind_label %>, all of the details will be prefilled here for you.</p>
-	<p>You can make changes to the data and fill in the missing details. Your changes, however, will be out of sync with the <%= bib_search_vufind_label %> source.</p>
-
-	<p><strong><%= bib_search_worldcat_label %></strong></p>
-	<p>If you have chosen to add an item from <%= bib_search_worldcat_label %>, all of the details will be prefilled here for you.</p>
-	<p>You can make changes to the data and fill in the missing details. Your changes, however, will be out of sync with the <%= bib_search_worldcat_label %> source.</p>
-
-
-	<p><strong>Blank Item</strong></p>
-	<p>When adding a new blank item, you must fill in all of the item details by hand. </p>
-	<p>The fields that standout are the minimum required to create a new item. </p>
-	<p>You can leave Unique ID empty if you wish for Papyrus to auto generate this value. Or you can fill it in yourself. </p>
-	<p class="alert alert-info"><span class="strong" >Remember:</span> Unique ID must be unique. It can't be changed after you create the ite. If you're not sure, let Papyrus do the heavy lifting.</p>
-<% end %>
-
-<%= render 'form' %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "New Item", icon: "edit") do %>
+			<%= render 'form' %>
+		<% end %>
+	</div>
+</div>
