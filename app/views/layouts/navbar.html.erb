@@ -33,7 +33,7 @@
     					</li>
     					<% end %>
 
-              
+
               <% if can? :read, Term %>
               <li class="<%= "active" if controller_name == "terms"%>">
                 <a href="<%= terms_path %>"><i class="fa fa-fw fa-university"></i> Terms &amp; Courses</a>
@@ -47,7 +47,7 @@
     					<% end %>
 
               <% if can? :read, Item %>
-              <li class="<%= "active" if controller_name == "search_items" %>">
+              <li class="<%= "active" if controller_name == "search" %>">
                   <a href="<%= search_items_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
               </li>
               <% end %>

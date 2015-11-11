@@ -1,0 +1,17 @@
+<div class="search-box row">
+	<form action="<%= search_students_path(type: params[:type]) %>" id="omni_search_form">
+		<div class="col-sm-6 col-xs-6">
+			<div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <input type="text" placeholder="Search Name or Student Number" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
+			</div>
+		</div>
+		<div class="col-sm-4 col-xs-4 results-info">
+      	Showing <%= @students.count%> / <%= " #{@students.total_count}" %> students
+		</div>
+    <div class="col-sm-2 col-xs-2 results-info">
+      <%= link_to "List of Inactive Students", inactive_students_path, class: "btn btn-link" %>
+    </div>
+	</form>
+
+</div>

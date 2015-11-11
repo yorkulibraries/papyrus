@@ -3,7 +3,15 @@
 <div class="row">
 	<div class="col-md-12">
 		<%= panel(title: "Registered Students", icon: "users") do %>
+			<%= render partial: "search/search_box_students" %>
 
+			<%= paginate @students %>
+
+			<ul class="list-unstyled">
+				<% @students.each do |student| %>
+					<%= render student, show: "li" %>
+				<% end %>
+			</ul>
 		<% end %>
 	</div>
 </div>
@@ -58,7 +66,7 @@
 
 <% else %>
 	<div class="blank-slate">
-		<i class="icon-user"></i>
+		<i class="fa fa-user"></i>
 		<h1>Students</h1>
 		<% if @searching %>
 			<p>Couldn't find any students registerd in Papyrus matching <strong><%= @query %></strong>.</p>
