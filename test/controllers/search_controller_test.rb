@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class SearchItemsControllerTest < ActionController::TestCase
+class SearchControllerTest < ActionController::TestCase
 
   setup do
     @user = create(:user)
-    log_user_in(@user)    
+    log_user_in(@user)
   end
 
   should "search items database if no type was specified" do

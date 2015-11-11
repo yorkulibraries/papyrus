@@ -17,7 +17,7 @@ Papyrus::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
-  
+
   resource :settings, only: [:update] do
     get :general
     get :email
@@ -107,8 +107,9 @@ Papyrus::Application.routes.draw do
   end
 
   # ITEMS Search
-  match "search/items(/:type)" => "search_items#index", as: "search_items", via: :get,  defaults: { type: "local" }
-  match "search/test" => "search_items#test", via: :get
+  match "search/items(/:type)" => "search#items", as: "search_items", via: :get,  defaults: { type: "local" }
+  match "search/students(/:type)" => "search#students", as: "search_students", via: :get,  defaults: { type: "active" }
+  
 
   # Root
   root :to => "home#index"

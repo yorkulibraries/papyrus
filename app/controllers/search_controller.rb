@@ -1,9 +1,12 @@
-class SearchItemsController < ApplicationController
+class SearchController < ApplicationController
   before_filter do
     authorize! :search, :items
   end
 
   def index
+  end
+
+  def items
     @search_results = params[:type] || "local"
     page_number = params[:page] ||= 1
 
@@ -13,7 +16,7 @@ class SearchItemsController < ApplicationController
     when BibRecord::VUFIND
       @results = search_vufind(params[:q])
     else
-      @results = search_local(params[:q])
+      @results = search_local_items(params[:q])
     end
 
 
@@ -30,21 +33,6 @@ class SearchItemsController < ApplicationController
 
   end
 
-  def test
-    bib_record = BibRecord.new
-    @bib_search = true
-
-    @docs = bib_record.search_items(params[:q], BibRecord::VUFIND)
-
-    if params[:no_layout]
-      render "test", layout: false
-    elsif params[:layout]
-      render "test", layout: params[:layout]
-    else
-      render "test"
-    end
-
-  end
 
   private
   def search_vufind(query)
@@ -66,7 +54,7 @@ class SearchItemsController < ApplicationController
     return @docs
   end
 
-  def search_local(query)
+  def search_local_items(query)
     page_number = params[:page] ||= 1
 
     query = query.strip unless query.blank?

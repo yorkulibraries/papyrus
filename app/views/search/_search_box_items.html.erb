@@ -7,11 +7,11 @@
 			</div>
 		</div>
 		<div class="col-sm-4 col-xs-4">
-			<a href="<%= search_items_path %>" class="btn btn-default <%= "btn-primary disabled" if @search_results == "local" %> search_items_button">Papyrus</a>
-			<a href="<%= search_items_path(type: BibRecord::VUFIND) %>" class="btn btn-default  <%= "btn-primary disabled" if @search_results == BibRecord::VUFIND %> search_items_button">
+			<a href="<%= search_items_path(q: params[:q]) %>" class="btn btn-default <%= "btn-primary disabled" if @search_results == "local" %> search_items_button">Papyrus</a>
+			<a href="<%= search_items_path(type: BibRecord::VUFIND, q: params[:q]) %>" class="btn btn-default  <%= "btn-primary disabled" if @search_results == BibRecord::VUFIND %> search_items_button">
 				<%= bib_search_vufind_label %>
 			</a>
-			<a href="<%= search_items_path(type: BibRecord::WORLDCAT) %>" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::WORLDCAT %> search_items_button">
+			<a href="<%= search_items_path(type: BibRecord::WORLDCAT, q: params[:q]) %>" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::WORLDCAT %> search_items_button">
 				<%= bib_search_worldcat_label %>
 			</a>
 		</div>
