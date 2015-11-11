@@ -12,68 +12,18 @@
 					<%= render student, show: "li" %>
 				<% end %>
 			</ul>
+
+			<%= paginate @students %>
+
+			<% if @students.size == 0 %>
+				<div class="blank-slate">
+					<i class="fa fa-user"></i>
+					<h1>Students</h1>
+					<p>There are no students registerd in Papyrus right now.</p>
+					<p>You can <%= link_to "Register a New Student", new_student_path %> to begin using Papyrus.</p>
+				</div>
+			<% end %>
+
 		<% end %>
 	</div>
 </div>
-
-
-<% sidebar do %>
-	<%= link_to new_student_path, class: "action-btn green input-block-level" do %>
-		<i class="icon-plus"></i> Register New Student
-	<% end %>
-	<h3>Registering New Students</h3>
-	<p>Registering a student requires you to fill in some basic information about the person, as well as the login credentials.</p>
-
-	<hr/>
-	<p>To see a list of inactive students, <%= link_to "click here.", inactive_students_path %></p>
-<% end %>
-
-<div class="search-box">
-	<form action="<%= search_students_path %>">
-		<div class="search-field  input-prepend">
-			<span class="add-on">	<i class="icon-search"></i></span>
-			<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Name or Username"/>
-			<button class="btn hidden-phone" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
-		</div>
-	</form>
-</div>
-
-<% if @students.size > 0 %>
-
-
-	<p><strong>Search results <%= "- Total: #{@students.total_count}" if @students%></strong></p>
-	<%= paginate @students %>
-	<div class="students">
-		<div class="list-group">
-			<% @students.each do |student| %>
-			  <div  class="list-group-item <%= cycle("odd", "even") %>">
-						<%= image_tag "icons/user_default.png", class: "pull-left" %>
-						<span class="badge badge-success"><%= pluralize(@current_items_counts[student.id], "item")%></span>
-			     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
-			     <p class="list-group-item-text">
-						<span class="trivial weak">Email: </span><%= student.email %>
-						<span class="trivial weak">Phone: </span><%= student.details.preferred_phone %>
-					 	<span class="hidden-phone">
-							<span class="trivial weak">Transcription Coordinator: </span><%= student.details.transcription_coordinator.name rescue nil%>
-						</span>
-					</p>
-			   </div>
-			 <% end %>
-		</div>
-	</div>
-
-	<%= paginate @students %>
-
-<% else %>
-	<div class="blank-slate">
-		<i class="fa fa-user"></i>
-		<h1>Students</h1>
-		<% if @searching %>
-			<p>Couldn't find any students registerd in Papyrus matching <strong><%= @query %></strong>.</p>
-			<p>You can <%= link_to "Register a New Student", new_student_path %>.</p>
-		<% else %>
-			<p>There are no students registerd in Papyrus right now.</p>
-			<p>You can <%= link_to "Register a New Student", new_student_path %> to begin using Papyrus.</p>
-		<% end %>
-	</div>
-<% end %>
