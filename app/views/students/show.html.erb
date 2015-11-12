@@ -1,23 +1,24 @@
-<% title @student.name %>
-<% title_html do %>
-	<h1>Student Registration Record
-		<% if @student.inactive? %>
-			<span class="red">Inactive</span>
-		<% end %>
-	</h1>
-<% end%>
+<% title @student.name, false %>
 
 
 
-<% sidebar do %>
+<%= render @student, show: "div" %>
 
-	<%= render partial: "students/shared/sidebar"%>
+<div class="row student-meta">
+	<div class="col-md-8">
+			<%= render partial: "students/shared/items_list", locals: { student: @student } %>
+	</div>
+	<div class="col-md-4">
+		<div class="students-with-access">
 
-<% end %>
+		<div>
+		<div class="course-list">
 
-<%= render partial: @student %>
-
-<div class="student">
-	<%= render partial: "students/shared/subnav"%>
-	<%= render partial: "items"%>
+		</div>
+	</div>
 </div>
+
+
+
+<%= render partial: "students/shared/subnav"%>
+<%= render partial: "items"%>

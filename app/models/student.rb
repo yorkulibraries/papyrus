@@ -44,6 +44,20 @@ class Student < User
     return self.student_details
   end
 
+  def formats_array 
+    formats_array = Array.new
+    formats_array.push "PDF" if self.details.format_pdf
+    formats_array.push "KURZWEIL" if self.details.format_kurzweil
+    formats_array.push "DAISY" if self.details.format_daisy
+    formats_array.push "BRAILLE" if self.details.format_braille
+    formats_array.push "WORD" if self.details.format_word
+    formats_array.push "LARGE PRINT" if self.details.format_large_print
+    formats_array.push "OTHER" if self.details.format_other
+    return formats_array
+  end
+
+
+
   def self.item_counts(student_ids, type = "current")
     counts = Hash.new
     connections = ItemConnection.select("student_id, count(*) as items_count").group(:student_id)

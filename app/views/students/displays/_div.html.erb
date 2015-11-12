@@ -1,35 +1,89 @@
-<div class="student">
-
-	<h1><%= @student.name %></h1>
-	<div class="attributes row">
-			<div class="span1 key">email: </div><div class="span3 value"><%= @student.email %></div>
-			<div class="span1 key">phone: </div><div class="span3 value"><%= @student.details.preferred_phone %></div>
-	</div>
-	<div class="attributes row">
-			<div class="span1 key top-border">Coordinator: </div><div class="span3 value top-border"><%= format_field @student.details.coordinator.name rescue nil %></div>
-			<div class="span1 key top-border">Assistant: </div><div class="span3 value top-border"> <%= format_field @student.details.assistant.name rescue nil %></div>
-	</div>
-	<div class="attributes row">
-			<div class="span1 key">Counsellor:</div><div class="span3 value" title="<%= @student.details.cds_counsellor_email %>"><%= @student.details.cds_counsellor %></div>
-			<div class="span1 key">Format:</div><div class="span3 value">
-				<% formats_array = Array.new %>
-				<% formats_array.push "PDF" if @student.details.format_pdf %>
-				<% formats_array.push "KURZWEIL" if @student.details.format_kurzweil %>
-				<% formats_array.push "DAISY" if @student.details.format_daisy %>
-				<% formats_array.push "BRAILLE" if @student.details.format_braille %>
-				<% formats_array.push "WORD" if @student.details.format_word %>
-				<% formats_array.push "LARGE PRINT" if @student.details.format_large_print %>
-				<% formats_array.push "OTHER" if @student.details.format_other %>
-				<div>
-					<% formats_array.each do | format| %>
-						<span class="tag"><%= format.downcase %></span>
-					<% end %>
-					<% unless @student.details.format_note.blank? %>
-						<a href="#" class="btn btn-link grey popover-link" data-content="<%= @student.details.format_note %>" data-original-title="Format Note" rel="popover">
-							<i class="icon-info-sign"></i>
+<div class="row student">
+	<div class="col-md-12 student" id="student_<%= student.id %>" data-id="<%= student.id %>">
+		<%= panel(title: "Student Details", icon: "user") do %>
+			<div class="student-header row">
+				<div class="col-md-8">
+					<h3>
+						<%= gravatar(student.email, style: "mm", force: true, size: "20") %>
+						<%= student.name %>
+					</h3>
+				</div>
+				<div class="col-md-4">
+					<div class="pull-right">
+						<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_student_path(student) %>" title="Audit Trail">
+							<i class="fa fa-list"></i>
 						</a>
-					<% end %>
+						<% if is_controller_and_action?("students", "show") && can?(:edit, student) %>
+							<a class="btn btn-sm btn-success" href="<%= edit_student_path(student) %>">
+								<i class="fa fa-edit"></i> Make Changes
+							</a>
+						<% end %>
+					</div>
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Email</label>
+							<%= format_field student.email %>
+						</li>
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Student ID</label>
+							<%= format_field student.details.student_number %>
+						</li>
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Coordinator</label>
+							<%= format_field student.details.coordinator.name rescue nil %>
+						</li>
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Assistant</label>
+							<%= format_field student.details.assistant.name rescue nil %>
+						</li>
+					</ul>									
+				</div>
+				<div class="col-md-6">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Preferred Phone</label>
+							<%= format_field student.details.preferred_phone %>
+						</li>
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Format</label>
+								<% student.formats_array.each do | format| %>
+									<span class="tag"><%= format.downcase %></span>
+								<% end %>
+								<% unless @student.details.format_note.blank? %>
+									<a href="#" class="btn btn-link grey popover-link" data-content="<%= @student.details.format_note %>" data-original-title="Format Note" rel="popover">
+										<i class="icon-info-sign"></i>
+									</a>
+								<% end %>
+						</li>
+
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Counsellor</label>
+							<%= format_field student.details.cds_counsellor %>
+						</li>
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Counsellor Email</label>
+							<%= format_field student.details.cds_counsellor_email %>
+						</li>
+
+
+					</ul>
+				</div>
+			</div>
+
+
+		<% end %>
 	</div>
 </div>

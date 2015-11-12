@@ -10,6 +10,6 @@ module UsersHelper
   def gravatar(email, size: "64", style: "retro", force: false)
      email_hash =  Digest::MD5.hexdigest(email)
      force_default = force ? "f=y" : ""
-     image_tag("http://www.gravatar.com/avatar/#{email_hash}?s=#{size}&d=#{style}&#{force_default}")
+     image_tag("http://www.gravatar.com/avatar/#{email_hash}?s=#{size}&d=#{style}&#{force_default}", class: "gravatar")
   end
 end
