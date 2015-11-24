@@ -1,4 +1,4 @@
-<%= panel(title: "Students With Access", icon: "users", icon_class: "fa-2x", title_class: "panel-top text-center", styles:"panel-primary") do %>
+<%= panel(title: "Students With Access", icon: "users", title_class: "panel-top text-center", styles:"panel-primary") do %>
 
   <a class="btn btn-sm btn-primary" data-toggle="modal" href="#assign_students_modal">
     <i class="fa fa-user-plus"></i> Grant Access To Students?</a>
@@ -7,7 +7,7 @@
 
   <ul class="list-unstyled list-info">
     <% item.students.unique_usernames.each do |student| %>
-    <li>      
+    <li>
       <span class="fa fa-user fa-fw"></span>
       <%= link_to withhold_from_student_item_path(item, student_id: student.id), data: { confirm: 'Are you sure?' }, :method => :delete, :class => "tooltips close",
       rel: "tooltip",  title: "Bar the student from accessing this item." do %>

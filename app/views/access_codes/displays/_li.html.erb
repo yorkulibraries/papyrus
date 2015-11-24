@@ -1,0 +1,39 @@
+<li class="access_code" id="access_code_<%= access_code.id %>">
+
+  <div class="pull-right date">
+
+    Exp: <%=  access_code.expires_at.nil? ? "never" : access_code.expires_at %>
+    <i class="fa fa-calendar"></i>
+  </div>
+  <h4><%= access_code.for %></h4>
+
+  <div class="pull-right access">
+    <%=  access_code.shared? ? "Group" : "Personal" %>
+    <i class="fa fa-legal"></i>
+  </div>
+  <div class="code">
+    <%= access_code.code %>
+  </div>
+
+
+  <% if can? :manage, access_code %>
+
+    <% if access_code.shared? %>
+
+      <span class="type">shared code</span>
+      <% if is_controller?("shared_access_codes")  %>
+        <%= link_to shared_access_code_path(access_code), method: :delete, class: "grey small remove float-right", data: {remote: true, confirm: "Are you sure?"} do %>
+          remove <i class="fa fa-remove"></i>
+        <% end %>
+      <% end %>
+
+    <% else %>
+
+
+      <%= link_to student_access_code_path(@student, access_code), method: :delete, class: "btn btn-default btn-xs red", data: {remote: true, confirm: "Are you sure?"} do %>
+         <i class="fa fa-remove"></i>
+      <% end %>
+
+    <% end %>
+    <% end %>
+</li>

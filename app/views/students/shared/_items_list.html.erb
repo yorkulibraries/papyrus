@@ -1,11 +1,11 @@
-<%= panel(title: "Assigned Items", icon: "book", icon_class: "fa-2x", title_class: "panel-top text-center", styles:"panel-info") do %>
+<%= panel(title: "Assigned Items", icon: "book", title_class: "panel-top text-center", styles:"panel-info") do %>
 
   <% unless student.inactive? %>
     <a data-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-right">
       <i class="icon-plus-sign icon-white"></i> Assign Items</a>
   <% end %>
-
-  <ul class="unstyled">
+  <hr/>
+  <ul class="list-unstyled" id="items">
     <% @items.each do |item| %>
       <%= render item, show: "li" %>
     <% end %>

@@ -17,7 +17,7 @@
 
     <div id="current_codes">
       <% @access_codes.each do |access_code| %>
-        <%= render partial: access_code %>
+        <%= render partial: access_code, locals: { show: "div"} %>
       <% end %>
     </div>
 
