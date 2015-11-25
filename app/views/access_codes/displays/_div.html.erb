@@ -13,30 +13,13 @@
 
 	</div>
 	<div class="span4">
-		<span class="code"><%= access_code.code %></span><br/>
+		<span class="code"><%= access_code.code %></span>
 
-		<% if can? :manage, access_code %>
-
-			<% if access_code.shared? %>
-
-				<span class="type">shared code</span>
-				<% if is_controller?("shared_access_codes")  %>
-					<%= link_to shared_access_code_path(access_code), method: :delete, class: "grey small remove float-right", data: {remote: true, confirm: "Are you sure?"} do %>
-						remove <i class="icon-remove"></i>
-					<% end %>
-				<% end %>
-
-			<% else %>
-
-				<span class="type">Individual Code</span>
-				<%= link_to student_access_code_path(@student, access_code), method: :delete, class: "grey small remove float-right", data: {remote: true, confirm: "Are you sure?"} do %>
-					remove <i class="icon-remove"></i>
-				<% end %>
-
+		<% if can?(:manage, access_code) && !access_code.shared? %>
+			<span class="type">Individual Code</span>
+			<%= link_to student_access_code_path(@student, access_code), method: :delete, class: "grey small remove float-right", data: {remote: true, confirm: "Are you sure?"} do %>
+				remove <i class="icon-remove"></i>
 			<% end %>
-
-		<% else %>
-			<span class="type">DO NOT SHARE</span>
 		<% end %>
 	</div>
 </div>

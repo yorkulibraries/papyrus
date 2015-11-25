@@ -22,4 +22,9 @@ class AccessCode < ActiveRecord::Base
 
   scope :shared, -> { where(shared: true) }
   scope :personal, -> { where(shared: false) }
+
+  def expired?
+    self[:expires_at] < Date.today
+  end
+  
 end

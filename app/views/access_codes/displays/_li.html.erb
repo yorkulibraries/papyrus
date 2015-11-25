@@ -10,30 +10,16 @@
   <div class="pull-right access">
     <%=  access_code.shared? ? "Group" : "Personal" %>
     <i class="fa fa-legal"></i>
+
+    <% if can?(:manage, access_code) && !access_code.shared?  && !access_code.expired? %>
+        <%= link_to student_access_code_path(@student, access_code), method: :delete, class: "remove red", data: {remote: true, confirm: "Are you sure?"} do %>
+           &times;
+      <% end %>
+    <% end %>
   </div>
   <div class="code">
     <%= access_code.code %>
   </div>
 
 
-  <% if can? :manage, access_code %>
-
-    <% if access_code.shared? %>
-
-      <span class="type">shared code</span>
-      <% if is_controller?("shared_access_codes")  %>
-        <%= link_to shared_access_code_path(access_code), method: :delete, class: "grey small remove float-right", data: {remote: true, confirm: "Are you sure?"} do %>
-          remove <i class="fa fa-remove"></i>
-        <% end %>
-      <% end %>
-
-    <% else %>
-
-
-      <%= link_to student_access_code_path(@student, access_code), method: :delete, class: "btn btn-default btn-xs red", data: {remote: true, confirm: "Are you sure?"} do %>
-         <i class="fa fa-remove"></i>
-      <% end %>
-
-    <% end %>
-    <% end %>
 </li>
