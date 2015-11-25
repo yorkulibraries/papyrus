@@ -1,7 +1,4 @@
-<% title "Edit User" %>
-<% title_html do %>	
-		<h1>Edit User Details</h1>	
-<% end %>
+<% title "Edit User", false %>
 
 <% sidebar do %>
 	<%  unless @user.inactive %>
@@ -10,9 +7,9 @@
 		<p class="alert alert-info"><strong>Remember: </strong> All fields are required and user's email and username must be unique.</p>
 
 	  <h3>Disabling Access</h3>
-		<p>You can disable access for this user, deactivating the account. This action prevents the user form logging in to Papyrus.</p>	
+		<p>You can disable access for this user, deactivating the account. This action prevents the user form logging in to Papyrus.</p>
 		<%= link_to "Disable Access", @user, confirm:  'Are you sure?', method: :delete, class: "btn btn-danger"%>
-		
+
 	<% else %>
 		<h3>Inactive User</h3>
 		<p class="alert alert-danger"><strong>Warning:</strong> This user's account is disabled. The access to Papyrus is not allowed.</p>
@@ -21,5 +18,37 @@
 	<% end %>
 <% end %>
 
-<%= render 'form' %>
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Update User Information", icon: "edit") do %>
+			<%= render 'form' %>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "Help", icon: "question") do %>
+			<%= render partial: "help" %>
+		<% end %>
+	</div>
+</div>
 
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Deactivate or Reactivate User", icon: "lock", styles:"panel-danger") do %>
+			<p><strong>Deactivate or Reactivate</strong></p>
+			<p>You can deactivate a user account. This does not delete the user record, just disables their ability to access Papyrus and hides the record from general view.</p>
+
+			<%  unless @user.inactive %>
+
+				<%= link_to "Deactivate This Account", @user, confirm:  'Are you sure?', method: :delete, class: "btn btn-danger"%>
+
+			<% else %>
+
+				<p class="alert alert-danger"><strong>Warning:</strong> This user's account is disabled. The access to Papyrus is not allowed.</p>
+
+				<%= link_to "Activate This Account", activate_user_path(@user), class: "btn btn-info", method: :post  %>
+			<% end %>
+			<br/><br/>
+			<p class="alert alert-warning"><span class="strong">Warning:</span> This action can be reversed.</p>
+		<% end %>
+	</div>
+</div>

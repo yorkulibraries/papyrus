@@ -39,22 +39,11 @@
 	</div>
 	<div class="col-md-6">
 		<%= panel(title: "My Students", icon: "users") do  %>
-			<ul class="list-group">
+			<ul class="list-unstyled">
 				<% @students.each do |student| %>
-					<li class="list-group-item">
-					 <span class="badge badge-success">
-						 <%= pluralize(@current_items_counts[student.id], "item")%>
-					 </span>
-					 <h5 class="list-group-item-heading">
-						 <a href="<%= student_path(student) %>"><%= student.name %></a>
-					 </h4>
-					 <p class="list-group-item-text">
-						<i class="fa fa-envelope-o strong"></i> <%= student.email %>
-						<i class="fa fa-mobile-phone fa-lg"></i> <%= student.student_details.preferred_phone %>
-					</p>
-					</li>
+					<%= render student, show: "li" %>
 				<% end %>
-			</ul>
+			</ul>			
 		<% end %>
 	</div>
 </div>

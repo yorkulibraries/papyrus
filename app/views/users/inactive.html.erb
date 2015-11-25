@@ -1,36 +1,40 @@
-<% title "Inactive Users"%>
-
-<% title_html do %>
-	<h1>Inactive Users</h2>
-<% end %>
+<% title "Inactive Users", false%>
 
 
 
-<%= render partial: "user_nav" %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "All users", icon: "users") do %>
+
+			<%= render partial: "user_nav" %>
+			<hr/>
 
 
-<% if @users.size == 0 %>
-	<p>There are not inactive users.</p>
-<% end %>
+			<% if @users.size == 0 %>
+				<p>There are not inactive users.</p>
+			<% end %>
 
-<table class="table table-condensed">
-	<tr>
-	  <th>Name</th>
-	  <th>Role</th>
-		<th>Joined On</th>
-		<th></th>
-	</tr>
-	<% @users.each do |user| %>
-		<tr>
-			<td><%= user.name %></td>
-			<td><%= user.role %></td>
-			<td><%= user.created_at.strftime("%b %d, %Y") %></td>
-			<td>
-				<%= link_to "Activate User", edit_user_path(user), :class=> "btn btn-small"%>				
-				<%= link_to audit_trail_user_path(user), class: "btn btn-small" do %>
-					<i class="icon-list" tilte="Audit Trail"></i>
+			<table class="table table-condensed">
+				<tr>
+				  <th>Name</th>
+				  <th>Role</th>
+					<th>Joined On</th>
+					<th></th>
+				</tr>
+				<% @users.each do |user| %>
+					<tr>
+						<td><%= user.name %></td>
+						<td><%= user.role %></td>
+						<td><%= user.created_at.strftime("%b %d, %Y") %></td>
+						<td>
+							<%= link_to "Activate User", edit_user_path(user), class: "btn btn-sm btn-danger"%>
+							<%= link_to audit_trail_user_path(user), class: "btn btn-sm btn-default" do %>
+								<i class="fa fa-list" tilte="Audit Trail"></i>
+							<% end %>
+						</td>
+					</tr>
 				<% end %>
-			</td>
-		</tr>
-	<% end %>
-</table>
+			</table>
+		<% end %>
+	</div>
+</div>
