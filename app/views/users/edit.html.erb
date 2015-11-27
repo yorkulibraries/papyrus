@@ -1,22 +1,5 @@
 <% title "Edit User", false %>
 
-<% sidebar do %>
-	<%  unless @user.inactive %>
-		<h3>Editing User Details</h3>
-		<p>Here you can update user's details. Change the login username, role or email.</p>
-		<p class="alert alert-info"><strong>Remember: </strong> All fields are required and user's email and username must be unique.</p>
-
-	  <h3>Disabling Access</h3>
-		<p>You can disable access for this user, deactivating the account. This action prevents the user form logging in to Papyrus.</p>
-		<%= link_to "Disable Access", @user, confirm:  'Are you sure?', method: :delete, class: "btn btn-danger"%>
-
-	<% else %>
-		<h3>Inactive User</h3>
-		<p class="alert alert-danger"><strong>Warning:</strong> This user's account is disabled. The access to Papyrus is not allowed.</p>
-		<p>To enable access for this user, pleae click on the Activate This User button below.</p>
-		<%= link_to "Activate This User", activate_user_path(@user), class: "btn btn-info", method: :post  %>
-	<% end %>
-<% end %>
 
 <div class="row">
 	<div class="col-md-8">

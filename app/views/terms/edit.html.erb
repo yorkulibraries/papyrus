@@ -1,6 +1,21 @@
-<% title "Edit School Term" %>
-<% title_html do %>
+<% title "Edit School Term", false %>
 
-		<h1><small>Edit School Term</small></h1>
-<% end %>
-<%= render 'form' %>
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Edit New School Term", icon: "edit") do %>
+			<%= render 'form' %>
+		<% end %>
+	</div>
+
+	<div class="col-md-4">
+		<%= panel(title: "Help", icon: "question") do %>
+			<p>Terms are used to group courses and assign expiry dates.</p>
+			<hr/>
+			<% unless @term.new_record? %>
+				<div class="float-right">
+					<%= link_to "Delete This Term ?", @term, confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

@@ -5,7 +5,9 @@
     <% end %>
   <% end %>
 
-  <i class="fa fa-university fa-fw"></i>
-  <label><%= short_course_code(course.code) %></label>
-  <%= course.title %>
+  <div class="title">
+    <i class="fa fa-university fa-fw"></i>
+    <label><%= short_course_code(course.code) %></label><br/>
+    <%= course.title %>
+  </div>
 </li>
