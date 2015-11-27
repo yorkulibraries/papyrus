@@ -2,12 +2,7 @@
 
 
 <% sidebar do %>
-	<h3>Recently Expired Terms</h3>
-	<ul>
-		<% @archived_terms.each do |term| %>
-			<li><%= link_to "#{term.name}", term %> <br/><span class="trivial">expired on  <%= term.end_date.strftime("%b %d, %Y") %></span></li>
-		<% end %>
-	</ul>
+
 <% end %>
 
 <div class="row">
@@ -33,9 +28,30 @@
 
 		<hr/>
 
+		<div class="row">
+			<div class="col-md-8">
+				
+				<ul class="list-unstyled" id="terms">
+					<% for term in @terms %>
+						<%= render term, show: "li" %>
+					<% end %>
+				</ul>
+
+			</div>
+			<div class="col-md-4">
+				<h3>Recently Expired Terms</h3>
+				<ul class="list-unstyled">
+					<% @archived_terms.each do |term| %>
+						<li><%= link_to "#{term.name}", term %> <br/><span class="trivial">expired on  <%= term.end_date.strftime("%b %d, %Y") %></span></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+
 		<% end %>
 	</div>
 </div>
+
 
 
 <section class="terms">
