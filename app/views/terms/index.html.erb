@@ -1,8 +1,4 @@
-<% title "School Terms and Courses" %>
-<% title_html do %>
-	<h1>School Terms &amp; Courses 
-			<%= link_to new_term_path, :class => "btn btn-small float-right" do %><i class="icon-plus"></i> Add a new term<% end %></h1>
-<% end %>
+<% title "School Terms and Courses", false %>
 
 
 <% sidebar do %>
@@ -14,14 +10,31 @@
 	</ul>
 <% end %>
 
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Terms and Courses", icon: "university") do %>
+		<div class="row">
 
-<div class="well">
-	<form action="<%= search_courses_terms_path %>" class="form-search">
-		<div class="omni_search box-shadow round">	
-			<input type="text" name="q" class="input-large search-query span4" value="<%= params[:q] %>" placeholder="Search Course Code or Name"/>
-			<input type="submit" value="Search" class="btn"/>	
-		</div>			
-	</form>
+			<div class="col-sm-4 col-xs-4">
+				<form action="<%= search_courses_terms_path %>" class="form-search">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+					<input type="text" placeholder="Search Course Code or Name" name="q" class="form-control search-query"  value="<%= params[:q].try(:strip) %>">
+				</div>
+				</form>
+			</div>
+
+			<div class="col-sm-8 col-xs-8">
+				<%= link_to new_term_path, class: "btn btn-sm btn-primary  pull-right" do %>
+					<i class="fa fa-plus"></i> Add a New Term
+				<% end %>
+			</div>
+		</div>
+
+		<hr/>
+
+		<% end %>
+	</div>
 </div>
 
 
@@ -29,19 +42,16 @@
 
 	<% for term in @terms %>
 		<div class="thumbnail term clearfix">
-		
+
 			<%= image_tag "icons/calendar-#{cycle('odd','even')}.png", :class => "float-left" %>
 			<div style="margin-left: 60px;">
 					<div class="course-count float-right"><span class="badge small"><%= pluralize(term.courses.count, "Course") %></span></div>
 					<h3><%= link_to "#{term.name}", term %> </h3>
 					<span class="trivial"><%= term.start_date.strftime("%b %d, %Y") %> <span class="weak">to</span> <%= term.end_date.strftime("%b %d, %Y") %></span>
 			</div>
-		
-			
+
+
 		</div>
 	<% end %>
 
 </section>
-
-
-
