@@ -12,9 +12,13 @@
     <i class="fa fa-legal"></i>
 
     <% if can?(:manage, access_code) && !access_code.shared?  && !access_code.expired? %>
-        <%= link_to student_access_code_path(@student, access_code), method: :delete, class: "remove red", data: {remote: true, confirm: "Are you sure?"} do %>
-           &times;
+      <%= link_to student_access_code_path(@student, access_code), method: :delete, class: "remove red", data: {remote: true, confirm: "Are you sure?"} do %>
+        &times;
       <% end %>
+    <% elsif can?(:manage, access_code) && is_controller?("shared_access_codes") && !access_code.expired?  %>
+			<%= link_to shared_access_code_path(access_code), method: :delete, class: "red remove", data: {remote: true, confirm: "Are you sure?"} do %>
+				&times;
+			<% end %>
     <% end %>
   </div>
   <div class="code">
