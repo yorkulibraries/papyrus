@@ -1,37 +1,47 @@
-<% title "Quick Statistics" %>
-
-<%= render partial: "stats/shared/nav_menu" %>
+<% title "Quick Statistics", false %>
 
 <div class="row">
-		<div class="stats well span3">
-			<h3>Item Statistics</h3>
-			<dl>
-				<dt>Total Number of Items</dt>
-				<dd><%= Item.count %></dd>
-				<dt>Items with Files Attached</dt>
-				<dd><%= @has_attachments_count %></dd>
-				<dt>Items Assigned to Students</dt>
-				<dd><%= @has_students_count %></dd>
-			</dl>
+	<div class="col-md-12">
+		<%= panel(title: "Reports Home") do %>
+			<%= render partial: "stats/shared/nav_menu" %>
 
-		</div>
+			<div class="row">
+				<div class="col-md-4">
+					<h3>Item Statistics</h3>
+					<dl>
+						<dt>Total Number of Items</dt>
+						<dd><%= Item.count %></dd>
+						<dt>Items with Files Attached</dt>
+						<dd><%= @has_attachments_count %></dd>
+						<dt>Items Assigned to Students</dt>
+						<dd><%= @has_students_count %></dd>
+					</dl>
+				</div>
+				<div class="col-md-4">
+					<h3>Student Statistics</h3>
+					<dl>
+						<dt>Total Number of Students</dt>
+						<dd><%= Student.count %></dd>
+						<dt>Active Students</dt>
+						<dd><%= Student.active.count %></dd>
+						<dt>Inactive Students</dt>
+						<dd><%= Student.inactive.count %></dd>
+					</dl>
+				</div>
+				<div class="col-md-4">
+					<h3>Miscellaneous Statistics</h3>
+					<dl>
+						<dt>Number of Papyrus Users</dt>
+						<dd><%= User.not_students.count %> (<%= User.not_students.active.count%> active, <%= User.not_students.inactive.count %> inactive)</dd>
+						<dt>Number Courses &amp; Terms</dt>
+						<dd><%= Course.count%> courses, <%= Term.count %> terms</dd>
+					</dl>
+				</div>
+			</div>
 
-		<div class="stats well span3">
-			<h3>Students Statistics</h3>
-			<dl>
-				<dt>Total Number of Students</dt>
-				<dd><%= Student.count %></dd>
-			</dl>
-		</div>
+		<% end %>
+	</div>
+</div>
+<div class="row">
 
-		<div class="stats well span3">
-			<h3>Miscellaneous Statistics</h3>
-			<dl>
-				<dt>Number of Papyrus Users</dt>
-				<dd><%= User.not_students.count %> (<%= User.not_students.active.count%> active, <%= User.not_students.inactive.count %> inactive)</dd>
-				<dt>Number Courses &amp; Terms</dt>
-				<dd><%= Course.count%> courses, <%= Term.count %> terms</dd>
-			</dl>
-
-		</div>
 </div>

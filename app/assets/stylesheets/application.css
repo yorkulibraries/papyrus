@@ -8,6 +8,7 @@
 *= require_tree ./vendor/jquery-token-input
 *= require bootstrap_and_overrides
 *= require font-awesome
+*= require jquery-ui
 *
 * THEME - BOOTSTRAP3
 *

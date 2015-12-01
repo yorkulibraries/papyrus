@@ -1,59 +1,67 @@
-<% title "Item Usage" %>
-<% title_html do %>
-	<h1>Item Usage
-		<small class="pull-right">
-			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>"><i class="icon-table"></i> Download Exel </a>
-		</small>
-	</h1>
-<% end %>
+<% title "Item Usage", false %>
 
-<%= render partial: "stats/shared/nav_menu" %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Item Usage") do %>
+			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>" class="pull-right btn btn-default">
+				<i class="fa fa-table"></i> Download Exel
+			</a>
+			<%= render partial: "stats/shared/nav_menu" %>
+
+			<h5>Date Range</h5>
+
+			<form action="<%= stats_item_usage_path %>" method="get" class="simple_form">
+				<%= render partial: "stats/shared/form_fields" %>
+			</form>
+
+			<h4>Assigned Items <small><%= @assigned_items.count %> (showing first 10)</small></h4>
+			<p>Total Items <strong><%= @items_count%></strong></p>
+			<table class="table table-striped">
+				<tr>
+					<th>Item Title</th>
+					<th>Callnumber</th>
+					<th>Source</th>
+					<th>ISBN</th>
+					<th>Assigned Count</th>
+				</tr>
+				<% @assigned_items.first(10).each do |item| %>
+					<tr>
+							<td><%= item["title"] %></td>
+							<td><%= item["callnumber"]%></td>
+							<td><%= item["source"]%></td>
+							<td><%= item["isbn"]%></td>
+							<td><%= item["assigned_count"]%></td>
+					</tr>
+				<% end %>
+			</table>
+			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
+				<i class="fa fa-table"></i> Download Exel
+			</a>
+
+			<h4>Not Assigned Items <small><%= @unassigned_items.count%> (showing first 10)</small></h4>
+
+			<table class="table table-striped">
+				<tr>
+					<th>Item Title</th>
+					<th>Callnumber</th>
+					<th>Source</th>
+					<th>ISBN</th>
+				</tr>
+				<% @unassigned_items.first(10).each do |item| %>
+					<tr>
+							<td><%= item.title%></td>
+							<td><%= item.callnumber %></td>
+							<td><%= item.source%></td>
+							<td><%= item.isbn%></td>
+					</tr>
+				<% end %>
+			</table>
+			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
+				<i class="fa fa-table"></i> Download Exel
+			</a>
 
 
-<h5>Date Range</h5>
+		<% end %>
 
-<form action="<%= stats_item_usage_path %>" method="get" class="simple_form">
-	<%= render partial: "stats/shared/form_fields" %>
-</form>
-
-<h4>Assigned Items <small><%= @assigned_items.count %> (showing first 10)</small></h4>
-<p>Total Items <strong><%= @items_count%></strong></p>
-<table class="table table-striped">
-	<tr>
-		<th>Item Title</th>
-		<th>Callnumber</th>
-		<th>Source</th>
-		<th>ISBN</th>
-		<th>Assigned Count</th>
-	</tr>
-	<% @assigned_items.first(10).each do |item| %>
-		<tr>
-				<td><%= item["title"] %></td>
-				<td><%= item["callnumber"]%></td>
-				<td><%= item["source"]%></td>
-				<td><%= item["isbn"]%></td>
-				<td><%= item["assigned_count"]%></td>
-		</tr>
-	<% end %>
-</table>
-<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>"><i class="icon-table"></i> Download Exel </a>
-
-<h4>Not Assigned Items <small><%= @unassigned_items.count%> (showing first 10)</small></h4>
-
-<table class="table table-striped">
-	<tr>
-		<th>Item Title</th>
-		<th>Callnumber</th>
-		<th>Source</th>
-		<th>ISBN</th>
-	</tr>
-	<% @unassigned_items.first(10).each do |item| %>
-		<tr>
-				<td><%= item.title%></td>
-				<td><%= item.callnumber %></td>
-				<td><%= item.source%></td>
-				<td><%= item.isbn%></td>
-		</tr>
-	<% end %>
-</table>
-<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>"><i class="icon-table"></i> Download Exel </a>
+	</div>
+</div>
