@@ -1,7 +1,10 @@
 <% title "Add New Annoucement" %>
 
-<% title_html do %>
-<h1>Annoucements <small> / Add Annoucement</small></h1>
-<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <%= panel(title: "New Annoucement", icon: "bell") do %>
+      <%= render 'form' %>
+    <% end %>
+  </div>
 
-<%= render 'form' %>
+</div>

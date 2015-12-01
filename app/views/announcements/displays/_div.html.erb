@@ -1,0 +1,38 @@
+<div class="announcement" id="announcement_<%= announcement.id %>">
+  <div class="row">
+    <div class="col-md-9 message">
+      <%= announcement.message %>
+    </div>
+    <div class="col-md-3 action text-right">
+      <i class="fa fa-bullhorn"></i> <%= announcement.audience %>s
+      <% if announcement.ends_at > Date.today %>
+        &nbsp;&nbsp;
+        <%= link_to announcement_path(announcement), method: :delete, class: "red remove", title: "Remove", data: {remote: true, confirm: "Are you sure?"} do %>
+         &times;
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 date">
+
+        <i class="fa fa-calendar"></i> From
+        <%= announcement.starts_at.strftime("%b %d, %Y") rescue nil %> to
+        <%= announcement.ends_at.strftime("%b %d, %Y") rescue nil %>
+
+    </div>
+    <div class="col-md-3 action">
+      By <%= announcement.user.name %>
+    </div>
+
+    <% if announcement.ends_at > Date.today %>
+      <div class="col-md-3 action text-right">
+        <%= simple_form_for announcement, remote: true do |f| %>
+          <label class="checkbox inline">
+            Make Active? <%= f.check_box :active, class: 'submittable' %>
+          </label>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
