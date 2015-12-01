@@ -52,4 +52,5 @@ module LayoutHelper
     content_tag :div, heading_div + body_div, class: "panel #{styles}"
 
   end
+
 end
