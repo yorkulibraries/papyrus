@@ -80,7 +80,17 @@
       </div> <!-- container fluid -->
 
       <footer>
-        <p>&copy; Company 2015</p>
+        <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="small help-block"
+            title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user.last_active_at != nil %>">
+              &copy; 2011 - <%= Date.today.year %>. Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> </p>
+
+          </div>
+        </div>
+      </div>
+
       </footer>
     </div> <!-- page wrapper -->
   </div>
