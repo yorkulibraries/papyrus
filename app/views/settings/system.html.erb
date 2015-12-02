@@ -1,92 +1,54 @@
-<% title "System Settings" %>
-
-<% title_html do %>
-	<h1>System Settings</h1>
-<% end%>
-
-
-<% sidebar do %>
-  <h3>System Settings Help</h3>
-	<p class="alert alert-danger"><strong>Warning:</strong> Changing authentication settings might disable your access to Papyrus. Please be careful.</p>
-	<dl>
-		<dt>CAS Header</dt>
-		<dd>The name of the login HEADER used to authenticated <%= PapyrusSettings.app_name %> users. </dd>
-		<dt>Alternate CAS Header</dt>
-		<dd>The alternate name of the login HEADER used to authenticated <%= PapyrusSettings.app_name %> users.</dd>
-		<dt>User ID Label</dt>
-		<dd>A label used to describe the ID of the user.</dd>
-		<dt>Cookies Domain</dt>
-		<dd>The Domain used for creating login and session cookies</dd>
-		<dt>Logout Redirect URL</dt>
-		<dd>The logout url to which a user will be redirected after clicking logout link.</dd>
-		<hr/>
-		<dt>Error Email Subject Prefix</dt>
-		<dd>A prefix used on a error notification email.</dd>
-		<dt>Error Email From Address</dt>
-		<dd>Email Address used to identify <%= PapyrusSettings.app_name %> error emails.</dd>
-		<dt>Send Error Messages To</dt>
-		<dd>A list of email address used to notify about <%= PapyrusSettings.app_name %> errors.</dd>
-	</dl>
-<% end %>
-
-
-<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
-
-<h3>Authentication Settings</h3>
-<div class="standout">
-  <div class="row">
-    <div class="span4">
-      <%= f.label :auth_cas_header, "CAS Header"%>
-      <%= f.input :auth_cas_header, label: false, input_html: { class: "input-xlarge" }, hint: "Name of login header used by CAS" %>
-    </div>
-    <div class="span4">
-        <%= f.label :auth_cas_header_alt, "Alternate CAS Header" %>
-        <%= f.input :auth_cas_header_alt, label: false, input_html: { class: "input-xlarge" },
-         hint: "Alternate Name of login header used by CAS" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span4">
-      <%= f.label :auth_cas_user_id_label, "User ID Label"%>
-      <%= f.input :auth_cas_user_id_label, label: false, input_html: { class: "input-xlarge" }, hint: "Label used to describe a user's id" %>
-    </div>
-    <div class="span4">
-        <%= f.label :auth_cookies_domain, "Cookies Domain" %>
-        <%= f.input :auth_cookies_domain, label: false, input_html: { class: "input-xlarge" },
-         hint: "Domain used for cookies creation" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span8">
-      <%= f.label :auth_cas_logout_redirect, "Logout Redirect URL"%>
-      <%= f.input :auth_cas_logout_redirect, label: false, input_html: { class: "input-block-level" }%>
-    </div>
-  </div>
-
-</div>
-
-<h3>Error Notification</h3>
+<% title "System Settings", false %>
 
 <div class="row">
-  <div class="span8">
-    <%= f.label :errors_email_subject_prefix, "Error Email Subject Prerix"%>
-    <%= f.input :errors_email_subject_prefix, label: false, input_html: { class: "input-block-level" }%>
-  </div>
-</div>
-<div class="row">
-  <div class="span8">
-    <%= f.label :errors_email_from, "Error Email From Address"%>
-    <%= f.input :errors_email_from, label: false, input_html: { class: "input-block-level" } %>
-  </div>
-</div>
-<div class="row">
-  <div class="span8">
-    <%= f.label :errors_email_to, "Send Error Messages To"%>
-    <%= f.input :errors_email_to, as: :array, label: false,  input_html: { class: "input-block-level" }%>
-		<p class="small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
-  </div>
-</div>
+	<div class="col-md-8">
+		<%= panel(title: "System Settings", icon: "cog") do %>
+			<p class="alert alert-danger"><strong>Warning:</strong> Changing authentication settings might disable your access to Papyrus. Please be careful.</p>
+			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
 
-	<input type="hidden" name="return_to" value="system"/>
-	<%= f.submit "Save Settings", class: "btn btn-success" %>
-<% end %>
+				<h4 class="black">Authentication Settings</h4>
+
+	      <%= f.input :auth_cas_header, label: "CAS Header", hint: "Name of login header used by CAS" %>
+	      <%= f.input :auth_cas_header_alt, label: "Alternate CAS Header",
+	         hint: "Alternate Name of login header used by CAS" %>
+	      <%= f.input :auth_cas_user_id_label, label: "User ID Label", hint: "Label used to describe a user's id" %>
+	      <%= f.input :auth_cookies_domain, label: "Cookies Domain",
+	         hint: "Domain used for cookies creation" %>
+	      <%= f.input :auth_cas_logout_redirect, label: "Logout Redirect URL" %>
+				<h4 class="black">Error Notification</h4>
+
+		    <%= f.input :errors_email_subject_prefix, label: "Error Email Subject Prerix"%>
+		    <%= f.input :errors_email_from, label: "Error Email From Address" %>
+		    <%= f.input :errors_email_to, as: :array, label: "Send Error Messages To"%>
+				<p class="help-block small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
+
+				<input type="hidden" name="return_to" value="system"/>
+				<%= f.submit "Save Settings", class: "btn btn-success" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "System Settings Help", icon: "question") do %>
+
+			<dl>
+				<dt>CAS Header</dt>
+				<dd>The name of the login HEADER used to authenticated <%= PapyrusSettings.app_name %> users. </dd>
+				<dt>Alternate CAS Header</dt>
+				<dd>The alternate name of the login HEADER used to authenticated <%= PapyrusSettings.app_name %> users.</dd>
+				<dt>User ID Label</dt>
+				<dd>A label used to describe the ID of the user.</dd>
+				<dt>Cookies Domain</dt>
+				<dd>The Domain used for creating login and session cookies</dd>
+				<dt>Logout Redirect URL</dt>
+				<dd>The logout url to which a user will be redirected after clicking logout link.</dd>
+				<hr/>
+				<dt>Error Email Subject Prefix</dt>
+				<dd>A prefix used on a error notification email.</dd>
+				<dt>Error Email From Address</dt>
+				<dd>Email Address used to identify <%= PapyrusSettings.app_name %> error emails.</dd>
+				<dt>Send Error Messages To</dt>
+				<dd>A list of email address used to notify about <%= PapyrusSettings.app_name %> errors.</dd>
+			</dl>
+		<% end %>
+	</div>
+</div>
