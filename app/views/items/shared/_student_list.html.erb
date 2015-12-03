@@ -24,28 +24,40 @@
 <% end %>
 
 
-<div class="modal hide" id="assign_students_modal">
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">×</a>
-      <h3>Assign This Item To Students</h3>
-    </div>
-    <div class="modal-body">
-      <p>Type the name of the student in the box to search for students.</p>
-    <%= form_tag assign_to_students_item_path(@item) do %>
-      <p><input type="text" id="assign-students-list" name="student_ids"/></p>
-      <p>Expires at the end of <br/><%= collection_select(:expires_on, :date, Term.all, :end_date, :name, options ={:prompt => " Never"}, :class =>"terms") %></p>
-      <p><%= submit_tag "Give Access To These Students", :class => "btn" %></p>
-    <% end %>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">Close</a>
-    </div>
+<div class="modal modal-fade" id="assign_students_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag assign_to_students_item_path(@item) do %>
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h4 class="modal-title">Assign This Item To Students</h4>
+        </div>
+        <div class="modal-body">
+          <p>Type the name of the student in the box to search for students.</p>
+
+          <p><input type="text" id="assign-students-list" name="student_ids"/></p>
+          <p>Expires at the end of:</p>
+          <%= collection_select(:expires_on, :date, Term.all, :end_date, :name, options ={prompt: " Never"}, class: "terms form-control") %></p>
+
+
+        </div>
+        <div class="modal-footer">
+          <%= submit_tag "Give Access To These Students", class: "btn btn-success" %>
+          <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+        </div>
+      <% end %>
   </div>
+</div>
+
+</div>
 
 <script type="text/javascript">
   $(document).ready(function () {
+
+    $("#assign_students_modal").modal({show: false}).on('shown.bs.modal', function (e) {
       $("#assign-students-list").tokenInput("<%= search_students_path %>");
-    $("#assign_students_modal").modal({show: false});
+    });
+    
     $(".tooltips").tooltip();
   });
 </script>

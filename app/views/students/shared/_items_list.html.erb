@@ -1,8 +1,8 @@
 <%= panel(title: "Assigned Items", icon: "book", title_class: "panel-top text-center", styles:"panel-info") do %>
 
   <% unless student.inactive? %>
-    <a data-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-right">
-      <i class="icon-plus-sign icon-white"></i> Assign Items</a>
+    <a data-toggle="modal" href="#assign_items_modal" class="btn btn-primary">
+      <i class="fa-plus fa"></i> Assign Items</a>
   <% end %>
   <hr/>
   <ul class="list-unstyled" id="items">
@@ -12,3 +12,42 @@
   </ul>
 
 <% end %>
+
+<div id="assign_items_modal" class="modal modal-fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag assign_many_to_student_items_path(:student_id => @student) do |f| %>
+      <div class="modal-header">
+        <h4 class="modal-title">Assign Items To This Student</h4>
+      </div>
+      <div class="modal-body">
+        <p>To assign a new item to this student, search for the item in the search box.</p>
+
+          <p><input type="text" id="assign-items-list" name="item_ids" class="form-control"/></p>
+
+          <p>Expires at the end of</p>
+          <%= collection_select(:expires_on, :date, Term.active, :end_date, :name, options ={ prompt: " Never"}, class: "terms form-control") %>
+
+
+
+      </div>
+
+      <div class="modal-footer">
+        <%= submit_tag "Assign These Items", class: "btn btn-success" %>
+        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+	$("#assign_items_modal").modal({show: false}).on('shown.bs.modal', function (e) {
+    $("#assign-items-list").tokenInput("<%= search_items_path %>");
+  });
+});
+</script>

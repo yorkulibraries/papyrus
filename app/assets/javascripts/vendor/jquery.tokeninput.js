@@ -284,10 +284,11 @@ $.TokenList = function (input, url_or_data, settings) {
         .addClass(settings.classes.inputToken)
         .appendTo(token_list)
         .append(input_box);
-
+    
     // The list to store the dropdown items in
     var dropdown = $("<div>")
         .addClass(settings.classes.dropdown)
+        .width($(".token-input-list").outerWidth())
         .appendTo("body")
         .hide();
 

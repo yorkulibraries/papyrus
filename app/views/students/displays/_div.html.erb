@@ -107,7 +107,7 @@
 							<span class="fa fa-at fa-fw"></span>
 							<label>Welcome Email:</label>
 							<%  if @student.email_sent_at %>
-								Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %>
+								Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %></strong>
 							<% elsif  can?(:create, Student) %>
 								<%= link_to send_welcome_email_student_url(@student), method: :post, data: { disable_with: 'sending ...', confirm: "Are you sure?" }, class: "small" do %>
 									<i class="icon-envelope"></i>	Send Welcome Email

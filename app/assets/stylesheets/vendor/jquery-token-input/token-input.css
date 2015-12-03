@@ -1,12 +1,12 @@
 /* Example tokeninput style #1: Token vertical list*/
 ul.token-input-list {
-    overflow: hidden; 
-    height: auto !important; 
+    overflow: hidden;
+    height: auto !important;
     height: 1%;
-    width: 300px;
+    width: 100%;
     border: 1px solid #999;
     cursor: text;
-    font-size: 12px;
+    font-size: 18px;
     font-family: Verdana;
     z-index: 999;
     margin: 0;
@@ -22,7 +22,7 @@ ul.token-input-list li {
 
 ul.token-input-list li input {
     border: 0;
-    width: 350px;
+    width: 300px;
     padding: 3px 8px;
     background-color: white;
 	background-image: none;
@@ -30,8 +30,8 @@ ul.token-input-list li input {
 }
 
 li.token-input-token {
-    overflow: hidden; 
-    height: auto !important; 
+    overflow: hidden;
+    height: auto !important;
     height: 1%;
     margin: 3px;
     padding: 3px 5px;
@@ -67,17 +67,18 @@ li.token-input-selected-token span {
 
 div.token-input-dropdown {
     position: absolute;
-    width: 300px;
+    width: 520px;
     background-color: #fff;
     overflow: hidden;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     cursor: default;
-    font-size: 12px;
+    font-size: 18px;
     font-family: Verdana;
     z-index: 10000;
 }
+
 
 div.token-input-dropdown p {
     margin: 0;
@@ -95,6 +96,13 @@ div.token-input-dropdown ul li {
     background-color: #fff;
     padding: 3px;
     list-style-type: none;
+    color: #222;  font-size: 14px;
+}
+
+div.token-input-dropdown ul li span {
+  float: right; font-size: 12px;
+  color: #aaa;
+
 }
 
 div.token-input-dropdown ul li.token-input-dropdown-item {
@@ -113,4 +121,3 @@ div.token-input-dropdown ul li em {
 div.token-input-dropdown ul li.token-input-selected-dropdown-item {
     background-color: #d0efa0;
 }
-
