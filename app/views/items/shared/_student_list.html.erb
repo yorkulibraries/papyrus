@@ -5,16 +5,9 @@
   <hr/>
 
 
-  <ul class="list-unstyled list-info">
+  <ul class="list-unstyled list-info" id="students">
     <% item.students.unique_usernames.each do |student| %>
-    <li>
-      <span class="fa fa-user fa-fw"></span>
-      <%= link_to withhold_from_student_item_path(item, student_id: student.id), data: { confirm: 'Are you sure?' }, :method => :delete, :class => "tooltips close",
-      rel: "tooltip",  title: "Bar the student from accessing this item." do %>
-        &times;
-      <% end %>
-      <label><a href="<%= student_path(student) %>"><%= student.name %></a></label>
-    </li>
+      <%= render student, show: "li_item" %>
     <% end %>
   </ul>
 
@@ -27,7 +20,7 @@
 <div class="modal modal-fade" id="assign_students_modal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_tag assign_to_students_item_path(@item) do %>
+      <%= form_tag assign_to_students_item_path(@item), remote: true do %>
         <div class="modal-header">
           <a class="close" data-dismiss="modal">×</a>
           <h4 class="modal-title">Assign This Item To Students</h4>
@@ -57,7 +50,7 @@
     $("#assign_students_modal").modal({show: false}).on('shown.bs.modal', function (e) {
       $("#assign-students-list").tokenInput("<%= search_students_path %>");
     });
-    
+
     $(".tooltips").tooltip();
   });
 </script>
