@@ -18,13 +18,14 @@
 
 	</div>
 
-	<div id="url_form_holder" class="hide well"></div>
+	<div id="url_form_holder" class="hide"></div>
 
-	<div id="upload_form_holder" class="hide well">
+	<div id="upload_form_holder" class="hide">
 		<%= render partial: "attachments/upload_files"%>
 	</div>
 
-	<hr/>
+
+	<hr/>	
 	<%= form_tag delete_multiple_item_attachments_path(@item) do %>
 		<div id="attachments">
 				<% @item.attachments.available.each do |attachment| %>

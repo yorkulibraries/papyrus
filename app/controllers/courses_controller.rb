@@ -16,29 +16,38 @@ class CoursesController < ApplicationController
     item = Item.find(params[:item_id])
 
     course.add_item(item)
-    redirect_to courses_item_path(item), notice:  "Added this item to the course"
+    redirect_to item_path(item), notice:  "Added this item to the course"
   end
 
   def assign_to_item
-    item = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id])
     course_ids = params[:course_ids]
 
 
     course_ids.split(",").each do |id|
       course = Course.find(id)
-      course.add_item(item)
+      course.add_item(@item)
     end
 
-    redirect_to courses_item_path(item), notice:  "Assigned this courses to this item"
+    @courses_grouped = @item.courses.group_by { |c| { name: c.term.name, id: c.term.id } }
+
+    respond_to do |format|
+      format.html { redirect_to item_path(@item), notice:  "Assigned this courses to this item" }
+      format.js
+    end
   end
 
   def remove_item
     course = Course.find(params[:id])
-    item = Item.find(params[:item_id])
+    @item = Item.find(params[:item_id])
 
-    course.remove_item(item)
+    course.remove_item(@item)
+    @courses_grouped = @item.courses.group_by { |c| { name: c.term.name, id: c.term.id } }
 
-    redirect_to courses_item_path(item), alert: "Removed item from course"
+    respond_to do |format|
+      format.html { redirect_to item_path(@item), alert: "Removed item from course" }
+      format.js
+    end
   end
 
   def new

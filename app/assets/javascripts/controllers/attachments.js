@@ -26,7 +26,7 @@ function onStart(e,  files) {
 		html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="progress">Queued</span></li>';
 	}
 	 $(".formstone_upload_queue").show();
-	 $("#uploaded_attachments").show();
+	 $("#uploaded_attachments").removeClass("hide");
 
 	$filequeue.append(html);
 
@@ -59,4 +59,4 @@ function onFileComplete(e, file, response) {
 	}
 }
 
-function onFileError() { console.log("File Error: " + error) ;}
+function onFileError(error) { console.log("File Error: " + error) ;}
