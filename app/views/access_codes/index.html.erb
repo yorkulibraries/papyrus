@@ -9,7 +9,7 @@
 
 <% end %>
 
-<%= render partial: @student %>
+<%= render partial: @student, show: "div" %>
 
 <div class="student">
 	<%= render partial: "students/shared/subnav" %>
@@ -26,7 +26,7 @@
 
 		<div id="current_codes">
 			<% @active_access_codes.each do |access_code| %>
-				<%= render partial: access_code %>
+				<%= render access_code, show: "div" %>
 			<% end %>
 		</div>
 
