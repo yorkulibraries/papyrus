@@ -1,58 +1,67 @@
-<% title "Acquisition Requests for #{@item.title}" %>
-<% title_html do %>
-	<h1>Item Details - Acquisition Requests</h1>
-<% end%>
+<% title "Acquisition Requests / #{@item.title}", false %>
 
-<% sidebar do %>
-	<h3>Acquisition Requests</h3>
-	<p>You can see the acquisition requests made for this item.</p>
-	<% if can? :create, AcquisitionRequest %>
-		<p>To send a new acquisition request, click on the Make An Acquisition Request button.</p>
-	<% end %>
-<% end %>
-<%= render @item, show: "div" %>
-<div class="item-extended">
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Audit Trail / #{@item.title} ", icon: "list") do %>
+			<div class="item-header row">
+				<div class="col-md-8">
+					<h4>
+						<a class="btn btn-xs btn-default" href="<%= item_path(@item) %>" title="Back To Item Details">
+							<i class="fa fa-chevron-left"></i>
+						</a> &nbsp;
+						<%= @item.title %>
+					</h4>
+				</div>
+				<div class="col-md-4">
+					<h5 class="pull-right">
+							<%= link_to for_item_acquisition_requests_path(item_id: @item.id), class: "btn btn-primary btn-small", data: { confirm: "Are you sure?" } do %>
+								<i class="fa fa-plus"></i> Make An Acquisition Request
+							<% end %>
+					</h5>
+				</div>
+			</div>
+			<hr/>
+			<section id="acquisition_requests">
+				<h2>Acquisition Requests </h2>
 
-
-	<section id="acquisition_requests">
-		<h2>Acquisition Requests 	<%= link_to for_item_acquisition_requests_path(:item_id => @item.id), :class=>"btn btn-small", data: { confirm: "Are you sure?" } do %>Make An Acquisition Request<% end %></h2>
-
-		<div class="acquisition_requests well">
-			<% if @pending_acquisition_requests.size > 0 %>
-				<h5>Pending</h5>
-				<%  @pending_acquisition_requests.each do |acquisition_request| %>
-					<%= render acquisition_request %>
-				<% end %>
-			<% else %>
-				<p>You have no pending requests</p>
-			<% end %>
-		</div>
-
-
-		<div class="well acquisition_requests">
-			<h5>Recently Fulfilled</h5>
-			<% if @fulfilled_acquisition_requests.size > 0 %>
-				<%  @fulfilled_acquisition_requests.each do |acquisition_request| %>
-					<%= render acquisition_request %>
-				<% end %>
-			<% else %>
-				<p>You have no recently fulfilled requests</p>
-			<% end %>
-		</div>
+				<div class="acquisition_requests well">
+					<% if @pending_acquisition_requests.size > 0 %>
+						<h5>Pending</h5>
+						<%  @pending_acquisition_requests.each do |acquisition_request| %>
+							<%= render acquisition_request %>
+						<% end %>
+					<% else %>
+						<p>You have no pending requests</p>
+					<% end %>
+				</div>
 
 
-		<div class="well acquisition_requests">
-			<h5>Recently Cancelled</h5>
-			<% if @cancelled_acquisition_requests.size > 0 %>
+				<div class="well acquisition_requests">
+					<h5>Recently Fulfilled</h5>
+					<% if @fulfilled_acquisition_requests.size > 0 %>
+						<%  @fulfilled_acquisition_requests.each do |acquisition_request| %>
+							<%= render acquisition_request %>
+						<% end %>
+					<% else %>
+						<p>You have no recently fulfilled requests</p>
+					<% end %>
+				</div>
 
-				<%  @cancelled_acquisition_requests.each do |acquisition_request| %>
-					<%= render acquisition_request %>
-				<% end %>
 
-			<% else %>
-				<p>You have no recently cancelled requests</p>
-			<% end %>
-		</div>
+				<div class="well acquisition_requests">
+					<h5>Recently Cancelled</h5>
+					<% if @cancelled_acquisition_requests.size > 0 %>
 
-	</section>
+						<%  @cancelled_acquisition_requests.each do |acquisition_request| %>
+							<%= render acquisition_request %>
+						<% end %>
+
+					<% else %>
+						<p>You have no recently cancelled requests</p>
+					<% end %>
+				</div>
+
+			</section>
+		<% end %>
+	</div>
 </div>

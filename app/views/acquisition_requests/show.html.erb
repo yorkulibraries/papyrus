@@ -15,8 +15,8 @@
 
 <div class="acquisition_requests well">
 	<%= render partial: @acquisition_request %>
-	
-	
+
+
 	<table class="table no-border">
 		<% if  @acquisition_request.fulfilled? %>
 		<tr>
@@ -44,13 +44,13 @@
 </div>
 
 
-<% if @acquisition_request.item  %>	
+<% if @acquisition_request.item  %>
 	<% @item = @acquisition_request.item %>
-	
+
 	<%= render partial: @acquisition_request.item %>
 
 
-	
+
 	<section class="attachments">
 		<h2>
 			Attached Files
@@ -62,8 +62,7 @@
 		</div>
 
 		<% @item.attachments.available.each do |attachment| %>
-			<%= render partial: attachment %>
-		<% end %> 		
+			<%= render attachment, show: "div" %>
+		<% end %>
 	</section>
 <% end %>
-
