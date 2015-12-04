@@ -1,46 +1,42 @@
-<% title "#{@student.name} - Notes" %>
-<% title_html do %>
-	<h1>Notes <small>/ <%= @student.name %> </h1>
-<% end%>
-
-<% sidebar do %>
-	<%= render partial: "students/shared/sidebar"%>
-<% end %>
+<% title "Notes / #{@student.name}", false %>
 
 
-<%= render partial: @student %>
 
-<div class="student">
-	<%= render partial: "students/shared/subnav" %>
+<%= render @student, show: "div" %>
 
-	<section class="notes">
-		<h2>Notes <a data-toggle="modal" href="#new_note_form" class='btn btn-small float-right btn-primary'>
-			<i class="icon-plus-sign icon-white"></i> New Note</a>
-		</h2>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Notes", icon: "commenting-o") do %>
+		<section class="notes">
+			<h2>Notes <a data-toggle="modal" href="#new_note_form" class='btn btn-small float-right btn-primary'>
+				<i class="icon-plus-sign icon-white"></i> New Note</a>
+			</h2>
 
-		<div id="new_note_form" class="hide modal">
+			<div id="new_note_form" class="hide modal">
 
-			<div class="modal-header">
-				<h2>Add a new note</h2>
+				<div class="modal-header">
+					<h2>Add a new note</h2>
+				</div>
+				<div class="modal-body">
+					<% @note = Note.new %>
+					<%= render partial:  "notes/form"%>
+
+				</div>
+
+				<div class="modal-footer">
+					<a href="#" class="btn" data-dismiss="modal">Close</a>
+				</div>
 			</div>
-			<div class="modal-body">
-				<% @note = Note.new %>
-				<%= render partial:  "notes/form"%>
-
-			</div>
-
-			<div class="modal-footer">
-				<a href="#" class="btn" data-dismiss="modal">Close</a>
-			</div>
-		</div>
 
 
-		<table>
-			<% @notes.each do |note| %>
-				<%= render partial: note %>
-			<% end %>
+			<table>
+				<% @notes.each do |note| %>
+					<%= render partial: note %>
+				<% end %>
 
-		</table>
+			</table>
 
-	</section>
+		</section>
+		<% end %>
+	</div>
 </div>
