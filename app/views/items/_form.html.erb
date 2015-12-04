@@ -69,7 +69,7 @@
 		<hr/>
 
 	 	<%= f.button :submit,  @item.new_record? ? "Create Item" : "Update Item" , class: 'btn-primary' %>
-		<%= link_to 'Cancel', @item.new_record? ? items_path : item_path(@item), class: 'btn' %>
+		<%= link_to 'Cancel', @item.new_record? ? items_path : item_path(@item), class: 'btn btn-default' %>
 
 
 

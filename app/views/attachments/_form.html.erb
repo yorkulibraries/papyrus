@@ -1,36 +1,31 @@
-<%= simple_form_for [@item, @attachment], :html => {:multipart => true, :class => "form-horizontal standout"} do |f| %>
+<%= simple_form_for [@item, @attachment], html: {multipart: true } do |f| %>
 
-	<fieldset>
-		<div class="row">
-			<div class="span6">
-				<%= f.input :name, :hint => "The name of the file, i.e. Chapter One", :input_html => { :class => "span4" } %>
-				<%= f.error :name %>
-			</div>
+				<%= f.input :name, hint: "The name of the file, i.e. Chapter One", :input_html => { :class => "span4" } %>
+				<%= f.check_box :full_text %> Full Text Version
 
-			<div class="span6">
-				<%= f.input :full_text, :label => "Full Text version"%>
-			</div>
-
-			<div class="span6">
+				<hr/>
 				<%= f.label "Attached File" %>
-			<div class="controls">	<div id="file_name" class="<%= "hide" unless @attachment.file? %>">
+
+				<div id="file_name" class="<%= "hide" unless @attachment.file? %>">
 
 					<%= File.basename(@attachment.file_url) if @attachment.file? %>
 					<% if @attachment.file? %>
-						<br/><a href="#" onclick="$('#file_upload').show(); $(this).hide();">Change</a>
+						<br/><a href="#" onclick="$('#file_upload').removeClass('hide'); $(this).hide();">
+							Change <i class="fa fa-upload"></i>
+						</a>
 					<% end %>
 				</div>
 				<div id="file_upload" class="<%= "hide" if @attachment.file? %>">
-				   	<%= f.file_field :file %>
+				   <%= f.file_field :file %>
 
 					<%= f.hidden_field :file_cache %><br/>
 					<%= f.error :file %>
-				</div>		</div>
-			</div>
-		</div>
+				</div>
 
-		<div class="form-actions">
-			<%= f.button :submit, "Update File", :class => "btn btn-primary" %> <%= link_to "Cancel", item_path(@item), :class => "btn"%>
-		</div>
-	</fieldset>
+
+
+				<hr/>
+				<%= f.button :submit, "Update File", class: "btn btn-primary" %>
+				<%= link_to "Cancel", item_path(@item), class: "btn btn-default"%>
+
 <% end %>

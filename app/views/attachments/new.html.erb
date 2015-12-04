@@ -1,17 +1,13 @@
-<% title "Upload A File" %>
+<% title "Upload A File", false %>
 
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Upload New File for Item: #{@item.title} ", icon: "file") do %>
+		<%= link_to item_path(@item), class: "btn btn-primary btn-sm" do %> &laquo; Back to item details <% end %>
+		<hr/>
 
-<% title_html do %>
-	<%= link_to item_path(@item) do %> &laquo; Back to item details <% end %>
-<% end %>
+			<%= render 'form' %>
+		<% end %>
+	</div>
 
-
-<div id="single_attachment">
-	<h3>Upload New File</h3>
-	<%= render 'form' %>
 </div>
-
-
-
-
-
