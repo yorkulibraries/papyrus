@@ -1,7 +1,7 @@
 <% if local_assigns[:show] == "tr" %>
   <%= render partial: "students/displays/tr", locals: { student: student } %>
 <% elsif local_assigns[:show] == "li" %>
-    <%= render partial: "students/displays/li", locals: { student: student } %>
+    <%= render partial: "students/displays/li", locals: { student: student, show_gravatar: local_assigns[:show_gravatar] } %>
 <% elsif local_assigns[:show] == "li_item" %>
     <%= render partial: "students/displays/li_item", locals: { student: student } %>
 <% elsif local_assigns[:show] == "div" %>

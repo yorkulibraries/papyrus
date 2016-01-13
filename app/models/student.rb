@@ -30,6 +30,11 @@ class Student < User
                              }
   scope :unique_usernames, -> { group("username") }
 
+  scope :recently_worked_with, lambda { |user_id|
+    joins("INNER JOIN audits ON (audits.auditable_id = users.id OR audits.associated_id = users.id) AND (audits.auditable_type = 'User' OR audits.associated_type = 'StudentDetails')")
+    .where("audits.user_id = ?", user_id).reorder("audits.created_at desc").group("users.id") }
+
+
   def to_csv
     [id, name, email, student_details.student_number, student_details.formats.join(", "), student_details.cds_counsellor, created_at]
   end
@@ -44,7 +49,7 @@ class Student < User
     return self.student_details
   end
 
-  def formats_array 
+  def formats_array
     formats_array = Array.new
     formats_array.push "PDF" if self.details.format_pdf
     formats_array.push "KURZWEIL" if self.details.format_kurzweil

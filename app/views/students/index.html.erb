@@ -9,7 +9,7 @@
 
 			<ul class="list-unstyled">
 				<% @students.each do |student| %>
-					<%= render student, show: "li" %>
+					<%= render student, show: "li", show_gravatar: true %>
 				<% end %>
 			</ul>
 
