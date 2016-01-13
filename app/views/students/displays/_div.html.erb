@@ -13,6 +13,13 @@
 						<% if student.inactive? %>
 							<span class="btn btn-danger">Inactive Account</span>
 						<% end %>
+
+						<% unless current_page?(student_path(@student)) %>
+							<a class="btn btn-sm btn-default" title="Back to Student Details" href="<%= student_path(@student) %>">
+								<i class="fa fa-chevron-left"></i>
+							</a>
+						<% end %>
+
 						<a class="btn btn-sm btn-default" title="Login As Student" href="<%= admin_student_view_path(@student) %>">
 							<i class="fa fa-share"></i>
 						</a>
