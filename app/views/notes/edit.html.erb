@@ -1,15 +1,15 @@
 <% title "Edit Note" %>
 
-<% title_html do %>
-	<%= link_to @student do %>
-		&laquo; Back to student details
-	<% end %>
-<% end %>
 
-<% stylesheet "forms" %>
-<%= simple_form_for [@student, @note] do |f| %>
-  <%= f.label :note, "Update a note about #{@student.name}" %>
-  <%= f.input :note, :label => false %><br/>
-  <%= f.button :submit %>
-<% end %>
-
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Edit Note", icon: "commenting-o") do %>
+			<%= simple_form_for [@student, @note] do |f| %>
+			  <%= f.label :note, "Update a note about #{@student.name}" %>
+			  <%= f.input :note, :label => false %><br/>
+			  <%= f.button :submit, class: "btn btn-success"%> 
+				<%= link_to "Cancel", student_notes_path(@student), class: "btn btn-link" %>
+			<% end %>
+		<% end %>
+	</div>
+</div>

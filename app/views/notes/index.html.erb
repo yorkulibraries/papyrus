@@ -8,8 +8,10 @@
 	<div class="col-md-12">
 		<%= panel(title: "Notes", icon: "commenting-o") do %>
 		<section class="notes">
-			<h2>Notes <a data-toggle="modal" href="#new_note_form" class='btn btn-small float-right btn-primary'>
-				<i class="fa-plus fa"></i> New Note</a>
+			<h2>
+				<a data-toggle="modal" href="#new_note_form" class='btn btn-small float-right btn-primary'>
+					<i class="fa-plus fa"></i> New Note
+				</a>
 			</h2>
 
 			<div id="new_note_form"class="modal modal-fade">
@@ -33,7 +35,7 @@
 			</div>
 
 
-			<table class="table">
+			<table class="table" id="notes">
 				<% @notes.each do |note| %>
 					<%= render partial: note %>
 				<% end %>
