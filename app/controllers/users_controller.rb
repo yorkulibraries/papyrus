@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def audit_trail
     @user = User.not_students.find(params[:id])
     @audits = @user.audits
-    @audits.sort! { |a, b| a.created_at <=> b.created_at }
+    # @audits.sort! { |a, b| a.created_at <=> b.created_at } # not used here 
 
     @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
   end

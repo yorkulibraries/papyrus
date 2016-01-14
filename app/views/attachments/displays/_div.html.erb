@@ -55,7 +55,7 @@
 					<br/>
 					<% if attachment.is_url? %>
 						<span title="<%= attachment.url %>">	<%= truncate(attachment.url, length: 45) %></span>
-							<span class="text-muted"><%= "Access Code Required" if attachment.access_code_required? %></span>
+							<span class="red"><%= "Access Code Required" if attachment.access_code_required? %></span>
 						<% else %>
 							<span class="text-muted">File size: <%= number_to_human_size attachment.file.file.size %></span>
 					<% end %>
