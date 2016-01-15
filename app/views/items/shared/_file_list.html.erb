@@ -25,8 +25,8 @@
 	</div>
 
 
-	<hr/>	
-	<%= form_tag delete_multiple_item_attachments_path(@item) do %>
+	<hr/>
+	<%= form_tag delete_multiple_item_attachments_path(@item), id: "delete_multiple_form" do %>
 		<div id="attachments">
 				<% @item.attachments.available.each do |attachment| %>
 					<%= render attachment, show: "div" %>
@@ -40,7 +40,8 @@
 			<i class="fa fa-trash"></i> Delete multiple files
 		</a>
 
-		<a href="#" class="submit_delete_multiple hide btn btn-link red"><i class="fa fa-trash"></i> Delete these files?</a>
+		<a href="#" class="submit_delete_multiple hide btn btn-link red">
+			<i class="fa fa-trash"></i> Delete these files?</a>
 		<a href="#" class="cancel_delete_multiple hide btn btn-link green">&times; Cancel</a>
 
 	</div>
