@@ -1,15 +1,18 @@
-<% title "My Access Codes" %>
+<% title "My Access Codes", false %>
 
-<div class="student">
-	<section class="access_codes">
-		<h2>Active Access Codes</h2>
+<div class="row">
+	<div class="col-md-12 access_codes">
+		<%= panel(title: "My Access Codes", icon: "lock") do %>
 
-		<% (@student.access_codes.active + AccessCode.active.shared).each do |access_code| %>
-			<%= render partial: access_code %>
+			<ul id="current_codes" class="list-unstyled">
+				<% (@student.access_codes.active + AccessCode.active.shared).each do |access_code| %>
+					<%= render access_code, show: "li" %>
+				<% end %>
+			</ul>
+			<% if (@student.access_codes.active.size + AccessCode.active.shared.size)== 0 %>
+				<p>You currently do not have any <strong>active</strong> access codes.</p>
+			<% end %>
+
 		<% end %>
-	</section>
-
-	<% if (@student.access_codes.active.size + AccessCode.active.shared.size)== 0 %>
-		<p>You currently do not have any <strong>active</strong> access codes.</p>
-	<% end %>
+	</div>
 </div>

@@ -16,11 +16,17 @@
       <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
+              <% if @current_user.type == Student.to_s %>
+                <%= render partial: "student_view/student_menu" %>
+              <% end %>
+
+              <% if can? :read, Item %>
+
               <li class="<%= "active" if controller_name == "home" %>">
                   <a href="<%= dashboard_path %>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
               </li>
 
-              <% if can? :read, Item %>
+
               <li class="<%= "active" if controller_name == "items"%>">
                   <a href="<%= items_path %>"><i class="fa fa-fw fa-book"></i> Items</a>
               </li>
