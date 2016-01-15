@@ -3,19 +3,21 @@
 <div class="row">
 	<div class="col-md-12">
 		<%= panel(title: "Item Usage") do %>
-			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>" class="pull-right btn btn-default">
+			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>" class="pull-right btn">
 				<i class="fa fa-table"></i> Download Exel
 			</a>
 			<%= render partial: "stats/shared/nav_menu" %>
 
-			<h5>Date Range</h5>
+
 
 			<form action="<%= stats_item_usage_path %>" method="get" class="simple_form">
 				<%= render partial: "stats/shared/form_fields" %>
 			</form>
 
-			<h4>Assigned Items <small><%= @assigned_items.count %> (showing first 10)</small></h4>
-			<p>Total Items <strong><%= @items_count%></strong></p>
+			<hr/>
+
+			<h4>Assigned Items <span class="label label-primary"><%= @assigned_items.count %></span></h4>
+			<p>Number Of All Items: <strong><%= @items_count%></strong></p>
 			<table class="table table-striped">
 				<tr>
 					<th>Item Title</th>
@@ -34,11 +36,15 @@
 					</tr>
 				<% end %>
 			</table>
-			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
+			<p class="text-muted small">Showing first 10 items</p>
+
+			<a class="btn" href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
 				<i class="fa fa-table"></i> Download Exel
 			</a>
 
-			<h4>Not Assigned Items <small><%= @unassigned_items.count%> (showing first 10)</small></h4>
+			<hr/>
+
+			<h4>Not Assigned Items <span class="label label-primary"><%= @unassigned_items.count%></span></h4>
 
 			<table class="table table-striped">
 				<tr>
@@ -56,7 +62,10 @@
 					</tr>
 				<% end %>
 			</table>
-			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
+
+			<p class="text-muted small">Showing first 10 items</p>
+
+			<a class="btn" href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
 				<i class="fa fa-table"></i> Download Exel
 			</a>
 

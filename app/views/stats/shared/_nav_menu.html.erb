@@ -1,7 +1,14 @@
-<div class="nav">
-	<%= link_to "Reports Home", stats_path %> |
-	<%= link_to "Assigned Students", stats_assigned_students_path %> |
-	<%= link_to "Items Usage", stats_item_usage_path %> |
-	<%= link_to "Items History", stats_items_history_path %>
-</div>
-<hr/>
+<ul class="nav nav-tabs">
+	<li class="<%= 'active' if is_action?("index") %>">
+		<%= link_to "Reports Home", stats_path %>
+	</li>
+	<li class="<%= 'active' if is_action?("assigned_students") %>">
+		<%= link_to "Assigned Students", stats_assigned_students_path %>
+	</li>
+	<li class="<%= 'active' if is_action?("item_usage") %>">
+		<%= link_to "Items Usage", stats_item_usage_path %>
+	</li>
+	<li class="<%= 'active' if is_action?("items_history") %>">
+		<%= link_to "Items History", stats_items_history_path %>
+	</li>
+</ul>

@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<%= panel(title: "Reports Home") do %>
-			<a href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>" class="btn btn-default pull-right">
+			<a href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>" class="btn pull-right">
 				<i class="fa fa-table"></i> Download Exel
 			</a>
 			<%= render partial: "stats/shared/nav_menu" %>
@@ -12,7 +12,10 @@
 				<%= render partial: "stats/shared/form_fields" %>
 			</form>
 
-			<h4>Items Added between [<%= @start_date %> and <%= @end_date %>] <small><%= @items.count %> (showing first 10)</small></h4>
+			<hr/>
+
+			<h4>Items Added between [<%= @start_date %> and <%= @end_date %>]
+				<span class="label label-primary"><%= @items.count %></span></h4>
 			<p>Number Of All Items: <strong><%= @items_count%></strong></p>
 			<table class="table table-striped">
 				<tr>
@@ -34,7 +37,9 @@
 					</tr>
 				<% end %>
 			</table>
-			<a href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>">
+			<p class="text-muted small">Showing first 10 items</p>
+
+			<a class="btn" href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>">
 				<i class="fa fa-table"></i> Download Exel
 			</a>
 

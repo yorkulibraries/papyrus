@@ -5,37 +5,70 @@
 		<%= panel(title: "Reports Home") do %>
 			<%= render partial: "stats/shared/nav_menu" %>
 
+			<br/>
+
 			<div class="row">
 				<div class="col-md-4">
-					<h3>Item Statistics</h3>
-					<dl>
-						<dt>Total Number of Items</dt>
-						<dd><%= Item.count %></dd>
-						<dt>Items with Files Attached</dt>
-						<dd><%= @has_attachments_count %></dd>
-						<dt>Items Assigned to Students</dt>
-						<dd><%= @has_students_count %></dd>
-					</dl>
+
+					<ul class="list-group">
+						<li class="list-group-item disabled">
+							<span class="strong black">Item Statistics</span>
+						</li>
+					  <li class="list-group-item">
+					    <span class="badge"><%= Item.count %></span>
+					    Total Number of Items
+					  </li>
+						<li class="list-group-item">
+					    <span class="badge"><%= @has_attachments_count %></span>
+					    Items with Files Attached
+					  </li>
+						<li class="list-group-item">
+					    <span class="badge"><%= @has_students_count %></span>
+					    Items Assigned to Students
+					  </li>
+					</ul>
+
 				</div>
 				<div class="col-md-4">
-					<h3>Student Statistics</h3>
-					<dl>
-						<dt>Total Number of Students</dt>
-						<dd><%= Student.count %></dd>
-						<dt>Active Students</dt>
-						<dd><%= Student.active.count %></dd>
-						<dt>Inactive Students</dt>
-						<dd><%= Student.inactive.count %></dd>
-					</dl>
+
+					<ul class="list-group">
+						<li class="list-group-item disabled">
+							<span class="strong black">Student Statistics</span>
+						</li>
+						<li class="list-group-item">
+							<span class="badge"><%= Student.count %></span>
+							Total Number of Students
+						</li>
+						<li class="list-group-item">
+							<span class="badge"><%= Student.active.count %></span>
+							Active Students
+						</li>
+						<li class="list-group-item">
+							<span class="badge"><%= Student.inactive.count %></span>
+							Inactive Students
+						</li>
+					</ul>
+
 				</div>
 				<div class="col-md-4">
-					<h3>Miscellaneous Statistics</h3>
-					<dl>
-						<dt>Number of Papyrus Users</dt>
-						<dd><%= User.not_students.count %> (<%= User.not_students.active.count%> active, <%= User.not_students.inactive.count %> inactive)</dd>
-						<dt>Number Courses &amp; Terms</dt>
-						<dd><%= Course.count%> courses, <%= Term.count %> terms</dd>
-					</dl>
+
+					<ul class="list-group">
+						<li class="list-group-item disabled">
+							<span class="strong black">Miscellaneous Statistics</span>
+						</li>
+						<li class="list-group-item">
+							<span class="badge"><%=  User.not_students.active.count %></span>
+				 			Active Papyrus Users
+						</li>
+						<li class="list-group-item">
+							<span class="badge"><%= User.not_students.inactive.count %></span>
+							Inactive Papyrus Users
+						</li>
+						<li class="list-group-item">
+							<span class="badge"> <%= Term.count %> | <%= Course.count %> </span>
+							Terms and Courses
+						</li>
+					</ul>
 				</div>
 			</div>
 

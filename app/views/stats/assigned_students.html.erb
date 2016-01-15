@@ -12,9 +12,12 @@
 				<%= render partial: "stats/shared/student_form_fields" %>
 			</form>
 
-			<h4>Assigned Students <small><%= @students.count %></small></h4>
+			<hr/>
 
-			<a href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>"><i class="icon-table"></i> Download Exel </a>
+			<h4>Assigned Students <span class="label label-primary"><%= @students.count %></span>
+				<a class="pull-right btn btn-sm" href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>">
+					<i class="fa fa-table"></i> Download Exel </a>
+			</h4>
 
 			<table class="table results">
 				<tr>
