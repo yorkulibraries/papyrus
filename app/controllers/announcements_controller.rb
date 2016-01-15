@@ -3,7 +3,7 @@ class AnnouncementsController < ApplicationController
   authorize_resource
 
   def index
-    @announcements = Announcement.current
+    @announcements = Announcement.non_expired
     @expired_announcements = Announcement.expired.limit(20)
   end
 

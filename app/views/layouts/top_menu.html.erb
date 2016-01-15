@@ -81,7 +81,14 @@
   <% end %>
 
   <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-bell"></i> <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <% Announcement.active.current(nil, @current_user.type).each do |announcement| %>
+            <%= render announcement, show: "li" %>
+        <% end %>
+      </ul>
   </li>
 
   <li class="dropdown">
