@@ -84,6 +84,9 @@ group :development, :test do
   gem "ruby-prof"
   gem "turn"
 
-  gem 'seed_dump'
+
 
 end
+
+## SPECIAL SEED DUMP TO GET DATA OUT
+gem 'seed_dump'
