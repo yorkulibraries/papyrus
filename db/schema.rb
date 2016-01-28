@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20151105154821) do
     t.datetime "updated_at",                        null: false
   end
 
+  add_index "acquisition_requests", ["item_id"], name: "acquisition_requests_index_acquisition_requests_on_item_id"
   add_index "acquisition_requests", ["item_id"], name: "index_acquisition_requests_on_item_id"
 
   create_table "announcements", force: :cascade do |t|
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 20151105154821) do
     t.boolean  "access_code_required",             default: false
   end
 
+  add_index "attachments", ["item_id", "deleted"], name: "attachments_index_attachments_on_item_id_and_deleted"
   add_index "attachments", ["item_id", "deleted"], name: "index_attachments_on_item_id_and_deleted"
 
   create_table "audits", force: :cascade do |t|
@@ -86,9 +88,14 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "audits", ["associated_id", "associated_type"], name: "associated_index"
+  add_index "audits", ["associated_id", "associated_type"], name: "audits_associated_index"
   add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index"
+  add_index "audits", ["auditable_id", "auditable_type"], name: "audits_auditable_index"
+  add_index "audits", ["created_at"], name: "audits_index_audits_on_created_at"
   add_index "audits", ["created_at"], name: "index_audits_on_created_at"
+  add_index "audits", ["request_uuid"], name: "audits_index_audits_on_request_uuid"
   add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid"
+  add_index "audits", ["user_id", "user_type"], name: "audits_user_index"
   add_index "audits", ["user_id", "user_type"], name: "user_index"
 
   create_table "courses", force: :cascade do |t|
@@ -100,6 +107,7 @@ ActiveRecord::Schema.define(version: 20151105154821) do
     t.integer  "items_count",             default: 0, null: false
   end
 
+  add_index "courses", ["term_id"], name: "courses_index_courses_on_term_id"
   add_index "courses", ["term_id"], name: "index_courses_on_term_id"
 
   create_table "item_connections", force: :cascade do |t|
@@ -111,8 +119,13 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "item_connections", ["expires_on", "item_id"], name: "ic_e_i_index"
+  add_index "item_connections", ["expires_on", "item_id"], name: "item_connections_ic_e_i_index"
+  add_index "item_connections", ["expires_on", "item_id"], name: "item_connections_index_item_connections_on_expires_on_and_item_id"
   add_index "item_connections", ["expires_on", "student_id"], name: "ic_e_s_index"
+  add_index "item_connections", ["expires_on", "student_id"], name: "item_connections_ic_e_s_index"
+  add_index "item_connections", ["expires_on", "student_id"], name: "item_connections_index_item_connections_on_expires_on_and_student_id"
   add_index "item_connections", ["student_id", "item_id", "expires_on"], name: "ic_s_i_e_index"
+  add_index "item_connections", ["student_id", "item_id", "expires_on"], name: "item_connections_ic_s_i_e_index"
 
   create_table "item_course_connections", force: :cascade do |t|
     t.integer  "item_id"
@@ -122,6 +135,7 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "item_course_connections", ["course_id", "item_id"], name: "icc_c_i_index"
+  add_index "item_course_connections", ["course_id", "item_id"], name: "item_course_connections_icc_c_i_index"
 
   create_table "items", force: :cascade do |t|
     t.string   "title",                limit: 255
@@ -155,6 +169,7 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "notes", ["student_id"], name: "index_notes_on_student_id"
+  add_index "notes", ["student_id"], name: "notes_index_notes_on_student_id"
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",        limit: 255, null: false
@@ -166,6 +181,7 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
+  add_index "settings", ["thing_type", "thing_id", "var"], name: "settings_index_settings_on_thing_type_and_thing_id_and_var"
 
   create_table "student_details", force: :cascade do |t|
     t.integer  "student_id"
@@ -195,7 +211,12 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "student_details", ["student_id"], name: "index_student_details_on_student_id"
+  add_index "student_details", ["transcription_assistant_id"], name: "student_details_ta_id"
+  add_index "student_details", ["transcription_assistant_id"], name: "student_details_transcription_assistant_index"
   add_index "student_details", ["transcription_assistant_id"], name: "ta_id"
+  add_index "student_details", ["transcription_coordinator_id", "transcription_assistant_id"], name: "student_details_transcription_user_ids"
+  add_index "student_details", ["transcription_coordinator_id"], name: "student_details_tc_id"
+  add_index "student_details", ["transcription_coordinator_id"], name: "student_details_transcription_coordinator_index"
   add_index "student_details", ["transcription_coordinator_id"], name: "tc_id"
 
   create_table "students", force: :cascade do |t|
@@ -218,6 +239,7 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "terms", ["end_date"], name: "index_terms_on_end_date"
+  add_index "terms", ["end_date"], name: "terms_index_terms_on_end_date"
 
   create_table "users", force: :cascade do |t|
     t.string   "username",           limit: 255
@@ -237,7 +259,10 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "users", ["inactive", "role"], name: "index_users_on_inactive_and_role"
+  add_index "users", ["inactive", "role"], name: "users_index_users_on_inactive_and_role"
+  add_index "users", ["inactive", "type"], name: "users_active_users_by_type"
   add_index "users", ["inactive"], name: "index_users_on_inactive"
+  add_index "users", ["inactive"], name: "users_active_users"
   add_index "users", ["type", "inactive"], name: "index_users_on_type_and_inactive"
   add_index "users", ["username"], name: "index_users_on_username"
 
