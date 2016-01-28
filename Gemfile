@@ -84,4 +84,6 @@ group :development, :test do
   gem "ruby-prof"
   gem "turn"
 
+  gem 'seed_dump'
+
 end

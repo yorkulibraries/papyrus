@@ -239,6 +239,9 @@ GEM
       sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
     scrub_rb (1.0.1)
+    seed_dump (3.2.4)
+      activerecord (>= 4)
+      activesupport (>= 4)
     shellany (0.0.1)
     shoulda (3.5.0)
       shoulda-context (~> 1.0, >= 1.0.1)
@@ -349,6 +352,7 @@ DEPENDENCIES
   ruby-prof
   rubyzip (= 0.9.9)
   sass-rails (~> 4.0.0)
+  seed_dump
   shoulda (= 3.5)
   shoulda-context
   shoulda-matchers
