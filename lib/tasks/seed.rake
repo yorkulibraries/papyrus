@@ -4,7 +4,7 @@ namespace :db do
       filename = Dir["#{ENV['FILE']}"][0]
       if File.exist?(filename)
         puts "Seeding #{filename}..."
-        #load(filename) if File.exist?(filename)
+        load(filename)
       else
         puts "#{filename} not found"
       end
