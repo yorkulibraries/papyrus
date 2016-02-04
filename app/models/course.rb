@@ -34,4 +34,9 @@ class Course < ActiveRecord::Base
      Course.joins(:term).where("terms.end_date >= '#{Date.today}'").where("courses.title like ? OR courses.code like ? ", q_like, q_like)
   end
 
+  def short_name
+    chunks = self[:code].split("_")
+    return "#{chunks[2]} #{chunks[4]}"
+  end
+
 end

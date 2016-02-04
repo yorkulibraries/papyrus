@@ -7,13 +7,13 @@ module LayoutHelper
     content_for(:title) { h(page_title.to_s) }
     @show_title = show_title
   end
-  
+
   def title_html(&block)
     content_for(:title_html) do
       yield block
     end
   end
-  
+
   def show_title?
     @show_title
   end
@@ -25,18 +25,32 @@ module LayoutHelper
   def javascript(*args)
     content_for(:head) { javascript_include_tag(*args) }
   end
-  
-  
+
+
   def splash_section(&block)
-     content_for (:splash_section) do 
+     content_for (:splash_section) do
          yield block
-     end 
+     end
   end
-  
-  
+
+
   def sidebar(&block)
-     content_for (:sidebar) do 
+     content_for (:sidebar) do
          yield block
-     end 
+     end
   end
+
+  def panel(title:, title_class: "panel-heading", icon: 'th', icon_class: '', styles: 'panel-default', &block)
+    icon_tag = content_tag(:i, "", class: "fa fa-#{icon} #{icon_class}")
+    title_tag = content_tag(:strong, icon_tag + " #{title}")
+
+    heading_div = content_tag(:div, title_tag, class: "#{title_class}")
+    body_div = content_tag :div, class: "panel-body" do
+      yield block
+    end
+
+    content_tag :div, heading_div + body_div, class: "panel #{styles}"
+
+  end
+
 end

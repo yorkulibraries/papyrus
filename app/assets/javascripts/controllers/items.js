@@ -18,31 +18,30 @@ $(document).ready(function() {
 
 
 	$("a.delete_multiple").click(function() {
-		$(".attachment .attachment-actions").hide();
-		$(".attachment .select-multiple").show();
+		$(".attachment .actions").hide();
+		$(".attachment .select-multiple").removeClass("hide");
 		$(this).hide();
-		$("a.cancel_delete_multiple").show();
-		$("a.submit_delete_multiple").show();
+		$("a.cancel_delete_multiple, a.submit_delete_multiple").removeClass("hide");
+		$("").show();
 		return false;
 	})
 
 
 	$("a.cancel_delete_multiple").click(function() {
-		$(".attachment .attachment-actions").show();
-		$(".attachment .select-multiple").hide();
-		$(this).hide();
+		$(".attachment .actions").show();
+		$(".attachment .select-multiple").addClass("hide");
+
 		$("a.delete_multiple").show();
-		$("a.submit_delete_multiple").hide();
+		$("a.submit_delete_multiple, a.cancel_delete_multiple").addClass("hide");
 		return false;
 	});
 
 	$("a.submit_delete_multiple").click(function() {
 		var result = confirm("Are you sure?");
 		if (result) {
-			$(this).closest('form').submit();
-		} else {
-			return false;
+			$("#delete_multiple_form").submit();
 		}
+    return false;
 	});
 
 

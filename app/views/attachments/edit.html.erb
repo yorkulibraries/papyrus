@@ -1,18 +1,29 @@
 <% if @attachment.is_url? %>
-	<% title "Update URL" %>
+	<% title "Update URL", false %>
 
-	<% title_html do %>
-		<h1><%= @item.title %> <small>Update URL</small></h1>
-	<% end %>
 
-	<%= render 'form_url' %>
-	
+
+	<div class="row">
+	  <div class="col-md-12">
+	    <%= panel(title: "Update Url for Item:  #{@item.title} ", icon: "link") do %>
+	      <%= render 'form_url' %>
+	    <% end %>
+	  </div>
+
+	</div>
+
+
 <% else %>
-	<% title "Update File" %>
+	<% title "Update File", false %>
 
-	<% title_html do %>
-		<h1><%= @item.title %> <small>Update File</small></h1>
-	<% end %>
 
-	<%= render 'form' %>
+	<div class="row">
+	  <div class="col-md-12">
+	    <%= panel(title: "Update File for Item: #{@item.title} ", icon: "file") do %>
+	      <%= render 'form' %>
+	    <% end %>
+	  </div>
+
+	</div>
+
 <% end %>

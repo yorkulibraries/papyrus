@@ -62,7 +62,7 @@ class CoursesControllerTest < ActionController::TestCase
       assert_difference "ItemCourseConnection.count", 1 do
         post :add_item, :term_id => @term.id, :id => @course.id, :item_id => item.id
       end
-      assert_redirected_to courses_item_path(item)
+      assert_redirected_to item_path(item)
     end
 
 
@@ -72,7 +72,7 @@ class CoursesControllerTest < ActionController::TestCase
 
       assert_difference "ItemCourseConnection.count", -1 do
         post :remove_item, :term_id => @term.id, :id => @course.id, :item_id => item.id
-        assert_redirected_to courses_item_path(item)
+        assert_redirected_to item_path(item)
       end
     end
 
@@ -85,7 +85,7 @@ class CoursesControllerTest < ActionController::TestCase
         post :assign_to_item, :term_id => @term.id, :course_ids => "#{@course.id}, #{course2.id}", :item_id => item.id
       end
 
-      assert_redirected_to courses_item_path(item)
+      assert_redirected_to item_path(item)
     end
 
     should "fail assign_to_item if teim_id is missing" do

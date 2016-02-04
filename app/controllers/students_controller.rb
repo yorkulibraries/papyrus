@@ -79,6 +79,12 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @items = @student.current_items
     @items_grouped = @items.group_by { |i| i.item_type }
+
+    @active_access_codes = @student.access_codes.active
+    @shared_codes = AccessCode.shared.active
+    @active_access_codes += @shared_codes
+
+    @expired_access_codes = @student.access_codes.expired
   end
 
   def audit_trail

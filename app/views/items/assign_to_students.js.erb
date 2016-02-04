@@ -1,0 +1,4 @@
+<% @students.each do |student| %>
+  $("#students").prepend('<%=escape_javascript render student, show: "li_item" %>')
+<% end %>
+$('#assign_students_modal').modal('hide');

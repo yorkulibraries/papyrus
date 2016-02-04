@@ -1,26 +1,26 @@
-<% title "#{@student.name} - Audit Trail" %>
-<% title_html do %>
-	<h1>Audit Trail <small>/ <%= @student.name %></small></h1>
-<% end%>
-
-
-<% sidebar do %>
-
-	<%= render partial: "students/shared/sidebar"%>
-
-<% end %>
-
-<%= render partial: @student %>
-
-<div class="student">
-	<%= render partial: "students/shared/subnav" %>
-
-	<section class="audit_trail">
-		<h2>Audit Trail
-			<a href="<%= audit_trail_student_path(@student, format: "xlsx") %>"><i class="icon-table"></i> Exel </a>
-		</h2>
-
-		<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>
-	</section>
-
+<% title "Audit Trail / #{@student.name}", false %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Audit Trail / #{@student.name} ", icon: "list") do %>
+			<div class="student-header row">
+				<div class="col-md-10">
+					<h4>
+						<a class="btn btn-xs btn-default" href="<%= student_path(@student) %>" title="Back To Student Details">
+							<i class="fa fa-chevron-left"></i>
+						</a>
+						<%= @student.name %>
+					</h4>
+				</div>
+				<div class="col-md-2">
+					<h5>
+						<a href="<%= audit_trail_student_path(@student, format: "xlsx") %>" class="pull-right">
+							<i class="fa fa-table"></i> Download Exel
+						</a>
+					</h5>
+				</div>
+			</div>
+			<hr/>
+			<%= render partial:"audit_trail/trail", locals: {audits_grouped: @audits_grouped} %>
+		<% end %>
+	</div>
 </div>

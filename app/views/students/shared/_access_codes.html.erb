@@ -1,0 +1,43 @@
+<%= panel(title: "Access Codes", icon: "lock", title_class: "panel-top text-center", styles:"panel-warning") do %>
+
+  <%= link_to  new_student_access_code_path(@student), class: "btn btn-small btn-primary", data: { remote: true } do %>
+  <i class="fa fa-plus"></i> New Access Code
+  <% end %>
+
+  <hr/>
+  <div id="access_code_form_holder"></div>
+
+
+  <section class="access_codes">
+
+    <ul id="current_codes" class="list-unstyled">
+      <% @active_access_codes.each do |access_code| %>
+        <%= render partial: access_code, locals: { show: "li" } %>
+      <% end %>
+    </ul>
+
+
+    <% if @active_access_codes.size == 0 %>
+      <div class="blank-slate">
+        <i class="fa fa-lock red"></i>
+        <h4>There are no active access codes.</h4>
+        <p>Click on the <strong>New Access Code</strong> button to add one.</p>
+      </div>
+    <% end %>
+
+
+    <div class="expired_codes">
+      <% if @expired_access_codes.size > 0 %>
+      <h5 class="black">Recently Expired Access Codes</h5>
+      <% end %>
+
+      <ul class="list-unstyled">
+        <% @expired_access_codes.each do |access_code| %>
+          <%= render partial: access_code, locals: { show: "li" } %>
+        <% end %>
+      </ul>
+    </div>
+
+  </section>
+
+<% end %>

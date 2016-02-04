@@ -18,6 +18,7 @@ class Announcement < ActiveRecord::Base
 
   ## SCOPES
   scope :expired, -> {  where("ends_at < ?", Date.today) }
+  scope :non_expired, -> { where("ends_at >= ?", Date.today)}
   scope :active, -> { where("active = ?", true) }
 
 

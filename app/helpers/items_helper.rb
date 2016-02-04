@@ -1,5 +1,5 @@
 module ItemsHelper
-  
+
   def display_icon(type)
     if type == Item::BOOK
       "book"
@@ -11,22 +11,22 @@ module ItemsHelper
       "flag"
     end
   end
-  
+
   def format_field(field)
     if field.blank?
-      content_tag(:span, "Not filled in...", class: "weak")
+      content_tag(:span, "n/a", class: "not-filled-in")
     else
       field
     end
   end
-  
-  
+
+
   def isbn_for_image_cover(item)
     begin
       item.isbn.split(",").first.gsub(/[^0-9]+/, '')
     rescue
       ""
-    end    
+    end
   end
-  
+
 end

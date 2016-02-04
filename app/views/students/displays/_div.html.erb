@@ -1,0 +1,150 @@
+<div class="row student">
+	<div class="col-md-12 student" id="student_<%= student.id %>" data-id="<%= student.id %>">
+		<%= panel(title: "Student Details", icon: "user") do %>
+			<div class="student-header row">
+				<div class="col-md-8">
+					<h3>
+						<%= gravatar(student.email, style: "mm", force: true, size: "20") %>
+						<%= student.name %>
+					</h3>
+				</div>
+				<div class="col-md-4">
+					<div class="pull-right">
+						<% if student.inactive? %>
+							<span class="btn btn-danger">Inactive Account</span>
+						<% end %>
+
+						<% unless current_page?(student_path(@student)) %>
+							<a class="btn btn-sm btn-default" title="Back to Student Details" href="<%= student_path(@student) %>">
+								<i class="fa fa-chevron-left"></i>
+							</a>
+						<% end %>
+
+						<a class="btn btn-sm btn-default" title="Login As Student" href="<%= admin_student_view_path(@student) %>">
+							<i class="fa fa-share"></i>
+						</a>
+						<a class="btn btn-sm btn-default <%= is_action?("notes", "btn-primary") %>" href="<%= student_notes_path(@student) %>" title="Notes">
+							<i class="fa fa-commenting-o"></i>
+						</a>
+
+						<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_student_path(student) %>" title="Audit Trail">
+							<i class="fa fa-list"></i>
+						</a>
+						<% if is_controller_and_action?("students", "show") && can?(:edit, student) %>
+							<a class="btn btn-sm btn-success" href="<%= edit_student_path(student) %>">
+								<i class="fa fa-edit"></i> Make Changes
+							</a>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-envelope fa-fw"></span>
+							<label>Email</label>
+							<%= format_field student.email %>
+						</li>
+						<li>
+							<span class="fa fa-square fa-fw"></span>
+							<label>Student ID</label>
+							<%= format_field student.details.student_number %>
+						</li>
+						<li>
+							<span class="fa fa-map-signs fa-fw"></span>
+							<label>Coordinator</label>
+							<%= format_field student.details.coordinator.name rescue nil %>
+						</li>
+						<li>
+							<span class="fa fa-adn fa-fw"></span>
+							<label>Assistant</label>
+							<%= format_field student.details.assistant.name rescue nil %>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-phone fa-fw"></span>
+							<label>Preferred Phone</label>
+							<%= format_field student.details.preferred_phone %>
+						</li>
+
+						<li>
+							<span class="fa fa-sticky-note fa-fw"></span>
+							<label>Counsellor</label>
+							<%= format_field student.details.cds_counsellor %>
+						</li>
+						<li>
+							<span class="fa fa-envelope-o fa-fw"></span>
+							<label>Counsellor Email</label>
+							<%= format_field student.details.cds_counsellor_email %>
+						</li>
+						<li>
+							<span class="fa fa-language fa-fw"></span>
+							<label>Format</label>
+								<% student.formats_array.each do | format| %>
+									<span class="tag"><%= format.downcase %></span>
+								<% end %>
+								<% unless @student.details.format_note.blank? %>
+									<a href="#" class="btn btn-link grey popover-link" data-content="<%= @student.details.format_note %>" data-original-title="Format Note" rel="popover">
+										<i class="icon-info-sign"></i>
+									</a>
+								<% end %>
+						</li>
+
+
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-laptop fa-fw"></span>
+							<label>Lab Access:</label>
+							<%= format_field student.details.accessibility_lab_access? ? "Yes" : "No" %>
+						</li>
+						<li>
+							<span class="fa fa-clone fa-fw"></span>
+							<label>Book Retrieval:</label>
+							<%= format_field student.details.book_retrieval? ? "Yes" : "No"  %>
+						</li>
+						<li>
+							<span class="fa fa-at fa-fw"></span>
+							<label>Welcome Email:</label>
+							<%  if @student.email_sent_at %>
+								Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %></strong>
+							<% elsif  can?(:create, Student) %>
+								<%= link_to send_welcome_email_student_url(@student), method: :post, data: { disable_with: 'sending ...', confirm: "Are you sure?" }, class: "small" do %>
+									<i class="icon-envelope"></i>	Send Welcome Email
+								<% end %>
+							<% end %>
+
+						</li>
+						<li>
+							<span class="fa fa-map fa-fw"></span>
+							<label>Orientation:</label>
+							<% if @student.details.requires_orientation? %>
+
+								<%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") if @student.details.orientation_completed_at != nil %>
+
+								<%  if @student.details.orientation_completed_at == nil && can?(:create, Student)  %>
+									<%= link_to complete_orientation_student_path(@student), disable_with: 'completing ...', class: "small", confirm: "Completing this orientation will record today's date. Are you sure?" do %>
+										<i class="icon-certificate"></i>	Complete orientation
+									<% end %>
+								<% end %>
+
+							<% else %>
+								Orientation Not Required
+							<% end %>
+
+						</li>
+					</ul>
+				</div>
+			</div>
+
+
+		<% end %>
+	</div>
+</div>

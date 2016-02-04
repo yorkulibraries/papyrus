@@ -6,19 +6,19 @@
 
 <% sidebar do %>
 
-	
+
 	<h3>Assign Item to a Course</h3>
 	<div>
-		
+
 		<p>Type the name of the course.</p>
-		<%= form_tag assign_to_item_term_courses_path(1) do %>	
+		<%= form_tag assign_to_item_term_courses_path(1) do %>
 			<input type="hidden" name="item_id" value="<%= @item.id %>"/>
-			<p><input type="text" id="assign-to-course-list" name="course_ids"/></p>	
+			<p><input type="text" id="assign-to-course-list" name="course_ids"/></p>
 			<p><%= submit_tag "Assign to course", :class => "btn" %></p>
 		<% end %>
 	</div>
 
-	
+
 	<script type="text/javascript">
 	$(document).ready(function () {
 	    $("#assign-to-course-list").tokenInput("<%= search_courses_terms_path %>");
@@ -27,25 +27,26 @@
 <% end %>
 
 
-<%= render partial: @item %>	
+<%= render partial: @item %>
 <div class="item-extended">
 	<%= render partial: "items/shared/subnav"%>
-	
+
 	<section class="courses">
 		<h2>Courses</h2>
 
 		<% @course_grouped.each do |term, courses| %>
 			<h3><%= term %></h3>
-	
+
 			<ul class="thumbnails">
-				<% courses.each do |course|%>   	 	
-					<li class="span4">	
+				<% courses.each do |course|%>
+					<li class="span4">
 						<%= render partial: course %>
 				    </li>
 				<% end %>
 	    	</ul>
-		
+
 		<% end %>
+		
 	</section>
-	
+
 </div>

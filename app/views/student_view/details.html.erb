@@ -1,67 +1,104 @@
-<% title "My Details" %>
+<% title "My Details", false %>
 
 
-<div class="student">
-
-	<h1><%= @student.name %></h1>
-	<div class="attributes row">
-			<div class="span2 key">email: </div><div class="span3 value"><%= @student.email %></div>
-			<div class="span2 key">phone: </div><div class="span3 value"><%= @student.details.preferred_phone %></div>
-	</div>
-	<div class="attributes row">
-			<div class="span2 key">Student Number: </div><div class="span3 value"><%=  @student.details.student_number %></div>
-			<div class="span2 key">Username: </div><div class="span3 value"> <%=  @student.username %></div>
-	</div>
-	<div class="attributes row">
-			<div class="span2 key top-border">Coordinator: </div><div class="span3 value top-border">
-				<%= format_field @student.details.coordinator.name rescue nil %><br/>
-				<span class="weak"><%= @student.details.coordinator.email %></span>
-			</div>
-			<div class="span2 key top-border">Assistant: </div><div class="span3 value top-border">
-				<%= format_field @student.details.assistant.name rescue nil %><br/>
-				<span class="weak"><%= @student.details.assistant.email %></span>
-			</div>
-	</div>
-	<div class="attributes row">
-			<div class="span2 key">CDS Councellor:</div><div class="span3 value"><%= @student.details.cds_counsellor %></div>
-			<div class="span2 key">Preferred Format:</div><div class="span3 value">
-				<% formats_array = Array.new %>
-				<% formats_array.push "PDF" if @student.details.format_pdf %>
-				<% formats_array.push "KURZWEIL" if @student.details.format_kurzweil %>
-				<% formats_array.push "DAISY" if @student.details.format_daisy %>
-				<% formats_array.push "BRAILLE" if @student.details.format_braille %>
-				<% formats_array.push "WORD" if @student.details.format_word %>
-				<% formats_array.push "LARGE PRINT" if @student.details.format_large_print %>
-				<div>
-					<% formats_array.each do | format| %>
-						<span class="tag"><%= format.downcase %></span>
-					<% end %>
+<div class="row">
+	<div class="col-md-12 student">
+		<%= panel(title: "My Details", icon: "user") do %>
+			<div class="student-header row">
+				<div class="col-md-12">
+					<h3>
+						<%= gravatar(@student.email, style: "mm", force: true, size: "20") %>
+						<%= @student.name %>
+					</h3>
 				</div>
 			</div>
-	</div>
 
-	<div class="attributes row">
-			<div class="span2 key top-border">Welcome Email: </div>
-			<div class="span3 value top-border">
-				<%  if @student.email_sent_at %>
-					Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %>
-				<% else %>
-					Not sent yet
-				<% end %>
+			<div class="row">
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-envelope fa-fw"></span>
+							<label>Email</label>
+							<%= format_field @student.email %>
+						</li>
+						<li>
+							<span class="fa fa-square fa-fw"></span>
+							<label>Student ID</label>
+							<%= format_field @student.details.student_number %>
+						</li>
+						<li>
+							<span class="fa fa-map-signs fa-fw"></span>
+							<label>Coordinator</label>
+							<%= format_field @student.details.coordinator.name rescue nil %>
+						</li>
+						<li>
+							<span class="fa fa-adn fa-fw"></span>
+							<label>Assistant</label>
+							<%= format_field @student.details.assistant.name rescue nil %>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-phone fa-fw"></span>
+							<label>Preferred Phone</label>
+							<%= format_field @student.details.preferred_phone %>
+						</li>
+
+						<li>
+							<span class="fa fa-sticky-note fa-fw"></span>
+							<label>Counsellor</label>
+							<%= format_field @student.details.cds_counsellor %>
+						</li>
+						<li>
+							<span class="fa fa-envelope-o fa-fw"></span>
+							<label>Counsellor Email</label>
+							<%= format_field @student.details.cds_counsellor_email %>
+						</li>
+						<li>
+							<span class="fa fa-language fa-fw"></span>
+							<label>Format</label>
+								<% @student.formats_array.each do | format| %>
+									<span class="tag"><%= format.downcase %></span>
+								<% end %>
+								<% unless @student.details.format_note.blank? %>
+									<a href="#" class="btn btn-link grey popover-link" data-content="<%= @student.details.format_note %>" data-original-title="Format Note" rel="popover">
+										<i class="icon-info-sign"></i>
+									</a>
+								<% end %>
+						</li>
+
+
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-laptop fa-fw"></span>
+							<label>Lab Access:</label>
+							<%= format_field @student.details.accessibility_lab_access? ? "Yes" : "No" %>
+						</li>
+						<li>
+							<span class="fa fa-clone fa-fw"></span>
+							<label>Book Retrieval:</label>
+							<%= format_field @student.details.book_retrieval? ? "Yes" : "No"  %>
+						</li>
+						<li>
+							<span class="fa fa-at fa-fw"></span>
+							<label>Welcome Email:</label>
+							<%  if @student.email_sent_at %>
+								Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %></strong>
+							<% elsif  can?(:create, Student) %>
+								<%= link_to send_welcome_email_student_url(@student), method: :post, data: { disable_with: 'sending ...', confirm: "Are you sure?" }, class: "small" do %>
+									<i class="icon-envelope"></i>	Send Welcome Email
+								<% end %>
+							<% end %>
+
+						</li>						
+					</ul>
+				</div>
 			</div>
-			<div class="span2 key top-border">Orientation: </div>
-			<div class="span3 value top-border">
-				<% if @student.details.requires_orientation? %>
-
-					<%= @student.details.orientation_completed_at.strftime(" %b %d, %Y") if @student.details.orientation_completed_at != nil %>
-
-					<%  if @student.details.orientation_completed_at == nil && can?(:create, Student)  %>
-						Orientation Pending
-					<% end %>
-
-				<% else %>
-					Orientation Not Required
-				<% end %>
-			</div>
+		<% end %>
 	</div>
 </div>

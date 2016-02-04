@@ -1,36 +1,9 @@
-<div class="announcement row" id="announcement_<%= announcement.id %>">
-
-  <div class="span7">
-    <span class="highlight"><%= announcement.message %></span>
-    <br/>
-    <span class="recede">
-      <i class="icon-calendar"></i> From
-      <%= announcement.starts_at.strftime("%b %d, %Y") rescue nil %> to
-      <%= announcement.ends_at.strftime("%b %d, %Y") rescue nil %>
-    </span>
-
-  </div>
-
-  <div class="span2">
-    <span class="highlight"><i class="icon-bullhorn"></i> <%= announcement.audience %>s</span><br/>
-    <span class="recede">
-      By <%= announcement.user.name %>
-    </span>
-  </div>
-
-  <% if announcement.ends_at > Date.today %>
-  <div class="span2">
-    <br/>
-    <span class="highlight">
-      <%= simple_form_for announcement, remote: true do |f| %>
-        <label class="checkbox inline"><%= f.check_box :active, class: 'submittable' %> Active?</label>
-        <%= link_to announcement_path(announcement), method: :delete, class: "red float-right", title: "Remove", data: {remote: true, confirm: "Are you sure?"} do %>
-        <i class="icon-remove"></i>
-        <% end %>
-      <% end %>
-
-    </span>
-
-  </div>
-  <% end %>
-</div>
+<% if local_assigns[:show] == "tr" %>
+  <%= render partial: "announcements/displays/tr", locals: { announcement: announcement } %>
+<% elsif local_assigns[:show] == "li" %>
+    <%= render partial: "announcements/displays/li", locals: { announcement: announcement } %>
+<% elsif local_assigns[:show] == "div" %>
+  <%= render partial: "announcements/displays/div", locals: { announcement: announcement } %>
+<% else %>
+  <%= render partial: "announcements/displays/public", locals: { announcement: announcement } %>
+<% end %>

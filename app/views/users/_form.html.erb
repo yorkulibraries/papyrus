@@ -1,18 +1,16 @@
 
 <%= simple_form_for @user, html: { class: "form-horizontal" } do |f| %>
 
-	<div class="standout">
+
 		<%= f.input :first_name, required: false %>
-		<%= f.input :last_name, required: false %>		
+		<%= f.input :last_name, required: false %>
 	  <%= f.input :username, hint: username_hint, required: false %>
 		<%= f.input :email, hint:  email_hint, required: false %>
 
 	  <%= f.input :role, collection: User::ROLES, required: false %>
-	</div>
+		<hr/>
+		<%= f.button :submit, class: "btn btn-primary" %>		
+		<%= link_to "Cancel", users_path, class: "btn btn-default" %>
 
-	<hr/>
-	<div style="text-align: right;">
-		<%= f.button :submit, class: "btn btn-primary" %> <%= link_to "Cancel", users_path, class: "btn " %>
-	</div>
 
 <% end %>

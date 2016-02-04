@@ -1,7 +1,16 @@
-<% title "Create New School Term" %>
+<% title "Create New School Term", false %>
 
-<% title_html do %>
-	<h1>New School Term</h1>
-<% end %>
 
-<%= render 'form' %>
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Create New School Term", icon: "edit") do %>
+			<%= render 'form' %>
+		<% end %>
+	</div>
+
+	<div class="col-md-4">
+		<%= panel(title: "Help", icon: "question") do %>
+			<p>Terms are used to group courses and assign expiry dates.</p>
+		<% end %>
+	</div>
+</div>

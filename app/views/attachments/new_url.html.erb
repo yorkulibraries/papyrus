@@ -1,12 +1,14 @@
-<% title "Add a URL" %>
+<% title "Add a URL", false %>
 
 
-<% title_html do %>
-	<%= link_to item_path(@item) do %> &laquo; Back to item details <% end %>
-<% end %>
 
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Add a URL for Item:  #{@item.title} ", icon: "link") do %>
+			<%= link_to item_path(@item), class: "btn btn-primary btn-sm" do %> &laquo; Back to item details <% end %>
+			<hr/>
+			<%= render 'form_url' %>
+		<% end %>
+	</div>
 
-<div id="single_attachment">
-	<h3>Add A URL</h3>
-	<%= render 'form_url' %>
 </div>

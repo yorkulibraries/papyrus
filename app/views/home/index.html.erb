@@ -1,38 +1,34 @@
-<% title "Home" %>
-<% title_html do %>
-	<h1>Dashboard</h1>
-<% end %>
+<% title "Dashboard", false %>
 
 <div class="row">
-	<div class="span6">
-		<h4>Recent Items</h4>
-		<% if @recently_worked_with_items.size == 0  %>
-			<span class="trivial">	You have not worked on any items recently.</span>
-		<% else %>
+	<div class="col-md-6">
+		<%= panel(title: "Recent Items", icon: "book") do  %>
 
-			<table class="items">
-				<tr class="heading">
-					<th class="hidden-phone"></th>
-					<th>title</th>
-					<th>author</th>
-					<th class="hidden-phone"><i class="icon-user"></i></th>
-					<th class="hidden-phone"><i class="icon-file-alt"></i></th>
+			<table class="table">
+				<tr>
+					<th>Title</th>
+					<th>Author</th>
+					<th><i class="fa fa-user"></i></th>
+					<th><i class="fa fa-file"></i></th>
 				</tr>
+				<% if @recently_worked_with_items.size == 0  %>
+					<tr class="item" id="item_<%= item.id %>">
+						<td colspan="4">	You have not worked on any items recently.</td>
+					</tr>
+				<% end %>
+
 				<% @recently_worked_with_items.each_with_index do |item, index| %>
 					<tr class="item" id="item_<%= item.id %>">
-						<td class="icon  hidden-phone" title="<%= item.item_type %>" data-id="<%= item.id %>">
-							<i class="icon-<%= display_icon(item.item_type) %>"></i>
-						</td>
-						<td class="title">
+						<td>
 							<%= link_to_unless controller.action_name == "show", item.title, item_path(item) do %><%= item.title %><% end %>
 						</td>
-						<td class="extra hidden-phone">
+						<td>
 							<%= format_field item.author %>
 						</td>
-						<td class="students hidden-phone">
+						<td>
 							<%= item.students.count %>
 						</td>
-						<td class="files hidden-phone">
+						<td>
 							<%= item.attachments.available.count %>
 						</td>
 					</tr>
@@ -41,29 +37,13 @@
 			</table>
 		<% end %>
 	</div>
-	<div class="span5">
-		<h4>My Students <small><%= @students.size %></small></h4>
-
-
-		<div class="students">
-			<div class="list-group">
+	<div class="col-md-6">
+		<%= panel(title: "My Students", icon: "users") do  %>
+			<ul class="list-unstyled">
 				<% @students.each do |student| %>
-				  <div  class="list-group-item <%= cycle("odd", "even") %>">
-							<%= image_tag "icons/user_default.png", class: "pull-left" %>
-							<span class="badge badge-success"><%= pluralize(@current_items_counts[student.id], "item")%></span>
-				     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a></h4>
-				     <p class="list-group-item-text">
-							<span class="trivial weak">Email: </span><%= student.email %>
-							<span class="trivial weak">Phone: </span><%= student.student_details.preferred_phone %>
-						</p>
-				   </div>
-				 <% end %>
-			</div>
-		</div>
-
-
-		<% if @students.size == 0  %>
-			<span class="trivial">	You have no students assigned to you.</span>
+					<%= render student, show: "li" %>
+				<% end %>
+			</ul>			
 		<% end %>
 	</div>
 </div>

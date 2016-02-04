@@ -1,0 +1,48 @@
+<%= panel(title: "Files & URLs", icon: "file", title_class: "panel-top text-center", styles:"panel-success") do %>
+	<div class="clearfix">
+		<a id="upload_files_button" href="#" class="btn btn-sm btn-primary"
+			data-toggle-visible="#upload_form_holder">
+				<i class="fa fa-upload"></i> Upload Files
+		</a>
+
+		<a href="<%= url_for new_item_attachment_path(@item, url: true) %>" class="btn btn-sm btn-default" data-remote="true">
+			<i class="fa fa-link"></i> Add a URL
+		</a>
+
+		<div class="pull-right">
+			<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-sm btn-default hidden-phone">
+				<i class="fa fa-download"></i> Download Zipped
+			</a>
+		</div>
+
+
+	</div>
+
+	<div id="url_form_holder" class="hide"></div>
+
+	<div id="upload_form_holder" class="hide">
+		<%= render partial: "attachments/upload_files"%>
+	</div>
+
+
+	<hr/>
+	<%= form_tag delete_multiple_item_attachments_path(@item), id: "delete_multiple_form" do %>
+		<div id="attachments">
+				<% @item.attachments.available.each do |attachment| %>
+					<%= render attachment, show: "div" %>
+				<% end %>
+		</div>
+	<% end %>
+
+	<hr/>
+	<div class="pull-right">
+		<a href="#" class="delete_multiple btn btn-link red">
+			<i class="fa fa-trash"></i> Delete multiple files
+		</a>
+
+		<a href="#" class="submit_delete_multiple hide btn btn-link red">
+			<i class="fa fa-trash"></i> Delete these files?</a>
+		<a href="#" class="cancel_delete_multiple hide btn btn-link green">&times; Cancel</a>
+
+	</div>
+<% end %>

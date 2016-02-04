@@ -1,0 +1,18 @@
+<% title "Search Items", false %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Search #{@search_results.humanize } Items", icon: "book") do %>
+			<%= render partial: "search/search_box_items" %>
+
+			<% if  @search_results == "local" %>
+				<%= render template: "search/papyrus_results"%>
+			<% elsif @search_results == BibRecord::VUFIND %>
+				<%= render  template: "search/vufind_search_results"%>
+			<% elsif @search_results == BibRecord::WORLDCAT %>
+					<%= render  template: "search/worldcat_search_results"%>
+			<% end %>
+
+		<% end %>
+	</div>
+</div>

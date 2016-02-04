@@ -1,8 +1,21 @@
 /*
-*= require_tree ./plugins
+*
+* VENDOR CSS
+*
+*= require ./vendor/bootstrap.min
+*= require ./vendor/formstone.upload.css
+*= require ./vendor/jquery.autocomplete.css
+*= require_tree ./vendor/jquery-token-input
 *= require bootstrap_and_overrides
-*= require plugin_overrides
-*= require common
-*= require layout
-*= require_tree ./controllers
+*= require font-awesome
+*= require jquery-ui
+*
+* THEME - BOOTSTRAP3
+*
+*= require themes/bootstrap3/base_theme
+*= require themes/bootstrap3/layout
+*= require themes/bootstrap3/components
+*= require themes/bootstrap3/forms
+*= require themes/bootstrap3/common
+*= require_tree ./themes/bootstrap3/controllers
 */

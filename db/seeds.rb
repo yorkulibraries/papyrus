@@ -6,11 +6,12 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-# admin user 
+# admin user
 admin = User.new
 admin.username = "admin"
 admin.email = "admin@library-test.ca"
-admin.name = "Admin User"
+admin.first_name = "Admin"
+admin.last_name = "User"
 admin.role = User::ADMIN
 admin.inactive = false
-admin.save
+admin.save(validate: false)

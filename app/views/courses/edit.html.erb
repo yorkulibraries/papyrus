@@ -1,22 +1,43 @@
-<% title "Edit Course" %>
-<% title_html do %>
-		<h1>Edit School Course - <%= @term.name %> Term</h1>
-<% end %>
+<% title "Edit Course", false %>
 
 
-<%= render 'form' %>
-
-
-<section class="items">
-	<h2>Assigned Items</h2>
-	
-	<% if @course.items.count == 0 %>
-		<p>No Items Have Been Assigned Yet</p>
-	<% end %>
-	<ul>
-		<% @course.items.each do |item| %>
-			<li><%= link_to item.title, item_path(item) %></li>
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Edit Course For - #{@term.name}", icon: "university") do %>
+			<%= link_to term_path(@term), class: "btn btn-default btn-sm" do %>&laquo; Term Details<% end %>
+			<hr/>
+			<%= render 'form' %>
 		<% end %>
-	</ul>
-	
-</section>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "Help", icon: "question") do %>
+			<p>Courses are used to organize items in student view.</p>
+			<p>
+				<a href="<%= PapyrusSettings.course_lookup_url %>" target="_blank" class="green"> Look up courses &raquo;</a>
+			</p>
+			<hr/>
+			<% unless @course.new_record? %>
+				<div class="float-right">
+					<%= link_to "Delete This Course ?", [@term, @course], confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Assigned Items", icon: "book") do %>
+
+			<% if @course.items.count == 0 %>
+				<p>No Items Have Been Assigned Yet</p>
+			<% end %>
+			<ul>
+				<% @course.items.each do |item| %>
+					<li><%= link_to item.title, item_path(item) %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	</div>
+</div>

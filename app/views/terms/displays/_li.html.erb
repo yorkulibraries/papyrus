@@ -1,0 +1,15 @@
+<li class="term" id="term_<%= term.id %>" data-id="<%= term.id %>">
+  <div class="row">
+      <div class="col-md-8">
+          <%= link_to "#{term.name}", term %>
+          <small>
+            <strong>Spans</strong> <i class="fa fa-calendar"></i>
+            <%= term.start_date.strftime("%b %d, %Y") %> - <%= term.end_date.strftime("%b %d, %Y") %>
+          </small>
+      </div>
+      <div class="col-md-4">
+          <span class="small strong">Active Courses</span><br/>
+          <span class="tag-item"><%= pluralize(term.courses.count, "Course") %></span>
+      </div>
+  </div>
+</li>

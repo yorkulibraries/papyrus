@@ -1,22 +1,20 @@
-<% title "#{@user.name} - Audit Trail" %>
-<% title_html do %>
-	<h1><%= @user.name %> - Audit Trail
-		<% if @user.inactive? %>
-			<span class="red">Inactive</span>
+
+<% title "Audit Trail / #{@user.name}", false %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Audit Trail / #{@user.name} ", icon: "list") do %>
+			<div class="student-header row">
+				<div class="col-md-10">
+					<h4>
+						<a class="btn btn-xs btn-default" href="<%= users_path() %>" title="Back To Student Details">
+							<i class="fa fa-chevron-left"></i>
+						</a>
+						<%= @user.name %>
+					</h4>
+				</div>
+			</div>
+			<hr/>
+			<%= render partial:"audit_trail/trail", locals: {audits_grouped: @audits_grouped} %>
 		<% end %>
-	</h1>
-<% end%>
-
-<%= link_to users_path do %>
-	<i class="icon-arrow-left"></i> Back to User's list
-<% end %>
-
-<div class="student-extended">
-
-	<section id="audit_trail">
-		<h2>Audit Trail</h2>
-
-		<%= render partial:"audit_trail/trail", locals: {:audits_grouped => @audits_grouped}%>
-	</section>
-
+	</div>
 </div>

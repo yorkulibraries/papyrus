@@ -14,14 +14,14 @@
 ActiveRecord::Schema.define(version: 20151105154821) do
 
   create_table "access_codes", force: :cascade do |t|
-    t.string   "for",           limit: 255
-    t.string   "code",          limit: 255
+    t.string   "for"
+    t.string   "code"
     t.date     "expires_at"
     t.integer  "student_id"
     t.integer  "created_by_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.boolean  "shared",                    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "shared",        default: false
   end
 
   create_table "acquisition_requests", force: :cascade do |t|
@@ -35,54 +35,54 @@ ActiveRecord::Schema.define(version: 20151105154821) do
     t.integer  "cancelled_by_id"
     t.date     "cancelled_by_date"
     t.text     "notes"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "acquisition_requests", ["item_id"], name: "index_acquisition_requests_on_item_id"
 
   create_table "announcements", force: :cascade do |t|
     t.text     "message"
-    t.string   "audience",   limit: 255
-    t.boolean  "active",                 default: false
+    t.string   "audience"
+    t.boolean  "active",     default: false
     t.integer  "user_id"
     t.datetime "starts_at"
     t.datetime "ends_at"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "attachments", force: :cascade do |t|
-    t.string   "name",                 limit: 255
+    t.string   "name"
     t.integer  "item_id"
-    t.string   "file",                 limit: 255
-    t.boolean  "full_text",                        default: false
-    t.boolean  "deleted",                          default: false
-    t.integer  "user_id",                          default: 0
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-    t.boolean  "is_url",                           default: false
-    t.string   "url",                  limit: 255
-    t.boolean  "access_code_required",             default: false
+    t.string   "file"
+    t.boolean  "full_text",            default: false
+    t.boolean  "deleted",              default: false
+    t.integer  "user_id",              default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_url",               default: false
+    t.string   "url"
+    t.boolean  "access_code_required", default: false
   end
 
   add_index "attachments", ["item_id", "deleted"], name: "index_attachments_on_item_id_and_deleted"
 
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
-    t.string   "auditable_type",  limit: 255
+    t.string   "auditable_type"
     t.integer  "associated_id"
-    t.string   "associated_type", limit: 255
+    t.string   "associated_type"
     t.integer  "user_id"
-    t.string   "user_type",       limit: 255
-    t.string   "username",        limit: 255
-    t.string   "action",          limit: 255
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
     t.text     "audited_changes"
-    t.integer  "version",                     default: 0
-    t.string   "comment",         limit: 255
-    t.string   "remote_address",  limit: 255
+    t.integer  "version",         default: 0
+    t.string   "comment"
+    t.string   "remote_address"
     t.datetime "created_at"
-    t.string   "request_uuid",    limit: 255
+    t.string   "request_uuid"
   end
 
   add_index "audits", ["associated_id", "associated_type"], name: "associated_index"
@@ -92,12 +92,12 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   add_index "audits", ["user_id", "user_type"], name: "user_index"
 
   create_table "courses", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.string   "code",        limit: 255
+    t.string   "title"
+    t.string   "code"
     t.integer  "term_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "items_count",             default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "items_count", default: 0, null: false
   end
 
   add_index "courses", ["term_id"], name: "index_courses_on_term_id"
@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 20151105154821) do
     t.integer  "item_id"
     t.integer  "student_id"
     t.date     "expires_on"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "item_connections", ["expires_on", "item_id"], name: "ic_e_i_index"
@@ -117,30 +117,30 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   create_table "item_course_connections", force: :cascade do |t|
     t.integer  "item_id"
     t.integer  "course_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "item_course_connections", ["course_id", "item_id"], name: "icc_c_i_index"
 
   create_table "items", force: :cascade do |t|
-    t.string   "title",                limit: 255
-    t.string   "unique_id",            limit: 255
-    t.string   "item_type",            limit: 255
-    t.string   "callnumber",           limit: 255
-    t.string   "author",               limit: 255
-    t.integer  "user_id",                          default: 0
-    t.string   "isbn",                 limit: 255
-    t.string   "published_date",       limit: 255
-    t.string   "publisher",            limit: 255
-    t.string   "edition",              limit: 255
-    t.string   "physical_description", limit: 255
-    t.string   "language_note",        limit: 255
-    t.string   "source",               limit: 255
-    t.string   "source_note",          limit: 255
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.integer  "attachments_count",                default: 0, null: false
+    t.string   "title"
+    t.string   "unique_id"
+    t.string   "item_type"
+    t.string   "callnumber"
+    t.string   "author"
+    t.integer  "user_id",              default: 0
+    t.string   "isbn"
+    t.string   "published_date"
+    t.string   "publisher"
+    t.string   "edition"
+    t.string   "physical_description"
+    t.string   "language_note"
+    t.string   "source"
+    t.string   "source_note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "attachments_count",    default: 0, null: false
   end
 
   add_index "items", ["unique_id"], name: "index_items_on_unique_id"
@@ -150,14 +150,14 @@ ActiveRecord::Schema.define(version: 20151105154821) do
     t.text     "note"
     t.integer  "student_id"
     t.integer  "user_id",    default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "notes", ["student_id"], name: "index_notes_on_student_id"
 
   create_table "settings", force: :cascade do |t|
-    t.string   "var",        limit: 255, null: false
+    t.string   "var",                   null: false
     t.text     "value"
     t.integer  "thing_id"
     t.string   "thing_type", limit: 30
@@ -170,8 +170,8 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   create_table "student_details", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "student_number"
-    t.string   "preferred_phone",              limit: 255
-    t.string   "cds_counsellor",               limit: 255
+    t.string   "preferred_phone"
+    t.string   "cds_counsellor"
     t.boolean  "format_pdf"
     t.boolean  "format_kurzweil"
     t.boolean  "format_daisy"
@@ -179,19 +179,19 @@ ActiveRecord::Schema.define(version: 20151105154821) do
     t.boolean  "format_word"
     t.boolean  "format_large_print"
     t.text     "format_note"
-    t.integer  "transcription_coordinator_id", limit: 255
+    t.integer  "transcription_coordinator_id"
     t.integer  "transcription_assistant_id"
     t.date     "request_form_signed_on"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
-    t.boolean  "requires_orientation",                     default: true,  null: false
-    t.boolean  "orientation_completed",                    default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "requires_orientation",         default: true,  null: false
+    t.boolean  "orientation_completed",        default: false, null: false
     t.date     "orientation_completed_at"
-    t.boolean  "book_retrieval",                           default: false
-    t.boolean  "accessibility_lab_access",                 default: false
-    t.string   "cds_counsellor_email",         limit: 255
-    t.boolean  "alternate_format_required",                default: true
-    t.boolean  "format_other",                 limit: 255
+    t.boolean  "book_retrieval",               default: false
+    t.boolean  "accessibility_lab_access",     default: false
+    t.string   "cds_counsellor_email"
+    t.boolean  "alternate_format_required",    default: true
+    t.boolean  "format_other"
   end
 
   add_index "student_details", ["student_id"], name: "index_student_details_on_student_id"
@@ -199,40 +199,40 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   add_index "student_details", ["transcription_coordinator_id"], name: "tc_id"
 
   create_table "students", force: :cascade do |t|
-    t.string   "name",           limit: 255
-    t.string   "email",          limit: 255
-    t.string   "username",       limit: 255
-    t.string   "student_number", limit: 255
-    t.integer  "user_id",                    default: 0
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.string   "name"
+    t.string   "email"
+    t.string   "username"
+    t.string   "student_number"
+    t.integer  "user_id",        default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "terms", force: :cascade do |t|
-    t.string   "name",          limit: 255
+    t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.integer  "courses_count",             default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "courses_count", default: 0, null: false
   end
 
   add_index "terms", ["end_date"], name: "index_terms_on_end_date"
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",           limit: 255
-    t.string   "last_name",          limit: 255
-    t.string   "role",               limit: 255
-    t.boolean  "inactive",                       default: false
-    t.string   "type",               limit: 255
-    t.string   "email",              limit: 255
+    t.string   "username"
+    t.string   "last_name"
+    t.string   "role"
+    t.boolean  "inactive",           default: false
+    t.string   "type"
+    t.string   "email"
     t.integer  "created_by_user_id"
     t.datetime "email_sent_at"
-    t.boolean  "blocked",                        default: false
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.boolean  "blocked",            default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "last_logged_in_at"
-    t.string   "first_name",         limit: 255
+    t.string   "first_name"
     t.datetime "last_active_at"
   end
 

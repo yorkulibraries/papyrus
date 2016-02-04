@@ -1,22 +1,15 @@
 <%= simple_form_for @access_code, url: shared_access_codes_path, remote: (request.xhr? ? true: false ) do |f| %>
-  <div class="alert alert-block alert-info">
-    <div class="row">
-      <div class="span4"><%= f.input :for, input_html: { class: "input-block-level"} %></div>
-      <div class="span3"><%= f.input :code, input_html: { class: "input-block-level"} %></div>
-      <div class="span3"><%= f.input :expires_at, as: :string, input_html: { class: "input-block-level datepicker"} %></div>
-    </div>
-    <div class="row">
-      <div class="span4">
-        <%= f.button :submit, "Save Access Code", class: "btn btn-primary" %>
+    <%= f.input :for, input_html: { class: "form-control"} %></div>
+    <%= f.input :code, input_html: { class: "form-control"} %></div>
+    <%= f.input :expires_at, as: :string, input_html: { class: "form-control datepicker"} %></div>
+    <%= f.button :submit, "Save Access Code", class: "btn btn-primary" %>
 
-        <% if request.xhr? %>
-          <%= link_to "Cancel", "#", class: "btn", onclick: "$('#access_code_form_holder').empty(); return false;" %>
-        <% else %>
-          <%= link_to "Cancel", shared_access_codes_path, class: "btn" %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <hr/>
+    <% if request.xhr? %>
+      <%= link_to "Cancel", "#", class: "btn", onclick: "$('#access_code_form_holder').empty(); return false;" %>
+    <% else %>
+      <%= link_to "Cancel", shared_access_codes_path, class: "btn" %>
+    <% end %>
+
+    <hr/>
 
 <% end %>

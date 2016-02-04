@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %> | <%= controller.controller_name.humanize %> - Papyrus | LAS</title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta charset="UTF-8">
+  </head>
+  <body>
+
+	<%= render :template => "layouts/navbar"%>
+
+	 <div class="container">
+     <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
+       <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement'>
+         <%= announcement.message %>
+         <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
+          &times;
+         <% end %>
+       </div>
+     <% end %>
+
+		<div class="panel">
+			<div class="page-header">
+	    	<%= content_tag :h1, yield(:title) if show_title? && !content_for?(:title_html) %>
+				<%= yield (:title_html) if content_for?(:title_html)%>
+	  	</div>
+			<div class="page-content">
+
+				<% flash.each do |name, msg| %>
+				  <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+				    <a class="close" data-dismiss="alert">×</a>
+				    <%= msg %>
+				  </div>
+				<% end %>
+
+				<div class="row">
+					<div class="content <%= content_for?(:sidebar) ? "span8" : "span11" %>">
+							<%= yield %>
+					</div>
+					<% if content_for?(:sidebar) %>
+						<div class="span3 sidebar">
+								<%=  yield (:sidebar) %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
+	 </div>
+
+	 <footer>
+		<div class="container">
+			<section class="weak push-down"
+      title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user.last_active_at != nil %>">
+        Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> <br/>
+      </section>
+		</div>
+	 </footer>
+
+  </body>
+</html>

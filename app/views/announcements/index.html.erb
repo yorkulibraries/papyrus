@@ -1,46 +1,42 @@
-<% title "Announcements" %>
-<% title_html do %>
-  <h1>Announcements</h1>
-<% end%>
+<% title "Announcements", false %>
 
-
-
-<section class="announcements">
-  <h2>Current Announcements
-
-    <%= link_to  new_announcement_path, class: "btn btn-small float-right btn-primary", data: { remote: true } do %>
-    <i class="icon-plus-sign icon-white"></i> New Announcement
-    <% end %>
-  </h2>
-
-  <div id="announcement_form_holder"></div>
-
-  <div id="current_announcements">
-    <% @announcements.each do |announcement| %>
-      <%= render partial: announcement %>
-    <% end %>
-  </div>
-
-
-  <% if @announcements.size == 0 %>
-    <div class="blank-slate">
-      <i class="icon-bullhorn"></i>
-      <h1>No announcements added.</h1>
-      <p>Click on the <strong>New Announcement</strong> button to add one.</p>
-    </div>
-  <% end %>
-
-
-  <div class="expired_announcements">
-    <% if @expired_announcements.size > 0 %>
+<div class="row">
+	<div class="col-md-6 announcements">
+		<%= panel(title: "Annoucements", icon: "bell") do %>
+      <%= link_to  new_announcement_path, class: "btn btn-sm btn-primary", data: { remote: true } do %>
+        <i class="fa fa-plus"></i> New Announcement
+      <% end %>
       <hr/>
-      <h5>Recently Expired Announcements</h5>
-    <% end %>
 
-    <% @expired_announcements.each do |announcement| %>
-      <%= render partial: announcement %>
+      <div id="announcement_form_holder"></div>
+
+      <div id="current_announcements">
+        <% @announcements.each do |announcement| %>
+          <%= render announcement, show: "div" %>
+        <% end %>
+
+        <% if @announcements.size == 0 %>
+          <div class="blank-slate">
+            <i class="icon-bullhorn"></i>
+            <h1>No announcements added.</h1>
+            <p>Click on the <strong>New Announcement</strong> button to add one.</p>
+          </div>
+        <% end %>
+      </div>
+
+		<% end %>
+	</div>
+  <div class="col-md-6 announcements">
+  	<%= panel(title: "Recently Expired Announcements", icon: "bell") do %>
+
+      <div class="expired_announcements">
+
+        <% @expired_announcements.each do |announcement| %>
+          <%= render announcement, show: "div" %>
+
+        <% end %>
+      </div>
 
     <% end %>
   </div>
-
-</section>
+</div>

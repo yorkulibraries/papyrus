@@ -1,6 +1,18 @@
-<% title "New School Course" %>
-<% title_html do %>	
-		<h1>New School Course - <%= @term.name %> Term</h1>	
-<% end %>
-<%= render 'form' %>
-
+<% title "New School Course", false %>
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "New Course For - #{@term.name}", icon: "university") do %>
+			<%= link_to term_path(@term), class: "btn btn-default btn-sm" do %>&laquo; Term Details<% end %>
+			<hr/>
+			<%= render 'form' %>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "Help", icon: "question") do %>
+			<p>Courses are used to organize items in student view.</p>
+			<p>
+				<a href="<%= PapyrusSettings.course_lookup_url %>" target="_blank" class="green"> Look up courses &raquo;</a>
+			</p>
+		<% end %>
+	</div>
+</div>

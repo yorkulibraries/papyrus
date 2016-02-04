@@ -1,33 +1,45 @@
-<% title "Recently Active Users" %>
+<% title "Recently Active Users", false %>
 
-<h4>Papyrus Users</h4>
-
-<div class="row" style="margin-bottom: 10px; ">
-  <div class="span4 strong">Name</div>
-  <div class="span2 strong">Last Active</div>
-  <div class="span2 strong">Logged In</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= panel(title: "Recently Active Papyrus Users", icon: "user") do %>
+      <div class="row" style="margin-bottom: 10px; ">
+        <div class="col-md-4 strong">Name</div>
+        <div class="col-md-4 strong">Last Active</div>
+        <div class="col-md-4 strong">Logged In</div>
+      </div>
+      <% @users.each do |u| %>
+          <div class="row">
+            <div class="col-md-4 distinct"><%= u.name %></div>
+            <div class="col-md-4 green"><%= u.last_active_at.strftime("%I:%M:%S %p") if u.last_active_at != nil %></div>
+            <div class="col-md-4 trivial"><%= u.last_logged_in_at.strftime("%I:%M:%S %p") if u.last_logged_in_at != nil %></div>
+          </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <%= panel(title: "Recently Active Students", icon: "users") do %>
+      <div class="row" style="margin-bottom: 10px; ">
+        <div class="col-md-4 strong">Name</div>
+        <div class="col-md-4 strong">Last Active</div>
+        <div class="col-md-4 strong">Logged In</div>
+      </div>
+      <% @students.each do |s| %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= s.name %>
+          </div>
+          <div class="col-md-4 green">
+            <%= s.last_active_at.strftime("%I:%M:%S %p") if s.last_active_at != nil %>
+          </div>
+          <div class="col-md-4 trivial">
+            <%= s.last_logged_in_at.strftime("%I:%M:%S %p") if s.last_logged_in_at != nil %>
+          </div>
+        </div>
+      <% end %>
+      <% if @students.size == 0 %>
+        <span class="grey">There are no active students right now.</span>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-<% @users.each do |u| %>
-    <div class="row" style="margin-bottom: 5px; ">
-      <div class="span4 distinct"><%= u.name %></div>
-      <div class="span2 green"><%= u.last_active_at.strftime("%I:%M:%S %p") if u.last_active_at != nil %></div>
-      <div class="span2 trivial"><%= u.last_logged_in_at.strftime("%I:%M:%S %p") if u.last_logged_in_at != nil %></div>
-    </div>
-<% end %>
-
-<hr/>
-
-<h4>Students</h4>
-
-<div class="row" style="margin-bottom: 10px; ">
-  <div class="span4 strong">Name</div>
-  <div class="span2 strong">Last Active</div>
-  <div class="span2 strong">Logged In</div>
-</div>
-<% @students.each do |s| %>
-<div class="row" style="margin-bottom: 5px; ">
-  <div class="span4"><%= s.name %></div>
-  <div class="span2 green"><%= s.last_active_at.strftime("%I:%M:%S %p") if s.last_active_at != nil %></div>
-  <div class="span2 trivial"><%= s.last_logged_in_at.strftime("%I:%M:%S %p") if s.last_logged_in_at != nil %></div>
-</div>
-<% end %>

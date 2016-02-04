@@ -1,0 +1,19 @@
+<li id="course_<%= course.id %>" data-id="<%= course.id %>" class="list-group-item">
+  <% if @item %>
+    <%= link_to remove_item_term_course_path(1, course.id, item_id: @item.id), :class=> "close", :method => "post", data: { confirm: 'Are you sure?', remote: true } do%>
+      &times;
+    <% end %>
+  <% end %>
+
+  <div class="title">
+    <% if @term && !@item%>
+      <%= link_to edit_term_course_path(@term, course), class: "pull-right" do %>
+        <i class="fa fa-edit"></i>
+      <% end %>
+    <% end %>
+
+    <i class="fa fa-university fa-fw"></i>
+    <label><%= course.title %></label><br/>
+    <i class="fa fa-fw"></i><%= course.code %>
+  </div>
+</li>

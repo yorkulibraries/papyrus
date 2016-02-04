@@ -1,52 +1,42 @@
-<% title "Item Settings" %>
-
-<% title_html do %>
-	<h1>Item Settings</h1>
-<% end%>
+<% title "Item Settings", false %>
 
 
-<% sidebar do %>
-  <h3>Item Settings Help</h3>
-	<dl>
-		<dt>Item Sources</dt>
-		<dd>A list of sources to record where a physical copy of the item was acquired from.</dd>
-		<hr/>
-		<dt>Course Code Lookup URL</dt>
-		<dd>A url where staff can look up different course codes</dd>
-		<dt>Course Code Sample</dt>
-		<dd>An example course code format, used when creating new courses.</dd>		
-	</dl>
-<% end %>
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Item Settings", icon: "cog") do %>
+
+			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+			  <h4 class="black">Item Settings</h4>
+
+	      <%= f.label :item_sources, "Item Sources"%>
+	      <%= f.input :item_sources, label: false, as: :array %>
+	      <p class="small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
 
 
-<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
-  <h3>Item Settings</h3>
+			  <h4 class="black">Course Settings</h4>
 
-  <div class="row">
-    <div class="span8">
-      <%= f.label :item_sources, "Item Sources"%>
-      <%= f.input :item_sources, label: false, as: :array, input_html: { class: "input-block-level" }%>
-      <p class="small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
-    </div>
-  </div>
+	      <%= f.label :course_lookup_url, "Course Code Lookup URL"%>
+	      <%= f.input :course_lookup_url, label: false, input_html: { class: "form-control" }%>
+	      <%= f.label :course_code_sample, "Course Code Sample"%>
+	      <%= f.input :course_code_sample, label: false, input_html: { class: "form-control" }%>
 
 
-  <h3>Course Settings</h3>
-
-  <div class="row">
-    <div class="span8">
-      <%= f.label :course_lookup_url, "Course Code Lookup URL"%>
-      <%= f.input :course_lookup_url, label: false, input_html: { class: "input-block-level" }%>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span8">
-      <%= f.label :course_code_sample, "Course Code Sample"%>
-      <%= f.input :course_code_sample, label: false, input_html: { class: "input-block-level" }%>
-    </div>
-  </div>
-
-
-  	<input type="hidden" name="return_to" value="item"/>
-	<%= f.submit "Save Settings", class: "btn btn-success" %>
-<% end %>
+			  <input type="hidden" name="return_to" value="item"/>
+				<%= f.submit "Save Settings", class: "btn btn-success" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "Item Settings Help", icon: "question") do %>
+			<dl>
+				<dt>Item Sources</dt>
+				<dd>A list of sources to record where a physical copy of the item was acquired from.</dd>
+				<hr/>
+				<dt>Course Code Lookup URL</dt>
+				<dd>A url where staff can look up different course codes</dd>
+				<dt>Course Code Sample</dt>
+				<dd>An example course code format, used when creating new courses.</dd>
+			</dl>
+		<% end %>
+	</div>
+</div>

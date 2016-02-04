@@ -1,0 +1,2 @@
+$(".course-list").empty();
+$(".course-list").append('<%=escape_javascript render partial: "items/shared/course_list", locals: { courses_grouped: @courses_grouped } %>')

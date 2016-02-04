@@ -1,79 +1,56 @@
-<% title "General Settings" %>
-
-<% title_html do %>
-	<h1>General Settings</h1>
-<% end%>
+<% title "General Settings", false %>
 
 
-<% sidebar do %>
-  <h3>General Settings Help</h3>
-	<dl>
-		<dt>Application Name</dt>
-		<dd>The name of the application, appears in the logo section at the top.</dd>
-		<hr/>
-		<dt>Organization's Name</dt>
-		<dd>The name of the organization running this version of <%= PapyrusSettings.app_name %>.</dd>
-		<dt>Organizations Short Name</dt>
-		<dd>Shortened name of the organization, used internally.</dd>
-		<dt><%= PapyrusSettings.app_name %> URL</dt>
-		<dd>The web url where <%= PapyrusSettings.app_name %> is installed, used for links in the email.</dd>
-		<hr/>
-		<dt>Default Report Interval</dt>
-		<dd>The number of days used when generating reports.</dd>
-		<dt>Fiscal Year Start Date</dt>
-		<dd>The day of the year representing the beginning of Fiscal Year, used for report generation.</dd>
-	</dl>
-<% end %>
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "General Settings", icon: "cog") do %>
+			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+
+				<h4 class="black">Application Settings</h4>
+
+				<%= f.label :app_name, "Application Name"%>
+				<%= f.input :app_name, label: false, input_html: { class: "form-control" }%>
+
+				<h4 class="black">Organization Settings</h4>
+
+					<%= f.label :org_name, "Organization's Name"%>
+					<%= f.input :org_name, label: false, input_html: { class: "form-control" }%>
+					<%= f.label :org_short_name, "Short Name of Organization"%>
+					<%= f.input :org_short_name, label: false, input_html: { class: "form-control" }%>
+					<%= f.label :org_app_url, "URL of where #{PapyrusSettings.app_name} installed"%>
+					<%= f.input :org_app_url, label: false, input_html: { class: "form-control" }%>
+
+				<h3>Reports</h3>
+
+				<% interval = [["30 days", 30.days], ["60 days", 60.days], ["90 days", 90.days]] %>
+				<%= f.input :reports_default_interval, label: "Default Report Interval", include_blank: false, collection: interval %>
+				<%= f.label :reports_fiscal_year_start, "Fiscal Year Start Date"%>
+				<%= f.input :reports_fiscal_year_start, label: false, input_html: { class: "form-control" }%>
 
 
-<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
-
-	<h3>Application Settings</h3>
-
-	<div class="row">
-	  <div class="span8">
-	    <%= f.label :app_name, "Application Name"%>
-	    <%= f.input :app_name, label: false, input_html: { class: "input-block-level" }%>
-	  </div>
+				<input type="hidden" name="return_to" value="general"/>
+				<%= f.submit "Save Settings", class: "btn btn-success" %>
+			<% end %>
+		<% end %>
 	</div>
-
-	<h3>Organization Settings</h3>
-
-	<div class="row">
-	  <div class="span8">
-	    <%= f.label :org_name, "Organization's Name"%>
-	    <%= f.input :org_name, label: false, input_html: { class: "input-block-level" }%>
-	  </div>
+	<div class="col-md-4">
+		<%= panel(title: "General Settings Help", icon: "question") do %>			
+			<dl>
+				<dt>Application Name</dt>
+				<dd>The name of the application, appears in the logo section at the top.</dd>
+				<hr/>
+				<dt>Organization's Name</dt>
+				<dd>The name of the organization running this version of <%= PapyrusSettings.app_name %>.</dd>
+				<dt>Organizations Short Name</dt>
+				<dd>Shortened name of the organization, used internally.</dd>
+				<dt><%= PapyrusSettings.app_name %> URL</dt>
+				<dd>The web url where <%= PapyrusSettings.app_name %> is installed, used for links in the email.</dd>
+				<hr/>
+				<dt>Default Report Interval</dt>
+				<dd>The number of days used when generating reports.</dd>
+				<dt>Fiscal Year Start Date</dt>
+				<dd>The day of the year representing the beginning of Fiscal Year, used for report generation.</dd>
+			</dl>
+		<% end %>
 	</div>
-	<div class="row">
-	  <div class="span8">
-	    <%= f.label :org_short_name, "Short Name of Organization"%>
-	    <%= f.input :org_short_name, label: false, input_html: { class: "input-block-level" }%>
-	  </div>
-	</div>
-	<div class="row">
-	  <div class="span8">
-	    <%= f.label :org_app_url, "URL of where #{PapyrusSettings.app_name} installed"%>
-	    <%= f.input :org_app_url, label: false, input_html: { class: "input-block-level" }%>
-	  </div>
-	</div>
-
-	<h3>Reports</h3>
-
-	<div class="row">
-	  <div class="span8">
-			<% interval = [["30 days", 30.days], ["60 days", 60.days], ["90 days", 90.days]] %>
-			<%= f.input :reports_default_interval, label: "Default Report Interval", include_blank: false, collection: interval %>
-	  </div>
-	</div>
-	<div class="row">
-	  <div class="span8">
-	    <%= f.label :reports_fiscal_year_start, "Fiscal Year Start Date"%>
-	    <%= f.input :reports_fiscal_year_start, label: false, input_html: { class: "input-block-level" }%>
-	  </div>
-	</div>
-
-
-  <input type="hidden" name="return_to" value="general"/>
-	<%= f.submit "Save Settings", class: "btn btn-success" %>
-<% end %>
+</div>

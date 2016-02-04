@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   def index
     page_number = params[:page] ||= 1
     @search_results = "local"
+
     if params[:order] && params[:order] == "alpha"
       @items = Item.alphabetical.page(page_number)
     else
@@ -42,18 +43,23 @@ class ItemsController < ApplicationController
   end
 
   def assign_to_students
-    item = Item.find(params[:id])
+    @item = Item.find(params[:id])
     student_ids = params[:student_ids]
     date = params[:expires_on][:date] if params[:expires_on]
 
     student_ids.split(",").each do |id|
       student = Student.new
       student.id = id
-      item.assign_to_student(student, date)
-      StudentMailer.items_assigned_email(student, [item]).deliver_later
+      @item.assign_to_student(student, date)
+      StudentMailer.items_assigned_email(student, [@item]).deliver_later
     end
 
-    redirect_to item, notice:  "Assigned this item to students"
+    @students = Student.where("id IN (?)", student_ids)
+
+    respond_to do |format|
+      format.html { redirect_to @item, notice:  "Assigned this item to students" }
+      format.js
+    end
   end
 
   def assign_many_to_student
@@ -86,6 +92,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @courses_grouped = @item.courses.group_by { |c| { name: c.term.name, id: c.term.id } }
   end
 
   def new

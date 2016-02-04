@@ -1,22 +1,23 @@
 
 <%= simple_form_for @term, html: { class: "form-horizontal" }  do |f| %>
 
-    <%= f.input :name, input_html: { class: "input-xxlarge"} %>
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :name, input_html: { class: "form-control" }%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :start_date, input_html: { class: "form-control" } %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :end_date, input_html: { class: "form-control" } %>
+      </div>
+    </div>
 
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
+    <hr/>
+    <%= f.button :submit,  class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', @term.new_record? ? terms_path : term_path(@term), class: 'btn btn-default' %>
 
 
-	<div class="form-actions">
-     	<%= f.button :submit,  class: 'btn btn-primary' %>
-     	<%= link_to 'Cancel', @term.new_record? ? terms_path : term_path(@term), class: 'btn' %>
-
-
-		<% unless @term.new_record? %>
-			<div class="float-right">
-				<%= link_to "Delete This Term", @term, confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %>			
-			</div>
-		<% end %>
-   </div>
- 
 <% end %>

@@ -1,0 +1,94 @@
+<div class="row item">
+	<div class="col-md-12 item" id="item_<%= item.id %>" data-id="<%= item.id %>">
+		<%= panel(title: "Item Details", icon: "book") do %>
+			<div class="item-header row">
+				<div class="col-md-8">
+					<h3><%= item.title %></h3>
+				</div>
+				<div class="col-md-4">
+					<div class="pull-right">
+						<a class="hide btn btn-sm btn-default <%= is_action?("acquisition_requests", "btn-primary")%>" href="<%= acquisition_requests_item_path(item) %>" title="Acquisition Requests">
+							<i class="fa fa-shopping-cart"></i>
+						</a>
+						<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_item_path(item) %>" title="Audit Trail">
+							<i class="fa fa-list"></i>
+						</a>
+						<% if is_controller_and_action?("items", "show") && can?(:edit, item) %>
+							<a class="btn btn-sm btn-success" href="<%= edit_item_path(item) %>">
+								<i class="fa fa-edit"></i> Make Changes
+							</a>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Author</label>
+							<%= format_field item.author %>
+						</li>
+						<li>
+							<span class="fa fa-barcode fa-fw"></span>
+							<label>Call Number</label>
+							<%= format_field item.callnumber %>
+						</li>
+						<li>
+							<span class="fa fa-university fa-fw"></span>
+							<label>Publisher</label>
+							<%= format_field item.publisher %>
+						</li>
+						<li>
+							<span class="fa fa-sticky-note fa-fw"></span>
+							<label>Language Note</label>
+							<%= format_field item.language_note %>
+						</li>
+						<li>
+							<span class="fa fa-language fa-fw"></span>
+							<label>Edition</label>
+							<%= format_field item.edition %>
+						</li>
+
+					</ul>
+				</div>
+
+				<div class="col-md-6">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-square fa-fw"></span>
+							<label>Unique ID</label>
+							<%= format_field item.unique_id %>
+						</li>
+
+						<li>
+							<span class="fa fa-barcode fa-fw"></span>
+							<label>ISBN</label>
+							<%= format_field item.isbn %>
+						</li>
+
+						<li>
+							<span class="fa fa-calendar fa-fw"></span>
+							<label>Published Date</label>
+							<%= format_field item.published_date %>
+						</li>
+
+						<li>
+							<span class="fa fa-paragraph fa-fw"></span>
+							<label>Physical Description</label>
+							<%= format_field item.physical_description %>
+						</li>
+
+						<li>
+							<span class="fa fa-quote-left fa-fw"></span>
+							<label>Source &amp; Note</label>
+							<%= format_field item.source %> / <%= format_field item.source %>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		<% end %>
+	</div>
+</div>

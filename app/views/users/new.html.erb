@@ -1,47 +1,15 @@
-<% title "Add A New Papyrus User" %>
+<% title "Add A New Papyrus User", false %>
 
-<% title_html do %>
-	<h1>Add A New Papyrus User</h1>
-<% end %>
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Add A New Papyrus User", icon: "edit") do %>
+			<%= render 'form' %>
+		<% end %>
+	</div>
 
-<% sidebar do %>
-	<h3>Adding a new user</h3>
-	<p>You can add a new user to Papyrus.</p>
-	<p class="alert alert-info"><strong>Remember: </strong> All fields are required and user's email and username must be unique.</p>
-	<h3>Roles</h3>
-	<ul>
-		<li>
-			<strong><%= User::ADMIN.humanize %></strong><br/>
-			An admin is allowed to manage the whole Papyrus installation, creating users with all roles. 
-		</li>
-		<li>
-			<strong><%= User::MANAGER.humanize %></strong><br/>
-			A manager has the same powers as an Admin but is the actual manager of the department. 
-		</li>
-	
-		<li>
-			<strong><%= User::COORDINATOR.humanize %></strong><br/>
-			Coordinators can create items and students, assign items to students, upload files, and login as students to view the student screen.
-		</li>
-	
-		<li>
-			<strong><%= User::STAFF.humanize %></strong><br/>
-			Staff have the same abilites as Coordinators with the main distinction in the name alone
-		</li>
-	
-		<li>
-			<strong><%= User::PART_TIME.humanize %></strong><br/>
-			Part time staff are usually students whose responsiblity is to create items, upload files and assigning these items to students. 
-		</li>
-		<li>
-			<strong><%= User::ACQUISITIONS.humanize %></strong><br/>
-			An optional Acquisitions role is for users whose responisiblity is to just acquire and upload files relating to items. 
-		</li>
-			
-	
-	</ul>
-<% end %>
-
-<%= render 'form' %>
-
-
+	<div class="col-md-4">
+		<%= panel(title: "Help", icon: "question") do %>
+			<%= render partial: "help" %>
+		<% end %>
+	</div>
+</div>

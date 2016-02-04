@@ -1,6 +1,8 @@
 var $filequeue;
 
 $(document).ready(function() {
+
+
 	$filequeue = $(".formstone_upload_queue ol");
 	$(".formstone_upload").upload({
 			action: $(".formstone_upload").data("url"),
@@ -17,14 +19,14 @@ $(document).ready(function() {
 
 });
 
-
+/*** FORMSTONE UPLOAD EVENT HANDLES **/
 function onStart(e,  files) {
 	var html = '';
 	for (var i = 0; i < files.length; i++) {
 		html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="progress">Queued</span></li>';
 	}
 	 $(".formstone_upload_queue").show();
-	 $("#uploaded_attachments").show();
+	 $("#uploaded_attachments").removeClass("hide");
 
 	$filequeue.append(html);
 
@@ -57,4 +59,4 @@ function onFileComplete(e, file, response) {
 	}
 }
 
-function onFileError() { console.log("File Error: " + error) ;}
+function onFileError(error) { console.log("File Error: " + error) ;}

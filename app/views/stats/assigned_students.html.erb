@@ -1,40 +1,43 @@
-<% title "Assigned Students" %>
-<% title_html do %>
-	<h1>Assigned Students
-		<small class="pull-right">
-			<a href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>"><i class="icon-table"></i> Download Exel </a>
-		</small>
-	</h1>
-<% end %>
+<% title "Assigned Students",false %>
 
-<%= render partial: "stats/shared/nav_menu" %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Item Usage") do %>
+			<a href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>" class="btn btn-defaul pull-right">
+				<i class="fa fa-table"></i> Download Exel
+			</a>
+			<%= render partial: "stats/shared/nav_menu" %>
 
+			<form action="<%= stats_assigned_students_path %>" method="get" class="simple_form">
+				<%= render partial: "stats/shared/student_form_fields" %>
+			</form>
 
-<form action="<%= stats_assigned_students_path %>" method="get" class="simple_form">
-	<%= render partial: "stats/shared/student_form_fields" %>
-</form>
+			<hr/>
 
+			<h4>Assigned Students <span class="label label-primary"><%= @students.count %></span>
+				<a class="pull-right btn btn-sm" href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>">
+					<i class="fa fa-table"></i> Download Exel </a>
+			</h4>
 
+			<table class="table results">
+				<tr>
+					<th>Name</th><th>Student Number</th><th>CDS Counsellor</th><th>Registerd On</th>
+					<th>Coordinator</th><th>Assistant</th>
+				</tr>
 
-<h4>Assigned Students <small><%= @students.count %></small></h4>
+				<% @students.each do |student| %>
+				<tr>
+					<td><%= student.name %><br/>
+						<small class="weak"><%= student.email %></small> </td>
+					<td><%= student.details.student_number%></td>
+					<td><%= student.details.cds_counsellor%></td>
+					<td><%= student.created_at.strftime(" %b %d, %Y")%></td>
+					<td><%= student.details.coordinator.name %></td>
+					<td><%= student.details.assistant.name %></td>
+				</tr>
+				<% end %>
+			</table>
 
-<a href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>"><i class="icon-table"></i> Download Exel </a>
-
-<table class="table results">
-	<tr>
-		<th>Name</th><th>Student Number</th><th>CDS Counsellor</th><th>Registerd On</th>
-		<th>Coordinator</th><th>Assistant</th>
-	</tr>
-
-	<% @students.each do |student| %>
-	<tr>
-		<td><%= student.name %><br/>
-			<small class="weak"><%= student.email %></small> </td>
-		<td><%= student.details.student_number%></td>
-		<td><%= student.details.cds_counsellor%></td>
-		<td><%= student.created_at.strftime(" %b %d, %Y")%></td>
-		<td><%= student.details.coordinator.name %></td>
-		<td><%= student.details.assistant.name %></td>
-	</tr>
-	<% end %>
-</table>
+		<% end %>
+	</div>
+</div>

@@ -1,20 +1,19 @@
 <tr>
-	<td class="avatar"><%= image_tag ("icons/note_32.png")%></td>
-	<td class="who"><%= note.user.name %></td>
+	<td width="12%">
+		<span class="strong"><%= note.user.name %></span><br/>
+		<% if note.created_at.to_date == Date.today %>
+			<%= note.created_at.strftime("%I:%M %p")%>
+		<% else %>
+			<span title="<%= note.created_at.strftime("%I:%M %p")%>">
+			<%= note.created_at.strftime("%b %d")%></span><%= note.created_at.strftime(", %Y") if note.created_at.year < Date.today.year %>
+		<% end %>
+	</td>
 	<td class="what">
 		<%= simple_format note.note %>
 
 		<% if note.editable_time > Time.now %>
 			<span class="label label-info">Important</span> <span class="trivial">You can <%= link_to "Edit note", edit_student_note_path(@student, note), :class => "edit"%> for the next
 			<%= distance_of_time_in_words(note.editable_time, Time.now) %></span>
-		<% end %>
-	</td>
-	<td class="when trivial">
-		<% if note.created_at.to_date == Date.today %>
-			<%= note.created_at.strftime("%I:%M %p")%>
-		<% else %>
-			<span title="<%= note.created_at.strftime("%I:%M %p")%>"><%= note.created_at.strftime("%b %d")%></span>
-			<%= note.created_at.strftime("%Y") if note.created_at.year < Date.today.year %>
 		<% end %>
 	</td>
 	<td>

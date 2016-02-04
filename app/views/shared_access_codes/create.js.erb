@@ -1,6 +1,6 @@
 $("#access_code_form_holder").empty();
 <% if @access_code.errors.size == 0 %>
-	$("#current_codes").after('<%=escape_javascript render @access_code %>')
+	$("#current_codes").append('<%=escape_javascript render @access_code, show: "li" %>')
 	$(".blank-slate").hide();
 <% else %>
 	$('#access_code_form_holder').prepend('<%=escape_javascript render("access_codes/form") %>');

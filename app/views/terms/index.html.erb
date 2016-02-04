@@ -1,47 +1,55 @@
-<% title "School Terms and Courses" %>
-<% title_html do %>
-	<h1>School Terms &amp; Courses 
-			<%= link_to new_term_path, :class => "btn btn-small float-right" do %><i class="icon-plus"></i> Add a new term<% end %></h1>
-<% end %>
+<% title "School Terms and Courses", false %>
 
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Terms and Courses", icon: "university") do %>
+		<div class="row">
 
-<% sidebar do %>
-	<h3>Recently Expired Terms</h3>
-	<ul>
-		<% @archived_terms.each do |term| %>
-			<li><%= link_to "#{term.name}", term %> <br/><span class="trivial">expired on  <%= term.end_date.strftime("%b %d, %Y") %></span></li>
-		<% end %>
-	</ul>
-<% end %>
-
-
-<div class="well">
-	<form action="<%= search_courses_terms_path %>" class="form-search">
-		<div class="omni_search box-shadow round">	
-			<input type="text" name="q" class="input-large search-query span4" value="<%= params[:q] %>" placeholder="Search Course Code or Name"/>
-			<input type="submit" value="Search" class="btn"/>	
-		</div>			
-	</form>
-</div>
-
-
-<section class="terms">
-
-	<% for term in @terms %>
-		<div class="thumbnail term clearfix">
-		
-			<%= image_tag "icons/calendar-#{cycle('odd','even')}.png", :class => "float-left" %>
-			<div style="margin-left: 60px;">
-					<div class="course-count float-right"><span class="badge small"><%= pluralize(term.courses.count, "Course") %></span></div>
-					<h3><%= link_to "#{term.name}", term %> </h3>
-					<span class="trivial"><%= term.start_date.strftime("%b %d, %Y") %> <span class="weak">to</span> <%= term.end_date.strftime("%b %d, %Y") %></span>
+			<div class="col-sm-4 col-xs-4">
+				<form action="<%= search_courses_terms_path %>" class="form-search">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+					<input type="text" placeholder="Search Course Code or Name" name="q" class="form-control search-query"  value="<%= params[:q].try(:strip) %>">
+				</div>
+				</form>
 			</div>
-		
-			
+
+			<div class="col-sm-8 col-xs-8">
+				<%= link_to new_term_path, class: "btn btn-sm btn-primary  pull-right" do %>
+					<i class="fa fa-plus"></i> Add a New Term
+				<% end %>
+			</div>
 		</div>
-	<% end %>
 
-</section>
+		<hr/>
 
+		<div class="row">
+			<div class="col-md-8">
+				<h4>Current Terms</h4>
+				<ul class="list-unstyled" id="terms">
+					<% for term in @terms %>
+						<%= render term, show: "li" %>
+					<% end %>
+				</ul>
 
+			</div>
+			<div class="col-md-4">
+				<h4>Recently Expired Terms</h4>
+				<ul class="list-unstyled">
+					<% @archived_terms.each do |term| %>
+					<li class="term" id="term_<%= term.id %>" data-id="<%= term.id %>">
+							<%= link_to "#{term.name}", term %>
+							<small>
+								<strong>Expired On</strong> <i class="fa fa-calendar"></i>
+							 	<%= term.end_date.strftime("%b %d, %Y") %>
+							</small>
+						</li>
 
+					<% end %>
+				</ul>
+			</div>
+		</div>
+
+		<% end %>
+	</div>
+</div>

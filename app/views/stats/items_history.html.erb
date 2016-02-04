@@ -1,38 +1,48 @@
-<% title "Items History" %>
-<% title_html do %>
-	<h1>Items History
-		<small class="pull-right">
-			<a href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>"><i class="icon-table"></i> Download Exel </a>
-		</small>
-	</h1>
-<% end %>
+<% title "Items History", false %>
 
-<%= render partial: "stats/shared/nav_menu" %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Reports Home") do %>
+			<a href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>" class="btn pull-right">
+				<i class="fa fa-table"></i> Download Exel
+			</a>
+			<%= render partial: "stats/shared/nav_menu" %>
 
-<form action="<%= stats_items_history_path %>" method="get" class="simple_form">
-	<%= render partial: "stats/shared/form_fields" %>
-</form>
+			<form action="<%= stats_items_history_path %>" method="get" class="simple_form">
+				<%= render partial: "stats/shared/form_fields" %>
+			</form>
 
-<h4>Items Added between [<%= @start_date %> and <%= @end_date %>] <small><%= @items.count %> (showing first 10)</small></h4>
-<p>Number Of All Items: <strong><%= @items_count%></strong></p>
-<table class="table table-striped">
-	<tr>
-		<th>Item Title</th>
-		<th>Source</th>
-		<th>Callnumber</th>
-		<th>ISBN</th>
-		<th>Creator</th>
-    <th>Date</th>
-	</tr>
-	<% @items.first(10).each do |item| %>
-		<tr>
-				<td><%=  item.title %> </td>
-				<td><%=  item.source %> </td>
-				<td><%=  item.callnumber %> </td>
-				<td><%=  item.isbn %> </td>
-				<td><%=  item.user.name rescue nil %> </td>
-        <td><%= item.created_at.strftime("%b %d, %Y") %> </td>
-		</tr>
-	<% end %>
-</table>
-<a href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>"><i class="icon-table"></i> Download Exel </a>
+			<hr/>
+
+			<h4>Items Added between [<%= @start_date %> and <%= @end_date %>]
+				<span class="label label-primary"><%= @items.count %></span></h4>
+			<p>Number Of All Items: <strong><%= @items_count%></strong></p>
+			<table class="table table-striped">
+				<tr>
+					<th>Item Title</th>
+					<th>Source</th>
+					<th>Callnumber</th>
+					<th>ISBN</th>
+					<th>Creator</th>
+			    <th>Date</th>
+				</tr>
+				<% @items.first(10).each do |item| %>
+					<tr>
+							<td><%=  item.title %> </td>
+							<td><%=  item.source %> </td>
+							<td><%=  item.callnumber %> </td>
+							<td><%=  item.isbn %> </td>
+							<td><%=  item.user.name rescue nil %> </td>
+			        <td><%= item.created_at.strftime("%b %d, %Y") %> </td>
+					</tr>
+				<% end %>
+			</table>
+			<p class="text-muted small">Showing first 10 items</p>
+
+			<a class="btn" href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>">
+				<i class="fa fa-table"></i> Download Exel
+			</a>
+
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,43 @@
+<li class="item" id="item_<%= item.id %>" data-id="<%= item.id %>">
+
+  <div class="media">
+
+    <a href="<%= item_path(item) %>" class="pull-left icon icon-<%= item.item_type %>">
+      <i class="fa fa-file fa-2x fa-fw"></i> <span> <%= item.item_type.humanize %></span>
+    </a>
+
+    <% if @student %>
+      <div class="pull-right actions">
+      <%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
+        data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm", method: :delete, title: "Remove Access" do %>
+        &times;    
+      <% end %>
+      </div>
+    <% end %>
+
+
+    <div class="media-body">
+
+        <h4 class="media-heading">
+          <%= link_to item.title, item_path(item) %>
+        </h4>
+
+        <a href="<%= zipped_files_item_path(item)%>" class="trivial">
+        <i class="fa fa-download"></i> Download <%= pluralize(item.attachments.size, "file")%>
+        </a>
+
+
+        <% connection = item.item_connections.current.find_by_student_id(@student.id) %>
+        <% if connection %>
+        <br/>
+          <span class="trivial">
+            <%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
+            <%= "Unlimited Access" unless connection.expires_on %>
+          </span>
+        <% end %>
+
+    </div>
+
+
+  </div>
+</li>
