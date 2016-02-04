@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :scan_list do
-    name "MyString"
-    created_by_id 1
+    sequence(:name) { |n| "Scan List #{n}" }
+    association :created_by, factory: :user
     status ScanList::STATUS_NEW
   end
 
