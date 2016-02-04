@@ -1,57 +1,43 @@
-<% title "Inactive Students" %>
-<% title_html do %>
-		<h1>Inactive Students</h2>
-<% end %>
+<% title "Inactive  Students", false %>
 
-<% sidebar do %>
-	<h3>Inactive Students</h3>
-	<p>Students that have been inactived, are no longer able to log in to use papyrus and will not show in the student listing or the dashboard.</p>
-	<p>To enable the student, click on the reactive link</p>
-<% end %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Inactive Students", icon: "ban") do %>
 
-<% if @students.size > 0 %>
-	<div class="search-box">
-		<form action="<%= search_students_path %>">
-			<div class="search-field  input-prepend">
-				<input type="hidden" name="inactive" value="true"/>
-				<span class="add-on">	<i class="icon-search"></i></span>
-				<input type="text" name="q" class="search-input  input-xxlarge" value="<%= params[:q] %>" placeholder="Search Inactive Students"/>
-				<button class="btn hidden-phone" id="search_submit" type="submit">Search <i class="icon-circle-arrow-right"></i></button>
+
+		<%= paginate @students %>
+		<div class="students">
+			<div class="list-group">
+				<% @students.each do |student| %>
+				  <div  class="list-group-item <%= cycle("odd", "even") %>">
+							<%= image_tag "icons/user_default.png", class: "pull-left" %>
+							<span class="badge badge-success">
+								<%= link_to reactivate_student_path(student), data: { confirm: 'Are you sure?'}, class: "white no-text-shadow" do %>
+								Reactivate Student
+								<% end %>
+							</span>
+				     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a> <span class="red">Inactive</span></h4>
+				     <p class="list-group-item-text">
+							<span class="trivial weak">Email: </span><%= student.email %>
+							<span class="trivial weak">Preferred Phone: </span><%= student.student_details.preferred_phone %>
+						 	<span class="hidden-phone">
+								<span class="trivial weak">Transcription Coordinator: </span><%= student.student_details.transcription_coordinator.name%>
+							</span>
+						</p>
+				   </div>
+				 <% end %>
 			</div>
-		</form>
-	</div>
-
-	<p><strong>Search results <%= "- Total: #{@students.total_count}" if @students%></strong></p>
-	<%= paginate @students %>
-	<div class="students">
-		<div class="list-group">
-			<% @students.each do |student| %>
-			  <div  class="list-group-item <%= cycle("odd", "even") %>">
-						<%= image_tag "icons/user_default.png", class: "pull-left" %>
-						<span class="badge badge-success">
-							<%= link_to reactivate_student_path(student), data: { confirm: 'Are you sure?'}, class: "white no-text-shadow" do %>
-							Reactivate Student
-							<% end %>
-						</span>
-			     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a> <span class="red">Inactive</span></h4>
-			     <p class="list-group-item-text">
-						<span class="trivial weak">Email: </span><%= student.email %>
-						<span class="trivial weak">Preferred Phone: </span><%= student.student_details.preferred_phone %>
-					 	<span class="hidden-phone">
-							<span class="trivial weak">Transcription Coordinator: </span><%= student.student_details.transcription_coordinator.name%>
-						</span>
-					</p>
-			   </div>
-			 <% end %>
 		</div>
-	</div>
 
-	<%= paginate @students %>
+		<%= paginate @students %>
 
-<% else %>
-	<div class="blank-slate">
-		<i class="icon-user"></i>
-		<h1>Inactive Students</h1>
-		<p>There are no inactive students in Papyrus right now.</p>
+		<% if @students.size == 0 %>
+			<div class="blank-slate">
+				<i class="icon-user"></i>
+				<p>There are no inactive students in Papyrus right now.</p>
+			</div>
+		<% end %>
+
+		<% end %>
 	</div>
-<% end %>
+</div>

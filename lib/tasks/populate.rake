@@ -97,7 +97,7 @@ namespace :db do
                 sd.alternate_format_required = true
             end
 
-            Note.populate 2..4 do |note|
+            Note.populate 1 do |note|
               note.student_id = student.id
               note.note = Populator.sentences(4..6)
               note.user_id = 1..2
