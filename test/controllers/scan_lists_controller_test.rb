@@ -3,7 +3,7 @@ require 'test_helper'
 class ScanListsControllerTest < ActionController::TestCase
 
     setup do
-      @manager_user = create(:user, role: User::MANAGER)
+      @manager_user = create(:user, role: User::ADMIN)
       log_user_in(@manager_user)
     end
 
@@ -14,9 +14,7 @@ class ScanListsControllerTest < ActionController::TestCase
       create_list(:scan_list, 5, status: ScanList::STATUS_DONE)
 
       get :index
-      #assert_template :index
-
-      
+      assert_template :index
 
       scan_lists = assigns(:scan_lists)
 
@@ -39,8 +37,8 @@ class ScanListsControllerTest < ActionController::TestCase
         scan_list = assigns(:scan_list)
         assert scan_list, "Scan List was not assigned"
         assert_equal 0, scan_list.errors.size, "There should be no errors, #{scan_list.errors.messages}"
-        assert_not_nil scan_list.cread_by, @manager_user, "User should be manager user"
-        assert_equal ScanList::STATUS_SCANNING, scan_list.status, "Status should be new"
+        assert_equal scan_list.created_by, @manager_user, "User should be manager user"
+        assert_equal ScanList::STATUS_NEW, scan_list.status, "Status should be new"
 
         assert_redirected_to scan_lists_path, "Should redirect back to scan list"
       end

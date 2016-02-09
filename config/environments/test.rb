@@ -43,4 +43,10 @@ Papyrus::Application.configure do
 
    config.active_support.test_order = :sorted
 
+   # Enable stdout logger
+   config.logger = Logger.new(STDOUT)
+
+   # Set log level
+  config.log_level = :ERROR
+
 end

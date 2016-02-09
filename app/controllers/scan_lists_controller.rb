@@ -3,7 +3,9 @@ class ScanListsController < ApplicationController
   before_filter :load_scan_list, except: [:index, :create, :new]
 
   def index
-    @scan_lists = ScanList.all    
+
+    @scan_lists = ScanList.all
+
   end
 
   def new
@@ -17,7 +19,8 @@ class ScanListsController < ApplicationController
     @scan_list =  ScanList.new(scan_list_params)
     @scan_list.created_by = current_user
     @scan_list.audit_comment = "Adding a new Scan List"
-
+    @scan_list.status = ScanList::STATUS_NEW
+    
     if @scan_list.save
       respond_to do |format|
         format.html { redirect_to scan_lists_path, notice: "Successfully created Scan List" }
