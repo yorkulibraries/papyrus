@@ -1,9 +1,10 @@
 class ScanList < ActiveRecord::Base
 
-  # Fields : name, status, created_by
+  # Fields : name, status, created_by, assigned_to
 
   ## RELATIONS
   belongs_to :created_by, class_name: "User"
+  belongs_to :assigned_to, class_name: "User"
 
   ## AUDIT TRAIL
   audited

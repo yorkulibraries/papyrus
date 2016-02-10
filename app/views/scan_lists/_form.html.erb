@@ -1,0 +1,18 @@
+
+<%= simple_form_for @scan_list do |f| %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :name %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :name %>
+      </div>
+    </div>
+
+    <hr/>
+    <%= f.button :submit,  class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', @scan_list.new_record? ? scan_lists_path : scan_list_path(@scan_list), class: 'btn btn-default' %>
+
+
+<% end %>

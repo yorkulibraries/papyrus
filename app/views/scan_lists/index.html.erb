@@ -1,0 +1,36 @@
+<% title "Scan Lists", false %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Scan Lists for Items", icon: "list") do %>
+      <div class="row">
+
+        <div class="col-sm-4 col-xs-4">
+          <%= link_to new_scan_list_path, class: "btn btn-sm btn-primary" do %>
+            <i class="fa fa-plus"></i> Add a Scan List
+          <% end %>
+        </div>
+
+        <div class="col-sm-8 col-xs-8">
+          <%= link_to scan_lists_path, class: "btn btn-sm btn-link  pull-right" do %>
+            <i class="fa fa-list"></i> Completed Lists
+          <% end %>
+        </div>
+      </div>
+
+    <hr/>
+
+
+      <div class="list-group scan_list">
+        <a href="#" class="list-group-item disabled">
+            <span class="badge">NEW</span>
+          Cras justo odio
+        </a>
+        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+        <a href="#" class="list-group-item">Morbi leo risus</a>
+        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+        <a href="#" class="list-group-item">Vestibulum at eros</a>
+      </div>
+		<% end %>
+	</div>
+</div>
