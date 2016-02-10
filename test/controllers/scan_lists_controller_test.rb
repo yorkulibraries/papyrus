@@ -40,7 +40,7 @@ class ScanListsControllerTest < ActionController::TestCase
         assert_equal scan_list.created_by, @manager_user, "User should be manager user"
         assert_equal ScanList::STATUS_NEW, scan_list.status, "Status should be new"
 
-        assert_redirected_to scan_lists_path, "Should redirect back to scan list"
+        assert_redirected_to scan_list_path(scan_list), "Should redirect back to scan list"
       end
     end
 

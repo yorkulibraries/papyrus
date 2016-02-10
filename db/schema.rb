@@ -159,9 +159,10 @@ ActiveRecord::Schema.define(version: 20160204191952) do
   create_table "scan_lists", force: :cascade do |t|
     t.string   "name"
     t.integer  "created_by_id"
+    t.integer  "assigned_to_id"
     t.string   "status"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "settings", force: :cascade do |t|

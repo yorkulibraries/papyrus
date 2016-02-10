@@ -17,5 +17,13 @@ class ScanList < ActiveRecord::Base
   ## VALIDATIONS
   validates_presence_of :name, :status, :created_by
 
+  ## METHODS
+  def assignee
+    if self[:assigned_to] == nil
+      "Unassigned"
+    else
+      self[:assigned_to].name
+    end
+  end
 
 end

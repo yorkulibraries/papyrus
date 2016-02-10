@@ -19,18 +19,11 @@
       </div>
 
     <hr/>
-
-
-      <div class="list-group scan_list">
-        <a href="#" class="list-group-item disabled">
-            <span class="badge">NEW</span>
-          Cras justo odio
-        </a>
-        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-        <a href="#" class="list-group-item">Morbi leo risus</a>
-        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-        <a href="#" class="list-group-item">Vestibulum at eros</a>
-      </div>
+		<div id="scan_lists">
+      <% @scan_lists.each do |scan_list| %>
+        <%= render partial: scan_list, locals: { show: "div" } %>
+      <% end %>
+		</div>
 		<% end %>
 	</div>
 </div>

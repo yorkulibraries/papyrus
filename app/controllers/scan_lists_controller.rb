@@ -20,10 +20,10 @@ class ScanListsController < ApplicationController
     @scan_list.created_by = current_user
     @scan_list.audit_comment = "Adding a new Scan List"
     @scan_list.status = ScanList::STATUS_NEW
-    
+
     if @scan_list.save
       respond_to do |format|
-        format.html { redirect_to scan_lists_path, notice: "Successfully created Scan List" }
+        format.html { redirect_to @scan_list, notice: "Successfully created Scan List" }
         format.js
       end
     else
