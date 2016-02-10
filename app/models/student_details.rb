@@ -10,7 +10,7 @@ class StudentDetails < ActiveRecord::Base
 
   audited associated_with: :student
 
-  validates_presence_of :student_number, :preferred_phone, :cds_counsellor
+  validates_presence_of :student_number, :preferred_phone
   validates_presence_of  :transcription_coordinator, message: "You must specify a transcription coordinator."
   validates_presence_of :transcription_assistant, message: "You must specify a transcritpion assistant"
 
