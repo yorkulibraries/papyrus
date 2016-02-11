@@ -14,16 +14,30 @@ class ScanList < ActiveRecord::Base
   STATUS_SCANNING = "scanning"
   STATUS_DONE = "done"
 
+  SCAN_STATUSES = [STATUS_NEW, STATUS_SCANNING, STATUS_DONE]
+
   ## VALIDATIONS
   validates_presence_of :name, :status, :created_by
 
   ## METHODS
   def assignee
-    if self[:assigned_to] == nil
+    if self[:assigned_to_id] == nil
       "Unassigned"
     else
-      self[:assigned_to].name
+      assigned_to.name
     end
+  end
+
+  def creator
+    if self[:created_by_id] == nil
+      "System"
+    else
+      created_by.name
+    end
+  end
+
+  def status_icon
+    self[:status][0].upcase
   end
 
 end

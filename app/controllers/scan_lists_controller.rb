@@ -41,7 +41,7 @@ class ScanListsController < ApplicationController
     if @scan_list.update_attributes(scan_list_params)
       respond_to do |format|
         format.html { redirect_to  @scan_list, notice: "Successfully updated scan list." }
-        format.js { render  nothing: true }
+        format.js
       end
     else
       respond_to do |format|
@@ -66,7 +66,7 @@ class ScanListsController < ApplicationController
 
   private
   def scan_list_params
-    params.require(:scan_list).permit(:name, :status)
+    params.require(:scan_list).permit(:name, :status, :assigned_to_id)
   end
 
   def load_scan_list
