@@ -4,7 +4,6 @@
 *
 *= require ./vendor/bootstrap.min
 *= require ./vendor/formstone.upload.css
-*= require ./vendor/jquery.autocomplete.css
 *= require_tree ./vendor/jquery-token-input
 *= require bootstrap_and_overrides
 *= require font-awesome

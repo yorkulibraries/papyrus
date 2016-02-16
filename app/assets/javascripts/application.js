@@ -2,11 +2,11 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require twitter/bootstrap
-//= require_self
 //= require_tree ./vendor/
 //= require_tree ./controllers/
 //= require ./vendor/formstone.core.js
 //= require ./vendor/formstone.upload.js
+//= require_self
 
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
@@ -40,6 +40,7 @@ $(document).ready(function() {
 
 });
 
+
 /** Requires a CSS element that has three data properties set: source, value-key and label-key **/
 function autocomplete_search(element) {
   var source = $(element).data("source");
@@ -51,13 +52,15 @@ function autocomplete_search(element) {
     source: source,
     delay: 300,
     minLength: 1,
-    create: function( event, ui ) { console.log("CREATED") },
-    search: function( event, ui ) { console.log("SEARCHING")}
+    create: function( event, ui ) { console.log("CREATED"); },
+    search: function( event, ui ) { console.log("SEARCHING"); }
 
 
   });
+
   console.log("SETUP");
 }
+
 
 
 /**  HELPER TO DISPLAY UNDEFINED VALUES PROPERLY ***/
