@@ -1,0 +1,4 @@
+<%= simple_form_for [@scan_list, @scan_item], html: { remote: true, class: "form-inline" } do |f| %>
+  <%= f.input :summary, label: false, input_html: { placeholder: "Scan Note Summary" } %>
+  <input type="text" name="item_search" class="autocomplete" data-source="<%= search_items_path %>" data-value-key="id" data-label-key="title"/>
+<% end %>

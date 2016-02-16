@@ -23,7 +23,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer', platforms: :ruby
-gem 'jquery-rails', "3.0.4"
+gem 'jquery-rails', "4.0.5"
 gem 'jquery-ui-rails', "5.0.5"
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##

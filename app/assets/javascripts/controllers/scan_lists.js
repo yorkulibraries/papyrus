@@ -4,4 +4,6 @@ $(document).ready(function() {
     $(this).children("input[type=radio]").prop('checked',true);
     $(this).parents('form:first').submit();
   });
+
+
 });

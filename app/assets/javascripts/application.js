@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery-migrate-1.0.0
 //= require twitter/bootstrap
 //= require_self
 //= require_tree ./vendor/
@@ -26,7 +25,7 @@ $(document).ready(function() {
 	});
 
 	$("a[data-toggle-visible]").click(function(){
-		var toggle = $(this).data("toggle-visible");	
+		var toggle = $(this).data("toggle-visible");
 		$(toggle).toggleClass("hide");return false;
 	});
 
@@ -41,31 +40,25 @@ $(document).ready(function() {
 
 });
 
+/** Requires a CSS element that has three data properties set: source, value-key and label-key **/
+function autocomplete_search(element) {
+  var source = $(element).data("source");
+  var value_key = $(element).data("value-key");
+  var label_key  = $(element).data("label-key");
 
-function bind_autocomplete_search(element, url, resultFunction, formatFunction) {
+  console.log("HERE + " + source);
+  $(element).autocomplete({
+    source: source,
+    delay: 300,
+    minLength: 1,
+    create: function( event, ui ) { console.log("CREATED") },
+    search: function( event, ui ) { console.log("SEARCHING")}
 
-	$(element).autocomplete(url, {
-			width: 500,
-			dataType: "json",
-			multiple: true,
-		    delay: 200,
-			highlight: false,
-			matchSubset: false,
-			parse: function(data) {
-						return $.map(data, function(row) {
-							return {
-								data: row
-							}
-						});
-					},
 
-			max: 20,
-			formatItem: formatFunction
-		});
-
-	// Result for top search
-	$(element).result(resultFunction);
+  });
+  console.log("SETUP");
 }
+
 
 /**  HELPER TO DISPLAY UNDEFINED VALUES PROPERLY ***/
 function safe(variable) { return undefined_helper(variable);}

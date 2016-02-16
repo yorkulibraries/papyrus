@@ -1,0 +1,10 @@
+$("#scan_list_<%= @scan_list.id %>_item_form_holder").empty();
+$('#scan_list_<%= @scan_list.id %>_item_form_holder').prepend('<%=escape_javascript render("scan_items/form") %>');
+
+
+//("input.autocomplete", $("input.autocomplete").data("autocomplete-source"));
+
+
+
+// call this function
+autocomplete_search(".autocomplete");
