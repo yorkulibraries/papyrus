@@ -49,3 +49,21 @@ $(document).ready(function() {
 
 
 });
+
+function setup_item_token_input(id, url, token_limit) {
+  $(id).tokenInput(url, {
+    tokenLimit: token_limit,
+    zindex: 9999999,
+    resultsFormatter: function(item) {
+      var line1 = "<div class='item-token-view results-view'>" + item.name + "<br/>";
+      var line2 = "<span class='meta'>" + safe(item.author) + " | " + safe(item.isbn) +  " | " + safe(item.callnumber) + "</span></div>";
+
+      return "<li>" +  line1 + line2 + "</li>";
+    },
+    tokenFormatter: function(item) {
+      var line1 = "<div class='item-token-view'>" + item.name + "<br/>";
+      var line2 = "<span class='meta'>" + safe(item.author) + " | " + safe(item.isbn) +  " | " + safe(item.callnumber) + "</span></div>";
+      return "<li>" +  line1 + line2 + "</li>";
+    }
+  });
+}

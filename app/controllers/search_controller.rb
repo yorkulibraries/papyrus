@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  
+
 
   before_filter do
     authorize! :search, :items
@@ -30,7 +30,12 @@ class SearchController < ApplicationController
     respond_to do |format|
 
       if @search_results == "local"
-        format.json { render json:  @results.map { |item| {id: item.id, name: "#{item.title}   <span>#{item.item_type}</span>" } } }
+        format.json { render json:  @results.map { |item| {
+              id: item.id, name: item.title,
+              edition: item.edition, author: item.author, isbn: item.isbn, callnumber: item.callnumber
+            }
+          }
+        }
       else
         format.json { render json:  ActiveSupport::JSON.encode(@docs, {} ) }
       end

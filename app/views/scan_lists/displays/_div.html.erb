@@ -15,11 +15,11 @@
   </div>
   <div class="list-group-item">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-10">
         <a href="<%= new_scan_list_scan_item_path(scan_list) %>" data-remote="true">+ Add Item</a>
-        <div id="scan_list_<%= scan_list.id %>_item_form_holder"></div>
+
       </div>
-      <div class="col-md-6 text-right">
+      <div class="col-md-2 text-right">
 
         <%= simple_form_for scan_list, remote: true do |f| %>
           <div class="btn-group scan_list_status" data-toggle="buttons">
@@ -34,5 +34,9 @@
         <% end %>
       </div>
     </div>
+
+    <hr/>
+    <div id="scan_list_<%= scan_list.id %>_item_form_holder"></div>
+
   </div>
 </div>

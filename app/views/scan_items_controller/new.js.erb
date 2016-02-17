@@ -1,4 +1,0 @@
-$("#scan_list_<%= @scan_list.id %>_item_form_holder").empty();
-$('#scan_list_<%= @scan_list.id %>_item_form_holder').prepend('<%=escape_javascript render("scan_items/form") %>');
-
-setup_item_search_autocomplete();
