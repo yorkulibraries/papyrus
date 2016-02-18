@@ -9,21 +9,23 @@
     <div class="col-md-2">
       <%= scan_item.assigned_to.name %>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
       Due: <%= scan_item.due_date %>
-    </div>
-    <div class="col-md-1">
-      <%= simple_form_for [@scan_list, scan_item], html: { remote: true } do |f| %>
-        <div class="btn-group scan_list_status" data-toggle="buttons">
-          <% ScanItem::SCAN_STATUSES.each do |status| %>
-            <label class="btn btn-xs btn-default <%= 'active' if status == scan_item.status %>">
-              <input type="radio" name="scan_item[status]" autocomplete="off" value="<%= status %>"
-                  <%= 'checked' if status == scan_item.status %>>
-                <%= status.humanize %>
-            </label>
-          <% end %>
-        </div>
-      <% end %>
+      <div class="pull-right">
+        <a href="<%= scan_list_scan_item_path(@scan_list, scan_item) %>" data-remote="true"
+          data-method="delete" data-confirm="Are you sure?" class="red pull-right">&times;</a><br/><br/>
+        <%= simple_form_for [@scan_list, scan_item], html: { remote: true } do |f| %>
+          <div class="btn-group scan_list_status" data-toggle="buttons">
+            <% ScanItem::SCAN_STATUSES.each do |status| %>
+              <label class="btn btn-xs btn-default <%= 'active' if status == scan_item.status %>">
+                <input type="radio" name="scan_item[status]" autocomplete="off" value="<%= status %>"
+                    <%= 'checked' if status == scan_item.status %>>
+                  <%= status.humanize %>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
