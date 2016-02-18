@@ -1,8 +1,6 @@
 $("#scan_list_<%= @scan_list.id %>_item_form_holder").empty();
 $('#scan_list_<%= @scan_list.id %>_item_form_holder').prepend('<%=escape_javascript render("scan_items/form") %>');
 
-
-// call this function
-//autocomplete_search(".autocomplete");
+$(".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
 setup_item_token_input("#scan_item_item_id", "<%= search_items_path %>", 1);

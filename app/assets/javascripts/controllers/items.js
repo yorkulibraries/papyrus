@@ -53,6 +53,7 @@ $(document).ready(function() {
 function setup_item_token_input(id, url, token_limit) {
   $(id).tokenInput(url, {
     tokenLimit: token_limit,
+    hintText: "Type the title of your item to search",
     zindex: 9999999,
     resultsFormatter: function(item) {
       var line1 = "<div class='item-token-view results-view'>" + item.name + "<br/>";

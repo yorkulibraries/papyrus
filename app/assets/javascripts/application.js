@@ -29,7 +29,7 @@ $(document).ready(function() {
 		$(toggle).toggleClass("hide");return false;
 	});
 
-
+	$(".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
 	$('.submittable').click(function() {
 		$(this).parents('form:first').submit();

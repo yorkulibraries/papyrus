@@ -8,10 +8,9 @@
   <div id="edit_scan_list_form_holder_<%= scan_list.id %>" class="form_holder">
   </div>
   <div class="scan_list_items">
-    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-    <a href="#" class="list-group-item">Morbi leo risus</a>
-    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-    <a href="#" class="list-group-item">Vestibulum at eros</a>
+    <% scan_list.scan_items.each do |scan_item| %>
+      <%= render scan_item, show: "div" %>
+    <% end %>
   </div>
   <div class="list-group-item">
     <div class="row">
@@ -36,7 +35,7 @@
     </div>
 
     <hr/>
-    <div id="scan_list_<%= scan_list.id %>_item_form_holder"></div>
+    <div id="scan_list_<%= scan_list.id %>_item_form_holder" class="form_holder"></div>
 
   </div>
 </div>

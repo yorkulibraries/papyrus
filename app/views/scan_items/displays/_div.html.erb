@@ -1,0 +1,29 @@
+<div id="scan_item_<%= scan_item.id %>" data-id="<%= scan_item.id %>" class="list-group-item">
+  <div class="row">
+    <div class="col-md-4">
+      <%= render scan_item.item %>
+    </div>
+    <div class="col-md-3">
+      <%= scan_item.summary %>
+    </div>
+    <div class="col-md-2">
+      <%= scan_item.assigned_to.name %>
+    </div>
+    <div class="col-md-2">
+      Due: <%= scan_item.due_date %>
+    </div>
+    <div class="col-md-1">
+      <%= simple_form_for [@scan_list, scan_item], html: { remote: true } do |f| %>
+        <div class="btn-group scan_list_status" data-toggle="buttons">
+          <% ScanItem::SCAN_STATUSES.each do |status| %>
+            <label class="btn btn-xs btn-default <%= 'active' if status == scan_item.status %>">
+              <input type="radio" name="scan_item[status]" autocomplete="off" value="<%= status %>"
+                  <%= 'checked' if status == scan_item.status %>>
+                <%= status.humanize %>
+            </label>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<% if local_assigns[:show] == "tr" %>
+  <%= render partial: "scan_items/displays/tr", locals: { scan_item: scan_item } %>
+<% elsif local_assigns[:show] == "li" %>
+    <%= render partial: "scan_items/displays/li", locals: { scan_item: scan_item } %>
+<% elsif local_assigns[:show] == "div" %>
+  <%= render partial: "scan_items/displays/div", locals: { scan_item: scan_item } %>
+<% else %>
+  <%= render partial: "scan_items/displays/public", locals: { scan_item: scan_item } %>
+<% end %>
