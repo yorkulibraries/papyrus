@@ -3,29 +3,49 @@
 <div class="row">
 	<div class="col-md-12">
 		<%= panel(title: "Scan Lists for Items", icon: "list") do %>
-      <div class="row">
 
-        <div class="col-sm-4 col-xs-4">
-          <%= link_to new_scan_list_path, class: "btn btn-sm btn-primary", remote: true do %>
-            <i class="fa fa-plus"></i> Add a Scan List
-          <% end %>
-        </div>
+			<% if params[:which] == ScanList::STATUS_DONE %>
+				<%= link_to scan_lists_path(), class: "btn btn-sm btn-link  pull-right" do %>
+					<i class="fa fa-list"></i> New Scan Lists
+				<% end %>
+				<h4>Completed Lists</h4>				
+				<hr/>
+			<% else %>
+				<div class="row">
 
-        <div class="col-sm-8 col-xs-8">
-          <%= link_to scan_lists_path, class: "btn btn-sm btn-link  pull-right" do %>
-            <i class="fa fa-list"></i> Completed Lists
-          <% end %>
-        </div>
-      </div>
+	        <div class="col-sm-4 col-xs-4">
+	          <%= link_to new_scan_list_path, class: "btn btn-sm btn-primary", remote: true do %>
+	            <i class="fa fa-plus"></i> Add a Scan List
+	          <% end %>
+	        </div>
 
-    <hr/>
-		<div id="scan_list_form_holder" class="form_holder">
-		</div>
-		<div id="scan_lists">
-      <% @scan_lists.each do |scan_list| %>
-        <%= render partial: scan_list, locals: { show: "div" } %>
-      <% end %>
-		</div>
+	        <div class="col-sm-8 col-xs-8">
+	          <%= link_to scan_lists_path(which: ScanList::STATUS_DONE), class: "btn btn-sm btn-link  pull-right" do %>
+	            <i class="fa fa-list"></i> Completed Lists
+	          <% end %>
+	        </div>
+	      </div>
+
+	    	<hr/>
+
+				<div id="scan_list_form_holder" class="form_holder">
+				</div>
+		<% end %>
+
+		<table class="table" id="scan_lists">
+			<tr>
+				<th>Name</th>
+				<th>Status</th>
+				<th>Assigned To</th>
+				<th class="text-center">Items #</th>
+				<th>Created</th>
+			</tr>
+			<tbody>
+	      <% @scan_lists.each do |scan_list| %>
+	        <%= render partial: scan_list, locals: { show: "tr" } %>
+	      <% end %>
+			</tbody>
+		</table>
 		<% end %>
 	</div>
 </div>

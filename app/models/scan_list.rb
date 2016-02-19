@@ -16,10 +16,14 @@ class ScanList < ActiveRecord::Base
   STATUS_SCANNING = "scanning"
   STATUS_DONE = "done"
 
-  SCAN_STATUSES = [STATUS_NEW, STATUS_SCANNING, STATUS_DONE]
+  SCAN_STATUSES = [STATUS_SCANNING, STATUS_DONE]
 
   ## VALIDATIONS
   validates_presence_of :name, :status, :created_by
+
+  ## SCOPES
+  scope :completed, -> { where(status: STATUS_DONE) }
+  scope :not_completed, -> { where("status <> ? ", STATUS_DONE) }
 
   ## METHODS
   def assignee

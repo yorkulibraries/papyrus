@@ -4,7 +4,11 @@ class ScanListsController < ApplicationController
 
   def index
 
-    @scan_lists = ScanList.all
+    if params[:which] == ScanList::STATUS_DONE
+      @scan_lists = ScanList.completed
+    else
+      @scan_lists = ScanList.not_completed
+    end
 
   end
 
