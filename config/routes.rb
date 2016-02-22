@@ -1,11 +1,6 @@
 Papyrus::Application.routes.draw do
 
 
-
-
-
-
-
   get "stats" => "stats#index"
   get "stats/assigned_students" =>"stats#assigned_students"
   get "stats/item_usage" => "stats#item_usage"
@@ -17,6 +12,10 @@ Papyrus::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
+  # Scan List & Items
+  resources :scan_lists do
+    resources :scan_items, except: :index
+  end
 
   resource :settings, only: [:update] do
     get :general
@@ -100,16 +99,14 @@ Papyrus::Application.routes.draw do
 
   end
 
-  resources :acquisition_requests, :except => [:new, :create] do
-    post "fulfill", :on => :member
-    get "for_item", :on => :collection
-    post "remove_note", :on => :member
+  resources :acquisition_requests do
+    patch :change_status, on: :member
+    post :send_to_acquisitions, on: :member
   end
 
   # ITEMS Search
   match "search/items(/:type)" => "search#items", as: "search_items", via: :get,  defaults: { type: "local" }
   match "search/students(/:type)" => "search#students", as: "ssearch_students", via: :get,  defaults: { type: "active" }
-
 
   # Root
   root :to => "home#index"

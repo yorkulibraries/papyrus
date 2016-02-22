@@ -1,0 +1,7 @@
+$("#scan_list_form_holder").empty();
+<% if @scan_list.errors.size == 0 %>
+  $("#scan_lists tbody").prepend('<%=escape_javascript render @scan_list, show: "tr" %>')
+  $(".blank-slate").hide();
+<% else %>
+  $('#scan_list_form_holder').prepend('<%=escape_javascript render("scan_lists/form") %>');
+<% end %>

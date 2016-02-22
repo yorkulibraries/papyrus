@@ -1,0 +1,11 @@
+<h2>Recently Acquired Requests (200)</h2>
+<div class="list-group">
+  <% @recently_acquired.each do |r| %>
+    <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
+      <span class="badge small">Acquired By <%= r.acquired_by.name rescue nil %></span>
+      <h5 class="list-group-item-heading"><%= r.item.title %></h5>
+      <p class="list-group-item-text weak">Acquired on <%= r.acquired_at.strftime("%b %e, %Y") rescue nil%></p>
+    </a>
+  <% end %>
+  
+</div>

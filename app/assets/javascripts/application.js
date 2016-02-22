@@ -1,13 +1,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery-migrate-1.0.0
 //= require twitter/bootstrap
-//= require_self
 //= require_tree ./vendor/
 //= require_tree ./controllers/
 //= require ./vendor/formstone.core.js
 //= require ./vendor/formstone.upload.js
+//= require_self
 
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
@@ -26,11 +25,11 @@ $(document).ready(function() {
 	});
 
 	$("a[data-toggle-visible]").click(function(){
-		var toggle = $(this).data("toggle-visible");	
+		var toggle = $(this).data("toggle-visible");
 		$(toggle).toggleClass("hide");return false;
 	});
 
-
+	$(".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
 	$('.submittable').click(function() {
 		$(this).parents('form:first').submit();
@@ -42,30 +41,49 @@ $(document).ready(function() {
 });
 
 
-function bind_autocomplete_search(element, url, resultFunction, formatFunction) {
+/** Requires a CSS element that has three data properties set: source, value-key and label-key **/
+function autocomplete_search(element) {
+  var source = $(element).data("source");
+  var value_key = $(element).data("valuekey");
+  var label_key  = $(element).data("labelkey");
+	var value_input_name = $(element).data("valueinput");
 
-	$(element).autocomplete(url, {
-			width: 500,
-			dataType: "json",
-			multiple: true,
-		    delay: 200,
-			highlight: false,
-			matchSubset: false,
-			parse: function(data) {
-						return $.map(data, function(row) {
-							return {
-								data: row
-							}
-						});
-					},
+  console.log("HERE + " + source);
+  $(element).autocomplete({
+    source: source,
+    delay: 300,
+    minLength: 1,
+    create: function( event, ui ) { console.log("CREATED"); },
+    search: function( event, ui ) { console.log("SEARCHING"); },
+		response: function(event, ui) {
+			var new_content = [];
 
-			max: 20,
-			formatItem: formatFunction
-		});
+			for ( var i = 0; i = ui.content.length; i++ ) {
+			 	var row = ui.content.pop();
+				new_content.push(row);
+		 	}
 
-	// Result for top search
-	$(element).result(resultFunction);
+			for (var i = 0; i = new_content.length; i++) {
+				var row = new_content.pop();
+				ui.content.push({ label: row[label_key], value: row[value_key] });
+			}
+
+		},
+		select: function(event, ui) {
+			$(value_input_name).val(ui.item.value);
+			console.log(ui.item.label);
+			$(element).val(ui.item.label);
+			return false;
+		}
+
+  }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+      return $( "<li>" ).append( item.label ).appendTo( ul );
+    };
+
+  console.log("SETUP");
 }
+
+
 
 /**  HELPER TO DISPLAY UNDEFINED VALUES PROPERLY ***/
 function safe(variable) { return undefined_helper(variable);}

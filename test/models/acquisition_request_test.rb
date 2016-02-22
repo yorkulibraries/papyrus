@@ -1,93 +1,77 @@
 require 'test_helper'
 
 class AcquisitionRequestTest < ActiveSupport::TestCase
-  setup do
-    @item = create(:item)
-  end
 
-  should "create a valid AcquisitionRequest" do
-    ar = build(:acquisition_request, :item => @item)
+  should "create a valid acquisition request" do
 
-    assert ar.valid?
+    i = build(:acquisition_request)
+
     assert_difference "AcquisitionRequest.count", 1 do
-      ar.save
+      i.save
     end
   end
 
-  should "not create an Acquisition request with item or requested by fields" do
-    ar = build(:acquisition_request, :item => nil)
-    assert !ar.valid?
+  should "not create an invalid acquisition_request" do
 
-    ar2 = build(:acquisition_request, :item => @item, :requested_by => nil)
-    assert !ar2.valid?
-
-    ar3 = build(:acquisition_request, :item => @item, :requested_by_date => nil)
-    assert !ar3.valid?
-
-    assert_no_difference "AcquisitionRequest.count" do
-      ar.save
-      ar2.save
-      ar3.save
-    end
+    ## blank item
+    assert ! build(:acquisition_request, item: nil).valid?
+    assert ! build(:acquisition_request, requested_by: nil).valid?    
 
   end
 
-  should "only update fulfilled fields" do
-    ar = create(:acquisition_request, :fulfilled_by => nil, :fulfilled_by_date => false, :cancelled_by_date => false)
-    user = create(:user)
+  should "require additional acquired fields if Status is #{AcquisitionRequest::STATUS_ACQUIRED}" do
+    status = AcquisitionRequest::STATUS_ACQUIRED
+    assert ! build(:acquisition_request, status: status, acquired_by: nil).valid?
+    assert ! build(:acquisition_request, status: status, acquired_at: nil).valid?
+    assert ! build(:acquisition_request, status: status, acquisition_source_type: nil).valid?
+    assert ! build(:acquisition_request, status: status, acquisition_source_name: nil).valid?
 
-    ar.fulfilled_by = user
-    ar.fulfilled_by_date = 1.month.from_now.to_s(:db)
-    ar.notes = "notes"
-    assert ar.valid?
 
-    ar.save
-    ar.reload
+    ## save item with field filled in
+    i = create(:acquisition_request)
+    i.status = AcquisitionRequest::STATUS_ACQUIRED
+    i.acquired_by = create(:user)
+    i.acquired_at = Time.now
+    i.acquisition_source_type = "Publisher"
+    i.acquisition_source_name = "MacMillan"
 
-    assert_equal "notes", ar.notes
-    assert_equal user.id, ar.fulfilled_by.id
+    assert i.save, "Should save without issues on acquisition"
+  end
+
+  should "require additional cancelled fields if Status i #{AcquisitionRequest::STATUS_CANCELLED}" do
+    status = AcquisitionRequest::STATUS_CANCELLED
+    assert ! build(:acquisition_request, status: status, cancelled_by: nil).valid?
+    assert ! build(:acquisition_request, status: status, cancelled_at: nil).valid?
+    assert ! build(:acquisition_request, status: status, cancellation_reason: nil).valid?
+
+    ## save item with field filled in
+    i = create(:acquisition_request)
+    i.status = AcquisitionRequest::STATUS_CANCELLED
+    i.cancelled_by = create(:user)
+    i.cancelled_at = Time.now
+    i.cancellation_reason = "Something didn't work, mistake"
+
+    assert i.save, "Should save without issues on cancellation"
 
   end
 
-  should "be able to fulfill request" do
-    ar = create(:acquisition_request, :fulfilled_by => nil, :fulfilled_by_date => false)
-    user = create(:user)
+  should "retrieve acquisition requests by status (scoped)" do
+    create(:acquisition_request)
+    create_list(:acquisition_request, 2, status: AcquisitionRequest::STATUS_ACQUIRED, acquired_at: Time.now)
+    create_list(:acquisition_request, 3, status: AcquisitionRequest::STATUS_CANCELLED, cancelled_at: Time.now)
 
-    ar.fulfill(user)
-
-    ar.reload
-    assert ar.fulfilled
-    assert_not_nil ar.fulfilled_by_date
-    assert_equal user.id, ar.fulfilled_by.id
+    assert_equal 3, AcquisitionRequest.cancelled.count
+    assert_equal 1, AcquisitionRequest.open.count
+    assert_equal 2, AcquisitionRequest.acquired.count
 
   end
 
-  should "not delete, but make AcquisitionRequest cancelled" do
-    ar = create(:acquisition_request)
-    user = create(:user)
+  should "retrieve acquisition requests by source_type" do
+    create(:acquisition_request, acquisition_source_type: "Publisher")
+    create_list(:acquisition_request, 2, acquisition_source_type: "Student")
 
-    assert_no_difference "AcquisitionRequest.count" do
-      assert_raise RuntimeError do
-        ar.destroy
-      end
-    end
-
-    ar.cancell(user)
-
-    ar.reload
-    assert_equal true, ar.cancelled, "Cancelled should be true"
-
-  end
-
-  should "get pending, fulfilled, cancelled requests" do
-    create(:acquisition_request, :fulfilled => false) # pending
-    create(:acquisition_request, :fulfilled => true) # fulfilled
-    create(:acquisition_request, :cancelled => true) # cancelled
-
-    assert_equal 1, AcquisitionRequest.pending.size
-    assert_equal 1, AcquisitionRequest.fulfilled.size
-    assert_equal 1, AcquisitionRequest.cancelled.size
-
+    assert_equal 1, AcquisitionRequest.by_source_type("Publisher").count
+    assert_equal 2, AcquisitionRequest.by_source_type("Student").count
   end
 
 

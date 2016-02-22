@@ -116,10 +116,8 @@ class ItemsController < ApplicationController
       if params[:create_acquisition_request] == "yes"
         @acquisition_request = AcquisitionRequest.new
         @acquisition_request.requested_by = @current_user
-        @acquisition_request.requested_by_date = Date.today
-        @acquisition_request.fulfilled = false
-        @acquisition_request.cancelled = false
         @acquisition_request.item = @item
+        @acquisition_request.audit_comment = "Created an acquisition request for #{@item.title}"
         @acquisition_request.save(:validate => false)
       end
       redirect_to @item, notice:  "Successfully created item."

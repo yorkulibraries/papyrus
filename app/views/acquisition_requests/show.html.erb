@@ -1,68 +1,106 @@
-<% title "Acquisition Request" %>
-<% title_html do%>
-	<h1>Acquisition Request</h1>
-<% end %>
+<% title "Acquisition Request Details" %>
 
-<div class="actions">
-	<% unless @acquisition_request.fulfilled? || @acquisition_request.cancelled? %>
-		<%= link_to "Fulfill Request", fulfill_acquisition_request_path(@acquisition_request), class:  "btn btn-success", method: :post %>
-		<%= link_to "Cancel", @acquisition_request, confirm: "Are you sure? This can't be undone.", method: :delete, class: "btn btn-danger float-right" %>
-	<% end %>
-	<% link_to "Add A Note", edit_acquisition_request_path(@acquisition_request), class: "btn" %>
-</div>
-
-<hr/>
-
-<div class="acquisition_requests well">
-	<%= render partial: @acquisition_request %>
-
-
-	<table class="table no-border">
-		<% if  @acquisition_request.fulfilled? %>
-		<tr>
-			<td class="trivial">fulfilled by</td>
-			<td class="strong"><%= @acquisition_request.fulfilled_by.username %></td>
-			<td>on <%= @acquisition_request.fulfilled_by_date.strftime("%b %d, %Y") %></td>
-		</tr>
-		<% end %>
-		<% if @acquisition_request.cancelled? %>
-		<tr>
-			<td class="trivial">cancelled by</td>
-			<td class="strong"><%= @acquisition_request.cancelled_by.username %></td>
-			<td>on <%= @acquisition_request.cancelled_by_date.strftime("%b %d, %Y") %></td>
-		</tr>
-		<% end %>
-		<% if @acquisition_request.notes %>
-		<tr>
-			<td class="trivial">Note</td>
-			<td colspan="2">
-				<%= @acquisition_request.notes %>
-			</td>
-		</tr>
-		<% end %>
-	</table>
+<div class="row">
+  <div class="col-md-12">
+    <h1>
+      Acquisition #<%= @acquisition_request.id %>
+      <small class="acquisition_request">
+        <span class="label label-default status-<%= @acquisition_request.status %>"><%= @acquisition_request.status.humanize %></span>
+      </small>
+    </h1>
+  </div>
 </div>
 
 
-<% if @acquisition_request.item  %>
-	<% @item = @acquisition_request.item %>
+<p><%= link_to "<< Back To Acquisitions List", acquisition_requests_path %></p>
 
-	<%= render partial: @acquisition_request.item %>
+<div class="acquisition_request">
+  <div class="items">
+    <%= render @item, hide_item_actions: true %>
+  </div>
 
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h3 class="panel-title">Acquisition Request Details</h3>
+    </div>
+    <div class="panel-body">
 
+      <div class="row">
+        <div class="col-md-6">
 
-	<section class="attachments">
-		<h2>
-			Attached Files
-			<a href="<%= url_for new_item_attachment_path(@item) %>" class="btn btn-small" onclick="$('#upload_form').toggle(); return false;">Upload Files</a>
-		</h2>
+          <span class="text-primary field">Requested By</span>
+          <%= format @acquisition_request.requested_by.name %>
+          <span class="text-primary field">Requested On</span>
+          <%= format @acquisition_request.created_at.strftime("%b %e, %Y") %>
+          <span class="text-primary field">Acquisition Reason</span>
+          <%= format @acquisition_request.acquisition_reason %>
+          <br/><br/>
+          <% if can? :send_to_acquisitions, @acquisition_request %>
+            <%= link_to "Send To Acquisitions", send_to_acquisitions_acquisition_request_path(@acquisition_request),
+            method: :post, class: "btn btn-sm btn-info", data: { confirm: "Are you sure? "} %>
 
-		<div id="upload_form" class="hide well">
-			<%= render partial: "attachments/upload_files"%>
-		</div>
+            <%= link_to "Send To Bookstore", send_to_acquisitions_acquisition_request_path(@acquisition_request, bookstore: true),
+            method: :post, class: "btn btn-sm btn-primary", data: { confirm: "Are you sure? "} %>
+          <% end %>
+        </div>
+        <div class="col-md-6 left-border">
+          <% if @acquisition_request.status == AcquisitionRequest::STATUS_ACQUIRED %>
+            <span class="text-primary field">Acquired By</span>
+            <%= format @acquisition_request.acquired_by.name %>
+            <span class="text-primary field">Acquired On</span>
+            <%= format @acquisition_request.acquired_at.strftime("%b %e, %Y") %>
+            <span class="text-primary field">Acquisition Type &amp; Source</span>
+            <%= format @acquisition_request.acquisition_source_type %> --
+            <%= format @acquisition_request.acquisition_source_name %>
+          <% elsif @acquisition_request.status == AcquisitionRequest::STATUS_CANCELLED %>
+            <span class="text-primary field">Cancelled By</span>
+            <%= format @acquisition_request.cancelled_by.name %>
+            <span class="text-primary field">Cancelled On</span>
+            <%= format @acquisition_request.cancelled_at.strftime("%b %e, %Y") %>
+            <span class="text-primary field">Cancellation Reason</span>
+            <%= format @acquisition_request.cancellation_reason %>
+          <% elsif can? :change_status, @acquisition_request %>
+            <div id="acquire_form">
+              <p class="small">All fields are required.</p>
+              <%= simple_form_for @acquisition_request, url: change_status_acquisition_request_path(@acquisition_request) do |f| %>
+                <input type="hidden" name="status" value="<%= AcquisitionRequest::STATUS_ACQUIRED %>"/>
+                <%= f.input :acquisition_source_type, label: "Source", collection: PapyrusSettings.acquisition_sources %>
+                <%= f.input :acquisition_source_name, label: "Source Name", as: :string %>
+                <%= f.input :acquisition_notes, label: "Notes"  %>
+                <%= f.button :submit, "Acquire Item", class: "btn btn-success btn-sm", data: { confirm: "Are you sure?" } %>
+                &nbsp;&nbsp; or
+                <a class="btn btn-link red btn-sm" data-toggle="collapse" data-slide-up="#acquire_form" href="#cancel_form">
+                 Cancel Request
+                </a>
+              <% end %>
+            </div>
 
-		<% @item.attachments.available.each do |attachment| %>
-			<%= render attachment, show: "div" %>
-		<% end %>
-	</section>
-<% end %>
+            <div class="collapse" id="cancel_form">
+              <p class="small">Please provide the reason for cancellation</p>
+              <%= simple_form_for @acquisition_request, url: change_status_acquisition_request_path(@acquisition_request) do |f| %>
+                <%= f.input :cancellation_reason, label: "Reason"  %>
+                <input type="hidden" name="status" value="<%= AcquisitionRequest::STATUS_CANCELLED %>"/>
+                <%= f.button :submit, "Cancel Request", class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
+                &nbsp;&nbsp; or
+                <a class="btn btn-link red btn-sm" data-toggle="collapse" data-slide-down="#acquire_form" href="#cancel_form">
+                 Close
+                </a>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Acquisition Request History</h3>
+    </div>
+    <div class="panel-body">
+      render partial: "history_log" 
+    </div>
+  </div>
+
+</div>

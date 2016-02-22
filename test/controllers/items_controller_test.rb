@@ -52,43 +52,7 @@ class ItemsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to student_path(@student_user)
   end
-
-  ##### ACQUISITION TESTS ########
-
-  should "create an Acquisition Request when creating a new item and the checkbox is checked" do
-    item_attrs = attributes_for(:item)
-
-    assert_difference "AcquisitionRequest.count", 1 do
-      post :create, :item => item_attrs, :create_acquisition_request => "yes"
-    end
-
-    request = assigns(:acquisition_request)
-    item = assigns(:item)
-    assert request
-    assert_equal @manager_user.id, request.requested_by.id
-    assert_equal item.id, request.item.id
-
-  end
-
-  should "show acquisition requests for the item" do
-    @item = create(:item)
-
-    create(:acquisition_request, :item => @item, :fulfilled => true) # fulfilled
-    create(:acquisition_request, :item => @item, :fulfilled => false) # pending
-    create(:acquisition_request, :item => @item, :fulfilled => false, :cancelled => true) # cancelled
-
-    get :acquisition_requests, :id => @item.id
-
-    pending = assigns(:pending_acquisition_requests)
-    fulfilled = assigns(:fulfilled_acquisition_requests)
-    cancelled = assigns(:cancelled_acquisition_requests)
-
-    assert_equal 1, pending.size, "pending"
-    assert_equal 1, fulfilled.size, "fulfilled"
-    assert_equal 1, cancelled.size, "cancelled"
-
-  end
-
+  
   #### DISPLAY TESTS #######
 
   should "show a list of items default: sort by date" do

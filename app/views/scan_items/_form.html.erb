@@ -1,0 +1,28 @@
+<%= simple_form_for [@scan_list, @scan_item], html: { remote: true } do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :item_id,label: false, as: :string,
+          input_html: { placeholder: "Find the item you want to scan" }
+      %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :summary, label: false, input_html: { placeholder: "Scan Note Summary" } %>
+    </div>
+    <div class="col-md-2">
+      <%= f.input :assigned_to_id, collection: User.transcription_assitants, label: false, input_html: { placeholder: "Scan Note Summary" }  %>
+    </div>
+    <div class="col-md-2">
+      <%= f.input :due_date, as: :string, label: false, input_html: { placeholder: "Due Date", class: "datepicker" }  %>
+    </div>
+  </div>
+
+  <hr/>
+  <%= f.button :submit,  class: 'btn btn-primary' %>
+
+  <% if request.xhr? %>
+    <%= link_to "Cancel", "#", class: "btn btn-default", onclick: "$(this).parents('.form_holder').empty(); return false;" %>
+  <% else %>
+    <%= link_to 'Cancel', @scan_item.new_record? ? scan_lists_path : scan_list_path(@scan_list), class: 'btn btn-default' %>
+  <% end %>
+
+<% end %>

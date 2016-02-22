@@ -16,7 +16,7 @@ class StudentDetailsTest < ActiveSupport::TestCase
 
     assert ! build(:student_details, student_number: nil).valid?, "Student Number is required"
     assert ! build(:student_details, preferred_phone: nil).valid?, "preferred_phone is required"
-    assert ! build(:student_details, cds_counsellor: nil).valid?, "CDS councillor is required"
+    #assert ! build(:student_details, cds_counsellor: nil).valid?, "CDS councillor is required"
     assert ! build(:student_details, transcription_coordinator: nil).valid?, "Transcription Coordinator is required"
     assert ! build(:student_details, transcription_assistant: nil).valid?, "Transcription Assistant is required"
 

@@ -1,0 +1,6 @@
+<% if @scan_list.errors.size == 0  %>
+  $("#scan_list_<%= @scan_list.id %>").replaceWith('<%=escape_javascript render @scan_list, show: "div" %>');
+<% else %>
+  $("#edit_scan_list_form_holder_<%= @scan_list.id %>").empty();
+  $('#edit_scan_list_form_holder_<%= @scan_list.id %>').prepend('<%=escape_javascript render("scan_lists/form") %>');
+<% end %>

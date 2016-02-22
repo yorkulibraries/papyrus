@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105154821) do
+ActiveRecord::Schema.define(version: 20160222141332) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string   "for"
@@ -27,19 +27,19 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   create_table "acquisition_requests", force: :cascade do |t|
     t.integer  "item_id"
     t.integer  "requested_by_id"
-    t.date     "requested_by_date"
-    t.integer  "fulfilled_by_id"
-    t.date     "fulfilled_by_date"
-    t.boolean  "fulfilled",         default: false
-    t.boolean  "cancelled",         default: false
+    t.text     "acquisition_reason"
+    t.string   "status"
     t.integer  "cancelled_by_id"
-    t.date     "cancelled_by_date"
-    t.text     "notes"
+    t.text     "cancellation_reason"
+    t.datetime "cancelled_at"
+    t.integer  "acquired_by_id"
+    t.datetime "acquired_at"
+    t.text     "acquisition_notes"
+    t.text     "acquisition_source_type"
+    t.text     "acquisition_source_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "acquisition_requests", ["item_id"], name: "index_acquisition_requests_on_item_id"
 
   create_table "announcements", force: :cascade do |t|
     t.text     "message"
@@ -155,6 +155,27 @@ ActiveRecord::Schema.define(version: 20151105154821) do
   end
 
   add_index "notes", ["student_id"], name: "index_notes_on_student_id"
+
+  create_table "scan_items", force: :cascade do |t|
+    t.string   "summary"
+    t.integer  "item_id"
+    t.integer  "scan_list_id"
+    t.integer  "assigned_to_id"
+    t.integer  "created_by_id"
+    t.date     "due_date"
+    t.string   "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "scan_lists", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "created_by_id"
+    t.integer  "assigned_to_id"
+    t.string   "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",                   null: false

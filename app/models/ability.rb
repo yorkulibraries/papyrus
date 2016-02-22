@@ -9,7 +9,7 @@ class Ability
       can :manage, :all
     elsif user.role == User::MANAGER
       can :show, :dashboard
-      can :manage, Announcement
+      can :manage, [Announcement, AcquisitionRequest]
 
       can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course]
       can :show, :stats

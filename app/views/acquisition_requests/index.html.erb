@@ -1,21 +1,35 @@
-<% title "Acquisition Requests - #{@filter_title}" %>
-<% title_html do %>
-	<h1>Acquisition Requests <small> <%= @filter_title%>  </small></h1>
-<% end %>
+<% title "Acquisition Lists" %>
 
-<div class="btn-group">
-	<%= link_to "Pending", acquisition_requests_path, :class => "btn #{"active" if  params[:which] == nil}" %>
-	<%= link_to "Fulfilled", acquisition_requests_path(:which => "fulfilled"), :class => "btn #{"active" if  params[:which] == "fulfilled"}" %>
-	<%= link_to "Cancelled", acquisition_requests_path(:which => "cancelled"), :class => "btn #{"active" if params[:which] == "cancelled"}" %>
+<div class="acquisition_requests">
+
+  <div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#open" aria-controls="home" role="tab" data-toggle="tab">Open</a>
+    </li>
+    <li role="presentation">
+      <a href="#acquired" aria-controls="profile" role="tab" data-toggle="tab">Acquired</a>
+    </li>
+    <li role="presentation">
+      <a href="#cancelled" aria-controls="messages" role="tab" data-toggle="tab">Cancelled</a>
+    </li>
+
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="open">
+      <%= render "open_requests" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="acquired">
+      <%= render "acquired_requests" %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="cancelled">
+      <%= render "cancelled_requests" %>
+    </div>
+  </div>
+
 </div>
-
-
-<div class="acquisition_requests well push-down">
-	<%  @acquisition_requests.each do |acquisition_request| %>
-		<%= render :partial =>  acquisition_request %>
-	<% end %>
-	
-	<% if @acquisition_requests.size == 0 %>
-		<p>You have no <%= params[:which] %> requests </p>
-	<% end %>
 </div>
