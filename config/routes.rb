@@ -1,20 +1,6 @@
 Papyrus::Application.routes.draw do
 
 
-  get 'acquisition_requests/index'
-
-  get 'acquisition_requests/new'
-
-  get 'acquisition_requests/show'
-
-  get 'acquisition_requests/create'
-
-  get 'acquisition_requests/edit'
-
-  get 'acquisition_requests/update'
-
-  get 'acquisition_requests/destroy'
-
   get "stats" => "stats#index"
   get "stats/assigned_students" =>"stats#assigned_students"
   get "stats/item_usage" => "stats#item_usage"
@@ -113,11 +99,7 @@ Papyrus::Application.routes.draw do
 
   end
 
-  resources :acquisition_requests, :except => [:new, :create] do
-    post "fulfill", :on => :member
-    get "for_item", :on => :collection
-    post "remove_note", :on => :member
-  end
+  resources :acquisition_requests
 
   # ITEMS Search
   match "search/items(/:type)" => "search#items", as: "search_items", via: :get,  defaults: { type: "local" }
