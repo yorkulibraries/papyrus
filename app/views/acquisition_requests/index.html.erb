@@ -1,21 +1,2 @@
-<% title "Acquisition Requests - #{@filter_title}" %>
-<% title_html do %>
-	<h1>Acquisition Requests <small> <%= @filter_title%>  </small></h1>
-<% end %>
-
-<div class="btn-group">
-	<%= link_to "Pending", acquisition_requests_path, :class => "btn #{"active" if  params[:which] == nil}" %>
-	<%= link_to "Fulfilled", acquisition_requests_path(:which => "fulfilled"), :class => "btn #{"active" if  params[:which] == "fulfilled"}" %>
-	<%= link_to "Cancelled", acquisition_requests_path(:which => "cancelled"), :class => "btn #{"active" if params[:which] == "cancelled"}" %>
-</div>
-
-
-<div class="acquisition_requests well push-down">
-	<%  @acquisition_requests.each do |acquisition_request| %>
-		<%= render :partial =>  acquisition_request %>
-	<% end %>
-	
-	<% if @acquisition_requests.size == 0 %>
-		<p>You have no <%= params[:which] %> requests </p>
-	<% end %>
-</div>
+<h1>AcquisitionRequests#index</h1>
+<p>Find me in app/views/acquisition_requests/index.html.erb</p>

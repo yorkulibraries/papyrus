@@ -1,6 +1,20 @@
 Papyrus::Application.routes.draw do
 
 
+  get 'acquisition_requests/index'
+
+  get 'acquisition_requests/new'
+
+  get 'acquisition_requests/show'
+
+  get 'acquisition_requests/create'
+
+  get 'acquisition_requests/edit'
+
+  get 'acquisition_requests/update'
+
+  get 'acquisition_requests/destroy'
+
   get "stats" => "stats#index"
   get "stats/assigned_students" =>"stats#assigned_students"
   get "stats/item_usage" => "stats#item_usage"
