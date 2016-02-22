@@ -1,4 +1,4 @@
-class AddAcquisitionRequests < ActiveRecord::Migration
+class CreateAcquisitionRequests < ActiveRecord::Migration
   def change
     create_table :acquisition_requests do |t|
       t.integer :item_id
@@ -12,7 +12,7 @@ class AddAcquisitionRequests < ActiveRecord::Migration
       t.datetime :acquired_at
       t.text :acquisition_notes
       t.text :acquisition_source_type
-      t.text :acquisition_source_name      
+      t.text :acquisition_source_name
       t.timestamps
     end
 

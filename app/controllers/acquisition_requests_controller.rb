@@ -6,12 +6,6 @@ class AcquisitionRequestsController < ApplicationController
     @recently_acquired = AcquisitionRequest.acquired.limit(200).order("acquired_at desc")
     @recently_cancelled = AcquisitionRequest.cancelled.limit(200).order("cancelled_at desc")
 
-    if current_user.role != User::MANAGER_ROLE
-      @acquisition_requests = @acquisition_requests.by_location(current_user.location_id)
-      @recently_acquired = @recently_acquired.by_location(current_user.location_id)
-      @recently_cancelled = @recently_cancelled.by_location(current_user.location_id)
-    end
-
   end
 
   def show
@@ -41,7 +35,6 @@ class AcquisitionRequestsController < ApplicationController
     @acquisition_request.audit_comment = "Created an acquisition item for #{@acquisition_request.item.title}"
     @acquisition_request.item = Item.find(acquisition_request_params[:item_id])
     @acquisition_request.requested_by = current_user
-    @acquisition_request.location = @acquisition_request.item.request.reserve_location
 
     respond_to do |format|
       if @acquisition_request.save
@@ -68,7 +61,8 @@ class AcquisitionRequestsController < ApplicationController
   end
 
   def destroy
-    @acquisition_request.audit_comment = "Removed acquisition_request #{@acquisition_request.item.title}"
+    item_title = @acquisition_request.item.title
+    @acquisition_request.audit_comment = "Removed acquisition_request #{item_title}"
     @acquisition_request.destroy
     respond_to do |format|
       format.html { redirect_to acquisition_requests_url }

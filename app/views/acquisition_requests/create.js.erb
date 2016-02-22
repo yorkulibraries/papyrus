@@ -1,0 +1,16 @@
+var acquisition_request_holder = "add_acquisition_request_<%= @acquisition_request.item.id %>"
+<% if @acquisition_request.errors.size == 0 %>
+
+
+  $("#" + acquisition_request_holder + " #acquisition_request_form").modal('hide');
+  $("#" + acquisition_request_holder + " #acquisition_request_form").remove();
+  
+  <% @request = @acquisition_request.item.request %>
+  $("#item_<%= @acquisition_request.item.id %>").replaceWith("<%= j render @acquisition_request.item, locals: { item: @acquisition_request.item } %>");
+  $("#item_<%= @acquisition_request.item.id %>").effect("highlight",2000);
+<% else %>
+  $("#" + acquisition_request_holder).remove();
+  $("body").append("<div id='add_acquisition_request_<%= @item.id %>'></div>");
+  $("#" + acquisition_request_holder).append("<%= j render "new_form", formats: [:html] %>");
+  $("#" + acquisition_request_holder + " #acquisition_request_form").modal('show');
+<% end %>

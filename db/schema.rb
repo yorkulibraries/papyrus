@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222141224) do
+ActiveRecord::Schema.define(version: 20160222141332) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string   "for"
@@ -22,6 +22,23 @@ ActiveRecord::Schema.define(version: 20160222141224) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "shared",        default: false
+  end
+
+  create_table "acquisition_requests", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "requested_by_id"
+    t.text     "acquisition_reason"
+    t.string   "status"
+    t.integer  "cancelled_by_id"
+    t.text     "cancellation_reason"
+    t.datetime "cancelled_at"
+    t.integer  "acquired_by_id"
+    t.datetime "acquired_at"
+    t.text     "acquisition_notes"
+    t.text     "acquisition_source_type"
+    t.text     "acquisition_source_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "announcements", force: :cascade do |t|

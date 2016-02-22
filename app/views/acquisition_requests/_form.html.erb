@@ -1,7 +1,3 @@
-<%= simple_form_for @acquisition_request do |f| %>
+<%= simple_form_for @acquisition_request do %>
 
-  <p><%= f.input :new_note, :as => :text,  :label => false, :input_html => { :class => "span8"} %></p>
-
-  <p  class="form-actions"><%= f.button :submit, "Add a note", :class => "btn btn-primary" %>
-	<%= link_to 'Back', acquisition_request_path(@acquisition_request), :class => 'btn' %></p>
 <% end %>

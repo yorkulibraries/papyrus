@@ -1,0 +1,46 @@
+<% if request.xhr? %>
+<div class="modal sfade" id="acquisition_request_form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= simple_form_for @acquisition_request, remote: true do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Request Item Acquisition</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <small>Acquire this title?</small>
+        <h3><%= @item.title%></h3>
+
+        <hr/>
+
+        <%= f.input :acquisition_reason, collection: Setting.acquisition_reasons %>
+
+        <%= f.hidden_field :item_id, value: @item.id %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+         <%= f.button :submit, class: "btn btn-success", value: "Request Acquisition" %>
+      </div>
+      <% end %>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<% else %>
+  <%= simple_form_for @acquisition_request, remote: true do |f| %>
+
+  <small>Acquire this title?</small>
+  <h3><%= @item.title%></h3>
+
+  <hr/>
+
+  <%= f.input :acquisition_reason %>
+  <%= f.input :item_id, value: @item.id, type: :hidden  %>
+
+  <%= f.button :submit, class: "btn btn-success", value: "Add To List" %>  <%= link_to "Cancel", request_path(@request), class: "btn btn-link"%>
+
+  <% end %>
+<% end %>

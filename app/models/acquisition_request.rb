@@ -1,42 +1,47 @@
 class AcquisitionRequest < ActiveRecord::Base
-  #attr_accessible :notes
 
+  ##### DB Fields for reference (update if changes)
+  # "id", "item_id", "requested_by_id", "acquisition_reason", "status", "location_id",
+  # "cancelled_by_id", "cancellation_reason", "cancelled_at", "acquired_by_id", "acquired_at",
+  # "acquisition_notes", "acquisition_source_type", "acquisition_source_name", "created_at", "updated_at"
+  #####
+
+  ## Audited
+  audited
+
+  ## CONSTANTS
+  STATUS_OPEN="open"
+  STATUS_ACQUIRED="acquired"
+  STATUS_CANCELLED="cancelled"
+  STATUSES=[STATUS_ACQUIRED, STATUS_CANCELLED]
+
+  ## RELATIONS
   belongs_to :item
-  belongs_to :requested_by, :class_name => "User", :foreign_key => "requested_by_id"
-  belongs_to :fulfilled_by, :class_name => "User", :foreign_key => "fulfilled_by_id"
-  belongs_to :cancelled_by, :class_name => "User", :foreign_key => "cancelled_by_id"
+  belongs_to :requested_by, class_name: "User", foreign_key: "requested_by_id"
+  belongs_to :acquired_by, class_name: "User", foreign_key: "acquired_by_id"
+  belongs_to :cancelled_by, class_name: "User", foreign_key: "cancelled_by_id"
+
+  ## VALIDATIONS
+  validates_presence_of :item, :requested_by  ## default basic validation
+  validates_presence_of :acquired_by, :acquired_at, :acquisition_source_type, :acquisition_source_name, if: lambda { self.status == STATUS_ACQUIRED }
+  validates_presence_of :cancelled_by, :cancelled_at, :cancellation_reason, if: lambda { self.status == STATUS_CANCELLED }
+
+  ## SCOPES
+
+  scope :open, -> { where(status: nil) }
+  scope :acquired, -> { where(status: STATUS_ACQUIRED) }
+  scope :cancelled, -> { where(status: STATUS_CANCELLED) }
+  scope :by_source_type, -> (source) { where("acquisition_source_type = ? ", source) }
 
 
-  validates_presence_of :item
-  validates_presence_of :requested_by, :requested_by_date
-
-
-  scope :pending, -> { where(:fulfilled => false).where(:cancelled => false).order("requested_by_date asc") }
-  scope :fulfilled, -> { where(:fulfilled => true).where(:cancelled => false).order("requested_by_date desc") }
-  scope :cancelled, -> { where(:cancelled => true).order("requested_by_date desc") }
-
-
-
-
-  def cancell(user)
-    return if user == nil
-    self.cancelled = true
-    self.cancelled_by = user
-    self.cancelled_by_date = Date.today
-    save(:validate => false)
+  ## Helper Methods
+  def status
+    if self[:status] == nil
+      STATUS_OPEN
+    else
+      self[:status]
+    end
   end
 
-  def destroy
-    raise "Not Implemeted Error, use AcquisitionRequest.cancell(by whom)"
-  end
-
-  def fulfill(user)
-    return if user == nil
-
-    self.fulfilled = true
-    self.fulfilled_by = user
-    self.fulfilled_by_date = Date.today
-    save(:validate => false)
-  end
 
 end

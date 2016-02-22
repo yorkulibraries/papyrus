@@ -1,0 +1,19 @@
+<h2>Open Requests</h2>
+
+<div class="list-group">
+  <% @acquisition_requests.group_by(&:location).each do | location, requests | %>
+    <a class="list-group-item list-group-item-warning disabled" href="#">
+      <h4 class="list-group-item-heading"><%= location == nil ? "Unassigned Location" : location.name %></h4>
+    </a>
+
+    <% requests.each do |r| %>
+      <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
+        <span class="badge small">By <%= r.requested_by.name %></span>
+        <h5 class="list-group-item-heading"><%= r.item.title rescue nil%></h5>
+        <p class="list-group-item-text weak">Requested on <%= r.created_at.strftime("%b %e, %Y") %></p>
+      </a>
+    <% end %>
+  <% end %>
+
+
+</div>

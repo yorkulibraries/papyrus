@@ -47,6 +47,18 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:email_item_assigned_subject,  "Subject for Item Assigned email")
   PapyrusSettings.save_default(:email_item_assigned_body,  "Item Assigned email text goes here")
 
+  ## Acquisitions Email
+  PapyrusSettings.save_default(:email_acquisitions_to, "acquisitions_mailer@yorku.ca")
+  PapyrusSettings.save_default(:email_acquisitions_to_bookstore, "bookstore@test.yorku.ca")
+  PapyrusSettings.save_default(:email_acquisitions_subject, "Please Acquire This Item")
+  PapyrusSettings.save_default(:email_acquisitions_body, "This is the stuff to be emailed")
+
+
+  ## Acquisition Sources Settings
+  PapyrusSettings.save_default(:acquisition_sources, ["Publisher", "Requester", "Library Loan", "Other"])
+  PapyrusSettings.save_default(:acquisition_reasons, ["New Copy Required", "Missing Item", "Other"])
+
+
 
   ## VuFIND
   PapyrusSettings.save_default(:vufind_url, "https://www.library.yorku.ca/find/Search/Results")
