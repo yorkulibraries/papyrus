@@ -15,7 +15,7 @@
 
         <hr/>
 
-        <%= f.input :acquisition_reason, collection: Setting.acquisition_reasons %>
+        <%= f.input :acquisition_reason, collection: PapyrusSettings.acquisition_reasons %>
 
         <%= f.hidden_field :item_id, value: @item.id %>
 
@@ -40,7 +40,7 @@
   <%= f.input :acquisition_reason %>
   <%= f.input :item_id, value: @item.id, type: :hidden  %>
 
-  <%= f.button :submit, class: "btn btn-success", value: "Add To List" %>  <%= link_to "Cancel", request_path(@request), class: "btn btn-link"%>
+  <%= f.button :submit, class: "btn btn-success", value: "Add To List" %>  <%= link_to "Cancel", items_path(@item), class: "btn btn-link"%>
 
   <% end %>
 <% end %>

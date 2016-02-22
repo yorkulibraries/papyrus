@@ -1,4 +1,5 @@
 class AcquisitionRequestsController < ApplicationController
+  before_action :set_request, only: [:show, :edit, :update, :destroy, :change_status, :send_to_acquisitions]
   authorize_resource
 
   def index
@@ -10,20 +11,16 @@ class AcquisitionRequestsController < ApplicationController
 
   def show
     @item = @acquisition_request.item
-    @request = @item.request
 
     @audits = @acquisition_request.audits
     @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
 
     @users = User.all
-    @locations = Location.active
-
   end
 
   def new
     @acquisition_request = AcquisitionRequest.new
     @item = Item.find(params[:item_id])
-    @request = @item.request
   end
 
 
@@ -61,8 +58,7 @@ class AcquisitionRequestsController < ApplicationController
   end
 
   def destroy
-    item_title = @acquisition_request.item.title
-    @acquisition_request.audit_comment = "Removed acquisition_request #{item_title}"
+    @acquisition_request.audit_comment = "Removed acquisition_request #{@acquisition_request.item.title}"
     @acquisition_request.destroy
     respond_to do |format|
       format.html { redirect_to acquisition_requests_url }

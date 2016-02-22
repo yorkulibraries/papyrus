@@ -99,7 +99,10 @@ Papyrus::Application.routes.draw do
 
   end
 
-  resources :acquisition_requests
+  resources :acquisition_requests do
+    patch :change_status, on: :member
+    post :send_to_acquisitions, on: :member
+  end
 
   # ITEMS Search
   match "search/items(/:type)" => "search#items", as: "search_items", via: :get,  defaults: { type: "local" }

@@ -1,5 +1,5 @@
 <% title "Acquisition Request Details" %>
-<% page_header do %>
+
 <div class="row">
   <div class="col-md-12">
     <h1>
@@ -10,20 +10,9 @@
     </h1>
   </div>
 </div>
-<% end %>
+
 
 <p><%= link_to "<< Back To Acquisitions List", acquisition_requests_path %></p>
-
-<h3> Reserves Request #<%= @request.id%>
-  <small class="request">
-
-    <a href="<%= request_path(@request)%>" class="label label-primary"><span class="glyphicon glyphicon-link"></span></a>
-
-
-    <span class="label label-default status-<%= @request.status.parameterize %>"><%= @request.status.humanize %></span>
-    <span class="label label-default"><%= @request.reserve_location.name %></span>
-  </small>
-</h3>
 
 <div class="acquisition_request">
   <div class="items">
@@ -45,9 +34,6 @@
           <%= format @acquisition_request.created_at.strftime("%b %e, %Y") %>
           <span class="text-primary field">Acquisition Reason</span>
           <%= format @acquisition_request.acquisition_reason %>
-          <span class="text-primary field">Reserve Location</span>
-          <%= @acquisition_request.location == nil ? "Unassigned Location" : @acquisition_request.location.name %>
-
           <br/><br/>
           <% if can? :send_to_acquisitions, @acquisition_request %>
             <%= link_to "Send To Acquisitions", send_to_acquisitions_acquisition_request_path(@acquisition_request),
@@ -78,7 +64,7 @@
               <p class="small">All fields are required.</p>
               <%= simple_form_for @acquisition_request, url: change_status_acquisition_request_path(@acquisition_request) do |f| %>
                 <input type="hidden" name="status" value="<%= AcquisitionRequest::STATUS_ACQUIRED %>"/>
-                <%= f.input :acquisition_source_type, label: "Source", collection: Setting.acquisition_sources %>
+                <%= f.input :acquisition_source_type, label: "Source", collection: PapyrusSettings.acquisition_sources %>
                 <%= f.input :acquisition_source_name, label: "Source Name", as: :string %>
                 <%= f.input :acquisition_notes, label: "Notes"  %>
                 <%= f.button :submit, "Acquire Item", class: "btn btn-success btn-sm", data: { confirm: "Are you sure?" } %>
@@ -113,7 +99,7 @@
       <h3 class="panel-title">Acquisition Request History</h3>
     </div>
     <div class="panel-body">
-      <%= render partial: "history_log" %>
+      render partial: "history_log" 
     </div>
   </div>
 

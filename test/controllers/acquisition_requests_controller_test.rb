@@ -79,10 +79,9 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
   end
 
   should "destroy an existing acquisition item" do
-    acquisition_request = create(:acquisition_request)
-
+    ar = create(:acquisition_request)
     assert_difference('AcquisitionRequest.count', -1) do
-      delete :destroy, id: acquisition_request
+      post :destroy, id: ar.id
     end
 
     assert_redirected_to acquisition_requests_path

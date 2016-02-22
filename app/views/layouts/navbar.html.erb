@@ -33,6 +33,9 @@
               <li class="<%= "active" if controller_name == "scan_lists" || controller_name == "scan_items"%>">
                   <a href="<%= scan_lists_path %>"><i class="fa fa-fw fa-list"></i> Scan Lists</a>
               </li>
+              <li class="<%= "active" if controller_name == "acquisition_requests" %>">
+                  <a href="<%= acquisition_requests_path %>"><i class="fa fa-fw fa-shopping-cart"></i> Acquisitions</a>
+              </li>
               <% end %>
 
 
