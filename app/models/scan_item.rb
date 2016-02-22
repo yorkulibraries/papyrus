@@ -19,5 +19,26 @@ class ScanItem < ActiveRecord::Base
   ## VALIDATIONS
   validates_presence_of :summary, :status, :created_by, :scan_list, :item
 
+  ## SCOPES
+  scope :completed, -> { where(status: STATUS_DONE) }
+  scope :not_completed, -> { where("status <> ? ", STATUS_DONE) }
+
+  ## METHODS
+  def assignee
+    if self[:assigned_to_id] == nil
+      "Unassigned"
+    else
+      assigned_to.name
+    end
+  end
+
+  def creator
+    if self[:created_by_id] == nil
+      "System"
+    else
+      created_by.name
+    end
+  end
+
 
 end

@@ -30,4 +30,14 @@ class ScanListTest < ActiveSupport::TestCase
     assert_equal "Unassigned", scan_list.assignee
   end
 
+  should "Return completed and not completed scan lists" do
+    create_list(:scan_list, 3, status: ScanList::STATUS_DONE)
+    create_list(:scan_list, 2, status: ScanList::STATUS_NEW)
+    create_list(:scan_list, 2, status: ScanList::STATUS_SCANNING)
+
+    assert_equal 4, ScanList.not_completed.size, "Should be 4"
+    assert_equal 3, ScanList.completed.size, "Should be 3"
+  end
+
+
 end

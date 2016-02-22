@@ -22,7 +22,12 @@ class ScanListsControllerTest < ActionController::TestCase
       assert_not_nil scan_lists, "Shouldn't be nil"
 
 
-      assert_equal 12, scan_lists.size, "Should only be 12"
+      assert_equal 7, scan_lists.size, "Should only be 7, not completed ones"
+
+      get :index, which: "done"
+      assert_template :index
+      scan_lists = assigns(:scan_lists)
+      assert_equal 5, scan_lists.size, "Should be 5 complted"
     end
 
 

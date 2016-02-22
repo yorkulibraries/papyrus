@@ -1,6 +1,7 @@
 class ScanItemsController < ApplicationController
   authorize_resource
   before_filter :load_scan_list
+  protect_from_forgery except: [:new, :edit]
 
   def new
     @scan_item = @scan_list.scan_items.new
