@@ -48,7 +48,7 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:email_item_assigned_body,  "Item Assigned email text goes here")
 
   ## Acquisitions Email
-  PapyrusSettings.save_default(:email_acquisitions_to, "acquisitions_mailer@yorku.ca")
+  PapyrusSettings.save_default(:email_acquisitions_to, "acquisitions_mailer@test.yorku.ca")
   PapyrusSettings.save_default(:email_acquisitions_to_bookstore, "bookstore@test.yorku.ca")
   PapyrusSettings.save_default(:email_acquisitions_subject, "Please Acquire This Item")
   PapyrusSettings.save_default(:email_acquisitions_body, "This is the stuff to be emailed")
