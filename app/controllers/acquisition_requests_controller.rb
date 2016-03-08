@@ -93,9 +93,10 @@ class AcquisitionRequestsController < ApplicationController
     where = params[:bookstore] ? "bookstore" : "acquisitions"
 
     AcquisitionsMailer.send_acquisition_request(@acquisition_request, current_user, params[:bookstore]).deliver_now
-    @acquisition_request.audit_comment = "Sent email to #{where}."
+    #AcquisitionsMailer.test.deliver_later
+    @acquisition_request.audit_comment = "XSent email to #{where}."
     @acquisition_request.save(validate: false)
-      
+
     redirect_to acquisition_request_path(@acquisition_request), notice: "Sent request to #{where}"
   end
 
