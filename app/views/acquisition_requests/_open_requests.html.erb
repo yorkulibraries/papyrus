@@ -1,11 +1,36 @@
-<h2>Open Requests</h2>
+<% if @acquisition_requests.size == 0 %>
+  <div class="blank-slate">
+    <i class="icon-bullhorn"></i>
+    <h1>There are no open requests righ tnow.</h1>
+    <p>Go to an item you want acquire and click on <strong>Acquisitions</strong> link.</p>
+  </div>
+<% else %>
+  <div class="list-group">
+    <% @acquisition_requests.each do |r| %>
+      <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
+        <h4 class="list-group-item-heading"><%= r.item.title rescue nil%></h4>
+        <div class="row list-group-item-text small">
+          <div class="col-md-2">
+            <span class="weak">Requested on:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="strong black"><%= r.created_at.strftime("%b %e, %Y") %></span>
+          </div>
+          <div class="col-md-2">
+            <span class="weak">Reason:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="strong black"><%= r.acquisition_reason %></span>
+          </div>
+          <div class="col-md-2">
+            <span class="weak">Requested by:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="strong black"><%= r.requested_by.name %></span>
+          </div>
+        </div>
 
-<div class="list-group">
-  <% @acquisition_requests.each do |r| %>
-    <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
-      <span class="badge small">By <%= r.requested_by.name %></span>
-      <h5 class="list-group-item-heading"><%= r.item.title rescue nil%></h5>
-      <p class="list-group-item-text weak">Requested on <%= r.created_at.strftime("%b %e, %Y") %></p>
-    </a>
-  <% end %>
-</div>
+      </a>
+    <% end %>
+  </div>
+<% end %>

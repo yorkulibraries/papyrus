@@ -1,29 +1,36 @@
-<% title "Acquisition Request Details" %>
+<% title "Acquisition Request Details", false %>
+
 
 <div class="row">
-  <div class="col-md-12">
-    <h1>
-      Acquisition #<%= @acquisition_request.id %>
-      <small class="acquisition_request">
-        <span class="label label-default status-<%= @acquisition_request.status %>"><%= @acquisition_request.status.humanize %></span>
-      </small>
-    </h1>
+	<div class="col-md-12 acquisition_requests">
+		<%= panel(title: "Acquisition Request ##{@acquisition_request.id}", icon: "shopping-cart") do %>
+
+      <div class="item-header row">
+        <div class="col-md-8">
+          <h3>
+            <%= link_to acquisition_requests_path, class: "btn btn-xs btn-default" do %>
+                <i class="fa fa-list" title="Back to List"></i>
+            <% end %>
+
+            Acquisition #<%= @acquisition_request.id %></h3>
+        </div>
+        <div class="col-md-4">
+          <div class="pull-right">
+            <span class="label label-default status-<%= @acquisition_request.status %>"><%= @acquisition_request.status.humanize %></span>
+          </div>
+        </div>
+      </div>
+
+      <%= render @item, show: "div_info", item: @item  %>
+
+    <% end %>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12 acquisition_requests">
+    <%= panel(title: "Acquisition Request Details", icon: "shopping-cart", title_class: "panel-top text-center", styles:"panel-primary") do %>
 
-<p><%= link_to "<< Back To Acquisitions List", acquisition_requests_path %></p>
-
-<div class="acquisition_request">
-  <div class="items">
-    <%= render @item, hide_item_actions: true %>
-  </div>
-
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h3 class="panel-title">Acquisition Request Details</h3>
-    </div>
-    <div class="panel-body">
 
       <div class="row">
         <div class="col-md-6">
@@ -35,13 +42,18 @@
           <span class="text-primary field">Acquisition Reason</span>
           <%= format @acquisition_request.acquisition_reason %>
           <br/><br/>
-          <% if can? :send_to_acquisitions, @acquisition_request %>
+
+          <% if can?(:send_to_acquisitions, @acquisition_request) && @acquisition_request.status == AcquisitionRequest::STATUS_OPEN %>
+            <hr/>
+            <p>Send an email request to Acquistions or Bookstore: </p>
+
             <%= link_to "Send To Acquisitions", send_to_acquisitions_acquisition_request_path(@acquisition_request),
             method: :post, class: "btn btn-sm btn-info", data: { confirm: "Are you sure? "} %>
 
             <%= link_to "Send To Bookstore", send_to_acquisitions_acquisition_request_path(@acquisition_request, bookstore: true),
             method: :post, class: "btn btn-sm btn-primary", data: { confirm: "Are you sure? "} %>
           <% end %>
+
         </div>
         <div class="col-md-6 left-border">
           <% if @acquisition_request.status == AcquisitionRequest::STATUS_ACQUIRED %>
@@ -91,16 +103,16 @@
         </div>
 
       </div>
-    </div>
-  </div>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Acquisition Request History</h3>
-    </div>
-    <div class="panel-body">
-      render partial: "history_log" 
-    </div>
-  </div>
 
+
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 acquisition_requests">
+    <%= panel(title: "Acquisition Request History", icon: "shopping-cart") do %>
+      <%= render partial:"audit_trail/trail", locals: {audits_grouped: @audits_grouped} %>
+    <% end %>
+  </div>
 </div>

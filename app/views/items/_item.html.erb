@@ -4,6 +4,8 @@
     <%= render partial: "items/displays/li", locals: { item: item } %>
 <% elsif local_assigns[:show] == "div" %>
   <%= render partial: "items/displays/div", locals: { item: item } %>
+<% elsif local_assigns[:show] == "div_info" %>
+  <%= render partial: "items/displays/div_info", locals: { item: item } %>
 <% else %>
   <%= render partial: "items/displays/public", locals: { item: item } %>
 <% end %>
