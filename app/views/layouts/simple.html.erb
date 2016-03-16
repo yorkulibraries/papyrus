@@ -58,6 +58,10 @@
       <div class="row">
         <div class="col-lg-9">
           <%= bootstrap_flash %>
+          <%= PapyrusSettings.auth_cas_header %><br/>
+          <% request.headers.each do |key, value|  %>
+            KEY: <%= key %> VAL: <%= value %><br/>
+          <% end %>
           <%= yield %>
         </div>
         <div class="col-lg-3">
