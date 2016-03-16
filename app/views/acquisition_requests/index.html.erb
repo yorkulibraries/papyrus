@@ -1,35 +1,26 @@
-<% title "Acquisition Lists" %>
+<% title "Acquisition Lists", false %>
 
-<div class="acquisition_requests">
+<div class="row">
+	<div class="col-md-12 acquisition_requests">
+		<%= panel(title: "Acquisition Requests", icon: "shopping-cart") do %>
 
-  <div role="tabpanel">
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-pills" role="tablist">
-    <li role="presentation" class="active">
-      <a href="#open" aria-controls="home" role="tab" data-toggle="tab">Open</a>
-    </li>
-    <li role="presentation">
-      <a href="#acquired" aria-controls="profile" role="tab" data-toggle="tab">Acquired</a>
-    </li>
-    <li role="presentation">
-      <a href="#cancelled" aria-controls="messages" role="tab" data-toggle="tab">Cancelled</a>
-    </li>
-
-  </ul>
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="open">
       <%= render "open_requests" %>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="acquired">
-      <%= render "acquired_requests" %>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="cancelled">
-      <%= render "cancelled_requests" %>
-    </div>
+
+    <% end %>
   </div>
 
+
 </div>
+
+<div class="row">
+  <div class="col-md-8 acquisition_requests">
+    <%= panel(title: "Recently Acquired Requests (100)", icon: "shopping-cart", title_class: "panel-top text-center", styles:"panel-success") do %>
+      <%= render "acquired_requests" %>
+    <% end %>
+  </div>
+  <div class="col-md-4 acquisition_requests">
+    <%= panel(title: "Recently Cancelled Requests (100)", icon: "shopping-cart", title_class: "panel-top text-center", styles:"panel-warning") do %>
+      <%= render "cancelled_requests" %>
+    <% end %>
+  </div>
 </div>

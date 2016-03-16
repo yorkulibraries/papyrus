@@ -1,0 +1,26 @@
+<br/>
+<div style="font-size: 15px; font-weight: bold">
+  <%= @template.render %>
+</div>
+
+<br/>
+<hr/>
+<br/>
+
+<style>
+<%= Papyrus::Application.assets.find_asset('vendor/bootstrap.min.css').body %>
+<%= Papyrus::Application.assets.find_asset('themes/bootstrap3/common.css').body %>
+<%= Papyrus::Application.assets.find_asset('themes/bootstrap3/controllers/items.css').body %>
+
+.field { display: block; }
+td { valign: top; }
+
+</style>
+<h2>Acquisition Request #<%= @acquisition_request.id %></h2>
+<p>Request Sent By <strong><%= @user.name %> </strong> on <%= Date.today %> </p>
+
+<h3>Item Information</h3>
+<table class="table">
+  <tr>
+</table>
+<%= render @item, show: "div_info", item: @item  %>

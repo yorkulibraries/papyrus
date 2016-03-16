@@ -1,3 +1,56 @@
-<%= simple_form_for @acquisition_request do %>
+<% if request.xhr? %>
+<div class="modal sfade" id="acquisition_request_form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= simple_form_for @acquisition_request, remote: true do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Request Item Acquisition</h4>
+      </div>
+      <div class="modal-body">
 
+        <h5><%= @item.title%></h5>
+        <hr/>
+
+        <%= f.input :acquisition_reason, collection: PapyrusSettings.acquisition_reasons %>
+
+        <%= f.hidden_field :item_id, value: @item.id %>
+
+
+        <% if @item.acquisition_requests.size > 0 %>
+          <p>The following is a list of acquisition requests made for this item</p>
+          <ul>
+            <% @item.acquisition_requests.each do |r| %>
+              <li>
+                <span class="badge pull-right"><%= r.status %></span>
+                <%= link_to "Request ##{r.id}", r %> - <%= r.acquisition_reason %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+         <%= f.button :submit, class: "btn btn-success", value: "Request Acquisition" %>
+      </div>
+      <% end %>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<% else %>
+  <%= simple_form_for @acquisition_request, remote: true do |f| %>
+
+  <small>Acquire this title?</small>
+  <h3><%= @item.title%></h3>
+
+  <hr/>
+
+  <%= f.input :acquisition_reason %>
+  <%= f.input :item_id, value: @item.id, type: :hidden  %>
+
+  <%= f.button :submit, class: "btn btn-success", value: "Add To List" %>  <%= link_to "Cancel", items_path(@item), class: "btn btn-link"%>
+
+  <% end %>
 <% end %>

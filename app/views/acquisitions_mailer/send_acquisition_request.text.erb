@@ -1,0 +1,24 @@
+
+<%= @template.render %>
+
+
+============================
+ACQUISITION REQUEST #<%= @acquisition_request.id %>
+Sent By <%= @user.name %> on <%= Date.today %>
+++++++++++++++++++++++++++++
+Item Information
+----------------------------
+
+TITLE: <%= @item.title %>
+TYPE:  <%= @item.item_type.humanize.upcase %>
+ITEM ID:    <%= @item.id %>
+
+
+AUTHOR:         <%= format_field @item.author %>
+ISBN:           <%= format_field @item.isbn %>
+CALL NUMBER:    <%= format_field @item.callnumber %>
+PUBLISHER:      <%= format_field @item.publisher %>
+DATE PUBLISHED: <%= format_field @item.published_date %>
+EDITION:        <%= format_field @item.edition %>
+LANGUAGE NOTE:  <%= format_field @item.language_note %>
+PHYSICAL DESC:  <%= format_field @item.physical_description %>

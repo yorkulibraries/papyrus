@@ -2,5 +2,5 @@ var acquisition_request_holder = "add_acquisition_request_<%= @item.id %>"
 
 $("#" + acquisition_request_holder).remove();
 $("body").append("<div id='add_acquisition_request_<%= @item.id %>'></div>");
-$("#" + acquisition_request_holder).append("<%= j render "new_form", formats: [:html] %>");
+$("#" + acquisition_request_holder).append("<%= j render "form", formats: [:html] %>");
 $("#" + acquisition_request_holder + " #acquisition_request_form").modal('show');

@@ -1,10 +1,37 @@
-<h2>Recently Cancelled Requests (200)</h2>
-<div class="list-group">
-  <% @recently_cancelled.each do |r| %>
-    <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
-      <span class="badge small">Cancelled By <%= r.cancelled_by.name rescue nil %></span>
-      <h5 class="list-group-item-heading"><%= r.item.title rescue nil %></h5>
-      <p class="list-group-item-text weak">Cancelled on <%= r.cancelled_at.strftime("%b %e, %Y") rescue nil%></p>
-    </a>
-  <% end %>
-</div>
+<% if @recently_cancelled.size == 0 %>
+  <div class="blank-slate">
+    <i class="icon-bullhorn"></i>
+    <h1>There are no cancelled requests righ tnow.</h1>
+    <p>Go to an item you want acquire and click on <strong>Acquisitions</strong> link.</p>
+  </div>
+<% else %>
+  <div class="list-group">
+    <% @recently_cancelled.each do |r| %>
+      <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
+
+        <h5 class="list-group-item-heading"><%= r.item.title rescue nil %></h5>
+        <div class="row list-group-item-text small">
+          <div class="col-md-2">
+            <span class="weak">Cancelled:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="strong tiny"><%= r.cancelled_at.strftime("%b %e, %Y") %></span>
+          </div>
+          <div class="col-md-1">
+            <span class="weak">By:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="strong tiny"><%= r.cancelled_by.name rescue nil%></span>
+          </div>
+          <div class="col-md-1">
+            <span class="weak">Why:</span>
+          </div>
+          <div class="col-md-2">
+            <span class="strong tiny"><%= r.cancellation_reason %></span>
+          </div>
+
+        </div>
+      </a>
+    <% end %>
+  </div>
+<% end %>

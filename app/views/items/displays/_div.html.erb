@@ -7,7 +7,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="pull-right">
-						<a class="hide btn btn-sm btn-default <%= is_action?("acquisition_requests", "btn-primary")%>" href="<%= acquisition_requests_item_path(item) %>" title="Acquisition Requests">
+						<a class="btn btn-sm btn-default <%= is_action?("acquisition_requests", "btn-primary")%>" data-remote="true" href="<%= new_acquisition_request_path(item_id: item.id) %>" title="Acquisition Requests">
 							<i class="fa fa-shopping-cart"></i>
 						</a>
 						<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_item_path(item) %>" title="Audit Trail">

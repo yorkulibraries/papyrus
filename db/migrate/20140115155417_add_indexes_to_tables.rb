@@ -14,7 +14,5 @@ class AddIndexesToTables < ActiveRecord::Migration
     add_index :attachments, [:item_id, :deleted]
     add_index :notes, [:student_id]
 
-
-    add_index :acquisition_requests, [:item_id]
   end
 end

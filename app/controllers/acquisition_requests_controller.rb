@@ -4,8 +4,8 @@ class AcquisitionRequestsController < ApplicationController
 
   def index
     @acquisition_requests = AcquisitionRequest.open.order("created_at desc")
-    @recently_acquired = AcquisitionRequest.acquired.limit(200).order("acquired_at desc")
-    @recently_cancelled = AcquisitionRequest.cancelled.limit(200).order("cancelled_at desc")
+    @recently_acquired = AcquisitionRequest.acquired.limit(100).order("acquired_at desc")
+    @recently_cancelled = AcquisitionRequest.cancelled.limit(100).order("cancelled_at desc")
 
   end
 
@@ -91,10 +91,12 @@ class AcquisitionRequestsController < ApplicationController
 
   def send_to_acquisitions
     where = params[:bookstore] ? "bookstore" : "acquisitions"
-    @acquisition_request.audit_comment = "Sent email to #{where}."
+
+    AcquisitionsMailer.send_acquisition_request(@acquisition_request, current_user, params[:bookstore]).deliver_now
+    #AcquisitionsMailer.test.deliver_later
+    @acquisition_request.audit_comment = "XSent email to #{where}."
     @acquisition_request.save(validate: false)
 
-    AcquisitionsMailer.send_acquisition_request(@acquisition_request, current_user, params[:bookstore]).deliver_later
     redirect_to acquisition_request_path(@acquisition_request), notice: "Sent request to #{where}"
   end
 
