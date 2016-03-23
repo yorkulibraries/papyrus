@@ -60,23 +60,23 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
 
-  # config.vm.provision "shell", privileged: true, inline: <<-SHELL
-  #    apt-get -y update
-  #    apt-get -y install build-essential
-  #    apt-get -y install zlib1g-dev git-core nodejs
-  #
-  #    # Install Apache and MySQL
-  #    apt-get install -y apache2
-  #    debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password root'
-  #    debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password root'
-  #    apt-get -y install mysql-server mysql-client libmysqlclient-dev
-  #
-  #    apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev
-  #    apt-get install -y libreadline6-dev zlib1g-dev libncurses5-dev
-  #    apt-get install -y libgdbm3 libgdbm-dev libsqlite3-dev
-  #    apt-get install -y libreadline-dev libssl-dev libffi-dev
-  #    apt-get install -y libxml2-dev libxslt1-dev python-software-properties
-  # SHELL
+  config.vm.provision "shell", privileged: true, inline: <<-SHELL
+     apt-get -y update
+     apt-get -y install build-essential
+     apt-get -y install zlib1g-dev git-core nodejs
+
+     # Install Apache and MySQL
+     apt-get install -y apache2
+     debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password root'
+     debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password root'
+     apt-get -y install mysql-server mysql-client libmysqlclient-dev
+
+     apt-get install -y autoconf bison build-essential libssl-dev libyaml-dev
+     apt-get install -y libreadline6-dev zlib1g-dev libncurses5-dev
+     apt-get install -y libgdbm3 libgdbm-dev libsqlite3-dev
+     apt-get install -y libreadline-dev libssl-dev libffi-dev
+     apt-get install -y libxml2-dev libxslt1-dev python-software-properties
+  SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
      # download rbenv if the directory is missing
@@ -109,10 +109,10 @@ Vagrant.configure(2) do |config|
      fi
   SHELL
 
-  # config.vm.provision 'shell', privileged: false, inline: <<-SHELL
-  #   rbenv install 2.2.3
-  #   rbenv global 2.2.3
-  # SHELL
+  config.vm.provision 'shell', privileged: false, inline: <<-SHELL
+    rbenv install 2.2.3
+    rbenv global 2.2.3
+  SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
     echo "gem: --no-document" > ~/.gemrc
