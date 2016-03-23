@@ -23,4 +23,14 @@ production:
   pool: 5
   username: mysqluser
   password: mysqlpassword
-  socket: /var/lib/mysql/mysql.sock
+  host: localhost
+
+vagrant:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: papyrus_development
+  pool: 5
+  username: root
+  password: root
+  host: localhost

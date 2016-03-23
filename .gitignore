@@ -11,3 +11,4 @@ config/database.yml
 config/deploy.rb
 config/deploy
 .DS_Store
+.vagrant

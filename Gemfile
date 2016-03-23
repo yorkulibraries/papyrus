@@ -38,7 +38,7 @@ gem "worldcatapi", "1.0.5"
 gem 'kaminari', "0.15.1"
 gem "cancan", "1.6.9"
 gem "rubyzip", "0.9.9"
-gem 'liquid', '2.6.1'
+gem 'liquid', '2.6.2'
 gem 'email_validator', "1.4.0"
 gem "rails-settings-cached", "0.4.1"
 gem "audited-activerecord", "4.0.0"
