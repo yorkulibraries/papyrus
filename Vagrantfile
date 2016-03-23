@@ -110,8 +110,8 @@ Vagrant.configure(2) do |config|
   SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
-    rbenv install 2.2.3
-    rbenv global 2.2.3
+    rbenv install 2.1.3
+    rbenv global 2.1.3
   SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
@@ -122,8 +122,8 @@ Vagrant.configure(2) do |config|
     echo 'cd ~/app' >> ~/.bash_profile
 
     cd /home/vagrant/app
-    # bundle install
-    # RAILS_ENV=vagrant bundle exec rake db:create
+    bundle install
+    RAILS_ENV=vagrant bundle exec rake db:create
     RAILS_ENV=vagrant bundle exec rake db:schema:load
   SHELL
 
