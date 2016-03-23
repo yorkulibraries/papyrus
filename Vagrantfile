@@ -119,42 +119,12 @@ Vagrant.configure(2) do |config|
     gem install bundler
 
     echo 'export RAILS_ENV=vagrant' >> ~/.bash_profile
+    echo 'cd ~/app' >> ~/.bash_profile
 
     cd /home/vagrant/app
-    bundle install
-    RAILS_ENV=vagrant bundle exec rake db:create
+    # bundle install
+    # RAILS_ENV=vagrant bundle exec rake db:create
     RAILS_ENV=vagrant bundle exec rake db:schema:load
   SHELL
 
-
-  # config.vm.provision "shell", privileged: false, inline: <<-SHELL
-  #     #SETUP RBENV ruby version
-  #     git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-  #     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-  #     echo 'eval "$(rbenv init -)"'               >> ~/.bashrc
-  #     source ~/.bashrc
-  #
-  #     git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-  #     sudo -H -u vagrant bash -i -c 'rbenv install 2.2.3'
-  #     sudo -H -u vagrant bash -i -c 'rbenv rehash'
-  #     sudo -H -u vagrant bash -i -c 'rbenv global 2.2.3'
-  #     sudo -H -u vagrant bash -i -c 'gem install bundler --no-ri --no-rdoc'
-  #     sudo -H -u vagrant bash -i -c 'rbenv rehash'
-  #
-  #     #Javascript Runtime
-  #     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-  #     sudo apt-get install -y nodejs
-  #
-  #     # INSTALL RAILS
-  #     sudo -H -u vagrant bash -i -c 'gem install rails -v 4.2.6  --no-ri --no-rdoc'
-  #     sudo -H -u vagrant bash -i -c 'rbenv rehash'
-  #
-  #     echo 'export RAILS_ENV=vagrant' >> ~/.bashrc
-  #     cd app
-  #     sudo -H -u vagrant bash -i -c 'bundle install'
-  #     sudo -H -u vagrant bash -i -c 'RAILS_ENV=vagrant rake db:create'
-  #     sudo -H -u vagrant bash -i -c 'RAILS_ENV=vagrant rake db:migrate'
-  #
-  #
-  #  SHELL
 end

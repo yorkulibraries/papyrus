@@ -59,31 +59,28 @@ gem "exception_notification", git: "git://github.com/rails/exception_notificatio
 
 
 ## TESTING && DEVELOPMENT ##
-group :development, :test do
-  gem 'nifty-generators', "0.4.6"
-  gem "populator", git: "https://github.com/ryanb/populator.git"
-  gem "faker"
-  gem "rack-livereload"
-  gem "bullet" # Testing SQL queries
+gem 'nifty-generators', "0.4.6"
+gem "populator", git: "https://github.com/ryanb/populator.git"
+gem "faker"
+gem "rack-livereload"
+gem "bullet" # Testing SQL queries
 
-  gem "minitest", "5.6.1"
+gem "minitest", "5.6.1"
 
-  gem 'webrat', "0.7.3"
-  gem 'factory_girl_rails', "4.5.0"
-  gem 'shoulda', "3.5"
-  gem 'shoulda-matchers'
-  gem 'shoulda-context'
-  gem "mocha", "0.14", require: false
-  gem "capybara", "2.1.0"
-  gem 'database_cleaner', "1.2.0"
+gem 'webrat', "0.7.3"
+gem 'factory_girl_rails', "4.5.0"
+gem 'shoulda', "3.5"
+gem 'shoulda-matchers'
+gem 'shoulda-context'
+gem "mocha", "0.14", require: false
+gem "capybara", "2.1.0"
+gem 'database_cleaner', "1.2.0"
 
-  gem "guard-minitest", "2.4.4"
-  gem 'guard-livereload', require: false
+gem "guard-minitest", "2.4.4"
+gem 'guard-livereload', require: false
 
-  gem 'spring', "1.3.6"
-  gem "ruby-prof"
-  #gem "turn", "0.9.7"
+gem 'spring', "1.3.6"
+gem "ruby-prof"
+#gem "turn", "0.9.7"
 
-  gem 'seed_dump'
-
-end
+gem 'seed_dump'
