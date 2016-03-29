@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
         redirect_to root_url, notice: "Logged in!"
       end
     else
-      flash.now.alert = "Invalid email or password #{username}"
+      flash.now.alert = "Invalid email or password"
 
       render layout: "simple"
     end
