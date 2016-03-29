@@ -40,7 +40,7 @@ module LayoutHelper
      end
   end
 
-  def panel(title:, title_class: "panel-heading", icon: 'th', icon_class: '', styles: 'panel-default', &block)
+  def panel(title: "untitled", title_class: "panel-heading", icon: 'th', icon_class: '', styles: 'panel-default', &block)
     icon_tag = content_tag(:i, "", class: "fa fa-#{icon} #{icon_class}")
     title_tag = content_tag(:strong, icon_tag + " #{title}")
 
