@@ -7,7 +7,7 @@ class TermsController < ApplicationController
     #Course.joins(:term).where("terms.end_date >= '#{Date.today}'").where("courses.title like \"%#{@query}%\" || courses.code like \"%#{@query}%\" ")
 
       respond_to do |format|
-        format.json { render json: @courses.map { |course| { id: course.id, name: "#{course.title}  <br/> <span class='weak'>#{course.term.name}</span>" } } }
+        format.json { render json: @courses.map { |course| { id: course.id, name: "#{course.title}", term: "#{course.term.name}" } } }
         format.html
       end
   end

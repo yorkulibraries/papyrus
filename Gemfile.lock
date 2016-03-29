@@ -380,6 +380,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   webrat (= 0.7.3)
   worldcatapi (= 1.0.5)
-
-BUNDLED WITH
-   1.11.2
