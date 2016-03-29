@@ -61,9 +61,6 @@ Papyrus::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  config.assets.compressor = :uglifier
-
-
-  config.active_record.disable_implicit_join_references = true
+  config.assets.compressor = :uglifier  
 
 end

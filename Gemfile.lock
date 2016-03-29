@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/rails/exception_notification.git
-  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
-  specs:
-    exception_notification (1.0.0)
-
-GIT
   remote: https://github.com/ryanb/populator.git
   revision: cd1373d8c0a89709a892db9abb2517a87646ed41
   specs:
@@ -111,6 +105,9 @@ GEM
     ensure_valid_encoding (0.5.3)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
+    exception_notification (4.1.4)
+      actionmailer (~> 4.0)
+      activesupport (~> 4.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -340,7 +337,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner (= 1.2.0)
   email_validator (= 1.4.0)
-  exception_notification!
+  exception_notification (= 4.1.4)
   factory_girl_rails (= 4.5.0)
   faker
   flash_cookie_session (= 1.1.6)

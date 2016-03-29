@@ -79,11 +79,18 @@ end
 # Exception Notification For Production
 if Rails.env.production?
 
-  Papyrus::Application.configure do
-    config.middleware.use ExceptionNotifier,
-         email_prefix: PapyrusSettings.errors_email_subject_prefix,
-         sender_address: PapyrusSettings.errors_email_from,
-         exception_recipients: PapyrusSettings.errors_email_to
-  end
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+  email: {
+    email_prefix: PapyrusSettings.errors_email_subject_prefix,
+    sender_address: PapyrusSettings.errors_email_from,
+    exception_recipients: PapyrusSettings.errors_email_to
+  }
+
+  # Papyrus::Application.configure do
+  #   config.middleware.use ExceptionNotifier,
+  #        email_prefix: PapyrusSettings.errors_email_subject_prefix,
+  #        sender_address: PapyrusSettings.errors_email_from,
+  #        exception_recipients: PapyrusSettings.errors_email_to
+  # end
 
 end

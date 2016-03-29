@@ -54,8 +54,8 @@ gem "mini_magick", "3.7.0"
 gem "mime-types", "1.25.1"
 
 # NOTIFICATIONS
-gem "exception_notification", git: "git://github.com/rails/exception_notification.git", require: "exception_notifier"
-
+#gem "exception_notification", git: "git://github.com/rails/exception_notification.git", require: "exception_notifier"
+gem 'exception_notification', "4.1.4"
 
 
 ## TESTING && DEVELOPMENT ##

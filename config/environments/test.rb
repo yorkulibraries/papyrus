@@ -37,9 +37,7 @@ Papyrus::Application.configure do
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_files = true
   config.static_cache_control = "public, max-age=3600"
-
-  config.active_record.disable_implicit_join_references = true
-
+  
 
    config.active_support.test_order = :sorted
 
