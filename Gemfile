@@ -72,6 +72,7 @@ group :test do
   gem 'database_cleaner', "1.2.0"
   gem "guard-minitest", "2.4.4"
   gem 'guard-livereload', require: false
+  gem "rack-livereload"
   gem 'spring', "1.3.6"
   gem "ruby-prof"
 end

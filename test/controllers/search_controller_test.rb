@@ -7,7 +7,7 @@ class SearchControllerTest < ActionController::TestCase
     log_user_in(@user)
   end
 
-  should "search items database if no type was specified" do
+  should "search local items if no type is specified" do
     create(:item, title: "unique title")
     create(:item, isbn: "9-233-12345")
     create(:item, unique_id: "000111")
@@ -36,5 +36,27 @@ class SearchControllerTest < ActionController::TestCase
     assert_equal "john smith", items.first.author
 
   end
+
+  should "search students" do
+    create(:student, name: "Terry Jones", username: "terryjones", email: "tj@yorku.ca", inactive: false)
+    create(:student, name: "Valmar Garry", username: "vgarry", email: "vg@university.ca", inactive: true)
+
+    get :students, q: "Terry Jones"
+    students = assigns(:students)
+    assert_equal 1, students.size, "One student found with that name"
+
+    get :students, q: "vgarry"
+    students = assigns(:students)
+    assert_equal 0, students.size, "No one should be found, since vgarry is inactive"
+
+    get :students, q: "vg@university.ca", inactive: true
+    students = assigns(:students)
+    assert_equal 1, students.size, "Should find one inactive student"
+
+    get :students, q: "terry", inactive: true
+    students = assigns(:students)
+    assert_equal 0, students.size, "Should find no student student since Terry is active"
+  end
+
 
 end

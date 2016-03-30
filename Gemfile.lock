@@ -213,6 +213,8 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
+    rack-livereload (0.3.16)
+      rack
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -375,6 +377,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.14)
   nifty-generators (= 0.4.6)
   populator!
+  rack-livereload
   rails (= 4.2.4)
   rails-settings-cached (= 0.4.1)
   responders (~> 2.0)

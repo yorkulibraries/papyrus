@@ -10,7 +10,24 @@ class SearchController < ApplicationController
 
 
   def students
+    page_number = params[:page] ||= 1
+    query = params[:q].strip
+    inactive_status = params[:inactive].blank? ? false : true
+    @searching = true
+    @query = query
 
+    @students = Student.where("users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ?",
+                              "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")
+                        .where(inactive: inactive_status).page page_number
+
+
+
+    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
+
+    respond_to do |format|
+      format.json { render :json => @students.map { |student| {:id => student.id, :name => student.name } } }
+      format.html {  render :template => "students/index" }
+    end
   end
 
   def items
