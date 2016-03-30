@@ -54,33 +54,33 @@ gem "mini_magick", "3.7.0"
 gem "mime-types", "1.25.1"
 
 # NOTIFICATIONS
-#gem "exception_notification", git: "git://github.com/rails/exception_notification.git", require: "exception_notifier"
+
 gem 'exception_notification', "4.1.4"
 
 
 ## TESTING && DEVELOPMENT ##
-gem 'nifty-generators', "0.4.6"
-gem "populator", git: "https://github.com/ryanb/populator.git"
-gem "faker"
-gem "rack-livereload"
-gem "bullet" # Testing SQL queries
 
-gem "minitest", "5.6.1"
+group :test do
+  gem "minitest", "5.6.1"
+  gem 'webrat', "0.7.3"
+  gem 'factory_girl_rails', "4.5.0"
+  gem 'shoulda', "3.5"
+  gem 'shoulda-matchers'
+  gem 'shoulda-context'
+  gem "mocha", "0.14", require: false
+  gem "capybara", "2.1.0"
+  gem 'database_cleaner', "1.2.0"
+  gem "guard-minitest", "2.4.4"
+  gem 'guard-livereload', require: false
+  gem 'spring', "1.3.6"
+  gem "ruby-prof"
+end
 
-gem 'webrat', "0.7.3"
-gem 'factory_girl_rails', "4.5.0"
-gem 'shoulda', "3.5"
-gem 'shoulda-matchers'
-gem 'shoulda-context'
-gem "mocha", "0.14", require: false
-gem "capybara", "2.1.0"
-gem 'database_cleaner', "1.2.0"
 
-gem "guard-minitest", "2.4.4"
-gem 'guard-livereload', require: false
-
-gem 'spring', "1.3.6"
-gem "ruby-prof"
-#gem "turn", "0.9.7"
-
-gem 'seed_dump'
+group :development do
+  gem 'nifty-generators', "0.4.6"
+	gem "populator", git: "https://github.com/ryanb/populator.git"
+	gem "faker"
+  gem "bullet" # Testing SQL queries
+	gem "mailcatcher" # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
+end
