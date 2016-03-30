@@ -8,16 +8,30 @@ Papyrus is an accessible content delivery and student management application. It
 Downloading The Latest Version
 ------------------------------
 
-The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.5.3 is the most recent production ready version.
-
-[Download v2.5.3 Zip File](https://github.com/yorkulcs/papyrus/archive/v2.5.3.tar.gz)
+The latest Papyrus version can be found by clicking on the [Releases](https://github.com/yorkulcs/papyrus/releases) link at the top of this page. Currently v2.7 is the most recent production ready version.
 
 Checkout the [Wiki Pages](https://github.com/yorkulcs/papyrus/wiki) for more details on how to deploy Papyrus.
 
 Demo
 ----
 
-We had to remove the demo of Papyrus. However if you would like to see it again, send us an email (tdanylak@yorku.ca)
+---- NOTE ----
+THIS Demo Vagrant box is still in the testing mode, so it might not work right now. This message will be removed once demo is fully functional. 
+---- NOTE ---
+
+
+Clone the master branch of Papyrus into a directory on your computer. Demo version of Papyrus can be run via a Vagrant box, so you will need to download and install [Vagrant](https://www.vagrantup.com).
+
+Once vagrant is installed, cd into the papyrus directory and type:
+
+```sh
+papyrus$ vagrant up
+papyrus$ vagrant ssh
+vagrant-machine$ rails s
+```
+
+This should start up a demo Papyrus server. You can go to (http://localhost:3000) in your browser to test out Papyrus. 
+
 
 
 Deploying Papyrus
@@ -28,8 +42,8 @@ There are two ways to install and test out Papyrus. The first one lets you start
 Prerequisites
 -------------
 
-- Ruby 1.9.3
-- Rails 4.0.x
+- Ruby 2.0.0
+- Rails 4.2.x
 - MySQL 5.5 or PostgreSQL (This method requires changing of the configuration files)
 - SQLite (For development/testing mode)
 
@@ -75,58 +89,4 @@ Checkout this guide on how to setup Papyrus in production.
 Configuration Options
 =====================
 
-
-The configuration options are located in:
-
-```
-config/papyrus_app_config.rb
-```
-This is a simple RUBY configuration file that contains settings for the application's name, authentication, error handling and bibliographic search.
-
-### Organization
-
-| OPTION                    | Description                                                        | Usage               |
-|---------------------------|--------------------------------------------------------------------|---------------------|
-| full_name                 | The full name of your organization. i.e. York University Libraries | Used in copyright   |
-| short_name                | Short name of your organization, i.e. yul                          | Used internally     |
-| app_url                   | The URL where Papyrus is deployed.                                 | Email notifications |
-| course\_code\_sample      | The format for a course to shown as a hint on courses page.        | Courses and Terms   |
-| course\_code\_lookup_link | A link where to find the proper course code												 | Courses and Terms   |
-| item_sources              | An array of sources for the electronic files of an Item            | Adding new Item     |
-
-### Authentication
-
-| OPTION                      | Description                                         | Usage                 |
-|-----------------------------|-----------------------------------------------------|-----------------------|
-| cas\_header\_name           | The name of the CAS header to authenticate the user | Authentication module |
-| cas\_user\_id\_name       | The name of user id to be use. i.e Passport York    | User module           |
-| after\_logout\_redirect\_to | The URL to redirect the user to after logout        | Logout function       |
-| cookies_domain              | The domain to use for cookies                       | Not implemented yet   |
-
-
-### Errors
-
-| OPTION                 | Description                                                |
-|------------------------|------------------------------------------------------------|
-| email\_subject\_prefix | The prefix to use in the email subject                     |
-| sender_address         | Address of the sender for error emails                     |
-| error_recipients       | An array of email addresses to receive error notifications |
-
-### Notifications
-
-| OPTION                   | Description                                                                 |
-|--------------------------|-----------------------------------------------------------------------------|
-| from_email               | The From email address to use when sending out notifications                |
-| welcome_subject          | The subject for the welcome email                                           |
-| notification_subject     | The subject for notifications email, when sending notifications to students |
-| items\_assigned\_subject | The subject of items that have been assigned to you email                   |
-
-
-###### Worldcat
-> NOTE: Worldcat integration requires an API key. If you're instution subscribes to OCLC services, you should already have an api key.
-
-| OPTION             | Description (Defaults)                                                       |
-|--------------------|------------------------------------------------------------------------------|
-| worldcat.label     | The label to use on the front end when searching (Worldcat Search)           |
-| worldcat.id_prefix | The prefix to sue when saving the id of the item in the database  (oclc)     |
-| worldcat.key       | To access Worldcat you need an API key. Put the key here. (no key provided)  |
+Configuration is done inside of Papyrus instance. 
