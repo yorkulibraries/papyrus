@@ -1,3 +1,11 @@
 <% title "Search", false %>
 
-Search Here
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Search", icon: "users") do %>
+      <%= render partial: "search/search_box_items" %>
+      <hr/>
+      <%= render partial: "search/search_box_students" %>      
+    <% end %>
+  </div>
+</div>

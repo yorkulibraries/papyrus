@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     authorize! :search, :items
   end
 
-  def index
+  def index    
   end
 
 

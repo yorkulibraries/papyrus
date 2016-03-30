@@ -60,7 +60,7 @@
 
               <% if can? :read, Item %>
               <li class="<%= "active" if controller_name == "search" %>">
-                  <a href="<%= search_items_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
+                  <a href="<%= search_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
               </li>
               <% end %>
 

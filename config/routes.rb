@@ -67,7 +67,7 @@ Papyrus::Application.routes.draw do
 
     collection do
       get "inactive"
-      get "search"
+      #get "search"
       post "notify"
     end
 
@@ -104,10 +104,10 @@ Papyrus::Application.routes.draw do
     post :send_to_acquisitions, on: :member
   end
 
-  # ITEMS Search
+  # Search
   match "search/items(/:type)" => "search#items", as: "search_items", via: :get,  defaults: { type: "local" }
-  match "search/students(/:type)" => "search#students", as: "ssearch_students", via: :get,  defaults: { type: "active" }
-
+  match "search/students(/:type)" => "search#students", as: "search_students", via: :get,  defaults: { type: "active" }
+  match "search" => "search#index", as: "search", via: :get
   # Root
   root :to => "home#index"
 
