@@ -33,13 +33,15 @@
 		<% end %>
 
 		<table class="table" id="scan_lists">
-			<tr>
-				<th>Name</th>
-				<th>Status</th>
-				<th>Assigned To</th>
-				<th>Items #</th>
-				<th>Created</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Status</th>
+					<th>Assigned To</th>
+					<th>Items #</th>
+					<th>Created</th>
+				</tr>
+			</thead>
 			<tbody>
 	      <% @scan_lists.each do |scan_list| %>
 	        <%= render partial: scan_list, locals: { show: "tr" } %>

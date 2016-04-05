@@ -8,9 +8,11 @@
       <div class="col-md-4">
         <%= f.input :assigned_to_id, collection: User.transcription_assitants %>
       </div>
-      <div class="col-md-4">
-        <%= f.input :status, collection: ScanList::SCAN_STATUSES %>
-      </div>
+      <% unless @scan_list.new_record? %>
+        <div class="col-md-4">
+          <%= f.input :status, collection: ScanList::SCAN_STATUSES %>
+        </div>
+      <% end %>
     </div>
 
     <hr/>
