@@ -3,9 +3,10 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
-  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+  config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder ".", "/home/vagrant/app"
+  config.vm.synced_folder ".", "/home/vagrant/app", type: "rsync", rsync__exclude: ".git/"
 
 
 
@@ -76,6 +77,18 @@ Vagrant.configure(2) do |config|
      apt-get install -y libgdbm3 libgdbm-dev libsqlite3-dev
      apt-get install -y libreadline-dev libssl-dev libffi-dev
      apt-get install -y libxml2-dev libxslt1-dev python-software-properties
+
+     # Open Up some ports in the firewall
+     apt-get install -y iptables-persistent
+     iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+     iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+     iptables -A INPUT -p tcp -m tcp --dport 3000 -j ACCEPT
+     iptables -A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
+     iptables -A INPUT -p tcp -m tcp --dport 2222 -j ACCEPT
+
+     iptables-save > /etc/iptables/rules.v4
+     service iptables-persistent start
+
   SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
@@ -125,6 +138,11 @@ Vagrant.configure(2) do |config|
     bundle install
     RAILS_ENV=vagrant bundle exec rake db:create
     RAILS_ENV=vagrant bundle exec rake db:schema:load
+    RAILS_ENV=vagrant bundle exec rake db:seed
+
+    echo 'alias rs="rails server -b 0.0.0.0"' >> ~/.bash_profile
   SHELL
+
+
 
 end

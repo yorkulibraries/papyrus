@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def new
 
-    if Rails.env.development?
+    if Rails.env.development? || Rails.env.vagrant?
         if params[:as].nil?
           username = User::ADMIN
         else

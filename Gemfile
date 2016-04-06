@@ -73,6 +73,9 @@ group :test do
   gem "guard-minitest", "2.4.4"
   gem 'spring', "1.3.6"
   gem "ruby-prof"
+
+  gem 'guard-livereload', require: false
+  gem "rack-livereload"
 end
 
 
@@ -82,8 +85,5 @@ group :development do
 	gem "faker"
   gem "bullet" # Testing SQL queries
 	gem "mailcatcher" # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
-
-  gem 'guard-livereload', require: false
-  gem "rack-livereload"
 
 end
