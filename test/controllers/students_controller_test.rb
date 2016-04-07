@@ -20,7 +20,7 @@ class StudentsControllerTest < ActionController::TestCase
       assert_equal 0, student.errors.size, "Should be 0 errors"
       assert_redirected_to student_url(student)
     end
-  
+
   end
 
   should "update an existing student" do
@@ -187,32 +187,6 @@ class StudentsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to root_url
   end
-
-
-  ######### SEARCH STUDENTS #######
-
-  should "find students based on name or username and use inactive or active status" do
-    create(:student, name: "Terry Jones", username: "terryjones", email: "tj@yorku.ca", inactive: false)
-    create(:student, name: "Valmar Garry", username: "vgarry", email: "vg@university.ca", inactive: true)
-
-    get :search, q: "Terry Jones"
-    students = assigns(:students)
-    assert_equal 1, students.size, "One student found with that name"
-
-    get :search, q: "vgarry"
-    students = assigns(:students)
-    assert_equal 0, students.size, "No one should be found, since vgarry is inactive"
-
-    get :search, q: "vg@university.ca", inactive: true
-    students = assigns(:students)
-    assert_equal 1, students.size, "Should find one inactive student"
-
-    get :search, q: "terry", inactive: true
-    students = assigns(:students)
-    assert_equal 0, students.size, "Should find no student student since Terry is active"
-
-  end
-
 
   ######### COMPLETE ORIENTATION ######
   should "complete student orientation field" do
