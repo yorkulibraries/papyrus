@@ -2,6 +2,11 @@ $("#announcement_form_holder").empty();
 <% if @announcement.errors.size == 0 %>
   $("#current_announcements").after('<%=escape_javascript render @announcement, show: "div" %>')
   $(".blank-slate").hide();
+
+  $('.submittable').click(function() {
+    $(this).parents('form:first').submit();
+  });
+  
 <% else %>
   $('#announcement_form_holder').prepend('<%=escape_javascript render("announcements/form") %>');
 <% end %>

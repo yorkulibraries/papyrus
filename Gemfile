@@ -59,6 +59,8 @@ gem 'exception_notification', "4.1.4"
 
 
 ## TESTING && DEVELOPMENT ##
+gem 'guard-livereload', require: false
+gem "rack-livereload"
 
 group :test do
   gem "minitest", "5.6.1"
@@ -74,8 +76,6 @@ group :test do
   gem 'spring', "1.3.6"
   gem "ruby-prof"
 
-  gem 'guard-livereload', require: false
-  gem "rack-livereload"
 end
 
 
