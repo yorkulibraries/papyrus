@@ -15,24 +15,23 @@ Checkout the [Wiki Pages](https://github.com/yorkulcs/papyrus/wiki) for more det
 Demo
 ----
 
----- NOTE ----
-THIS Demo Vagrant box is still in the testing mode, so it might not work right now. This message will be removed once demo is fully functional. 
----- NOTE ---
-
-
-Clone the master branch of Papyrus into a directory on your computer. Demo version of Papyrus can be run via a Vagrant box, so you will need to download and install [Vagrant](https://www.vagrantup.com).
+Clone the master branch of Papyrus into a directory on your computer. Demo version of Papyrus can be run via a Vagrant box, so you will need to download and install [Vagrant](https://www.vagrantup.com). You must use Vagrant 1.8.1 or newer for synced folder to work properly. 
 
 Once vagrant is installed, cd into the papyrus directory and type:
 
 ```sh
 papyrus$ vagrant up
 papyrus$ vagrant ssh
-vagrant-machine$ rails s
 ```
+Because rails 4.2.x changed the way rails server binds to a network interface, in order for you to be able to access Papyrus running in the vagrant box you must start the server and bind it to 0.0.0.0 address:
 
+```sh
+papyrus$ rails server -b 0.0.0.0
+# or user an alias created for this purpose
+papyrus$ rs
+```
+An admin user was created for the purpose of this demo, Papyrus will automatically log you in as that user. 
 This should start up a demo Papyrus server. You can go to (http://localhost:3000) in your browser to test out Papyrus. 
-
-
 
 Deploying Papyrus
 ------------------
