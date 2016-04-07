@@ -11,22 +11,35 @@ class Ability
       can :show, :dashboard
       can :manage, [Announcement, AcquisitionRequest]
 
-      can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course]
+      can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course, ScanList]
       can :show, :stats
-      can :manage, :acquisitions
 
       can :login_as, :student
 
-    elsif  user.role == User::COORDINATOR  ||  user.role == User::STAFF
+    elsif user.role == User::COORDINATOR
       can :show, :dashboard
 
+      can :manage, [ScanList]
       can :manage, [Term, Course]
-      can :manage, AcquisitionRequest
+      can [:read, :create, :update], AcquisitionRequest
       can :manage, AccessCode
       can [:read, :create, :update], [Note]
       can :manage, [Item, Attachment, ItemConnection]
       can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail, :reactivate, :inactive, :destroy], Student
       can :login_as, :student
+
+    elsif user.role == User::STAFF
+      can :show, :dashboard
+
+      can :manage, [ScanList]
+      can :manage, [Term, Course]
+      can [:read, :create], AcquisitionRequest
+      can :manage, AccessCode
+      can [:read, :create, :update], [Note]
+      can :manage, [Item, Attachment, ItemConnection]
+      can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail, :reactivate, :inactive, :destroy], Student
+      can :login_as, :student
+
     elsif user.role == User::PART_TIME
       can :show, :dashboard
 
@@ -38,15 +51,6 @@ class Ability
       can :login_as, :student
       can :create, Attachment
       can :get_file, Attachment
-
-    elsif user.role == User::ACQUISITIONS
-      can :show, :dashboard
-
-      can :manage, AcquisitionRequest
-      can :read, Item
-      can :create, Attachment
-      can :get_file, Attachment
-      can :zipped_files, Item
     else
       can :show, :student
       can :hide, Announcement
