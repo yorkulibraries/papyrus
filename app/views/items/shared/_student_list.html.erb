@@ -48,7 +48,9 @@
   $(document).ready(function () {
 
     $("#assign_students_modal").modal({show: false}).on('shown.bs.modal', function (e) {
-      $("#assign-students-list").tokenInput("<%= search_students_path %>");
+      $("#assign-students-list").tokenInput("<%= search_students_path %>", {
+          zindex: 9999999
+      });
     });
 
     $(".tooltips").tooltip();

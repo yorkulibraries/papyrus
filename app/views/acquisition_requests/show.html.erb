@@ -43,7 +43,7 @@
           <%= format @acquisition_request.acquisition_reason %>
           <br/><br/>
 
-          <% if can?(:send_to_acquisitions, @acquisition_request) && @acquisition_request.status == AcquisitionRequest::STATUS_OPEN %>
+          <% if can?(:send_to_acquisitions, @acquisition_request) && @acquisition_request.status != AcquisitionRequest::STATUS_CANCELLED %>
             <hr/>
             <p>Send an email request to Acquistions or Bookstore: </p>
 

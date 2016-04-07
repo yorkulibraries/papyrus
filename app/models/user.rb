@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   scope :active, -> { where(:inactive => false).order("users.created_at desc") }
   scope :inactive, -> { where(:inactive => true).order("users.created_at desc") }
   scope :not_students, -> { where("users.role <> '#{STUDENT_USER}'") }
-  scope :transcription_assitants, -> { where("users.role <> '#{STUDENT_USER}'").where("users.role <> '#{ACQUISITIONS}'") }
+  scope :transcription_assitants, -> { where("users.role <> '#{STUDENT_USER}'").where("users.role <> '#{ADMIN}'") }
 
   default_scope { order("users.last_name asc") }
 

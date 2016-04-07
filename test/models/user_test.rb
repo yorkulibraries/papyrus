@@ -25,9 +25,9 @@ class UserTest < ActiveSupport::TestCase
     create_list(:user, 2, role: User::COORDINATOR)
     create_list(:user, 2, role: User::STUDENT_USER)
     create_list(:user, 2, role: User::ADMIN)
-    create_list(:user, 2, role: User::ACQUISITIONS)
 
-    assert_equal 8, User.transcription_assitants.count, "8 Transcription assistants, ADMINS are now included"
+
+    assert_equal 6, User.transcription_assitants.count, "8 Transcription assistants, ADMINS are now included"
   end
 
 
