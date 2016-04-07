@@ -10,7 +10,7 @@
       <div class="pull-right actions">
       <%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
         data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm", method: :delete, title: "Remove Access" do %>
-        &times;    
+        &times;
       <% end %>
       </div>
     <% end %>
@@ -21,7 +21,12 @@
         <h4 class="media-heading">
           <%= link_to item.title, item_path(item) %>
         </h4>
-
+        <% if item.callnumber.blank? %>
+          <%= item.isbn %>
+        <% else %>
+          <%= item.callnumber %>
+        <% end %>
+        <br/>
         <a href="<%= zipped_files_item_path(item)%>" class="trivial">
         <i class="fa fa-download"></i> Download <%= pluralize(item.attachments.size, "file")%>
         </a>
@@ -29,7 +34,7 @@
 
         <% connection = item.item_connections.current.find_by_student_id(@student.id) %>
         <% if connection %>
-        <br/>
+
           <span class="trivial">
             <%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
             <%= "Unlimited Access" unless connection.expires_on %>
