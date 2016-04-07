@@ -13,10 +13,9 @@ class User < ActiveRecord::Base
   STAFF = "staff"
   PART_TIME ="part_time_staff"
   STUDENT_USER = "student"
-  ACQUISITIONS = "acquisitions"
-  ROLE_NAMES = [ADMIN, MANAGER, COORDINATOR, STAFF, PART_TIME, STUDENT_USER, ACQUISITIONS]
+  ROLE_NAMES = [ADMIN, MANAGER, COORDINATOR, STAFF, PART_TIME, STUDENT_USER]
   ROLES = [[ADMIN.titleize, ADMIN], [MANAGER.titleize, MANAGER],  [COORDINATOR.titleize, COORDINATOR], [STAFF.titleize, STAFF],
-        [PART_TIME.titleize, PART_TIME], [ACQUISITIONS.titleize, ACQUISITIONS]]
+        [PART_TIME.titleize, PART_TIME]]
 
   # Activity Names
   ACTIVITY_GENERAL = "general"
