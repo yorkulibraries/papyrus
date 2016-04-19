@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 ## RAILS and related ##
-gem "rails", "4.2.4"
+gem "rails", "4.2.6"
 gem 'responders', '~> 2.0'
 
 ## RAILS related ##
@@ -16,7 +16,7 @@ gem 'capistrano-rbenv', "~> 2.0"
 
 ## DATABASES ##
 gem 'sqlite3'
-gem "mysql2", "~> 0.3.14"
+gem "mysql2", "0.4.4"
 
 ## CSS AND JAVASCRIPT ##
 gem 'sass-rails', '~> 4.0.0'
@@ -31,7 +31,7 @@ gem 'twitter-bootstrap-rails', "3.2.0"
 gem "less-rails", "2.6.0"
 gem "simple_form", "3.1.0"
 gem "font-awesome-rails", '4.4.0'
-gem "flash_cookie_session", "1.1.6"
+gem "flash_cookie_session", "1.1.6" # <- remove this
 
 ## TOOLS AND UTILITIES ##
 gem "worldcatapi", "1.0.5"

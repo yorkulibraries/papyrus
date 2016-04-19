@@ -61,6 +61,7 @@ Papyrus::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  config.assets.compressor = :uglifier  
+  config.assets.compressor = :uglifier
 
+  config.log_level = :info
 end

@@ -66,6 +66,8 @@ Papyrus::Application.configure do
 
   config.active_record.disable_implicit_join_references = true
 
+  config.log_level = :info
+
   Rails.application.config.middleware.use ExceptionNotification::Rack,
   email: {
     email_prefix: 'DEMO ERROR',
