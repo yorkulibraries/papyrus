@@ -13,6 +13,7 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
     create_list(:acquisition_request, 3, status: nil)
     create_list(:acquisition_request, 4, status: AcquisitionRequest::STATUS_ACQUIRED, acquired_at: Time.now)
     create_list(:acquisition_request, 2, status: AcquisitionRequest::STATUS_CANCELLED, cancelled_at: Time.now)
+    create_list(:acquisition_request, 1, status: AcquisitionRequest::STATUS_BACK_ORDERED)
 
     get :index
     assert_template :index
@@ -138,6 +139,24 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
     assert_equal Date.today, acquisition_request.cancelled_at.to_date, "Should be today"
 
 
+
+  end
+
+  should "set status to #{AcquisitionRequest::STATUS_BACK_ORDERED}" do
+    @arequest = create(:acquisition_request)
+    date = 3.weeks.from_now
+
+    post :change_status, id: @arequest.id, status: AcquisitionRequest::STATUS_BACK_ORDERED,
+            acquisition_request: { back_ordered_until: date }
+
+    acquisition_request = assigns(:acquisition_request)
+    assert_response :redirect
+    assert_redirected_to acquisition_request_path(acquisition_request)
+
+
+    assert acquisition_request, "Request was loaded"
+    assert_equal AcquisitionRequest::STATUS_BACK_ORDERED, acquisition_request.status, "Status should be back_ordered"
+    assert_equal date.to_date, acquisition_request.back_ordered_until
 
   end
 

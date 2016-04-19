@@ -83,6 +83,12 @@ class AcquisitionRequestsController < ApplicationController
       @acquisition_request.audit_comment = "Changed status to #{AcquisitionRequest::STATUS_CANCELLED}"
 
       result = @acquisition_request.update(acquisition_request_params)
+    elsif params[:status] == AcquisitionRequest::STATUS_BACK_ORDERED
+
+      @acquisition_request.status = AcquisitionRequest::STATUS_BACK_ORDERED
+      @acquisition_request.audit_comment = "Changed status to #{AcquisitionRequest::STATUS_BACK_ORDERED}"
+
+      result = @acquisition_request.update(acquisition_request_params)
     end
 
     redirect_to acquisition_request_path(@acquisition_request)
@@ -109,7 +115,7 @@ class AcquisitionRequestsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def acquisition_request_params
 
-    params.require(:acquisition_request).permit(:item_id, :acquisition_reason,
+    params.require(:acquisition_request).permit(:item_id, :acquisition_reason, :back_ordered_until,
           :cancellation_reason, :acquisition_notes, :acquisition_source_type, :acquisition_source_name)
 
   end

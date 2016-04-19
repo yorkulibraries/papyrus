@@ -15,7 +15,7 @@ class AcquisitionRequestTest < ActiveSupport::TestCase
 
     ## blank item
     assert ! build(:acquisition_request, item: nil).valid?
-    assert ! build(:acquisition_request, requested_by: nil).valid?    
+    assert ! build(:acquisition_request, requested_by: nil).valid?
 
   end
 
@@ -59,10 +59,12 @@ class AcquisitionRequestTest < ActiveSupport::TestCase
     create(:acquisition_request)
     create_list(:acquisition_request, 2, status: AcquisitionRequest::STATUS_ACQUIRED, acquired_at: Time.now)
     create_list(:acquisition_request, 3, status: AcquisitionRequest::STATUS_CANCELLED, cancelled_at: Time.now)
+    create_list(:acquisition_request, 4, status: AcquisitionRequest::STATUS_BACK_ORDERED, cancelled_at: Time.now)
 
     assert_equal 3, AcquisitionRequest.cancelled.count
     assert_equal 1, AcquisitionRequest.open.count
     assert_equal 2, AcquisitionRequest.acquired.count
+    assert_equal 4, AcquisitionRequest.back_ordered.count
 
   end
 
@@ -74,7 +76,11 @@ class AcquisitionRequestTest < ActiveSupport::TestCase
     assert_equal 2, AcquisitionRequest.by_source_type("Student").count
   end
 
-
+  should "show available_after as Unknown if nil or as date" do
+    unknown = create(:acquisition_request, back_ordered_until: nil)
+    date = 3.months.from_now
+    known =   create(:acquisition_request, back_ordered_until: date)
+  end
 
 
 end

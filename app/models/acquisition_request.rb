@@ -2,6 +2,7 @@ class AcquisitionRequest < ActiveRecord::Base
 
   ##### DB Fields for reference (update if changes)
   # "id", "item_id", "requested_by_id", "acquisition_reason", "status", "location_id",
+  # "back_ordered_until",
   # "cancelled_by_id", "cancellation_reason", "cancelled_at", "acquired_by_id", "acquired_at",
   # "acquisition_notes", "acquisition_source_type", "acquisition_source_name", "created_at", "updated_at"
   #####
@@ -11,9 +12,10 @@ class AcquisitionRequest < ActiveRecord::Base
 
   ## CONSTANTS
   STATUS_OPEN="open"
+  STATUS_BACK_ORDERED="back_ordered"
   STATUS_ACQUIRED="acquired"
   STATUS_CANCELLED="cancelled"
-  STATUSES=[STATUS_ACQUIRED, STATUS_CANCELLED]
+  STATUSES=[STATUS_ACQUIRED, STATUS_CANCELLED, STATUS_BACK_ORDERED]
 
   ## RELATIONS
   belongs_to :item
@@ -29,6 +31,7 @@ class AcquisitionRequest < ActiveRecord::Base
   ## SCOPES
 
   scope :open, -> { where(status: nil) }
+  scope :back_ordered, -> { where(status: STATUS_BACK_ORDERED) }
   scope :acquired, -> { where(status: STATUS_ACQUIRED) }
   scope :cancelled, -> { where(status: STATUS_CANCELLED) }
   scope :by_source_type, -> (source) { where("acquisition_source_type = ? ", source) }
@@ -40,6 +43,14 @@ class AcquisitionRequest < ActiveRecord::Base
       STATUS_OPEN
     else
       self[:status]
+    end
+  end
+
+  def available_after
+    if self[:back_ordered_until] == nil
+      "Unknown"
+    else
+      self[:back_ordered_until]
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222141332) do
+ActiveRecord::Schema.define(version: 20160419182549) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string   "for"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20160222141332) do
     t.text     "acquisition_source_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "note"
+    t.date     "back_ordered_until"
   end
 
   create_table "announcements", force: :cascade do |t|
