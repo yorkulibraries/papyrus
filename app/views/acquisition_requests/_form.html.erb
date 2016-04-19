@@ -19,7 +19,7 @@
                 <span class="label label-default pull-right status-<%= r.status %>"><%= r.status %></span>
                 <%= link_to "Request ##{r.id}", r %> - <%= r.acquisition_reason %>
                 <% if r.note != nil %>
-                <br/><strong>Note:</strong> <%= r.note %>
+                <br/><strong>Note:</strong> <%= field_format r.note %>
                 <% end %>
               </li>
             <% end %>

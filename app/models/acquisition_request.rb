@@ -36,7 +36,7 @@ class AcquisitionRequest < ActiveRecord::Base
   scope :cancelled, -> { where(status: STATUS_CANCELLED) }
   scope :by_source_type, -> (source) { where("acquisition_source_type = ? ", source) }
   scope :open_back_ordered, -> { where("status = ? or status = ?", nil, STATUS_BACK_ORDERED) }
-
+  
 
   ## Helper Methods
   def status

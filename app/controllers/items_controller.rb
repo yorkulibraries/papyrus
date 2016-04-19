@@ -117,6 +117,8 @@ class ItemsController < ApplicationController
         @acquisition_request = AcquisitionRequest.new
         @acquisition_request.requested_by = @current_user
         @acquisition_request.item = @item
+        @acquisition_request.acquisition_reason = params[:acquisition_request][:acquisition_reason]
+        @acquisition_request.note = params[:acquisition_request][:note]
         @acquisition_request.audit_comment = "Created an acquisition request for #{@item.title}"
         @acquisition_request.save(:validate => false)
       end
@@ -188,7 +190,7 @@ class ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit( :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
-                                  :language_note, :edition, :physical_description, :source, :source_note)
+                                  :language_note, :edition, :physical_description, :source, :source_note, :acquisition_request)
   end
 
 end

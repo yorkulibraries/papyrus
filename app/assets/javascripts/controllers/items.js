@@ -48,6 +48,15 @@ $(document).ready(function() {
 	$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
 
+  $("input[name=create_acquisition_request]").click(function() {
+    if (this.checked) {
+      $("#create_acquisition_request").removeClass("hide");
+    } else {
+      $("#create_acquisition_request").addClass("hide");
+    }
+
+  });
+
 });
 
 function setup_item_token_input(id, url, token_limit) {

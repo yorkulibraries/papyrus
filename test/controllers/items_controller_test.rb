@@ -52,7 +52,7 @@ class ItemsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to student_path(@student_user)
   end
-  
+
   #### DISPLAY TESTS #######
 
   should "show a list of items default: sort by date" do
@@ -131,14 +131,19 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   should "create an item and acquisition request if parameter is present" do
+    reason = "Reason"
+    note = "Note"
+
     assert_difference ["Item.count", "AcquisitionRequest.count"], 1 do
-       post :create, item: attributes_for(:item).except(:created_at), create_acquisition_request: "yes"
+       post :create, item: attributes_for(:item).except(:created_at), create_acquisition_request: "yes", acquisition_request: { acquisition_reason: reason, note: note}
     end
 
     acquisition_request = assigns(:acquisition_request)
     item = assigns(:item)
     assert_equal @manager_user, acquisition_request.requested_by
     assert_equal item, acquisition_request.item
+    assert_equal reason, acquisition_request.acquisition_reason
+    assert_equal note, acquisition_request.note
 
   end
 
