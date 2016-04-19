@@ -115,7 +115,7 @@ class AcquisitionRequestsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def acquisition_request_params
 
-    params.require(:acquisition_request).permit(:item_id, :acquisition_reason, :back_ordered_until,
+    params.require(:acquisition_request).permit(:item_id, :acquisition_reason, :back_ordered_until, :note,
           :cancellation_reason, :acquisition_notes, :acquisition_source_type, :acquisition_source_name)
 
   end

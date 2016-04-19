@@ -36,11 +36,15 @@
         <div class="col-md-6">
 
           <span class="text-primary field">Requested By</span>
-          <%= format @acquisition_request.requested_by.name %>
+          <%= field_format @acquisition_request.requested_by.name %>
           <span class="text-primary field">Requested On</span>
-          <%= format @acquisition_request.created_at.strftime("%b %e, %Y") %>
+          <%= field_format @acquisition_request.created_at.strftime("%b %e, %Y") %>
           <span class="text-primary field">Acquisition Reason</span>
-          <%= format @acquisition_request.acquisition_reason %>
+          <%= field_format @acquisition_request.acquisition_reason %>
+
+					<span class="text-primary field">Note</span>
+          <%= field_format @acquisition_request.note %>
+
           <br/><br/>
 
           <% if can?(:send_to_acquisitions, @acquisition_request) && @acquisition_request.status != AcquisitionRequest::STATUS_CANCELLED %>
@@ -58,19 +62,19 @@
         <div class="col-md-6 left-border">
           <% if @acquisition_request.status == AcquisitionRequest::STATUS_ACQUIRED %>
             <span class="text-primary field">Acquired By</span>
-            <%= format @acquisition_request.acquired_by.name %>
+            <%= field_format @acquisition_request.acquired_by.name %>
             <span class="text-primary field">Acquired On</span>
-            <%= format @acquisition_request.acquired_at.strftime("%b %e, %Y") %>
+            <%= field_format @acquisition_request.acquired_at.strftime("%b %e, %Y") %>
             <span class="text-primary field">Acquisition Type &amp; Source</span>
-            <%= format @acquisition_request.acquisition_source_type %> --
-            <%= format @acquisition_request.acquisition_source_name %>
+            <%= field_format @acquisition_request.acquisition_source_type %> --
+            <%= field_format @acquisition_request.acquisition_source_name %>
           <% elsif @acquisition_request.status == AcquisitionRequest::STATUS_CANCELLED %>
             <span class="text-primary field">Cancelled By</span>
-            <%= format @acquisition_request.cancelled_by.name %>
+            <%= field_format @acquisition_request.cancelled_by.name %>
             <span class="text-primary field">Cancelled On</span>
-            <%= format @acquisition_request.cancelled_at.strftime("%b %e, %Y") %>
+            <%= field_format @acquisition_request.cancelled_at.strftime("%b %e, %Y") %>
             <span class="text-primary field">Cancellation Reason</span>
-            <%= format @acquisition_request.cancellation_reason %>
+            <%= field_format @acquisition_request.cancellation_reason %>
           <% elsif can? :change_status, @acquisition_request %>
             <div id="acquire_form">
               <p class="small">All fields are required.</p>

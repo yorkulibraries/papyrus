@@ -53,4 +53,17 @@ module LayoutHelper
 
   end
 
+
+  def field_format(field, simple_format = false)
+  # If field is blank, print out blank message
+  if field.blank?
+    content_tag(:span, "Not filled in...", class: "empty-field")
+  else
+    if field.is_a? Date
+      field.strftime("%B %d, %Y")
+    else
+      simple_format ? simple_format(field) : field
+    end
+  end
+end
 end

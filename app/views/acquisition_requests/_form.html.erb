@@ -11,28 +11,34 @@
 
         <h5><%= @item.title%></h5>
         <hr/>
-
-        <%= f.input :acquisition_reason, collection: PapyrusSettings.acquisition_reasons %>
-
-        <%= f.hidden_field :item_id, value: @item.id %>
-
-
         <% if @item.acquisition_requests.size > 0 %>
           <p>The following is a list of acquisition requests made for this item</p>
-          <ul>
+          <ul class="acquisition_requests">
             <% @item.acquisition_requests.each do |r| %>
               <li>
-                <span class="badge pull-right"><%= r.status %></span>
+                <span class="label label-default pull-right status-<%= r.status %>"><%= r.status %></span>
                 <%= link_to "Request ##{r.id}", r %> - <%= r.acquisition_reason %>
+                <% if r.note != nil %>
+                <br/><strong>Note:</strong> <%= r.note %>
+                <% end %>
               </li>
             <% end %>
           </ul>
         <% end %>
 
+        <hr/>
+        <p>Create a new Acquisition Request </p>
+
+        <%= f.input :acquisition_reason, collection: PapyrusSettings.acquisition_reasons %>
+        <%= f.input :note %>
+
+        <%= f.hidden_field :item_id, value: @item.id %>
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-         <%= f.button :submit, class: "btn btn-success", value: "Request Acquisition" %>
+         <%= f.button :submit, class: "btn btn-success", value: "Request New Acquisition" %>
       </div>
       <% end %>
 
