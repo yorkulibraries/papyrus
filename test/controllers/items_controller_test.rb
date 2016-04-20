@@ -135,15 +135,19 @@ class ItemsControllerTest < ActionController::TestCase
     note = "Note"
 
     assert_difference ["Item.count", "AcquisitionRequest.count"], 1 do
-       post :create, item: attributes_for(:item).except(:created_at), create_acquisition_request: "yes", acquisition_request: { acquisition_reason: reason, note: note}
+      post :create, create_acquisition_request: "yes", item: { title: "Test", item_type: "BOOK", unique_id: "12323", acquisition_request: { acquisition_reason: reason, note: note} }
+
+    #  item = assigns(:item)
+    #  assert_equal 0, item.errors.size, "Item Errors: #{item.errors.messages}"
     end
 
-    acquisition_request = assigns(:acquisition_request)
     item = assigns(:item)
-    assert_equal @manager_user, acquisition_request.requested_by
-    assert_equal item, acquisition_request.item
+    acquisition_request = assigns(:acquisition_request)
+    assert_equal @manager_user, acquisition_request.requested_by  
+    assert_equal item.id, acquisition_request.item.id
     assert_equal reason, acquisition_request.acquisition_reason
     assert_equal note, acquisition_request.note
+
 
   end
 

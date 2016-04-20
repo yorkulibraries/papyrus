@@ -109,19 +109,25 @@ class ItemsController < ApplicationController
   end
 
   def create
+    ## Check if we need to create an acquisition request, if yes make it, but don't save it yet
+    if params[:create_acquisition_request] == "yes"
+      @acquisition_request = AcquisitionRequest.new
+      @acquisition_request.requested_by = @current_user
+      @acquisition_request.acquisition_reason = params[:item][:acquisition_request][:acquisition_reason]
+      @acquisition_request.note = params[:item][:acquisition_request][:note]
+    end
+
     @item = Item.new(item_params)
     @item.user = @current_user
     @item.audit_comment = "Creating a new item."
     if @item.save
-      if params[:create_acquisition_request] == "yes"
-        @acquisition_request = AcquisitionRequest.new
-        @acquisition_request.requested_by = @current_user
+      ## Only save if the object is created
+      unless @acquisition_request == nil
         @acquisition_request.item = @item
-        @acquisition_request.acquisition_reason = params[:acquisition_request][:acquisition_reason]
-        @acquisition_request.note = params[:acquisition_request][:note]
         @acquisition_request.audit_comment = "Created an acquisition request for #{@item.title}"
-        @acquisition_request.save(:validate => false)
+        @acquisition_request.save(validate: false)
       end
+
       redirect_to @item, notice:  "Successfully created item."
     else
       render action: 'new'
@@ -190,7 +196,7 @@ class ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit( :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
-                                  :language_note, :edition, :physical_description, :source, :source_note, :acquisition_request)
+                                  :language_note, :edition, :physical_description, :source, :source_note, acquisition_request: [:acquisition_reason, :note])
   end
 
 end

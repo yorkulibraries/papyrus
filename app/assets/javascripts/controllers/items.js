@@ -48,7 +48,7 @@ $(document).ready(function() {
 	$( ".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
 
-  $("input[name=create_acquisition_request]").click(function() {
+  $("input[name=create_acquisition_request]").on("click load", function() {
     if (this.checked) {
       $("#create_acquisition_request").removeClass("hide");
     } else {
