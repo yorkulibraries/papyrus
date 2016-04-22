@@ -1,0 +1,46 @@
+<% title "Acquisitions Settings", false %>
+
+
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Acquisitions Settings", icon: "cog") do %>
+
+			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+			  <h4 class="black">Acquisition Request Settings</h4>
+
+        <%= f.label :acquisition_sources, "Acquisitions Sources"%>
+        <%= f.input :acquisition_sources, label: false, as: :array %>
+
+	      <%= f.label :acquisition_reasons, "Acquisitions Reasons"%>
+	      <%= f.input :acquisition_reasons, label: false, as: :array %>
+	      <p class="small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
+
+        <hr/>
+			  <h4 class="black">Send To Acquisitions Settings</h4>
+
+        <%= f.input :email_acquisitions_to, label: "Acquisitions Email" %>
+        <%= f.input :email_acquisitions_to_bookstore, label: "Bookstore Email" %>
+        <%= f.input :email_acquisitions_subject, label: "Subject" %>
+        <%= f.input :email_acquisitions_body, as: :text, label: "Body", input_html: { rows: 5 } %>
+
+        <p class="small">The email will be sent to the above address and inlcude Acquistion Request, Item and Course details.</p>
+
+			  <input type="hidden" name="return_to" value="acquisitions"/>
+				<%= f.submit "Save Settings", class: "btn btn-success" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "Item Settings Help", icon: "question") do %>
+			<dl>
+				<dt>Item Sources</dt>
+				<dd>A list of sources to record where a physical copy of the item was acquired from.</dd>
+				<hr/>
+				<dt>Course Code Lookup URL</dt>
+				<dd>A url where staff can look up different course codes</dd>
+				<dt>Course Code Sample</dt>
+				<dd>An example course code format, used when creating new courses.</dd>
+			</dl>
+		<% end %>
+	</div>
+</div>

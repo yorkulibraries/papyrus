@@ -75,6 +75,10 @@
           <li class="<%= "active" if is_controller_and_action?("settings", "system") %>">
             <%= link_to "Settings: System", system_settings_path %>
           </li>
+
+          <li class="<%= "active" if is_controller_and_action?("settings", "acquisitions") %>">
+            <%= link_to "Settings: Acquisitions", acquisitions_settings_path %>
+          </li>
         <% end %>
       </ul>
     </li>

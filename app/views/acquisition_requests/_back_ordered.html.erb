@@ -15,7 +15,7 @@
           <div class="col-md-12">
             <span class="fa fa-calendar fa-fw"></span>
             <label>Until:</label>
-            <%= r.back_ordered_until.strftime("%b %e, %Y") %>
+            <%= r.back_ordered_until.strftime("%b %e, %Y") rescue nil %>
           </div>
         </div>
         <div class="row list-group-item-text">

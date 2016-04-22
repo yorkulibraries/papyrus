@@ -23,6 +23,7 @@ Papyrus::Application.routes.draw do
     get :bib_search
     get :item
     get :system
+    get :acquisitions
   end
 
   # Anouncements

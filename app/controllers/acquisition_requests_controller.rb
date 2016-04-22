@@ -4,9 +4,9 @@ class AcquisitionRequestsController < ApplicationController
 
   def index
     @acquisition_requests = AcquisitionRequest.open.order("created_at desc")
-    @recently_acquired = AcquisitionRequest.acquired.limit(100).order("acquired_at desc")
-    @recently_cancelled = AcquisitionRequest.cancelled.limit(5).order("cancelled_at desc")
-    @back_ordered = AcquisitionRequest.back_ordered.limit(5).order("back_ordered_until desc")
+    @recently_acquired = AcquisitionRequest.acquired.limit(40).order("acquired_at desc")
+    @recently_cancelled = AcquisitionRequest.cancelled.limit(10).order("cancelled_at desc")
+    @back_ordered = AcquisitionRequest.back_ordered.order("back_ordered_until desc")
   end
 
   def show

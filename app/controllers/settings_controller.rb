@@ -14,6 +14,9 @@ class SettingsController < ApplicationController
   def item
   end
 
+  def acquisitions
+  end
+
   def system
   end
 
@@ -33,6 +36,8 @@ class SettingsController < ApplicationController
       redirect_to item_settings_path, notice: "Saved Item Settings"
     when "system"
       redirect_to system_settings_path, notice: "Saved System Settings"
+    when "acquisitions"
+      redirect_to acquisitions_settings_path, notice: "Saved Acquisitions Settings"
     else
       redirect_to general_settings_path, notice: "Saved General Settings"
     end
