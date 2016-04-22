@@ -1,27 +1,28 @@
-<% if @recently_cancelled.size == 0 %>
+<% if @back_ordered.size == 0 %>
   <div class="blank-slate">
     <i class="icon-bullhorn"></i>
-    <h1>There are no cancelled requests right now.</h1>
-    <p>Items acquisitions can be cancelled through an acquisition request page.</p>
+    <h1>There are no back ordered requests.</h1>
+    <p>Items that are on back order will appear in this section of the page.</p>
   </div>
 <% else %>
   <div class="list-group">
-    <% @recently_cancelled.each do |r| %>
+    <% @back_ordered.each do |r| %>
       <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
 
         <h5 class="list-group-item-heading small"><%= r.item.title rescue nil %></h5>
+
         <div class="row list-group-item-text">
           <div class="col-md-12">
             <span class="fa fa-calendar fa-fw"></span>
-            <label>Cancelled:</label>
-            <%= r.cancelled_at.strftime("%b %e, %Y") %>
+            <label>Until:</label>
+            <%= r.back_ordered_until.strftime("%b %e, %Y") %>
           </div>
         </div>
         <div class="row list-group-item-text">
           <div class="col-md-12">
             <span class="fa fa-user fa-fw"></span>
             <label>By:</label>
-            <%= r.cancelled_by.name rescue nil %>
+            <%= r.back_ordered_by.name rescue nil %>
           </div>
         </div>
       </a>

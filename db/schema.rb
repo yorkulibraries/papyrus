@@ -39,8 +39,11 @@ ActiveRecord::Schema.define(version: 20160419182549) do
     t.text     "acquisition_source_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "back_ordered_note"
     t.string   "note"
     t.date     "back_ordered_until"
+    t.string   "back_ordered_reason"
+    t.integer  "back_ordered_by_id"
   end
 
   create_table "announcements", force: :cascade do |t|

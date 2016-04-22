@@ -1,12 +1,12 @@
 class AcquisitionRequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy, :change_status, :send_to_acquisitions]
+  before_action :set_request, only: [:show, :edit, :update, :destroy, :change_status_form, :change_status, :send_to_acquisitions]
   authorize_resource
 
   def index
     @acquisition_requests = AcquisitionRequest.open.order("created_at desc")
     @recently_acquired = AcquisitionRequest.acquired.limit(100).order("acquired_at desc")
-    @recently_cancelled = AcquisitionRequest.cancelled.limit(100).order("cancelled_at desc")
-
+    @recently_cancelled = AcquisitionRequest.cancelled.limit(5).order("cancelled_at desc")
+    @back_ordered = AcquisitionRequest.back_ordered.limit(5).order("back_ordered_until desc")
   end
 
   def show
@@ -67,6 +67,14 @@ class AcquisitionRequestsController < ApplicationController
   end
 
   ### CHANGE STATUS ###
+  def change_status_form
+    @status = params[:status]
+    respond_to do |format|
+      format.html { redirect_to a  @acquisition_request }
+      format.js
+    end
+  end
+
   def change_status
     if params[:status] == AcquisitionRequest::STATUS_ACQUIRED
       @acquisition_request.status = AcquisitionRequest::STATUS_ACQUIRED
@@ -84,7 +92,7 @@ class AcquisitionRequestsController < ApplicationController
 
       result = @acquisition_request.update(acquisition_request_params)
     elsif params[:status] == AcquisitionRequest::STATUS_BACK_ORDERED
-
+      @acquisition_request.back_ordered_by = current_user
       @acquisition_request.status = AcquisitionRequest::STATUS_BACK_ORDERED
       @acquisition_request.audit_comment = "Changed status to #{AcquisitionRequest::STATUS_BACK_ORDERED}"
 
@@ -115,7 +123,7 @@ class AcquisitionRequestsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def acquisition_request_params
 
-    params.require(:acquisition_request).permit(:item_id, :acquisition_reason, :back_ordered_until, :note,
+    params.require(:acquisition_request).permit(:item_id, :acquisition_reason, :back_ordered_reason, :back_ordered_until, :note,
           :cancellation_reason, :acquisition_notes, :acquisition_source_type, :acquisition_source_name)
 
   end

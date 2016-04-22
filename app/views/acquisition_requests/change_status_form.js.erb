@@ -1,0 +1,13 @@
+$("#acquisition_request_change_status_form").remove();
+
+<% if @status == AcquisitionRequest::STATUS_ACQUIRED %>
+  $("body").append("<%= j render "acquisition_requests/forms/acquire_form", formats: [:html] %>");
+  $("#acquisition_request_change_status_form").modal('show');
+<% elsif @status == AcquisitionRequest::STATUS_CANCELLED %>
+  $("body").append("<%= j render "acquisition_requests/forms/cancel_form", formats: [:html] %>");
+  $("#acquisition_request_change_status_form").modal('show');
+<% elsif @status == AcquisitionRequest::STATUS_BACK_ORDERED %>
+  $("body").append("<%= j render "acquisition_requests/forms/back_order_form", formats: [:html] %>");
+  $("#acquisition_request_change_status_form").modal('show');
+  $(".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+<% end %>

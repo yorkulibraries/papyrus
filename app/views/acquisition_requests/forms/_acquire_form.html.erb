@@ -1,0 +1,23 @@
+<div class="modal sfade" id="acquisition_request_change_status_form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= simple_form_for @acquisition_request, url: change_status_acquisition_request_path(@acquisition_request) do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Acquire Item</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="status" value="<%= AcquisitionRequest::STATUS_ACQUIRED %>"/>
+        <%= f.input :acquisition_source_type, label: "Source", collection: PapyrusSettings.acquisition_sources %>
+        <%= f.input :acquisition_source_name, label: "Source Name", as: :string %>
+        <%= f.input :acquisition_notes, label: "Notes" %>
+        <p class="small">All fields are required.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <%= f.button :submit, class: "btn btn-success", value: "Acquire Item",  data: { confirm: "Are you sure?" }  %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

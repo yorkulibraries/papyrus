@@ -1,34 +1,32 @@
 <% if @recently_acquired.size == 0 %>
   <div class="blank-slate">
     <i class="icon-bullhorn"></i>
-    <h1>There are no acquired requests righ tnow.</h1>
+    <h1>There are no acquired requests right now.</h1>
     <p>Go to an item you want acquire and click on <strong>Acquisitions</strong> link.</p>
   </div>
 <% else %>
   <div class="list-group">
     <% @recently_acquired.each do |r| %>
       <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
-        <h5 class="list-group-item-heading black"><%= r.item.title %></h5>
+        <h5 class="list-group-item-heading"><%= r.item.title %></h5>
 
-        <div class="row list-group-item-text small">
-          <div class="col-md-2">
-            <span class="weak">Acquired on:</span>
+        <div class="row list-group-item-text">
+          <div class="col-md-4">
+            <span class="fa fa-calendar fa-fw"></span>
+            <label>Acquired:</label>
+            <%= r.acquired_at.strftime("%b %e, %Y") %>
           </div>
-          <div class="col-md-2">
-            <span class="strong"><%= r.acquired_at.strftime("%b %e, %Y") %></span>
+          <div class="col-md-4">
+            <span class="fa fa-quote-left fa-fw"></span>
+            <label>Source:</label>
+            <%= r.acquisition_source_name %>
           </div>
-          <div class="col-md-2">
-            <span class="weak">Source:</span>
+          <div class="col-md-4">
+            <span class="fa fa-user fa-fw"></span>
+            <label>Acquired by:</label>
+            <%= r.acquired_by.name rescue nil %>
           </div>
-          <div class="col-md-2">
-            <span class="strong"><%= r.acquisition_source_name %></span>
-          </div>
-          <div class="col-md-2">
-            <span class="weak">Acquired by:</span>
-          </div>
-          <div class="col-md-2">
-            <span class="strong"><%= r.acquired_by.name rescue nil %></span>
-          </div>
+
         </div>
 
       </a>

@@ -1,25 +1,157 @@
 <% title "Acquisition Request Details", false %>
 
+<div class="row">
+  <div class="col-md-12 acquisition_request">
+    <%= panel(title: "Acquisition Request Details", icon: "shopping-cart", title_class: "", styles:"panel-primary") do %>
+		<div class="pull-right">
+			<span class="label label-default status-<%= @acquisition_request.status %>"><%= @acquisition_request.status.humanize %></span>
+		</div>
+		<h2>Acquisition Request #<%= @acquisition_request.id %></h2>
+
+		<div class="row details">
+			<div class="col-md-4">
+				<div class="field">
+					<span class="fa fa-user fa-fw"></span>
+					<label>Requested By</label>
+					<%= field_format @acquisition_request.requested_by.name %>
+				</div>
+
+				<div class="field">
+					<span class="fa fa-calendar fa-fw"></span>
+					<label>Requested On</label>
+					<%= field_format @acquisition_request.created_at.strftime("%b %e, %Y")  %>
+				</div>
+
+				<div class="field">
+					<span class="fa fa-question-circle fa-fw"></span>
+					<label>Reason</label>
+					<%= field_format @acquisition_request.acquisition_reason  %>
+				</div>
+
+				<div class="field">
+					<span class="fa fa-sticky-note fa-fw"></span>
+					<label>Note</label>
+					<%= field_format @acquisition_request.note  %>
+				</div>
+
+			</div>
+			<div class="col-md-4 left-border">
+				<% if @acquisition_request.status == AcquisitionRequest::STATUS_ACQUIRED %>
+					<div class="field">
+						<span class="fa fa-user fa-fw"></span>
+						<label>Acquired By</label>
+						<%= field_format @acquisition_request.acquired_by.name  %>
+					</div>
+
+					<div class="field">
+						<span class="fa fa-calendar fa-fw"></span>
+						<label>Acquired On</label>
+						<%= field_format @acquisition_request.acquired_at.strftime("%b %e, %Y")  %>
+					</div>
+
+					<div class="field">
+						<span class="fa fa-quote-left fa-fw"></span>
+						<label>Source Type</label>
+						<%= field_format @acquisition_request.acquisition_source_type  %>
+					</div>
+
+					<div class="field">
+						<span class="fa fa-quote-left fa-fw"></span>
+						<label>Source Name</label>
+						<%= field_format @acquisition_request.acquisition_source_name  %>
+					</div>
+
+
+				<% elsif @acquisition_request.status == AcquisitionRequest::STATUS_CANCELLED %>
+
+					<div class="field">
+						<span class="fa fa-user fa-fw"></span>
+						<label>Cancelled By</label>
+						<%= field_format @acquisition_request.cancelled_by.name %>
+					</div>
+
+					<div class="field">
+						<span class="fa fa-calendar fa-fw"></span>
+						<label>Cancelled On</label>
+						<%= field_format @acquisition_request.cancelled_at.strftime("%b %e, %Y")  %>
+					</div>
+
+					<div class="field">
+						<span class="fa fa-question-circle fa-fw"></span>
+						<label>Reason</label>
+						<%= field_format @acquisition_request.cancellation_reason  %>
+					</div>
+
+					<% elsif @acquisition_request.status == AcquisitionRequest::STATUS_BACK_ORDERED %>
+
+						<div class="field">
+							<span class="fa fa-user fa-fw"></span>
+							<label>Back Ordered By</label>
+							<%= field_format @acquisition_request.back_ordered_by.name %>
+						</div>
+
+						<div class="field">
+							<span class="fa fa-calendar fa-fw"></span>
+							<label>Until</label>
+							<%= field_format @acquisition_request.back_ordered_until.strftime("%b %e, %Y")  %>
+						</div>
+
+						<div class="field">
+							<span class="fa fa-question-circle fa-fw"></span>
+							<label>Reason</label>
+							<%= field_format @acquisition_request.back_ordered_reason  %>
+						</div>
+
+						You can still: &nbsp;
+						<%= link_to "Acquire Item", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_ACQUIRED),
+								class: "btn btn-xs btn-primary", data: { remote: true } %>
+						&nbsp; or
+						<%= link_to "Cancel Request", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_CANCELLED),
+						 class: "btn btn-sm btn-link red", data: { remote: true }  %>
+
+				<% elsif can? :change_status, @acquisition_request %>
+					<p>You acquisitions request is currently <span class="strong"><%= @acquisition_request.status.humanize %></span>.</p>
+					<p>Here are actions available for you: </p>
+					<p>
+					<%= link_to "Acquire Item", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_ACQUIRED),
+							class: "btn btn-primary", data: { remote: true } %>
+					&nbsp; or &nbsp;
+					<%= link_to "Back Order", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_BACK_ORDERED),
+					 		class: "btn btn-sm btn-default", data: { remote: true }  %>
+					&nbsp; or
+					<%= link_to "Cancel Request", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_CANCELLED),
+					 class: "btn btn-xs btn-link red", data: { remote: true }  %>
+					</p>
+					<p class="small">All actions on this item are recorded in audit trail</p>
+				<% end %>
+
+			</div>
+
+			<div class="col-md-4 left-border">
+				<% if can?(:send_to_acquisitions, @acquisition_request) && @acquisition_request.status != AcquisitionRequest::STATUS_CANCELLED %>
+					<p>Send an email request to Acquistions or Bookstore: </p>
+
+					<p><%= link_to "Send To Acquisitions", send_to_acquisitions_acquisition_request_path(@acquisition_request),
+					method: :post, class: "btn btn-sm btn-info", data: { confirm: "Are you sure? "} %>
+					&nbsp; or &nbsp;
+					<%= link_to "Send To Bookstore", send_to_acquisitions_acquisition_request_path(@acquisition_request, bookstore: true),
+					method: :post, class: "btn btn-sm btn-primary", data: { confirm: "Are you sure? "} %>
+					</p>
+
+					<p>A copy of the email will be sent to:<br/><span class="small"><%= @current_user.email %></span></p>
+				<% end %>
+
+			</div>
+		</div>
+
+
+    <% end %>
+  </div>
+</div>
 
 <div class="row">
 	<div class="col-md-12 acquisition_requests">
-		<%= panel(title: "Acquisition Request ##{@acquisition_request.id}", icon: "shopping-cart") do %>
-
-      <div class="item-header row">
-        <div class="col-md-8">
-          <h3>
-            <%= link_to acquisition_requests_path, class: "btn btn-xs btn-default" do %>
-                <i class="fa fa-list" title="Back to List"></i>
-            <% end %>
-
-            Acquisition #<%= @acquisition_request.id %></h3>
-        </div>
-        <div class="col-md-4">
-          <div class="pull-right">
-            <span class="label label-default status-<%= @acquisition_request.status %>"><%= @acquisition_request.status.humanize %></span>
-          </div>
-        </div>
-      </div>
+		<%= panel(title: "For Item ##{@item.id}", icon: "shopping-cart") do %>
 
       <%= render @item, show: "div_info", item: @item  %>
 
@@ -29,93 +161,7 @@
 
 <div class="row">
   <div class="col-md-12 acquisition_requests">
-    <%= panel(title: "Acquisition Request Details", icon: "shopping-cart", title_class: "text-center", styles:"panel-primary") do %>
-
-
-      <div class="row">
-        <div class="col-md-6">
-
-          <span class="text-primary field">Requested By</span>
-          <%= field_format @acquisition_request.requested_by.name %>
-          <span class="text-primary field">Requested On</span>
-          <%= field_format @acquisition_request.created_at.strftime("%b %e, %Y") %>
-          <span class="text-primary field">Acquisition Reason</span>
-          <%= field_format @acquisition_request.acquisition_reason %>
-
-					<span class="text-primary field">Note</span>
-          <%= field_format @acquisition_request.note %>
-
-          <br/><br/>
-
-          <% if can?(:send_to_acquisitions, @acquisition_request) && @acquisition_request.status != AcquisitionRequest::STATUS_CANCELLED %>
-            <hr/>
-            <p>Send an email request to Acquistions or Bookstore: </p>
-
-            <%= link_to "Send To Acquisitions", send_to_acquisitions_acquisition_request_path(@acquisition_request),
-            method: :post, class: "btn btn-sm btn-info", data: { confirm: "Are you sure? "} %>
-
-            <%= link_to "Send To Bookstore", send_to_acquisitions_acquisition_request_path(@acquisition_request, bookstore: true),
-            method: :post, class: "btn btn-sm btn-primary", data: { confirm: "Are you sure? "} %>
-          <% end %>
-
-        </div>
-        <div class="col-md-6 left-border">
-          <% if @acquisition_request.status == AcquisitionRequest::STATUS_ACQUIRED %>
-            <span class="text-primary field">Acquired By</span>
-            <%= field_format @acquisition_request.acquired_by.name %>
-            <span class="text-primary field">Acquired On</span>
-            <%= field_format @acquisition_request.acquired_at.strftime("%b %e, %Y") %>
-            <span class="text-primary field">Acquisition Type &amp; Source</span>
-            <%= field_format @acquisition_request.acquisition_source_type %> --
-            <%= field_format @acquisition_request.acquisition_source_name %>
-          <% elsif @acquisition_request.status == AcquisitionRequest::STATUS_CANCELLED %>
-            <span class="text-primary field">Cancelled By</span>
-            <%= field_format @acquisition_request.cancelled_by.name %>
-            <span class="text-primary field">Cancelled On</span>
-            <%= field_format @acquisition_request.cancelled_at.strftime("%b %e, %Y") %>
-            <span class="text-primary field">Cancellation Reason</span>
-            <%= field_format @acquisition_request.cancellation_reason %>
-          <% elsif can? :change_status, @acquisition_request %>
-            <div id="acquire_form">
-              <p class="small">All fields are required.</p>
-              <%= simple_form_for @acquisition_request, url: change_status_acquisition_request_path(@acquisition_request) do |f| %>
-                <input type="hidden" name="status" value="<%= AcquisitionRequest::STATUS_ACQUIRED %>"/>
-                <%= f.input :acquisition_source_type, label: "Source", collection: PapyrusSettings.acquisition_sources %>
-                <%= f.input :acquisition_source_name, label: "Source Name", as: :string %>
-                <%= f.input :acquisition_notes, label: "Notes"  %>
-                <%= f.button :submit, "Acquire Item", class: "btn btn-success btn-sm", data: { confirm: "Are you sure?" } %>
-                &nbsp;&nbsp; or
-                <a class="btn btn-link red btn-sm" data-toggle="collapse" data-slide-up="#acquire_form" href="#cancel_form">
-                 Cancel Request
-                </a>
-              <% end %>
-            </div>
-
-            <div class="collapse" id="cancel_form">
-              <p class="small">Please provide the reason for cancellation</p>
-              <%= simple_form_for @acquisition_request, url: change_status_acquisition_request_path(@acquisition_request) do |f| %>
-                <%= f.input :cancellation_reason, label: "Reason"  %>
-                <input type="hidden" name="status" value="<%= AcquisitionRequest::STATUS_CANCELLED %>"/>
-                <%= f.button :submit, "Cancel Request", class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
-                &nbsp;&nbsp; or
-                <a class="btn btn-link red btn-sm" data-toggle="collapse" data-slide-down="#acquire_form" href="#cancel_form">
-                 Close
-                </a>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-
-      </div>
-
-
-
-    <% end %>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12 acquisition_requests">
-    <%= panel(title: "Acquisition Request History", icon: "shopping-cart") do %>
+    <%= panel(title: "Acquisition Request History", icon: "shopping-cart",  styles:"panel-info") do %>
       <%= render partial:"audit_trail/trail", locals: {audits_grouped: @audits_grouped} %>
     <% end %>
   </div>

@@ -8,25 +8,23 @@
   <div class="list-group">
     <% @acquisition_requests.each do |r| %>
       <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
-        <h4 class="list-group-item-heading"><%= r.item.title rescue nil%></h4>
-        <div class="row list-group-item-text small">
-          <div class="col-md-2">
-            <span class="weak">Requested on:</span>
+        <h5 class="list-group-item-heading"><%= r.item.title rescue nil%></h5>
+        <div class="row list-group-item-text">
+
+          <div class="col-md-4">
+            <span class="fa fa-calendar fa-fw"></span>
+            <label>Requested:</label>
+            <%= r.created_at.strftime("%b %e, %Y") %>
           </div>
-          <div class="col-md-2">
-            <span class="strong black"><%= r.created_at.strftime("%b %e, %Y") %></span>
+          <div class="col-md-4">
+            <span class="fa fa-question-circle fa-fw"></span>
+            <label>Reason:</label>
+            <%= r.acquisition_reason %>
           </div>
-          <div class="col-md-2">
-            <span class="weak">Reason:</span>
-          </div>
-          <div class="col-md-2">
-            <span class="strong black"><%= r.acquisition_reason %></span>
-          </div>
-          <div class="col-md-2">
-            <span class="weak">Requested by:</span>
-          </div>
-          <div class="col-md-2">
-            <span class="strong black"><%= r.requested_by.name %></span>
+          <div class="col-md-4">
+            <span class="fa fa-user fa-fw"></span>
+            <label>Requested by:</label>
+            <%= r.requested_by.name %>
           </div>
         </div>
 
