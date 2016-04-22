@@ -1,34 +1,38 @@
 /** BASIC PANEL **/
 .panel {
   background-color: #fff;
-  border: 1px solid transparent;
+  border: none;
   border-radius: 2px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
 
-  .panel-top {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    padding: 30px 20px;
-    display: block;
-
-    strong {  font-weight: 500; font-size: 1.5em; }
-  }
+  .panel-body { border: 1px solid #dadada; border-top: none;  }
 
   .panel-heading {
     text-transform: uppercase;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 1px;
     border-top-right-radius: 1px;
-    padding: 10px 15px;
+    padding: 15px 15px;
 
-    strong {  font-weight: 500; }
+    strong {  font-weight: 500; font-size: 1.2em; }
   }
+
+  .panel-heading-large {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    padding: 20px 15px;
+    display: block;
+
+    strong {  font-weight: 500; font-size: 1.4em; }
+  }
+
+
 
   &.panel-info {
     border-color: #d0f2f7;
 
-    > .panel-heading, >.panel-top {
+    > .panel-heading, >.panel-heading-large {
       background-color: #018692;
       border-color: #d0f2f7;
       color: #fff;
@@ -37,7 +41,7 @@
 
   &.panel-success {
 
-     > .panel-heading, >.panel-top {
+     > .panel-heading, >.panel-heading-large {
       background-color: #098462;
       color: #fff;
     }
@@ -45,7 +49,7 @@
 
   &.panel-primary {
 
-    > .panel-heading, >.panel-top {
+    > .panel-heading, >.panel-heading-large {
       background-color: #233F7B;
       color: #fff;
     }
@@ -53,27 +57,28 @@
 
   &.panel-warning {
 
-    > .panel-heading, >.panel-top {
+    > .panel-heading, >.panel-heading-large {
       background-color: #D2920B;
       color: #fff;
-
     }
   }
 
   &.panel-danger {
 
-    > .panel-heading, >.panel-top {
+    > .panel-heading, >.panel-heading-large {
       background-color: #a31809;
       color: #fff;
     }
+
+    .panel-body { border-color: #a31809; }
   }
 
   &.panel-default {
-    border-color: #dadada;
 
-    > .panel-heading, >.panel-top {
-       background-color: #f6f6f6;
-       border-color: #dadada;
+    > .panel-heading, >.panel-heading-large {
+       background-color: #f0f0f0;
+       border: 1px solid #dadada;
+       border-bottom: 1px solid #ddd;
        color: #767676;
    }
   }

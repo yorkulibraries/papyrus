@@ -1,4 +1,4 @@
-<%= panel(title: "Courses", icon: "university", title_class: "panel-top text-center", styles:"panel-warning") do %>
+<%= panel(title: "Courses", icon: "university", title_class: "text-center", styles:"panel-warning") do %>
   <ul class="list-unstyled list-info" id="courses">
     <% courses_grouped.each do |term, courses| %>
     <li id="term_<%= term[:id] %>"><label class="term"><%= term[:name] %></label></li>
@@ -28,7 +28,7 @@
 
 	<script type="text/javascript">
 	$(document).ready(function () {
-    setup_course_token_input("#assign-to-course-list", "<%= search_courses_terms_path %>", 5)	    
+    setup_course_token_input("#assign-to-course-list", "<%= search_courses_terms_path %>", 5)
 	});
 	</script>
 

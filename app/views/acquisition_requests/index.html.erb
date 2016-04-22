@@ -14,12 +14,12 @@
 
 <div class="row">
   <div class="col-md-8 acquisition_requests">
-    <%= panel(title: "Recently Acquired Requests (100)", icon: "shopping-cart", title_class: "panel-top text-center", styles:"panel-success") do %>
+    <%= panel(title: "Recently Acquired Requests (100)", icon: "shopping-cart", title_class: "text-center", styles:"panel-success") do %>
       <%= render "acquired_requests" %>
     <% end %>
   </div>
   <div class="col-md-4 acquisition_requests">
-    <%= panel(title: "Recently Cancelled Requests (100)", icon: "shopping-cart", title_class: "panel-top text-center", styles:"panel-warning") do %>
+    <%= panel(title: "Recently Cancelled Requests (100)", icon: "shopping-cart", title_class: "text-center", styles:"panel-warning") do %>
       <%= render "cancelled_requests" %>
     <% end %>
   </div>
