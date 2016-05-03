@@ -1,0 +1,46 @@
+<% title "#{params[:status].humanize} Acquistion Requests", false %>
+<div class="row">
+  <div class="col-md-12 acquisition_requests">
+    <%= panel(title: "#{params[:status].humanize} Acquistion Requests", icon: "shopping-cart", title_class: "", styles:"panel-default") do %>
+
+      <% if @acquisition_requests.size == 0 %>
+        <div class="blank-slate">
+          <i class="icon-bullhorn"></i>
+          <h1>There are no <%= params[:status] %> requests righ tnow.</h1>
+          <p>Go to an item you want acquire and click on <strong>Acquisitions</strong> link.</p>
+        </div>
+      <% else %>
+        <div class="list-group">
+          <% @acquisition_requests.each do |r| %>
+            <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
+              <h5 class="list-group-item-heading"><%= r.item.title rescue nil%></h5>
+              <div class="row list-group-item-text">
+
+                <div class="col-md-4">
+                  <span class="fa fa-calendar fa-fw"></span>
+                  <label>Requested:</label>
+                  <%= r.created_at.strftime("%b %e, %Y") %>
+                </div>
+                <div class="col-md-4">
+                  <span class="fa fa-question-circle fa-fw"></span>
+                  <label>Reason:</label>
+                  <%= r.acquisition_reason %>
+                </div>
+                <div class="col-md-4">
+                  <span class="fa fa-user fa-fw"></span>
+                  <label>Requested by:</label>
+                  <%= r.requested_by.name %>
+                </div>
+              </div>
+
+            </a>
+          <% end %>
+        </div>
+      <% end %>
+
+
+      <%= paginate @acquisition_requests %>
+
+    <% end %>
+  </div>
+</div>
