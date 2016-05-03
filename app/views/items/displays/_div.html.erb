@@ -7,6 +7,10 @@
 				</div>
 				<div class="col-md-4">
 					<div class="pull-right">
+
+						<a class="btn btn-sm btn-default <%= is_action?("scan_lists", "btn-primary") %>" href="<%= audit_trail_item_path(item) %>" title="Scan Lists">
+							<i class="fa fa-list"></i>
+						</a>
 						<a class="btn btn-sm btn-default with-bubble <%= is_action?("acquisition_requests", "btn-primary")%>" data-remote="true" href="<%= new_acquisition_request_path(item_id: item.id) %>" title="Acquisition Requests">
 							<i class="fa fa-shopping-cart"></i>
 							<% if @item.acquisition_requests.open.count > 0 %>
@@ -16,7 +20,7 @@
 							<% end %>
 						</a>
 						<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_item_path(item) %>" title="Audit Trail">
-							<i class="fa fa-list"></i>
+							<i class="fa fa-history"></i>
 						</a>
 						<% if is_controller_and_action?("items", "show") && can?(:edit, item) %>
 							<a class="btn btn-sm btn-success" href="<%= edit_item_path(item) %>">

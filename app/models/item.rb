@@ -35,6 +35,8 @@ class Item < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :scan_lists, through: :scan_items
+
   ## SCOPES ##
 
   scope :by_date, -> { order("items.created_at desc") }
