@@ -2,7 +2,12 @@ var $filequeue;
 
 $(document).ready(function() {
 
+	load_formstone_upload_plugin();
 
+});
+
+/** LOAD Formstone Plugin function **/
+function load_formstone_upload_plugin(){
 	$filequeue = $(".formstone_upload_queue ol");
 	$(".formstone_upload").upload({
 			action: $(".formstone_upload").data("url"),
@@ -11,13 +16,12 @@ $(document).ready(function() {
 			postKey: "attachment[file]",
 			postData: { multiple: true }
 	}).on("start.upload", onStart)
-		  .on("complete.upload", onComplete)
-		  .on("filestart.upload", onFileStart)
-		  .on("fileprogress.upload", onFileProgress)
-		  .on("filecomplete.upload", onFileComplete)
-		  .on("fileerror.upload", onFileError);
-
-});
+			.on("complete.upload", onComplete)
+			.on("filestart.upload", onFileStart)
+			.on("fileprogress.upload", onFileProgress)
+			.on("filecomplete.upload", onFileComplete)
+			.on("fileerror.upload", onFileError);
+}
 
 /*** FORMSTONE UPLOAD EVENT HANDLES **/
 function onStart(e,  files) {

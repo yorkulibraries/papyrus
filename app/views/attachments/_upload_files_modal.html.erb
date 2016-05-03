@@ -1,0 +1,32 @@
+<div class="modal fade" id="upload_files_modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&amp;times;</button>
+        <h4 class="modal-title">Upload Files For Item</h4>
+      </div>
+      <div class="modal-body">
+          <%= render @item %>
+          <hr/>
+
+          <div class='formstone_upload' data-url="<%= url_for item_attachments_path(@item, format: "js") %>"
+              data-label="Click to select files. Upload will begin immediately after clicking on the Open button.">
+          </div>
+
+          <div class="formstone_upload_queue hide">
+            <h5>Queued</h5>
+            <ol>
+            </ol>
+          </div>
+          <div id="uploaded_attachments" class="attachments hide">
+            <hr/>
+            <h5>Recently Uploaded Files</h5>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

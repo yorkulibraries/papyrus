@@ -1,7 +1,7 @@
 <% title "Scan List", false %>
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Scan List", icon: "list") do %>
+		<%= panel(title: "Scan List - #{@scan_list.scan_items.size} Items", icon: "list") do %>
 			<%= render partial: @scan_list, locals: { show: "div" } %>
 		<% end %>
 	</div>
