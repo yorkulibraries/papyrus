@@ -9,6 +9,14 @@ class AcquisitionRequestsController < ApplicationController
     @back_ordered = AcquisitionRequest.back_ordered.order("back_ordered_until desc")
   end
 
+  def status
+    if params[:status]
+      @acquisition_requests = AcquisitionRequest.where(status: params[:status]).order("acquired_at desc").page(params[:page]).per(100)
+    else
+      redirect_to acquisition_requests_path
+    end
+  end
+
   def show
     @item = @acquisition_request.item
 

@@ -21,6 +21,28 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
     assert_equal 3, items.size, "3 Open acquisition requests"
   end
 
+
+  should "list acquistions items when status is specified" do
+    create_list(:acquisition_request, 3, status: nil)
+    create_list(:acquisition_request, 4, status: AcquisitionRequest::STATUS_ACQUIRED, acquired_at: Time.now)
+    create_list(:acquisition_request, 2, status: AcquisitionRequest::STATUS_CANCELLED, cancelled_at: Time.now)
+    create_list(:acquisition_request, 1, status: AcquisitionRequest::STATUS_BACK_ORDERED)
+
+    get :status, status: AcquisitionRequest::STATUS_ACQUIRED
+    assert_template :status
+    reqs  = assigns(:acquisition_requests)
+    assert_equal 4, reqs.size, "4 STATUS_ACQUIRED acquisition requests"
+
+    get :status, status: AcquisitionRequest::STATUS_BACK_ORDERED
+    assert_template :status
+    reqs  = assigns(:acquisition_requests)
+    assert_equal 1, reqs.size, "4 STATUS_BACK_ORDERED acquisition requests"
+
+    get :status
+    assert_redirected_to acquisition_requests_path
+
+  end
+
   should "show acquisition_request details" do
     @acquisition_request = create(:acquisition_request)
 

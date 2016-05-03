@@ -10,6 +10,9 @@ class AcquisitionRequest < ActiveRecord::Base
   ## Audited
   audited
 
+  ## PAGINATION
+  paginates_per 40
+
   ## CONSTANTS
   STATUS_OPEN="open"
   STATUS_BACK_ORDERED="back_ordered"

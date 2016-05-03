@@ -104,6 +104,7 @@ Papyrus::Application.routes.draw do
     patch :change_status, on: :member
     get :change_status_form, on: :member
     post :send_to_acquisitions, on: :member
+    get :status, on: :collection
   end
 
   # Search
