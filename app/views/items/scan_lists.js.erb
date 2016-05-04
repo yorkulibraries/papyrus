@@ -1,0 +1,18 @@
+$("#scan_lists_holder").remove();
+$("body").append("<div id='scan_lists_holder'></div>");
+$("#scan_lists_holder").append("<%= escape_javascript render("items/scan_lists_modal") %>");
+$("#item_scan_lists").modal({show: true, backdrop: "static" });
+
+
+$("#scan_list_selector").on("change", function() {
+  var list_id = this.value;
+  if (list_id) {
+    $("#new_scan_item_form_holder").empty();
+    var url = "<%= scan_lists_path %>/" + list_id + "/scan_items/new.js?item_id=<%=@item.id %>";
+    var div = "<div id='scan_list_" + list_id + "_item_form_holder'></div>";
+    $("#new_scan_item_form_holder").append(div);
+    $.ajax({
+      url: url,
+    });
+  }
+});

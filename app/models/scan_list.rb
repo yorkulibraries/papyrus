@@ -23,7 +23,7 @@ class ScanList < ActiveRecord::Base
 
   ## SCOPES
   scope :completed, -> { where(status: STATUS_DONE) }
-  scope :not_completed, -> { where("status <> ? ", STATUS_DONE) }
+  scope :not_completed, -> { where("scan_lists.status <> ? ", STATUS_DONE) }
 
   ## METHODS
   def assignee

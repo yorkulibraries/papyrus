@@ -1,7 +1,16 @@
 $("#scan_list_<%= @scan_list.id %>_item_form_holder").empty();
-<% if @scan_list.errors.size == 0 %>
+<% if @scan_item.errors.size == 0 %>
   $("#scan_list_<%= @scan_list.id %> .scan_list_items").append('<%=escape_javascript render @scan_item, show: "div" %>')
   $(".blank-slate").hide();
+
+  // special: remove modal if working from item side
+  $("#item_scan_lists").modal('hide');
+  $("#scan_lists_holder").remove();
+
 <% else %>
-  $('#scan_list_<%= @scan_list.id %>_item_form_holder').prepend('<%=escape_javascript render("scan_items/form") %>');
+  if ($("#scan_list_selector").length) {
+    $('#scan_list_<%= @scan_list.id %>_item_form_holder').prepend('<%=escape_javascript render("scan_items/form_with_item") %>');
+  } else {
+    $('#scan_list_<%= @scan_list.id %>_item_form_holder').prepend('<%=escape_javascript render("scan_items/form") %>');
+  }
 <% end %>

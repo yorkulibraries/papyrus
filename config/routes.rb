@@ -14,7 +14,7 @@ Papyrus::Application.routes.draw do
 
   # Scan List & Items
   resources :scan_lists do
-    resources :scan_items, except: :index
+    resources :scan_items, except: :index 
   end
 
   resource :settings, only: [:update] do
@@ -84,13 +84,14 @@ Papyrus::Application.routes.draw do
   end
 
   resources :items do
-    post 'assign_to_students', :on => :member
-    post 'assign_many_to_student', :on => :collection
-    delete 'withhold_from_student', :on => :member
-    get "courses", :on => :member
+    post 'assign_to_students', on: :member
+    post 'assign_many_to_student', on: :collection
+    delete 'withhold_from_student', on: :member
+    get "courses", on: :member
     get "audit_trail", on: :member
-    get 'zipped_files', :on => :member
-    get 'acquisition_requests', :on => :member
+    get 'zipped_files', on: :member
+    get 'acquisition_requests', on: :member
+    get 'scan_lists', on: :member
     #get 'search', :on => :collection
     #get 'search_vufind', :on => :collection
     resources :attachments, path: "files", except: [:index, :show] do

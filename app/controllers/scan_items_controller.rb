@@ -5,7 +5,9 @@ class ScanItemsController < ApplicationController
 
   def new
     @scan_item = @scan_list.scan_items.new
+    @scan_item.item_id = params[:item_id]  if params[:item_id]
   end
+  
 
   def create
     @scan_item =  @scan_list.scan_items.new(scan_item_params)

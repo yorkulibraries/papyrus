@@ -42,6 +42,12 @@ class ItemsController < ApplicationController
     @fulfilled_acquisition_requests = @item.acquisition_requests.fulfilled.limit(5)
   end
 
+  def scan_lists
+    @item = Item.find(params[:id])
+    @item_scan_lists = @item.scan_lists.not_completed.group(:id)
+    @scan_lists = ScanList.not_completed
+  end
+
   def assign_to_students
     @item = Item.find(params[:id])
     student_ids = params[:student_ids]
