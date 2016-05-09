@@ -3,7 +3,9 @@
 		<%= panel(title: "Item Details", icon: "book") do %>
 			<div class="item-header row">
 				<div class="col-md-8">
-					<h3><%= item.title %></h3>
+					<h3>
+						<%= image_tag "icons/files/photo.png", data: { isbn: isbn_for_image_cover(@item), size: "large"}, class: "google-bookcover", width: "20px" %>
+					<%= item.title %></h3>
 				</div>
 				<div class="col-md-4">
 					<div class="pull-right">

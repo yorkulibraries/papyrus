@@ -14,7 +14,7 @@
 
 <div class="row">
   <div class="col-md-8 acquisition_requests">
-    <%= panel(title: "Recently Acquired", icon: "shopping-cart", title_class: "text-center", styles:"panel-success") do %>
+    <%= panel(title: "Recently Acquired", icon: "shopping-cart", title_class: "text-center", styles:"panel-info") do %>
       <%= render "acquired_requests" %>
 			<br/><%= link_to  status_acquisition_requests_path(status: AcquisitionRequest::STATUS_ACQUIRED) do %>
 				See all <i class="fa fa-chevron-circle-right small"></i>
@@ -22,7 +22,7 @@
     <% end %>
   </div>
   <div class="col-md-4 acquisition_requests">
-		<%= panel(title: "On Back Order", icon: "shopping-cart", title_class: "text-center", styles:"panel-primary") do %>
+		<%= panel(title: "On Back Order", icon: "shopping-cart", title_class: "text-center", styles:"panel-warning") do %>
       <%= render "back_ordered" %>
 			<br/><%= link_to status_acquisition_requests_path(status: AcquisitionRequest::STATUS_BACK_ORDERED) do %>
 				See all <i class="fa fa-chevron-circle-right small"></i>

@@ -28,7 +28,7 @@
 						</a>
 
 						<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_student_path(student) %>" title="Audit Trail">
-							<i class="fa fa-list"></i>
+							<i class="fa fa-history"></i>
 						</a>
 						<% if is_controller_and_action?("students", "show") && can?(:edit, student) %>
 							<a class="btn btn-sm btn-success" href="<%= edit_student_path(student) %>">
