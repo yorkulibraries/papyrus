@@ -1,6 +1,8 @@
 //= require jquery
+//= require best_in_place
 //= require jquery_ujs
 //= require jquery-ui
+//= require best_in_place.jquery-ui
 //= require twitter/bootstrap
 //= require_tree ./vendor/
 //= require_tree ./controllers/
@@ -30,13 +32,15 @@ $(document).ready(function() {
 	});
 
 	$(".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+	$.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
 
 	$('.submittable').click(function() {
 		$(this).parents('form:first').submit();
 	});
 
-
-
+	// Best In Place - In Place Editting
+	$(".best_in_place").best_in_place();
+	$(".best_in_place").attr("title", "Click to edit");
 
 });
 

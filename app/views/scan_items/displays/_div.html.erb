@@ -13,12 +13,16 @@
       </a>
     </div>
     <div class="col-md-4">
-      <%= scan_item.summary %>
+      <%= in_place_edit [@scan_list, scan_item], :summary %>
     </div>
     <div class="col-md-3">
       <ul class="fa-ul">
-        <li title="Assigned To"><i class="fa-li fa fa-user"></i> <%= scan_item.assignee %></li>
-        <li title="Due Date"><i class="fa-li fa fa-calendar"></i> <%= scan_item.due_date %></li>
+        <li title="Assigned To"><i class="fa-li fa fa-user"></i>
+          <%= in_place_edit [@scan_list, scan_item], :assigned_to_id, display_as: :assignee,  as: :select, collection:  ScanItem.assignees(true) %>
+        </li>
+        <li title="Due Date"><i class="fa-li fa fa-calendar"></i>
+          <%= in_place_edit [@scan_list, scan_item], :due_date,  as: :date, inner_class: "datepicker" %>          
+        </li>
       </ul>
     </div>
     <div class="col-md-1 text-right">

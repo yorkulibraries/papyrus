@@ -7,7 +7,7 @@ class ScanItemsController < ApplicationController
     @scan_item = @scan_list.scan_items.new
     @scan_item.item_id = params[:item_id]  if params[:item_id]
   end
-  
+
 
   def create
     @scan_item =  @scan_list.scan_items.new(scan_item_params)
@@ -35,15 +35,18 @@ class ScanItemsController < ApplicationController
   def update
     @scan_item = @scan_list.scan_items.find(params[:id])
     @scan_item.audit_comment = "Updating Scan Item"
+    
     if @scan_item.update_attributes(scan_item_params)
       respond_to do |format|
         format.html { redirect_to  [@scan_list, @scan_item], notice: "Successfully updated scan item." }
         format.js
+        format.json  { render json: @scan_item }
       end
     else
       respond_to do |format|
         format.html { render action: 'edit' }
         format.js
+        format .json  { render json: @scan_item }
       end
     end
   end

@@ -25,7 +25,7 @@ class ScanItem < ActiveRecord::Base
 
   ## METHODS
   def assignee
-    if self[:assigned_to_id] == nil
+    if assigned_to == nil
       "Unassigned"
     else
       assigned_to.name
@@ -40,5 +40,11 @@ class ScanItem < ActiveRecord::Base
     end
   end
 
+  def self.assignees(include_empty_field=false)
+    list = User.transcription_assitants.collect { |u| [u.id, u.name]}
+    if include_empty_field
+      list.unshift(["", "- Unassigned -"])
+    end
+  end
 
 end

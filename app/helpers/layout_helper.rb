@@ -55,15 +55,32 @@ module LayoutHelper
 
 
   def field_format(field, simple_format = false)
-  # If field is blank, print out blank message
-  if field.blank?
-    content_tag(:span, "Not filled in...", class: "empty-field")
-  else
-    if field.is_a? Date
-      field.strftime("%B %d, %Y")
+    # If field is blank, print out blank message
+    if field.blank?
+      content_tag(:span, "Not filled in...", class: "empty-field")
     else
-      simple_format ? simple_format(field) : field
+      if field.is_a? Date
+        field.strftime("%B %d, %Y")
+      else
+        simple_format ? simple_format(field) : field
+      end
     end
   end
-end
+
+  ## WRAPPER FOR BEST_IN_PLACE WITH SOME DEFAULTS
+  def in_place_edit( object, field, *args)
+    ok = "\u2713";  cancel = "\u2A09"
+    defaults = {
+      place_holder: "Click me to add content!",
+      inner_class: "field",
+      ok_button: ok , ok_button_class: "btn btn-link green",
+      cancel_button: cancel,
+      cancel_button_class: "btn btn-link red"
+    }
+
+    options = args.extract_options!
+    defaults.merge!(options)
+
+    best_in_place object, field, defaults
+  end
 end
