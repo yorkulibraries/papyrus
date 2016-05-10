@@ -10,7 +10,7 @@
       </div>
       <div class="modal-footer">
         <%  if can? :destroy, @document %>
-          <%= link_to [@document.attachable, @document], confirm: 'Are you sure?',method: :delete,
+          <%= link_to [@document.attachable, @document], data: { confirm: 'Are you sure?' }, method: :delete,
               remote: true, class: "btn btn-danger pull-left ", title: "Delete this dcument" do %>
               <i class="fa fa-trash"></i> Delete
           <% end %>

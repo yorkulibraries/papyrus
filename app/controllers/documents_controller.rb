@@ -38,11 +38,27 @@ class DocumentsController < ApplicationController
   end
 
   def update
+    @document = @attachable.documents.find(params[:id])
+    @document.user = @current_user
+    @document.audit_comment = "Updated an existing document"
 
+    respond_to do |format|
+      if @document.update_attributes(document_params)
+        format.js
+      else
+        format.js
+      end
+    end
   end
 
   def destroy
+    @document = @attachable.documents.find(params[:id])
+    @document.user = @current_user
+    @document.audit_comment = "Deleted a document"
 
+    @document.deleted = true
+    @document.save(validate: false)
+    
   end
 
   private

@@ -1,0 +1,14 @@
+<% if @document.errors.size == 0 %>
+
+  $("#document_<%= @document.id %>").replaceWith('<%= j render(@document) %>');
+  $("#document_<%= @document.id %>").effect("highlight", {}, 3000);
+
+  $("#edit_document_modal").modal("hide");
+  $("#edit_document_form_holder").remove();
+
+<% else %>
+	$("#edit_document_modal").modal("hide");
+	$("#edit_document_form_holder").empty();
+	$("#edit_document_form_holder").append('<%= j render("documents/edit_modal") %>');
+	$("#edit_document_modal").modal({ show: true, backdrop: 'static' });
+<% end %>
