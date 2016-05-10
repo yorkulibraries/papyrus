@@ -3,8 +3,7 @@ class AttachmentsController < ApplicationController
   before_filter :load_item
 
   def new
-    @attachment = @item.attachments.build
-
+    @attachment = @item.attachments.build      
     render "new_url" if params[:url]
   end
 

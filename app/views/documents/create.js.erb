@@ -1,0 +1,15 @@
+<% if @document.errors.size == 0 %>
+
+	$("#documents").append('<%= j render(@document) %>');
+
+  $("#new_document_modal").modal("hide");
+  $("#new_document_form_holder").remove();
+
+	$("#document<%= @document.id %>").effect("highlight", {}, 3000);
+
+<% else %>
+	$("#new_document_modal").modal("hide");
+	$("#new_document_form_holder").empty();
+	$("#new_document_form_holder").append('<%= j render("documents/new_modal") %>');
+	$("#new_document_modal").modal({ show: true, backdrop: 'static' });
+<% end %>

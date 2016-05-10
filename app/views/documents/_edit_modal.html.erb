@@ -1,0 +1,23 @@
+<div class="modal" id="edit_document_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title">Edit Document</h5>
+      </div>
+      <div class="modal-body">
+        <%= render partial: "documents/form" %>
+      </div>
+      <div class="modal-footer">
+        <%  if can? :destroy, @document %>
+          <%= link_to [@document.attachable, @document], confirm: 'Are you sure?',method: :delete,
+              remote: true, class: "btn btn-danger pull-left ", title: "Delete this dcument" do %>
+              <i class="fa fa-trash"></i> Delete
+          <% end %>
+        <% end %>
+
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

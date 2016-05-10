@@ -1,17 +1,23 @@
 class Course < ActiveRecord::Base
   #attr_accessible :title, :code
 
+  ## RELATIONSHIPS ##
   belongs_to :term, counter_cache: true
 
-  validates_presence_of :title, :code, :term_id
-  validates_uniqueness_of :code
-
-  default_scope  { order('title ASC') }
+  has_many :documents, as: :attachable
 
   has_many :item_course_connections
   has_many :items, :through => :item_course_connections
 
+  ## VALIDATIONS ##
+  validates_presence_of :title, :code, :term_id
+  validates_uniqueness_of :code
 
+  ## SCOPES ##
+  default_scope  { order('title ASC') }
+
+
+  ## METHODS ##
   def add_item(item)
     unless item == nil
       item_course = item_course_connections.build

@@ -1,0 +1,12 @@
+<%= simple_form_for [@attachable, @document], html: {multipart: true }, remote: true do |f| %>
+  <%= f.input :name %>
+  <%= f.input :attachment, as: :file, label: "Choose file" %>
+  <% if @document.new_record? %>
+    <p class="tiny">Created by <%= @current_user.name %></p>
+  <% else %>
+    <p>Current File: <%=File.basename(@document.attachment_url) %></p>
+    <p class="tiny">Created by <%= @document.user.name %></p>
+  <% end %>
+  <hr/>
+  <%= f.button :submit, class: "btn btn-success" %>
+<% end %>

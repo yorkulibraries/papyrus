@@ -1,17 +1,16 @@
 class Student < User
   #attr_accessible :name, :email, :username, :student_details_attributes
+
+  ## PLUGINS ##
   paginates_per 18
-
-
   audited
   has_associated_audits
 
+  ## RELATIONSHIPS ##
   has_many :notes
   has_many :access_codes
 
   has_one :student_details
-  accepts_nested_attributes_for :student_details, allow_destroy: true
-
   has_many :item_connections
   has_many :items, through: :item_connections
 
@@ -20,9 +19,15 @@ class Student < User
 
   belongs_to :created_by, :foreign_key => "created_by_user_id", class_name: "User"
 
+  has_many :documents, as: :attachable
 
+  ## ATTRIBUTES ##
+  accepts_nested_attributes_for :student_details, allow_destroy: true
+  
+  ## VALIDATIONS ##
   # username, email, name and role are validated in the user class
 
+  ## SCOPES ##
   default_scope  { order("#{table_name}.created_at desc").includes(student_details: { transcription_coordinator: [] }) }
 
   scope :assigned_to, lambda { |user_id| joins(:student_details).

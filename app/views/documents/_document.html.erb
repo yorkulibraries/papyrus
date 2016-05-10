@@ -1,0 +1,30 @@
+<div id="document_<%= document.id %>" data-id="<%= document.id %>" class="document attachment">
+  <div class="media">
+		<a class="pull-left icon icon-<%= document.attachment.file.extension.upcase %>"
+      href="<%= download_document_path(document) %>">
+			<i class="fa fa-file fa-fw"></i>
+			<%= document.attachment.file.extension.upcase %>
+		</a>
+
+
+    <div class="pull-right actions">
+
+      <% if can? :update, document %>
+        <a class="btn btn-sm btn-default hidden-phone" title="Edit Document" data-remote="true"
+            href="<%= edit_document_path(document.attachable, document) %>">
+          <i class="fa fa-edit"></i>
+        </a>
+      <% end %>
+
+    </div>
+
+    <div class="media-body">
+      <h4 class="media-heading">
+        <a href="<%= download_document_path(document) %>">  <%= document.name %></a>
+      </h4>
+      <p>Updated <span title="<%= document.created_at.strftime("%b %e %Y, %l:%M %p") %>">
+        <%= time_ago_in_words document.updated_at %></span> ago by <%= document.user.name %>
+      </p>
+    </div>
+  </div>
+</div>

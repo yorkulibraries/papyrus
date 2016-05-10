@@ -2,10 +2,15 @@
 .form-group, .control-group {
   margin-bottom: 15px;
 
-  .help-block { font-size: 12px; padding: 3px 5px;
-    background-color: #f4f8fa; border-left: 2px solid #2ec1cc;
+  .help-block, .help-inline { font-size: 13px; padding: 2px 5px; margin-top: 4px; display: inline-block;
+    background-color: #f4f8fa; border-left: 2px solid #2ec1cc; color: #C7244D;
   }
+
+  &.error { input, textarea { border-color: #C7244D; } }
+
 }
+
+
 
 .form-control {
     background-color: #fff;
@@ -29,6 +34,9 @@
 input[type="radio"].form-control, input[type="checkbox"].form-control {
   height: inherit; width: inherit;
 }
+
+input[type="file"].form-control { height: auto; }
+
 
 .best_in_place {
   padding: 4px; border: 2px solid transparent;

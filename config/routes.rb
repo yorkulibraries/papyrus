@@ -33,7 +33,8 @@ Papyrus::Application.routes.draw do
   end
 
   # match 'announcements/:id/hide', to: 'announcements#hide', as: 'hide_announcement'
-
+  # Download document link
+  get "documents/download/:id" => "documents#download", as: :download_document
 
   # Student View
   match "login_as_student/:id" => "student_view#login_as_student", :as => :admin_student_view, via: [:get, :post]

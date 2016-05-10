@@ -2,8 +2,8 @@ FactoryGirl.define do
 
   factory :document do
     sequence(:name) { |n| "Some Name of Attachment #{n}"}
-    attachments { fixture_file_upload( Rails.root + 'test/fixtures/test_pdf.pdf','application/pdf') }
-    association :attachable, factory: :student
+    attachment { fixture_file_upload( Rails.root + 'test/fixtures/test_pdf.pdf','application/pdf') }
+    attachable { |a| a.association(:student) }    
     association :user, factory: :user
 
     deleted false

@@ -1,0 +1,4 @@
+$("#edit_document_form_holder").remove();
+$("body").append("<div id='edit_document_form_holder'></div>");
+$("#edit_document_form_holder").append("'<%= j render("documents/edit_modal") %>'")
+$("#edit_document_modal").modal({ show: true, backdrop: 'static' });

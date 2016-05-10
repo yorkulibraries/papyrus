@@ -11,6 +11,8 @@ class Ability
       can :show, :dashboard
       can :manage, [Announcement, AcquisitionRequest]
 
+      can :manage, Document
+
       can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course, ScanList]
       can :show, :stats
 
@@ -19,7 +21,7 @@ class Ability
     elsif user.role == User::COORDINATOR
       can :show, :dashboard
 
-      can :manage, [ScanList]
+      can :manage, [ScanList, Document]
       can :manage, [Term, Course]
       can [:read, :create, :update], AcquisitionRequest
       can :manage, AccessCode
@@ -30,6 +32,12 @@ class Ability
 
     elsif user.role == User::STAFF
       can :show, :dashboard
+
+      can :manage, Document do |d|
+        d.user_id == user.id
+      end
+
+      can :read, Document
 
       can :manage, [ScanList]
       can :manage, [Term, Course]

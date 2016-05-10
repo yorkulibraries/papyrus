@@ -1,0 +1,13 @@
+<%= panel(title: "Documents", icon: "file", title_class: "text-center", styles:"panel-success") do %>
+  <p>
+    <%= link_to new_student_document_path(@student), remote: true, class: "btn btn-xs btn-primary" do %>
+      <i class="fa fa-plus"></i> New Document
+    <% end %>
+  </p>
+
+  <div id="documents">
+    <% @student.documents.each do |document| %>
+      <%= render document %>
+    <% end %>
+  </div>
+<% end %>
