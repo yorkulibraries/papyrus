@@ -1,6 +1,7 @@
 Papyrus::Application.routes.draw do
 
 
+
   get "stats" => "stats#index"
   get "stats/assigned_students" =>"stats#assigned_students"
   get "stats/item_usage" => "stats#item_usage"
@@ -14,7 +15,7 @@ Papyrus::Application.routes.draw do
 
   # Scan List & Items
   resources :scan_lists do
-    resources :scan_items, except: :index 
+    resources :scan_items, except: :index
   end
 
   resource :settings, only: [:update] do
@@ -60,7 +61,10 @@ Papyrus::Application.routes.draw do
 
   resources :shared_access_codes, only: [:index, :new, :create, :destroy]
 
+
+
   resources :students do
+    resources :documents
     resources :access_codes
     resources :notes, except: [:show, :new]
 
