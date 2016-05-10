@@ -18,6 +18,7 @@ class DocumentTest < ActiveSupport::TestCase
     assert ! build(:document, attachment: nil).valid?, "Attachment required"
     assert ! build(:document, attachable_id: nil).valid?, "Attachable ID is required"
     assert ! build(:document, attachable_type: nil).valid?, "Attachable Type is required"
+    assert ! build(:document, user: nil).valid?, "User is required"
 
   end
 end

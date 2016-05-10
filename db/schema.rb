@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419182549) do
+ActiveRecord::Schema.define(version: 20160510131328) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string   "for"
@@ -106,6 +106,17 @@ ActiveRecord::Schema.define(version: 20160419182549) do
   end
 
   add_index "courses", ["term_id"], name: "index_courses_on_term_id"
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "attachment"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.integer  "user_id",         default: 0
+    t.boolean  "deleted",         default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
   create_table "item_connections", force: :cascade do |t|
     t.integer  "item_id"

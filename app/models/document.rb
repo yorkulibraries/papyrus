@@ -10,7 +10,7 @@ class Document < ActiveRecord::Base
   ## VALIDATIONS ##
   validates_presence_of :attachment, message: "Please select the file to upload.", unless: lambda { is_url? }
   validates_presence_of :name, message: "Enter the name of for this file.", unless: lambda { is_url? }
-  validates_presence_of :attachable_id, :attachable_type
+  validates_presence_of :attachable_id, :attachable_type, :user_id
 
   ## Audited Setup ##
   audited associated_with: :student
