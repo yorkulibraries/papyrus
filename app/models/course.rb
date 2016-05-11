@@ -9,6 +9,8 @@ class Course < ActiveRecord::Base
   has_many :item_course_connections
   has_many :items, :through => :item_course_connections
 
+  has_one :syllabus, as: :attachable
+
   ## VALIDATIONS ##
   validates_presence_of :title, :code, :term_id
   validates_uniqueness_of :code
