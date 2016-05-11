@@ -1,8 +1,8 @@
-<% title "School Term - #{@term.name}", false %>
+<% title "#{@term.name}", false %>
 
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "School Term - #{@term.name}", icon: "university", styles: "panel-success") do %>
+		<%= panel(title: "#{@term.name}", icon: "university", styles: "panel-success term-panel") do %>
 
 			<%= render "terms/shared/menu" %>
 

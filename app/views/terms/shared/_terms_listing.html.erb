@@ -1,18 +1,28 @@
 <div class="list-group" id="terms">
+  <%= blank_slate(@terms, title: "There are no active Terms.", description: "Click <strong>Add New Term</strong> button to add one") %>
+
   <% @terms.each do |term| %>
     <%= render term, show: "a" %>
   <% end %>
-  <% if @archived_terms %>
-    <hr/>
-    <strong>Expired Terms</strong>
-    <dl>
-      <% @archived_terms.each do |term| %>
-        <dt><%= link_to "#{term.name}", term %></dt>
-        <dd class="small">
-         <i class="fa fa-calendar"></i> Expired
-          <%= term.end_date.strftime("%b %d, %Y") %>
-        </dd>
-      <% end %>
-    </dl>
-  <% end %>
+
 </div>
+
+<% if @archived_terms %>
+  <hr/>
+  <strong>Expired Terms</strong>
+  <dl>
+    <% @archived_terms.each do |term| %>
+      <dt><%= link_to "#{term.name}", term %></dt>
+      <dd class="small">
+       <i class="fa fa-calendar"></i> Expired
+        <%= term.end_date.strftime("%b %d, %Y") %>
+      </dd>
+    <% end %>
+  </dl>
+<% else %>
+  <br/>
+  <%= link_to terms_path do %>
+    Expired Terms <i class="fa fa-angle-double-right"></i>
+  <% end %>
+
+<% end %>

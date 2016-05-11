@@ -5,3 +5,4 @@ $("#term_<%= @term.id %>").addClass("active");
 // load term partial
 $("#term_details").empty();
 $("#term_details").append("<%= j render(@term, show: "full") %>");
+$(".term-panel .panel-heading strong").empty().append("<i class='fa fa-university'></i> <%= @term.name %>");
