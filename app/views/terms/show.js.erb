@@ -1,0 +1,7 @@
+$("#terms a").removeClass("active");
+$("#terms a i").addClass("hide");
+$("#term_<%= @term.id %>").addClass("active");
+
+// load term partial
+$("#term_details").empty();
+$("#term_details").append("<%= j render(@term, show: "full") %>");

@@ -1,0 +1,6 @@
+<a href="<%= term_path(term) %>" data-remote="truxe"
+  class="list-group-item term <%="active" if @term && @term.id == term.id %>" id="term_<%= term.id %>" data-id="<%= term.id %>">
+  <span class="badge"><%= term.courses.count %></span>
+  <%= term.name %>
+  <i class="fa fa-spinner fa-spin hide"></i>
+</a>

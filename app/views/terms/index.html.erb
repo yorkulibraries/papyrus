@@ -3,53 +3,21 @@
 <div class="row">
 	<div class="col-md-12">
 		<%= panel(title: "Terms and Courses", icon: "university") do %>
-		<div class="row">
 
-			<div class="col-sm-4 col-xs-4">
-				<form action="<%= search_courses_terms_path %>" class="form-search">
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-search"></i></span>
-					<input type="text" placeholder="Search Course Code or Name" name="q" class="form-control search-query"  value="<%= params[:q].try(:strip) %>">
+
+			<%= render "terms/shared/menu" %>
+
+			<div class="row">
+				<div class="col-md-4">
+					<%= render "terms/shared/terms_listing" %>
 				</div>
-				</form>
+				<div class="col-md-8" id="term_details">
+					<%= blank_slate(@courses, title: "Click on the term to see the courses",
+													icon: "university red", description: "Please select the term on the left side..." ) %>
+				</div>
 			</div>
-
-			<div class="col-sm-8 col-xs-8">
-				<%= link_to new_term_path, class: "btn btn-sm btn-primary  pull-right" do %>
-					<i class="fa fa-plus"></i> Add a New Term
-				<% end %>
-			</div>
-		</div>
-
-		<hr/>
-
-		<div class="row">
-			<div class="col-md-8">
-				<h4>Current Terms</h4>
-				<ul class="list-unstyled" id="terms">
-					<% for term in @terms %>
-						<%= render term, show: "li" %>
-					<% end %>
-				</ul>
-
-			</div>
-			<div class="col-md-4">
-				<h4>Recently Expired Terms</h4>
-				<ul class="list-unstyled">
-					<% @archived_terms.each do |term| %>
-					<li class="term" id="term_<%= term.id %>" data-id="<%= term.id %>">
-							<%= link_to "#{term.name}", term %>
-							<small>
-								<strong>Expired On</strong> <i class="fa fa-calendar"></i>
-							 	<%= term.end_date.strftime("%b %d, %Y") %>
-							</small>
-						</li>
-
-					<% end %>
-				</ul>
-			</div>
-		</div>
 
 		<% end %>
+
 	</div>
 </div>

@@ -2,8 +2,12 @@
   <%= render partial: "terms/displays/tr", locals: { term: term } %>
 <% elsif local_assigns[:show] == "li" %>
     <%= render partial: "terms/displays/li", locals: { term: term } %>
+<% elsif local_assigns[:show] == "full" %>
+    <%= render partial: "terms/displays/full", locals: { term: term } %>
 <% elsif local_assigns[:show] == "div" %>
   <%= render partial: "terms/displays/div", locals: { term: term } %>
+<% elsif local_assigns[:show] == "a" %>
+  <%= render partial: "terms/displays/a", locals: { term: term } %>
 <% else %>
   <%= render partial: "terms/displays/public", locals: { term: term } %>
 <% end %>

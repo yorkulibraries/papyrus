@@ -16,3 +16,11 @@ function setup_course_token_input(id, url, token_limit) {
     }
   });
 }
+
+
+$(document).ready(function() {
+  $("a.term").click(function() {
+    $(this).children("i.fa-spin").removeClass("hide");
+    history.pushState({}, null, $(this).attr("href"));    
+  });
+});

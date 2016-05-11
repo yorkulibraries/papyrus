@@ -1,0 +1,46 @@
+<% if @term.end_date < Date.today %>
+  <div class="alert alert-warning">
+    <h3>Term Expired</h3>
+    <p>This term expired on  <strong><%= @term.end_date.strftime("%b %d, %Y") %></strong>. All courses from this term will not be searchable in the items screen.</p>
+    <%= link_to terms_path, class: "btn btn-default btn-sm" do %>&laquo; All terms<% end %>
+  </div>
+<% end %>
+
+<%= render @term, show: "div" %>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-6">
+    <% if @courses.size > 10 %>
+
+      <form class="form-search">
+          <input type="text" id="courses_search" class="form-control search-query" placeholder="Search Course Code or Name">
+      </form>
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('input#courses_search').quicksearch('#courses li', { selector: ".title" });
+        });
+      </script>
+
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <%= link_to new_term_course_path(@term), id: "new_course", class: "btn btn-sm btn-primary pull-right" do %>
+      <i class="fa fa-plus"></i> Add a new course
+    <% end %>
+  </div>
+</div>
+
+<hr/>
+
+<h4><%= pluralize(@courses.count, "Course") %></h4>
+<div id="courses">
+  <ul class="list-group">
+    <% @courses.each do |course| %>
+      <%= render  course, show: "li" %>
+    <% end %>
+  </ul>
+</div>

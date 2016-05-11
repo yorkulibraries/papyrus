@@ -44,12 +44,12 @@ class CoursesControllerTest < ActionController::TestCase
     end
 
     should "redirect to term details if going to course index" do
-        get :index, :term_id => @term.id
+        get :index, term_id: @term.id
         assert_redirected_to term_path(@term)
     end
 
     should "show template if going to course show" do
-      get :show, :term_id => @term.id, :id => 1
+      get :show,  term_id:  @term.id, id: 1
       assert_redirected_to term_path(@term)
     end
 

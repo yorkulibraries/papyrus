@@ -4,6 +4,7 @@ class CoursesController < ApplicationController
   before_filter :load_term
 
   def index
+    @courses = @term.courses
     redirect_to @term
   end
 

@@ -1,6 +1,6 @@
 <div class="term" id="term_<%= term.id %>" data-id="<%= term.id %>">
   <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-6">
           <%= link_to "#{term.name}", term %>
           <small>
             <strong>Spans</strong> <i class="fa fa-calendar"></i>
@@ -10,6 +10,13 @@
       <div class="col-md-4">
           <span class="small strong">Active Courses</span><br/>
           <span class="tag-item"><%= pluralize(term.courses.count, "Course") %></span>
+      </div>
+      <div class="col-md-2">
+        <% if can? :update, @term %>
+          <%= link_to edit_term_path(@term), class: "btn btn-sm btn-primary" do %>
+            <i class="fa fa-edit"></i> Update Term
+          <% end %>
+        <% end %>
       </div>
   </div>
 </div>

@@ -1,0 +1,18 @@
+<div class="list-group" id="terms">
+  <% @terms.each do |term| %>
+    <%= render term, show: "a" %>
+  <% end %>
+  <% if @archived_terms %>
+    <hr/>
+    <strong>Expired Terms</strong>
+    <dl>
+      <% @archived_terms.each do |term| %>
+        <dt><%= link_to "#{term.name}", term %></dt>
+        <dd class="small">
+         <i class="fa fa-calendar"></i> Expired
+          <%= term.end_date.strftime("%b %d, %Y") %>
+        </dd>
+      <% end %>
+    </dl>
+  <% end %>
+</div>

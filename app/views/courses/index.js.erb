@@ -1,0 +1,13 @@
+$("#terms a").removeClass("active");
+$("#terms a i").addClass("hide");
+$("#term_<%= @term.id %>").addClass("active");
+
+<% if @courses.count > 0 %>
+  $("#courses").empty();
+  <% @courses.each do |course| %>
+  	$("#courses").append("<%= escape_javascript render(course, show: "div") %>");
+  <% end %>
+<% else %>
+  <% slate = blank_slate(@courses, title: "There are no courses in this term", icon: "university red", description: "Click on <strong>New Course</strong> button to add one." ) %>
+  $("#courses").empty().append("<%= escape_javascript render text: slate.html_safe %>");
+<% end %>

@@ -19,6 +19,7 @@ class TermsController < ApplicationController
   end
 
   def show
+    @terms = Term.active
     @term = Term.find(params[:id])
     @courses = @term.courses.includes(:term)
   end
