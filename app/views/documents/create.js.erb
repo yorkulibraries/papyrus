@@ -1,7 +1,7 @@
 <% if @document.errors.size == 0 %>
 
 	$("#documents").append('<%= j render(@document) %>');
-
+	console.log("HERE I AM");
   $("#new_document_modal").modal("hide");
   $("#new_document_form_holder").remove();
 

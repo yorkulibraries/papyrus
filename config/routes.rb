@@ -51,6 +51,12 @@ Papyrus::Application.routes.draw do
     get "inactive", :on => :collection
   end
 
+  ## Special path for documents to work across the board
+  resources :courses do
+    resources :documents, path: "syllabus"
+  end
+
+
   resources :terms do
      resources :courses do
         post "add_item", :on => :member
