@@ -28,6 +28,11 @@
 	<hr/>
 	<%= form_tag delete_multiple_item_attachments_path(@item), id: "delete_multiple_form" do %>
 		<div id="attachments">
+			<% if @item.attachments.available.size == 0 %>
+				<div class="blank-slate">
+					<h5>There are no files or urls in this Item.</h5>
+				</div>
+			<% end %>
 				<% @item.attachments.available.each do |attachment| %>
 					<%= render attachment, show: "div" %>
 				<% end %>

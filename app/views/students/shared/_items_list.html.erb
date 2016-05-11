@@ -6,6 +6,18 @@
   <% end %>
   <hr/>
   <ul class="list-unstyled" id="items">
+    <%= blank_slate(@items,
+        title: "There are no active access codes.", icon: "file red",
+        description: "Click on the <strong>New Access Code</strong> button to add one.")
+      %>
+
+    <% if @items.size == 0 %>
+      <div class="blank-slate">
+        <h4>There are no active access codes.</h4>
+        <p>Click on the <strong>New Access Code</strong> button to add one.</p>
+      </div>
+    <% end %>
+
     <% @items.each do |item| %>
       <%= render item, show: "li" %>
     <% end %>

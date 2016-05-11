@@ -7,6 +7,10 @@
   <hr/>
 
   <div id="documents">
+    <%= blank_slate(@student.documents.available,
+        title: "There are no documents.", icon: "file red",
+        description: "Click on the <strong>New Document</strong> button to add one.")
+      %>
     <% @student.documents.available.each do |document| %>
       <%= render document %>
     <% end %>
