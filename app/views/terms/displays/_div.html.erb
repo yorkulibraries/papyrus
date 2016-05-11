@@ -1,22 +1,20 @@
 <div class="term" id="term_<%= term.id %>" data-id="<%= term.id %>">
   <div class="row">
-      <div class="col-md-6">
-          <%= link_to "#{term.name}", term %>
-          <small>
-            <strong>Spans</strong> <i class="fa fa-calendar"></i>
-            <%= term.start_date.strftime("%b %d, %Y") %> - <%= term.end_date.strftime("%b %d, %Y") %>
-          </small>
-      </div>
-      <div class="col-md-4">
-          <span class="small strong">Active Courses</span><br/>
-          <span class="tag-item"><%= pluralize(term.courses.count, "Course") %></span>
-      </div>
-      <div class="col-md-2">
+    <div class="col-md-8">
+      <h3 class="title"><%= term.name %>
         <% if can? :update, @term %>
-          <%= link_to edit_term_path(@term), class: "btn btn-sm btn-primary" do %>
-            <i class="fa fa-edit"></i> Update Term
+          <%= link_to edit_term_path(@term), class: "btn btn-link" do %>
+            <i class="fa fa-edit"></i>
           <% end %>
         <% end %>
-      </div>
+      </h3>
+      <span class="small date"><i class="fa fa-calendar"></i>
+        Spans <%= term.start_date.strftime("%b %d, %Y") %> - <%= term.end_date.strftime("%b %d, %Y") %>
+      </span>
+    </div>
+    <div class="col-md-4 text-right">
+        <span class="strong title">Active Courses</span><br/>
+        <span class="tag-item"><%= pluralize(term.courses.count, "Course") %></span>
+    </div>
   </div>
 </div>

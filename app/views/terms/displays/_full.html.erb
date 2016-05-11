@@ -21,14 +21,14 @@
 
       <script type="text/javascript">
         $(document).ready(function(){
-          $('input#courses_search').quicksearch('#courses li', { selector: ".title" });
+          $('input#courses_search').quicksearch('#courses div.course', { selector: ".course_name" });
         });
       </script>
 
     <% end %>
   </div>
   <div class="col-md-6">
-    <%= link_to new_term_course_path(@term), id: "new_course", class: "btn btn-sm btn-primary pull-right" do %>
+    <%= link_to new_term_course_path(@term), id: "new_course", class: "btn btn-sm btn-success pull-right" do %>
       <i class="fa fa-plus"></i> Add a new course
     <% end %>
   </div>
@@ -38,9 +38,9 @@
 
 <h4><%= pluralize(@courses.count, "Course") %></h4>
 <div id="courses">
-  <ul class="list-group">
+  <div class="list-group">
     <% @courses.each do |course| %>
-      <%= render  course, show: "li" %>
+      <%= render  course, show: "div" %>
     <% end %>
   </ul>
 </div>
