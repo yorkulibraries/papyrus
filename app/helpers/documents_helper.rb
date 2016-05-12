@@ -7,7 +7,7 @@ module DocumentsHelper
     when "Student"
       edit_student_document_path(attachable, document)
     when "Course"
-      edit_term_course_document_path(@term, attachable, document)
+      edit_course_document_path(attachable, document)
     else
       ""
     end

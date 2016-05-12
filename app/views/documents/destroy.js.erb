@@ -2,3 +2,10 @@ $("#edit_document_modal").modal("hide");
 $("#edit_document_form_holder").remove();
 
 $("#document_<%= @document.id %>").fadeOut(2000, function(){ $(this).remove();});
+
+
+// courses view
+if ($("#courses").length > 0) {
+  $("#course_<%= @document.attachable_id %>").replaceWith("<%= j render(@document.attachable, show: 'div') %>");
+  $("#course_<%= @document.attachable_id %>").effect("highlight", {}, 3000);
+}

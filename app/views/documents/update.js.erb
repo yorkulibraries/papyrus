@@ -2,10 +2,16 @@
 
   $("#document_<%= @document.id %>").replaceWith('<%= j render(@document) %>');
   $("#document_<%= @document.id %>").effect("highlight", {}, 3000);
-
   $("#edit_document_modal").modal("hide");
   $("#edit_document_form_holder").remove();
 
+
+  // courses view
+  if ($("#courses").length > 0) {
+    $("#course_<%= @document.attachable_id %>").replaceWith("<%= j render(@document.attachable, show: 'div') %>");
+    $("#course_<%= @document.attachable_id %>").effect("highlight", {}, 3000);
+  }
+  
 <% else %>
 	$("#edit_document_modal").modal("hide");
 	$("#edit_document_form_holder").empty();

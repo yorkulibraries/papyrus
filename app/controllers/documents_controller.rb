@@ -5,6 +5,7 @@ class DocumentsController < ApplicationController
   def download
     @document = Document.find(params[:id])
     file = "#{@document.attachment.path}"
+    ext = @document.attachment.file.extension
 
     begin
       mime_type = MIME::Types.type_for(file).first.content_type
@@ -12,7 +13,12 @@ class DocumentsController < ApplicationController
       mime_type = "unknown"
     end
 
-    send_data File.read(file), type: mime_type, disposition: 'attachment', filename: "#{File.basename(@document.attachment_url)}"
+    if ext.downcase == "pdf".downcase
+      send_file File.read(file), filename: "#{File.basename(@document.attachment_url)}", disposition: 'inline', type: "application/pdf"
+    else
+      send_data File.read(file), type: mime_type, disposition: 'attachment', filename: "#{File.basename(@document.attachment_url)}"
+    end
+
   end
 
   def new
@@ -58,7 +64,7 @@ class DocumentsController < ApplicationController
 
     @document.deleted = true
     @document.save(validate: false)
-    
+
   end
 
   private

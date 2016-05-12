@@ -1,7 +1,5 @@
 Papyrus::Application.routes.draw do
 
-
-
   get "stats" => "stats#index"
   get "stats/assigned_students" =>"stats#assigned_students"
   get "stats/item_usage" => "stats#item_usage"

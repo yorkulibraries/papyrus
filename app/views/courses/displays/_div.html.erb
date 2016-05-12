@@ -1,6 +1,6 @@
-<div class="list-group-item course">
+<div class="list-group-item course" id="course_<%= course.id %>" data-id="<%= course.id %>">
 	<h5 class="title">
-		<%= link_to course.title, edit_term_course_path(@term, course) %>
+		<%= link_to course.title, edit_term_course_path(course.term, course) %>
 		<span class="course_name hide"><%= course.title %></span>
 		<div class="pull-right">
 
@@ -9,19 +9,18 @@
 		      <i class="fa fa-upload" title="Upload Syllabus"></i>
 		    <% end %>
 			<% else %>
-				<%= link_to download_document_path(course.syllabus), remote: true, class: "btn btn-xs" do %>
-					<i class="fa fa-download" title="Downdload Syllabus"></i>
+				<%= link_to download_document_path(course.syllabus), class: "btn btn-xs", target: "_blank" do %>
+					<i class="fa fa-download" title="Preview Syllabus"></i>
 				<% end %>
 				<%= link_to edit_course_document_path(course, course.syllabus), remote: true, class: "btn btn-xs" do %>
 					<i class="fa fa-upload" title="Upload Syllabus"></i>
 				<% end %>
 			<% end %>
 
-			<% if @term%>
-				<%= link_to edit_term_course_path(@term, course) do %>
-					<i class="fa fa-edit"></i>
-				<% end %>
+			<%= link_to edit_term_course_path(course.term, course) do %>
+				<i class="fa fa-edit"></i>
 			<% end %>
+
 		</div>
 	</h5>
 	<div class="code small"><%= course.code %></div>

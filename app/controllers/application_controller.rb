@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  check_authorization
+  check_authorization unless: :pdf_viewer_controller?
 
   before_filter :login_required
 
@@ -38,7 +38,9 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.url
   end
 
-
+  def pdf_viewer_controller?
+    controller_name == "PdfjsView::viewer" 
+  end
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user && current_user.role == User::STUDENT_USER
