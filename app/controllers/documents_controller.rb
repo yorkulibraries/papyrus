@@ -13,16 +13,18 @@ class DocumentsController < ApplicationController
       mime_type = "unknown"
     end
 
-    if ext.downcase == "pdf".downcase
-      send_file File.read(file), filename: "#{File.basename(@document.attachment_url)}", disposition: 'inline', type: "application/pdf"
+    if ["pdf", "jpg", "png", "gif", "jpeg"].include?(ext.downcase)
+      disposition = "inline"
     else
-      send_data File.read(file), type: mime_type, disposition: 'attachment', filename: "#{File.basename(@document.attachment_url)}"
+      disposition = "attachment"
     end
 
+    send_data File.read(file), type: mime_type, disposition: disposition, filename: "#{File.basename(@document.attachment_url)}"
   end
 
   def new
     @document = @attachable.documents.new
+    @document.name = params[:name] if params[:name]
   end
 
   def create

@@ -11,8 +11,10 @@
         <i class="fa fa-edit"></i>
       <% end %>
     <% end %>
-
     <label><%= course.title %></label><br/>
     <%= course.code %>
+    <div class="pull-right">
+      <%= render "courses/shared/syllabus_menu", course: course %>
+    </div>
   </div>
 </li>

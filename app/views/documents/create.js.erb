@@ -11,7 +11,7 @@
 
 	// courses view
 	if ($("#courses").length > 0) {
-		$("#course_<%= @document.attachable_id %>").replaceWith("<%= j render(@document.attachable, show: 'div') %>");
+		$("#course_<%= @document.attachable_id %> .course_syllabus_menu").replaceWith("<%= j render("courses/shared/syllabus_menu", course: @document.attachable) %>");
 		$("#course_<%= @document.attachable_id %>").effect("highlight", {}, 3000);
 	}
 

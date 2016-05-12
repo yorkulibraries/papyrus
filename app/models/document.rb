@@ -21,4 +21,10 @@ class Document < ActiveRecord::Base
   scope :deleted, -> { where(deleted: true) }
   scope :available, -> { where(deleted: false) }
 
+
+  ## Private methods
+  def filename
+    File.basename(self.attachment_url)
+  end
+
 end

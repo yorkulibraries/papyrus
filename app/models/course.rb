@@ -9,7 +9,7 @@ class Course < ActiveRecord::Base
   has_many :item_course_connections
   has_many :items, :through => :item_course_connections
 
-  has_one :syllabus, as: :attachable, class_name: "Document"
+  has_one :syllabus, -> { where deleted: false }, as: :attachable,  class_name: "Document"
 
   ## VALIDATIONS ##
   validates_presence_of :title, :code, :term_id

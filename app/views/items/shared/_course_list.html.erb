@@ -21,7 +21,7 @@
 		<%= form_tag assign_to_item_term_courses_path(1), remote: true do %>
 			<input type="hidden" name="item_id" value="<%= @item.id %>"/>
 			<p><input type="text" id="assign-to-course-list" name="course_ids"/></p>
-			<p><%= submit_tag "Assign to course", :class => "btn" %></p>
+			<p><%= submit_tag "Assign to course", class: "btn btn-default" %></p>
 		<% end %>
 	</div>
 
