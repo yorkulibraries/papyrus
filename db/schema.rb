@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511191616) do
+ActiveRecord::Schema.define(version: 20160512152447) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string   "for"
@@ -204,6 +204,13 @@ ActiveRecord::Schema.define(version: 20160511191616) do
   end
 
   add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
+
+  create_table "student_courses", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "student_details", force: :cascade do |t|
     t.integer  "student_id"

@@ -108,4 +108,25 @@ class CourseTest < ActiveSupport::TestCase
 
   end
 
+  ## Enroll and Withdraw students
+  should "be able to enroll student" do
+    course = create(:course)
+    student = create(:student)
+
+    assert_difference "StudentCourse.count", 1 do
+      course.enroll_student(student)
+    end
+
+  end
+
+  should "be able to withdraw item" do
+    course = create(:course)
+    student = create(:student)
+    course.enroll_student(student)
+
+    assert_difference "StudentCourse.count", -1 do
+      course.withdraw_student(student)
+    end
+  end
+
 end

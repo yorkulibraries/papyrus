@@ -14,6 +14,9 @@ class Student < User
   has_many :item_connections
   has_many :items, through: :item_connections
 
+  has_many :student_courses
+  has_many :courses, through: :student_courses
+
   has_many :current_items, -> { where("item_connections.expires_on >= ? OR item_connections.expires_on IS ?", Date.today, nil) }, through: :item_connections, source: :item
   has_many :expired_items, -> { where("item_connections.expires_on < ?", Date.today) }, through: :item_connections, source: :item
 
@@ -23,7 +26,7 @@ class Student < User
 
   ## ATTRIBUTES ##
   accepts_nested_attributes_for :student_details, allow_destroy: true
-  
+
   ## VALIDATIONS ##
   # username, email, name and role are validated in the user class
 

@@ -10,7 +10,4 @@ class ImporterTaskTest < ActiveSupport::TestCase
   end
 
 
-  should "updated existing student" do
-    puts ENV["DEBUG"]    
-  end
 end
