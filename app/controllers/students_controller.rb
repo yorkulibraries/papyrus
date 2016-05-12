@@ -85,6 +85,8 @@ class StudentsController < ApplicationController
     @active_access_codes += @shared_codes
 
     @expired_access_codes = @student.access_codes.expired
+
+    @courses_grouped = @student.courses.group_by { |c| { name: c.term.name, id: c.term.id } }
   end
 
   def audit_trail
@@ -170,6 +172,28 @@ class StudentsController < ApplicationController
     @student.save
     redirect_to @student, notice: "Student has been reactivated, and can now use Papyrus"
   end
+
+  ## COURSE ENROLLMENT
+  def enroll_in_courses
+    @student = Student.find(params[:id])
+
+    course_ids = params[:course_ids]
+
+    course_ids.split(",").each do |id|
+      course = Course.find(id)
+      course.enroll_student(@student)
+    end
+
+    @courses_grouped = @student.courses.group_by { |c| { name: c.term.name, id: c.term.id } }
+  end
+
+  def withdraw_from_course
+    @student = Student.find(params[:id])
+    @course = @student.courses.find(params[:course_id])
+
+    @course.withdraw_student(@student) unless @course.blank?
+  end
+
 
   private
   def student_params

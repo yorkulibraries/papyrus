@@ -1,7 +1,13 @@
 <li id="course_<%= course.id %>" data-id="<%= course.id %>" class="list-group-item">
   <% if @item %>
     <%= link_to remove_item_term_course_path(1, course.id, item_id: @item.id), :class=> "close", :method => "post", data: { confirm: 'Are you sure?', remote: true } do%>
-      &times;
+        <span title="Remove item from this course"> &times;</span>
+    <% end %>
+  <% end %>
+
+  <% if @student %>
+    <%= link_to withdraw_from_course_student_path(@student, course_id: course.id), class: "close", method: "delete", data: { confirm: 'Are you sure?', remote: true } do%>
+      <span title="Withdraw from course">&times;</span>
     <% end %>
   <% end %>
 

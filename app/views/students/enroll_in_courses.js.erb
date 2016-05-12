@@ -1,0 +1,14 @@
+<% if @courses_grouped.size > 0 %>
+  $(".blank-slate").remove();
+  $("#courses").empty();
+  $("#assign-to-course-list").tokenInput("clear");
+
+  <% @courses_grouped.each do |term, courses| %>
+    $("#courses").append("<li id='term_<%= term[:id] %>'><label class='term'><%= j term[:name] %></label></li>");
+    <% courses.each do |course|%>
+      $("#courses").append("<%= j render(course, show: "li") %>");
+    <% end %>
+  <% end %>
+
+
+<% end %>

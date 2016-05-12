@@ -204,4 +204,27 @@ class StudentsControllerTest < ActionController::TestCase
 
   end
 
+
+  ##  ENROLL AND WITHDRAW FROM COURSE ##
+  should "enroll student in courses" do
+    student = create(:student)
+    courses = create_list(:course, 4)
+
+    assert_difference "StudentCourse.count", courses.size do
+      xhr :post, :enroll_in_courses, id: student.id, course_ids: courses.collect { |c| c.id }.join(",")
+      assert_response :success
+    end
+  end
+
+  should "withdraw student from course" do
+    student = create(:student)
+    course = create(:course)
+    course.enroll_student(student)
+
+    assert_difference "StudentCourse.count", -1 do
+      xhr :delete, :withdraw_from_course, id: student.id, course_id: course.id
+      assert_response :success
+    end
+  end
+
 end

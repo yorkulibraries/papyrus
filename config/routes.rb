@@ -89,6 +89,9 @@ Papyrus::Application.routes.draw do
       get :unblock
       get :reactivate
       get :complete_orientation
+
+      post :enroll_in_courses
+      delete :withdraw_from_course
     end
   end
 

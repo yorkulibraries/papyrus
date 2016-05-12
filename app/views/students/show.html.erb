@@ -6,12 +6,13 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<%= render partial: "students/shared/items_list", locals: { student: @student } %>
+		<%= render partial: "students/shared/items_list", locals: { student: @student } %>		
+		<%= render partial: "students/shared/access_codes", locals: { student: @student } %>
 	</div>
 	<div class="col-md-4">
 		<div class="access-codes">
+			<%= render partial: "students/shared/course_list", locals: { student: @student } %>
 			<%= render partial: "students/shared/documents", locals: { student: @student } %>
-			<%= render partial: "students/shared/access_codes", locals: { student: @student } %>
 		</div>
 	</div>
 </div>
