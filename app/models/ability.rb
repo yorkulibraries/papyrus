@@ -13,7 +13,7 @@ class Ability
 
       can :manage, Document
 
-      can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course, ScanList]
+      can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course, ScanList, ScanItem]
       can :show, :stats
 
       can :login_as, :student
@@ -21,7 +21,7 @@ class Ability
     elsif user.role == User::COORDINATOR
       can :show, :dashboard
 
-      can :manage, [ScanList, Document]
+      can :manage, [ScanList, Document, ScanItem]
       can :manage, [Term, Course]
       can [:read, :create, :update], AcquisitionRequest
       can :manage, AccessCode
@@ -39,7 +39,7 @@ class Ability
 
       can :read, Document
 
-      can :manage, [ScanList]
+      can :manage, [ScanList, ScanItem]
       can :manage, [Term, Course]
       can [:read, :create], AcquisitionRequest
       can :manage, AccessCode
@@ -51,11 +51,11 @@ class Ability
     elsif user.role == User::PART_TIME
       can :show, :dashboard
 
-      can [:create, :read, :update], [Item, Note, Course]
+      can [:create, :read, :update], [Item, Note, Course, ScanList, ScanItem]
       can [:assign_to_students, :assign_many_to_student, :withhold_from_student, :courses], Item
       can [:assign_to_item, :add_item, :remove_item], Course
       can :manage, ItemConnection
-      can :read,  [Student, Term, Course]
+      can :read,  [Student, Term, Course, ScanList, ScanItem]
       can :login_as, :student
       can :create, Attachment
       can :get_file, Attachment

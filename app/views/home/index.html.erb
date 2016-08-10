@@ -2,7 +2,34 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<%= panel(title: "Recent Items", icon: "book") do  %>
+		<%= panel(title: "Your Scan Lists", icon: "list") do %>
+			<table class="table" id="scan_lists">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Status</th>
+						<th>Assigned To</th>
+						<th>Items #</th>
+						<th>Created</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% if @scan_lists.size == 0 %>
+						<tr>
+							<td colspan="5">
+								There are no scan lists assigned to you right now.
+							</td>
+						</tr>
+					<% end %>
+
+					<% @scan_lists.each do |scan_list| %>
+						<%= render partial: scan_list, locals: { show: "tr" } %>
+					<% end %>
+				</tbody>
+			</table>
+		<% end %>
+
+		<%= panel(title: "Recent Items", icon: "book", styles:"panel-info") do  %>
 
 			<table class="table">
 				<tr>
@@ -38,12 +65,12 @@
 		<% end %>
 	</div>
 	<div class="col-md-6">
-		<%= panel(title: "My Students", icon: "users") do  %>
+		<%= panel(title: "My Students", icon: "users", styles:"panel-warning") do  %>
 			<ul class="list-unstyled">
 				<% @students.each do |student| %>
 					<%= render student, show: "li" %>
 				<% end %>
-			</ul>			
+			</ul>
 		<% end %>
 	</div>
 </div>

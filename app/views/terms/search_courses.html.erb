@@ -2,20 +2,25 @@
 <% title_html do %>
 		<h1><small>Searching Courses</small></h1>
 <% end %>
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Terms and Courses", icon: "university", styles: "panel-success term-panel") do %>
 
-<form action="<%= search_courses_terms_path %>" class="form-search well">
-	<div class="omni_search box-shadow round">
-		<input type="text" name="q" class="input-xlarge search-query" value="<%= params[:q] %>" placeholder="Search Course Code or Name"/>
-		<input type="submit" value="Search" class="btn btn-small"/>
+
+			<%= render "terms/shared/menu" %>
+
+			<div class="hide"><%= @courses.to_sql %></div>
+
+			<h5>Found <%= pluralize(@courses.count, "Course") %> for <strong><%= @query%></strong></h5>
+
+			<div class="courses">
+				<% @courses.each do |course| %>
+					<%= render partial: course, locals: { show: "div" } %>
+					<br/>
+				<% end %>
+
+			</div>
+
+		<% end %>
 	</div>
-</form>
-
-<%= @courses.to_sql %>
-Found <%= pluralize(@courses.count, "Course") %> for <strong><%= @query%></strong>
-<div class="courses">
-	<% @courses.each do |course| %>
-		<%= render :partial => course %>
-		<br/>
-	<% end %>
-
 </div>
