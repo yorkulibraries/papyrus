@@ -1,0 +1,14 @@
+<div id="expired_items" class="hide">
+  <h4>Expired Items</h4>
+  <ul class="list-unstyled">
+    <%= blank_slate(@expired_items,
+        title: "There are no expired items.", icon: "file red",
+        description: "Once items expire, they will appear in this list")
+      %>
+
+    <% @expired_items.each do |item| %>
+      <% item.expired = true %>
+      <%= render item, show: "li" %>
+    <% end %>
+  </ul>
+</div>

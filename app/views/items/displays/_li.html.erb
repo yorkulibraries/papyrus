@@ -36,16 +36,20 @@
         <i class="fa fa-download"></i> Download <%= pluralize(item.attachments.size, "file")%>
         </a>
 
+        <% if item.expired %>
+          Expired Item
+        <% else %>
+          <% connection = item.item_connections.current.find_by_student_id(@student.id) %>
+          <% if connection %>
 
-        <% connection = item.item_connections.current.find_by_student_id(@student.id) %>
-        <% if connection %>
+            <span class="trivial">
+              <%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
+              <%= "Unlimited Access" unless connection.expires_on %>
+            </span>
 
-          <span class="trivial">
-            <%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
-            <%= "Unlimited Access" unless connection.expires_on %>
-          </span>
-
+          <% end %>
         <% end %>
+
 
     </div>
 
