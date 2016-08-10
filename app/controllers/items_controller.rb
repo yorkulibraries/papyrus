@@ -68,21 +68,30 @@ class ItemsController < ApplicationController
     end
   end
 
+  def renew_access
+    @student = params[:student_id]
+    @item = Item.find(params[:id])
+  end
+  
+
   def assign_many_to_student
-    student = Student.active.find(params[:student_id])
+    @student = Student.active.find(params[:student_id])
     item_ids = params[:item_ids]
     date = params[:expires_on][:date] if params[:expires_on]
 
-    items = Array.new
+    @items = Array.new
     item_ids.split(",").each do |id|
-      item = Item.find(id)
-      item.assign_to_student(student, date)
-      items << item
+      i = Item.find_by_id(id)
+      i.assign_to_student(@student, date)
+      @items << i
     end
 
-    StudentMailer.items_assigned_email(student, items).deliver_later
+    StudentMailer.items_assigned_email(@student, @items).deliver_later
 
-    redirect_to student, notice: "Assigned items to this student"
+    respond_to do |format|
+      format.html { redirect_to @student, notice: "Assigned items to this student" }
+      format.js
+    end
   end
 
   def withhold_from_student

@@ -1,0 +1,5 @@
+$('body #renew_access_form_holder').remove();
+$("body").append("<div id='renew_access_form_holder'></div>");
+
+$('#renew_access_form_holder').prepend('<%=escape_javascript render("items/renew_form") %>');
+$("#renew_item_access_form").modal('show');

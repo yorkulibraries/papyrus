@@ -20,10 +20,10 @@ class Student < User
   has_many :current_items, -> { where("item_connections.expires_on >= ? OR item_connections.expires_on IS ?", Date.today, nil) }, through: :item_connections, source: :item
   has_many :expired_items, -> { where("item_connections.expires_on < ?", Date.today) }, through: :item_connections, source: :item
 
+
   belongs_to :created_by, :foreign_key => "created_by_user_id", class_name: "User"
 
   has_many :documents, as: :attachable
-
   ## ATTRIBUTES ##
   accepts_nested_attributes_for :student_details, allow_destroy: true
 

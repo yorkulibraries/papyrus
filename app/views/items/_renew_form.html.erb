@@ -1,0 +1,26 @@
+<div class="modal" id="renew_item_access_form" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_tag assign_many_to_student_items_path(student_id: @student), remote: true do |f| %>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Renew Item For Another Term</h4>
+      </div>
+      <div class="modal-body">
+        <p>Renew this item for a another term</p>
+        <strong><%= @item.title %></strong>
+        <hr/>
+        <p>New Expiration Term</p>
+        <%= collection_select(:expires_on, :date, Term.active, :end_date, :name, options ={ prompt: " Never"}, class: "terms form-control") %>
+        <input type="hidden" name="item_ids[]" value="<%= @item.id %>"/>
+
+      </div>
+      <div class="modal-footer">
+        <%= submit_tag "Renew This Item", class: "btn btn-success" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -69,17 +69,26 @@ class Item < ActiveRecord::Base
 
 
   def assign_to_student(student, expire_on = nil)
-     existing_connection = ItemConnection.where("student_id = ? AND item_id = ? AND (expires_on >= ? OR expires_on IS ?)", student.id, self.id, Date.today, nil).first
+    existing_connection = ItemConnection.where("student_id = ? AND item_id = ? AND (expires_on >= ? OR expires_on IS ?)", student.id, self.id, Date.today, nil).first
 
-     # if we have an item_connection that has been expired, just return
-     return existing_connection unless existing_connection == nil
+    # if we have an item_connection that has been expired, update it
+    if existing_connection
+     existing_connection.audit_comment = "Renewing until #{expire_on}"
+     existing_connection.expires_on = expire_on
 
+     unless expire_on.nil?
+       existing_connection.save
+     end
+
+    else
+     # No existing conneciton, make a new one.
      connection = ItemConnection.new
      connection.student = student
      connection.expires_on = expire_on unless expire_on.nil?
      connection.item = self
      connection.audit_comment = "Assigned - #{self.title}"
      connection.save
+    end
   end
 
   def withhold_from_student(student)

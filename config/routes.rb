@@ -96,6 +96,7 @@ Papyrus::Application.routes.draw do
   end
 
   resources :items do
+    get 'renew_access', on: :member
     post 'assign_to_students', on: :member
     post 'assign_many_to_student', on: :collection
     delete 'withhold_from_student', on: :member

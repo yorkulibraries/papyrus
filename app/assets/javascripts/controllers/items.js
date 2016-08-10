@@ -57,6 +57,15 @@ $(document).ready(function() {
 
   });
 
+
+  $("#show_expired_items_list").click(function(){
+    $("#items").hide();
+    $("#expired_items").removeClass("hide");
+    $("#show_current_items_list").removeClass("hide");
+    $(this).addClass("hide");
+    return false;
+  });
+
 });
 
 function setup_item_token_input(id, url, token_limit) {

@@ -1,8 +1,17 @@
 <%= panel(title: "Assigned Items", icon: "book", title_class: "text-center", styles:"panel-info") do %>
 
   <% unless student.inactive? %>
+    <a href="#expired_items" id="show_expired_items_list" class="small trivial pull-right">
+      Show expired items
+    </a>
+    <a href="<%= student_path(@student) %>" data-disable-with="Loading current items..." 
+      id="show_current_items_list" class="small trivial pull-right hide">
+      Show current items
+    </a>
     <a data-toggle="modal" href="#assign_items_modal" class="btn btn-sm btn-primary">
-      <i class="fa-plus fa"></i> Assign Items</a>
+      <i class="fa-plus fa"></i> Assign Items
+    </a>
+
   <% end %>
   <hr/>
   <ul class="list-unstyled" id="items">
@@ -16,6 +25,19 @@
     <% end %>
   </ul>
 
+  <div id="expired_items" class="hide">
+    <h4>Expired Items</h4>
+    <ul class="list-unstyled">
+      <%= blank_slate(@expired_items,
+          title: "There are no expired items.", icon: "file red",
+          description: "Once items expire, they will appear in this list")
+        %>
+
+      <% @expired_items.each do |item| %>
+        <%= render item, show: "li" %>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <div id="assign_items_modal" class="modal modal-fade">

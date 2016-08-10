@@ -12,6 +12,11 @@
         data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm", method: :delete, title: "Remove Access" do %>
         &times;
       <% end %>
+        <br/>
+        <a href="<%= renew_access_item_path(item, student_id: @student.id)%>" data-remote="true"
+          title="Renew access" class="btn btn-xs btn-success">
+          <i class="fa-recycle fa fa-fw"></i>
+        </a>
       </div>
     <% end %>
 
@@ -39,6 +44,7 @@
             <%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
             <%= "Unlimited Access" unless connection.expires_on %>
           </span>
+
         <% end %>
 
     </div>
