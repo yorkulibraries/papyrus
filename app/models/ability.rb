@@ -23,7 +23,7 @@ class Ability
 
       can :manage, [ScanList, Document, ScanItem]
       can :manage, [Term, Course]
-      can [:read, :create, :update], AcquisitionRequest
+      can :manage, AcquisitionRequest
       can :manage, AccessCode
       can [:read, :create, :update], [Note]
       can :manage, [Item, Attachment, ItemConnection]
