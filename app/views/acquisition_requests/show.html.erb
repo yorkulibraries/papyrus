@@ -151,10 +151,12 @@
 
 <div class="row">
 	<div class="col-md-12 acquisition_requests">
-		<%= panel(title: "For Item ##{@item.id}", icon: "shopping-cart") do %>
+    <% if @item %>
+  		<%= panel(title: "For Item ##{@item.id}", icon: "shopping-cart") do %>
 
-      <%= render @item, show: "div_info", item: @item  %>
+        <%= render @item, show: "div_info", item: @item  %>
 
+      <% end %>
     <% end %>
   </div>
 </div>
