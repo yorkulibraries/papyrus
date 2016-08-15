@@ -3,6 +3,10 @@ function setup_course_token_input(id, url, token_limit) {
     tokenLimit: token_limit,
     hintText: "Type the course name to search",
     zindex: 9999999,
+    allowTabOut: true,
+    onReady: function() {
+      $("#token-input-" + id).attr("tabindex", "1");
+    },
     resultsFormatter: function(course) {
       var line1 = "<div class='course-token-view results-view'>" + course.name;
       var line2 = "<span class='meta'>" + safe(course.term) + "</span></div>";
@@ -21,6 +25,6 @@ function setup_course_token_input(id, url, token_limit) {
 $(document).ready(function() {
   $("a.term").click(function() {
     $(this).children("i.fa-spin").removeClass("hide");
-    history.pushState({}, null, $(this).attr("href"));    
+    history.pushState({}, null, $(this).attr("href"));
   });
 });

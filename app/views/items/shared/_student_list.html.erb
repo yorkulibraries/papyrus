@@ -30,13 +30,13 @@
 
           <p><input type="text" id="assign-students-list" name="student_ids"/></p>
           <p>Expires at the end of:</p>
-          <%= collection_select(:expires_on, :date, Term.all, :end_date, :name, options ={prompt: " Never"}, class: "terms form-control") %></p>
+          <%= collection_select(:expires_on, :date, Term.all, :end_date, :name, options ={prompt: " Never"}, tabindex: "2", class: "terms form-control") %></p>
 
 
         </div>
         <div class="modal-footer">
-          <%= submit_tag "Give Access To These Students", class: "btn btn-success" %>
-          <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+          <%= submit_tag "Give Access To These Students", class: "btn btn-success", tabindex: "3" %>
+          <a href="#" class="btn btn-default" data-dismiss="modal" tabindex="4">Close</a>
         </div>
       <% end %>
   </div>
@@ -49,9 +49,14 @@
 
     $("#assign_students_modal").modal({show: false}).on('shown.bs.modal', function (e) {
       $("#assign-students-list").tokenInput("<%= search_students_path %>", {
-          zindex: 9999999
+          zindex: 9999999,
+          allowTabOut: true,
+          onReady: function() {            
+            $("#token-input-assign-students-list").attr("tabindex", "1");
+          }
       });
     });
+
 
     $(".tooltips").tooltip();
   });

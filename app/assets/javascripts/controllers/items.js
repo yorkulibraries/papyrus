@@ -73,6 +73,10 @@ function setup_item_token_input(id, url, token_limit) {
     tokenLimit: token_limit,
     hintText: "Type the title of your item to search",
     zindex: 9999999,
+    allowTabOut: true,
+    onReady: function() {      
+      $("#token-input-" + id).attr("tabindex", "1");
+    },
     resultsFormatter: function(item) {
       var line1 = "<div class='item-token-view results-view'>" + item.name + "<br/>";
       var line2 = "<span class='meta'>" + safe(item.author) + " | " + safe(item.isbn) +  " | " + safe(item.callnumber) + "</span></div>";
