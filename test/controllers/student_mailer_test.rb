@@ -40,15 +40,18 @@ class StudentMailerTest < ActionMailer::TestCase
   should "send out items assigned email" do
     PapyrusSettings.email_allow = true
 
+    sender = create(:user, email: "sender@sender.com")
+
     student = create(:student, email: "whatever@whatever.com")
     items = create_list(:item, 3)
 
-    email = StudentMailer.items_assigned_email(student, items).deliver_now
+    email = StudentMailer.items_assigned_email(student, items, sender).deliver_now
 
     # Test delivery
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [student.email], email.to
+    assert_equal [sender.email], email.cc
     assert_equal PapyrusSettings.email_item_assigned_subject, email.subject
   end
 
@@ -57,8 +60,9 @@ class StudentMailerTest < ActionMailer::TestCase
 
     student = create(:student, email: "whatever@whatever.com")
     items = create_list(:item, 1, title: "Test")
+    sender = create(:user, email: "sender@sender.com")
 
-    email = StudentMailer.items_assigned_email(student, items).deliver_now
+    email = StudentMailer.items_assigned_email(student, items, sender).deliver_now
 
     assert_equal PapyrusSettings.email_item_assigned_subject, email.subject
   end

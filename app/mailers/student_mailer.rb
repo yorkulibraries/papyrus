@@ -40,7 +40,7 @@ class StudentMailer < ActionMailer::Base
     end
   end
 
-  def items_assigned_email(student, items)
+  def items_assigned_email(student, items, sender)
     @template = Liquid::Template.parse(PapyrusSettings.email_item_assigned_body)  # Parses and compiles the template
 
     @student = student
@@ -54,7 +54,7 @@ class StudentMailer < ActionMailer::Base
     @org_name = PapyrusSettings.org_name
 
     if PapyrusSettings.email_allow && student.email != nil
-      mail(to: student.email, subject: PapyrusSettings.email_item_assigned_subject)
+      mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_item_assigned_subject)
     end
   end
 

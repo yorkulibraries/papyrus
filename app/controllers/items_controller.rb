@@ -57,7 +57,7 @@ class ItemsController < ApplicationController
       student = Student.new
       student.id = id
       @item.assign_to_student(student, date)
-      StudentMailer.items_assigned_email(student, [@item]).deliver_later
+      StudentMailer.items_assigned_email(student, [@item], current_user).deliver_later
     end
 
     @students = Student.where("id IN (?)", student_ids)
@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
     @student = params[:student_id]
     @item = Item.find(params[:id])
   end
-  
+
 
   def assign_many_to_student
     @student = Student.active.find(params[:student_id])
@@ -86,7 +86,7 @@ class ItemsController < ApplicationController
       @items << i
     end
 
-    StudentMailer.items_assigned_email(@student, @items).deliver_later
+    StudentMailer.items_assigned_email(@student, @items, current_user).deliver_later
 
     respond_to do |format|
       format.html { redirect_to @student, notice: "Assigned items to this student" }
