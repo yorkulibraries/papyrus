@@ -32,7 +32,7 @@
 			<% end %>
 
 			<%  if can? :destroy, Attachment %>
-				<%= link_to [attachment.item, attachment], confirm: 'Are you sure?',method: :delete,
+				<%= link_to [attachment.item, attachment], data: { confirm: 'Are you sure?'} ,method: :delete,
 						remote: true, class: "btn btn-sm btn-default red hidden-phone", title: "Delete this file or URL?" do %>
 						<i class="fa fa-trash"></i>
 				<% end %>
