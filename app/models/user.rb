@@ -24,17 +24,17 @@ class User < ActiveRecord::Base
 
   ## RELATIONS
 
-  belongs_to :created_by, :foreign_key => "created_by_user_id"
+  belongs_to :created_by, foreign_key: "created_by_user_id"
 
 
   ## VALIDATIONS
 
   validates_presence_of :first_name, :last_name, :username, :role
   validates_inclusion_of :role, in: ROLE_NAMES, allow_blank: false
-  validates_format_of :username, :with => /\A[-\w\._]+\z/i, :allow_blank => false, :message => "should only contain letters, numbers, or .-_"
+  validates_format_of :username, with: /\A[-\w\._]+\z/i, allow_blank: false, message: "should only contain letters, numbers, or .-_"
   validates_uniqueness_of :username
   validates_presence_of :email
-  validates_format_of :email, :with => /\A[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\z/i
+  validates_format_of :email, with: /\A[-a-z0-9_+\.]+\@([-a-z0-9]+\.)+[a-z0-9]{2,4}\z/i
   validates_uniqueness_of :email
 
   ## SCOPES

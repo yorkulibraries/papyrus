@@ -14,8 +14,7 @@ class ScanItemTest < ActiveSupport::TestCase
     end
 
     should "not create an invalid ScanItem"  do
-
-      assert ! build(:scan_item, summary: nil).valid?, "summary must be present"
+      
       assert ! build(:scan_item, status: nil).valid?, "status must be present"
       assert ! build(:scan_item, item: nil).valid?, "item must be present"
       assert ! build(:scan_item, scan_list: nil).valid?, "scan List must be present"

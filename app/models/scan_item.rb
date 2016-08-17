@@ -17,7 +17,7 @@ class ScanItem < ActiveRecord::Base
   SCAN_STATUSES = [STATUS_NEW, STATUS_DONE]
 
   ## VALIDATIONS
-  validates_presence_of :summary, :status, :created_by, :scan_list, :item
+  validates_presence_of :status, :created_by, :scan_list, :item
 
   ## SCOPES
   scope :completed, -> { where(status: STATUS_DONE) }
@@ -41,7 +41,7 @@ class ScanItem < ActiveRecord::Base
   end
 
   def self.assignees(include_empty_field=false)
-    list = User.transcription_assitants.collect { |u| [u.id, u.name]}
+    list = User.active.not_students.collect { |u| [u.id, u.name]}
     if include_empty_field
       list.unshift(["", "- Unassigned -"])
     end

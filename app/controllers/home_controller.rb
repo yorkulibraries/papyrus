@@ -10,6 +10,8 @@ class HomeController < ApplicationController
     @recently_worked_with_items = Item.recently_worked_with(current_user.id).limit(20)
 
     @scan_lists = ScanList.not_completed.where(assigned_to_id: current_user.id)
+
+    @scan_items = ScanItem.not_completed.where(assigned_to_id: current_user.id)
   end
 
   def active_users

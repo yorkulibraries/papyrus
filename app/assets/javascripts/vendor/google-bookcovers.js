@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var url = "http://books.google.com/books?jscmd=viewapi&bibkeys="
+	var url = "//books.google.com/books?jscmd=viewapi&bibkeys="
 	$("img.google-bookcover").each(function(){
 		var isbn = $(this).data("isbn");
 		url = url + isbn + ",";
@@ -34,7 +34,7 @@ function setup_google_book_covers(details) {
 	});
 
 	$('img.google-bookcover').popover({
-		content: function() { return "<img src=" + $(this).attr("src") + ">"; }, 
+		content: function() { return "<img src=" + $(this).attr("src") + ">"; },
 		html: true,
 		title: "Image Cover"
 	});

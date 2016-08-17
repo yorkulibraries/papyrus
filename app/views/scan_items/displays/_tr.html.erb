@@ -1,0 +1,23 @@
+<tr>
+  <td>
+    <% if scan_item.summary.blank? %>
+      <%= link_to "**No scan item summary provided", scan_item.scan_list %>
+    <% else %>
+      <%= link_to scan_item.summary, scan_item.scan_list %>
+    <% end %>
+  </td>
+  <td>
+    <%= scan_item.due_date %>
+  </td>
+</tr>
+<tr>
+  <td  colspan="2" style="border-top: none;">
+    <% item = scan_item.item %>
+    <div class="item" id="item_<%= item.id %>" data-id="<%=item.id %>">
+      <strong><%=link_to item.title, scan_item.scan_list %></strong><br/>
+      <%= format_field item.author %> | <%= format_field item.edition %>
+      <br/> 	<%= format_field item.callnumber %> | 	<%= format_field item.isbn %>
+    </div>
+  </td>
+
+</tr>

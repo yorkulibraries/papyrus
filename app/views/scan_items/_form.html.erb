@@ -9,7 +9,7 @@
       <%= f.input :summary, label: false, input_html: { placeholder: "Scan Note Summary" } %>
     </div>
     <div class="col-md-2">
-      <%= f.input :assigned_to_id, collection: User.transcription_assitants, label: false, input_html: { placeholder: "Scan Note Summary" }  %>
+      <%= f.input :assigned_to_id, collection: User.active.not_students, label: false, input_html: { placeholder: "Assigned To" }  %>
     </div>
     <div class="col-md-2">
       <%= f.input :due_date, as: :string, label: false, input_html: { placeholder: "Due Date", class: "datepicker" }  %>
