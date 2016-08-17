@@ -19,7 +19,7 @@
 
 			<% if  @search_results == "local" %>
 				<% @results = @items if @items %>
-				Showing <%= @results.count%> / <%= " #{@results.total_count}" %> items
+				<%= page_entries_info @items %>				
 			<% elsif @search_results == BibRecord::VUFIND %>
 				Showing <%= " #{@results.count}" if @results %> closest matches
 			<% elsif @search_results == BibRecord::WORLDCAT %>

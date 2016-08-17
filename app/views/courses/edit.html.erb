@@ -10,6 +10,27 @@
 		<% end %>
 	</div>
 	<div class="col-md-4">
+		<%= panel(title: "Course Syllabus", icon: "list") do %>
+
+				<div class="course_syllabus_menu">
+					<% if @course.syllabus == nil %>
+						<p id="syllabus_file_name">File: No syllabus attached yet.</p>
+						<%= link_to new_course_document_path(@course, name: "Syllabus"), remote: true, class: "btn btn-xs" do %>
+							<i class="fa fa-upload" title="Upload Syllabus"></i> Upload New Syllabus
+						<% end %>
+					<% else %>
+						<p id="syllabus_file_name">File: <%= @course.syllabus.filename %></p>
+						<%= link_to download_document_path(@course.syllabus, filename: @course.syllabus.filename), class: "btn btn-xs", target: "_blank" do %>
+							<i class="fa fa-download" title="Preview/Download Syllabus"></i> Preview Download Syllabus
+						<% end %>
+						<%= link_to edit_course_document_path(@course, @course.syllabus), remote: true, class: "btn btn-xs" do %>
+							<i class="fa fa-upload" title="Upload Syllabus"></i> Update Syllabus
+						<% end %>
+					<% end %>
+				</div>
+
+		<% end %>
+
 		<%= panel(title: "Help", icon: "question") do %>
 			<p>Courses are used to organize items in student view.</p>
 			<p>

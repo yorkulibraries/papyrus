@@ -5,7 +5,7 @@ class SearchController < ApplicationController
     authorize! :search, :items
   end
 
-  def index    
+  def index
   end
 
 
@@ -32,7 +32,7 @@ class SearchController < ApplicationController
 
   def items
     @search_results = params[:type] || "local"
-    page_number = params[:page] ||= 1
+    @page_number = params[:page] ||= 1
 
     case params[:type]
     when BibRecord::WORLDCAT

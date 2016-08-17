@@ -15,6 +15,13 @@
 		$("#course_<%= @document.attachable_id %>").effect("highlight", {}, 3000);
 	}
 
+	// course edit view
+	if ($("#syllabus_file_name").length > 0) {
+		$("#syllabus_file_name").effect("highlight", {}, 3000);
+		$("#syllabus_file_name").empty().html("File: <%= @document.filename %>");
+		$("#syllabus_file_name").append("<br/><span class='trivial small'>Refresh page to see preview link</span>");
+	}
+
 <% else %>
 	$("#new_document_modal").modal("hide");
 	$("#new_document_form_holder").empty();

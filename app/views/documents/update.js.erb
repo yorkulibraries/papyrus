@@ -12,6 +12,12 @@
     $("#course_<%= @document.attachable_id %>").effect("highlight", {}, 3000);
   }
 
+  // course edit view
+  if ($("#syllabus_file_name").length > 0) {
+    $("#syllabus_file_name").effect("highlight", {}, 3000);
+    $("#syllabus_file_name").empty().html("File: <%= @document.filename %>");
+  }
+
 <% else %>
 	$("#edit_document_modal").modal("hide");
 	$("#edit_document_form_holder").empty();
