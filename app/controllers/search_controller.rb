@@ -16,8 +16,9 @@ class SearchController < ApplicationController
     @searching = true
     @query = query
 
-    @students = Student.where("users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ?",
-                              "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")
+    @students = Student.joins(:student_details)
+                .where("users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ? or student_details.student_number = ?",
+                              "%#{query}%", "%#{query}%", "#{query}", "%#{query}%", "#{query}")
                         .where(inactive: inactive_status).page page_number
 
 
