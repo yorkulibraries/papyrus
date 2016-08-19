@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512152447) do
+ActiveRecord::Schema.define(version: 20160819154210) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string   "for"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20160512152447) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "attachments_count",    default: 0, null: false
+    t.integer  "updated_by"
   end
 
   add_index "items", ["unique_id"], name: "index_items_on_unique_id"

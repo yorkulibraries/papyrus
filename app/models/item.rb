@@ -102,4 +102,11 @@ class Item < ActiveRecord::Base
      end
   end
 
+  def touch(user_id = nil, updated_comment="Updated Item or related objects")
+    if user_id
+      self[:updated_by] = user_id
+      self.audit_comment = updated_comment
+      save(validate: false)
+    end
+  end
 end

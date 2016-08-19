@@ -1,12 +1,17 @@
 <div id="scan_item_<%= scan_item.id %>" data-id="<%= scan_item.id %>" class="list-group-item">
   <div class="row">
     <div class="col-md-4">
+
       <% item = scan_item.item %>
-      <div class="item" id="item_<%= item.id %>" data-id="<%=item.id %>">
-        <strong><%=link_to  item.title, item  %></strong><br/>
-        <%= format_field item.author %> | <%= format_field item.edition %>
-        <br/> 	<%= format_field item.callnumber %> | 	<%= format_field item.isbn %>
-      </div>
+      <% if item != nil %>
+        <div class="item" id="item_<%= item.id %>" data-id="<%=item.id %>">
+          <strong><%=link_to  item.title, item  %></strong><br/>
+          <%= format_field item.author %> | <%= format_field item.edition %>
+          <br/> 	<%= format_field item.callnumber %> | 	<%= format_field item.isbn %>
+        </div>
+      <% else %>
+          <p>Item was deleted. ID: <%= scan_item.item_id %></p>
+      <% end %>
       <a href="<%= scan_list_scan_item_path(@scan_list, scan_item) %>" data-remote="true"
         data-method="delete" data-confirm="Are you sure?" class="tiny red">
         <i class="fa fa-fw fa-times"></i> Remove
@@ -21,7 +26,7 @@
           <%= in_place_edit [@scan_list, scan_item], :assigned_to_id, display_as: :assignee,  as: :select, collection:  ScanItem.assignees(true) %>
         </li>
         <li title="Due Date"><i class="fa-li fa fa-calendar"></i>
-          <%= in_place_edit [@scan_list, scan_item], :due_date,  as: :date, inner_class: "datepicker" %>          
+          <%= in_place_edit [@scan_list, scan_item], :due_date,  as: :date, inner_class: "datepicker" %>
         </li>
       </ul>
     </div>
