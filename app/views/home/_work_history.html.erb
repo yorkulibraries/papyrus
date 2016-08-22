@@ -1,0 +1,28 @@
+<table class="table">
+  <tr>
+    <th>Action</th>
+    <th>When</th>
+  </tr>
+  <% if @work_history.size == 0  %>
+    <tr class="item" id="item_<%= item.id %>">
+      <td colspan="4">	You have not worked with Papyrus yet.</td>
+    </tr>
+  <% end %>
+
+  <% @work_history.each_with_index do |event, index| %>
+    <% type = event.auditable_type %>
+
+    <% type = "Item" if type == "ItemConnection" %>
+
+    <tr class="audit_event">
+
+      <td class="audit_comment distinct">
+        <%= link_to event.comment, audit_type_path(event) %>
+      </td>
+      <td class="when">
+        on <%= event.created_at.strftime('%b %e')%>
+      </td>
+    </tr>
+  <% end %>
+
+</table>
