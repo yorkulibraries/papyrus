@@ -24,7 +24,7 @@
 		<% end %>
 
 		<%= panel(title: "Work History", icon: "list", styles:"panel-info") do  %>
-			<%= render partial: "work_history" %>		
+			<%= render partial: "work_history" %>
 		<% end %>
 	</div>
 	<div class="col-md-6">
@@ -46,14 +46,15 @@
 			<% end %>
 		<% end %>
 
-		<%= panel(title: "My Students", icon: "users", styles:"panel-warning") do  %>
-		<%= @timing %><br/>
-		<%= @timing2 %>
-			<ul class="list-unstyled">
-				<% @students.each do |student| %>
-					<%= render student, show: "li" %>
-				<% end %>
-			</ul>
+		<% if @students.size > 0 %>
+			<%= panel(title: "My Students", icon: "users", styles:"panel-warning") do  %>
+
+				<ul class="list-unstyled">
+					<% @students.each do |student| %>
+						<%= render student, show: "li" %>
+					<% end %>
+				</ul>
+			<% end %>
 		<% end %>
 	</div>
 </div>
