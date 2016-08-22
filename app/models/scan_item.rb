@@ -8,7 +8,7 @@ class ScanItem < ActiveRecord::Base
   belongs_to :scan_list, class_name: "ScanList"
 
   ## AUDIT TRAIL
-  audited
+  audited associated_with: :scan_item
 
   ## CONSTANTS
   STATUS_NEW = "new"

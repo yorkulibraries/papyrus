@@ -83,6 +83,13 @@ class User < ActiveRecord::Base
 
   end
 
+
+  def work_history(max=20)
+    ## With a new version of Audit, it'll Change to Audited::Audit.where(....)
+    ## Below is for Audited 4.2.x
+    Audited::Adapters::ActiveRecord::Audit.where(user_id: self[:id]).order("created_at desc").limit(max)
+  end
+
   ## CLASS FUNCTIONS
 
 end
