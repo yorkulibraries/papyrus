@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   def index
 
     @students = Student.active.assigned_to(current_user.id).order("student_details.updated_at asc").limit(20)
-    
+
     @work_history = current_user.work_history
 
     @scan_lists = ScanList.not_completed.where(assigned_to_id: current_user.id)

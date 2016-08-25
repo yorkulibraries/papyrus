@@ -38,4 +38,9 @@ class AccessCodeTest < ActiveSupport::TestCase
     assert_equal 2, AccessCode.shared.size, "Two shared ones. "
   end
 
+  should "return false for access code whos expiry date is nil" do
+    ac = create(:access_code, expires_at: nil)
+    assert ac.expired? == false
+  end
+
 end

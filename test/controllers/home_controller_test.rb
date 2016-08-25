@@ -19,7 +19,9 @@ class HomeControllerTest < ActionController::TestCase
 
     students = assigns(:students)
     assert_not_nil students, "Should have students array"
-  
+    assert assigns(:work_history)
+    assert assigns(:scan_lists)
+    assert assigns(:scan_items)
 
     #     TEST THIS LATER
     #     item = create(:item)
