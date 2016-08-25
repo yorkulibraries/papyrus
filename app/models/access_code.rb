@@ -24,7 +24,11 @@ class AccessCode < ActiveRecord::Base
   scope :personal, -> { where(shared: false) }
 
   def expired?
-    self[:expires_at] < Date.today
+    if self[:expires_at] != nil
+      self[:expires_at] < Date.today 
+    else
+      false
+    end
   end
-  
+
 end
