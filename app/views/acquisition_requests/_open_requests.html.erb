@@ -20,11 +20,13 @@
 
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="my_requests">
-        <% @acquisition_requests_grouped.keys.select!{ |r| r[:id] == @current_user.id }.each do |user| %>
-          <% @acquisition_requests.where(requested_by_id: user[:id]).each do |request| %>
-            <%= render partial: "acquisition_requests/partials/open_request_info", locals: { request: request } %>
-          <% end %>
+        <br/>
+        <%= blank_slate @acquisition_requests.where(requested_by_id: @current_user.id), title: "Acquisiton Requests", description: "There are no acquisition requests created by you", icon: "bullhorn" %>
+
+        <% @acquisition_requests.where(requested_by_id:  @current_user.id).each do |request| %>
+          <%= render partial: "acquisition_requests/partials/open_request_info", locals: { request: request } %>
         <% end %>
+
       </div>
       <% @acquisition_requests_grouped.keys.reject{ |r| r[:id] == @current_user.id }.each do |user|  %>
         <div role="tabpanel" class="tab-pane" id="created_by_<%= user[:id] %>">
