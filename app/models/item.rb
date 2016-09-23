@@ -87,7 +87,7 @@ class Item < ActiveRecord::Base
      connection.student = student
      connection.expires_on = expire_on unless expire_on.nil?
      connection.item = self
-     connection.audit_comment = "Assigned - #{self.title}"
+     connection.audit_comment = "Assigned - #{self.title[0...240]}"
      connection.save
     end
   end

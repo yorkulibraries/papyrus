@@ -8,6 +8,7 @@ class AcquisitionsMailer < ActionMailer::Base
 
     @acquisition_request = acquisition_request
     @item = acquisition_request.item
+    @courses = @item.courses.joins(:term).where("terms.end_date >= ?", Date.today)
     @user = current_user
 
     if bookstore

@@ -12,8 +12,7 @@
 
         <div class="row list-group-item-text">
           <div class="col-md-4">
-            <span class="fa fa-calendar fa-fw"></span>
-            <label>Acquired:</label>
+            <span class="fa fa-calendar fa-fw"></span>            
             <%= r.acquired_at.strftime("%b %e, %Y") %>
           </div>
           <div class="col-md-4">
@@ -23,7 +22,7 @@
           </div>
           <div class="col-md-4">
             <span class="fa fa-user fa-fw"></span>
-            <label>Acquired by:</label>
+            <label>By:</label>
             <%= r.acquired_by.name rescue nil %>
           </div>
 

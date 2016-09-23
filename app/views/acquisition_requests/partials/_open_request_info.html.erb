@@ -1,0 +1,25 @@
+<a class="list-group-item" href="<%= acquisition_request_path(request) %>">
+  <h5 class="list-group-item-heading"><%= request.item.title rescue nil%></h5>
+  <div class="row list-group-item-text">
+
+    <div class="col-md-2">
+      <span class="fa fa-calendar fa-fw" title="Requested"></span>
+      <%= request.created_at.strftime("%b %e, %Y") %>
+    </div>
+    <div class="col-md-3">
+      <span class="fa fa-question-circle fa-fw"></span>
+      <label>Reason:</label>
+      <%= request.acquisition_reason %>
+    </div>
+    <div class="col-md-3">
+      <span class="fa fa-user fa-fw"></span>
+      <label>By:</label>
+      <%= request.requested_by.name %>
+    </div>
+    <div class="col-md-4">
+      <span class="fa fa-sticky-note fa-fw"></span>
+      <%= request.note %>
+    </div>
+  </div>
+
+</a>

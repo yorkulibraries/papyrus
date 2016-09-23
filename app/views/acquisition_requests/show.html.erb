@@ -105,9 +105,7 @@
 						You can still: &nbsp;
 						<%= link_to "Acquire Item", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_ACQUIRED),
 								class: "btn btn-xs btn-primary", data: { remote: true } %>
-						&nbsp; or
-						<%= link_to "Cancel Request", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_CANCELLED),
-						 class: "btn btn-sm btn-link red", data: { remote: true }  %>
+
 
 				<% elsif can? :change_status, @acquisition_request %>
 					<p>You acquisitions request is currently <span class="strong"><%= @acquisition_request.status.humanize %></span>.</p>
@@ -118,11 +116,10 @@
 					&nbsp; or &nbsp;
 					<%= link_to "Back Order", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_BACK_ORDERED),
 					 		class: "btn btn-sm btn-default", data: { remote: true }  %>
-					&nbsp; or
-					<%= link_to "Cancel Request", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_CANCELLED),
-					 class: "btn btn-xs btn-link red", data: { remote: true }  %>
 					</p>
 					<p class="small">All actions on this item are recorded in audit trail</p>
+          <%= link_to "Cancel Request", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_CANCELLED),
+           class: "small red", data: { remote: true, confirm: "Are you sure?" }  %>
 				<% end %>
 
 			</div>

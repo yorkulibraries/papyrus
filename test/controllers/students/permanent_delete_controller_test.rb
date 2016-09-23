@@ -18,7 +18,7 @@ class Students::PermanentDeleteControllerTest < ActionController::TestCase
     @student = create(:student)
     assert_difference "Student.count", -1 do
       get :destroy, id: @student.id
-      assert_redirected_to students_permanent_delete_index_path
+      assert_redirected_to students_permanent_delete_index_path(name: @student.name)
     end
   end
 

@@ -20,7 +20,10 @@ td { valign: top; }
 <p>Request Sent By <strong><%= @user.name %> </strong> on <%= Date.today %> </p>
 
 <h3>Item Information</h3>
-<table class="table">
-  <tr>
-</table>
+
 <%= render @item, show: "div_info", item: @item  %>
+
+<h3>Courses</h3>
+<% @courses.each do |course| %>
+  <%= render course, show: "public", course: course  %>
+<% end %>

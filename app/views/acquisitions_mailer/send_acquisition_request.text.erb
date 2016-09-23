@@ -22,3 +22,13 @@ DATE PUBLISHED: <%= format_field @item.published_date %>
 EDITION:        <%= format_field @item.edition %>
 LANGUAGE NOTE:  <%= format_field @item.language_note %>
 PHYSICAL DESC:  <%= format_field @item.physical_description %>
+
+++++++++++++++++++++++++++++
+Course Information
+----------------------------
+
+<% @courses.each do |course| %>
+COURSE NAME: <%= course.title %>
+COURSE CODE: <%= course.code %>
+--------
+<% end %>

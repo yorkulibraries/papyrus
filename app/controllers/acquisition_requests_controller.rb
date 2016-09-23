@@ -4,6 +4,8 @@ class AcquisitionRequestsController < ApplicationController
 
   def index
     @acquisition_requests = AcquisitionRequest.open.order("created_at desc")
+    @acquisition_requests_grouped = @acquisition_requests.group_by { |r|  { name: r.requested_by.name, id: r.requested_by.id } }
+  
     @recently_acquired = AcquisitionRequest.acquired.limit(40).order("acquired_at desc")
     @recently_cancelled = AcquisitionRequest.cancelled.limit(10).order("cancelled_at desc")
     @back_ordered = AcquisitionRequest.back_ordered.order("back_ordered_until desc")
@@ -37,7 +39,7 @@ class AcquisitionRequestsController < ApplicationController
 
   def create
     @acquisition_request = AcquisitionRequest.new(acquisition_request_params)
-    @acquisition_request.audit_comment = "Created an acquisition item for #{@acquisition_request.item.title}"
+    @acquisition_request.audit_comment = "Created an acquisition item for Item #: #{@acquisition_request.item.id}"
     @acquisition_request.item = Item.find(acquisition_request_params[:item_id])
     @acquisition_request.requested_by = current_user
 
@@ -53,7 +55,7 @@ class AcquisitionRequestsController < ApplicationController
   end
 
   def update
-    @acquisition_request.audit_comment = "Updated an acquisition request for #{@acquisition_request.item.title}"
+    @acquisition_request.audit_comment = "Updated an acquisition request for Item #: #{@acquisition_request.item.id}"
     respond_to do |format|
       if @acquisition_request.update(acquisition_request_params)
         format.html { redirect_to acquisition_request_path(@acquisition_request), notice: 'Acquisition Request was successfully updated.' }
@@ -66,7 +68,7 @@ class AcquisitionRequestsController < ApplicationController
   end
 
   def destroy
-    @acquisition_request.audit_comment = "Removed acquisition_request #{@acquisition_request.item.title}"
+    @acquisition_request.audit_comment = "Removed acquisition_request for Item #: #{@acquisition_request.item.id}"
     @acquisition_request.destroy
     respond_to do |format|
       format.html { redirect_to acquisition_requests_url }
