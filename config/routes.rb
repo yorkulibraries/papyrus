@@ -1,5 +1,13 @@
 Papyrus::Application.routes.draw do
 
+  namespace :students do
+  get 'permanent_delete/show'
+  end
+
+  namespace :students do
+  get 'permanent_delete/destroy'
+  end
+
   get "stats" => "stats#index"
   get "stats/assigned_students" =>"stats#assigned_students"
   get "stats/item_usage" => "stats#item_usage"
