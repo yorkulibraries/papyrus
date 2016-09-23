@@ -107,7 +107,8 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @courses_grouped = @item.courses.group_by { |c| { name: c.term.name, id: c.term.id } }
+    #@courses_grouped = @item.courses.group_by { |c| { name: c.term.name, id: c.term.id, end_date: c.term.end_date } }
+    @courses_grouped = @item.courses.joins(:term).where("terms.end_date >= ?", Date.today).group_by { |c| { name: c.term.name, id: c.term.id, end_date: c.term.end_date } }
   end
 
   def new
