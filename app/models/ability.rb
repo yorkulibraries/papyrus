@@ -8,6 +8,7 @@ class Ability
     if user.role == User::ADMIN
       can :manage, :all
     elsif user.role == User::MANAGER
+      can :perma_destroy, :student
       can :show, :dashboard
       can :manage, [Announcement, AcquisitionRequest]
 

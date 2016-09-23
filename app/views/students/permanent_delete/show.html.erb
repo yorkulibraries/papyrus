@@ -1,2 +1,17 @@
-<h1>Students::PermanentDelete#show</h1>
-<p>Find me in app/views/students/permanent_delete/show.html.erb</p>
+<% title "Student Record - Destroy Permanently", false %>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Destroy Student Record Permanently", icon: "trash",styles:"panel-danger") do %>
+
+      <%= blank_slate nil, title: "Destroy #{@student.name}'s record?", description: "All student information will be deleted permanently.", icon: "trash red" %>
+
+      <center>
+        <%= link_to "Yes", students_permanent_delete_path(@student), method: :delete, class: "btn btn-large btn-danger", data: {confirm: "Are you sure?"} %>
+        <%= link_to "No", edit_student_path(@student), class: "btn btn-sm btn-default" %>
+
+      </center>
+		<% end %>
+	</div>
+</div>

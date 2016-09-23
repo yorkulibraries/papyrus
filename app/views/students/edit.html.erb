@@ -31,6 +31,13 @@
 			<% end %>
 
 			<p class="alert alert-warning"><span class="strong">Warning:</span> This action can be reversed.</p>
+
+			<hr/>
+			<%  if can?(:perma_destroy, :student) %>
+				<%= link_to students_permanent_delete_path(@student), class: "red" do %>
+					<i class="fa fa-trash"></i> Destroy Student Record Permanently?
+				<% end %>
+			<% end %>
 		<% end %>
 	</div>
 </div>

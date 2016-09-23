@@ -1,0 +1,15 @@
+<% title "Destroyed Student Record - Permanently", false %>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Record Destroyed", icon: "trash",styles:"panel-danger") do %>
+
+      <%= blank_slate nil, title: "#{params[:name]}'s record has been destroyed.", description: "All student information was deleted permanently.", icon: "exclamation red" %>
+
+      <center>
+        <%= link_to "Students List", students_path, class: "btn btn-sm btn-default" %>
+      </center>
+		<% end %>
+	</div>
+</div>

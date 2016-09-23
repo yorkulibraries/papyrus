@@ -1,8 +1,6 @@
 Papyrus::Application.routes.draw do
 
-  namespace :students do
-  get 'permanent_delete/show'
-  end
+
 
   namespace :students do
   get 'permanent_delete/destroy'
@@ -74,7 +72,9 @@ Papyrus::Application.routes.draw do
 
   resources :shared_access_codes, only: [:index, :new, :create, :destroy]
 
-
+  namespace :students do
+    resources :permanent_delete, only: [:index, :show, :destroy]
+  end
 
   resources :students do
     resources :documents
