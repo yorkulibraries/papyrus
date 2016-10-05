@@ -5,7 +5,7 @@ class AcquisitionRequestsController < ApplicationController
   def index
     @acquisition_requests = AcquisitionRequest.open.order("created_at desc")
     @acquisition_requests_grouped = @acquisition_requests.group_by { |r|  { name: r.requested_by.name, id: r.requested_by.id } }
-  
+
     @recently_acquired = AcquisitionRequest.acquired.limit(40).order("acquired_at desc")
     @recently_cancelled = AcquisitionRequest.cancelled.limit(10).order("cancelled_at desc")
     @back_ordered = AcquisitionRequest.back_ordered.order("back_ordered_until desc")
@@ -99,8 +99,9 @@ class AcquisitionRequestsController < ApplicationController
       @acquisition_request.cancelled_at = Time.now
       @acquisition_request.cancelled_by = current_user
       @acquisition_request.audit_comment = "Changed status to #{AcquisitionRequest::STATUS_CANCELLED}"
+      @acquisition_request.cancellation_reason = acquisition_request_params[:cancellation_reason]
 
-      result = @acquisition_request.update(acquisition_request_params)
+      result = @acquisition_request.save(validate: false)
     elsif params[:status] == AcquisitionRequest::STATUS_BACK_ORDERED
       @acquisition_request.back_ordered_by = current_user
       @acquisition_request.status = AcquisitionRequest::STATUS_BACK_ORDERED

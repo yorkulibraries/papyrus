@@ -19,6 +19,9 @@ class StudentMailer < ActionMailer::Base
 
      if PapyrusSettings.email_allow && student.email != nil
        mail( to: student.email, cc: sender.email, subject: PapyrusSettings.email_notification_subject)
+
+       @student.audit_comment = "Sent Notification Email to #{@student.email}"
+       @student.save
      end
    end
 
@@ -37,6 +40,9 @@ class StudentMailer < ActionMailer::Base
 
     if PapyrusSettings.email_allow && student.email != nil
       mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_welcome_subject)
+
+      @student.audit_comment = "Sent to #{@student.email}"
+      @student.save
     end
   end
 
@@ -55,6 +61,9 @@ class StudentMailer < ActionMailer::Base
 
     if PapyrusSettings.email_allow && student.email != nil
       mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_item_assigned_subject)
+
+      @student.audit_comment = "Sent Assigned Items Notice to #{@student.email}"
+      @student.save
     end
   end
 
