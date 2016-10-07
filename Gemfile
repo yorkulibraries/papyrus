@@ -42,7 +42,7 @@ gem 'liquid', '2.6.2'
 gem 'email_validator', "1.4.0"
 gem "rails-settings-cached", "0.4.1"
 gem "audited-activerecord", "4.0.0"
-gem 'remotipart', '~> 1.2' # submit files remotely
+gem 'remotipart', '1.3.1' # submit files remotely
 
 ## EXEL EXPORT ##
 gem "roo", "1.13.2"
