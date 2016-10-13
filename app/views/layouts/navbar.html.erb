@@ -45,6 +45,12 @@
     					</li>
     					<% end %>
 
+              <% if can? :read, Student %>
+              <li class="<%= "active" if controller_name == "students" %>">
+                <a href="<%= students_path %>"><i class="fa fa-fw fa-calendar"></i> Appointments</a>
+              </li>
+              <% end %>
+
 
               <% if can? :read, Term %>
               <li class="<%= "active" if controller_name == "terms"%>">
