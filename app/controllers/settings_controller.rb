@@ -14,6 +14,9 @@ class SettingsController < ApplicationController
   def item
   end
 
+  def courses
+  end
+
   def acquisitions
   end
 
@@ -34,6 +37,8 @@ class SettingsController < ApplicationController
       redirect_to bib_search_settings_path, notice: "Saved Bib Search Settings"
     when "item"
       redirect_to item_settings_path, notice: "Saved Item Settings"
+    when "courses"
+      redirect_to courses_settings_path, notice: "Saved Courses Settings"
     when "system"
       redirect_to system_settings_path, notice: "Saved System Settings"
     when "acquisitions"

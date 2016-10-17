@@ -29,6 +29,7 @@ Papyrus::Application.routes.draw do
     get :item
     get :system
     get :acquisitions
+    get :courses
   end
 
   # Anouncements
