@@ -2,6 +2,8 @@ Papyrus::Application.routes.draw do
 
 
 
+
+
   namespace :students do
   get 'permanent_delete/destroy'
   end
@@ -16,6 +18,8 @@ Papyrus::Application.routes.draw do
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
+
+  resource :course_sync, only: :update
 
   # Scan List & Items
   resources :scan_lists do
