@@ -39,7 +39,7 @@ module Papyrus
 
       if code_list != nil && code_list.size >= FULL_SIZE
         code_list.split(separator).each do |code|
-          if valid?(code.strip)          
+          if valid?(code.strip)
             unique_list.push(unique_code(code.strip))
           end
         end
@@ -56,6 +56,15 @@ module Papyrus
       else
         return code
       end
+    end
+
+
+    def code_year(code)
+      get_value_from_code(code, 0)
+    end
+
+    def code_term(code)
+      get_value_from_code(code, 3)
     end
 
     private
