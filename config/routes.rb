@@ -19,7 +19,7 @@ Papyrus::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
-  resource :course_sync, only: :update
+  post "sync_courses" => "course_sync#sync",  as: :sync_courses
 
   # Scan List & Items
   resources :scan_lists do
