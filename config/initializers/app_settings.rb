@@ -23,7 +23,16 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:course_sync_on_login, true)
   PapyrusSettings.save_default(:course_listing_header, "COURSE_LIST_HEADER")
   PapyrusSettings.save_default(:course_listing_separator, ",")
-  
+
+  PapyrusSettings.save_default(:term_fall_start, "Sep 1")
+  PapyrusSettings.save_default(:term_fall_end, "Dec 31")
+  PapyrusSettings.save_default(:term_winter_start, "Jan 1")
+  PapyrusSettings.save_default(:term_winter_end, "April 30")
+  PapyrusSettings.save_default(:term_year_start, "Sep 1")
+  PapyrusSettings.save_default(:term_year_end, "April 30")
+  PapyrusSettings.save_default(:term_summer_start, "May 1")
+  PapyrusSettings.save_default(:term_summer_end, "Aug 31")
+
 
   ## Items
   PapyrusSettings.save_default(:item_sources, ["Publisher", "AERO", "Student Purchase"])

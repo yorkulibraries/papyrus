@@ -77,24 +77,24 @@ module Papyrus
       case code_term(code).upcase
       when "F"
         term_name = "Fall #{year}"
-        start_date = Date.parse("Sep 1, #{year}")
-        end_date = Date.parse("Jan 15, #{year + 1}")
+        start_date = Date.parse("#{PapyrusSettings.term_fall_start}, #{year}")
+        end_date = Date.parse("#{PapyrusSettings.term_fall_end}, #{year + 1}")
       when "W"
         term_name = "Winter #{year + 1}"
-        start_date = Date.parse("Jan 1, #{year + 1}")
-        end_date = Date.parse("May 15, #{year + 1}")
+        start_date = Date.parse("#{PapyrusSettings.term_winter_start}, #{year + 1}")
+        end_date = Date.parse("#{PapyrusSettings.term_winter_end}, #{year + 1}")
       when "FW", "Y"
         term_name = "Year #{year}-#{year + 1}"
-        start_date = Date.parse("Sep 1, #{year}")
-        end_date = Date.parse("May 15, #{year + 1}")
-      when "S", "SU", "S1", "S2"      
+        start_date = Date.parse("#{PapyrusSettings.term_year_start}, #{year}")
+        end_date = Date.parse("#{PapyrusSettings.term_year_end}, #{year + 1}")
+      when "S", "SU", "S1", "S2"
         term_name = "Summer #{year + 1}"
-        start_date = Date.parse("May 1, #{year + 1}")
-        end_date = Date.parse("Sep 15, #{year + 1}")
+        start_date = Date.parse("#{PapyrusSettings.term_summer_start}, #{year + 1}")
+        end_date = Date.parse("#{PapyrusSettings.term_summer_end}, #{year + 1}")
       else
-        term_name = "Full Year #{year}-#{year + 1}"
-        start_date = Date.parse("Sep 1, #{year}")
-        end_date = Date.parse("Sep 15, #{year + 1}")
+        term_name = "Year #{year}-#{year + 1}"
+        start_date = Date.parse("#{PapyrusSettings.term_year_start}, #{year}")
+        end_date = Date.parse("#{PapyrusSettings.term_year_end}, #{year + 1}")
       end
 
       term = Hash.new
