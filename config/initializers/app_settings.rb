@@ -20,8 +20,10 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   ## Courses
   PapyrusSettings.save_default(:course_code_sample, "2011_AP_ADMS_F_1000__3_A")
   PapyrusSettings.save_default(:course_lookup_url, "http:://your-institution.website/coursecode-lookup")
+  PapyrusSettings.save_default(:course_sync_on_login, true)
   PapyrusSettings.save_default(:course_listing_header, "COURSE_LIST_HEADER")
   PapyrusSettings.save_default(:course_listing_separator, ",")
+  
 
   ## Items
   PapyrusSettings.save_default(:item_sources, ["Publisher", "AERO", "Student Purchase"])

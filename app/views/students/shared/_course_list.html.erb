@@ -8,25 +8,27 @@
     <% end %>
   </ul>
 
-  <%= blank_slate(@courses_grouped, title: "Not entrolled in any courses.", description: "Lookup a course and click entroll.") %>
+  <%= blank_slate(@courses_grouped, title: "Not enrolled in any courses.", description: "Lookup a course and click entroll.") %>
 
-  <hr/>
+  <% if PapyrusSettings.course_sync_on_login == PapyrusSettings::FALSE %>
+    <hr/>
 
-  <h3>Enroll In a Course</h3>
-	<div>
+    <h3>Enroll In a Course</h3>
+  	<div>
 
-		<p>Type the name of the course.</p>
-		<%= form_tag enroll_in_courses_student_path(@student), remote: true do %>
-			<p><input type="text" id="assign-to-course-list" name="course_ids"/></p>
-			<p><%= submit_tag "Enroll in courses", class: "btn btn-primary" %></p>
-		<% end %>
-	</div>
+  		<p>Type the name of the course.</p>
+  		<%= form_tag enroll_in_courses_student_path(@student), remote: true do %>
+  			<p><input type="text" id="assign-to-course-list" name="course_ids"/></p>
+  			<p><%= submit_tag "Enroll in courses", class: "btn btn-primary" %></p>
+  		<% end %>
+  	</div>
 
 
-	<script type="text/javascript">
-	$(document).ready(function () {
-    setup_course_token_input("#assign-to-course-list", "<%= search_courses_terms_path %>", 5)
-	});
-	</script>
+  	<script type="text/javascript">
+  	$(document).ready(function () {
+      setup_course_token_input("#assign-to-course-list", "<%= search_courses_terms_path %>", 5)
+  	});
+  	</script>
+  <% end %>
 
 <% end %>

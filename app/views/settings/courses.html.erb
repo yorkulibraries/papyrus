@@ -14,6 +14,9 @@
 	      <%= f.label :course_code_sample, "Course Code Sample"%>
 	      <%= f.input :course_code_sample, label: false, input_html: { class: "form-control" }%>
 
+				<hr/>
+
+				<%= f.input :course_sync_on_login, as: :radio_buttons, :collection => [ ['Yes', true], ['No', false] ], label: "Sync Courses & Terms When Students Login?" %>
         <%= f.label :course_listing_header, "Course Listing Header"%>
         <%= f.input :course_listing_header, label: false, input_html: { class: "form-control" }%>
         <%= f.label :course_listing_separator, "Course Listing Separator"%>
