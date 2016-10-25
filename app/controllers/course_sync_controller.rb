@@ -49,7 +49,7 @@ class CourseSyncController < ApplicationController
     end
 
 
-    redirect_to student_view_path
+    redirect_to student_view_path, info: "Courses synced"
   end
 
   private

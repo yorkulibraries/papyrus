@@ -119,7 +119,9 @@
 			<hr/>
 			<h4 class="black strong">My Courses</h4>
 			<% request.headers.each do |key, value|   %>
-				<%= key %>: <%= value %><br/>
+				<%  if key.downcase.starts_with?('http') %>
+					<%= key %>: <%= value %><br/>
+				<% end %>
 			<% end %>
 			<hr/>
 			<% @student.courses.each do |course| %>
