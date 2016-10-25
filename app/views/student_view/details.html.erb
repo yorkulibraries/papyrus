@@ -118,6 +118,11 @@
 
 			<hr/>
 			<h4 class="black strong">My Courses</h4>
+
+			C: <%= request.headers[PapyrusSettings.course_listing_header] %><br/>
+			N: <%= request.headers[PapyrusSettings.auth_cas_header_alt] %>
+			<br/>
+
 			<% request.headers.each do |key, value|   %>
 				<%  if key.downcase.starts_with?('http') %>
 					<%= key %>: <%= value %><br/>
