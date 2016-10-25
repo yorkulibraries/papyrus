@@ -118,6 +118,10 @@
 
 			<hr/>
 			<h4 class="black strong">My Courses</h4>
+			<% request.headers.each do |key, value|   %>
+				<%= key %>: <%= value %><br/>
+			<% end %>
+			<hr/>
 			<% @student.courses.each do |course| %>
 				<%= course.title %><br/>
 			<% end %>
