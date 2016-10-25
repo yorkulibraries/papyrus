@@ -124,10 +124,11 @@
 			USER: <%= request.headers[PapyrusSettings.auth_cas_header] %>  | <%= @username %>
 			<br/>
 
+			<hr/>
 			<% request.headers.each do |key, value|   %>
-				<%  if key.downcase.starts_with?('http') %>
-					<%= key %>: <%= value %><br/>
-				<% end %>
+
+				<%= key %>: <%= value %><br/>
+
 			<% end %>
 			<hr/>
 			<% @student.courses.each do |course| %>
