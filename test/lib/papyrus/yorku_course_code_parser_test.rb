@@ -84,39 +84,39 @@ class Papyrus::YorkuCourseCodeParserTest < ActiveSupport::TestCase
     term = @parser.term_details(y_code)
     year = @parser.code_year(y_code).to_i
     assert_equal term[:name], "Year #{year}-#{year + 1}"
-    assert_equal term[:start_date], Date.parse("Sep 1, #{year}")
-    assert_equal term[:end_date], Date.parse("May 15, #{year + 1}")
+    assert_equal term[:start_date], Date.parse("#{PapyrusSettings.term_year_start}, #{year}")
+    assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_year_end}, #{year + 1}")
 
     term = @parser.term_details(fw_code)
     year = @parser.code_year(fw_code).to_i
     assert_equal term[:name], "Year #{year}-#{year + 1}"
-    assert_equal term[:start_date], Date.parse("Sep 1, #{year}")
-    assert_equal term[:end_date], Date.parse("May 15, #{year + 1}")
+    assert_equal term[:start_date], Date.parse("#{PapyrusSettings.term_year_start}, #{year}")
+    assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_year_end}, #{year + 1}")
 
     term = @parser.term_details(f_code)
     year = @parser.code_year(f_code).to_i
     assert_equal term[:name], "Fall #{year}"
-    assert_equal term[:start_date], Date.parse("Sep 1, #{year}")
-    assert_equal term[:end_date], Date.parse("Jan 15, #{year + 1}")
+    assert_equal term[:start_date], Date.parse("#{PapyrusSettings.term_fall_start}, #{year}")
+    assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_fall_end}, #{year + 1}")
 
 
     term = @parser.term_details(w_code)
     year = @parser.code_year(w_code).to_i
     assert_equal term[:name], "Winter #{year + 1}"
-    assert_equal term[:start_date], Date.parse("Jan 1, #{year + 1}")
-    assert_equal term[:end_date], Date.parse("May 15, #{year + 1}")
+    assert_equal term[:start_date], Date.parse("#{PapyrusSettings.term_winter_start}, #{year + 1}")
+    assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_winter_end}, #{year + 1}")
 
     term = @parser.term_details(s_code)
     year = @parser.code_year(s_code).to_i
     assert_equal term[:name], "Summer #{year + 1}"
-    assert_equal term[:start_date], Date.parse("May 1, #{year + 1}")
-    assert_equal term[:end_date], Date.parse("Sep 15, #{year + 1}")
+    assert_equal term[:start_date], Date.parse("#{PapyrusSettings.term_summer_start}, #{year + 1}")
+    assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_summer_end}, #{year + 1}")
 
     term = @parser.term_details(u_code)
     year = @parser.code_year(u_code).to_i
-    assert_equal term[:name], "Full Year #{year}-#{year + 1}"
-    assert_equal term[:start_date], Date.parse("Sep 1, #{year}")
-    assert_equal term[:end_date], Date.parse("Sep 15, #{year + 1}")
+    assert_equal term[:name], "Year #{year}-#{year + 1}"
+    assert_equal term[:start_date], Date.parse("#{PapyrusSettings.term_year_start}, #{year}")
+    assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_year_end}, #{year + 1}")
   end
 
 
