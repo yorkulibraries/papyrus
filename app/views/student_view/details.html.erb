@@ -119,18 +119,6 @@
 			<hr/>
 			<h4 class="black strong">My Courses</h4>
 
-			COURSES: <%= request.headers[PapyrusSettings.course_listing_header] %> | <%= @courses %><br/>
-			ALT: <%= request.headers[PapyrusSettings.auth_cas_header_alt] %>  | <%= @alt_username %><br/>
-			USER: <%= request.headers[PapyrusSettings.auth_cas_header] %>  | <%= @username %>
-			<br/>
-
-			<hr/>
-			<% request.headers.each do |key, value|   %>
-
-				<%= key %>: <%= value %><br/>
-
-			<% end %>
-			<hr/>
 			<% @student.courses.each do |course| %>
 				<%= course.title %><br/>
 			<% end %>
