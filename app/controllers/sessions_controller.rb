@@ -29,7 +29,14 @@ class SessionsController < ApplicationController
       user.active_now!(User::ACTIVITY_LOGIN)
 
       if user.role == User::STUDENT_USER
-        redirect_to student_view_path
+
+        # check if using automatic sync, if yes, redirect there first
+        if PapyrusSettings.course_sync_on_login == PapyrusSettings::TRUE
+          redirect_to sync_courses_path
+        else
+          redirect_to student_view_path
+        end
+
       else
         redirect_to root_url, notice: "Logged in!"
       end
