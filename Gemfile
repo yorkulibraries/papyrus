@@ -43,6 +43,7 @@ gem 'email_validator', "1.4.0"
 gem "rails-settings-cached", "0.4.1"
 gem "audited-activerecord", "4.0.0"
 gem 'remotipart', '1.3.1' # submit files remotely
+gem 'fullcalendar-rails', "3.0.0.0"
 
 ## EXEL EXPORT ##
 gem "roo", "1.13.2"

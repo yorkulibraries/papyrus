@@ -124,6 +124,10 @@ GEM
     font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
     formatador (0.2.5)
+    fullcalendar-rails (3.0.0.0)
+      jquery-rails (>= 4.0.5, < 5.0.0)
+      jquery-ui-rails (>= 5.0.2)
+      momentjs-rails (>= 2.9.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     guard (2.13.0)
@@ -198,6 +202,8 @@ GEM
     minitest (5.6.1)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
+    momentjs-rails (2.15.1)
+      railties (>= 3.1)
     multi_json (1.11.2)
     mysql2 (0.4.4)
     nenv (0.3.0)
@@ -364,6 +370,7 @@ DEPENDENCIES
   factory_girl_rails (= 4.5.0)
   faker
   font-awesome-rails (= 4.4.0)
+  fullcalendar-rails (= 3.0.0.0)
   guard-livereload
   guard-minitest (= 2.4.4)
   jbuilder (~> 1.2)
