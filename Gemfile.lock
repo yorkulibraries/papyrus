@@ -384,6 +384,7 @@ DEPENDENCIES
   mini_magick (= 3.7.0)
   minitest (= 5.6.1)
   mocha (= 0.14)
+  momentjs-rails (= 2.15.1)
   mysql2 (= 0.4.4)
   nifty-generators (= 0.4.6)
   populator!

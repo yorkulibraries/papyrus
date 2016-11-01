@@ -1,7 +1,7 @@
 //= require jquery
 //= require best_in_place
 //= require jquery_ujs
-//= require jquery.remotipart 
+//= require jquery.remotipart
 //= require jquery-ui
 //= require best_in_place.jquery-ui
 //= require twitter/bootstrap
@@ -9,11 +9,15 @@
 //= require_tree ./controllers/
 //= require ./vendor/formstone.core.js
 //= require ./vendor/formstone.upload.js
+//= require moment
+//= require fullcalendar
 //= require_self
 
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function() {
+	$('#calendar').fullCalendar();
+
 	$("input[placeholder], textarea[placeholder]").enablePlaceholder({"withPlaceholderClass": "light-text"});
 
 	$('.dropdown-toggle').dropdown();

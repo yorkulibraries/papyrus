@@ -1,9 +1,8 @@
 module Papyrus
-  ## SAMPLE 2016_AP_POLS_Y_1000__6_C_EN_A_LECT_01, 2016_AP_POLS_Y_1000__6_C_EN_A_TUTR_04
+  ## SAMPLE 2016_AP_POLS_Y_1000__6_C_EN_A_LECT_01, 2016_AP_POLS_Y_1000__6_C_EN_A_TUTR_04, 2016_AP_HRM_F_3422__3_B_EN_A_LECT_01
 
   class YorkuCourseCodeParser
-    EXTENDED_SIZE = 37
-    FULL_SIZE = 29
+
     EXTENDED_UNDERSCORE_COUNT = 11
     FULL_UNDERSCORE_COUNT = 9
 
@@ -13,10 +12,8 @@ module Papyrus
       ## nil or empty return false right away
       return false if code == nil || code.size == 0
 
-
-      if code.size == FULL_SIZE || code.size == FULL_SIZE + 1 || code.size == EXTENDED_SIZE || code.size == EXTENDED_SIZE + 1
-        # check if right amount of underscores
-        return true if code.count("_") == FULL_UNDERSCORE_COUNT || code.count("_") == EXTENDED_UNDERSCORE_COUNT
+      if code.count("_") == FULL_UNDERSCORE_COUNT || code.count("_") == EXTENDED_UNDERSCORE_COUNT
+        return true
       end
 
       # doesn't match any, return false right away
@@ -26,20 +23,21 @@ module Papyrus
 
     ## Takes 2016_AP_POLS_Y_1000__6_C_EN_A_LECT_01 and makes it 2016_AP_POLS_Y_1000__6_C_EN_A
     def unique_code(extended_code)
+
       if valid?(extended_code)
-        return extended_code[0..(FULL_SIZE-1)] if extended_code.size == EXTENDED_SIZE
-        return extended_code[0..(FULL_SIZE)] if extended_code.size == EXTENDED_SIZE + 1
-        return extended_code if extended_code.size < EXTENDED_SIZE
-      else
-        return extended_code
+        return extended_code.split("_")[0..FULL_UNDERSCORE_COUNT].join("_")if extended_code.count("_") == EXTENDED_UNDERSCORE_COUNT
+        return extended_code if extended_code.count("_") == FULL_UNDERSCORE_COUNT
       end
+
+      return extended_code
+
     end
 
     ## TAKES A LIST 2016_AP_POLS_Y_1000__6_C_EN_A_LECT_01, 2016_AP_POLS_Y_1000__6_C_EN_A_TUTR_04 and returns 2016_AP_POLS_Y_1000__6_C_EN_A
     def unique_codes_only(code_list, separator=",")
       unique_list = Array.new
 
-      if code_list != nil && code_list.size >= FULL_SIZE
+      if code_list != nil && code_list.split("_").size >= FULL_UNDERSCORE_COUNT
         code_list.split(separator).each do |code|
           if valid?(code.strip)
             unique_list.push(unique_code(code.strip))

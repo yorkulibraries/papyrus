@@ -11,6 +11,9 @@ class Papyrus::YorkuCourseCodeParserTest < ActiveSupport::TestCase
     assert @parser.valid?("2016_AP_POLS_Y_1000__6_C_EN_A_LECT_01"), "should be valid"
     assert @parser.valid?("2016_AP_POLS_Y_1000__6_C_EN_A_TUTR_04"), "Should be valid tutorial"
 
+    assert @parser.valid?("2016_AP_POL_Y_1000__6_C_EN_A_TUTR_04"), "Should be valid tutorial"
+    assert @parser.valid?("2016_AP_HRS_Y_1000__6_C_EN_A"), "Should be valid too"
+
     assert @parser.valid?("2016_AP_POLS_Y_1000__6_C_EN_A"), "should be also be valid, since it's unique"
 
     assert ! @parser.valid?("POLS_2000"), "Not Valid"
@@ -119,6 +122,12 @@ class Papyrus::YorkuCourseCodeParserTest < ActiveSupport::TestCase
     assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_year_end}, #{year + 1}")
   end
 
+  should "Parse courses properly, York Student Example" do
+    list = "2016_AP_HRM_F_3422__3_B_EN_A_LECT_01, 2016_AP_HRM_F_3470__3_C_EN_A_LECT_01, 2016_AP_HRM_F_3490__3_A_EN_A_LECT_01, 2016_AP_HRM_W_4430__3_M_EN_A_LECT_01, 2016_FA_DANC_Y_1205__3_A_EN_A_STDO_01"
+
+    unique_list = @parser.unique_codes_only(list)
+    assert_equal 5, unique_list.size, "Should be five unique"
+  end
 
 
 end

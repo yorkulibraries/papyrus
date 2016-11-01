@@ -1,5 +1,6 @@
 <% title "Dashboard", false %>
 
+
 <div class="row">
 	<div class="col-md-6">
 		<% if @scan_lists.size > 0 %>
@@ -24,6 +25,8 @@
 		<% end %>
 
 		<%= panel(title: "Work History", icon: "list", styles:"panel-info") do  %>
+
+
 			<%= render partial: "work_history" %>
 		<% end %>
 	</div>

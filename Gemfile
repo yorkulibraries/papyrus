@@ -44,6 +44,7 @@ gem "rails-settings-cached", "0.4.1"
 gem "audited-activerecord", "4.0.0"
 gem 'remotipart', '1.3.1' # submit files remotely
 gem 'fullcalendar-rails', "3.0.0.0"
+gem 'momentjs-rails', "2.15.1"
 
 ## EXEL EXPORT ##
 gem "roo", "1.13.2"
