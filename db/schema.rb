@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819154210) do
+ActiveRecord::Schema.define(version: 20161102190012) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string   "for"
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(version: 20160819154210) do
     t.datetime "ends_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "appointments", force: :cascade do |t|
+    t.integer  "student_id"
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "at"
+    t.text     "note"
+    t.boolean  "completed",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "attachments", force: :cascade do |t|
@@ -158,7 +169,6 @@ ActiveRecord::Schema.define(version: 20160819154210) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "attachments_count",    default: 0, null: false
-    t.integer  "updated_by"
   end
 
   add_index "items", ["unique_id"], name: "index_items_on_unique_id"
@@ -286,5 +296,16 @@ ActiveRecord::Schema.define(version: 20160819154210) do
   add_index "users", ["inactive"], name: "index_users_on_inactive"
   add_index "users", ["type", "inactive"], name: "index_users_on_type_and_inactive"
   add_index "users", ["username"], name: "index_users_on_username"
+
+  create_table "work_history", force: :cascade do |t|
+    t.string   "object_type"
+    t.integer  "object_id"
+    t.string   "comment"
+    t.integer  "user_id",     default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "work_history", ["user_id"], name: "u_w_h_index"
 
 end
