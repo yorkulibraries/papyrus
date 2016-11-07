@@ -1,0 +1,68 @@
+<% title "Courses Settings", false %>
+
+
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Courses Settings", icon: "university") do %>
+
+			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+
+			  <h4 class="black">Course Settings</h4>
+
+	      <%= f.label :course_lookup_url, "Course Code Lookup URL"%>
+	      <%= f.input :course_lookup_url, label: false, input_html: { class: "form-control" }%>
+	      <%= f.label :course_code_sample, "Course Code Sample"%>
+	      <%= f.input :course_code_sample, label: false, input_html: { class: "form-control" }%>
+
+				<hr/>
+
+				<%= f.input :course_sync_on_login, as: :radio_buttons, :collection => [ ['Yes', true], ['No', false] ], label: "Sync Courses & Terms When Students Login?" %>
+        <%= f.label :course_listing_header, "Course Listing Header"%>
+        <%= f.input :course_listing_header, label: false, input_html: { class: "form-control" }%>
+        <%= f.label :course_listing_separator, "Course Listing Separator"%>
+        <%= f.input :course_listing_separator, label: false, input_html: { class: "form-control" }%>
+
+				<hr/>
+				<h4 class="black">For Course Sync: Term Start/End Days</h4>
+				<div class="row">
+					<div class="col-md-6"><%= f.input :term_fall_start, label: "Fall Start Day" %></div>
+					<div class="col-md-6"><%= f.input :term_fall_end, label: "Fall End Day" %></div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6"><%= f.input :term_winter_start, label: "Winter Start Day" %></div>
+					<div class="col-md-6"><%= f.input :term_winter_end, label: "Winter End Day" %></div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6"><%= f.input :term_year_start, label: "Year Start Day" %></div>
+					<div class="col-md-6"><%= f.input :term_year_end, label: "Year End Day" %></div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-6"><%= f.input :term_summer_start, label: "Summer Start Day" %></div>
+					<div class="col-md-6"><%= f.input :term_summer_end, label: "Summer End Day" %></div>
+				</div>
+
+
+			  <input type="hidden" name="return_to" value="courses"/>
+				<%= f.submit "Save Settings", class: "btn btn-success" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "Course Settings Help", icon: "question") do %>
+			<dl>
+				<dt>Course Code Lookup URL</dt>
+				<dd>A url where staff can look up different course codes</dd>
+				<dt>Course Code Sample</dt>
+				<dd>An example course code format, used when creating new courses.</dd>
+        <dt>Course Listing Header</dt>
+				<dd>The name of CAS header the has a list of courses a student is enrolled in</dd>
+				<dt>Course Listing Separator</dt>
+				<dd>A separtor string (a comma, semicolon, etc) that is used to separate the list of courses</dd>
+			</dl>
+		<% end %>
+	</div>
+</div>

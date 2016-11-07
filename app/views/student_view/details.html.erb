@@ -102,7 +102,7 @@
 			</div>
 
 			<hr/>
-			<h4 class="black strong">Contact Information</h4>	
+			<h4 class="black strong">Contact Information</h4>
 			<div class="row list-info">
 				<div class="col-md-4"><label>Coordinator Email: </label></div>
 				<div class="col-md-8"><%= format_field @student.details.coordinator.email rescue nil %></div>
@@ -115,6 +115,14 @@
 				<div class="col-md-4"><label>CDS Counsellor Email </label></div>
 				<div class="col-md-8"><%= format_field @student.details.cds_counsellor_email rescue nil %></div>
 			</div>
+
+			<hr/>
+			<h4 class="black strong">My Courses</h4>
+
+			<% @student.courses.each do |course| %>
+				<%= course.title %><br/>
+			<% end %>
+
 		<% end %>
 	</div>
 </div>

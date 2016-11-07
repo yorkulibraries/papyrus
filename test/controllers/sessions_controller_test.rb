@@ -4,6 +4,8 @@ class SessionsControllerTest < ActionController::TestCase
   setup do
     @cas_header = PapyrusSettings.auth_cas_header
     @cas_alt_header = PapyrusSettings.auth_cas_header_alt
+    PapyrusSettings.course_sync_on_login = PapyrusSettings::FALSE
+
   end
   should "FOR CAS: create a new session and log user in if valid user" do
     user = create(:user, username: "someuser")
@@ -30,6 +32,15 @@ class SessionsControllerTest < ActionController::TestCase
     assert_equal User::STUDENT_USER, student.role
     assert_equal student.id, session[:user_id], "Session user id is student's id"
     assert_redirected_to student_view_url, "Redirects to student view url"
+  end
+
+  should "redirect to sync_courses_path first, if course_sync is enabled" do
+    PapyrusSettings.course_sync_on_login = PapyrusSettings::TRUE
+    student = create(:student)
+    @request.env[@cas_header] = student.username
+
+    get :new
+    assert_redirected_to sync_courses_path
   end
 
   should "Show invalid login page if user is not found" do

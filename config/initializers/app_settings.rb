@@ -20,6 +20,19 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   ## Courses
   PapyrusSettings.save_default(:course_code_sample, "2011_AP_ADMS_F_1000__3_A")
   PapyrusSettings.save_default(:course_lookup_url, "http:://your-institution.website/coursecode-lookup")
+  PapyrusSettings.save_default(:course_sync_on_login, true)
+  PapyrusSettings.save_default(:course_listing_header, "COURSE_LIST_HEADER")
+  PapyrusSettings.save_default(:course_listing_separator, ",")
+
+  PapyrusSettings.save_default(:term_fall_start, "Sep 1")
+  PapyrusSettings.save_default(:term_fall_end, "Dec 31")
+  PapyrusSettings.save_default(:term_winter_start, "Jan 1")
+  PapyrusSettings.save_default(:term_winter_end, "April 30")
+  PapyrusSettings.save_default(:term_year_start, "Sep 1")
+  PapyrusSettings.save_default(:term_year_end, "April 30")
+  PapyrusSettings.save_default(:term_summer_start, "May 1")
+  PapyrusSettings.save_default(:term_summer_end, "Aug 31")
+
 
   ## Items
   PapyrusSettings.save_default(:item_sources, ["Publisher", "AERO", "Student Purchase"])

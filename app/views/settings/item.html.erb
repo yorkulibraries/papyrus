@@ -13,14 +13,6 @@
 	      <p class="small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
 
 
-			  <h4 class="black">Course Settings</h4>
-
-	      <%= f.label :course_lookup_url, "Course Code Lookup URL"%>
-	      <%= f.input :course_lookup_url, label: false, input_html: { class: "form-control" }%>
-	      <%= f.label :course_code_sample, "Course Code Sample"%>
-	      <%= f.input :course_code_sample, label: false, input_html: { class: "form-control" }%>
-
-
 			  <input type="hidden" name="return_to" value="item"/>
 				<%= f.submit "Save Settings", class: "btn btn-success" %>
 			<% end %>
