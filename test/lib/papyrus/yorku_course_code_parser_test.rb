@@ -100,7 +100,7 @@ class Papyrus::YorkuCourseCodeParserTest < ActiveSupport::TestCase
     year = @parser.code_year(f_code).to_i
     assert_equal term[:name], "Fall #{year}"
     assert_equal term[:start_date], Date.parse("#{PapyrusSettings.term_fall_start}, #{year}")
-    assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_fall_end}, #{year + 1}")
+    assert_equal term[:end_date], Date.parse("#{PapyrusSettings.term_fall_end}, #{year}")
 
 
     term = @parser.term_details(w_code)

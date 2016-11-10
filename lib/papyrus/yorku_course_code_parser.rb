@@ -76,7 +76,7 @@ module Papyrus
       when "F"
         term_name = "Fall #{year}"
         start_date = Date.parse("#{PapyrusSettings.term_fall_start}, #{year}")
-        end_date = Date.parse("#{PapyrusSettings.term_fall_end}, #{year + 1}")
+        end_date = Date.parse("#{PapyrusSettings.term_fall_end}, #{year}")
       when "W"
         term_name = "Winter #{year + 1}"
         start_date = Date.parse("#{PapyrusSettings.term_winter_start}, #{year + 1}")
