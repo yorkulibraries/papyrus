@@ -60,6 +60,8 @@ gem "mime-types", "1.25.1"
 
 gem 'exception_notification', "4.1.4"
 
+## PROFILING
+gem 'rack-mini-profiler', require: false
 
 ## TESTING && DEVELOPMENT ##
 gem 'guard-livereload', require: false
