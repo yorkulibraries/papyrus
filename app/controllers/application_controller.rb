@@ -42,9 +42,11 @@ class ApplicationController < ActionController::Base
   end
 
   def miniprofiler
-    Rack::MiniProfiler.authorize_request
+    if current_user.role != User::STUDENT_USER
+      Rack::MiniProfiler.authorize_request
+    end
   end
-  
+
   rescue_from CanCan::AccessDenied do |exception|
     if current_user && current_user.role == User::STUDENT_USER
       redirect_to student_view_path, notice: "Access Denied"
