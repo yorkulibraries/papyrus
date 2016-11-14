@@ -2,9 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   check_authorization
 
-  before_filter :login_required
-  before_filter :miniprofiler
 
+  before_filter :login_required, :miniprofiler
 
 
   def current_user
