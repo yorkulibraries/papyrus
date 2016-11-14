@@ -39,7 +39,9 @@ class ApplicationController < ActionController::Base
   end
 
   def miniprofiler
-    Rack::MiniProfiler.authorize_request
+    if current_user.role != User::STUDENT_USER
+      Rack::MiniProfiler.authorize_request
+    end
   end
 
 
