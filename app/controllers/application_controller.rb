@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   check_authorization
 
-  before_filter :login_required
+  before_filter :login_required, :miniprofiler
 
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
@@ -37,6 +37,11 @@ class ApplicationController < ActionController::Base
   def store_target_location
     session[:return_to] = request.url
   end
+
+  def miniprofiler
+    Rack::MiniProfiler.authorize_request
+  end
+
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user && current_user.role == User::STUDENT_USER
