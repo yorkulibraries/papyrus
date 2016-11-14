@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   check_authorization
 
   before_filter :login_required
+  before_filter :miniprofiler
+
+
 
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
@@ -38,6 +41,10 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.url
   end
 
+  def miniprofiler
+    Rack::MiniProfiler.authorize_request
+  end
+  
   rescue_from CanCan::AccessDenied do |exception|
     if current_user && current_user.role == User::STUDENT_USER
       redirect_to student_view_path, notice: "Access Denied"
