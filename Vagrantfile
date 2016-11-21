@@ -123,8 +123,8 @@ Vagrant.configure(2) do |config|
   SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
-    rbenv install 2.1.3
-    rbenv global 2.1.3
+    rbenv install 2.3.0
+    rbenv global 2.3.0
   SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
