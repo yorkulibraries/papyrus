@@ -78,6 +78,9 @@ class Student < User
     return formats_array
   end
 
+  def lab_access_only?
+    formats_array.size == 0
+  end
 
 
   def self.item_counts(student_ids, type = "current")

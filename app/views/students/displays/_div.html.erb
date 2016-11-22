@@ -13,6 +13,9 @@
 						<% if student.inactive? %>
 							<span class="btn btn-danger">Inactive Account</span>
 						<% end %>
+						<% if student.lab_access_only? %>
+							<span class="btn btn-warning">Lab Access Only</span>
+						<% end %>
 
 						<% unless current_page?(student_path(student)) %>
 							<a class="btn btn-sm btn-default" title="Back to Student Details" href="<%= student_path(student) %>">

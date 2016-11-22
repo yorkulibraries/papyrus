@@ -3,6 +3,7 @@
 		<div class="col-sm-6 col-xs-6">
 			<div class="input-group">
         <span class="input-group-addon"><i class="fa fa-search"></i></span>
+				<input type="hidden" name="search_all" value="true"/>				
         <input type="text" placeholder="Search Name or Student Number" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
 			</div>
 		</div>

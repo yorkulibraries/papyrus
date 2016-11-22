@@ -35,6 +35,15 @@ class StudentTest < ActiveSupport::TestCase
 
   end
 
+  should "return true/false for lab access only students" do
+    details = build(:student_details, format_pdf: true)
+    general_student = create(:student, student_details: details)
+    lab_access_student = create(:student)
+
+    assert lab_access_student.lab_access_only?
+    assert ! general_student.lab_access_only?
+  end
+
   should "show csv format properly" do
 
     student = create(:student, name: "test", email: "test@test.com")

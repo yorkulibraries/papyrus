@@ -19,8 +19,12 @@ class SearchController < ApplicationController
     @students = Student.joins(:student_details)
                 .where("users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ? or student_details.student_number = ?",
                               "%#{query}%", "%#{query}%", "#{query}", "%#{query}%", "#{query}")
-                        .where(inactive: inactive_status).page page_number
 
+    if params[:search_all]
+      @students = @students.page page_number      
+    else
+      @students = @students.where(inactive: inactive_status).page page_number
+    end
 
 
     @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")

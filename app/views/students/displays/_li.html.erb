@@ -16,6 +16,14 @@
 
 				<h4 class="media-heading">
 					<a href="<%= student_path(student) %>"><%= student.name %></a>
+
+          <% if student.inactive? %>
+            <span class="label label-danger black tiny"> Inactive</span>
+          <% end %>
+          <% if student.lab_access_only? %>
+            <span class="label label-warning black tiny"> Lab Access Only</span>
+          <% end %>
+
 				</h4>
 
 				<div class="row">

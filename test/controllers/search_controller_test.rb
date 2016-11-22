@@ -47,7 +47,7 @@ class SearchControllerTest < ActionController::TestCase
 
     get :students, q: "vgarry"
     students = assigns(:students)
-    assert_equal 0, students.size, "No one should be found, since vgarry is inactive"
+    assert_equal 0, students.size, "No one should be found, since varry is inactive"
 
     get :students, q: "vg@university.ca", inactive: true
     students = assigns(:students)
