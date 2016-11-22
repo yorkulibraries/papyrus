@@ -42,6 +42,15 @@ class Student < User
     joins("INNER JOIN audits ON (audits.auditable_id = users.id OR audits.associated_id = users.id) AND (audits.auditable_type = 'User' OR audits.associated_type = 'StudentDetails')")
     .where("audits.user_id = ?", user_id).reorder("audits.created_at desc").group("users.id") }
 
+  scope :lab_access_only, -> { joins(:student_details)
+    .where("format_pdf IS NULL OR format_pdf = ?", false)
+    .where("format_kurzweil IS NULL OR format_kurzweil = ?", false)
+    .where("format_daisy IS NULL OR format_daisy = ?", false)
+    .where("format_braille IS NULL OR format_braille = ?", false)
+    .where("format_word IS NULL OR format_word = ?", false)
+    .where("format_large_print IS NULL OR format_large_print = ?", false)
+    .where("format_other IS NULL OR format_other = ?", false)
+    }
 
   def to_csv
     [id, name, email, student_details.student_number, student_details.formats.join(", "), student_details.cds_counsellor, created_at]

@@ -24,6 +24,16 @@ class StudentTest < ActiveSupport::TestCase
 
   end
 
+  should "show lab access students only" do
+    details = build(:student_details, format_pdf: true)
+    create(:student, student_details: details)
+    lab_access_student = create(:student)
+
+
+    assert_equal  2, Student.all.size, "Should be two"
+    assert_equal 1, Student.lab_access_only.size, "Should be one"
+
+  end
 
   should "show csv format properly" do
 
