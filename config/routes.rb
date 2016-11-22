@@ -6,6 +6,7 @@ Papyrus::Application.routes.draw do
 
   namespace :students do
     get 'permanent_delete/destroy'
+    resource :lab_access_only, only: [:show, :destroy], controller: "lab_access_only"
   end
 
   get "stats" => "stats#index"

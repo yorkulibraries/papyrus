@@ -1,0 +1,37 @@
+<% title "Lab Access Only Students", false %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Lab Access Only  Students", icon: "users") do %>
+
+
+			<%= paginate @students %>
+
+			<ul class="list-unstyled">
+				<% @students.each do |student| %>
+					<%= render partial: "students/student", locals: { show: "li", show_gravatar: true, student: student } %>
+				<% end %>
+			</ul>
+
+			<%= paginate @students %>
+
+			<% if @students.size == 0 %>
+				<div class="student blank-slate">
+					<i class="fa fa-user"></i>
+					<h1>Lab Access Only Students</h1>
+					<p>There are no lab access only students registerd in Papyrus right now.</p>
+				</div>
+
+
+			<% end %>
+
+      <hr/>
+      <% if can? :manage, :all %>
+        <%= link_to students_lab_access_only_path, method: :delete, class: "btn btn-danger", date: { confirm: "Are you sure?" } do %>
+          <i class="fa fa-ban"></i> Disable access for students that have do not have a format field filled out?
+        <% end %>
+      <% end %>
+
+		<% end %>
+	</div>
+</div>

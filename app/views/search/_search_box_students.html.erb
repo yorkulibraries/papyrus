@@ -8,11 +8,12 @@
 		</div>
 		<div class="col-sm-4 col-xs-4 results-info">
 			<% if @students %>
-      	<%= page_entries_info @students %>				
+      	<%= page_entries_info @students %>
 			<% end %>
 		</div>
     <div class="col-sm-2 col-xs-2 results-info">
-      <%= link_to "List of Inactive Students", inactive_students_path, class: "btn btn-link" %>
+      <%= link_to "Inactive Students", inactive_students_path, class: "btn btn-link" %>
+			<%= link_to "Lab Access Only Students", students_lab_access_only_path, class: "btn btn-link" %>
     </div>
 	</form>
 
