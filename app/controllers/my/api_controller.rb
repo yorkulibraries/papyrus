@@ -17,7 +17,7 @@ class My::ApiController < ApplicationController
       @student.audit_comment = "#{current_user.name} logged in as this student"
       @student.save(validate: false)
 
-      redirect_to student_view_path, notice: "Logged in as student #{@student.name}"
+      redirect_to my_terms_path, notice: "Logged in as student #{@student.name}"
     else
       redirect_to students_path, error: "No such student found"
     end

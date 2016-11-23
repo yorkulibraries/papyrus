@@ -4,7 +4,7 @@
 	<div class="col-md-12">
 		<%= panel(title: "My Assigned Items", icon: "book") do %>
 			<ul class="nav nav-pills">
-				<li  class="<%= "active" unless params[:course] %>"><%= link_to "All Items", student_view_path, title: "Show all items" %></li>
+				<li  class="<%= "active" unless params[:course] %>"><%= link_to "All Items", my_items_path, title: "Show all items" %></li>
 
 				<% @courses_grouped.sort.each do |group,  courses| %>
 				<li class="dropdown <%= "active" if !params[:course].blank? && params[:course].split("_").first == group %>">
@@ -14,7 +14,7 @@
 					<ul class="dropdown-menu">
 						<% courses.each do |course| %>
 							<li class="<%= "active" if !params[:course].blank? && params[:course].gsub("_", " ") == course %>">
-								<%= link_to "#{course}", student_view_path(:course => course.gsub(" ", "_")), title: "Show assigned items for #{course}" %></li>
+								<%= link_to "#{course}", my_items_path(:course => course.gsub(" ", "_")), title: "Show assigned items for #{course}" %></li>
 						<% end %>
 					</ul>
 				</li>

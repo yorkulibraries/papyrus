@@ -49,7 +49,7 @@ class CourseSyncController < ApplicationController
     end
 
     flash[:notice] = "Courses synced"
-    redirect_to student_view_path
+    redirect_to my_terms_path
   end
 
   private

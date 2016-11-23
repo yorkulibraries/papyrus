@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user && current_user.role == User::STUDENT_USER
-      redirect_to student_view_path, notice: "Access Denied"
+      redirect_to my_terms_path, notice: "Access Denied"
     else
       redirect_to root_url, notice: "Access Denied"
     end

@@ -1,0 +1,128 @@
+<% title "My Details", false %>
+
+
+<div class="row">
+	<div class="col-md-12 student">
+		<%= panel(title: "My Details", icon: "user") do %>
+			<div class="student-header row">
+				<div class="col-md-12">
+					<h3>
+						<%= gravatar(@student.email, style: "mm", force: true, size: "20") %>
+						<%= @student.name %>
+					</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-envelope fa-fw"></span>
+							<label>Email</label>
+							<%= format_field @student.email %>
+						</li>
+						<li>
+							<span class="fa fa-square fa-fw"></span>
+							<label>Student ID</label>
+							<%= format_field @student.details.student_number %>
+						</li>
+						<li>
+							<span class="fa fa-map-signs fa-fw"></span>
+							<label>Coordinator</label>
+							<%= format_field @student.details.coordinator.name rescue nil %>
+						</li>
+						<li>
+							<span class="fa fa-adn fa-fw"></span>
+							<label>Assistant</label>
+							<%= format_field @student.details.assistant.name rescue nil %>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-phone fa-fw"></span>
+							<label>Preferred Phone</label>
+							<%= format_field @student.details.preferred_phone %>
+						</li>
+
+						<li>
+							<span class="fa fa-sticky-note fa-fw"></span>
+							<label>Counsellor</label>
+							<%= format_field @student.details.cds_counsellor %>
+						</li>
+						<li>
+							<span class="fa fa-envelope-o fa-fw"></span>
+							<label>Counsellor Email</label>
+							<%= format_field @student.details.cds_counsellor_email %>
+						</li>
+						<li>
+							<span class="fa fa-language fa-fw"></span>
+							<label>Format</label>
+								<% @student.formats_array.each do | format| %>
+									<span class="tag"><%= format.downcase %></span>
+								<% end %>
+								<% unless @student.details.format_note.blank? %>
+									<a href="#" class="btn btn-link grey popover-link" data-content="<%= @student.details.format_note %>" data-original-title="Format Note" rel="popover">
+										<i class="icon-info-sign"></i>
+									</a>
+								<% end %>
+						</li>
+
+
+					</ul>
+
+				</div>
+				<div class="col-md-4">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-laptop fa-fw"></span>
+							<label>Lab Access:</label>
+							<%= format_field @student.details.accessibility_lab_access? ? "Yes" : "No" %>
+						</li>
+						<li>
+							<span class="fa fa-clone fa-fw"></span>
+							<label>Book Retrieval:</label>
+							<%= format_field @student.details.book_retrieval? ? "Yes" : "No"  %>
+						</li>
+						<li>
+							<span class="fa fa-at fa-fw"></span>
+							<label>Welcome Email:</label>
+							<%  if @student.email_sent_at %>
+								Sent On <strong><%= @student.email_sent_at.strftime(" %b %d, %Y") %></strong>
+							<% elsif  can?(:create, Student) %>
+								<%= link_to send_welcome_email_student_url(@student), method: :post, data: { disable_with: 'sending ...', confirm: "Are you sure?" }, class: "small" do %>
+									<i class="icon-envelope"></i>	Send Welcome Email
+								<% end %>
+							<% end %>
+
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<hr/>
+			<h4 class="black strong">Contact Information</h4>
+			<div class="row list-info">
+				<div class="col-md-4"><label>Coordinator Email: </label></div>
+				<div class="col-md-8"><%= format_field @student.details.coordinator.email rescue nil %></div>
+			</div>
+			<div class="row list-info">
+				<div class="col-md-4"><label>Transciption Assistant Email: </label></div>
+				<div class="col-md-8"><%= format_field @student.details.assistant.email rescue nil %></div>
+			</div>
+			<div class="row list-info">
+				<div class="col-md-4"><label>CDS Counsellor Email </label></div>
+				<div class="col-md-8"><%= format_field @student.details.cds_counsellor_email rescue nil %></div>
+			</div>
+
+			<hr/>
+			<h4 class="black strong">My Courses</h4>
+
+			<% @student.courses.each do |course| %>
+				<%= course.title %><br/>
+			<% end %>
+
+		<% end %>
+	</div>
+</div>

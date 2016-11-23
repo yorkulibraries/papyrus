@@ -23,7 +23,7 @@
 							</a>
 						<% end %>
 
-						<a class="btn btn-sm btn-default" title="Login As Student" href="<%= admin_student_view_path(student) %>">
+						<a class="btn btn-sm btn-default" title="Login As Student" href="<%= my_login_as_student_path(student) %>">
 							<i class="fa fa-share"></i>
 						</a>
 						<a class="btn btn-sm btn-default <%= is_action?("notes", "btn-primary") %>" href="<%= student_notes_path(student) %>" title="Notes">

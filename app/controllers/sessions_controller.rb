@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
         if PapyrusSettings.course_sync_on_login == PapyrusSettings::TRUE
           redirect_to sync_courses_path
         else
-          redirect_to student_view_path
+          redirect_to my_terms_path
         end
 
       else
