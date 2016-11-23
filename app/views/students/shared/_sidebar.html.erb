@@ -59,7 +59,7 @@
 <% if can? :manage, ItemConnection %>
 
 	<p align="center">
-		<a href="<%= admin_student_view_path(@student) %>" class="btn btn-link"><i class="icon-share-alt"></i> Login As Student  </a>
+		<a href="<%= my_login_as_student_path(@student) %>" class="btn btn-link"><i class="icon-share-alt"></i> Login As Student  </a>
 		<a href="#" onclick="$('#message_center').toggle(); return false;" class="btn btn-link"><i class="icon-bullhorn"></i> Message  </a>
 	</p>
 

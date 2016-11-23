@@ -17,7 +17,7 @@ class CourseSyncControllerTest < ActionController::TestCase
     assert_equal 2, @student.courses.size, "Should be two courses"
 
     post :sync
-    #assert_redirected_to student_view_path
+    assert_redirected_to my_terms_path
 
     assert_equal 0, @student.courses.size, "There should be no courses"
 

@@ -31,7 +31,7 @@ class SessionsControllerTest < ActionController::TestCase
     assert Date.today >= student.last_logged_in_at.to_date, "Logged in date should be set"
     assert_equal User::STUDENT_USER, student.role
     assert_equal student.id, session[:user_id], "Session user id is student's id"
-    assert_redirected_to student_view_url, "Redirects to student view url"
+    assert_redirected_to my_terms_url, "Redirects to student view url"
   end
 
   should "redirect to sync_courses_path first, if course_sync is enabled" do
@@ -73,7 +73,7 @@ class SessionsControllerTest < ActionController::TestCase
 
     get :new
 
-    assert_redirected_to student_view_url, "Redirects to student view url"
+    assert_redirected_to my_terms_url, "Redirects to student view url"
     assert_equal student.id, session[:user_id], "Session user id is student's id"
 
 

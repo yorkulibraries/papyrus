@@ -9,7 +9,7 @@ Papyrus::Application.routes.draw do
 
     scope :api do
       get "login_as_student/:id", to: "api#login_as_student", as: "login_as_student"
-      get "logout_as_student", to: "api#login_as_student"
+      get "logout_as_student", to: "api#logout_as_student"
     end
   end
 
