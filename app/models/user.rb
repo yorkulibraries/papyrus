@@ -43,8 +43,9 @@ class User < ActiveRecord::Base
   scope :inactive, -> { where(:inactive => true).order("users.created_at desc") }
   scope :not_students, -> { where("users.role <> '#{STUDENT_USER}'") }
   scope :transcription_assitants, -> { where("users.role <> '#{STUDENT_USER}'").where("users.role <> '#{ADMIN}'") }
+  scope :coordinators, -> { where(role: COORDINATOR) }
 
-  default_scope { order("users.last_name asc") }
+  scope :ordered_by_last_name, -> { order("users.last_name asc") }
 
   ## INSTANCE FUNCTIONS
 

@@ -136,4 +136,18 @@ class StudentTest < ActiveSupport::TestCase
 
   end
 
+  should "list the most recent students" do
+    s1 = create(:student)
+    s2 = create(:student)
+    s3 = create(:student)
+
+
+    assert_equal 2, Student.most_recent_students(2).size, "Should be last two students"
+
+    list = Student.most_recent_students(2)
+
+    assert_equal s3.id, list.first.id
+    assert_equal s2.id, list.last.id
+  end
+
 end

@@ -37,8 +37,8 @@ class UserTest < ActiveSupport::TestCase
     create(:user, last_name: "John")
 
 
-    assert_equal "Andrew", User.first.last_name, "Andrew is first"
-    assert_equal "Zach", User.last.last_name, "Zach is first"
+    assert_equal "Andrew", User.ordered_by_last_name.first.last_name, "Andrew is first"
+    assert_equal "Zach", User.ordered_by_last_name.last.last_name, "Zach is first"
   end
 
   should "create a valid user" do

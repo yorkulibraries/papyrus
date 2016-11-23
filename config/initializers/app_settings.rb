@@ -87,6 +87,11 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:reports_default_interval, 30.days)
   PapyrusSettings.save_default(:reports_fiscal_year_start, "May 1")
 
+  ## Import Settings
+  PapyrusSettings.save_default(:import_auto_assign_coordinator, PapyrusSettings::FALSE)
+  PapyrusSettings.save_default(:import_send_welcome_email_to_student, PapyrusSettings::FALSE)
+  PapyrusSettings.save_default(:import_notify_coordinator, PapyrusSettings::FALSE)
+
 end
 
 # Exception Notification For Production

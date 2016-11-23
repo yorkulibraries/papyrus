@@ -4,6 +4,9 @@ require Rails.root.join("lib", "papyrus", "student_loader.rb")
 class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
   setup do
     @loader = Papyrus::StudentLoader.new
+    PapyrusSettings.import_auto_assign_coordinator = PapyrusSettings::FALSE
+    PapyrusSettings.import_send_welcome_email_to_student = PapyrusSettings::FALSE
+    PapyrusSettings.import_notify_coordinator = PapyrusSettings::FALSE
   end
 
   should "only accept an array" do
@@ -60,4 +63,100 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
     assert_equal "jo@shmo.com", s.email, "Email name changed"
 
   end
+
+  should "auto assign coordinator id form the list, in ordered manner" do
+    c1 = create(:user, role: User::COORDINATOR)
+    c2 = create(:user, role: User::COORDINATOR)
+
+    sample_data = [
+      ["ignore", "first", "line", "by", "default"],
+      ["111111", "jerome", "iron", "j@i.com", "Smitthy"],
+      ["222222", "richard", "hammer", "r@h.com", "Smitthy"],
+      ["333333", "Joseph", "Schmoesef", "jo@shmo.com", "Smitthy"]
+    ]
+
+    PapyrusSettings.import_auto_assign_coordinator = PapyrusSettings::TRUE
+    @loader.from_list(sample_data)
+
+    students = Student.all
+    assert_equal c1.id, students.at(0).details.transcription_coordinator.id, "Should be first coordinator"
+    assert_equal c2.id, students.at(1).details.transcription_coordinator.id, "Should be second coordinator"
+    assert_equal c1.id, students.at(2).details.transcription_coordinator.id, "Should be first coordinator"
+
+  end
+
+  should "not assign coordinaor first, if it was last assigned" do
+    c1 = create(:user, role: User::COORDINATOR)
+    c2 = create(:user, role: User::COORDINATOR)
+
+    details = create(:student_details, transcription_coordinator_id: c1.id)
+    student = create(:student, student_details: details)
+
+    sample_data = [
+      ["ignore", "first", "line", "by", "default"],
+      ["111111", "jerome", "iron", "j@i.com", "Smitthy"],
+      ["222222", "richard", "hammer", "r@h.com", "Smitthy"],
+      ["333333", "Joseph", "Schmoesef", "jo@shmo.com", "Smitthy"]
+    ]
+
+    PapyrusSettings.import_auto_assign_coordinator = PapyrusSettings::TRUE
+    @loader.from_list(sample_data)
+
+    students = Student.all
+    assert_equal c1.id, students.at(0).details.transcription_coordinator.id, "Should be first coordinator"
+    assert_equal c2.id, students.at(1).details.transcription_coordinator.id, "Should be second coordinator"
+    assert_equal c1.id, students.at(2).details.transcription_coordinator.id, "Should be first coordinator"
+    assert_equal c2.id, students.at(3).details.transcription_coordinator.id, "Should be second coordinator"
+  end
+
+  should "send an welcome email to student upon creation if setting is enabled" do
+    c1 = create(:user, role: User::COORDINATOR)
+
+    sample_data = [
+      ["ignore", "first", "line", "by", "default"],
+      ["111111", "jerome", "iron", "j@i.com", "Smitthy"],
+      ["222222", "richard", "hammer", "r@h.com", "Smitthy"],
+      ["333333", "Joseph", "Schmoesef", "jo@shmo.com", "Smitthy"]
+    ]
+
+    ActionMailer::Base.deliveries = []
+
+    PapyrusSettings.import_send_welcome_email_to_student = PapyrusSettings::TRUE
+    PapyrusSettings.email_allow = PapyrusSettings::TRUE
+
+
+    assert ActionMailer::Base.deliveries.empty?, "nothing in the queue"
+
+    @loader.from_list(sample_data,{ coordinator_id: c1.id })
+
+
+    assert_equal 3, ActionMailer::Base.deliveries.size, "3 emails  in the queue, #{PapyrusSettings.import_send_welcome_email_to_student}"
+
+
+  end
+
+  should "send an notification email to coordinator upon creation if setting is enabled" do
+    c1 = create(:user, role: User::COORDINATOR)
+
+    sample_data = [
+      ["ignore", "first", "line", "by", "default"],
+      ["111111", "jerome", "iron", "j@i.com", "Smitthy"],
+      ["222222", "richard", "hammer", "r@h.com", "Smitthy"],
+      ["333333", "Joseph", "Schmoesef", "jo@shmo.com", "Smitthy"]
+    ]
+
+    ActionMailer::Base.deliveries = []
+    
+    PapyrusSettings.import_notify_coordinator = PapyrusSettings::TRUE
+    PapyrusSettings.email_allow = PapyrusSettings::TRUE
+
+
+    assert ActionMailer::Base.deliveries.empty?, "nothing in the queue"
+
+    @loader.from_list(sample_data,{ coordinator_id: c1.id })
+
+    assert_equal 3, ActionMailer::Base.deliveries.size, "3 emails  in the queue, #{PapyrusSettings.import_notify_coordinator}"
+
+  end
+
 end

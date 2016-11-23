@@ -39,6 +39,17 @@ module Papyrus
       # ignore first line if required
       students_list.shift if @options[:ignore_first_line]
 
+      ## GET COORDINATOR LIST, for later processing
+      coordinator_list = User.active.coordinators.collect { |u| u.id }
+      ## ENSURE first id in the list is not the most recent assigned coordinator
+      if Student.most_recent_students(1).size > 0
+        last_assigned_coordinator_id = Student.most_recent_students(1).first.details.transcription_coordinator_id
+        if last_assigned_coordinator_id == coordinator_list.last
+          id = coordinator_list.pop
+          coordinator_list.insert(0, id)
+        end
+      end
+
       status = { updated: [], created: [], errors: [] }
 
       students_list.each do |student_array|
@@ -68,8 +79,20 @@ module Papyrus
           student = Student.new(params)
           student.username = student.details.student_number
           student.role = User::STUDENT_USER
-          student.details.transcription_coordinator_id = @options[:coordinator_id]
-          student.details.transcription_assistant_id = @options[:coordinator_id]
+
+          if PapyrusSettings.import_auto_assign_coordinator == PapyrusSettings::TRUE
+
+            auto_id = coordinator_list.pop # pop the id off the list (Last In )
+
+            student.details.transcription_coordinator_id = auto_id
+            student.details.transcription_assistant_id = auto_id
+
+            coordinator_list.insert(0, auto_id) # put the id back at the end of the list (Last Out)
+          else
+            student.details.transcription_coordinator_id = @options[:coordinator_id]
+            student.details.transcription_assistant_id = @options[:coordinator_id]
+          end
+
           student.details.preferred_phone = "not provided"
           student.created_by_user_id = @options[:created_by_id]
 
@@ -77,6 +100,19 @@ module Papyrus
           if student.save
             status[:created].push student.id
             log "Saved: #{student.id}"
+
+            if PapyrusSettings.import_send_welcome_email_to_student == PapyrusSettings::TRUE
+              student.audit_comment = "Sending welcome email."
+              StudentMailer.welcome_email(student, student.created_by).deliver_later
+              student.email_sent_at = Time.zone.now
+              student.save
+            end
+
+            if PapyrusSettings.import_notify_coordinator == PapyrusSettings::TRUE && student.details.transcription_coordinator
+              body = "A student, #{student.name} has been assigned to you. \n\n -- \nPapyrus"              
+              ReportMailer.mail_report(student.details.transcription_coordinator.email, body, "New Student Assigned").deliver_later
+            end
+
           else
             status[:errors].push [student_array, student.errors.messages]
           end
@@ -84,6 +120,7 @@ module Papyrus
 
 
       end
+
 
       return status ## return status
 

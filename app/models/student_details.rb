@@ -50,6 +50,5 @@ class StudentDetails < ActiveRecord::Base
     self.audit_comment = "Orientation Completed"
     save(valudate: false)
   end
-
-
+  
 end

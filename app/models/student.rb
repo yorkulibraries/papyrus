@@ -31,7 +31,7 @@ class Student < User
   # username, email, name and role are validated in the user class
 
   ## SCOPES ##
-  default_scope  { order("#{table_name}.created_at desc").includes(student_details: { transcription_coordinator: [] }) }
+  default_scope  { includes(student_details: { transcription_coordinator: [] }) }
 
   scope :assigned_to, lambda { |user_id| joins(:student_details).
                               where("student_details.transcription_coordinator_id = ? OR student_details.transcription_assistant_id = ?", user_id, user_id)
@@ -51,6 +51,8 @@ class Student < User
     .where("format_large_print IS NULL OR format_large_print = ?", false)
     .where("format_other IS NULL OR format_other = ?", false)
     }
+
+  scope :most_recent_students, lambda { |lim| order(id: :desc).limit(lim) }
 
   def to_csv
     [id, name, email, student_details.student_number, student_details.formats.join(", "), student_details.cds_counsellor, created_at]

@@ -1,0 +1,41 @@
+<% title "Import Settings", false %>
+
+
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Import Settings", icon: "cog") do %>
+
+			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+			  <h4 class="black">Import Settings</h4>
+
+	      <%= f.label :import_auto_assign_coordinator, "Auto Assign Coordinator"%>
+	      <%= f.input :import_auto_assign_coordinator, label: false, as: :radio_buttons %>
+
+        <hr/>
+
+        <%= f.label :import_send_welcome_email_to_student, "Send Welcome Emailt To Student"%>
+	      <%= f.input :import_send_welcome_email_to_student, label: false, as: :radio_buttons %>
+
+        <%= f.label :import_notify_coordinator, "Notify Coordinator, when new student is created"%>
+	      <%= f.input :import_notify_coordinator, label: false, as: :radio_buttons %>
+
+
+			  <input type="hidden" name="return_to" value="import"/>
+				<%= f.submit "Save Settings", class: "btn btn-success" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "Import Settings Help", icon: "question") do %>
+			<dl>
+				<dt>Auto Assign Coordinator</dt>
+				<dd>Should a coordinator be assigned automatically when new students are imported</dd>
+				<hr/>
+				<dt>Send Welcome Email To Student</dt>
+				<dd>Send a welcome email to student when account is created through import?</dd>
+				<dt>Notify Coordinator</dt>
+				<dd>Should the coordinator be notified when new student is created?</dd>
+			</dl>
+		<% end %>
+	</div>
+</div>

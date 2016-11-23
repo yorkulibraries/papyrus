@@ -37,6 +37,7 @@ class StudentMailer < ActionMailer::Base
     @date_short = Date.today.strftime("%m-%d-%Y")
     @app_name = PapyrusSettings.app_name
     @org_name = PapyrusSettings.org_name
+    
 
     if PapyrusSettings.email_allow && student.email != nil
       mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_welcome_subject)
