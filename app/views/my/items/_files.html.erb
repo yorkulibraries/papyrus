@@ -1,0 +1,30 @@
+<div class="hide individual_files" id="attachments_<%=item.id%>">
+	<ol title="Individual Files">
+		<% item.attachments.files.available.full_text.each do |attachment| %>
+		<li>
+			<span title="extension" class="label label-success extension hidden-phone"><%= attachment.file.file.extension %></span>
+			<a href="<%= get_file_item_attachment_url(item, attachment) if attachment.file? %>" title="Download full text <%= attachment.file.file.extension %> file">
+			 	<%= attachment.name %>
+			</a>
+
+			<span title="file size" class="small text-muted  hidden-phone"><%= number_to_human_size attachment.file.file.size %> </span>
+			<span title="full text" class="label label-inverse hidden-phone">full text</span>
+		</li>
+		<% end %>
+
+		<% item.attachments.files.available.not_full_text.each do |attachment| %>
+		<li>
+			<span title="extension" class="label label-success extension  hidden-phone"><%= attachment.file.file.extension %></span>
+			<a href="<%= get_file_item_attachment_url(item, attachment) if attachment.file? %>" title="Download <%= attachment.file.file.extension %> file">
+			 	<%= attachment.name %>
+			</a>
+
+			<span title="file size" class="small text-muted hidden-phone"><%= number_to_human_size attachment.file.file.size %> </span>
+		</li>
+		<% end %>
+
+		<% if item.attachments.files.available.size == 0 %>
+			<li>No files have been added for this item yet. Check back soon.</li>
+		<% end %>
+	</ol>
+</div>

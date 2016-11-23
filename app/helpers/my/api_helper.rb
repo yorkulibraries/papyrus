@@ -1,0 +1,2 @@
+module My::ApiHelper
+end

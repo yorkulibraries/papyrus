@@ -1,0 +1,2 @@
+module My::AccessCodesHelper
+end

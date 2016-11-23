@@ -1,8 +1,27 @@
 Papyrus::Application.routes.draw do
 
 
+  namespace :my do
+    resource :terms
+    resource :details
+    resource :items
+    resource :access_codes
+
+    scope :api do
+      get "login_as_student/:id", to: "api#login_as_student", as: "login_as_student"
+      get "logout_as_student", to: "api#login_as_student"
+    end
+  end
 
 
+  # Student View
+  #match "login_as_student/:id" => "student_view#login_as_student", :as => :admin_student_view, via: [:get, :post]
+  #match "logout_as_student" => "student_view#logout_as_student", :as => :logout_as_student, via: [:get, :post]
+  #get "my/" => "student_view#show", :as => :student_view
+  #get "my/details" => "student_view#details", :as => :student_view_details
+  #match "my/terms" => "student_view#index", :as => :show_student_terms, via: [:get, :post]
+  #match "my/accept_terms" => "student_view#accept_terms", :as => :accept_student_terms, via: [:get, :post]
+  #match "my/access_codes" => "student_view#access_codes", as: :student_view_access_codes, via: [:get, :post]
 
   namespace :students do
     get 'permanent_delete/destroy'
@@ -47,14 +66,7 @@ Papyrus::Application.routes.draw do
   # Download document link
   get "documents/download/:id" => "documents#download", as: :download_document
 
-  # Student View
-  match "login_as_student/:id" => "student_view#login_as_student", :as => :admin_student_view, via: [:get, :post]
-  match "logout_as_student" => "student_view#logout_as_student", :as => :logout_as_student, via: [:get, :post]
-  get "my/" => "student_view#show", :as => :student_view
-  get "my/details" => "student_view#details", :as => :student_view_details
-  match "my/terms" => "student_view#index", :as => :show_student_terms, via: [:get, :post]
-  match "my/accept_terms" => "student_view#accept_terms", :as => :accept_student_terms, via: [:get, :post]
-  match "my/access_codes" => "student_view#access_codes", as: :student_view_access_codes, via: [:get, :post]
+
 
   resources :users do
     post "activate", :on => :member

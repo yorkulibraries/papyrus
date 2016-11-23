@@ -1,0 +1,83 @@
+<% title "My Assigned Items", false %>
+
+<div class="row student_view">
+	<div class="col-md-12">
+		<%= panel(title: "My Assigned Items", icon: "book") do %>
+			<ul class="nav nav-pills">
+				<li  class="<%= "active" unless params[:course] %>"><%= link_to "All Items", student_view_path, title: "Show all items" %></li>
+
+				<% @courses_grouped.sort.each do |group,  courses| %>
+				<li class="dropdown <%= "active" if !params[:course].blank? && params[:course].split("_").first == group %>">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#select_courses" title="Select a <%= group %> course">	<%= group %>
+						<i class="caret"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<% courses.each do |course| %>
+							<li class="<%= "active" if !params[:course].blank? && params[:course].gsub("_", " ") == course %>">
+								<%= link_to "#{course}", student_view_path(:course => course.gsub(" ", "_")), title: "Show assigned items for #{course}" %></li>
+						<% end %>
+					</ul>
+				</li>
+				<% end %>
+			</ul>
+			<hr/>
+
+			<%	@items_grouped.each do |type, items| %>
+				<ul class="list-group assigned_items">
+					<li class="list-group-item active" title="List of assigned <%= type.pluralize  %>">
+						Assigned <%= type.pluralize.humanize %> <%= "- " + params[:course].gsub("_", " ") if params[:course]%>
+					</li>
+
+				<% items.each do |item| %>
+					<li class="list-group-item <%= cycle("odd", "event") %>">
+						<div class="attachment-actions pull-right">
+							<% connection = item.item_connections.current.find_by_student_id(@student.id) %>
+							<% if connection %>
+								<p title="Access Expiration Date"><i class="icon-calendar"></i>
+								<%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
+								<%= "Unlimited Access" unless connection.expires_on %>
+								</p>
+							<% end %>
+
+							<% if item.attachments.files.available.size > 0 %>
+								<a class="action" href="<%= zipped_files_item_path(item)%>" title="Download Zipped File">
+									<i class="icon-download"></i> Download Zipped File
+								</a>
+							<% elsif item.attachments.urls.available.size > 0 %>
+								<a class="action" href="#" onclick="$('#urls_<%=item.id %>').toggleClass('hide'); return false;" title="Show Links">
+									<i class="icon-info"></i> Links Only
+								</a>
+							<% else %>
+								<a class="action" href="#" title="There are no files or links attached to this item yet." onclick="return false;" data-confirm="Files or Links are not ready yet. Check back soon.">
+									<i class="icon-remove"></i> Not Ready
+								</a>
+							<% end %>
+						</div>
+
+						<div class="title" title="Files for <%= item.title %>">
+							<h4><%= item.title %></h4>
+
+							<div class="trivial" style="margin-bottom: 10px;">
+								<a href="#" class="trivial" onclick="$('#attachments_<%=item.id %>').toggleClass('hide'); return false;" title="Download files individually">
+									<i class="icon-file-alt"></i> Show individual files.
+								</a>
+								&nbsp; &nbsp;
+								<a href="#" class="trivial" onclick="$('#urls_<%=item.id %>').toggleClass('hide'); return false;" title="Show Links">
+									<i class="icon-link"></i> Show Links
+								</a>
+							</div>
+
+							<%= render partial: "urls", locals: { item: item } %>
+							<%= render partial: "files", locals: { item: item } %>
+
+						</div>
+
+
+					</li>
+				<% end %>
+				</ul>
+			<% end %>
+
+		<% end %>
+	</div>
+</div>
