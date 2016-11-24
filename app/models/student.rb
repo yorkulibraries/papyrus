@@ -54,6 +54,8 @@ class Student < User
 
   scope :most_recent_students, lambda { |lim| order(id: :desc).limit(lim) }
 
+  scope :never_logged_in, -> { where("last_active_at is NULL") }
+
   def to_csv
     [id, name, email, student_details.student_number, student_details.formats.join(", "), student_details.cds_counsellor, created_at]
   end

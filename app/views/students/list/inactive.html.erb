@@ -1,0 +1,50 @@
+<% title "Inactive  Students", false %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Inactive Students", icon: "ban") do %>
+
+		<div class="row">
+			<div class="col-sm-12 col-xs-12">
+				<%= render partial: "students/list/links.html.erb" %>
+			</div>
+		</div>
+
+		<hr/>
+
+		<%= paginate @students %>
+		<div class="students">
+			<div class="list-group">
+				<% @students.each do |student| %>
+				  <div  class="list-group-item <%= cycle("odd", "even") %>">
+							<%= image_tag "icons/user_default.png", class: "pull-left" %>
+							<span class="badge badge-success">
+								<%= link_to reactivate_student_path(student), data: { confirm: 'Are you sure?'}, class: "white no-text-shadow" do %>
+								Reactivate Student
+								<% end %>
+							</span>
+				     <h4 class="list-group-item-heading"><a href="<%= student_path(student) %>"><%= student.name %></a> <span class="red">Inactive</span></h4>
+				     <p class="list-group-item-text">
+							<span class="trivial weak">Email: </span><%= student.email %>
+							<span class="trivial weak">Preferred Phone: </span><%= student.student_details.preferred_phone %>
+						 	<span class="hidden-phone">
+								<span class="trivial weak">Transcription Coordinator: </span><%= student.student_details.transcription_coordinator.name%>
+							</span>
+						</p>
+				   </div>
+				 <% end %>
+			</div>
+		</div>
+
+		<%= paginate @students %>
+
+		<% if @students.size == 0 %>
+			<div class="blank-slate">
+				<i class="icon-user"></i>
+				<p>There are no inactive students in Papyrus right now.</p>
+			</div>
+		<% end %>
+
+		<% end %>
+	</div>
+</div>

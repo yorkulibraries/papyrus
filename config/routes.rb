@@ -1,6 +1,18 @@
 Papyrus::Application.routes.draw do
 
 
+  namespace :students do
+  get 'list/lab_access_only'
+  end
+
+  namespace :students do
+  get 'list/never_logged_in'
+  end
+
+  namespace :students do
+  get 'list/inactive'
+  end
+
   namespace :my do
     resource :terms
     resource :details
@@ -14,18 +26,14 @@ Papyrus::Application.routes.draw do
   end
 
 
-  # Student View
-  #match "login_as_student/:id" => "student_view#login_as_student", :as => :admin_student_view, via: [:get, :post]
-  #match "logout_as_student" => "student_view#logout_as_student", :as => :logout_as_student, via: [:get, :post]
-  #get "my/" => "student_view#show", :as => :student_view
-  #get "my/details" => "student_view#details", :as => :student_view_details
-  #match "my/terms" => "student_view#index", :as => :show_student_terms, via: [:get, :post]
-  #match "my/accept_terms" => "student_view#accept_terms", :as => :accept_student_terms, via: [:get, :post]
-  #match "my/access_codes" => "student_view#access_codes", as: :student_view_access_codes, via: [:get, :post]
-
   namespace :students do
     get 'permanent_delete/destroy'
     resource :lab_access_only, only: [:show, :destroy], controller: "lab_access_only"
+
+    scope :list do
+      get :never_logged_in, to: "list#never_logged_in"
+      get :inactive, to: "list#inactive"
+    end
   end
 
   get "stats" => "stats#index"
@@ -103,7 +111,7 @@ Papyrus::Application.routes.draw do
     resource :student_details, as: :details, path: "details", except: [:index, :destroy]
 
     collection do
-      get "inactive"
+      #get "inactive"
       #get "search"
       post "notify"
     end

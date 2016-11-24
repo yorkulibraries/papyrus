@@ -8,11 +8,6 @@ class StudentsController < ApplicationController
      @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
   end
 
-  def inactive
-    page_number = params[:page] ||= 1
-
-    @students = Student.inactive.page(page_number)
-  end
 
   def notify
     if params[:students]

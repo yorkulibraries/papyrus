@@ -60,14 +60,7 @@ class StudentsControllerTest < ActionController::TestCase
     assert_equal 4, students.size, "There should be four active students"
   end
 
-  should "show a list of inactive students" do
-    create_list(:student, 2, inactive: false)
-    create_list(:student, 5, inactive: true)
 
-    get :inactive
-    students = assigns(:students)
-    assert_equal 5, students.size, "There should be 5 inactive students"
-  end
 
 
   should "display student details and only current items, not expired ones" do
