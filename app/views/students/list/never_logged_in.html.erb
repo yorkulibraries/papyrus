@@ -1,32 +1,33 @@
-<% title "Inactive  Students", false %>
+<% title "Never Logged In Students", false %>
 
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Never Logged In Students", icon: "ban") do %>
+		<%= panel(title: "Never Logged In Students", icon: "users") do %>
 
-    <div class="row">
-      <div class="col-sm-12 col-xs-12">
-        <%= render partial: "students/list/links.html.erb" %>
-      </div>
-    </div>
+	    <div class="row">
+	      <div class="col-sm-12 col-xs-12">
+	        <%= render partial: "students/list/links.html.erb" %>
+	      </div>
+	    </div>
 
-    <%= paginate @students %>
+	    <%= paginate @students %>
 
-    <ul class="list-unstyled">
-      <% @students.each do |student| %>
-        <%= render student, show: "li", show_gravatar: true %>
-      <% end %>
-    </ul>
+	    <ul class="list-unstyled">
+	      <% @students.each do |student| %>
+	        <%= render partial: "students/student", locals: { student: student, show: "li", show_gravatar: true } %>
+	      <% end %>
+	    </ul>
 
-    <%= paginate @students %>
+	    <%= paginate @students %>
 
-    <% if @students.size == 0 %>
-      <div class="student blank-slate">
-        <i class="fa fa-user"></i>
-        <h1>Students</h1>
-        <p>There are no never logged in students</p>
-      </div>
-    <% end %>
+	    <% if @students.size == 0 %>
+	      <div class="student blank-slate">
+	        <i class="fa fa-user"></i>
+	        <h1>Students</h1>
+	        <p>There are no never logged in students</p>
+	      </div>
+	    <% end %>
 
+		<% end %>
 	</div>
 </div>

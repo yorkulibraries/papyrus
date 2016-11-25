@@ -5,6 +5,13 @@
 		<%= panel(title: "Lab Access Only  Students", icon: "users") do %>
 
 
+			<div class="row">
+				<div class="col-sm-12 col-xs-12">
+					<%= render partial: "students/list/links.html.erb" %>
+				</div>
+			</div>
+
+
 			<%= paginate @students %>
 
 			<ul class="list-unstyled">
