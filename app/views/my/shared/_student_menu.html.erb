@@ -6,18 +6,18 @@
 	</li>
 <% end %>
 
-<li class="<%= "active" if controller_name == "student_view" && action_name =="index"%>">
+<li class="<%= "active" if controller_name == "terms" && action_name =="show"%>">
 	<a href="<%= my_terms_path %>"><i class="fa fa-fw fa-legal"></i>Terms of Use</a>
 </li>
 
 <% if session[:terms_accepted]%>
-	<li class="<%= "active" if controller_name == "student_view" && action_name =="show"%>">
+	<li class="<%= "active" if controller_name == "items" && action_name =="show"%>">
 		<a href="<%= my_items_path %>"><i class="fa fa-fw fa-book"></i> My Items</a>
 	</li>
-	<li class="<%= "active" if controller_name == "student_view" && action_name =="details"%>">
+	<li class="<%= "active" if controller_name == "details" && action_name =="show"%>">
 		<a href="<%= my_details_path %>"><i class="fa fa-fw fa-users"></i> My Details</a>
 	</li>
-	<li class="<%= "active" if controller_name == "student_view" && action_name =="access_codes"%>">
+	<li class="<%= "active" if controller_name == "access_codes" && action_name =="show"%>">
 		<a href="<%= my_access_codes_path %>"><i class="fa fa-fw fa-lock"></i> My Access Codes</a>
 	</li>
 <% end %>
