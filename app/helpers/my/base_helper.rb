@@ -1,0 +1,2 @@
+module My::BaseHelper
+end

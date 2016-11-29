@@ -1,7 +1,10 @@
-class My::ApiController < ApplicationController
+class My::ApiController < My::BaseController
 
-  before_filter :authorize_controller, except: :login_as_student
+  skip_filter :check_terms_acceptance
+  skip_filter :authorize_controller, only: :login_as_student
+  skip_filter :load_student, only: [:login_as_student, :logout_as_student]
 
+  
   def login_as_student
     authorize! :login_as, :student
 
@@ -32,13 +35,5 @@ class My::ApiController < ApplicationController
     redirect_to student_path(student_id)
   end
 
-  private
-  def authorize_controller
-     authorize! :show, :student
-  end
-
-  def load_student
-    @student = Student.find(current_user.id)
-  end
 
 end

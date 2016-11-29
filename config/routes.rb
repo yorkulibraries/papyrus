@@ -1,23 +1,15 @@
 Papyrus::Application.routes.draw do
 
 
-  namespace :students do
-  get 'list/lab_access_only'
-  end
-
-  namespace :students do
-  get 'list/never_logged_in'
-  end
-
-  namespace :students do
-  get 'list/inactive'
-  end
 
   namespace :my do
     resource :terms
     resource :details
     resource :items
     resource :access_codes
+
+    get :welcome, to: "base#welcome", as: "student_portal"
+    get :review_details, to: "base#review_details", as: "review_details"
 
     scope :api do
       get "login_as_student/:id", to: "api#login_as_student", as: "login_as_student"

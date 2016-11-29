@@ -1,6 +1,5 @@
-class My::DetailsController < ApplicationController
+class My::DetailsController < My::BaseController
 
-  before_filter :authorize_controller, :load_student, :check_terms_acceptance
 
   def show
     @student_details = @student.student_details
@@ -10,16 +9,4 @@ class My::DetailsController < ApplicationController
     @courses = request.headers[PapyrusSettings.course_listing_header]
   end
 
-  private
-  def authorize_controller
-     authorize! :show, :student
-  end
-
-  def load_student
-    @student = Student.find(current_user.id)
-  end
-
-  def check_terms_acceptance
-    redirect_to my_terms_path unless session[:terms_accepted]
-  end
 end

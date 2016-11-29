@@ -1,6 +1,6 @@
-class My::TermsController < ApplicationController
+class My::TermsController < My::BaseController
 
-  before_filter :authorize_controller, :load_student
+  skip_filter :check_terms_acceptance
 
   def show
 
@@ -10,14 +10,4 @@ class My::TermsController < ApplicationController
     session[:terms_accepted] = true
     redirect_to my_items_path
   end
-
-  private
-  def authorize_controller
-     authorize! :show, :student
-  end
-
-  def load_student
-    @student = Student.find(current_user.id)
-  end
-
 end

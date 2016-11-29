@@ -1,6 +1,4 @@
-class My::ItemsController < ApplicationController
-
-  before_filter :authorize_controller, :load_student, :check_terms_acceptance
+class My::ItemsController < My::BaseController
 
   def show
     @items = @student.current_items
@@ -15,19 +13,6 @@ class My::ItemsController < ApplicationController
     else
       @items_grouped = @items.group_by { |i| i.item_type }
     end
-  end
-
-  private
-  def authorize_controller
-     authorize! :show, :student
-  end
-
-  def load_student
-    @student = Student.find(current_user.id)
-  end
-
-  def check_terms_acceptance
-    redirect_to my_terms_path unless session[:terms_accepted]
   end
 
 end
