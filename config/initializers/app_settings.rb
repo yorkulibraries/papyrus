@@ -12,6 +12,9 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:app_name, "Papyrus")
   PapyrusSettings.save_default(:app_owner, "York University Libraries")
 
+  ## MINI PROFILER
+  PapyrusSettings.save_default(:profiler_enable, PapyrusSettings::FALSE)
+
   ## Organization
   PapyrusSettings.save_default(:org_name, "Your Institutioin/Department")
   PapyrusSettings.save_default(:org_short_name, "SHORT_NAME")

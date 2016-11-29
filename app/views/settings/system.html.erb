@@ -15,12 +15,20 @@
 	      <%= f.input :auth_cookies_domain, label: "Cookies Domain",
 	         hint: "Domain used for cookies creation" %>
 	      <%= f.input :auth_cas_logout_redirect, label: "Logout Redirect URL" %>
+
+				<hr/>
 				<h4 class="black">Error Notification</h4>
 
 		    <%= f.input :errors_email_subject_prefix, label: "Error Email Subject Prerix"%>
 		    <%= f.input :errors_email_from, label: "Error Email From Address" %>
 		    <%= f.input :errors_email_to, as: :array, label: "Send Error Messages To"%>
 				<p class="help-block small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
+
+				<hr/>
+				<h4 class="black">Performance Profiling</h4>
+
+
+				<%= f.input :profiler_enable, label: "Enable Profiler", as: :radio_buttons %>				
 
 				<input type="hidden" name="return_to" value="system"/>
 				<%= f.submit "Save Settings", class: "btn btn-success" %>
