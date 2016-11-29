@@ -15,7 +15,7 @@ class My::BaseControllerTest < ActionController::TestCase
 
     get :welcome
 
-    assert_redirected_to my_details_path(review: true), "Should redirect to my_details_path"
+    assert_redirected_to my_details_path(welcome: true), "Should redirect to my_details_path"
   end
 
   should "redirect to terms page if student has logged in before" do
@@ -25,7 +25,7 @@ class My::BaseControllerTest < ActionController::TestCase
 
     get :welcome
 
-    assert_redirected_to my_terms_path, "SHould go to terms path"
+    assert_redirected_to my_items_path, "SHould go to items path"
   end
 
   should "redirect to sync_courses_path first, if course_sync is enabled" do
@@ -46,7 +46,7 @@ class My::BaseControllerTest < ActionController::TestCase
 
     get :welcome
 
-    assert_redirected_to my_terms_path, "SHould go to terms path"
+    assert_redirected_to my_items_path, "SHould go to items path"
 
   end
 

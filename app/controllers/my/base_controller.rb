@@ -9,9 +9,9 @@ class My::BaseController < ApplicationController
     ## if student is first timer, show details welcome page
     ## otherwise show terms
     if @student.last_logged_in_at == nil
-      redirect_to my_details_path(review: true)
+      redirect_to my_details_path(welcome: true)
     else
-      redirect_to my_terms_path
+      redirect_to my_items_path
     end
   end
 

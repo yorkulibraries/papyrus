@@ -20,7 +20,7 @@
 					<%= f.label :org_app_url, "URL of where #{PapyrusSettings.app_name} installed"%>
 					<%= f.input :org_app_url, label: false, input_html: { class: "form-control" }%>
 
-				<h3>Reports</h3>
+				<h4 class="black">Reports</h4>
 
 				<% interval = [["30 days", 30.days], ["60 days", 60.days], ["90 days", 90.days]] %>
 				<%= f.input :reports_default_interval, label: "Default Report Interval", include_blank: false, collection: interval %>
@@ -34,7 +34,7 @@
 		<% end %>
 	</div>
 	<div class="col-md-4">
-		<%= panel(title: "General Settings Help", icon: "question") do %>			
+		<%= panel(title: "General Settings Help", icon: "question") do %>
 			<dl>
 				<dt>Application Name</dt>
 				<dd>The name of the application, appears in the logo section at the top.</dd>

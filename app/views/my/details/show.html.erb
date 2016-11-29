@@ -4,6 +4,15 @@
 <div class="row">
 	<div class="col-md-12 student">
 		<%= panel(title: "My Details", icon: "user") do %>
+
+		<% if PapyrusSettings.student_portal_welcome_enable == PapyrusSettings::TRUE && @welcome_details == true %>
+			<h2>Welcome to Papyrus</h2>
+			<%= simple_format PapyrusSettings.student_portal_welcome_message %>
+
+			<hr/>
+		<% end %>
+
+
 			<div class="student-header row">
 				<div class="col-md-12">
 					<h3>

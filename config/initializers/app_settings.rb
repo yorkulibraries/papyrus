@@ -95,6 +95,10 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:import_send_welcome_email_to_student, PapyrusSettings::FALSE)
   PapyrusSettings.save_default(:import_notify_coordinator, PapyrusSettings::FALSE)
 
+  ## Student Portal
+  PapyrusSettings.save_default(:student_portal_welcome_message, "Welcome to Papyrus. You are here first time.")
+  PapyrusSettings.save_default(:student_portal_welcome_enable, PapyrusSettings::FALSE)
+
 end
 
 # Exception Notification For Production

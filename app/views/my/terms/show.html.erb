@@ -21,7 +21,7 @@
 				<%= link_to "I accept these terms", my_terms_path, method:  :put, class: "btn btn-primary", data: { disable_with: 'loading papyrus...' } %>
 				<%= link_to "I do not", logout_path, class: "btn"%>
 			<% else %>
-				<p class="trivial">Terms accepted for current Papyrus session.</p>
+				<p class="trivial">Terms accepted for current Papyrus session. <%= link_to "Go to my Items.", my_items_path %></p>
 			<% end %>
 		<% end %>
 	</div>

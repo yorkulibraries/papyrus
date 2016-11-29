@@ -1,26 +1,34 @@
-<% title "Import Settings", false %>
+<% title "Student Management Settings", false %>
 
 
 <div class="row">
 	<div class="col-md-8">
-		<%= panel(title: "Import Settings", icon: "cog") do %>
+		<%= panel(title: "Student Management Settings", icon: "cog") do %>
 
 			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
-			  <h4 class="black">Import Settings</h4>
+				<h4 class="black">Student Portal</h4>
+
+				<%= f.label :student_portal_welcome_enable, "Enable Welcome / First Time Login Message?"%>
+				<%= f.input :student_portal_welcome_enable, label: false, as: :radio_buttons %>
+
+				<%= f.label :student_portal_welcome_message, "Welcome / First Time Login Message"%>
+				<%= f.input :student_portal_welcome_message, label: false, as: :text %>
+
+				<h4 class="black">Import Settings</h4>
 
 	      <%= f.label :import_auto_assign_coordinator, "Auto Assign Coordinator"%>
 	      <%= f.input :import_auto_assign_coordinator, label: false, as: :radio_buttons %>
 
         <hr/>
 
-        <%= f.label :import_send_welcome_email_to_student, "Send Welcome Emailt To Student"%>
+        <%= f.label :import_send_welcome_email_to_student, "Send Welcome Email To Student"%>
 	      <%= f.input :import_send_welcome_email_to_student, label: false, as: :radio_buttons %>
 
         <%= f.label :import_notify_coordinator, "Notify Coordinator, when new student is created"%>
 	      <%= f.input :import_notify_coordinator, label: false, as: :radio_buttons %>
 
 
-			  <input type="hidden" name="return_to" value="import"/>
+			  <input type="hidden" name="return_to" value="students"/>
 				<%= f.submit "Save Settings", class: "btn btn-success" %>
 			<% end %>
 		<% end %>
