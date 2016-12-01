@@ -10,9 +10,9 @@ class Students::LabAccessOnlyController < ApplicationController
 
   def destroy
 
-    Student.lab_access_only.each do |student|      
+    Student.lab_access_only.each do |student|
       student.inactive = true
-      student.audit_comment = "Disabled access by #{@current_user.name}, via mass Lab Access Only Disable function"
+      student.audit_comment = "Disabled access for #{@current_user.name}, via mass Lab Access Only Disable function"
       student.save(validate: false)
     end
 
