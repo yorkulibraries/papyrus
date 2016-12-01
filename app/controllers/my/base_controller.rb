@@ -21,7 +21,7 @@ class My::BaseController < ApplicationController
   def sync_courses
     if PapyrusSettings.course_sync_on_login == PapyrusSettings::TRUE && session[:courses_synced] == nil
       session[:courses_synced] = true # mark it as synced here, to avoid introducing an extra dependecy into course_sync_controller
-      redirect_to sync_courses_path
+      redirect_to my_sync_courses_path
     end
   end
 

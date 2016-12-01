@@ -34,7 +34,7 @@ class My::BaseControllerTest < ActionController::TestCase
 
     get :welcome
     assert session[:courses_synced], "Session should be set"
-    assert_redirected_to sync_courses_path
+    assert_redirected_to my_sync_courses_path
   end
 
   should "redirect to my_terms if session courses_synced is already set and user is not logged in" do

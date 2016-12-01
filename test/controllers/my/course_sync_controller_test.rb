@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CourseSyncControllerTest < ActionController::TestCase
+class My::CourseSyncControllerTest < ActionController::TestCase
 
   setup do
     @student = create(:student)
@@ -105,6 +105,7 @@ class CourseSyncControllerTest < ActionController::TestCase
 
   end
 
+
   should "notify the coordinator and assistant that courses were added or removed: PRIVATE METHOD TEST" do
     courses_added = ["COMP_1010"]
     courses_removed = ["MATH_2000", "HIST_1010"]
@@ -113,7 +114,7 @@ class CourseSyncControllerTest < ActionController::TestCase
 
     student = create(:student)
 
-    controller = CourseSyncController.new
+    controller = My::CourseSyncController.new
     controller.send(:notify_coordinator, student, courses_added, courses_removed)
 
     assert !ActionMailer::Base.deliveries.empty?
@@ -122,11 +123,34 @@ class CourseSyncControllerTest < ActionController::TestCase
     assert_equal mail.to, [student.details.transcription_coordinator.email, student.details.transcription_assistant.email]
     assert_equal mail.subject, "Course List Updated: #{student.name}"
 
-
-
   end
 
+  should "still notify even if transcription_assistant or coordnator are nil: PRIVATE METHOD TEST" do
 
+    courses_added = ["COMP_1010"]
+    courses_removed = ["MATH_2000", "HIST_1010"]
+
+    ActionMailer::Base.deliveries = []
+    details = build(:student_details)
+    student = create(:student, student_details: details)
+    details.transcription_assistant = nil
+    details.save(validate: false)
+
+
+    controller = My::CourseSyncController.new
+    controller.send(:notify_coordinator, student, courses_added, courses_removed)
+
+    assert !ActionMailer::Base.deliveries.empty?
+
+    details.transcription_coordinator = nil
+    details.save(validate: false)
+
+    controller = My::CourseSyncController.new
+    assert_nothing_raised do
+      controller.send(:notify_coordinator, student, courses_added, courses_removed)
+    end
+
+  end
 
 
 end

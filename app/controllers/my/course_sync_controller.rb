@@ -1,5 +1,6 @@
-class CourseSyncController < ApplicationController
-  before_filter :authorize_controller
+class My::CourseSyncController < My::BaseController
+
+  skip_filter :check_terms_acceptance, :sync_courses
 
   def sync
     @student = current_user
@@ -68,7 +69,7 @@ class CourseSyncController < ApplicationController
 
   def notify_coordinator(student, courses_added, courses_removed)
     if courses_added.size > 0 || courses_removed.size > 0
-      coordinator = student.details.transcription_coordinator || User.new
+      coordinator = student.details.transcription_coordinator || User.new(email: "noreply@library.yorku.ca")
       assistant = student.details.transcription_assistant || User.new
 
       message = <<-HEREDOC

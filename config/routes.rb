@@ -12,6 +12,7 @@ Papyrus::Application.routes.draw do
     get :review_details, to: "base#review_details", as: "review_details"
 
     scope :api do
+      get "sync_courses" => "course_sync#sync"
       get "login_as_student/:id", to: "api#login_as_student", as: "login_as_student"
       get "logout_as_student", to: "api#logout_as_student"
     end
@@ -39,7 +40,7 @@ Papyrus::Application.routes.draw do
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
 
-  get "sync_courses" => "course_sync#sync",  as: :sync_courses
+
 
   # Scan List & Items
   resources :scan_lists do
