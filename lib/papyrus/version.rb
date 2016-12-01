@@ -1,7 +1,7 @@
 module Papyrus
   class Version
     def version
-      "2.7.6"
+      "2.8"
     end
   end
 end
