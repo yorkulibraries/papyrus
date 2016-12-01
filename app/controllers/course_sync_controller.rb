@@ -11,7 +11,7 @@ class CourseSyncController < ApplicationController
     course_code_parser = Papyrus::YorkuCourseCodeParser.new
 
     list = course_code_parser.unique_codes_only(course_list, PapyrusSettings.course_listing_separator)
-
+    current_list = @student.courses.collect { |c| c.code }
 
     if list.size == 0
       @student.courses.delete_all
@@ -48,13 +48,44 @@ class CourseSyncController < ApplicationController
       end
     end
 
+    @courses_added = list - current_list
+    @courses_removed = current_list - list
+
+    ## Send the email to coordinator and/or assistant if different. If there are changes
+    notify_coordinator(@student, @courses_added, @courses_removed)
+
     flash[:notice] = "Courses synced"
     redirect_to my_student_portal_path
   end
+
+
 
   private
   def authorize_controller
      authorize! :show, :student
   end
 
+
+  def notify_coordinator(student, courses_added, courses_removed)
+    if courses_added.size > 0 || courses_removed.size > 0
+      coordinator = student.details.transcription_coordinator || User.new
+      assistant = student.details.transcription_assistant || User.new
+
+      message = <<-HEREDOC
+        Hello,
+
+        The list of courses, which #{student.name} is enrolled in, has been updated. Please review below:
+
+        #{"Added:\n" if courses_added.size > 0 }
+        #{courses_added.join("\n") if courses_added.size > 0 }
+
+        #{"Removed:\n" if courses_removed.size > 0 }
+        #{courses_removed.join("\n") if courses_removed.size > 0 }
+
+      HEREDOC
+
+      ReportMailer.mail_report([coordinator.email, assistant.email], message, "Course List Updated: #{student.name}").deliver_later
+    end
+
+  end
 end

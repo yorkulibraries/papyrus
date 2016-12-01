@@ -73,6 +73,60 @@ class CourseSyncControllerTest < ActionController::TestCase
   end
 
 
+  should "figure out if courses were added for student and/or removed and send email" do
+    new_course_code = "2016_AP_NEW_W_1111__6_C_EN_A"
+    existing_course_code = "2016_AP_EXST_W_9999__6_C_EN_A"
+
+    ActionMailer::Base.deliveries = []
+
+    course = create(:course, code: existing_course_code)
+    sc = create(:student_course, course: course, student: @student)
+
+    assert_equal 1, @student.courses.size, "SHould have one course already"
+
+
+    @request.env[@course_listing_header]  = new_course_code
+
+    post :sync
+
+    added = assigns(:courses_added)
+    removed = assigns(:courses_removed)
+
+
+    assert_equal 1, @student.courses.size, "Should be one"
+
+    assert_equal 1, added.size, "Added one"
+    assert_equal 1, removed.size, "Removed one"
+
+    assert_equal existing_course_code, removed.first
+    assert_equal new_course_code, added.first
+
+    assert !ActionMailer::Base.deliveries.empty?, "Should send an email"
+
+  end
+
+  should "notify the coordinator and assistant that courses were added or removed: PRIVATE METHOD TEST" do
+    courses_added = ["COMP_1010"]
+    courses_removed = ["MATH_2000", "HIST_1010"]
+
+    ActionMailer::Base.deliveries = []
+
+    student = create(:student)
+
+    controller = CourseSyncController.new
+    controller.send(:notify_coordinator, student, courses_added, courses_removed)
+
+    assert !ActionMailer::Base.deliveries.empty?
+
+    mail = ActionMailer::Base.deliveries.first
+    assert_equal mail.to, [student.details.transcription_coordinator.email, student.details.transcription_assistant.email]
+    assert_equal mail.subject, "Course List Updated: #{student.name}"
+
+
+
+  end
+
+
 
 
 end
