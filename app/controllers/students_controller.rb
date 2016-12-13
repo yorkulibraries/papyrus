@@ -165,7 +165,12 @@ class StudentsController < ApplicationController
     @student.inactive = false
     @student.audit_comment = "Set Student account to ACTIVE"
     @student.save
-    redirect_to @student, notice: "Student has been reactivated, and can now use Papyrus"
+    
+    respond_to do |format|
+      format.html { redirect_to @student, notice: "Student has been reactivated, and can now use Papyrus" }
+      format.js
+    end
+
   end
 
   ## COURSE ENROLLMENT

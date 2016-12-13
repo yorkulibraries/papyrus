@@ -24,7 +24,7 @@
 						</a>
 
 						<div class="pull-right">
-							<%= link_to reactivate_student_path(student), data: { confirm: 'Are you sure?'}, class: "red" do %>
+							<%= link_to reactivate_student_path(student), data: { remote: true, confirm: 'Are you sure?'}, class: "red" do %>
 							Reactivate?
 							<% end %>
 						</div>
