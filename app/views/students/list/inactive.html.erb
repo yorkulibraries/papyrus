@@ -70,8 +70,9 @@
 		<%= paginate @students %>
 
 		<% if @students.size == 0 %>
-			<div class="blank-slate">
-				<i class="icon-user"></i>
+			<div class="student blank-slate">
+				<i class="fa fa-user"></i>
+				<h1>Inactive Students</h1>
 				<p>There are no inactive students in Papyrus right now.</p>
 			</div>
 		<% end %>

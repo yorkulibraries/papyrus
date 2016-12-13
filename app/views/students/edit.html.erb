@@ -16,7 +16,7 @@
 	<div class="col-md-12">
 		<%= panel(title: "Deactivate or Reactivate Student", icon: "lock", styles:"panel-danger") do %>
 			<p><strong>Deactivate or Reactivate</strong></p>
-			<p>You can deactivate a student. This does not delete the student record, just disables their ability to access Papyrus and hides the record from general view.</p>
+			<p>You can deactivate a student. This does not delete the student record, just hides the record from most views in Papyrus.</p>
 
 			<% if ! @student.inactive? %>
 				<p><%= link_to @student, confirm: 'Are you sure?', method: :delete, class: 'btn btn-lg btn-warning' do %>
@@ -30,10 +30,35 @@
 				</p>
 			<% end %>
 
-			<p class="alert alert-warning"><span class="strong">Warning:</span> This action can be reversed.</p>
+
 
 			<hr/>
+
+			<p><strong>Block or Unblock</strong></p>
+			<p>You can block a student. This does not delete the student record, just disables their ability to access Papyrus.</p>
+
+
+			<% if @student.blocked? %>
+				<p><%= link_to unblock_student_path(@student), confirm: 'Are you sure?', method: :delete, class: 'btn btn-lg btn-warning' do %>
+					<i class="fa fa-unlock"></i> Unblock Student's Access To Papyrus
+				<% end %></p>
+			<% else %>
+				<p>
+					<%= link_to block_student_path(@student), confirm: 'Are you sure?', class: 'btn btn-lg btn-warning' do %>
+					<i class="fa fa-lock"></i> Block Student's Access To Papyrus
+					<% end %>
+				</p>
+			<% end %>
+
+			<hr/>
+
+
+
 			<%  if can?(:perma_destroy, :student) %>
+				<p><strong>Permanently Destroy</strong></p>
+				<p>This action, permanently deletes Student record from Papyrus. Use at your own risk.</p>
+				<p class="alert alert-danger"><span class="strong">Warning:</span> This action is irreversable.</p>
+
 				<%= link_to students_permanent_delete_path(@student), class: "red" do %>
 					<i class="fa fa-trash"></i> Destroy Student Record Permanently?
 				<% end %>
