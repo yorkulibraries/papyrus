@@ -21,11 +21,11 @@ class Students::LabAccessOnlyControllerTest < ActionController::TestCase
   should "Disable all students that have no format filled out" do
     create_list(:student, 3, blocked: false)
 
-    assert_equal 3, Student.lab_access_only.active.size, "Should be 3 active"
+    assert_equal 3, Student.lab_access_only.unblocked.size, "Should be 3 active"
     post :destroy
     assert_redirected_to students_lab_access_only_path
 
-    assert_equal 3, Student.lab_access_only.inactive.size, "Should be 3 inactive"
+    assert_equal 3, Student.lab_access_only.blocked.size, "Should be 3 inactive"
   end
 
 

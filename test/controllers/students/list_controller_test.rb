@@ -34,7 +34,7 @@ class Students::ListControllerTest < ActionController::TestCase
 
     get :blocked
     students = assigns(:students)
-    assert_equal 5, blocked.size, "There should be 5 blocked students"
+    assert_equal 5, students.blocked.size, "There should be 5 blocked students"
   end
 
 end
