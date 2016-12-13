@@ -7,6 +7,8 @@ FactoryGirl.define do
     sequence(:username) { |n| "username#{n}" }
     role User::MANAGER
 
+    blocked false
+
   end
 
 end

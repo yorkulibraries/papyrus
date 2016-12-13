@@ -71,6 +71,22 @@ class SessionsControllerTest < ActionController::TestCase
 
   end
 
+  should "only lookup users who are not blocked" do
+    blocked = create(:user, blocked: true)
+    unblocked = create(:user, blocked: false)
+
+    @request.env[@cas_alt_header] = blocked.username
+
+    get  :new
+    assert_template :new
+
+    @request.env[@cas_alt_header] = unblocked.username
+
+    get :new
+    assert_redirected_to root_url
+
+  end
+
 
 
 end

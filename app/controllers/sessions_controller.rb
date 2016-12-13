@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     end
 
 
-    users = User.active.where("username = ? OR username = ?", username, alt_username)
+    users = User.unblocked.where("username = ? OR username = ?", username, alt_username)
 
     if users.size == 1
 

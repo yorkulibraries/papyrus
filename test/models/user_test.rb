@@ -30,6 +30,16 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 6, User.transcription_assitants.count, "8 Transcription assistants, ADMINS are now included"
   end
 
+  should "show blocked, unblocked, inactive and active" do
+    create_list(:user, 2, blocked: true, inactive: true)
+    create_list(:user, 3, blocked: false, inactive: false)
+
+    assert_equal 2, User.blocked.size
+    assert_equal 3, User.unblocked.size
+    assert_equal 3, User.active.size
+    assert_equal 2, User.inactive.size
+  end
+
 
   should "default to ordering by user's name" do
     create(:user, last_name: "Zach")
@@ -101,6 +111,7 @@ class UserTest < ActiveSupport::TestCase
     u.active_now!
     u.reload
     assert Time.now >= u.last_active_at, "Should record last active time"
+    assert u.inactive == false, "Should be active now"
 
     u.active_now!(User::ACTIVITY_LOGIN)
     u.reload

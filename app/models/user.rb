@@ -39,8 +39,10 @@ class User < ActiveRecord::Base
 
   ## SCOPES
 
-  scope :active, -> { where(:inactive => false).order("users.created_at desc") }
-  scope :inactive, -> { where(:inactive => true).order("users.created_at desc") }
+  scope :active, -> { where(inactive: false).order("users.created_at desc") }
+  scope :inactive, -> { where(inactive: true).order("users.created_at desc") }
+  scope :unblocked, -> { where(blocked: false) }
+  scope :blocked, -> { where(blocked: true) }
   scope :not_students, -> { where("users.role <> '#{STUDENT_USER}'") }
   scope :transcription_assitants, -> { where("users.role <> '#{STUDENT_USER}'").where("users.role <> '#{ADMIN}'") }
   scope :coordinators, -> { where(role: COORDINATOR) }
@@ -69,6 +71,7 @@ class User < ActiveRecord::Base
     if action == ACTIVITY_LOGIN
       self.last_logged_in_at = now
       self.last_active_at = now
+      self.inactive = false
       self.audit_comment = self.last_logged_in_at.strftime("Logged in on %b %d, %Y at %I:%M%p")
       save(validate: false)
     else
