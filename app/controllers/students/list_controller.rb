@@ -14,4 +14,10 @@ class Students::ListController < ApplicationController
     page_number = params[:page] ||= 1
     @students = Student.inactive.page(page_number)
   end
+
+  def blocked
+    page_number = params[:page] ||= 1
+    @students = Student.blocked.page(page_number)
+  end
+
 end

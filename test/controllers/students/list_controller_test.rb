@@ -27,4 +27,14 @@ class Students::ListControllerTest < ActionController::TestCase
     assert_equal 5, students.size, "There should be 5 inactive students"
   end
 
+  should "list blocked in students" do
+
+    create_list(:student, 2, blocked: false)
+    create_list(:student, 5, blocked: true)
+
+    get :blocked
+    students = assigns(:students)
+    assert_equal 5, blocked.size, "There should be 5 blocked students"
+  end
+
 end

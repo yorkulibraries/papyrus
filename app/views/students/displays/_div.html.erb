@@ -10,8 +10,11 @@
 				</div>
 				<div class="col-md-4">
 					<div class="pull-right">
+						<% if student.blocked? %>
+							<span class="btn btn-danger">Blocked</span>
+						<% end %>
 						<% if student.inactive? %>
-							<span class="btn btn-danger">Inactive Account</span>
+							<span class="btn btn-primary">Inactive</span>
 						<% end %>
 						<% if student.lab_access_only? %>
 							<span class="btn btn-warning">Lab Access Only</span>

@@ -1,8 +1,8 @@
-<% title "Inactive  Students", false %>
+<% title "Blocked  Students", false %>
 
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Inactive Students", icon: "ban") do %>
+		<%= panel(title: "Blocked Students", icon: "ban") do %>
 
 		<div class="row">
 			<div class="col-sm-12 col-xs-12">
@@ -24,8 +24,8 @@
 						</a>
 
 						<div class="pull-right">
-							<%= link_to reactivate_student_path(student), data: { confirm: 'Are you sure?'}, class: "red" do %>
-							Reactivate?
+							<%= link_to unblock_student_path(student), data: { confirm: 'Are you sure?'}, class: "red" do %>
+							Unblock?
 							<% end %>
 						</div>
 

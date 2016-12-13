@@ -2,6 +2,7 @@
   <%= link_to "Show:", "#", class: "btn btn-link" %>
   <%= link_to "Active", students_path, class: "btn btn-default #{"btn-info" if action_name == "index"}" %>
   <%= link_to "Inactive", students_inactive_path, class: "btn btn-default #{"btn-info" if action_name == "inactive"}" %>
+  <%= link_to "Blocked", students_blocked_path, class: "btn btn-default #{"btn-info" if action_name == "blocked"}" %>
   <%= link_to "Never Logged In", students_never_logged_in_path, class: "btn btn-default #{"btn-info" if action_name == "never_logged_in"}" %>
   <%= link_to "Lab Access Only", students_lab_access_only_path, class: "btn btn-default #{"btn-info" if action_name == "show"}" %>
 </div>

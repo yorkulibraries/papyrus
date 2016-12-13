@@ -26,6 +26,7 @@ Papyrus::Application.routes.draw do
     scope :list do
       get :never_logged_in, to: "list#never_logged_in"
       get :inactive, to: "list#inactive"
+      get :blocked, to: "list#blocked"
     end
   end
 
