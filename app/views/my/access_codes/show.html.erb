@@ -6,7 +6,7 @@
 
 			<ul id="current_codes" class="list-unstyled">
 				<% (@student.access_codes.active + AccessCode.active.shared).each do |access_code| %>
-					<%= render access_code, show: "li" %>
+					<%= render partial: "access_codes/access_code", locals: { show: "li", access_code: access_code } %>
 				<% end %>
 			</ul>
 			<% if (@student.access_codes.active.size + AccessCode.active.shared.size)== 0 %>
