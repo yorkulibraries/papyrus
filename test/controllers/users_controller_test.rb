@@ -8,7 +8,7 @@ class UsersControllerTest < ActionController::TestCase
     log_user_in(@manager_user)
   end
 
-  should "only set user to inactive when destroying one" do
+  should "only set user to blocked when destroying one" do
     u = create(:user)
 
     assert_no_difference "User.count" do
@@ -16,7 +16,7 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     user = assigns(:user)
-    assert_equal true, user.inactive?, "User has been set to inactive"
+    assert_equal true, user.blocked?, "User has been set to inactive"
     assert_redirected_to users_url, "Redirected to users url"
   end
 
@@ -28,26 +28,26 @@ class UsersControllerTest < ActionController::TestCase
     post :destroy, id: u.id
 
     user = assigns(:user)
-    assert_equal true, user.inactive?, "User should be set to inactive"
+    assert_equal true, user.blocked?, "User should be set to inactive"
 
   end
 
   should "activate an inactive user" do
-    u = create(:user, inactive: true)
+    u = create(:user, blocked: true)
 
     post :activate, id: u.id
 
     user = assigns(:user)
-    assert ! user.inactive?, "User should be active"
+    assert ! user.blocked?, "User should be active"
     assert_redirected_to users_url, "Redirects to users url"
   end
 
 
   should "list all active non-student users" do
-    create_list(:user, 2, inactive: false)
+    create_list(:user, 2, blocked: false)
     create_list(:user, 2, role: User::STUDENT_USER, inactive: false)
 
-    create_list(:user, 5, inactive: true)
+    create_list(:user, 5, blocked: true)
 
     get :index
 
@@ -57,10 +57,10 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   should "list all inactive non student users" do
-    create_list(:user, 2, inactive: false)
+    create_list(:user, 2, blocked: false)
 
     create_list(:user, 2, role: User::STUDENT_USER, inactive: true)
-    create_list(:user, 5, inactive: true)
+    create_list(:user, 5, blocked: true)
 
     get :inactive
 

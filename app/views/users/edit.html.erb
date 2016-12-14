@@ -22,13 +22,13 @@
 
 			<%  unless @user.inactive %>
 
-				<%= link_to "Deactivate This Account", @user, confirm:  'Are you sure?', method: :delete, class: "btn btn-danger"%>
+				<%= link_to "Block This Account", @user, confirm:  'Are you sure?', method: :delete, class: "btn btn-danger"%>
 
 			<% else %>
 
 				<p class="alert alert-danger"><strong>Warning:</strong> This user's account is disabled. The access to Papyrus is not allowed.</p>
 
-				<%= link_to "Activate This Account", activate_user_path(@user), class: "btn btn-info", method: :post  %>
+				<%= link_to "Unblock This Account", activate_user_path(@user), class: "btn btn-info", method: :post  %>
 			<% end %>
 			<br/><br/>
 			<p class="alert alert-warning"><span class="strong">Warning:</span> This action can be reversed.</p>

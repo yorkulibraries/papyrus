@@ -1,4 +1,4 @@
-<% title "Inactive Users", false%>
+<% title "Blocked Users", false%>
 
 
 
@@ -11,7 +11,7 @@
 
 
 			<% if @users.size == 0 %>
-				<p>There are not inactive users.</p>
+				<p>There are not blocked users.</p>
 			<% end %>
 
 			<table class="table table-condensed">
@@ -27,7 +27,7 @@
 						<td><%= user.role %></td>
 						<td><%= user.created_at.strftime("%b %d, %Y") %></td>
 						<td>
-							<%= link_to "Activate User", edit_user_path(user), class: "btn btn-sm btn-danger"%>
+							<%= link_to "Unblock User", edit_user_path(user), class: "btn btn-sm btn-danger"%>
 							<%= link_to audit_trail_user_path(user), class: "btn btn-sm btn-default" do %>
 								<i class="fa fa-history" title="Audit Trail"></i>
 							<% end %>

@@ -3,19 +3,19 @@ class UsersController < ApplicationController
 
 
   def inactive
-    @users = User.inactive.not_students.to_a
+    @users = User.blocked.not_students.to_a
   end
 
   def activate
     @user = User.find(params[:id])
-    @user.inactive = false
+    @user.blocked = false
     @user.audit_comment = "Activated User Account"
     @user.save
     redirect_to users_path, notice: "#{@user.name} is now active in Papyrus"
   end
 
   def index
-    @users = User.active.not_students.to_a
+    @users = User.unblocked.not_students.to_a
   end
 
   def show
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def audit_trail
     @user = User.not_students.find(params[:id])
     @audits = @user.audits
-    # @audits.sort! { |a, b| a.created_at <=> b.created_at } # not used here 
+    # @audits.sort! { |a, b| a.created_at <=> b.created_at } # not used here
 
     @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
   end
@@ -59,8 +59,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.inactive = true
-    @user.audit_comment = "Deactivated User Account"
+    @user.blocked = true
+    @user.audit_comment = "Blocked User Account"
     @user.save(validate: false)
     redirect_to users_url, notice: "Successfully disabled this user."
   end
