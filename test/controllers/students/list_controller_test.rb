@@ -7,9 +7,9 @@ class Students::ListControllerTest < ActionController::TestCase
   end
 
   should "list never logged in students" do
-
-    create(:student, last_active_at: nil)
-    create_list(:student, 3, last_active_at: 3.days.ago)
+    details = create(:student_details, format_pdf: true)
+    create(:student, last_logged_in_at: nil, student_details: details)
+    create_list(:student, 3, last_logged_in_at: 3.days.ago)
 
     get :never_logged_in
     students = assigns(:students)
