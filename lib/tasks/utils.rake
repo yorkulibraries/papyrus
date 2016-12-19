@@ -1,13 +1,21 @@
 namespace :utils do
   desc "Papyrus Utilities Tasks"
   task :deactivate_students => :environment do
-    students = Student.active.where("last_logged_in_at > ? OR last_logged_in_at IS ?", 1.year.ago, nil)
+    active_students = Student.active.where("last_logged_in_at < ?", 1.year.ago)
     students.each do |s|
       s.inactive = true
+      s.audit_comment = "Deactivating inactive students..."
       s.save(validate: false)
     end
 
-    puts "Dectivated #{students.size} students"
+    lab_access_only_students = Student.lab_access_only
+    lab_access_only_students.each do |s|
+      s.inactive = true
+      s.audit_comment = "Deactivating Lab Access Only students...."
+      s.save(validate: false)
+    end
+
+    puts "Dectivated #{active_students.size + lab_access_only_students.size} students"
   end
 
   task :block_lab_only_students => :environment do

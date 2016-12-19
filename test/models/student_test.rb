@@ -151,9 +151,9 @@ class StudentTest < ActiveSupport::TestCase
   end
 
   should "show never logged in students" do
-    create(:student, last_active_at: nil)
-    create(:student, last_active_at: 2.days.ago)
-    create(:student, last_active_at: 2.days.ago)
+    create(:student, last_logged_in_at: nil)
+    create(:student, last_logged_in_at: 2.days.ago)
+    
 
     assert_equal 1, Student.never_logged_in.size, "Should be 1"
   end
