@@ -11,19 +11,14 @@
 	    </div>
 
 			<hr/>
-			<% if @students %>
-				<%= page_entries_info @students %>
-			<% end %>
 
-	    <%= paginate @students %>
+	  	<p>Showing <%= @students.size %> students </p>
 
 	    <ul class="list-unstyled">
 	      <% @students.each do |student| %>
 	        <%= render partial: "students/student", locals: { student: student, show: "li", show_gravatar: true } %>
 	      <% end %>
 	    </ul>
-
-	    <%= paginate @students %>
 
 	    <% if @students.size == 0 %>
 	      <div class="student blank-slate">

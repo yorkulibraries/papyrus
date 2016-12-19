@@ -6,8 +6,7 @@ class Students::ListController < ApplicationController
 
 
   def never_logged_in
-    page_number = params[:page] ||= 1
-    @students = Student.never_logged_in.page(page_number)
+    @students = Student.never_logged_in.reject { |s| s.lab_access_only? }
   end
 
   def inactive
