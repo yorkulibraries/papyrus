@@ -11,6 +11,9 @@
 		</div>
 
 		<hr/>
+		<% if @students %>
+			<%= page_entries_info @students %>
+		<% end %>
 
 		<%= paginate @students %>
 
