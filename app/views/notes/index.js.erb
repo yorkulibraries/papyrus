@@ -1,0 +1,19 @@
+$("#notes_form_holder").empty();
+$("#notes").empty();
+
+dialog = bootbox.dialog({
+    message: '<div id="notes_form_holder"></div><table id="notes"></table>',
+    title: "Notes",
+    size: "large",
+    buttons: { confirm: { label: "Close"} }
+
+});
+
+$(dialog).on("shown.bs.modal", function() {
+
+  $("#notes_form_holder").prepend('<%=escape_javascript render("notes/form") %>');
+
+  <% @notes.each do |note| %>
+    $("#notes").append("<%=escape_javascript render note %>");
+  <% end %>
+});

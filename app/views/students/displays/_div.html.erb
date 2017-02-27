@@ -29,7 +29,8 @@
 						<a class="btn btn-sm btn-default" title="Login As Student" href="<%= my_login_as_student_path(student) %>">
 							<i class="fa fa-share"></i>
 						</a>
-						<a class="btn btn-sm btn-default <%= is_action?("notes", "btn-primary") %>" href="<%= student_notes_path(student) %>" title="Notes">
+						<a class="btn btn-sm btn-default <%= is_action?("notes", "btn-primary") %>"
+							data-remote="true" href="<%= student_notes_path(student) %>" title="Notes">
 							<i class="fa fa-commenting-o"></i>
 						</a>
 

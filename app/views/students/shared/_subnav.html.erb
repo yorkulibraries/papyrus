@@ -7,7 +7,7 @@
 	</div>
 
 	<div class="column">
-		<a href="<%= student_notes_path(@student) %>" class="resource <%= is_controller?("notes", "active")%>">
+		<a href="<%= student_notes_path(@student) %>" data-remote="true" class="resource <%= is_controller?("notes", "active")%>">
 			<i class="icon-pencil"></i>
 			Notes
 		</a>

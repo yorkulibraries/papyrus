@@ -9,6 +9,7 @@
 //= require_tree ./controllers/
 //= require ./vendor/formstone.core.js
 //= require ./vendor/formstone.upload.js
+//= require ./vendor/bootbox.min.js
 //= require moment
 //= require fullcalendar
 //= require_self
