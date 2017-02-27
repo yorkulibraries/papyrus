@@ -6,7 +6,7 @@ namespace :db do
           require 'populator'
           require 'faker'
 
-          [Item, Attachment, Student, StudentDetails, ItemConnection, Note, User, Term, Course, ItemCourseConnection, AccessCode].each(&:delete_all)
+          [AcquisitionRequest, Item, Attachment, Student, StudentDetails, ItemConnection, Note, User, Term, Course, ItemCourseConnection, AccessCode].each(&:delete_all)
 
           puts "Create all user accounts"
 
@@ -18,6 +18,7 @@ namespace :db do
             user.last_name = "User"
             user.email = "#{user.username}@utest.yorku.ca"
             user.inactive = false
+            user.blocked = false
             user.role = User::ROLE_NAMES[index]
             index = index + 1
 
@@ -155,6 +156,32 @@ namespace :db do
                  c.course_id = 1..Course.all.size
                  c.item_id = item.id
                end
+           end
+
+           puts "Creating acquisition requets"
+           AcquisitionRequest.populate 50 do |ar|
+             ar.item_id = 1..Item.all.size
+             ar.requested_by_id = 1..User.not_students.size
+             ar.acquisition_reason = "Some reason"
+             statuses = [AcquisitionRequest::STATUS_OPEN, AcquisitionRequest::STATUS_CANCELLED,AcquisitionRequest::STATUS_ACQUIRED, AcquisitionRequest::STATUS_BACK_ORDERED]
+             ar.status = statuses.sample
+             ar.acquisition_notes = "Some notes"
+
+             if ar.status == AcquisitionRequest::STATUS_CANCELLED
+               ar.cancelled_by_id = 1..User.not_students.size
+               ar.cancellation_reason = "Some cancellation Reason"
+               ar.cancelled_at = Date.today
+             end
+             if ar.status == AcquisitionRequest::STATUS_ACQUIRED
+               ar.acquired_by_id = 1..User.not_students.size
+               ar.acquisition_source_type = PapyrusSettings.acquisition_sources.to_a.sample
+               ar.acquisition_source_name = "Some name"
+               ar.acquired_at = Date.today
+             end
+             if ar.status == AcquisitionRequest::STATUS_BACK_ORDERED
+               ar.back_ordered_until = 1.year.from_now
+               ar.back_ordered_by_id = 1..User.not_students.size
+             end
            end
 
     end
