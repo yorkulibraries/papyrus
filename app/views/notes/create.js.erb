@@ -1,7 +1,10 @@
 <% if @note.valid? %>
 	$('#notes').prepend('<%=escape_javascript render(@note) %>');
-	$('#new_note_form').modal('hide')
-	$("#new_note_form form")[0].reset();
+
+	<% @note = Note.new %>
+
+	$("#notes_form_holder").empty();
+	$("#notes_form_holder").prepend('<%=escape_javascript render("notes/form") %>');
 <% else %>
 	$("#note_errors").empty();
 	$("#note_errors").append("<div id=\"list_of_errors\"></div>");

@@ -1,0 +1,3 @@
+$("#notes_form_holder").empty();
+$("#notes_form_holder").prepend('<%=escape_javascript render("notes/form") %>');
+$("#notes_form_holder").effect( "highlight", '', 3000 );

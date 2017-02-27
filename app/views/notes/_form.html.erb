@@ -1,5 +1,5 @@
 <div id="note_errors"></div>
-<%= simple_form_for [@student, @note], :remote => true do |f| %>
-  <%= f.input :note, :label => false, :required => false, :input_html => { :class => "span5", :rows => "10" } %><br/>
+<%= simple_form_for [@student, @note], remote: true do |f| %>
+  <%= f.input :note, label: false, required: false, input_html: { class: "span5", rows: "3" } %><br/>
   <%= f.button :submit, class: "btn btn-success" %>
 <% end %>
