@@ -15,7 +15,7 @@ class Note < ActiveRecord::Base
   end
 
   def editable_time
-    created_at + Note.EDIT_TIME
+    updated_at + Note.EDIT_TIME
   end
 
 end

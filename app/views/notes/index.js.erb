@@ -3,7 +3,7 @@ $("#notes").empty();
 
 dialog = bootbox.dialog({
     message: '<div id="notes_form_holder"></div><br/><table class="table" id="notes"></table>',
-    title: "Notes",
+    title: "Notes - <%= @student.name %>",
     size: "large",
     buttons: { confirm: { label: "Close"} }
 

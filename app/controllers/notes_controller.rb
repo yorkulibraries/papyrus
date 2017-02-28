@@ -33,19 +33,26 @@ class NotesController < ApplicationController
   end
 
   def update
-
     @note = Note.find(params[:id])
-    @note.audit_comment = "Updated the note to #{@note.note}"
-
+    
     unless @note.editable_time > Time.now
         redirect_to student_notes_path(@student),  alert: "Time to edit the note has ended."
     else
-      if @note.update_attributes(note_params)
-        redirect_to student_notes_path(@student), notice: "Successfully updated note."
-      else
-        render action: 'edit'
+
+      @note.audit_comment = "Updated: #{@note.note}"
+
+      respond_to do |format|
+
+        if @note.update_attributes(note_params)
+          format.js
+          format.html { redirect_to student_notes_path(@student), notice: "Successfully updated note." }
+        else
+          format.html { render action: 'edit' }
+          format.js
+        end
       end
     end
+
   end
 
   def destroy

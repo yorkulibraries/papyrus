@@ -1,0 +1,18 @@
+<% if @note.errors.size == 0  %>
+  $("#note_<%= @note.id %>").replaceWith('<%=escape_javascript render @note %>');
+  $("#note_<%= @note.id %>").effect( "highlight", '', 3000 );
+  <% @note = Note.new %>
+
+  $("#notes_form_holder").empty();
+  $("#notes_form_holder").prepend('<%=escape_javascript render("notes/form") %>');
+
+<% else %>
+  $("#note_errors").empty();
+  $("#note_errors").append("<div id=\"list_of_errors\"></div>");
+
+  $("#list_of_errors").addClass("alert alert-danger");
+  $("#list_of_errors").append("<a class=\"close\" data-dismiss=\"alert\">×</a>");
+  <% @note.errors.each do | error | %>
+    $("#list_of_errors").append("<%= @note.errors[error.to_sym].join(", ") %> <br/>");
+  <% end %>
+<% end %>
