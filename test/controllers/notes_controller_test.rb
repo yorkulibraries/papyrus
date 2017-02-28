@@ -34,7 +34,7 @@ class NotesControllerTest < ActionController::TestCase
     end
 
     should "redirect to notes list with error mesage if updating after #{Note.EDIT_TIME / 60} minutes" do
-      note = create(:note, :created_at => Time.now - 2.days, :student => @student)
+      note = create(:note, :updated_at => Time.now - 2.days, :student => @student)
       note.reload
 
       post :edit, {:id => note.id, :student_id => @student.id}
@@ -45,7 +45,7 @@ class NotesControllerTest < ActionController::TestCase
     end
 
     should "be not be able to update note after #{Note.EDIT_TIME / 60} minutes" do
-      note = create(:note, :created_at => Time.now - 6.minutes, :student => @student )
+      note = create(:note, :updated_at => Time.now - 6.minutes, :student => @student )
 
       post :update, { :id => note.id, :student_id => @student.id, :note => { :note => note.note } }
 

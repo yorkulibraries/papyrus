@@ -34,7 +34,7 @@ class NotesController < ApplicationController
 
   def update
     @note = Note.find(params[:id])
-    
+
     unless @note.editable_time > Time.now
         redirect_to student_notes_path(@student),  alert: "Time to edit the note has ended."
     else
@@ -57,9 +57,13 @@ class NotesController < ApplicationController
 
   def destroy
     @note = Note.find(params[:id])
-    @note.audit_comment = "Delete a note"
+    @note.audit_comment = "Deleted a note"
     @note.destroy
-    redirect_to student_notes_path(@student), notice: "Successfully destroyed note."
+
+    respond_to do |format|
+      format.html { redirect_to student_notes_path(@student), notice: "Successfully removed note." }
+      format.js
+    end
   end
 
   private
