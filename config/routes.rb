@@ -1,6 +1,12 @@
 Papyrus::Application.routes.draw do
 
-
+  ## API V1 routes
+  namespace :api do
+    namespace :v1 do
+      get :info, to: "base#index"
+      get :login_test, to: "base#test"
+    end
+  end
 
   namespace :my do
     resource :terms
