@@ -11,6 +11,8 @@ class Student < User
   has_many :access_codes
 
   has_one :student_details
+  has_one :student_details_only_student_number,  -> { select "student_details.student_number"}, class_name: "StudentDetails", foreign_key: "student_id"
+
   has_many :item_connections
   has_many :items, through: :item_connections
 
@@ -31,7 +33,7 @@ class Student < User
   # username, email, name and role are validated in the user class
 
   ## SCOPES ##
-  default_scope  { includes(student_details: { transcription_coordinator: [] }) }
+  #default_scope  { includes(student_details: { transcription_coordinator: [] }) }
 
   scope :assigned_to, lambda { |user_id| joins(:student_details).
                               where("student_details.transcription_coordinator_id = ? OR student_details.transcription_assistant_id = ?", user_id, user_id)

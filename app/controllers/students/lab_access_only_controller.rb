@@ -5,7 +5,7 @@ class Students::LabAccessOnlyController < ApplicationController
 
   def show
     page_number = params[:page] ||= 1
-    @students = Student.lab_access_only.page(page_number)
+    @students = Student.lab_access_only.includes(:student_details).page(page_number)
   end
 
   def destroy

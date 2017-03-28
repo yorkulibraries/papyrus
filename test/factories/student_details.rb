@@ -14,5 +14,5 @@ FactoryGirl.define do
     association :transcription_assistant, factory: :user
 
   end
-  
+
 end

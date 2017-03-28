@@ -4,7 +4,7 @@ class StudentsController < ApplicationController
   def index
      page_number = params[:page] ||= 1
 
-     @students = Student.active.page(page_number)
+     @students = Student.active.includes(:student_details).page(page_number)
      @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
   end
 
@@ -165,7 +165,7 @@ class StudentsController < ApplicationController
     @student.inactive = false
     @student.audit_comment = "Set Student account to ACTIVE"
     @student.save
-    
+
     respond_to do |format|
       format.html { redirect_to @student, notice: "Student has been reactivated, and can now use Papyrus" }
       format.js

@@ -6,17 +6,17 @@ class Students::ListController < ApplicationController
 
 
   def never_logged_in
-    @students = Student.never_logged_in.reject { |s| s.lab_access_only? }
+    @students = Student.never_logged_in.includes(:student_details).reject { |s| s.lab_access_only? }
   end
 
   def inactive
     page_number = params[:page] ||= 1
-    @students = Student.inactive.page(page_number)
+    @students = Student.inactive.includes(:student_details).page(page_number)
   end
 
   def blocked
     page_number = params[:page] ||= 1
-    @students = Student.blocked.page(page_number)
+    @students = Student.blocked.includes(:student_details).page(page_number)
   end
 
 end

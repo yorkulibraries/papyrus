@@ -1,5 +1,6 @@
 class Api::V1::BaseController < ApplicationController
   skip_authorization_check ## skip authorization, this will use it's own
+  skip_before_filter :login_required
 
   ## BASE CONTROLLER REQUIRING AUTHENTICATION - BASIC HTTP
   ## IT CHECKS IF API ACCESS IS ENABLED
@@ -11,7 +12,6 @@ class Api::V1::BaseController < ApplicationController
   #before_action :authenticate, except: [:info]
 
   def info
-    render plain: "Papyrus REST API version 1.0"
   end
 
   def test

@@ -2,15 +2,20 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def index
     which = params[:which]
-    fields = params[:fields]
-    fields = [:id, :first_name, :last_name, :username, :role].join(",") if fields.blank?
+
+    if params[:fields].blank?
+      fields = [:id, :first_name, :last_name, :username]
+    else
+      fields = params[:fields].split(",").map { |f| f.to_sym }
+    end
+
 
     if which == "students"
-      @users = Student.unblocked.includes(:student_details).pluck(fields)
-    elsif which == "admin"
-      @users =  User.unblocked.not_students.pluck(fields)
-    else
-      @users = User.unblocked.pluck(fields)
+      @users = Student.unblocked.includes(:student_details_only_student_number).pluck(*fields)
+    elsif which == "admins"
+      @users =  User.unblocked.not_students.pluck(*fields)
+    else      
+      @users = User.unblocked.pluck(*fields)
     end
 
 

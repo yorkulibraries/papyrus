@@ -5,6 +5,7 @@ class StudentDetails < ActiveRecord::Base
   #                 :requires_orientation, :orientation_completed, :orientation_completed_at, :accessibility_lab_access, :alternate_format_required
 
   belongs_to :student
+  
   belongs_to :transcription_coordinator, class_name: "User", foreign_key: "transcription_coordinator_id"
   belongs_to :transcription_assistant, class_name: "User", foreign_key: "transcription_assistant_id"
 
@@ -50,5 +51,5 @@ class StudentDetails < ActiveRecord::Base
     self.audit_comment = "Orientation Completed"
     save(valudate: false)
   end
-  
+
 end

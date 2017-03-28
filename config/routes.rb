@@ -7,7 +7,7 @@ Papyrus::Application.routes.draw do
         get :info, on: :collection
       end
 
-      get :info, to: "base#info"
+      get :info, to: "base#info", defaults: { format: 'text' }
       get :login_test, to: "base#test"
 
       resources :users, concerns: :information, defaults: { format: 'text' }
