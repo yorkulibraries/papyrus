@@ -3,8 +3,17 @@ Papyrus::Application.routes.draw do
   ## API V1 routes
   namespace :api do
     namespace :v1 do
-      get :info, to: "base#index"
+      concern :information do
+        get :info, on: :collection
+      end
+
+      get :info, to: "base#info"
       get :login_test, to: "base#test"
+
+      resources :users, concerns: :information, defaults: { format: 'text' }
+      resources :items, concerns: :information, defaults: { format: 'text' } # NOT IMPLEMENTED
+      resources :courses, concerns: :information, defaults: { format: 'text' } # NOT IMPLEMENTED
+
     end
   end
 

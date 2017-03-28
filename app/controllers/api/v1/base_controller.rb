@@ -8,9 +8,9 @@ class Api::V1::BaseController < ApplicationController
   USERS = {"api" => "secret", #plain text password
             "dap" => Digest::MD5.hexdigest(["dap",REALM,"secret"].join(":")) }  #ha1 digest password
 
-  before_action :authenticate, except: [:index]
+  #before_action :authenticate, except: [:info]
 
-  def index
+  def info
     render plain: "Papyrus REST API version 1.0"
   end
 
