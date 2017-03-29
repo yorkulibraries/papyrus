@@ -23,12 +23,25 @@
 		    <%= f.input :errors_email_from, label: "Error Email From Address" %>
 		    <%= f.input :errors_email_to, as: :array, label: "Send Error Messages To"%>
 				<p class="help-block small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
+				<hr/>
+				<div class='well'>
+				<h4 class="black">EXTERNAL API - Version 1.0</h4>
+				<%= f.input :api_enable, label: "Enable External API v1.0", as: :radio_buttons %>
 
+				<p class="alert alert-danger">
+					If you enable API and don't enable Basic HTTP AUTH, you must secure access to API via Apache or some other module.
+				</p>
+
+				<%= f.input :api_http_auth_enable, label: "Enable Basic HTTP AUTH", as: :radio_buttons %>
+				<hr/>
+				<%= f.input :api_http_auth_user, label: "HTTP AUTH Username", as: :string %>
+				<%= f.input :api_http_auth_pass, label: "HTTP AUTH Passowrd", as: :string %>
+				</div>
 				<hr/>
 				<h4 class="black">Performance Profiling</h4>
 
 
-				<%= f.input :profiler_enable, label: "Enable Profiler", as: :radio_buttons %>				
+				<%= f.input :profiler_enable, label: "Enable Profiler", as: :radio_buttons %>
 
 				<input type="hidden" name="return_to" value="system"/>
 				<%= f.submit "Save Settings", class: "btn btn-success" %>

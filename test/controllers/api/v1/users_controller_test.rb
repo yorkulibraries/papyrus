@@ -3,9 +3,9 @@ require 'test_helper'
 class Api::V1::UsersControllerTest < ActionController::TestCase
 
   setup do
-    user = 'api'
-    pw = 'secret'
-    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(user,pw)
+    ## ENABLE API WITH HTTP_AUTH
+    PapyrusSettings.api_enable = PapyrusSettings::TRUE
+    PapyrusSettings.api_http_auth_enable = PapyrusSettings::FALSE
   end
 
   should "return a list of students, as text and json" do

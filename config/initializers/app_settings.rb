@@ -12,6 +12,12 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:app_name, "Papyrus")
   PapyrusSettings.save_default(:app_owner, "York University Libraries")
 
+  ## ENABLE / DISABLE API
+  PapyrusSettings.save_default(:api_enable, PapyrusSettings::FALSE)
+  PapyrusSettings.save_default(:api_http_auth_enable, PapyrusSettings::FALSE)
+  PapyrusSettings.save_default(:api_http_auth_user, "papyrus_api")
+  PapyrusSettings.save_default(:api_http_auth_pass, "secret-api")
+
   ## MINI PROFILER
   PapyrusSettings.save_default(:profiler_enable, PapyrusSettings::FALSE)
 

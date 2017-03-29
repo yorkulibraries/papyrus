@@ -5,13 +5,12 @@ class Api::V1::BaseController < ApplicationController
   ## BASE CONTROLLER REQUIRING AUTHENTICATION - BASIC HTTP
   ## IT CHECKS IF API ACCESS IS ENABLED
 
-  REALM = "SuperSecret"
-  USERS = {"api" => "secret", #plain text password
-            "dap" => Digest::MD5.hexdigest(["dap",REALM,"secret"].join(":")) }  #ha1 digest password
 
-  #before_action :authenticate, except: [:info]
+
+  before_action :authenticate, except: [:info]
 
   def info
+    @disabled = params[:disabled]
   end
 
   def test
@@ -20,8 +19,22 @@ class Api::V1::BaseController < ApplicationController
 
   private
   def authenticate
-    authenticate_or_request_with_http_digest(REALM) do |username|
-      USERS[username]
+    @realm = "Papyrus API v1.0"
+    users = { PapyrusSettings.api_http_auth_user => PapyrusSettings.api_http_auth_password, "u" => "p"}
+
+    if PapyrusSettings.api_enable == PapyrusSettings::TRUE
+
+      if PapyrusSettings.api_http_auth_enable == PapyrusSettings::TRUE
+
+        authenticate_or_request_with_http_digest(@realm) do |username|        
+          users[username]
+        end
+
+      end
+
+    else
+      redirect_to api_v1_info_url(disabled: true)
     end
+
   end
 end
