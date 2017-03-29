@@ -20,7 +20,7 @@ class Api::V1::BaseControllerTest < ActionController::TestCase
     PapyrusSettings.api_http_auth_enable = PapyrusSettings::TRUE
 
     get :test
-    assert_response 401, "Should deny it"
+    assert_response 401, "Should denied"
   end
 
   should "log in and not redirect if right credentials were passed" do

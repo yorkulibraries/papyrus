@@ -31,6 +31,7 @@ class ActiveSupport::TestCase
 end
 
 class ActionController::TestCase
+  PapyrusSettings.expire_cache
 
   def log_user_in(user)
     session[:user_id] = user.id

@@ -33,6 +33,8 @@ Papyrus::Application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.cache_store = :memory_store
+
   config.log_tags = [:uuid, :remote_ip]
 
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload

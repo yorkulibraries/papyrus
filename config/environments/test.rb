@@ -37,9 +37,11 @@ Papyrus::Application.configure do
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_files = true
   config.static_cache_control = "public, max-age=3600"
-  
+
 
    config.active_support.test_order = :sorted
+
+   config.cache_store = :memory_store
 
    # Enable stdout logger
    config.logger = Logger.new(STDOUT)

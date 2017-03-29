@@ -20,13 +20,15 @@ class Api::V1::BaseController < ApplicationController
   private
   def authenticate
     @realm = "Papyrus API v1.0"
-    users = { PapyrusSettings.api_http_auth_user => PapyrusSettings.api_http_auth_password, "u" => "p"}
+
+    users = { PapyrusSettings.api_http_auth_user => PapyrusSettings.api_http_auth_pass }
+    
 
     if PapyrusSettings.api_enable == PapyrusSettings::TRUE
 
       if PapyrusSettings.api_http_auth_enable == PapyrusSettings::TRUE
 
-        authenticate_or_request_with_http_digest(@realm) do |username|        
+        authenticate_or_request_with_http_digest(@realm) do |username|
           users[username]
         end
 
