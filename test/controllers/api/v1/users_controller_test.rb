@@ -58,4 +58,16 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     assert_equal json_users.first[1], user.first_name
   end
 
+  should "return a student if a number is passed in the which paramter" do
+    student = create(:student)
+
+    get :index, fields: "id, first_name",format: :json, which: student.details.student_number
+    json_users = JSON.parse(@response.body)
+
+    assert_equal json_users.first[0], student.id
+    assert_equal json_users.first[1], student.first_name
+
+  end
+
+
 end

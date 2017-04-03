@@ -14,11 +14,11 @@ class Api::V1::UsersController < Api::V1::BaseController
       @users = Student.unblocked.includes(:student_details_only_student_number).pluck(*fields)
     elsif which == "admins"
       @users =  User.unblocked.not_students.pluck(*fields)
-    else      
+    elsif is_number?(which)
+      @users = Student.unblocked.includes(:student_details_only_student_number).where("student_details.student_number = ? ", which).pluck(*fields)
+    else
       @users = User.unblocked.pluck(*fields)
     end
-
-
 
     respond_to do |format|
       format.json { render json: @users }
@@ -33,5 +33,10 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     info = [preamble, index]
     render plain: info.join("\n---\n");
+  end
+
+  private
+  def is_number? string
+    true if Float(string) rescue false
   end
 end
