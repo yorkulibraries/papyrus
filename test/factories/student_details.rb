@@ -6,6 +6,7 @@ FactoryGirl.define do
     sequence(:student_number) { |n| n }
     preferred_phone "12345"
     cds_counsellor "some person"
+    cds_counsellor_email "counserllor_email@email.com.test"
     student nil
     requires_orientation true
     orientation_completed true
