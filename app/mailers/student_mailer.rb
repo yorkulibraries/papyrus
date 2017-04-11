@@ -37,10 +37,10 @@ class StudentMailer < ActionMailer::Base
     @date_short = Date.today.strftime("%m-%d-%Y")
     @app_name = PapyrusSettings.app_name
     @org_name = PapyrusSettings.org_name
-    
+    @counsellor_email = student.details.cds_counsellor_email
 
     if PapyrusSettings.email_allow && student.email != nil
-      mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_welcome_subject)
+      mail(to: student.email, cc: sender.email, bcc: @counsellor_email, subject: PapyrusSettings.email_welcome_subject)
 
       @student.audit_comment = "Sent to #{@student.email}"
       @student.save
