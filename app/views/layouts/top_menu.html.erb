@@ -97,7 +97,7 @@
       </a>
       <ul class="dropdown-menu">
         <% Announcement.active.current(nil, @current_user.type).each do |announcement| %>
-          <%= render announcement, show: "li" %>
+          <%= render partial: "announcements/announcement", locals: { show: "li", announcement: announcement } %>
         <% end %>
       </ul>
   </li>
