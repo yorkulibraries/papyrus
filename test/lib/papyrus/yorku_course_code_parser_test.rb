@@ -14,10 +14,12 @@ class Papyrus::YorkuCourseCodeParserTest < ActiveSupport::TestCase
     assert @parser.valid?("2016_AP_POL_Y_1000__6_C_EN_A_TUTR_04"), "Should be valid tutorial"
     assert @parser.valid?("2016_AP_HRS_Y_1000__6_C_EN_A"), "Should be valid too"
 
+    assert @parser.valid?("2016_GS_GFWS_SU_6801A_3_A_EN_A_DIRD_01"), "ADDITIONAL VERSION, should be valid"
+
     assert @parser.valid?("2016_AP_POLS_Y_1000__6_C_EN_A"), "should be also be valid, since it's unique"
 
     assert ! @parser.valid?("POLS_2000"), "Not Valid"
-    assert ! @parser.valid?("2016_AP_POLS_Y_1000_6_C_EN_A_LECT_01"), "should be not be valid, missing an _"
+
 
     assert ! @parser.valid?("nil"), "not valid"
     assert ! @parser.valid?(""), "not valid"
