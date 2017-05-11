@@ -1,5 +1,11 @@
 module Papyrus
   ## SAMPLE 2016_AP_POLS_Y_1000__6_C_EN_A_LECT_01, 2016_AP_POLS_Y_1000__6_C_EN_A_TUTR_04, 2016_AP_HRM_F_3422__3_B_EN_A_LECT_01
+  # 2016_GS_CDIS_F_5110__3_A_EN_A_SEMR_01,
+  # 2016_GS_CDIS_S2_5075__3_B_EN_A_ONLN_01,
+  # 2016_GS_CDIS_W_5120__3_M_EN_A_SEMR_01,
+  # 2016_GS_CDIS_Y_5100__6_A_EN_A_SEMR_01,
+  # 2016_GS_EDUC_SU_5715__3_A_EN_A_SEMR_01,
+  # 2016_GS_GFWS_SU_6801A_3_A_EN_A_DIRD_01  <<<<<<<<< THIS IS ANOTHER VERSION OF THE CODE
 
   class YorkuCourseCodeParser
 
@@ -12,7 +18,7 @@ module Papyrus
       ## nil or empty return false right away
       return false if code == nil || code.size == 0
 
-      if code.count("_") == FULL_UNDERSCORE_COUNT || code.count("_") == EXTENDED_UNDERSCORE_COUNT
+      if code.count("_") >= FULL_UNDERSCORE_COUNT || code.count("_") <= EXTENDED_UNDERSCORE_COUNT
         return true
       end
 
@@ -25,7 +31,8 @@ module Papyrus
     def unique_code(extended_code)
 
       if valid?(extended_code)
-        return extended_code.split("_")[0..FULL_UNDERSCORE_COUNT].join("_")if extended_code.count("_") == EXTENDED_UNDERSCORE_COUNT
+        return extended_code.split("_")[0..FULL_UNDERSCORE_COUNT].join("_") if extended_code.count("_") == EXTENDED_UNDERSCORE_COUNT
+        return extended_code.split("_")[0..FULL_UNDERSCORE_COUNT].join("_") if extended_code.count("_") == (EXTENDED_UNDERSCORE_COUNT - 1)
         return extended_code if extended_code.count("_") == FULL_UNDERSCORE_COUNT
       end
 
