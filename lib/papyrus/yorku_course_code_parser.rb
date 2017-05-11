@@ -18,7 +18,7 @@ module Papyrus
       ## nil or empty return false right away
       return false if code == nil || code.size == 0
 
-      if code.count("_") >= FULL_UNDERSCORE_COUNT || code.count("_") <= EXTENDED_UNDERSCORE_COUNT
+      if code.count("_") >= FULL_UNDERSCORE_COUNT && code.count("_") <= EXTENDED_UNDERSCORE_COUNT
         return true
       end
 
