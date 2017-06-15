@@ -110,7 +110,7 @@ class BibRecord
   def self.build_item_from_vufind_result(result, item_type, id_prefix = VUFIND)
     return if result == nil
 
-    result = HashWithIndifferentAccess.new(result)
+    result = ActiveSupport::HashWithIndifferentAccess.new(result)
     item = Item.new
 
     item.item_type = item_type
