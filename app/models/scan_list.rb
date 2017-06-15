@@ -1,4 +1,4 @@
-class ScanList < ActiveRecord::Base
+class ScanList < ApplicationRecord 
 
   # Fields : name, status, created_by, assigned_to
 

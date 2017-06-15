@@ -1,4 +1,4 @@
-class ItemCourseConnection < ActiveRecord::Base
+class ItemCourseConnection < ApplicationRecord 
 
   ## RELATIONSHIPS ##
   belongs_to :item
@@ -9,5 +9,5 @@ class ItemCourseConnection < ActiveRecord::Base
 
   ## Audited ##
   audited associated_with: :item
-  
+
 end

@@ -1,4 +1,4 @@
-class ScanItem < ActiveRecord::Base
+class ScanItem < ApplicationRecord 
   # Fields: :summary, :item_id, :scan_list_id, :assigned_to_id, :created_by_id, :due_date, :status
 
   ## RELATIONS

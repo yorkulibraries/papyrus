@@ -1,4 +1,4 @@
-class Course < ActiveRecord::Base
+class Course < ApplicationRecord 
   #attr_accessible :title, :code
 
   ## RELATIONSHIPS ##

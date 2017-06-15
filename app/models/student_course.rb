@@ -1,4 +1,4 @@
-class StudentCourse < ActiveRecord::Base
+class StudentCourse < ApplicationRecord 
 
   ## RELATIONSHIPS ##
   belongs_to :student

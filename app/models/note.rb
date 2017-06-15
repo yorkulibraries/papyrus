@@ -1,4 +1,4 @@
-class Note < ActiveRecord::Base
+class Note < ApplicationRecord 
   #attr_accessible :note
 
   default_scope { order("created_at desc") }

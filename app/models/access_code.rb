@@ -1,4 +1,4 @@
-class AccessCode < ActiveRecord::Base
+class AccessCode < ApplicationRecord 
   #attr_accessible :for, :code, :expires_at
 
 
@@ -25,7 +25,7 @@ class AccessCode < ActiveRecord::Base
 
   def expired?
     if self[:expires_at] != nil
-      self[:expires_at] < Date.today 
+      self[:expires_at] < Date.today
     else
       false
     end

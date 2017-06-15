@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord 
   #attr_accessible :username, :first_name, :last_name, :role, :email
   audited
 

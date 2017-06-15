@@ -1,4 +1,4 @@
-class Appointment < ActiveRecord::Base
+class Appointment < ApplicationRecord 
 
   ## RELATIONSHIPS
   belongs_to :student

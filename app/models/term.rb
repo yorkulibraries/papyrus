@@ -1,4 +1,4 @@
-class Term < ActiveRecord::Base
+class Term < ApplicationRecord 
   #attr_accessible :name, :start_date, :end_date
 
 

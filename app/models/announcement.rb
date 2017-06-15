@@ -1,4 +1,4 @@
-class Announcement < ActiveRecord::Base
+class Announcement < ApplicationRecord 
   #attr_accessible :ends_at, :message, :starts_at, :audience, :active
 
   ## AUDIT TRAIL

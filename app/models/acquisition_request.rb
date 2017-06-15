@@ -1,4 +1,4 @@
-class AcquisitionRequest < ActiveRecord::Base
+class AcquisitionRequest < ApplicationRecord 
 
   ##### DB Fields for reference (update if changes)
   # "id", "item_id", "requested_by_id", "acquisition_reason", "status", "location_id",

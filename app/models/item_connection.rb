@@ -1,4 +1,4 @@
-class ItemConnection < ActiveRecord::Base
+class ItemConnection < ApplicationRecord 
   # extra field  "expires_on"
 
   belongs_to :item

@@ -1,4 +1,4 @@
-class Attachment < ActiveRecord::Base
+class Attachment < ApplicationRecord 
   #attr_accessible :name, :item_id, :file, :file_cache, :full_text, :url, :access_code_required, :is_url
   before_create :default_name
 
