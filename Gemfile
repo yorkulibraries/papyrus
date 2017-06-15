@@ -25,7 +25,7 @@ gem 'capistrano-rbenv', "2.1.0"
 
 
 ## CSS AND JAVASCRIPT ##
-gem 'therubyracer', "0.12.3" platforms: :ruby
+gem 'therubyracer', "0.12.3", platforms: :ruby
 gem 'jquery-rails', "4.3.1"
 gem 'jquery-ui-rails', "6.0.1"
 
@@ -40,24 +40,25 @@ gem 'best_in_place', '3.1.1'
 gem "worldcatapi", "1.0.5"
 gem 'kaminari', "0.17.0"
 gem "cancancan", "2.0.0"
-gem "rubyzip", "0.9.9"
 gem 'liquid', '4.0.0'
 gem 'email_validator', "1.6.0"
 gem "rails-settings-cached", "0.4.1"
-gem "audited-activerecord", "4.0.0"
+#gem "audited-activerecord", "4.0.0"
+gem "audited", "~> 4.5"
 gem 'remotipart', '1.3.1' # submit files remotely
 gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
+gem "rubyzip", "~> 1.1"
 
 ## EXEL EXPORT ##
-gem "roo", "2.7.1"
-gem "axlsx", "2.0.0"
+gem "roo", '~> 2.3.1'
+gem "axlsx", git: 'https://github.com/randym/axlsx.git'
 gem 'axlsx_rails', "0.5.1"
 
 ## UPLOADING AND MANIPULATING FILES ##
 gem "carrierwave", "1.1.0"
 gem "mini_magick", "4.7.1"
-gem "mime-types", "2.1.15"
+gem "mime-types"
 
 # NOTIFICATIONS
 
@@ -66,14 +67,10 @@ gem 'exception_notification', "4.2.1"
 ## PROFILING
 gem 'rack-mini-profiler', require: false
 
-## TESTING && DEVELOPMENT ##
-group, :develpment, :test do
 
-  gem 'guard-livereload', "2.5.2", require: false
-  gem "rack-livereload", "0.3.16"
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-end
+gem 'guard-livereload', "2.5.2", require: false
+gem "rack-livereload", "0.3.16"
+gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
 group :test do
   gem "minitest", "5.10.2"
@@ -82,7 +79,7 @@ group :test do
   gem 'shoulda', "3.5"
   gem 'shoulda-matchers'
   gem 'shoulda-context'
-  gem "mocha", "3.4.2", require: false
+  gem "mocha", require: false
   gem "ruby-prof", "0.16.2"
   gem 'database_cleaner', "1.6.1"
 
