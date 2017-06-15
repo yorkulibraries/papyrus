@@ -7,7 +7,7 @@ gem "puma", "~> 3.7"
 ## RAILS related ##
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt-ruby', '~> 3.1.2'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '5.0.6'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 

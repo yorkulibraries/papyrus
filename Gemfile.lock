@@ -439,7 +439,7 @@ DEPENDENCIES
   roo (~> 2.3.1)
   ruby-prof (= 0.16.2)
   rubyzip (~> 1.1)
-  sass-rails (~> 5.0)
+  sass-rails (= 5.0.6)
   selenium-webdriver
   shoulda (= 3.5)
   shoulda-context
