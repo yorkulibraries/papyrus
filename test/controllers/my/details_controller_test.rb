@@ -19,7 +19,7 @@ class My::DetailsControllerTest < ActionController::TestCase
 
 
   should "assign review_details variable if review parameter is present" do
-    get :show, welcome: true
+    get :show, params: { welcome: true }
 
     welcome_details = assigns(:welcome_details)
     assert welcome_details == true, "Should be assigned, because we're new"

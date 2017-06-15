@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   check_authorization
 
-  before_filter :login_required, :miniprofiler
+  before_action :login_required, :miniprofiler
 
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
 
     return @current_user
   end
+  helper_method :current_user
 
 
   def logged_in?

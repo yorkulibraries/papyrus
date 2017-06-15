@@ -1,8 +1,8 @@
 class My::BaseController < ApplicationController
 
-  before_filter :authorize_controller, :load_student, :sync_courses
+  before_action :authorize_controller, :load_student, :sync_courses
 
-  before_filter :check_terms_acceptance, except: :welcome
+  before_action :check_terms_acceptance, except: :welcome
 
 
   def welcome
