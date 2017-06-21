@@ -30,11 +30,12 @@ class ActiveSupport::TestCase
 
 end
 
-class ActionController::TestCase
+class ActionDispatch::IntegrationTest
   PapyrusSettings.expire_cache
 
   def log_user_in(user)
-    session[:user_id] = user.id
+    #session[:user_id] = user.id
+    get login_url, headers: { "#{PapyrusSettings.auth_cas_header}" => user.username }
   end
 
 

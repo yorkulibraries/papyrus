@@ -53,8 +53,8 @@ Papyrus::Application.routes.draw do
   get "dashboard" => "home#index"
   get "active_users" => "home#active_users", as: :active_users
 
-  get "logout" => "sessions#destroy", :as => "logout"
-  get "login" => "sessions#new", :as => "login"
+  get "logout" => "login#destroy", :as => "logout"
+  get "login" => "login#new", :as => "login"
 
 
 
