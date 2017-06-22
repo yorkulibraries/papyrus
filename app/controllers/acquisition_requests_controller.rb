@@ -1,4 +1,4 @@
-class AcquisitionRequestsController < ApplicationController
+class AcquisitionRequestsController < AuthenticatedController
   before_action :set_request, only: [:show, :edit, :update, :destroy, :change_status_form, :change_status, :send_to_acquisitions]
   authorize_resource
 

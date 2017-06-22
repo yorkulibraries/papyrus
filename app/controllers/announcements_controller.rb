@@ -1,4 +1,4 @@
-class AnnouncementsController < ApplicationController
+class AnnouncementsController < AuthenticatedController
 
   authorize_resource
 

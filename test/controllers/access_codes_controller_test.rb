@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AccessCodesControllerTest < ActionController::TestCase
+class AccessCodesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @student = create(:student)
@@ -13,8 +13,8 @@ class AccessCodesControllerTest < ActionController::TestCase
     create_list(:access_code, 4, student: @student, expires_at: 2.months.ago)
     create(:access_code)
 
-    get :index, student_id: @student.id
-    assert_template :index
+    get student_access_codes_url(@student)
+    assert_response :success
     active_access_codes = assigns(:active_access_codes)
     expired_access_codes = assigns(:expired_access_codes)
 
@@ -28,19 +28,19 @@ class AccessCodesControllerTest < ActionController::TestCase
 
 
   should "show new form for access_code" do
-    get :new, student_id: @student.id
-    assert_template :new
+    get new_student_access_code_url(@student)
+    assert_response :success
   end
 
   should "show edit form for access_code" do
     code = create(:access_code, student: @student)
-    get :edit, student_id: @student.id, id: code.id
+    get edit_student_access_code_url(@student, code) 
     assert_template :edit
   end
 
   should "create a new access code" do
     assert_difference "AccessCode.count", 1 do
-      post :create, student_id: @student.id, access_code: { for: "whaterver", code: "code", expires_at: "2014-10-10" }
+      post student_access_codes_url(@student), params: {  access_code: { for: "whaterver", code: "code", expires_at: "2014-10-10" } }
       code = assigns(:access_code)
       assert_equal 0, code.errors.size, "There should be no errors"
       assert_equal code.student.id, @student.id, "Student was assigned"
@@ -53,7 +53,7 @@ class AccessCodesControllerTest < ActionController::TestCase
     code = create(:access_code, student: @student)
 
     assert_difference "AccessCode.count", -1 do
-      post :destroy, student_id: @student.id, id: code.id
+      delete student_access_code_url(@student, code)
       assert_redirected_to student_access_codes_path(@student), "Should redirect back to student codes list"
     end
   end

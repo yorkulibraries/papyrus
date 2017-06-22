@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AcquisitionRequestsControllerTest < ActionController::TestCase
+class AcquisitionRequestsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
 
@@ -15,8 +15,8 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
     create_list(:acquisition_request, 2, status: AcquisitionRequest::STATUS_CANCELLED, cancelled_at: Time.now)
     create_list(:acquisition_request, 1, status: AcquisitionRequest::STATUS_BACK_ORDERED)
 
-    get :index
-    assert_template :index
+    get acquisition_requests_url
+    assert_response :success
     items  = assigns(:acquisition_requests)
     assert_equal 3, items.size, "3 Open acquisition requests"
   end
@@ -28,27 +28,26 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
     create_list(:acquisition_request, 2, status: AcquisitionRequest::STATUS_CANCELLED, cancelled_at: Time.now)
     create_list(:acquisition_request, 1, status: AcquisitionRequest::STATUS_BACK_ORDERED)
 
-    get :status, status: AcquisitionRequest::STATUS_ACQUIRED
-    assert_template :status
+    get status_acquisition_requests_url, params: { status: AcquisitionRequest::STATUS_ACQUIRED }
+    assert_response :success
     reqs  = assigns(:acquisition_requests)
     assert_equal 4, reqs.size, "4 STATUS_ACQUIRED acquisition requests"
 
-    get :status, status: AcquisitionRequest::STATUS_BACK_ORDERED
-    assert_template :status
+    get status_acquisition_requests_url, params: { status: AcquisitionRequest::STATUS_BACK_ORDERED }
+    assert_response :success
     reqs  = assigns(:acquisition_requests)
     assert_equal 1, reqs.size, "4 STATUS_BACK_ORDERED acquisition requests"
 
-    get :status
+    get status_acquisition_requests_url
     assert_redirected_to acquisition_requests_path
 
   end
 
   should "show acquisition_request details" do
-    @acquisition_request = create(:acquisition_request)
+    ar = create(:acquisition_request)
 
-    get :show, id: @acquisition_request
+    get acquisition_request_url(ar)
     assert_response :success
-    assert_template :show
   end
 
 
@@ -56,9 +55,8 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
 
   should "show new acquistion request" do
     item = create(:item)
-    get :new, item_id: item.id
+    get new_acquisition_request_url, params: { item_id: item.id }
     assert_response :success
-    assert_template :new
 
     assert assigns(:item), "Should load an request for which to create an acquisition"
   end
@@ -67,7 +65,7 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
     item = create(:item)
     assert_difference('AcquisitionRequest.count') do
       ai = build(:acquisition_request, item: item)
-      post :create, acquisition_request: ai.attributes
+      post acquisition_requests_url,  params: { acquisition_request: ai.attributes }
 
       request = assigns(:acquisition_request)
       assert request
@@ -80,9 +78,9 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
   ### EDITING ###
 
   should "show edit form" do
-    @acquisition_request = create(:acquisition_request, item_id: @item.id)
+    ar = create(:acquisition_request, item_id: @item.id)
 
-    get :edit, id: @acquisition_request
+    get edit_acquisition_request_url(ar)
     assert_response :success
   end
 
@@ -90,7 +88,7 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
     ar = create(:acquisition_request)
     old_source_type = ar.acquisition_source_type
 
-    patch :update, id: ar.id, acquisition_request: { acquisition_source_type: "NEW" }
+    patch acquisition_request_url(ar), params: { acquisition_request: { acquisition_source_type: "NEW" } }
     acquisition_request = assigns(:acquisition_request)
     assert_equal 0, acquisition_request.errors.size, "Should be no errors, #{acquisition_request.errors.messages}"
     assert_response :redirect
@@ -104,7 +102,7 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
   should "destroy an existing acquisition item" do
     ar = create(:acquisition_request)
     assert_difference('AcquisitionRequest.count', -1) do
-      post :destroy, id: ar.id
+      delete acquisition_request_url(ar)
     end
 
     assert_redirected_to acquisition_requests_path
@@ -114,12 +112,13 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
 
   ### STATUS CHANGES ###
   should "set status to #{AcquisitionRequest::STATUS_ACQUIRED}" do
-    @arequest = create(:acquisition_request)
+    ar = create(:acquisition_request)
     source_type = "Publisher"
     source_name = "Penguin"
 
-    post :change_status, id: @arequest.id, status: AcquisitionRequest::STATUS_ACQUIRED,
+    patch change_status_acquisition_request_url(ar), params: { status: AcquisitionRequest::STATUS_ACQUIRED,
             acquisition_request: { acquisition_source_type: source_type, acquisition_source_name: source_name }
+          }
 
     acquisition_request = assigns(:acquisition_request)
     assert_response :redirect
@@ -140,11 +139,13 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
   end
 
   should "set status to #{AcquisitionRequest::STATUS_CANCELLED}" do
-    @arequest = create(:acquisition_request)
+    ar = create(:acquisition_request)
     reason = "Duplicate"
 
-    post :change_status, id: @arequest.id, status: AcquisitionRequest::STATUS_CANCELLED,
+    patch change_status_acquisition_request_url(ar), params: {
+            status: AcquisitionRequest::STATUS_CANCELLED,
             acquisition_request: { cancellation_reason: reason }
+          }
 
             acquisition_request = assigns(:acquisition_request)
     assert_response :redirect
@@ -165,11 +166,12 @@ class AcquisitionRequestsControllerTest < ActionController::TestCase
   end
 
   should "set status to #{AcquisitionRequest::STATUS_BACK_ORDERED}" do
-    @arequest = create(:acquisition_request)
+    ar = create(:acquisition_request)
     date = 3.weeks.from_now
 
-    post :change_status, id: @arequest.id, status: AcquisitionRequest::STATUS_BACK_ORDERED,
+    patch change_status_acquisition_request_url(ar), params: { status: AcquisitionRequest::STATUS_BACK_ORDERED,
             acquisition_request: { back_ordered_until: date }
+          }
 
     acquisition_request = assigns(:acquisition_request)
     assert_response :redirect

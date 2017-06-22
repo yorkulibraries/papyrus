@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < AuthenticatedController
   before_action :authorize_controller
 
   def index

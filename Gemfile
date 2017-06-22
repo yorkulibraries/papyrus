@@ -88,7 +88,7 @@ group :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 
-  gem 'rails-controller-testing'
+  gem 'rails-controller-testing' ## KEEP THIS AROUND SINCE IT'S USEFUL FOR TESTS in CONTROLLERS
   gem 'spring', "2.0.2"
   gem 'spring-watcher-listen', '~> 2.0.0'
 

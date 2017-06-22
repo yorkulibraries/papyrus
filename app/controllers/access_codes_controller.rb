@@ -1,6 +1,6 @@
-class AccessCodesController < ApplicationController
+class AccessCodesController < AuthenticatedController
   authorize_resource
-  before_filter :load_student
+  before_action :load_student
 
 
   def index

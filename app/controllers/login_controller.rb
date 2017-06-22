@@ -1,6 +1,4 @@
 class LoginController < ApplicationController
-  skip_authorization_check
-
 
   def new
 
@@ -16,7 +14,7 @@ class LoginController < ApplicationController
        alt_username = request.headers[PapyrusSettings.auth_cas_header_alt]
     end
 
-    
+
     users = User.unblocked.where("username = ? OR username = ?", username, alt_username)
 
     if users.size == 1
