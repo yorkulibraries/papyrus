@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class My::TermsControllerTest < ActionController::TestCase
+class My::TermsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @student = create(:student)
@@ -8,13 +8,12 @@ class My::TermsControllerTest < ActionController::TestCase
   end
 
   should "show terms page" do
-    get :show
-    assert_response :success
-    assert_template :show
+    get my_terms_path
+    assert_response :success    
   end
 
   should "accept terms and redirect to items page" do
-    post :update
+    patch my_terms_path
 
     assert  session[:terms_accepted], "Should be accepted terms"
 

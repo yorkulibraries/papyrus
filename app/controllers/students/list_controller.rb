@@ -1,6 +1,6 @@
-class Students::ListController < ApplicationController
+class Students::ListController < AuthenticatedController
 
-  before_filter do
+  before_action do
     authorize! :show, :dashboard
   end
 

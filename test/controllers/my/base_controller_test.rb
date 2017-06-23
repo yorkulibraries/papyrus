@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class My::BaseControllerTest < ActionController::TestCase
+class My::BaseControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @cas_header = PapyrusSettings.auth_cas_header
@@ -10,12 +10,15 @@ class My::BaseControllerTest < ActionController::TestCase
   end
 
   should "redirect to details welcome page if student never logged in" do
-    @student.last_logged_in_at = nil
-    @student.save
+    @student.first_time_login = true
+    @student.save(validate: false)
 
-    get :welcome
-
+    get my_student_portal_path
     assert_redirected_to my_details_path(welcome: true), "Should redirect to my_details_path"
+
+    @student.reload
+    assert_equal false, @student.first_time_login?, "First time login should be set to false"
+
   end
 
   should "redirect to terms page if student has logged in before" do
@@ -23,7 +26,7 @@ class My::BaseControllerTest < ActionController::TestCase
     @student.last_logged_in_at = 2.days.ago
     @student.save
 
-    get :welcome
+    get my_student_portal_path
 
     assert_redirected_to my_items_path, "SHould go to items path"
   end
@@ -32,19 +35,23 @@ class My::BaseControllerTest < ActionController::TestCase
     PapyrusSettings.course_sync_on_login = PapyrusSettings::TRUE
     session[:courses_synced] = nil
 
-    get :welcome
+    get my_student_portal_path
     assert session[:courses_synced], "Session should be set"
     assert_redirected_to my_sync_courses_path
   end
 
   should "redirect to my_terms if session courses_synced is already set and user is not logged in" do
     PapyrusSettings.course_sync_on_login = PapyrusSettings::TRUE
-    session[:courses_synced] = true
+    #session[:courses_synced] = true
+
+    get my_student_portal_path
+    assert session[:courses_synced], "Session should be set"
+    assert_redirected_to my_sync_courses_path
 
     @student.last_logged_in_at = 2.days.ago
     @student.save
 
-    get :welcome
+    get my_student_portal_path
 
     assert_redirected_to my_items_path, "SHould go to items path"
 

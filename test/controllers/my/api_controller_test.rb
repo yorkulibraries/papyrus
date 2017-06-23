@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class My::ApiControllerTest < ActionController::TestCase
+class My::ApiControllerTest < ActionDispatch::IntegrationTest
 
   context "as manager user" do
     setup do
@@ -10,7 +10,7 @@ class My::ApiControllerTest < ActionController::TestCase
 
     should "be able to log in as student" do
       student = create(:student)
-      get :login_as_student, id: student.id
+      get my_login_as_student_path(student)
 
       assert_equal student.id, session[:user_id]
       assert_equal @user.id, session[:return_to_user_id]
@@ -20,22 +20,21 @@ class My::ApiControllerTest < ActionController::TestCase
 
     should "raises error if log in as student not found" do
       assert_raises ActiveRecord::RecordNotFound do
-        get :login_as_student, id: "999"
+        get my_login_as_student_path(999)
       end
     end
 
     should "log out as student" do
       student = create(:student)
 
-      session[:user_id] = student.id
-      session[:return_to_user_id] = @user.id
-      session[:terms_accepted] = false
+      get my_login_as_student_path(student)
+      patch my_terms_path
 
-      get :logout_as_student
+      get my_logout_as_student_path
 
-      assert_equal nil, session[:return_to_user_id]
+      assert_nil session[:return_to_user_id]
       assert_equal @user.id, session[:user_id]
-      assert_equal nil, session[:terms_accepted]
+      assert_nil session[:terms_accepted]
 
       assert_response :redirect
       assert_redirected_to student_path(student)

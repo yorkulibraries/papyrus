@@ -1,5 +1,5 @@
-class Students::LabAccessOnlyController < ApplicationController
-  before_filter do
+class Students::LabAccessOnlyController < AuthenticatedController
+  before_action do
     authorize! :show, :dashboard
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102190012) do
+ActiveRecord::Schema.define(version: 20170623162239) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string "for"
@@ -279,6 +279,7 @@ ActiveRecord::Schema.define(version: 20161102190012) do
     t.datetime "last_logged_in_at"
     t.string "first_name"
     t.datetime "last_active_at"
+    t.boolean "first_time_login", default: true
     t.index ["inactive", "role"], name: "index_users_on_inactive_and_role"
     t.index ["inactive"], name: "index_users_on_inactive"
     t.index ["type", "inactive"], name: "index_users_on_type_and_inactive"

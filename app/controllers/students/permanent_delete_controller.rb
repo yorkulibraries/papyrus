@@ -1,5 +1,5 @@
-class Students::PermanentDeleteController < ApplicationController
-  before_filter do
+class Students::PermanentDeleteController < AuthenticatedController
+  before_action do
     authorize! :perma_destroy, :student
   end
 

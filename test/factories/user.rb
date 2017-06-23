@@ -6,7 +6,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "foo#{n}@email.com" }
     sequence(:username) { |n| "username#{n}" }
     role User::MANAGER
-
+    first_time_login false
     blocked false
 
   end

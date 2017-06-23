@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Students::ListControllerTest < ActionController::TestCase
+class Students::ListControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user, role: User::ADMIN)
     log_user_in(@user)
@@ -11,7 +11,7 @@ class Students::ListControllerTest < ActionController::TestCase
     create(:student, last_logged_in_at: nil, student_details: details)
     create_list(:student, 3, last_logged_in_at: 3.days.ago)
 
-    get :never_logged_in
+    get students_never_logged_in_path
     students = assigns(:students)
     assert_equal 1, students.size, "Should be 1 never logged in student"
     assert_template :never_logged_in
@@ -22,7 +22,7 @@ class Students::ListControllerTest < ActionController::TestCase
     create_list(:student, 2, inactive: false)
     create_list(:student, 5, inactive: true)
 
-    get :inactive
+    get students_inactive_path
     students = assigns(:students)
     assert_equal 5, students.size, "There should be 5 inactive students"
   end
@@ -32,7 +32,7 @@ class Students::ListControllerTest < ActionController::TestCase
     create_list(:student, 2, blocked: false)
     create_list(:student, 5, blocked: true)
 
-    get :blocked
+    get students_blocked_path
     students = assigns(:students)
     assert_equal 5, students.blocked.size, "There should be 5 blocked students"
   end

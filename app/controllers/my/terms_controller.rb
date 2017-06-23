@@ -1,6 +1,6 @@
 class My::TermsController < My::BaseController
 
-  skip_filter :check_terms_acceptance
+  skip_before_action :check_terms_acceptance
 
   def show
 

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class My::AccessCodesControllerTest < ActionController::TestCase
+class My::AccessCodesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @student = create(:student)
     log_user_in(@student)

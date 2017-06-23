@@ -1,6 +1,6 @@
 class My::CourseSyncController < My::BaseController
 
-  skip_filter :check_terms_acceptance, :sync_courses
+  skip_before_action :check_terms_acceptance, :sync_courses
 
   def sync
     @student = current_user
@@ -84,7 +84,7 @@ class My::CourseSyncController < My::BaseController
         #{courses_removed.join("\n") if courses_removed.size > 0 }
 
       HEREDOC
-
+      
       ReportMailer.mail_report([coordinator.email, assistant.email], message, "Course List Updated: #{student.name}").deliver_later
     end
 

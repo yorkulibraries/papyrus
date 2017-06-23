@@ -1,10 +1,10 @@
 class My::ApiController < My::BaseController
 
-  skip_filter :check_terms_acceptance
-  skip_filter :authorize_controller, only: :login_as_student
-  skip_filter :load_student, only: [:login_as_student, :logout_as_student]
+  skip_before_action :check_terms_acceptance
+  skip_before_action :authorize_controller, only: :login_as_student
+  skip_before_action :load_student, only: [:login_as_student, :logout_as_student]
 
-  
+
   def login_as_student
     authorize! :login_as, :student
 

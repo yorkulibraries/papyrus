@@ -1,15 +1,15 @@
 require 'test_helper'
 
-class My::DetailsControllerTest < ActionController::TestCase
+class My::DetailsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @student = create(:student)
     log_user_in(@student)
-    session[:terms_accepted] = true
+    patch my_terms_path
   end
 
   should "show student details page" do
 
-    get :show
+    get my_details_path
 
     assert_response :success
     assert assigns(:student_details)
@@ -19,7 +19,7 @@ class My::DetailsControllerTest < ActionController::TestCase
 
 
   should "assign review_details variable if review parameter is present" do
-    get :show, params: { welcome: true }
+    get my_details_path, params: { welcome: true }
 
     welcome_details = assigns(:welcome_details)
     assert welcome_details == true, "Should be assigned, because we're new"

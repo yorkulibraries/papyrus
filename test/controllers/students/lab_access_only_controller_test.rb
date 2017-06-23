@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Students::LabAccessOnlyControllerTest < ActionController::TestCase
+class Students::LabAccessOnlyControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @user = create(:user, role: User::ADMIN)
@@ -12,7 +12,7 @@ class Students::LabAccessOnlyControllerTest < ActionController::TestCase
     create(:student, student_details: details)
     create_list(:student, 3)
 
-    get :show
+    get students_lab_access_only_path
     students = assigns(:students)
     assert_equal 3, students.size, "Should be 3 lab access only students"
     assert_template :show
@@ -22,7 +22,7 @@ class Students::LabAccessOnlyControllerTest < ActionController::TestCase
     create_list(:student, 3, blocked: false)
 
     assert_equal 3, Student.lab_access_only.unblocked.size, "Should be 3 active"
-    post :destroy
+    delete students_lab_access_only_path
     assert_redirected_to students_lab_access_only_path
 
     assert_equal 3, Student.lab_access_only.blocked.size, "Should be 3 inactive"

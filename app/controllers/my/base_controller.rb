@@ -1,4 +1,4 @@
-class My::BaseController < ApplicationController
+class My::BaseController < AuthenticatedController
 
   before_action :authorize_controller, :load_student, :sync_courses
 
@@ -8,7 +8,9 @@ class My::BaseController < ApplicationController
   def welcome
     ## if student is first timer, show details welcome page
     ## otherwise show terms
-    if @student.last_logged_in_at == nil
+
+    if @student.first_time_login?
+      @student.update_attribute(:first_time_login, false)      
       redirect_to my_details_path(welcome: true)
     else
       redirect_to my_items_path
