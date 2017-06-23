@@ -1,7 +1,7 @@
-class CoursesController < ApplicationController
+class CoursesController < AuthenticatedController
   authorize_resource
 
-  before_filter :load_term
+  before_action :load_term
 
   def index
     @courses = @term.courses

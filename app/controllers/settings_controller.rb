@@ -1,4 +1,4 @@
-class SettingsController < ApplicationController
+class SettingsController < AuthenticatedController
 
   authorize_resource PapyrusSettings
 

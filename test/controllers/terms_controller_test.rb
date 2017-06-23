@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TermsControllerTest < ActionController::TestCase
+class TermsControllerTest < ActionDispatch::IntegrationTest
 
   context "as admin" do
     setup do
@@ -12,7 +12,7 @@ class TermsControllerTest < ActionController::TestCase
 
       assert_difference "Term.count", 1 do
         attrs = attributes_for(:term)
-        post :create, :term => attrs
+        post terms_path, params: { term: attrs }
       end
 
       assert_redirected_to term_path(assigns(:term))
@@ -23,7 +23,7 @@ class TermsControllerTest < ActionController::TestCase
        term.name = "woot"
 
 
-       post :update, {:id => term.id, :term => { :name => term.name, :start_date => term.start_date, :end_date => term.end_date } }
+       patch term_path(term), params: { term: { name: term.name, start_date: term.start_date, end_date: term.end_date } }
        assert_redirected_to term_path(term)
        t = Term.find(term.id)
        assert_equal "woot", t.name
@@ -32,17 +32,17 @@ class TermsControllerTest < ActionController::TestCase
     should "be able to destroy" do
       term = create(:term)
       assert_difference "Term.count", -1 do
-        post :destroy, {:id => term.id}
+        delete term_path(term)
       end
     end
 
 
     should "show term and list all courses alphabetically" do
       term = create(:term)
-      create(:course, :title => "a", :term => term)
-      create(:course, :title => "x", :term => term)
+      create(:course, title: "a", term: term)
+      create(:course, title: "x", term: term)
 
-       get :show, :id => term.id
+       get term_path(term)
        term = assigns(:term)
        assert term
        assert_equal term.courses.size, 2
@@ -52,9 +52,9 @@ class TermsControllerTest < ActionController::TestCase
 
     should "show all active and last 10 archived terms" do
       create_list(:term, 10)
-      create_list(:term, 20, :end_date => Date.today - 2.months, :start_date => Date.today - 1.year)
+      create_list(:term, 20, end_date: Date.today - 2.months, start_date: Date.today - 1.year)
 
-      get :index
+      get terms_path
 
       assert_response :success
       terms = assigns(:terms)
@@ -70,10 +70,10 @@ class TermsControllerTest < ActionController::TestCase
 
 
     should "not return courses if the term is expired when searching" do
-      term = create(:term, :name => "expired", :start_date => Date.today - 1.year, :end_date => Date.today - 2.months)
-      create(:course, :title => "search for me", :term => term)
+      term = create(:term, name: "expired", start_date: Date.today - 1.year, end_date:  Date.today - 2.months)
+      create(:course, title: "search for me", term: term)
 
-      get :search_courses, :q => "search"
+      get  search_courses_terms_path, params: { q: "search" }
 
       assert_response :success
       courses = assigns(:courses)

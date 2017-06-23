@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < AuthenticatedController
   authorize_resource
 
 

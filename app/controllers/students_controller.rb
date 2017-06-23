@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class StudentsController < AuthenticatedController
   authorize_resource
 
   def index

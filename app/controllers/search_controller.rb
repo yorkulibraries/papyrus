@@ -1,7 +1,7 @@
-class SearchController < ApplicationController
+class SearchController < AuthenticatedController
 
 
-  before_filter do
+  before_action do
     authorize! :search, :items
   end
 
@@ -21,7 +21,7 @@ class SearchController < ApplicationController
                               "%#{query}%", "%#{query}%", "#{query}", "%#{query}%", "#{query}")
 
     if params[:search_all]
-      @students = @students.page page_number      
+      @students = @students.page page_number
     else
       @students = @students.where(inactive: inactive_status).page page_number
     end

@@ -1,6 +1,6 @@
-class NotesController < ApplicationController
+class NotesController < AuthenticatedController
   authorize_resource
-  before_filter :load_student
+  before_action :load_student
 
   def index
     @notes = @student.notes.includes(:user)

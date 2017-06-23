@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class StatsControllerTest < ActionController::TestCase
+class StatsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user, role: User::MANAGER)
     log_user_in(@user)
@@ -12,7 +12,7 @@ class StatsControllerTest < ActionController::TestCase
     create_list(:attachment, 10, item: item)
     create(:item_connection, item: item, student: student)
 
-    get :index
+    get stats_path
 
     has_attachments_count = assigns(:has_attachments_count)
     has_students_count = assigns(:has_students_count)

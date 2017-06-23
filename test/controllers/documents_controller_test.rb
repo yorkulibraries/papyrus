@@ -1,49 +1,50 @@
 require 'test_helper'
 
-class DocumentsControllerTest < ActionController::TestCase
+class DocumentsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @user = create(:user)
     log_user_in(@user)
+    @student = create(:student)
   end
 
   ####### SHOWING DETAILS AND FORMS ###########
 
   should "show new document form" do
-    student = create(:student)
-    xhr :get, :new, student_id: student.id
+
+    get new_student_document_url(@student), xhr: true
 
     document = assigns(:document)
     assert document, "Document should be assigned"
-    assert_equal student.id, document.attachable_id
-    assert_template :new
+    assert_equal @student.id, document.attachable_id
+    assert_response :success
   end
 
   should "create one new document" do
-    student = create(:student)
+
 
     assert_difference "Document.count", 1 do
-      xhr :post, :create, student_id: student.id, document: attributes_for(:document)
+      post student_documents_url(@student),xhr: true, params: { document: attributes_for(:document) }
     end
 
     document = assigns(:document)
     assert document, "Document should be assigned"
     assert_equal @user.id, document.user_id, "current user is the uploaded"
-    assert_equal student.id, document.attachable_id, "The student id is set"
-    assert_template :create
+    assert_equal @student.id, document.attachable_id, "The student id is set"
+    assert_response :success
 
   end
 
   ## EDITING AND UPDATING ##
   should "show edit document form" do
-    student = create(:student)
-    document = create(:document, user: @user, attachable: student)
 
-    xhr :get, :edit, student_id: student.id, id: document.id
+    document = create(:document, user: @user, attachable: @student)
+
+    get edit_student_document_url(@student, document), xhr: true
 
     document = assigns(:document)
     assert document, "Document should be assigned"
-    assert_template :edit
+    assert_response :success
   end
 
 end

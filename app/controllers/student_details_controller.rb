@@ -1,6 +1,6 @@
-class StudentDetailsController < ApplicationController
+class StudentDetailsController < AuthenticatedController
   authorize_resource Student
-  before_filter :load_student
+  before_action :load_student
 
   def new
     @student_details = StudentDetails.new

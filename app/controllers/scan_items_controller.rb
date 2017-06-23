@@ -1,6 +1,6 @@
-class ScanItemsController < ApplicationController
+class ScanItemsController < AuthenticatedController
   authorize_resource
-  before_filter :load_scan_list
+  before_action :load_scan_list
   protect_from_forgery except: [:new, :edit]
 
   def new
@@ -35,7 +35,7 @@ class ScanItemsController < ApplicationController
   def update
     @scan_item = @scan_list.scan_items.find(params[:id])
     @scan_item.audit_comment = "Updating Scan Item"
-    
+
     if @scan_item.update_attributes(scan_item_params)
       respond_to do |format|
         format.html { redirect_to  [@scan_list, @scan_item], notice: "Successfully updated scan item." }

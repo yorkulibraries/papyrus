@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ItemsControllerTest < ActionController::TestCase
+class ItemsControllerTest < ActionDispatch::IntegrationTest
   include Rails.application.routes.url_helpers
 
 
@@ -14,39 +14,39 @@ class ItemsControllerTest < ActionController::TestCase
   #### ASSIGNING AND WITHHOLDING TESTS ########
 
   should "withhold an item from student" do
-     @item = create(:item)
+     item = create(:item)
 
-     @item.assign_to_student(@student_user)
+     item.assign_to_student(@student_user)
 
      assert_difference "ItemConnection.count", -1 do
-        post :withhold_from_student, {:id => @item.id, :student_id => @student_user.id }
+        delete withhold_from_student_item_url(item), params: { student_id: @student_user.id }
      end
 
      assert_response :redirect
-     assert_redirected_to item_path(@item)
+     assert_redirected_to item_path(item)
   end
 
   should "assign item to students" do
-    @item = create(:item)
+    item = create(:item)
 
     student_1 = create(:student)
     student_2 = create(:student)
 
     assert_difference "ItemConnection.count", 3 do
-      post :assign_to_students, { :id => @item.id, :student_ids => "#{student_1.id},#{student_2.id},#{@student_user.id}", :expires_on => { :date => 1.year.from_now} }
+      post assign_to_students_item_url(item), params: { student_ids: "#{student_1.id},#{student_2.id},#{@student_user.id}", expires_on: { date: 1.year.from_now} }
     end
 
     assert_response :redirect
-    assert_redirected_to item_path(@item)
+    assert_redirected_to item_path(item)
   end
 
   should "assign one or more items to one student" do
-    @item = create(:item)
+    item = create(:item)
 
     item_1 = create(:item)
 
     assert_difference "ItemConnection.count", 2 do
-      post :assign_many_to_student, {:item_ids => "#{item_1.id},#{@item.id}", :student_id => @student_user.id, :expires_on => {:date => 1.year.from_now}}
+      post assign_many_to_student_items_url, params: { item_ids: "#{item_1.id},#{item.id}", student_id: @student_user.id, expires_on: { date: 1.year.from_now } }
     end
 
     assert_response :redirect
@@ -60,7 +60,7 @@ class ItemsControllerTest < ActionController::TestCase
     create(:item, :title => "a month ago", :created_at => Date.today - 2.months)
     create(:item, :title => "6 moths ago", :created_at => Date.today - 6.months)
 
-    get :index
+    get items_path
 
     assert_response :success
     items = assigns(:items)
@@ -76,14 +76,14 @@ class ItemsControllerTest < ActionController::TestCase
      create(:item, :title => "a first item", :created_at => Date.today - 6.months)
 
 
-     get :index, order: "alpha"
+     get items_path, params: { order: "alpha" }
 
      assert_response :success
      alpha_items = assigns(:items)
      assert_equal "a first item", alpha_items.first.title
 
 
-     get :index
+     get items_path
 
      assert_response :success
      by_date_items = assigns(:items)
@@ -93,10 +93,9 @@ class ItemsControllerTest < ActionController::TestCase
   should "show item details page" do
     item = create(:item)
 
-    get :show, id: item.id
+    get item_path(item)
 
     assert_response :success
-    assert_template :show
 
     item = assigns(:item)
     assert_not_nil item, "Item was set"
@@ -106,10 +105,10 @@ class ItemsControllerTest < ActionController::TestCase
   #### CREATE AND UPDATE TESTS ####
 
   should "show new form if no vufind id is present" do
-    get :new
+    get new_item_path
+    assert_response :success
 
     item = assigns(:item)
-    assert_template :new
     assert item.title.blank?, "Title is not set"
   end
 
@@ -118,7 +117,7 @@ class ItemsControllerTest < ActionController::TestCase
   should "create a new item" do
 
     assert_difference "Item.count", 1 do
-      post :create, item: attributes_for(:item).except(:created_at)
+      post items_path, params: { item: attributes_for(:item).except(:created_at) }
       item = assigns(:item)
       assert_response :redirect, "Should redirect to item details page"
       assert_equal 0, item.errors.count, "NO error messages"
@@ -135,7 +134,11 @@ class ItemsControllerTest < ActionController::TestCase
     note = "Note"
 
     assert_difference ["Item.count", "AcquisitionRequest.count"], 1 do
-      post :create, create_acquisition_request: "yes", item: { title: "Test", item_type: "BOOK", unique_id: "12323", acquisition_request: { acquisition_reason: reason, note: note} }
+      post items_path, params: { create_acquisition_request: "yes",
+            item: { title: "Test", item_type: "BOOK", unique_id: "12323",
+            acquisition_request: { acquisition_reason: reason, note: note}
+            }
+          }
 
     #  item = assigns(:item)
     #  assert_equal 0, item.errors.size, "Item Errors: #{item.errors.messages}"
@@ -143,7 +146,7 @@ class ItemsControllerTest < ActionController::TestCase
 
     item = assigns(:item)
     acquisition_request = assigns(:acquisition_request)
-    assert_equal @manager_user, acquisition_request.requested_by  
+    assert_equal @manager_user, acquisition_request.requested_by
     assert_equal item.id, acquisition_request.item.id
     assert_equal reason, acquisition_request.acquisition_reason
     assert_equal note, acquisition_request.note
@@ -154,9 +157,9 @@ class ItemsControllerTest < ActionController::TestCase
   should "show edit form" do
     item = create(:item)
 
-    get :edit, id: item.id
+    get edit_item_path(item)
 
-    assert_template :edit
+    assert_response :success
     assert assigns(:item)
   end
 
@@ -164,7 +167,7 @@ class ItemsControllerTest < ActionController::TestCase
 
     item = create(:item, title: "old", author: "him", user: @manager_user)
 
-    post :update, id: item.id, item: { title: "new", author: "me"}
+    patch item_path(item), params: { item: { title: "new", author: "me"} }
 
     item = assigns(:item)
     assert_response :redirect
@@ -177,7 +180,7 @@ class ItemsControllerTest < ActionController::TestCase
   should "delete an item, just set the deleted flag" do
     item = create(:item)
     assert_difference "Item.count", -1 do
-      post :destroy, id: item.id
+      delete item_path(item)
     end
     assert_redirected_to items_path, "Redirects to items listing"
   end

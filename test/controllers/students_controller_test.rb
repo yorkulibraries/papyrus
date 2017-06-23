@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class StudentsControllerTest < ActionController::TestCase
+class StudentsControllerTest <  ActionDispatch::IntegrationTest
 
   setup do
     @user = create(:user, :role => User::ADMIN)
@@ -14,7 +14,9 @@ class StudentsControllerTest < ActionController::TestCase
       transcription_assistant_id: @user.id }
 
     assert_difference ["Student.count", "StudentDetails.count"], 1 do
-      post :create, student: {first_name: "dude", last_name: "test", email: "1@1.com", username: "dude", student_details_attributes: student_details}
+      post students_path, params: {
+         student: {first_name: "dude", last_name: "test", email: "1@1.com", username: "dude", student_details_attributes: student_details}
+       }
       student = assigns(:student)
       assert student, "student object should not be nil"
       assert_equal 0, student.errors.size, "Should be 0 errors"
@@ -29,7 +31,8 @@ class StudentsControllerTest < ActionController::TestCase
 
     student_details = { student_number: '111', preferred_phone: '11232', cds_counsellor: 'dadf', transcription_coordinator_id: @user.id,
         transcription_assistant_id: @user.id }
-    post :update, id: student.id, student: { first_name: "new", student_details_attributes: student_details}
+
+    patch student_path(student), params: { student: { first_name: "new", student_details_attributes: student_details} }
 
     assert_redirected_to student
 
@@ -43,7 +46,7 @@ class StudentsControllerTest < ActionController::TestCase
 
   should "show audit trail" do
     student = create(:student)
-    get :audit_trail, id: student.id
+    get audit_trail_student_path(student)
 
     assert assigns(:student), "Need student object"
     assert assigns(:audits), "Audits should be there"
@@ -54,7 +57,7 @@ class StudentsControllerTest < ActionController::TestCase
     create_list(:student, 4, inactive: false)
     create_list(:student, 5, inactive: true)
 
-    get :index
+    get students_path
 
     students = assigns(:students)
     assert_equal 4, students.size, "There should be four active students"
@@ -68,7 +71,7 @@ class StudentsControllerTest < ActionController::TestCase
     create_list(:item_connection, 3, :student => student, :expires_on => Date.today - 1.year)
     create_list(:item_connection, 6, :student => student, :expires_on => Date.today + 1.year)
 
-    get :show, :id => student.id
+    get student_path(student)
 
     assert_response :success
 
@@ -94,14 +97,14 @@ class StudentsControllerTest < ActionController::TestCase
 
     assert student.blocked
 
-    get :unblock, :id => student.id
+    get unblock_student_path(student)
 
     assert_redirected_to student
     student.reload
 
     assert !student.blocked
 
-    get :show, :id => student.id
+    get student_path(student)
     assert_select '.blocked .message span', 0
 
   end
@@ -110,7 +113,7 @@ class StudentsControllerTest < ActionController::TestCase
     student = create(:student)
 
     assert_no_difference "Student.count" do
-      post :destroy, id: student.id
+      delete student_path(student)
     end
 
     student = assigns(:student)
@@ -120,7 +123,7 @@ class StudentsControllerTest < ActionController::TestCase
   should "reactivate a student" do
     student = create(:student, inactive: false)
 
-    post :reactivate, id: student.id
+    get reactivate_student_path(student)
     student = assigns(:student)
     assert ! student.inactive?, "Student should be active"
     assert_redirected_to student, "Should redirect to student path"
@@ -132,12 +135,7 @@ class StudentsControllerTest < ActionController::TestCase
   should "send out a welcome email" do
     student = create(:student, email: "whatever@whatever.com")
 
-    post :send_welcome_email,  id: student.id
-
-    last_email = ActionMailer::Base.deliveries.last
-
-    assert_equal "whatever@whatever.com", last_email.to.first
-
+    post send_welcome_email_student_path(student)
     assert_redirected_to student_path(student)
   end
 
@@ -146,15 +144,12 @@ class StudentsControllerTest < ActionController::TestCase
     item = create(:item)
 
     # From Student Screen
-    post :notify, students: [student.id], student: student.id
+    post notify_students_path, params: { students: [student.id], student: student.id }
     assert_redirected_to student_path(student), "redirects to student"
 
     # From Item Screen
-    post :notify, students: [student.id], item: item.id
+    post notify_students_path, params: { students: [student.id], item: item.id }
     assert_redirected_to item_path(item), "redirects to item"
-
-    last_email = ActionMailer::Base.deliveries.last
-    assert_equal "whatever@whatever.com", last_email.to.first
 
   end
 
@@ -163,20 +158,20 @@ class StudentsControllerTest < ActionController::TestCase
     student.first_name = nil
     student.save(validate: false)
 
-    post :notify, students: [student.id], student:student.id
+    post notify_students_path, params: { students: [student.id], student:student.id }
     assert_redirected_to student_path(student), "redirects to student"
 
   end
 
   should "redirect to item or student path if no student ids were provided" do
-    post :notify, student: 1
+    post notify_students_path, params: { student: 1 }
     assert_response :redirect
-    post :notify, item: 1
+    post notify_students_path, params: { item: 1 }
     assert_response :redirect
   end
 
   should "redirect to rool url if no student or item id was present" do
-    post :notify
+    post notify_students_path
     assert_response :redirect
     assert_redirected_to root_url
   end
@@ -186,7 +181,7 @@ class StudentsControllerTest < ActionController::TestCase
     student = create(:student, name: "Terry Jones", username: "terryjones", email: "tj@yorku.ca", inactive: false)
     student.details.update_attributes(orientation_completed: false, orientation_completed_at: nil)
 
-    get :complete_orientation, id: student.id
+    get complete_orientation_student_path(student)
     assert_response :redirect
     assert_redirected_to student_path(student), "Should redirect back to student view"
 
@@ -204,7 +199,7 @@ class StudentsControllerTest < ActionController::TestCase
     courses = create_list(:course, 4)
 
     assert_difference "StudentCourse.count", courses.size do
-      xhr :post, :enroll_in_courses, id: student.id, course_ids: courses.collect { |c| c.id }.join(",")
+      post enroll_in_courses_student_path(student), xhr: true, params: { course_ids: courses.collect { |c| c.id }.join(",") }
       assert_response :success
     end
   end
@@ -215,7 +210,7 @@ class StudentsControllerTest < ActionController::TestCase
     course.enroll_student(student)
 
     assert_difference "StudentCourse.count", -1 do
-      xhr :delete, :withdraw_from_course, id: student.id, course_id: course.id
+      delete withdraw_from_course_student_path(student), xhr: true, params: { course_id: course.id }
       assert_response :success
     end
   end

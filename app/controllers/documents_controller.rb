@@ -1,6 +1,6 @@
-class DocumentsController < ApplicationController
+class DocumentsController < AuthenticatedController
   authorize_resource
-  before_filter :load_attachable, except: :download
+  before_action :load_attachable, except: :download
 
   def download
     @document = Document.find(params[:id])

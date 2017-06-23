@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class StudentDetailsControllerTest < ActionController::TestCase
+class StudentDetailsControllerTest <  ActionDispatch::IntegrationTest
   setup do
     @manager_user = create(:user, role: User::MANAGER)
     @student = create(:student)
@@ -8,8 +8,8 @@ class StudentDetailsControllerTest < ActionController::TestCase
   end
 
   should "show now form" do
-    get :new, student_id: @student.id
-    assert_template :new
+    get new_student_details_path(@student)
+    assert_response :success
   end
 
 
@@ -17,8 +17,9 @@ class StudentDetailsControllerTest < ActionController::TestCase
     assert_no_difference "StudentDetails.count" do
       student_details_id = @student.student_details.id
 
-      post :create, student_id: @student.id,
+      post student_details_path(@student), params: {
           student_details: attributes_for(:student_details, transcription_coordinator: @manaer_user, transcription_assistant: @manaer_user ).except(:student)
+        }
 
       assert_equal student_details_id, @student.student_details.id
     end
@@ -26,15 +27,15 @@ class StudentDetailsControllerTest < ActionController::TestCase
 
   should "show edit page" do
 
-    get :edit, student_id: @student.id, id: @student.student_details.id
+    get edit_student_details_path(@student, @student.student_details)
 
-    assert_template :edit
+    assert_response :success
   end
 
   should "update student details" do
     details = create(:student_details, student: @student, preferred_phone: "123")
 
-    post :update, student_id: @student.id, id: details.id, student_details: { preferred_phone: '345'}
+    patch student_details_path(@student, details),params: { student_details: { preferred_phone: '345'} }
 
     details = assigns(:student_details)
     assert_equal 0, details.errors.size, "No errors"

@@ -1,4 +1,4 @@
-class SharedAccessCodesController < ApplicationController
+class SharedAccessCodesController < AuthenticatedController
   authorize_resource  User
 
   def index

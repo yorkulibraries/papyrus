@@ -1,4 +1,4 @@
-class TermsController < ApplicationController
+class TermsController < AuthenticatedController
   authorize_resource
 
   def search_courses

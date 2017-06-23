@@ -1,9 +1,9 @@
-class AttachmentsController < ApplicationController
+class AttachmentsController < AuthenticatedController
   authorize_resource
-  before_filter :load_item
+  before_action :load_item
 
   def new
-    @attachment = @item.attachments.build      
+    @attachment = @item.attachments.build
     render "new_url" if params[:url]
   end
 

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class NotesControllerTest < ActionController::TestCase
+class NotesControllerTest < ActionDispatch::IntegrationTest
 
   context "as admin" do
     setup do
@@ -11,33 +11,33 @@ class NotesControllerTest < ActionController::TestCase
 
     should "be able to create a new note for student" do
        assert_difference "Note.count", 1 do
-          attrs = attributes_for(:note, :student => @student, :user => @admin_user)
-          post :create, {:note => attrs, :student_id => @student.id }
+          attrs = attributes_for(:note, student: @student, user: @admin_user)
+          post student_notes_path(@student), params: { note: attrs}
         end
 
         assert_redirected_to student_notes_path(@student)
     end
 
     should "be able to update note within #{Note.EDIT_TIME / 60} minutes" do
-      note = create(:note, :student => @student, :user => @admin_user)
+      note = create(:note, student: @student, user: @admin_user)
 
-      note.note = "changed"
+      changed_note = "changed"
 
-      post :update, {:id => note.id, :note => {:note => note.note }, :student_id => @student.id }
+      patch student_note_path(@student, note), params: { note: { note: changed_note } }
 
       assert_redirected_to student_notes_path(@student)
 
       note.reload
 
-      assert_equal "changed", note.note
+      assert_equal changed_note, note.note
 
     end
 
     should "redirect to notes list with error mesage if updating after #{Note.EDIT_TIME / 60} minutes" do
-      note = create(:note, :updated_at => Time.now - 2.days, :student => @student)
+      note = create(:note, updated_at: Time.now - 2.days, student: @student)
       note.reload
 
-      post :edit, {:id => note.id, :student_id => @student.id}
+      get edit_student_note_path(@student, note)
 
       assert_redirected_to student_notes_path(@student)
 
@@ -45,9 +45,9 @@ class NotesControllerTest < ActionController::TestCase
     end
 
     should "be not be able to update note after #{Note.EDIT_TIME / 60} minutes" do
-      note = create(:note, :updated_at => Time.now - 6.minutes, :student => @student )
+      note = create(:note, updated_at: Time.now - 6.minutes, student: @student )
 
-      post :update, { :id => note.id, :student_id => @student.id, :note => { :note => note.note } }
+      patch student_note_path(@student, note), params: { note: { note: "something" } }
 
       assert_redirected_to student_notes_path(@student)
 
@@ -57,10 +57,10 @@ class NotesControllerTest < ActionController::TestCase
 
     should "be able to delete the notes" do
 
-      note = create(:note, :student => @student)
+      note = create(:note, student: @student)
 
        assert_difference "Note.count", -1 do
-          post :destroy, {:id => note.id, :student_id => @student.id}
+          delete student_note_path(@student, note)
        end
 
        assert_redirected_to student_notes_path(@student)
@@ -70,7 +70,7 @@ class NotesControllerTest < ActionController::TestCase
       note = create(:note, :student => @student)
       note2 = create(:note, :student => @student)
 
-      get :index, :student_id => @student.id
+      get  student_notes_path(@student)
 
       assert assigns(:notes), "Doesn't assign the notes"
       notes = assigns(:notes)

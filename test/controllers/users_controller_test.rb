@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionController::TestCase
+class UsersControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @manager_user = create(:user, :role => User::MANAGER)
@@ -12,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
     u = create(:user)
 
     assert_no_difference "User.count" do
-      post :destroy, id: u.id
+      delete user_path(u)
     end
 
     user = assigns(:user)
@@ -25,7 +25,7 @@ class UsersControllerTest < ActionController::TestCase
     u.email = nil
     u.save(validate: false)
 
-    post :destroy, id: u.id
+    delete user_path(u)
 
     user = assigns(:user)
     assert_equal true, user.blocked?, "User should be set to inactive"
@@ -35,7 +35,7 @@ class UsersControllerTest < ActionController::TestCase
   should "activate an inactive user" do
     u = create(:user, blocked: true)
 
-    post :activate, id: u.id
+    post activate_user_path(u)
 
     user = assigns(:user)
     assert ! user.blocked?, "User should be active"
@@ -49,7 +49,7 @@ class UsersControllerTest < ActionController::TestCase
 
     create_list(:user, 5, blocked: true)
 
-    get :index
+    get users_path
 
     users = assigns(:users)
     assert_equal 3, users.count, "Only 3 active users (2 + 1 logged in)"
@@ -62,7 +62,7 @@ class UsersControllerTest < ActionController::TestCase
     create_list(:user, 2, role: User::STUDENT_USER, inactive: true)
     create_list(:user, 5, blocked: true)
 
-    get :inactive
+    get inactive_users_path
 
     users = assigns(:users)
     assert_equal 5, users.count, "5 inactive users"
@@ -72,14 +72,14 @@ class UsersControllerTest < ActionController::TestCase
   should "create a new user" do
 
     assert_difference "User.count", 1 do
-      post :create, user: attributes_for(:user)
+      post users_path, params: { user: attributes_for(:user) }
     end
   end
 
   should "update an existing user" do
     u = create(:user, username: "old")
 
-    post :update, id: u.id, user: { username: "new" }
+    patch user_path(u), params: { user: { username: "new" } }
 
     user = assigns(:user)
     assert_equal "new", user.username, "Updated username"
@@ -90,7 +90,7 @@ class UsersControllerTest < ActionController::TestCase
 
   should "not create a user when fields are missing" do
     assert_no_difference "User.count" do
-      post :create, user: { email: "woot@test.com"}
+      post users_path, params: { user: { email: "woot@test.com"} }
     end
 
   end

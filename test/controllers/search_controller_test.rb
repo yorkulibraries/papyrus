@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SearchControllerTest < ActionController::TestCase
+class SearchControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     @user = create(:user)
@@ -14,24 +14,24 @@ class SearchControllerTest < ActionController::TestCase
     create(:item, author: "john smith")
 
 
-    get :items, q: "unique"
+    get search_items_path, params: { q: "unique" }
     search_results = assigns(:search_results)
     assert_equal "local", search_results, "search results should be set to local"
     assert_response :success
-    assert_template :items
+
 
     items = assigns(:items)
     assert_equal "unique title", items.first.title
 
-    get :items, q: "9-233"
+    get search_items_path, params: { q: "9-233" }
     items = assigns(:items)
     assert_equal "9-233-12345", items.first.isbn
 
-    get :items, q: "000111"
+    get search_items_path, params: { q: "000111" }
     items = assigns(:items)
     assert_equal "000111", items.first.unique_id
 
-    get :items, q: "john"
+    get search_items_path, params: { q: "john" }
     items = assigns(:items)
     assert_equal "john smith", items.first.author
 
@@ -41,19 +41,19 @@ class SearchControllerTest < ActionController::TestCase
     create(:student, name: "Terry Jones", username: "terryjones", email: "tj@yorku.ca", inactive: false)
     create(:student, name: "Valmar Garry", username: "vgarry", email: "vg@university.ca", inactive: true)
 
-    get :students, q: "Terry Jones"
+    get search_students_path, params: { q: "Terry Jones" }
     students = assigns(:students)
     assert_equal 1, students.size, "One student found with that name"
 
-    get :students, q: "vgarry"
+    get search_students_path, params: {  q: "vgarry" }
     students = assigns(:students)
     assert_equal 0, students.size, "No one should be found, since varry is inactive"
 
-    get :students, q: "vg@university.ca", inactive: true
+    get search_students_path, params: {  q: "vg@university.ca", inactive: true }
     students = assigns(:students)
     assert_equal 1, students.size, "Should find one inactive student"
 
-    get :students, q: "terry", inactive: true
+    get search_students_path, params: {  q: "terry", inactive: true }
     students = assigns(:students)
     assert_equal 0, students.size, "Should find no student student since Terry is active"
   end
