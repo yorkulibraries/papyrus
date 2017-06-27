@@ -1,4 +1,4 @@
-class Term < ApplicationRecord 
+class Term < ApplicationRecord
   #attr_accessible :name, :start_date, :end_date
 
 
@@ -15,7 +15,7 @@ class Term < ApplicationRecord
   private
   def start_date_is_before_end_date
     if self.end_date <= self.start_date
-      errors[:base] = "End date must be after the start date"
+      errors.add(:base, "End date must be after the start date")
       false
     else
       true

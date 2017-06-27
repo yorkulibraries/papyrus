@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Api::V1::UsersControllerTest < ActionController::TestCase
+class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     ## ENABLE API WITH HTTP_AUTH
@@ -12,11 +12,11 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     create_list(:student, 3)
     create(:user)
 
-    get :index, which: "students", format: :json
+    get api_v1_users_path(format: :json), params: { which: "students" }
     json_users = JSON.parse(@response.body)
     assert_equal 3, json_users.length, "SHould return 3 students"
 
-    get :index, which: "students", format: :text
+    get api_v1_users_path(format: :text), params: { which: "students" }
     text_users = @response.body
     assert_equal 3, text_users.lines.count
   end
@@ -29,11 +29,11 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
 
 
 
-    get :index, which: "admins", format: :json
+    get api_v1_users_path(format: :json), params: { which: "admins", format: :json }
     json_users = JSON.parse(@response.body)
     assert_equal 3, json_users.length, "SHould return 3 admins as json"
 
-    get :index, which: "admins", format: :text
+    get api_v1_users_path(format: :text), params: { which: "admins"}
     text_users = @response.body
     assert_equal 3, text_users.lines.count, "Should return 3 admins as text"
   end
@@ -44,14 +44,14 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     details = create(:student_details, transcription_coordinator: @creator, transcription_assistant: @creator)
     create(:student, created_by: @creator, student_details: details)
 
-    get :index, which: "all", format: :json
+    get api_v1_users_path(format: :json), params: { which: "all" }
     json_users = JSON.parse(@response.body)
     assert_equal 4, json_users.length, "SHould return 4 users as json"
   end
 
   should "be able to specify which fields to return" do
     user = create(:user)
-    get :index, fields: "id,first_name", format: :json
+    get api_v1_users_path(format: :json), params: { fields: "id,first_name" }
     json_users = JSON.parse(@response.body)
 
     assert_equal json_users.first[0], user.id
@@ -61,9 +61,9 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
   should "return a student if a number is passed in the which paramter" do
     student = create(:student)
 
-    get :index, fields: "id, first_name",format: :json, which: student.details.student_number
+    get api_v1_users_path(format: :json), params: { fields: "id, first_name", which: student.details.student_number }
     json_users = JSON.parse(@response.body)
-
+    
     assert_equal json_users.first[0], student.id
     assert_equal json_users.first[1], student.first_name
 

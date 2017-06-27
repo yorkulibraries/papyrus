@@ -84,7 +84,7 @@ class My::CourseSyncController < My::BaseController
         #{courses_removed.join("\n") if courses_removed.size > 0 }
 
       HEREDOC
-      
+    
       ReportMailer.mail_report([coordinator.email, assistant.email], message, "Course List Updated: #{student.name}").deliver_later
     end
 

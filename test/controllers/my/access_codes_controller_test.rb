@@ -7,15 +7,15 @@ class My::AccessCodesControllerTest < ActionDispatch::IntegrationTest
   end
 
   should "show access codes page" do
-    session[:terms_accepted] = true
-    get :show
+    patch my_terms_path
+    get my_access_codes_path
 
     assert_response :success
     assert assigns(:student)
   end
 
   should "redirect to terms page if terms not accepted" do
-    get :show
+    get my_access_codes_path
 
     assert_redirected_to my_terms_path
   end

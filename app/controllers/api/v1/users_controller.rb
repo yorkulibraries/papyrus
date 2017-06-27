@@ -6,7 +6,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     if params[:fields].blank?
       fields = [:id, :first_name, :last_name, :username]
     else
-      fields = params[:fields].split(",").map { |f| f.to_sym }
+      fields = params[:fields].split(",").map { |f| f.strip.to_sym }
     end
 
     begin
@@ -16,11 +16,13 @@ class Api::V1::UsersController < Api::V1::BaseController
       elsif which == "admins"
         @users =  User.unblocked.not_students.pluck(*fields)
       elsif is_number?(which)
-        @users = Student.unblocked.includes(:student_details_only_student_number).where("student_details.student_number = ? ", which).pluck(*fields)
+        #details = StudentDetails.find_by_student_number(which) || Student.new
+        #@users = Student.unblocked.where(id: details.student_id).pluck(*fields)
+        @users = Student.unblocked.includes(:student_details_only_student_number).where("student_details.student_number = ? ", which).pluck(*fields)        
       else
         @users = User.unblocked.pluck(*fields)
       end
-      
+
     rescue
       @users = []
     end
@@ -28,7 +30,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     respond_to do |format|
       format.json { render json: @users }
-      format.text { render text: @users.collect { |u| u.kind_of?(Array) ? u.join("\t") : u  }.join("\n") }
+      format.text { render plain: @users.collect { |u| u.kind_of?(Array) ? u.join("\t") : u  }.join("\n") }
     end
   end
 

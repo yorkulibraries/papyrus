@@ -87,10 +87,10 @@ class My::CourseSyncControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, @student.courses.size, "SHould have one course already"
 
 
-    #  @request.env[@course_listing_header]  = new_course_code
-
-    assert_difference 'ActionMailer::Base.deliveries.size', +1 do
-       get my_sync_courses_path, headers: { "#{@course_listing_header}" => "#{new_course_code}"}
+    perform_enqueued_jobs do
+      assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+        get my_sync_courses_path, headers: { "#{@course_listing_header}" => "#{new_course_code}"}
+      end
     end
 
     added = assigns(:courses_added)
@@ -119,10 +119,12 @@ class My::CourseSyncControllerTest < ActionDispatch::IntegrationTest
     student = create(:student)
 
     controller = My::CourseSyncController.new
-    #controller.send(:notify_coordinator, student, courses_added, courses_removed)
+    perform_enqueued_jobs do
+      controller.send(:notify_coordinator, student, courses_added, courses_removed)
 
-    #assert !ActionMailer::Base.deliveries.empty?
-
+      assert !ActionMailer::Base.deliveries.empty?
+    end
+    
     mail = ActionMailer::Base.deliveries.first
     assert_equal mail.to, [student.details.transcription_coordinator.email, student.details.transcription_assistant.email]
     assert_equal mail.subject, "Course List Updated: #{student.name}"
@@ -140,11 +142,13 @@ class My::CourseSyncControllerTest < ActionDispatch::IntegrationTest
     details.transcription_assistant = nil
     details.save(validate: false)
 
-
     controller = My::CourseSyncController.new
-    controller.send(:notify_coordinator, student, courses_added, courses_removed)
 
-    assert !ActionMailer::Base.deliveries.empty?
+    perform_enqueued_jobs do
+      controller.send(:notify_coordinator, student, courses_added, courses_removed)
+
+      assert !ActionMailer::Base.deliveries.empty?
+    end
 
     details.transcription_coordinator = nil
     details.save(validate: false)

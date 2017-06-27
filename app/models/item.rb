@@ -1,4 +1,4 @@
-class Item < ApplicationRecord 
+class Item < ApplicationRecord
   #attr_accessible :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
   #                :language_note, :edition, :physical_description, :source, :source_note
 

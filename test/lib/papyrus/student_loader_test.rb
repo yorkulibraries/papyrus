@@ -78,7 +78,7 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
     PapyrusSettings.import_auto_assign_coordinator = PapyrusSettings::TRUE
     @loader.from_list(sample_data)
 
-    students = Student.all
+    students = Student.all.to_ary
     assert_equal c1.id, students.at(0).details.transcription_coordinator.id, "Should be first coordinator"
     assert_equal c2.id, students.at(1).details.transcription_coordinator.id, "Should be second coordinator"
     assert_equal c1.id, students.at(2).details.transcription_coordinator.id, "Should be first coordinator"
@@ -102,7 +102,7 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
     PapyrusSettings.import_auto_assign_coordinator = PapyrusSettings::TRUE
     @loader.from_list(sample_data)
 
-    students = Student.all
+    students = Student.all.to_ary
     assert_equal c1.id, students.at(0).details.transcription_coordinator.id, "Should be first coordinator"
     assert_equal c2.id, students.at(1).details.transcription_coordinator.id, "Should be second coordinator"
     assert_equal c1.id, students.at(2).details.transcription_coordinator.id, "Should be first coordinator"
@@ -123,15 +123,12 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
 
     PapyrusSettings.import_send_welcome_email_to_student = PapyrusSettings::TRUE
     PapyrusSettings.email_allow = PapyrusSettings::TRUE
-
-
     assert ActionMailer::Base.deliveries.empty?, "nothing in the queue"
 
-    @loader.from_list(sample_data,{ coordinator_id: c1.id })
-
-
-    assert_equal 3, ActionMailer::Base.deliveries.size, "3 emails  in the queue, #{PapyrusSettings.import_send_welcome_email_to_student}"
-
+    perform_enqueued_jobs do
+      @loader.from_list(sample_data,{ coordinator_id: c1.id })
+      assert_equal 3, ActionMailer::Base.deliveries.size, "3 emails  in the queue, #{PapyrusSettings.import_send_welcome_email_to_student}"
+    end
 
   end
 
@@ -146,16 +143,18 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
     ]
 
     ActionMailer::Base.deliveries = []
-    
+
     PapyrusSettings.import_notify_coordinator = PapyrusSettings::TRUE
     PapyrusSettings.email_allow = PapyrusSettings::TRUE
 
 
-    assert ActionMailer::Base.deliveries.empty?, "nothing in the queue"
+    perform_enqueued_jobs do
+      assert ActionMailer::Base.deliveries.empty?, "nothing in the queue"
 
-    @loader.from_list(sample_data,{ coordinator_id: c1.id })
+      @loader.from_list(sample_data,{ coordinator_id: c1.id })
 
-    assert_equal 3, ActionMailer::Base.deliveries.size, "3 emails  in the queue, #{PapyrusSettings.import_notify_coordinator}"
+      assert_equal 3, ActionMailer::Base.deliveries.size, "3 emails  in the queue, #{PapyrusSettings.import_notify_coordinator}"
+    end
 
   end
 
