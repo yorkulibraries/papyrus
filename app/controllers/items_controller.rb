@@ -173,7 +173,7 @@ class ItemsController < AuthenticatedController
 
 
   def zipped_files
-      require 'zip/zip'
+      #require 'zip/zip'
 
       @item = Item.find(params[:id])
       file_name = "#{@item.unique_id}.zip"
@@ -189,10 +189,10 @@ class ItemsController < AuthenticatedController
         temp_file = Tempfile.new("temp-papyrus-#{file_name}")
 
         #Initialize the temp file as a zip file
-        Zip::ZipOutputStream.open(temp_file) { |zos| }
+        Zip::OutputStream.open(temp_file) { |zos| }
 
         counter = 0
-        Zip::ZipFile.open(temp_file.path, Zip::ZipFile::CREATE) do |zipfile|
+        Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
           @item.attachments.files.available.each do |filename|
             # Two arguments:
             # - The name of the file as it will appear in the archive
