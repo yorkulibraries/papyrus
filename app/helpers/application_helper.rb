@@ -29,8 +29,8 @@ module ApplicationHelper
   end
 
   def papyrus_version
-    #Papyrus::Version.new.version
-    "2.8.3"
+    Papyrus::Version.new.version
+    #"2.8.3"
   end
 
   def papyrus_institution

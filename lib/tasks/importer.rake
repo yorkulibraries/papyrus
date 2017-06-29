@@ -1,6 +1,6 @@
 require 'ostruct'
 require 'csv'
-require Rails.root.join("lib", "papyrus", "student_loader.rb")
+require Rails.root.join("app","lib", "papyrus", "student_loader.rb")
 
 namespace :import do
   desc "Papyrus Import Tasks"
