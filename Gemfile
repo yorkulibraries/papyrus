@@ -98,7 +98,7 @@ end
 group :development do
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
-  gem "bullet" # Testing SQL queries
+  #gem "bullet" # Testing SQL queries
 	gem "mailcatcher" # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
