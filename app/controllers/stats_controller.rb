@@ -45,7 +45,7 @@ class StatsController < AuthenticatedController
 
     sql = "SELECT #{select_fields} FROM item_connections INNER JOIN items ON item_connections.item_id = items.id #{where_clause} GROUP BY item_connections.item_id"
 
-    @assigned_items = ActiveRecord::Base.connection.exec_query(sql)
+    @assigned_items = ActiveRecord::Base.connection.exec_query(sql).limit(10)
 
     @unassigned_items = Item.where("id not in (?)", @assigned_items.collect{ |i| i["id"] })
 
