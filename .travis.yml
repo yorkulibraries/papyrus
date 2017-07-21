@@ -10,7 +10,7 @@ script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - RAILS_ENV=test bundle exec rake db:test:prepare
   - RAILS_ENV=test bundle exec rake test:units
-  - RAILS_ENV=test bundle exec rake test:functionals
+  - RAILS_ENV=test bundle exec rake test:controllers
 before_script:
   - cp config/travis.database.yml config/database.yml
   - mysql -e 'create database papyrus_test'
