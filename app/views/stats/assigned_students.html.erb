@@ -22,7 +22,7 @@
 			<table class="table results">
 				<tr>
 					<th>Name</th><th>Student Number</th><th>CDS Counsellor</th><th>Registerd On</th>
-					<th>Coordinator</th><th>Assistant</th>
+					<th>Coordinator</th><th>Assistant</th><th>Status</th>
 				</tr>
 
 				<% @students.each do |student| %>
@@ -34,6 +34,7 @@
 					<td><%= student.created_at.strftime(" %b %d, %Y")%></td>
 					<td><%= student.details.coordinator.name %></td>
 					<td><%= student.details.assistant.name %></td>
+					<td><%= student.inactive? ? "Inactive" : "Active" %></td>
 				</tr>
 				<% end %>
 			</table>

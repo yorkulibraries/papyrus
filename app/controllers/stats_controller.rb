@@ -20,6 +20,9 @@ class StatsController < AuthenticatedController
     @students = @students.where("transcription_coordinator_id = ?", @coordinator.id) unless @coordinator == nil
     @students = @students.where("transcription_assistant_id = ?", @assistant.id) unless @assistant == nil
 
+    @students = @students.inactive if params[:status].to_s.downcase == "inactive"
+    @students = @students.active if params[:status].to_s.downcase == "active"
+
     respond_to do |format|
       format.html
       format.xlsx
@@ -45,9 +48,9 @@ class StatsController < AuthenticatedController
 
     sql = "SELECT #{select_fields} FROM item_connections INNER JOIN items ON item_connections.item_id = items.id #{where_clause} GROUP BY item_connections.item_id"
 
-    @assigned_items = ActiveRecord::Base.connection.exec_query(sql).limit(10)
+    @assigned_items = ActiveRecord::Base.connection.exec_query(sql).to_a
 
-    @unassigned_items = Item.where("id not in (?)", @assigned_items.collect{ |i| i["id"] })
+    @unassigned_items = Item.where("id not in (?)", @assigned_items.collect{ |i| i["id"] }).to_a
 
 
     respond_to do |format|
@@ -68,6 +71,7 @@ class StatsController < AuthenticatedController
 
     @items = @items.where("source = ?", params["source"]) unless @source == nil || @source == "All"
 
+    @items = @items.to_a
 
     respond_to do |format|
       format.html
