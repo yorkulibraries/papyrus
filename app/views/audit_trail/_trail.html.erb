@@ -22,18 +22,22 @@
 			</td>
 			<td class="audit_comment distinct">
 				<%= event.comment %>
-				<% if event.audited_changes != nil %>
-					<br/>
-					<small class="trivial hide">
-						<% event.audited_changes.each do |key, value| %>
-							<% if value.kind_of?(Array) %>
-								<strong><%= key %></strong> changed from <em><%= value.first  rescue nil %></em> to <em><%= value.last rescue nil %></em>
-							<% else %>
-								<strong><%= key %></strong> = <em> <%= value == nil ? "nothing" : value %></em>
+				<% begin %>
+					<% if event.audited_changes != nil %>
+						<br/>
+						<small class="trivial hide">
+							<% event.audited_changes.each do |key, value| %>
+								<% if value.kind_of?(Array) %>
+									<strong><%= key %></strong> changed from <em><%= value.first  rescue nil %></em> to <em><%= value.last rescue nil %></em>
+								<% else %>
+									<strong><%= key %></strong> = <em> <%= value == nil ? "nothing" : value %></em>
+								<% end %>
+								<br/>
 							<% end %>
-							<br/>
-						<% end %>
-					</small>
+						</small>
+					<% end %>
+				<% rescue %>
+					There was an issue displaying the changes 
 				<% end %>
 			</td>
 			<td class="who"><code title="<%= event.action %> "><%= event.user.name if event.user %></code></td>
