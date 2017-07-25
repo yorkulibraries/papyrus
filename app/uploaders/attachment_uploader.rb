@@ -17,6 +17,19 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     "uploads/items/#{model.item.item_type}/#{model.item.unique_id}"
   end
 
+  def move_to_cache
+    true
+  end
+
+  def move_to_store
+    true
+  end
+
+  def cache_dir
+    # should return path to cache dir
+    Rails.root.join 'uploads/cache'
+  end
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
@@ -25,7 +38,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  def filename     
+  def filename
     "#{timestamp}-#{original_filename}" if original_filename
   end
 
