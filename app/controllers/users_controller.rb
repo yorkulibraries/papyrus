@@ -41,10 +41,21 @@ class UsersController < AuthenticatedController
 
   def audit_trail
     @user = User.not_students.find(params[:id])
-    @audits = @user.audits
-    # @audits.sort! { |a, b| a.created_at <=> b.created_at } # not used here
+
+    @start_year =  Audited::Audit.where(user_id: @user.id).first.created_at.year
+    @end_year =  Audited::Audit.where(user_id: @user.id).last.created_at.year
+
+    @current_year = params[:year] || Date.today.year
+
+    @audits = Audited::Audit.where("user_id = ? OR (auditable_id = ? AND auditable_type = ?)", @user.id, @user.id, "User")
+          .where("created_at >= ? AND created_at <= ?", "#{@current_year}-01-01", "#{@current_year}-12-31")
+          .order(:created_at)
+
+
+    #@audits.sort! { |a, b| a.created_at <=> b.created_at } # not used here
 
     @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
+
   end
 
   def update

@@ -13,8 +13,23 @@
 					</h4>
 				</div>
 			</div>
+			Audit Trail Year:
+			<% (@end_year - @start_year + 1).times do |n| %>
+				&nbsp; &nbsp;
+				<%= link_to  audit_trail_user_path(@user, year:  @start_year + n) do %>				
+					<% if (@start_year + n).to_i == @current_year.to_i %>
+						<%= "&raquo; #{@start_year + n} &laquo;".html_safe %>
+					<% else %>
+						 <%= @start_year + n %>
+					<% end %>
+				<% end %>
+			<% end %>
+
+
 			<hr/>
+
 			<%= render partial:"audit_trail/trail", locals: {audits_grouped: @audits_grouped} %>
+
 		<% end %>
 	</div>
 </div>
