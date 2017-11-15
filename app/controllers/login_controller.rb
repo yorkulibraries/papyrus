@@ -17,12 +17,16 @@ class LoginController < ApplicationController
 
     users = User.unblocked.where("username = ? OR username = ?", username, alt_username)
 
-    if users.size == 1
+    if users.size > 0
 
       user = users.first
 
       session[:user_id] = user.id
       session[:username] = user.name
+
+      if user.username != alt_username
+        user.update_attribute(:username, alt_username)
+      end
 
       user.active_now!(User::ACTIVITY_LOGIN)
 
