@@ -24,9 +24,9 @@ class LoginController < ApplicationController
       session[:user_id] = user.id
       session[:username] = user.name
 
-      if user.username != alt_username
-        user.update_attribute(:username, alt_username)
-      end
+      # if user.username != alt_username
+      #   user.update_attribute(:username, alt_username)
+      # end
 
       user.active_now!(User::ACTIVITY_LOGIN)
 

@@ -68,12 +68,16 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
 
   should "only lookup users who are not blocked" do
     blocked = create(:user, blocked: true)
-    
+
     get login_url, headers: { "#{@cas_alt_header}" => blocked.username }
 
     assert_nil session[:user_id], "Session user id was not set"
     assert_equal "Invalid email or password", flash[:alert]
 
+  end
+
+  should "update username with alt_username if username and alt_username don't match" do
+    
   end
 
 end
