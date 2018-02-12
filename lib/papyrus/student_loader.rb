@@ -17,7 +17,6 @@ module Papyrus
         "format_large_print",
         "format_word",
         "format_braille",
-        "format_daisy",
         "format_other",
         "format_note",
         "request_form_signed_on"
@@ -32,6 +31,7 @@ module Papyrus
 
 
     def from_list(students_list, options=nil)
+      
       return nil if students_list == nil || !students_list.kind_of?(Array) # If nil or array return
 
       process_options(options)
@@ -109,7 +109,7 @@ module Papyrus
             end
 
             if PapyrusSettings.import_notify_coordinator == PapyrusSettings::TRUE && student.details.transcription_coordinator
-              body = "A student, #{student.name} has been assigned to you. \n\n -- \nPapyrus"              
+              body = "A student, #{student.name} has been assigned to you. \n\n -- \nPapyrus"
               ReportMailer.mail_report(student.details.transcription_coordinator.email, body, "New Student Assigned").deliver_later
             end
 

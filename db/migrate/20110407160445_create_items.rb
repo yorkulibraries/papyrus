@@ -1,4 +1,4 @@
-class CreateItems < ActiveRecord::Migration
+class CreateItems < ActiveRecord::Migration[4.2]
   def self.up
     create_table :items do |t|
       t.string :title
@@ -17,7 +17,7 @@ class CreateItems < ActiveRecord::Migration
       t.string   :source_note
       t.timestamps
     end
-    
+
     add_index :items, :unique_id
     add_index :items, :user_id
   end

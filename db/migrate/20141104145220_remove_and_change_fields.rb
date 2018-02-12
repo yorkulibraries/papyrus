@@ -1,4 +1,4 @@
-class RemoveAndChangeFields < ActiveRecord::Migration
+class RemoveAndChangeFields < ActiveRecord::Migration[4.2]
   def change
 
    # Rename Indexes

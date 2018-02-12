@@ -1,4 +1,4 @@
-class InstallActsAsAudited < ActiveRecord::Migration
+class InstallActsAsAudited < ActiveRecord::Migration[4.2]
   def self.up
     create_table :audits, :force => true do |t|
       t.integer  :auditable_id
@@ -15,13 +15,13 @@ class InstallActsAsAudited < ActiveRecord::Migration
       t.string   :remote_address
       t.datetime :created_at
     end
-    
-    
+
+
     add_index :audits, [:associated_id, :associated_type], name: "associated_index"
     add_index :audits, [:auditable_id, :auditable_type], name: "auditable_index"
     add_index :audits, [:created_at], name: "index_audits_on_created_at"
     add_index :audits, [:user_id, :user_type], name: "user_index"
-    
+
   end
 
   def self.down

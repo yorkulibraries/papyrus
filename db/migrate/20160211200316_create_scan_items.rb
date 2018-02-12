@@ -1,4 +1,4 @@
-class CreateScanItems < ActiveRecord::Migration
+class CreateScanItems < ActiveRecord::Migration[4.2]
   def change
     create_table :scan_items do |t|
       t.string :summary

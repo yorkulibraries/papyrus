@@ -1,4 +1,4 @@
-class FixIndexes < ActiveRecord::Migration
+class FixIndexes < ActiveRecord::Migration[4.2]
   def change
 
     # remove long named indexes

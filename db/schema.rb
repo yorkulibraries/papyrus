@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20170623162239) do
     t.text "acquisition_source_name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "back_ordered_note"
     t.string "note"
     t.date "back_ordered_until"
     t.string "back_ordered_reason"
@@ -163,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170623162239) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "attachments_count", default: 0, null: false
+    t.integer "updated_by"
     t.index ["unique_id"], name: "index_items_on_unique_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
@@ -284,16 +284,6 @@ ActiveRecord::Schema.define(version: 20170623162239) do
     t.index ["inactive"], name: "index_users_on_inactive"
     t.index ["type", "inactive"], name: "index_users_on_type_and_inactive"
     t.index ["username"], name: "index_users_on_username"
-  end
-
-  create_table "work_history", force: :cascade do |t|
-    t.string "object_type"
-    t.integer "object_id"
-    t.string "comment"
-    t.integer "user_id", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "u_w_h_index"
   end
 
 end

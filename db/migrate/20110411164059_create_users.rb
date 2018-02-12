@@ -1,4 +1,4 @@
-class CreateUsers < ActiveRecord::Migration
+class CreateUsers < ActiveRecord::Migration[4.2]
   def self.up
     create_table :users do |t|
       t.string :username
@@ -12,7 +12,7 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean  :blocked, default: false
       t.timestamps
     end
-    
+
     add_index :users, :inactive
     add_index :users, :username
     add_index :users, [:type, :inactive]

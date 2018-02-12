@@ -1,4 +1,4 @@
-class CreateItemConnections < ActiveRecord::Migration
+class CreateItemConnections < ActiveRecord::Migration[4.2]
   def self.up
     create_table :item_connections do |t|
       t.integer :item_id
@@ -6,7 +6,7 @@ class CreateItemConnections < ActiveRecord::Migration
       t.date :expires_on
       t.timestamps
     end
-  end  
+  end
 
   def self.down
     drop_table :item_connections
