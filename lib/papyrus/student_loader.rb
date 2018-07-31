@@ -31,7 +31,7 @@ module Papyrus
 
 
     def from_list(students_list, options=nil)
-      
+
       return nil if students_list == nil || !students_list.kind_of?(Array) # If nil or array return
 
       process_options(options)
@@ -42,13 +42,13 @@ module Papyrus
       ## GET COORDINATOR LIST, for later processing
       coordinator_list = User.active.coordinators.collect { |u| u.id }
       ## ENSURE first id in the list is not the most recent assigned coordinator
-      if Student.most_recent_students(1).size > 0
-        last_assigned_coordinator_id = Student.most_recent_students(1).first.details.transcription_coordinator_id
-        if last_assigned_coordinator_id == coordinator_list.last
-          id = coordinator_list.pop
-          coordinator_list.insert(0, id)
-        end
-      end
+      # if Student.most_recent_students(1).size > 0
+      #   last_assigned_coordinator_id = Student.most_recent_students(1).first.details.transcription_coordinator_id
+      #   if last_assigned_coordinator_id == coordinator_list.last
+      #     id = coordinator_list.pop
+      #     coordinator_list.insert(0, id)
+      #   end
+      # end
 
       status = { updated: [], created: [], errors: [] }
 
