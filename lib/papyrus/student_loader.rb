@@ -72,6 +72,11 @@ module Papyrus
           end
 
           status[:updated].push student.id
+
+          unless student.valid?
+            status[:errors].push [student_array, student.errors.messages]
+          end
+          
         else
           # if new student, should create it
 
