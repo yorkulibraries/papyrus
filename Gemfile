@@ -10,7 +10,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'sass-rails', '5.0.6'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-
+gem "sprockets", ">= 3.7.2"
 
 ## DATABASES ##
 gem 'sqlite3'
@@ -49,7 +49,7 @@ gem 'remotipart', '1.3.1' # submit files remotely
 gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
 gem "rubyzip", "~> 1.1"
-#gem "nokogiri", "~> 1.8.1"
+#gem "nokogiri", "~> 1.8.2"
 
 ## EXEL EXPORT ##
 gem "roo", '~> 2.3.1'
