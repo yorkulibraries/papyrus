@@ -2,6 +2,13 @@ require 'ostruct'
 require 'csv'
 require Rails.root.join("lib", "papyrus", "student_loader.rb")
 
+
+#### IMPORTER TEST LINE
+# bundle exec rake import:students COORDINATOR_ID=1 REPORT=true CREATOR_ID=1 EMAIL_REPORT_LOG_TO=test@paypurs.com FILE=test/fixtures/test_student_import_latest.csv
+# File No Erros: test_student_import_latest.csv
+# File With Erros: test_student_import_latest_erros.csv
+#######
+
 namespace :import do
   desc "Papyrus Import Tasks"
 
@@ -43,6 +50,19 @@ namespace :import do
     status = loader.from_list(students)
 
     report "-----------"
+    if status[:errors].count > 0
+      report "Errors: #{status[:errors].count}"
+      status[:errors].each do |e|
+        report "<<<<<< IMPORT ERROR >>>>>>>"        
+        report "#{e.first.join(" | ")}"
+        e.last.each_pair { |k,v|
+          report  "ERROR: #{k} -- #{v.join(" and ")}"
+        }
+        report "<<<<<<>>>>>>>"
+      end
+      report "-----------"
+    end
+
     report "Updated: #{status[:updated].count}"
     status[:updated].each do |id|
       student = Student.find(id)
@@ -57,13 +77,7 @@ namespace :import do
     end
 
     report "-----------"
-    if status[:errors].count > 0
-      report "Errors: #{status[:errors].count}"
-      status[:errors].each do |e|
-        report "ERROR: #{e}"
-      end
-      report "-----------"
-    end
+
 
     if ENV["SEND_WELCOME_EMAIL"]
       sender = User.find(ENV["SEND_WELCOME_EMAIL"]) # send_welcome email should be id of the sender user.
@@ -85,7 +99,9 @@ namespace :import do
 
 
     if ENV["EMAIL_REPORT_LOG_TO"]
-      ReportMailer.mail_report(ENV["EMAIL_REPORT_LOG_TO"], @report_log.join("\n"), 'Papyrus Student Import Report').deliver
+      subject = "Papyrus Student Import Report"
+      subject << "- IMPORT ERRORS" if status[:errors].count > 0
+      ReportMailer.mail_report(ENV["EMAIL_REPORT_LOG_TO"], @report_log.join("\n"), subject).deliver
     end
 
   end
