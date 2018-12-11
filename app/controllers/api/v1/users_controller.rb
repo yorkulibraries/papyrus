@@ -19,9 +19,9 @@ class Api::V1::UsersController < Api::V1::BaseController
         #details = StudentDetails.find_by_student_number(which) || Student.new
         #@users = Student.unblocked.where(id: details.student_id).pluck(*fields)
         #@users = Student.unblocked.includes(:student_details_only_student_number).where("student_details.student_number = ? ", which).pluck(*fields)
-        @users = User.unblocked.where("username = ?", which).pluck(*fields)        
+        @users = User.unblocked.where("username = ?", which).pluck(*fields)
       else
-        @users = User.unblocked.pluck(*fields)
+        @users = User.unblocked.where("username = ?", which).pluck(*fields)   
       end
 
     rescue
