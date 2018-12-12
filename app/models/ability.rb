@@ -17,6 +17,8 @@ class Ability
       can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course, ScanList, ScanItem]
       can :show, :stats
 
+      can :manage, :shared_access_codes
+
       can :login_as, :student
 
     elsif user.role == User::COORDINATOR
@@ -31,6 +33,8 @@ class Ability
       can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail, :reactivate, :inactive, :destroy], Student
       can :login_as, :student
 
+      can :manage, :shared_access_codes
+      
     elsif user.role == User::STAFF
       can :show, :dashboard
 
