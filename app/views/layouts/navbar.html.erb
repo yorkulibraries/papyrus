@@ -66,6 +66,12 @@
               </li>
               <% end %>
 
+              <% if can? :manage, :shared_access_codes %>
+              <li class="<%= "active" if controller_name == "shared_access_codes" %>">
+                <a href="<%= shared_access_codes_path %>"><i class="fa fa-fw fa-lock"></i> Shared Access Codes</a>
+              </li>
+              <% end %>>
+
           </ul>
       </div>  <!-- /.navbar-collapse -->
 

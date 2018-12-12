@@ -1,5 +1,5 @@
 class SharedAccessCodesController < AuthenticatedController
-  authorize_resource  User
+  before_action :authorize_check
 
   def index
     @access_codes = AccessCode.active.shared
@@ -44,6 +44,11 @@ class SharedAccessCodesController < AuthenticatedController
 
   def access_code_params
     params.require(:access_code).permit(:for, :code, :expires_at)
+  end
+
+  private
+  def authorize_check
+     authorize! :manage, :shared_access_codes
   end
 
 end
