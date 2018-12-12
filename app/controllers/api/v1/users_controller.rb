@@ -15,13 +15,15 @@ class Api::V1::UsersController < Api::V1::BaseController
         @users = Student.unblocked.includes(:student_details_only_student_number).pluck(*fields)
       elsif which == "admins"
         @users =  User.unblocked.not_students.pluck(*fields)
+      elsif which == "all"
+        @users = User.unblocked
       elsif is_number?(which)
         #details = StudentDetails.find_by_student_number(which) || Student.new
         #@users = Student.unblocked.where(id: details.student_id).pluck(*fields)
         #@users = Student.unblocked.includes(:student_details_only_student_number).where("student_details.student_number = ? ", which).pluck(*fields)
         @users = User.unblocked.where("username = ?", which).pluck(*fields)
       else
-        @users = User.unblocked.where("username = ?", which).pluck(*fields)   
+        @users = User.unblocked.where("username = ?", which).pluck(*fields)
       end
 
     rescue

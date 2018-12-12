@@ -51,9 +51,8 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
 
   should "be able to specify which fields to return" do
     user = create(:user)
-    get api_v1_users_path(format: :json), params: { fields: "id,first_name" }
+    get api_v1_users_path(format: :json), params: { which: "admins", fields: "id,first_name" }
     json_users = JSON.parse(@response.body)
-
     assert_equal json_users.first[0], user.id
     assert_equal json_users.first[1], user.first_name
   end
@@ -63,7 +62,7 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
 
     get api_v1_users_path(format: :json), params: { fields: "id, first_name", which: student.details.student_number }
     json_users = JSON.parse(@response.body)
-    
+
     assert_equal json_users.first[0], student.id
     assert_equal json_users.first[1], student.first_name
 
