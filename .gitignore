@@ -5,13 +5,6 @@ tmp/
 public/uploads/**/*
 MissingDrawer.tmplugin
 .sass-cache/
-config/papyrus_app_config.rb
-config/initializers/papyrus_config_transition.rb
-config/database.yml
-config/deploy.rb
-config/deploy
 .DS_Store
 .vagrant
-test/fixtures/2018_no_daisy_test.csv
-test/fixtures/las_import.csv
 uploads/

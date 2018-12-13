@@ -117,11 +117,5 @@ if Rails.env.production?
     exception_recipients: PapyrusSettings.errors_email_to
   }
 
-  # Papyrus::Application.configure do
-  #   config.middleware.use ExceptionNotifier,
-  #        email_prefix: PapyrusSettings.errors_email_subject_prefix,
-  #        sender_address: PapyrusSettings.errors_email_from,
-  #        exception_recipients: PapyrusSettings.errors_email_to
-  # end
 
 end
