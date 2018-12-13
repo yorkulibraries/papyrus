@@ -16,14 +16,6 @@ gem "sprockets", ">= 3.7.2"
 gem 'sqlite3'
 gem "mysql2", "0.4.6"
 
-
-## DEPLOYMENT ##
-gem 'capistrano', '3.8.0'
-gem 'capistrano-rails', '1.2.3'
-gem 'capistrano-bundler', "1.2.0"
-gem 'capistrano-rbenv', "2.1.0"
-
-
 ## CSS AND JAVASCRIPT ##
 gem 'therubyracer', "0.12.3", platforms: :ruby
 gem 'jquery-rails', "4.3.1"
