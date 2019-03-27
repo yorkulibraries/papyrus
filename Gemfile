@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 ## RAILS and server ##
-gem "rails", "5.1.1"
+gem "rails", "5.1.6.2"
 gem "puma", "~> 3.7"
 
 ## RAILS related ##
