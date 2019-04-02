@@ -34,7 +34,7 @@ class Ability
       can :login_as, :student
 
       can :manage, :shared_access_codes
-      
+
     elsif user.role == User::STAFF
       can :show, :dashboard
 
@@ -53,6 +53,8 @@ class Ability
       can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail, :reactivate, :inactive, :destroy], Student
       can :login_as, :student
 
+      can :manage, :shared_access_codes
+      
     elsif user.role == User::PART_TIME
       can :show, :dashboard
 
