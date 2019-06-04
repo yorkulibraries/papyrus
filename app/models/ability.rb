@@ -23,7 +23,8 @@ class Ability
 
     elsif user.role == User::COORDINATOR
       can :show, :dashboard
-
+      can :show, :stats
+      
       can :manage, [ScanList, Document, ScanItem]
       can :manage, [Term, Course]
       can :manage, AcquisitionRequest
@@ -54,7 +55,7 @@ class Ability
       can :login_as, :student
 
       can :manage, :shared_access_codes
-      
+
     elsif user.role == User::PART_TIME
       can :show, :dashboard
 
