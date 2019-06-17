@@ -24,7 +24,7 @@ class Ability
     elsif user.role == User::COORDINATOR
       can :show, :dashboard
       can :show, :stats
-      
+
       can :manage, [ScanList, Document, ScanItem]
       can :manage, [Term, Course]
       can :manage, AcquisitionRequest
@@ -67,6 +67,9 @@ class Ability
       can :login_as, :student
       can :create, Attachment
       can :get_file, Attachment
+    elsif user.role == User::STUDENT_VIEW
+      can :show, :dashboard
+      can :read, Student
     else
       can :show, :student
       can :hide, Announcement

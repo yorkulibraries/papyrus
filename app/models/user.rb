@@ -12,10 +12,11 @@ class User < ApplicationRecord
   COORDINATOR = "coordinator"
   STAFF = "staff"
   PART_TIME ="part_time_staff"
+  STUDENT_VIEW = "student_view_only"
   STUDENT_USER = "student"
-  ROLE_NAMES = [ADMIN, MANAGER, COORDINATOR, STAFF, PART_TIME, STUDENT_USER]
+  ROLE_NAMES = [ADMIN, MANAGER, COORDINATOR, STAFF, PART_TIME, STUDENT_VIEW, STUDENT_USER]
   ROLES = [[ADMIN.titleize, ADMIN], [MANAGER.titleize, MANAGER],  [COORDINATOR.titleize, COORDINATOR], [STAFF.titleize, STAFF],
-        [PART_TIME.titleize, PART_TIME]]
+        [PART_TIME.titleize, PART_TIME],[STUDENT_VIEW.titleize, STUDENT_VIEW]]
 
   # Activity Names
   ACTIVITY_GENERAL = "general"

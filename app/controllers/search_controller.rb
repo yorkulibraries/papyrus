@@ -30,7 +30,7 @@ class SearchController < AuthenticatedController
     @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
 
     respond_to do |format|
-      format.json { render :json => @students.map { |student| {:id => student.id, :name => student.name } } }
+      format.json { render :json => @students.map { |student| {:id => student.id, :name => "#{student.name} - #{student.details.student_number}" } } }
       format.html {  render :template => "students/index" }
     end
   end

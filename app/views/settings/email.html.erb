@@ -10,6 +10,7 @@
 						<a href="#general_email_settings" role="tab" data-toggle="tab">General</a>
 					</li>
 					<li><a href="#welcome_email_settings" role="tab" data-toggle="tab">Welcome Email</a></li>
+					<li><a href="#lab_access_email_settings" role="tab" data-toggle="tab">Lab Access Email</a></li>
 					<li><a href="#notification_email_settings" role="tab" data-toggle="tab">Notification Email</a></li>
 					<li><a href="#item_assigned_email_settings" role="tab" data-toggle="tab">Item Assigned Email</a></li>
 					<li><a href="#helpful_tags_settings" role="tab" data-toggle="tab">Helpful Tags</a></li>
@@ -28,6 +29,15 @@
 						<p class="help-block small">Available Body Tags:
 							{{sender_name}} | {{student_name}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
 						<%= f.input :email_welcome_body, as: :text, label: "Body", input_html: { rows: 20, class: "form-control"  } %>
+					</div>
+					<div class="tab-pane" id="lab_access_email_settings">
+						<h4>Lab Access Email</h4>
+						<%= f.input :email_lab_access_enable, as: :radio_buttons, label: "Enable Lab Access Welcome Email?" %>
+
+						<%= f.input :email_lab_access_subject, label: "Subject", input_html: { class: "form-control" } %>
+						<p class="help-block small">Available Body Tags:
+							{{sender_name}} | {{student_name}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
+						<%= f.input :email_lab_access_body, as: :text, label: "Body", input_html: { rows: 20, class: "form-control"  } %>
 					</div>
 				<div class="tab-pane" id="notification_email_settings">
 						<h4>Notification Email</h4>
@@ -66,7 +76,9 @@
 				<dd>The email address that will appear in the from field on papyrus generated emails.</dd>
 				<hr/>
 				<dt>Welcome Email Subject and Body</dt>
-				<dd>The subject and body of an email sent out to welcome newly registered students.</dd>
+				<dd>The subject and body of an email sent out to welcome newly registered students that require access to Papyrus.</dd>
+				<dt>Lab Access Subject and Body</dt>
+				<dd>The subject and body of an email sent out to welcome only lab access students.</dd>
 				<dt>Notification Email Subject and Body</dt>
 				<dd>The subject and body of an email sent out via student communcation box.</dd>
 				<dt>Item Assigned Email Subject and Body</dt>

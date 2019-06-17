@@ -26,7 +26,6 @@ class StudentMailer < ActionMailer::Base
    end
 
   def welcome_email(student, sender)
-    @template = Liquid::Template.parse(PapyrusSettings.email_welcome_body)  # Parses and compiles the template
 
     @student = student
     @sender = sender
@@ -39,8 +38,16 @@ class StudentMailer < ActionMailer::Base
     @org_name = PapyrusSettings.org_name
     @counsellor_email = student.details.cds_counsellor_email
 
+    if PapyrusSettings.email_lab_access_enable && @student.lab_access_only?
+      @subject = PapyrusSettings.email_lab_access_subject
+      @template = Liquid::Template.parse(PapyrusSettings.email_lab_access_body)  # Parses and compiles the template
+    else
+      @subject = PapyrusSettings.email_welcome_subject
+      @template = Liquid::Template.parse(PapyrusSettings.email_welcome_body)  # Parses and compiles the template
+    end
+
     if PapyrusSettings.email_allow && student.email != nil
-      mail(to: student.email, cc: sender.email, bcc: @counsellor_email, subject: PapyrusSettings.email_welcome_subject)
+      mail(to: student.email, cc: sender.email, bcc: @counsellor_email, subject: @subject)
 
       @student.audit_comment = "Sent to #{@student.email}"
       @student.save

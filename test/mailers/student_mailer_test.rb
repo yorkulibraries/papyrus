@@ -5,6 +5,7 @@ class StudentMailerTest < ActionMailer::TestCase
   should "Send a welcome email" do
     PapyrusSettings.email_allow = true
     student = create(:student)
+    student.details.format_pdf = true
     details = create(:student_details, student: student)
     sender = create(:user)
 
@@ -77,6 +78,50 @@ class StudentMailerTest < ActionMailer::TestCase
     email = StudentMailer.items_assigned_email(student, items, sender).deliver_now
 
     assert_equal PapyrusSettings.email_item_assigned_subject, email.subject
+  end
+
+  should "send a lab access only email to lab_access student" do
+    PapyrusSettings.email_allow = true
+    PapyrusSettings.email_lab_access_enable = true
+
+    sender = create(:user, email: "sender@sender.com")
+    student = create(:student, email: "whatever@whatever.com")
+    assert student.lab_access_only?
+
+    email = StudentMailer.welcome_email(student, sender).deliver_now
+    assert !ActionMailer::Base.deliveries.empty?, "Shouldn't be empty"
+
+    assert_equal PapyrusSettings.email_lab_access_subject, email.subject
+  end
+
+  should "send a welcome emailt to student that's not lab access only" do
+    PapyrusSettings.email_allow = true
+    PapyrusSettings.email_lab_access_enable = true
+
+    sender = create(:user, email: "sender@sender.com")
+    student = create(:student, email: "whatever@whatever.com")
+    student.details.format_pdf = true
+    assert ! student.lab_access_only?
+
+    email = StudentMailer.welcome_email(student, sender).deliver_now
+    assert !ActionMailer::Base.deliveries.empty?, "Shouldn't be empty"
+
+    assert_equal PapyrusSettings.email_welcome_subject, email.subject
+  end
+
+
+  should "NOT send a lab access only email to lab_access student if it wasn't enabled" do
+    PapyrusSettings.email_allow = true
+    PapyrusSettings.email_lab_access_enable = false
+
+    sender = create(:user, email: "sender@sender.com")
+    student = create(:student, email: "whatever@whatever.com")
+    assert student.lab_access_only?
+
+    email = StudentMailer.welcome_email(student, sender).deliver_now
+    assert !ActionMailer::Base.deliveries.empty?, "Shouldn't be empty"
+
+    assert_equal PapyrusSettings.email_welcome_subject, email.subject
   end
 
 end
