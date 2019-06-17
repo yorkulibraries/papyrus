@@ -8,9 +8,11 @@
       id="show_current_items_list" class="small trivial pull-right hide">
       Show current items
     </a>
-    <a data-toggle="modal" href="#assign_items_modal" class="btn btn-sm btn-primary">
-      <i class="fa-plus fa"></i> Assign Items
-    </a>
+    <% if can? :create, ItemConnection %>
+      <a data-toggle="modal" href="#assign_items_modal" class="btn btn-sm btn-primary">
+        <i class="fa-plus fa"></i> Assign Items
+      </a>
+    <% end %>
 
   <% end %>
   <hr/>
@@ -25,7 +27,7 @@
     <% end %>
   </ul>
 
-	<%= render partial: "students/shared/expired_items_list", locals: { student: @student } %>		
+	<%= render partial: "students/shared/expired_items_list", locals: { student: @student } %>
 <% end %>
 
 <div id="assign_items_modal" class="modal modal-fade">
