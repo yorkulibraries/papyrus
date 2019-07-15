@@ -19,7 +19,8 @@ module Papyrus
         "format_braille",
         "format_other",
         "format_note",
-        "request_form_signed_on"
+        "request_form_signed_on",
+        "format_epub"
       ],
       coordinator_id: 1,
       created_by_id: 1
@@ -35,6 +36,7 @@ module Papyrus
       return nil if students_list == nil || !students_list.kind_of?(Array) # If nil or array return
 
       process_options(options)
+
 
       # ignore first line if required
       students_list.shift if @options[:ignore_first_line]

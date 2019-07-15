@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623162239) do
+ActiveRecord::Schema.define(version: 20190715133718) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string "for"
@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(version: 20170623162239) do
     t.string "cds_counsellor_email"
     t.boolean "alternate_format_required", default: true
     t.boolean "format_other"
+    t.boolean "format_epub"
     t.index ["student_id"], name: "index_student_details_on_student_id"
     t.index ["transcription_assistant_id"], name: "ta_id"
     t.index ["transcription_coordinator_id"], name: "tc_id"

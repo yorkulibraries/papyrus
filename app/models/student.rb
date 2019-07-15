@@ -80,6 +80,7 @@ class Student < User
     formats_array.push "BRAILLE" if self.details.format_braille
     formats_array.push "WORD" if self.details.format_word
     formats_array.push "LARGE PRINT" if self.details.format_large_print
+    formats_array.push "EPUB" if self.details.format_epub
     formats_array.push "OTHER" if self.details.format_other
     return formats_array
   end
@@ -148,6 +149,8 @@ class Student < User
         hash[:student_details_attributes][:format_kurzweil] = data[index].try(:downcase) == "true" ? true : false
       when "format_word"
         hash[:student_details_attributes][:format_word]  =  data[index].try(:downcase) == "true" ? true : false
+      when "format_epub"
+        hash[:student_details_attributes][:format_epub]  =  data[index].try(:downcase) == "true" ? true : false      
       when "format_other"
         hash[:student_details_attributes][:format_other]  =  data[index].try(:downcase) == "true" ? true : false
       when "format_note"

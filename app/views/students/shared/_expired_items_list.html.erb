@@ -1,5 +1,5 @@
 <div id="expired_items" class="hide">
-  <h4>Expired Items</h4>
+  <h4>Expired Items <%= @expired_items.size %></h4>
   <ul class="list-unstyled">
     <%= blank_slate(@expired_items,
         title: "There are no expired items.", icon: "file red",
