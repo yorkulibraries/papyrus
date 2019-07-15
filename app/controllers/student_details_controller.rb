@@ -43,7 +43,7 @@ class StudentDetailsController < AuthenticatedController
 
   def student_details_params
     params.require(:student_details).permit( :student_number, :preferred_phone, :request_form_signed_on,
-                     :format_large_print, :format_pdf, :format_kurzweil, :format_daisy, :format_braille, :format_word, :format_note, :format_other,
+                     :format_large_print, :format_pdf, :format_kurzweil, :format_epub, :format_daisy, :format_braille, :format_word, :format_note, :format_other,
                      :transcription_coordinator_id, :transcription_assistant_id, :cds_counsellor, :cds_counsellor_email, :book_retrieval,
                      :requires_orientation, :orientation_completed, :orientation_completed_at, :accessibility_lab_access, :alternate_format_required)
   end

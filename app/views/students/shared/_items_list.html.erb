@@ -1,12 +1,12 @@
-<%= panel(title: "Assigned Items", icon: "book", title_class: "text-center", styles:"panel-info") do %>
+<%= panel(title: "Assigned Items - #{@items.size}", icon: "book", title_class: "text-center", styles:"panel-info") do %>
 
   <% unless student.inactive? %>
     <a href="#expired_items" id="show_expired_items_list" class="small trivial pull-right">
-      Show expired items
+      Show expired items (<%= @expired_items.size %>)
     </a>
     <a href="<%= student_path(@student) %>" data-disable-with="Loading current items..."
       id="show_current_items_list" class="small trivial pull-right hide">
-      Show current items
+      Show current items (<%= @items.size %>)
     </a>
     <% if can? :create, ItemConnection %>
       <a data-toggle="modal" href="#assign_items_modal" class="btn btn-sm btn-primary">

@@ -158,4 +158,46 @@ class Papyrus::StudentLoaderTest < ActiveSupport::TestCase
 
   end
 
+  should "import csv with all the proper fields and assigend things propely, including EPUB" do
+    c = create(:user, id: 1) # coordinator user, for testing mysql referential checks
+
+    # ENV["FIELDS_ORDER"] = [
+    #   "student_number",
+    #   "first_name",
+    #   "last_name",
+    #   "email",
+    #   "cds_counsellor",
+    #   "cds_counsellor_email",
+    #   "accessibility_lab_access",
+    #   "book_retrieval",
+    #   "alternate_format_required",
+    #   "format_pdf",
+    #   "format_large_print",
+    #   "format_word",
+    #   "format_braille",
+    #   "format_other",
+    #   "format_note",
+    #   "request_form_signed_on",
+    #   "format_epub"
+    # ].join(" ")
+
+    sample_data = [
+      ["ignore", "first", "line", "by", "default"],
+      ["111111", "jerome", "iron", "j@i.com", "Smitthy", "cod@cod.com",
+        "true", "true", "false", "true", "true", "true", "true", "true", "Note", "2019-05-07", "true"]
+    ]
+
+    assert_difference "Student.count", 1 do
+      # should create two new students
+      loader = Papyrus::StudentLoader.new
+      result = loader.from_list(sample_data)
+
+      assert_equal 1, result[:created].size, "1 Created, #{result[:errors]}"
+
+      student = Student.last
+      assert_equal true, student.details.format_pdf, "Format PDF should true"
+      assert_equal true, student.details.format_epub, "Epub Should be set"
+    end
+  end
+
 end

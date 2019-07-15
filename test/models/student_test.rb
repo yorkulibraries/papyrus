@@ -99,12 +99,12 @@ class StudentTest < ActiveSupport::TestCase
     fields = [
       "student_number", "first_name", "last_name", "email", "cds_counsellor", "cds_counsellor_email","request_form_signed_on",
       "accessibility_lab_access", "book_retrieval", "alternate_format_required", "format_pdf", "format_large_print", "format_braille",
-      "format_word", "format_other", "format_note"
+      "format_word", "format_other", "format_note", "format_epub"
     ]
 
 
     data = [12323, "Johnny", "Smithy", "johnny@smitthy.com", "Jeremy Irons", "jeremy@irons.com", "2012-10-10", "True", "false", "True",
-            "True", "no", "False", "True", "True", "No Notes" ]
+            "True", "no", "False", "True", "True", "No Notes", "True" ]
 
     hash = Student.build_hash_from_array(data, fields)
 
@@ -130,7 +130,8 @@ class StudentTest < ActiveSupport::TestCase
     assert_equal true, student_details.format_pdf, "PDF"
     assert_equal false, student_details.format_large_print, "Large Print"
     assert_equal false, student_details.format_braille, "Braille"
-    assert_equal true, student_details.format_word, "World"
+    assert_equal true, student_details.format_word, "Word"
+    assert_equal true, student_details.format_epub, "EPUB"
     assert_equal true, student_details.format_other, "Other"
     assert_equal "No Notes", student_details.format_note, "notes"
 
@@ -153,7 +154,7 @@ class StudentTest < ActiveSupport::TestCase
   should "show never logged in students" do
     create(:student, last_logged_in_at: nil)
     create(:student, last_logged_in_at: 2.days.ago)
-    
+
 
     assert_equal 1, Student.never_logged_in.size, "Should be 1"
   end
