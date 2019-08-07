@@ -26,6 +26,10 @@ class BibRecord::PrimoResult
     results
   end
 
+  def self.find_by_id(id)
+    record = Primo.find_by_id(id: id, context: :PC)
+  end
+
   def from_primo(record)
     self.source = "primo"
     self.catalogue_record = record
@@ -42,6 +46,7 @@ class BibRecord::PrimoResult
     self.callnumber = get_value record[:delivery]["holding"].first["callNumber"] rescue "n/a"
     self.main_location = get_value record[:delivery]["holding"].first["mainLocation"] rescue "n/a"
     self.isbn_issn = get_value record[:pnx]["addata"]["isbn"]
+    self.ils_id = get_value record[:pnx]["display"]["mms"]
 
     ## journals
     self.isbn_issn = get_value record[:pnx]["addata"]["issn"] if isbn_issn.blank?
