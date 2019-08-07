@@ -32,6 +32,8 @@ class BibRecord
       find_vufind_item(item_id)
     elsif source == WORLDCAT
       find_worldcat_item(item_id)
+    elsif source == PRIMO
+      BibRecord::AlmaResult.build_item_from_alma_result(item_id)
     else
       "Record Not Found"
     end
