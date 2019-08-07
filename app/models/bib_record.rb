@@ -5,6 +5,7 @@ class BibRecord
   ## CONSTANTS
   VUFIND = "vufind"
   WORLDCAT = "worldcat"
+  PRIMO = "Primo"
 
 
   def initialize()
@@ -19,6 +20,8 @@ class BibRecord
       search_vufind_items(search_string)
     elsif source == WORLDCAT
       search_worldcat_items(search_string)
+    elsif source == PRIMO
+      BibRecord::PrimoResult.search search_string
     else
       ["No Results Found"]
     end
@@ -39,6 +42,8 @@ class BibRecord
       BibRecord.build_item_from_vufind_result(result, item_type, PapyrusSettings.vufind_id_prefix)
     elsif source == WORLDCAT
       BibRecord.build_item_from_worldcat_result(result, item_type, PapyrusSettings.worldcat_id_prefix)
+    elsif source == PRIMO
+
     else
       "Item Can't be built"
     end
