@@ -44,6 +44,8 @@ class SearchController < AuthenticatedController
       @results = search_worldcat(params[:q])
     when BibRecord::VUFIND
       @results = search_vufind(params[:q])
+    when BibRecord::PRIMO
+      @results = search_primo(params[:q])
     else
       @results = search_local_items(params[:q])
     end
@@ -69,6 +71,12 @@ class SearchController < AuthenticatedController
 
 
   private
+  def search_primo(query)
+    bib_record = BibRecord.new
+    @bib_search = true
+    @docs = bib_record.search_items(query, BibRecord::PRIMO)
+  end
+
   def search_vufind(query)
     bib_record = BibRecord.new
     @bib_search = true

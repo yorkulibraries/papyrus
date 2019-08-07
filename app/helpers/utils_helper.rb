@@ -1,4 +1,10 @@
 module UtilsHelper
+  def pp(object)
+    begin
+      (ap object).html_safe
+    rescue
+    end
+  end
 
   def blank_slate(list = nil, title: "No items found", description: "Click on new button to add new item.", icon: nil)
     if list == nil || list.size == 0

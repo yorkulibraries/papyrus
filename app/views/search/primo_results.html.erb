@@ -1,0 +1,82 @@
+<% unless @results.nil? || @results.size == 0 %>
+  <div class="cat-search-results">
+
+    <% @results.each_with_index do |item, index| %>
+
+    <div class="media">
+
+      <a href="javascript:;" class="pull-left">
+        <% if item.isbn_issn %>
+          <div class="book-cover">
+            <%= image_tag "icons/files/photo.png",
+            data: { isbn: item.isbn_issn, size: "large"}, class: "google-bookcover" %>
+          </div>
+        <% else %>
+          <div class="book-cover unavailable">
+            <span class="fa fa-book fa-5x"></span><br/>
+            No Cover Available
+          </div>
+        <% end %>
+
+
+      </a>
+
+      <div class="media-body">
+          <h4 class="media-heading">
+            <span class="badge badge-success">
+              <a href="<%= new_item_path %>?bib_record_id=<%= item.ils_id %>" data-confirm="Are you sure?" class="hidden-phone">
+                <i class="fa fa-plus-square fa-fw "></i> item
+              </a>
+            </span>
+            <%= item.title %>
+          </h4>
+          <%= pp item.catalogue_record %>
+          <ul class="list-unstyled list-info">
+            <li>
+                <span class="fa fa-user fa-fw"></span>
+                <label>Author</label>
+                <%= item.author %>
+            </li>
+            <li>
+                <span class="fa fa-university fa-fw"></span>
+                <label>Publisher</label>
+                <%= item.publisher %> <span class="trivial">Published: <%= item.publication_date %></span>
+            </li>
+            <li>
+                <span class="fa fa-tags fa-fw"></span>
+                <label>Subject</label>
+                <%= item.subject %>
+            </li>
+            <li>
+                <span class="fa fa-language fa-fw"></span>
+                <label>Edition + Language</label>
+                <%= item.edition %>
+                <span class="trivial">[<%= item.language %>]</span>
+            </li>
+            <li>
+                <span class="fa fa-barcode fa-fw"></span>
+                <label>ISBN + Call Number</label>
+                <%= item.isbn_issn %> &amp;
+                <%= item.callnumber %>
+            </li>
+            <li>
+                <span class="fa fa-file-text fa-fw"></span>
+                <label>Format + Description</label>
+                <%= item.item_type %>
+                <span class="trivial">[<%= item.description %>]</span>
+            </li>
+          </ul>
+      </div>
+    </div>
+
+    <% end %>
+
+  </div>
+
+<% else %>
+  <div class="blank-slate">
+    <i class="icon-question-sign"></i>
+    <h1>No Search Terms</h1>
+    <p>Please specify a search term in the search box.</p>
+  </div>
+<% end %>

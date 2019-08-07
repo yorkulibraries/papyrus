@@ -38,6 +38,8 @@ class SettingsController < AuthenticatedController
       redirect_to email_settings_path, notice: "Saved Email Settings"
     when "bib_search"
       redirect_to bib_search_settings_path, notice: "Saved Bib Search Settings"
+    when "primo_alma"
+      redirect_to primo_alma_settings_path, notice: "Saved Primo Alma Settings"  
     when "item"
       redirect_to item_settings_path, notice: "Saved Item Settings"
     when "students"

@@ -43,6 +43,10 @@ gem 'momentjs-rails', "2.17.1"
 gem "rubyzip", "~> 1.2.2"
 #gem "nokogiri", "~> 1.8.2"
 
+## EX LIBRIS INTEGRATION ALMA, PRIMO
+gem "alma"
+gem "primo", github: "tulibraries/primo"
+
 ## EXEL EXPORT ##
 gem "roo", '~> 2.3.1'
 gem "axlsx", git: 'https://github.com/randym/axlsx.git'
@@ -64,6 +68,7 @@ gem 'rack-mini-profiler', require: false
 gem 'guard-livereload', "2.5.2", require: false
 gem "rack-livereload", "0.3.16"
 gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+gem "awesome_print", "1.8.0"
 
 group :test do
   gem "minitest", "5.10.2"
