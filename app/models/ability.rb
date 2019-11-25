@@ -24,6 +24,8 @@ class Ability
     elsif user.role == User::COORDINATOR
       can :show, :dashboard
       can :show, :stats
+      can :manage, Announcement
+      can :manage, PapyrusSettings
 
       can :manage, [ScanList, Document, ScanItem]
       can :manage, [Term, Course]
