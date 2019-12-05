@@ -227,7 +227,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.5)
-    puma (3.9.1)
+    puma (3.12.2)
     rack (2.0.6)
     rack-livereload (0.3.16)
       rack
@@ -402,7 +402,7 @@ DEPENDENCIES
   momentjs-rails (= 2.17.1)
   mysql2 (= 0.4.6)
   populator!
-  puma (~> 3.7)
+  puma (~> 3.12)
   rack-livereload (= 0.3.16)
   rack-mini-profiler
   rails (= 5.1.6.2)
