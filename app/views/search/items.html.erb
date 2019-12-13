@@ -11,6 +11,8 @@
 				<%= render  template: "search/vufind_search_results"%>
 			<% elsif @search_results == BibRecord::WORLDCAT %>
 					<%= render  template: "search/worldcat_search_results"%>
+			<% elsif @search_results == BibRecord::PRIMO %>
+					<%= render  template: "search/primo_results"%>
 			<% end %>
 
 		<% end %>

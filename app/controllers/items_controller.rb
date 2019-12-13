@@ -117,9 +117,15 @@ class ItemsController < AuthenticatedController
     if params[:bib_record_id]
      source = params[:source] || BibRecord::VUFIND
 
-     bib_record = BibRecord.new
-     bib_item = bib_record.find_item(params[:bib_record_id], source)
-     @item = bib_record.build_item_from_search_result(bib_item, Item::BOOK, source)
+
+     if source == BibRecord::PRIMO
+       @record = BibRecord::AlmaResult.find_item params[:bib_record_id]
+       @item = BibRecord::AlmaResult.build_item_from_alma_result @record        
+     else
+       bib_record = BibRecord.new
+       bib_item = bib_record.find_item(params[:bib_record_id], source)
+       @item = bib_record.build_item_from_search_result(bib_item, Item::BOOK, source)
+     end
     end
 
   end

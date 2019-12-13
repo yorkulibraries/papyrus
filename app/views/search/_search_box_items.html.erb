@@ -1,5 +1,5 @@
 <div class="search-box row">
-	
+
 	<form action="<%= search_items_path %>?type=<%=params[:type] %>" id="omni_search_form">
 
 		<div class="col-sm-4 col-xs-4">
@@ -12,12 +12,17 @@
 			<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == "local" %>" name="type" value="local">
 				Papyrus
 			</button>
+			<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::PRIMO %>" name="type" value="<%= BibRecord::PRIMO %>">
+				 Primo
+			</button>
 			<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::VUFIND %>" name="type" value="<%= BibRecord::VUFIND %>">
 					<%= bib_search_vufind_label %>
 			</button>
-			<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::WORLDCAT %>" name="type" value="<%= BibRecord::WORLDCAT %>">
-				<%= bib_search_worldcat_label %>
-			</button>
+			<% if !PapyrusSettings.worldcat_key.blank? %>
+				<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::WORLDCAT %>" name="type" value="<%= BibRecord::WORLDCAT %>">
+					<%= bib_search_worldcat_label %>
+				</button>
+			<% end %>
 		</div>
 		<div class="col-sm-4 col-xs-4 results-info">
 
@@ -28,6 +33,8 @@
 				Showing <%= " #{@results.count}" if @results %> closest matches
 			<% elsif @search_results == BibRecord::WORLDCAT %>
 				Displaying <%= " #{@results.count}" if @results %> closest matches
+			<% elsif @search_results == BibRecord::PRIMO %>
+				Showing <%= " #{@results.count}" if @results %> closest matches
 			<% end %>
 		</div>
 	</form>

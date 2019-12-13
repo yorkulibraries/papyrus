@@ -38,7 +38,7 @@
       <ul class="dropdown-menu">
         <li class="<%= "active" if controller_name == "users" %>">
           <a href="<%= users_path %>">Papyrus Users</a>
-        </li>  
+        </li>
 
         <li class="divider"></li>
 
@@ -82,6 +82,10 @@
 
           <li class="<%= "active" if is_controller_and_action?("settings", "acquisitions") %>">
             <%= link_to "Acquisitions", acquisitions_settings_path %>
+          </li>
+
+          <li class="<%= "active" if is_controller_and_action?("settings", "primo_alma") %>">
+            <%= link_to "Primo Alma", primo_alma_settings_path %>
           </li>
         <% end %>
       </ul>

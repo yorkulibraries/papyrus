@@ -110,6 +110,18 @@ if ActiveRecord::Base.connection.table_exists? 'settings'
   PapyrusSettings.save_default(:student_portal_welcome_message, "Welcome to Papyrus. You are here first time.")
   PapyrusSettings.save_default(:student_portal_welcome_enable, PapyrusSettings::FALSE)
 
+  ## PRIMO and ALMA Settings
+  PapyrusSettings.save_default(:primo_apikey, "")
+  PapyrusSettings.save_default(:primo_inst, "")
+  PapyrusSettings.save_default(:primo_vid, "")
+  PapyrusSettings.save_default(:primo_region, "")
+  PapyrusSettings.save_default(:primo_enable_loggable, true)
+  PapyrusSettings.save_default(:primo_scope, "")
+  PapyrusSettings.save_default(:primo_pcavailability, true)
+
+  PapyrusSettings.save_default(:alma_apikey, "")
+  PapyrusSettings.save_default(:alma_region, "")
+
 end
 
 # Exception Notification For Production
