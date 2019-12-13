@@ -54,7 +54,7 @@ gem 'axlsx_rails', "0.5.1"
 
 ## UPLOADING AND MANIPULATING FILES ##
 gem "carrierwave", "1.1.0"
-gem "mini_magick", "4.7.1"
+gem "mini_magick", "4.9.5"
 gem "mime-types"
 
 # NOTIFICATIONS
