@@ -24,7 +24,7 @@ gem 'jquery-ui-rails', "6.0.1"
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
 gem 'twitter-bootstrap-rails', "4.0.0"
 gem "less-rails", "2.8.0"
-gem "simple_form", "3.5.0"
+gem "simple_form", "5.0.1"
 gem "font-awesome-rails", '4.7.0.2'
 gem 'best_in_place', '3.1.1'
 
