@@ -1,0 +1,56 @@
+<% title "Primo/Alama Settings", false %>
+
+<div class="row">
+	<div class="col-md-8">
+		<%= panel(title: "Promo Alma", icon: "cog") do %>
+			<p class="alert alert-danger"><strong>Warning:</strong> Changing these values might disable Primo/Alma Search capabilities. Please be careful.</p>
+
+			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+
+
+				<h4 class="black">Primo Settings</h4>
+
+				<%= f.input :primo_apikey %>
+				<%= f.input :primo_region %>
+				<%= f.input :primo_inst %>
+				<%= f.input :primo_vid %>
+				<%= f.input :primo_enable_loggable, as: :radio_buttons %>
+				<%= f.input :primo_scope %>
+				<%= f.input :primo_pcavailability, as: :radio_buttons %>
+
+
+				<h4 class="black">Alma Settings</h4>
+
+				<%= f.input :alma_apikey %>
+	      <%= f.input :alma_region %>
+
+
+				<input type="hidden" name="return_to" value="primo_alma"/>
+				<%= f.submit "Save Settings", class: "btn btn-success" %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="col-md-4">
+		<%= panel(title: "Primo Alma Settings Help", icon: "question") do %>
+			<dl>
+				<dt>Primo ApiKey</dt>
+				<dd>The unique key that allows Papyrus to access Primo search</dd>
+				<dt>Primo Inst</dt>
+				<dd>Unique Institution Code</dd>
+				<dt>Primo Region</dt>
+				<dd>The url to the regional instance where Primo lives</dd>
+				<hr/>
+				<dt>Alma ApiKey</dt>
+				<dd>A unique key that allows Papyrus to access Alma records.</dd>
+				<dt>Alma Region</dt>
+				<dd>The url to the regional instance where Alama lives</dd>
+			</dl>
+		<% end %>
+	</div>
+</div>
+
+
+<% sidebar do %>
+  <h3>Bib Search Help</h3>
+
+<% end %>

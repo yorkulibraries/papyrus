@@ -72,6 +72,8 @@ Papyrus::Application.routes.draw do
     get :acquisitions
     get :courses
     get :students
+
+    get :primo_alma
   end
 
   # Anouncements
