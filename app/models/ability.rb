@@ -26,6 +26,7 @@ class Ability
       can :show, :stats
       can :manage, Announcement
       can :manage, PapyrusSettings
+      can :manage, User
 
       can :manage, [ScanList, Document, ScanItem]
       can :manage, [Term, Course]
