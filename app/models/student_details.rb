@@ -1,4 +1,4 @@
-class StudentDetails < ApplicationRecord 
+class StudentDetails < ApplicationRecord
   #attr_accessible  :student_number, :preferred_phone, :request_form_signed_on,
   #                 :format_large_print, :format_pdf, :format_kurzweil, :format_daisy, :format_braille, :format_word, :format_note, :format_other,
   #                 :transcription_coordinator_id, :transcription_assistant_id, :cds_counsellor, :cds_counsellor_email, :book_retrieval,
@@ -41,6 +41,7 @@ class StudentDetails < ApplicationRecord
     formats_array.push "BRAILLE" if self.format_braille
     formats_array.push "WORD DOCUMENT" if self.format_word
     formats_array.push "LARGE PRINT" if self.format_large_print
+    formats_array.push "EPUB" if self.format_epub
 
     formats_array
   end
