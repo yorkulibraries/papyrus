@@ -32,7 +32,7 @@
 
     <div class="row">
       <div class="col-md-6">
-        <%= builder.input :transcription_coordinator_id, required: true,  label: "Transcription Coordinator",  collection: User.transcription_assitants %>
+        <%= builder.input :transcription_coordinator_id, required: true,  label: "Transcription Coordinator",  collection: User.transcription_assitants.unblocked %>
       </div>
       <div class="col-md-6">
         <%= builder.input :cds_counsellor, label: "Disabilities Counsellor" %>
@@ -41,7 +41,7 @@
 
     <div class="row">
       <div class="col-md-6">
-        <%= builder.input :transcription_assistant_id, required: true, label: "Transcription Assistant", collection: User.transcription_assitants %>
+        <%= builder.input :transcription_assistant_id, required: true, label: "Transcription Assistant", collection: User.transcription_assitants.unblocked %>
       </div>
       <div class="col-md-6">
         <%= builder.input :cds_counsellor_email, required: true, label: "Disabilities Counsellor Email" %>
