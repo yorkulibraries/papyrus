@@ -10,7 +10,7 @@ class UsersController < AuthenticatedController
     @user = User.find(params[:id])
     @user.blocked = false
     @user.audit_comment = "Activated User Account"
-    @user.save
+    @user.save(validate: false)
     redirect_to users_path, notice: "#{@user.name} is now active in Papyrus"
   end
 

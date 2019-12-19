@@ -56,6 +56,10 @@ class User < ApplicationRecord
     self.name.split(/\s+/).map(&:first).join.upcase
   end
 
+  def blocked?
+    self[:blocked] == true
+  end
+  
   def name
     "#{self.first_name} #{self.last_name}".strip
   end

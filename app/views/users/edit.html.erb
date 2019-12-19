@@ -20,7 +20,7 @@
 			<p><strong>Deactivate or Reactivate</strong></p>
 			<p>You can deactivate a user account. This does not delete the user record, just disables their ability to access Papyrus and hides the record from general view.</p>
 
-			<%  unless @user.inactive %>
+			<%  unless @user.blocked? %>
 
 				<%= link_to "Block This Account", @user, confirm:  'Are you sure?', method: :delete, class: "btn btn-danger"%>
 
