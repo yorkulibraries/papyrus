@@ -50,7 +50,7 @@ class Ability
 
       can :manage, [ScanList, ScanItem]
       can :manage, [Term, Course]
-      can [:read, :create, :status, :send_to_acquisitions], AcquisitionRequest
+      can :manage, AcquisitionRequest
       can :manage, AccessCode
       can [:read, :create, :update], [Note]
       can :manage, [Item, Attachment, ItemConnection]
