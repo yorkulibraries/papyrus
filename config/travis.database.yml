@@ -6,7 +6,8 @@ sqlite: &sqlite
 
 mysql: &mysql
   adapter: mysql2
-  username: root
+  username: travis
+  encoding: utf8  
   password:
   database: papyrus_<%= Rails.env %>
 
