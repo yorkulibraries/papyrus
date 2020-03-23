@@ -248,7 +248,7 @@ GEM
       slop (~> 3.4)
     public_suffix (2.0.5)
     puma (3.9.1)
-    rack (2.0.6)
+    rack (2.2.2)
     rack-livereload (0.3.16)
       rack
     rack-mini-profiler (0.10.5)
