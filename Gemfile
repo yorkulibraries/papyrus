@@ -70,6 +70,9 @@ gem "rack-livereload", "0.3.16"
 gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 gem "awesome_print", "1.8.0"
 
+## CRONJOBS ##
+gem 'whenever', require: false
+
 group :test do
   gem "minitest", "5.10.2"
   gem 'webrat', "0.7.3"
