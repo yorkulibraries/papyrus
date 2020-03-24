@@ -45,7 +45,7 @@ gem "rubyzip", "~> 1.2.2"
 
 ## EX LIBRIS INTEGRATION ALMA, PRIMO
 gem "alma"
-gem "primo", github: "tulibraries/primo"
+gem "primo", git: "https://github.com/tulibraries/primo.git"
 
 ## EXEL EXPORT ##
 gem "roo", '~> 2.3.1'

@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/tulibraries/primo.git
-  revision: 695440062044db24a1d01c4fd873c4767e28dff6
-  specs:
-    primo (0.1.0)
-      httparty
-
-GIT
   remote: https://github.com/randym/axlsx.git
   revision: c8ac844572b25fda358cc01d2104720c4c42f450
   specs:
@@ -20,6 +13,13 @@ GIT
   revision: cd1373d8c0a89709a892db9abb2517a87646ed41
   specs:
     populator (1.0.0)
+
+GIT
+  remote: https://github.com/tulibraries/primo.git
+  revision: 695440062044db24a1d01c4fd873c4767e28dff6
+  specs:
+    primo (0.1.0)
+      httparty
 
 GEM
   remote: http://rubygems.org/
