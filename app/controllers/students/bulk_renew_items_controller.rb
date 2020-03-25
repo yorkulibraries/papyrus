@@ -8,10 +8,11 @@ class Students::BulkRenewItemsController < AuthenticatedController
   def create
     @items = @student.items
     date = params[:expires_on][:date] if params[:expires_on]
-
+        
     @items.each do |i|
       i.assign_to_student(@student, date)
     end
+
 
     if date.blank?
       message = "All items Never expire"

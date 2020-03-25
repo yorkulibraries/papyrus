@@ -76,11 +76,7 @@ class Item < ApplicationRecord
     if existing_connection
      existing_connection.audit_comment = "Renewing until #{expire_on}"
      existing_connection.expires_on = expire_on
-
-     unless expire_on.nil?
-       existing_connection.save
-     end
-
+     existing_connection.save
     else
      # No existing conneciton, make a new one.
      connection = ItemConnection.new
@@ -89,6 +85,8 @@ class Item < ApplicationRecord
      connection.item = self
      connection.audit_comment = "Assigned - #{self.title[0...240]}"
      connection.save
+
+     "NEW CONNECTION"
     end
   end
 
