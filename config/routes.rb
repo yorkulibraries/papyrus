@@ -43,6 +43,7 @@ Papyrus::Application.routes.draw do
       get :inactive, to: "list#inactive"
       get :blocked, to: "list#blocked"
     end
+
   end
 
   get "stats" => "stats#index"
@@ -120,6 +121,8 @@ Papyrus::Application.routes.draw do
     resources :notes, except: [:show, :new]
 
     resource :student_details, as: :details, path: "details", except: [:index, :destroy]
+
+    resource :bulk_renew_items, only: [:new, :create, :show], module: "students"
 
     collection do
       #get "inactive"
