@@ -30,7 +30,7 @@ gem 'best_in_place', '3.1.1'
 
 ## TOOLS AND UTILITIES ##
 gem "worldcatapi", "1.0.5"
-gem 'kaminari', "0.17.0"
+gem 'kaminari', "1.2.1"
 gem "cancancan", "2.0.0"
 gem 'liquid', '4.0.0'
 gem 'email_validator', "1.6.0"
