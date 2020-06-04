@@ -4,15 +4,10 @@ class Search::LocalItemsController < AuthenticatedController
     authorize! :search, :items
   end
 
-
-  def index
-    redirect_to new_find_item_path
-  end
-
   def new
   end
 
-  def create
+  def index
     page_number = params[:page] ||= 1
 
     @query = params[:q]

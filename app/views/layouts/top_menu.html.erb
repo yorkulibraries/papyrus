@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav navbar-right top-nav">
 
   <% if can? :create, Item %>
-    <li><a href="<%= find_items_path %>"><i class="fa-search fa"></i></a></li>
+    <li><a href="<%= new_find_item_path %>"><i class="fa-search fa"></i></a></li>
     <li class="dropdown <%= "active" if controller_name == "items" && action_name == "new" %>">
       <a  class="dropdown-toggle" data-toggle="dropdown" href="#" title="New Item">
       <i class="fa-plus-square fa"></i> New Item  <b class="caret"></b>
