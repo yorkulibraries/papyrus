@@ -1,0 +1,14 @@
+<% title "Find Local Items", false %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "Find Local Items", icon: "search") do %>
+      <%= render partial: "search/local_items/form" %>
+
+      <% unless @results.blank? %>
+        <%= render partial: "search/local_items/list" %>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
