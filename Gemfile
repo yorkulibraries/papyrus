@@ -41,6 +41,7 @@ gem 'remotipart', '1.3.1' # submit files remotely
 gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
 gem "rubyzip", "~> 1.2.2"
+gem 'search_cop', "1.1.0"
 #gem "nokogiri", "~> 1.8.2"
 
 ## EX LIBRIS INTEGRATION ALMA, PRIMO
