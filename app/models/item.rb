@@ -2,6 +2,15 @@ class Item < ApplicationRecord
   #attr_accessible :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
   #                :language_note, :edition, :physical_description, :source, :source_note
 
+  include SearchCop
+
+  search_scope :search do
+    attributes :title, :callnumber, :author, :isbn, :publisher
+    #attributes student: ["students.first_name", "students.last_name"]
+    #attributes course: "courses.code"
+    attributes creator: ["user.first_name", "user.last_name"]
+  end
+
   audited
   has_associated_audits
   paginates_per 20

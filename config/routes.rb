@@ -1,5 +1,6 @@
 Papyrus::Application.routes.draw do
 
+
   ## API V1 routes
   namespace :api do
     namespace :v1 do
@@ -57,6 +58,9 @@ Papyrus::Application.routes.draw do
   get "logout" => "login#destroy", :as => "logout"
   get "login" => "login#new", :as => "login"
 
+  scope "/find" do
+    resources :local_items, only: [:new, :create, :index], module: "search", as: "find_items"
+  end
 
 
   # Scan List & Items
