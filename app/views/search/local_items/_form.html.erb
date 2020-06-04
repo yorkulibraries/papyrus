@@ -1,5 +1,5 @@
 <div class="search-box row">
-  <%= form_tag find_items_path, method: :post do %>
+  <%= form_tag find_items_path, method: :get do %>
 		<div class="col-sm-6 col-xs-6">
 			<div class="input-group">
         <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -27,6 +27,7 @@
     <label>Advanced Search Examples</label>
 
     <blockquote>
+      <p><small>You can add multiple filters in one query line. </small></p>
       <p>title: 'Caesar' author: 'Christian Meier' ISBN: '1234567', callnumber: 'AB 123'</p>
       <p>creator: 'John Smith' (this is very experimental, finding items createdy by user)</p>
     </blockquote>

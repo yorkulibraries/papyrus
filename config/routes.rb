@@ -59,7 +59,7 @@ Papyrus::Application.routes.draw do
   get "login" => "login#new", :as => "login"
 
   scope "/find" do
-    resources :local_items, only: [:new, :create, :index], module: "search", as: "find_items"
+    resources :local_items, only: [:new, :index], module: "search", as: "find_items"
   end
 
 
