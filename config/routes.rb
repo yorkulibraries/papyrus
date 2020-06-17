@@ -165,6 +165,10 @@ Papyrus::Application.routes.draw do
       post 'delete_multiple', on: :collection
     end
 
+
+    collection do
+      resources :from_primo, only: :index, module: :items
+    end
   end
 
   resources :acquisition_requests do
