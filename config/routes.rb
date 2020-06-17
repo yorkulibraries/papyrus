@@ -167,7 +167,7 @@ Papyrus::Application.routes.draw do
 
 
     collection do
-      resources :from_primo, only: :index, module: :items
+      resources :from_primo, only: [:index, :new, :create], module: :items
     end
   end
 
