@@ -2,7 +2,7 @@ class BibRecord::PrimoResult
   attr_accessor :title, :author, :isbn_issn, :callnumber, :publication_date, :publisher, :edition,
               :item_type, :format, :map_index_num, :journal_title, :volume, :page_number,
               :issue, :ils_barcode, :ils_id, :description, :main_location, :url, :rtype,
-              :catalogue_record, :source, :subject, :language
+              :catalogue_record, :source, :subject, :language, :primo_id
 
   def self.search(search_string, max_number_of_results = 20)
     @query =  Primo::Search::Query.new(value: search_string)
@@ -18,6 +18,7 @@ class BibRecord::PrimoResult
     records.docs.each do |record|
       result = BibRecord::PrimoResult.new
       result.from_primo record
+      pp record
       # pp  result.get_value(record[:pnx]["display"]["title"])
       # pp result.title
       results << result
@@ -28,9 +29,11 @@ class BibRecord::PrimoResult
 
   def self.find_by_id(id)
     record = Primo.find_by_id(id: id, context: :PC)
+
   end
 
   def from_primo(record)
+    self.primo_id = get_value record[:pnx]["control"]["sourcerecordid"]
     self.source = "primo"
     self.catalogue_record = record
 

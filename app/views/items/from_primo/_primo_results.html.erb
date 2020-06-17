@@ -5,66 +5,81 @@
 
     <div class="media">
 
-      <a href="javascript:;" class="pull-left">
+      <div class="pull-left">
         <% if item.isbn_issn %>
-          <div class="book-cover">
-            <%= image_tag "icons/files/photo.png",
-            data: { isbn: item.isbn_issn, size: "large"}, class: "google-bookcover" %>
+          <div class="book-cover text-center"
+                data-book-cover-url="<%= "https://syndetics.com/index.php?client=primo&isbn=#{item.isbn_issn}/sc.jpg" %>">
+            <%= image_tag 'book_cover_v1.jpg', class: "book-cover-image" %>
+
           </div>
         <% else %>
-          <div class="book-cover unavailable">
-            <span class="fas fa-book fa-5x"></span><br/>
-            No Cover Available
-          </div>
+          <%= image_tag 'book_cover_v1.jpg', class: "book-cover-image" %>
         <% end %>
 
-
-      </a>
+      </div>
 
       <div class="media-body">
-          <h4 class="media-heading">
+          <h3 class="media-heading" style="margin-bottom: 10px;">
+            <span class="pull-right">
             <% unless item.ils_id.blank? %>
-            <span class="badge badge-success">
-              <a href="<%= new_item_path %>?bib_record_id=<%= item.ils_id %>&amp;source=<%= BibRecord::PRIMO %>" data-confirm="Are you sure?" class="hidden-phone">
-                <i class="fa fa-plus-square fa-fw "></i> item
+              <a href="<%= new_from_primo_path %>?bib_record_id=<%= item.ils_id %>" data-confirm="Are you sure?" class="btn btn-success">
+                <i class="fa fa-plus-square fa-fw "></i> Alma Item
               </a>
-            </span>
+            <% else %>
+              <%= form_tag  new_from_primo_path, method: :get do |f| %>
+                <%= hidden_field_tag :primo_id, item.primo_id %>
+                <%= hidden_field_tag :title, item.title %>
+                <%= hidden_field_tag :author, item.author %>
+                <%= hidden_field_tag :callnumber, item.callnumber %>
+                <%= hidden_field_tag :publisher, item.publisher %>
+                <%= hidden_field_tag :publication_date, item.publication_date %>
+                <%= hidden_field_tag :edition, item.edition %>
+                <%= hidden_field_tag :language, item.language %>
+                <%= hidden_field_tag :isbn_issn, item.isbn_issn %>
+                <%= hidden_field_tag :type, item.item_type %>
+                <%= hidden_field_tag :description, item.description %>
+
+                <button type="submit" class="btn btn-info">
+                  <i class="fa fa-plus-square fa-fw "></i> Primo Item
+                </button>
+              <% end %>
+
             <% end %>
+            </span>
             <%= item.title %>
-          </h4>
+          </h3>
 
           <ul class="list-unstyled list-info">
             <li>
                 <span class="fa fa-user fa-fw"></span>
                 <label>Author</label>
-                <%= item.author %>
+                <span class="text-lg"><%= item.author %></span>
             </li>
             <li>
                 <span class="fa fa-university fa-fw"></span>
                 <label>Publisher</label>
-                <%= item.publisher %> <span class="trivial">Published: <%= item.publication_date %></span>
+                <span class="text-lg"><%= item.publisher %></span> <span class="trivial">Published: <%= item.publication_date %></span>
             </li>
             <li>
                 <span class="fa fa-tags fa-fw"></span>
                 <label>Subject</label>
-                <%= item.subject %>
+                <span class="text-lg"><%= item.subject %></span>
             </li>
             <li>
                 <span class="fa fa-language fa-fw"></span>
                 <label>Edition + Language</label>
-                <%= item.edition %>
-                <span class="trivial">[<%= item.language %>]</span>
+                <span class="text-lg"><%= item.edition %> [<%= item.language %>]</span>
             </li>
             <li>
                 <span class="fa fa-barcode fa-fw"></span>
                 <label>ISBN + Call Number</label>
-                <%= item.isbn_issn %> &amp;
-                <%= item.callnumber %>
+                <span class="text-lg"><%= item.isbn_issn %> &amp;
+                <%= item.callnumber %></span>
             </li>
             <li>
                 <span class="fa fa-file-text fa-fw"></span>
                 <label>Format + Description</label>
-                <%= item.item_type %>
+                <span class="text-lg"><%= item.item_type %></span>
                 <span class="trivial">[<%= item.description %>]</span>
             </li>
           </ul>
