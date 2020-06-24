@@ -3,7 +3,7 @@ $("#todo_list_<%= @todo_list.id %>_item_form_holder").empty();
   $('#todo_list_<%= @todo_list.id %>_item_form_holder').prepend('<%=escape_javascript render("todo_items/form") %>');
   setup_item_token_input("#todo_item_item_id", "<%= search_items_path %>", 1);
 <% else %>
-  $('#todo_list_<%= @todo_list.id %>_item_form_holder').prepend('<%=escape_javascript render("todo_items/form_with_item") %>');
+  $('#todo_list_<%= @todo_list.id %>_item_form_holder').prepend('<%=escape_javascript render("todo_items/form_item") %>');
 <% end %>
 
 $(".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });

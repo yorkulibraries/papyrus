@@ -1,12 +1,7 @@
 <%= simple_form_for [@todo_list, @todo_item], html: { remote: true } do |f| %>
   <div class="row">
-    <div class="col-md-4">
-      <%= f.input :item_id,label: false, as: :string,
-          input_html: { placeholder: "Find the item you want to scan" }
-      %>
-    </div>
-    <div class="col-md-4">
-      <%= f.input :summary, label: false, input_html: { placeholder: "Scan Note Summary" } %>
+    <div class="col-md-8">
+      <%= f.input :summary, label: false, input_html: { placeholder: "Todo Item Summary", class: "text-lg" } %>
     </div>
     <div class="col-md-2">
       <%= f.input :assigned_to_id, collection: User.active.not_students, label: false, input_html: { placeholder: "Assigned To" }  %>

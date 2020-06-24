@@ -1,46 +1,41 @@
 <div id="todo_item_<%= todo_item.id %>" data-id="<%= todo_item.id %>" class="list-group-item">
   <div class="row">
-    <div class="col-md-4">
-
-      <% item = todo_item.item %>
-      <% if item != nil %>
-        <div class="item" id="item_<%= item.id %>" data-id="<%=item.id %>">
-          <strong><%=link_to  item.title, item  %></strong><br/>
-          <%= format_field item.author %> | <%= format_field item.edition %>
-          <br/> 	<%= format_field item.callnumber %> | 	<%= format_field item.isbn %>
+    <div class="col-md-7">
+      <div class="media">
+        <div class="media-left">
+          <%= simple_form_for [todo_item.todo_list, todo_item], html: { remote: true } do |f| %>
+              <% if todo_item.status == TodoItem::STATUS_NEW %>
+                <i class="todo_list_status fa fa-fw fa-square-o fa-2x"></i>
+                <input type="hidden" name="todo_item[status]" autocomplete="off" value="<%= TodoItem::STATUS_DONE %>">
+              <% else %>
+                <i class="todo_list_status fa fa-fw fa-check-square-o fa-2x"></i>
+                <input type="hidden" name="todo_item[status]" autocomplete="off" value="<%= TodoItem::STATUS_NEW %>">
+              <% end %>
+          <% end %>
         </div>
-      <% else %>
-          <p>Item was deleted. ID: <%= todo_item.item_id %></p>
-      <% end %>
-      <a href="<%= todo_list_todo_item_path(@todo_list, todo_item) %>" data-remote="true"
+        <div class="media-body">
+          <h4 class="media-heading" style="margin-top: 5px;">
+            <%= in_place_edit [todo_item.todo_list, todo_item], :summary %>
+          </h4>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-2">
+      <i class="fa-li fa fa-user"></i>
+      <%= in_place_edit [todo_item.todo_list, todo_item], :assigned_to_id, display_as: :assignee,  as: :select, collection:  TodoItem.assignees(true) %>
+    </div>
+    <div class="col-md-2">
+      <i class="fa-li fa fa-calendar"></i>
+      <%= in_place_edit [todo_item.todo_list, todo_item], :due_date,  as: :date, inner_class: "datepicker", place_holder: "No Due Date" %>
+    </div>
+
+    <div class="col-md-1 text-right">
+      <a href="<%= todo_list_todo_item_path(todo_item.todo_list, todo_item) %>" data-remote="true"
         data-method="delete" data-confirm="Are you sure?" class="tiny red">
         <i class="fa fa-fw fa-times"></i> Remove
       </a>
     </div>
-    <div class="col-md-4">
-      <%= in_place_edit [@todo_list, todo_item], :summary %>
-    </div>
-    <div class="col-md-3">
-      <ul class="fa-ul">
-        <li title="Assigned To"><i class="fa-li fa fa-user"></i>
-          <%= in_place_edit [@todo_list, todo_item], :assigned_to_id, display_as: :assignee,  as: :select, collection:  TodoItem.assignees(true) %>
-        </li>
-        <li title="Due Date"><i class="fa-li fa fa-calendar"></i>
-          <%= in_place_edit [@todo_list, todo_item], :due_date,  as: :date, inner_class: "datepicker" %>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-1 text-right">
-        <%= simple_form_for [@todo_list, todo_item], html: { remote: true } do |f| %>
-            <% if todo_item.status == TodoItem::STATUS_NEW %>
-              <i class="todo_list_status fa fa-fw fa-square-o fa-3x"></i>
-              <input type="hidden" name="todo_item[status]" autocomplete="off" value="<%= TodoItem::STATUS_DONE %>">
-            <% else %>
-              <i class="todo_list_status fa fa-fw fa-check-square-o fa-3x"></i>
-              <input type="hidden" name="todo_item[status]" autocomplete="off" value="<%= TodoItem::STATUS_NEW %>">
-            <% end %>
-        <% end %>
 
-    </div>
   </div>
 </div>

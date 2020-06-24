@@ -10,7 +10,7 @@ class TodoListsControllerTest < ActionDispatch::IntegrationTest
 
     should "show scan lists" do
       create_list(:todo_list,4)
-      create_list(:todo_list, 3, status: TodoList::STATUS_SCANNING)
+      create_list(:todo_list, 3, status: TodoList::STATUS_IN_PROGRESS)
       create_list(:todo_list, 5, status: TodoList::STATUS_DONE)
 
       get todo_lists_path
