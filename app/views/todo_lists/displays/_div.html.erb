@@ -1,9 +1,11 @@
 <div class="list-group todo_list" id="todo_list_<%= todo_list.id %>" data-id="<%= todo_list.id %>">
-  <div class="list-group-item list-group-item-success">
+  <div class="list-group-item">
       <span class="badge"><%= todo_list.assignee %></span>
-      <a href="<%= todo_list_path(todo_list) %>"><%= todo_list.name %></a>
-      &nbsp; &nbsp;
-      <a href="<%= edit_todo_list_path(todo_list) %>" data-remote="true"><i class="fa fa-edit"></i></a>
+      <h4>
+        <a href="<%= todo_list_path(todo_list) %>">
+          <%= todo_list.name %>
+        </a>
+      </h4>
   </div>
   <div id="edit_todo_list_form_holder_<%= todo_list.id %>" class="form_holder">
   </div>
@@ -22,14 +24,16 @@
 
         <%= simple_form_for todo_list, html: { remote: true } do |f| %>
 
-          <% if todo_list.status == TodoList::STATUS_SCANNING %>
+          <% if todo_list.status != TodoList::STATUS_DONE %>
             <i class="todo_list_status fa fa-fw fa-square-o"></i>
-            <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_DONE %>">            
+            <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_DONE %>">
+            Mark Done?
           <% else %>
             <i class="todo_list_status fa fa-fw fa-check-square-o "></i>
-            <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_SCANNING %>">
+            <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_IN_PROGRESS %>">
+            Done! Mark as Incomplete
           <% end %>
-          Done?
+
         <% end %>
       </div>
     </div>

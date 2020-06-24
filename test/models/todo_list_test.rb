@@ -33,7 +33,7 @@ class TodoListTest < ActiveSupport::TestCase
   should "Return completed and not completed scan lists" do
     create_list(:todo_list, 3, status: TodoList::STATUS_DONE)
     create_list(:todo_list, 2, status: TodoList::STATUS_NEW)
-    create_list(:todo_list, 2, status: TodoList::STATUS_SCANNING)
+    create_list(:todo_list, 2, status: TodoList::STATUS_IN_PROGRESS)
 
     assert_equal 4, TodoList.not_completed.size, "Should be 4"
     assert_equal 3, TodoList.completed.size, "Should be 3"

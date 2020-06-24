@@ -1,6 +1,6 @@
 $("#todo_list_form_holder").empty();
 <% if @todo_list.errors.size == 0 %>
-  $("#todo_lists tbody").prepend('<%=escape_javascript render @todo_list, show: "tr" %>')
+  $("#todo_list_form_holder").after('<%=escape_javascript render @todo_list, show: "div" %>')
   $(".blank-slate").hide();
 <% else %>
   $('#todo_list_form_holder').prepend('<%=escape_javascript render("todo_lists/form") %>');

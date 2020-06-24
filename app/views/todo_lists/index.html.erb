@@ -30,24 +30,13 @@
 
 				<div id="todo_list_form_holder" class="form_holder">
 				</div>
-		<% end %>
+			<% end %>
 
-		<table class="table" id="todo_lists">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Status</th>
-					<th>Assigned To</th>
-					<th>Items #</th>
-					<th>Created</th>
-				</tr>
-			</thead>
-			<tbody>
-	      <% @todo_lists.each do |todo_list| %>
-	        <%= render partial: todo_list, locals: { show: "tr" } %>
-	      <% end %>
-			</tbody>
-		</table>
+			<% @todo_lists.each do |todo_list| %>
+				<%= render partial: todo_list, locals: { show: "div" } %>
+			<% end %>
+
+
 		<% end %>
 	</div>
 </div>

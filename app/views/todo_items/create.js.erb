@@ -10,6 +10,11 @@ $("#todo_list_<%= @todo_list.id %>_item_form_holder").empty();
   // best inplace initation
   $(".best_in_place").best_in_place();
 
+  $(".todo_list_status, .todo_item_status").click(function() {
+    $(this).parents('form:first').submit();
+  });
+
+
 <% else %>
   if ($("#todo_list_selector").length) {
     $('#todo_list_<%= @todo_list.id %>_item_form_holder').prepend('<%=escape_javascript render("todo_items/form_with_item") %>');
