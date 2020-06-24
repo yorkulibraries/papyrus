@@ -1,0 +1,2 @@
+$("#edit_todo_list_form_holder_<%= @todo_list.id %>").empty();
+$('#edit_todo_list_form_holder_<%= @todo_list.id %>').prepend('<%=escape_javascript render("todo_lists/form") %>');

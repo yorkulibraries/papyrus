@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190715133718) do
+ActiveRecord::Schema.define(version: 20200211200316) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string "for"
@@ -263,6 +263,27 @@ ActiveRecord::Schema.define(version: 20190715133718) do
     t.datetime "updated_at"
     t.integer "courses_count", default: 0, null: false
     t.index ["end_date"], name: "index_terms_on_end_date"
+  end
+
+  create_table "todo_items", force: :cascade do |t|
+    t.string "summary"
+    t.integer "item_id"
+    t.integer "todo_list_id"
+    t.integer "assigned_to_id"
+    t.integer "created_by_id"
+    t.date "due_date"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "todo_lists", force: :cascade do |t|
+    t.string "name"
+    t.integer "created_by_id"
+    t.integer "assigned_to_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

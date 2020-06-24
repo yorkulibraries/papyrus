@@ -1,0 +1,19 @@
+$("#todo_list_<%= @todo_list.id %>_item_form_holder").empty();
+<% if @todo_item.errors.size == 0 %>
+  $("#todo_list_<%= @todo_list.id %> .todo_list_items").append('<%=escape_javascript render @todo_item, show: "div" %>')
+  $(".blank-slate").hide();
+
+  // special: remove modal if working from item side
+  $("#item_todo_lists").modal('hide');
+  $("#todo_lists_holder").remove();
+
+  // best inplace initation
+  $(".best_in_place").best_in_place();
+
+<% else %>
+  if ($("#todo_list_selector").length) {
+    $('#todo_list_<%= @todo_list.id %>_item_form_holder').prepend('<%=escape_javascript render("todo_items/form_with_item") %>');
+  } else {
+    $('#todo_list_<%= @todo_list.id %>_item_form_holder').prepend('<%=escape_javascript render("todo_items/form") %>');
+  }
+<% end %>

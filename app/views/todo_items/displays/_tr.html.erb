@@ -1,0 +1,28 @@
+<tr>
+  <td>
+    <% if todo_item.summary.blank? %>
+      <%= link_to "**No scan item summary provided", todo_item.todo_list %>
+    <% else %>
+      <%= link_to todo_item.summary, todo_item.todo_list %>
+    <% end %>
+  </td>
+  <td>
+    <%= todo_item.due_date %>
+  </td>
+</tr>
+<tr>
+  <td  colspan="2" style="border-top: none;">
+
+    <% item = todo_item.item %>
+    <% if item %>
+      <div class="item" id="item_<%= item.id %>" data-id="<%=item.id %>">
+        <strong><%=link_to item.title, todo_item.todo_list %></strong><br/>
+        <%= format_field item.author %> | <%= format_field item.edition %>
+        <br/> 	<%= format_field item.callnumber %> | 	<%= format_field item.isbn %>
+      </div>
+    <% else %>
+      <p>Item was deleted. ID: <%= todo_item.item_id %></p>
+    <% end %>
+  </td>
+
+</tr>

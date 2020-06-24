@@ -1,29 +1,29 @@
-<div class="modal" id="item_scan_lists" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+<div class="modal" id="item_todo_lists" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Scan Lists - Item</h4>
+        <h4 class="modal-title">Todo Lists - Item</h4>
       </div>
       <div class="modal-body">
-        <p>This item is part of the following Scan Lists</p>
+        <p>This item is part of the following Todo Lists</p>
         <ul class="fa-ul">
-          <% @item_scan_lists.each do |list| %>
+          <% @item_todo_lists.each do |list| %>
             <li><i class="fa-li fa fa-check"></i>
-              <%= link_to list.name, scan_list_path(list) %> -
+              <%= link_to list.name, todo_list_path(list) %> -
               <span class="small">Assigned to <%= list.assignee %></span></li>
           <% end %>
         </ul>
         <hr/>
         <strong>Add to another list: </strong>
-        <select id="scan_list_selector">
+        <select id="todo_list_selector">
           <option>-- choose a list --</option>
-          <% @scan_lists.each do |list| %>
+          <% @todo_lists.each do |list| %>
             <option value='<%= list.id %>'><%= list.name %></option>
           <% end %>
         </select>
         <br/><br/>
-        <div id="new_scan_item_form_holder">
+        <div id="new_todo_item_form_holder">
 
         </div>
       </div>

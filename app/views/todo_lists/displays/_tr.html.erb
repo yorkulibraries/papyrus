@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <%= link_to todo_list.name, todo_list %>
+  </td>
+  <td>
+    <%= todo_list.status.upcase %>
+  </td>
+  <td>
+    <%= todo_list.assignee %>
+  </td>
+  <td>
+    <%= todo_list.todo_items.size %>
+  </td>
+  <td>
+    <%= todo_list.created_at.strftime("%b %-d, %Y") %>
+  </td>
+</tr>

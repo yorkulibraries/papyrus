@@ -1,6 +1,6 @@
-class CreateScanItems < ActiveRecord::Migration[4.2]
+class CreateTodoItems < ActiveRecord::Migration[4.2]
   def change
-    create_table :scan_items do |t|
+    create_table :todo_items do |t|
       t.string :summary
       t.integer :item_id
       t.integer :todo_list_id

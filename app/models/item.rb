@@ -44,8 +44,8 @@ class Item < ApplicationRecord
 
   belongs_to :user
 
-  has_many :scan_items
-  has_many :scan_lists, through: :scan_items
+  has_many :todo_items
+  has_many :todo_lists, through: :todo_items
 
   ## SCOPES ##
 

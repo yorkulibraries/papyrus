@@ -14,7 +14,7 @@ class Ability
 
       can :manage, Document
 
-      can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course, ScanList, ScanItem]
+      can :manage, [Item, Student, Attachment, ItemConnection, User, Note, Term, Course, TodoList, TodoItem]
       can :show, :stats
 
       can :manage, :shared_access_codes
@@ -28,7 +28,7 @@ class Ability
       can :manage, PapyrusSettings
       can :manage, User
 
-      can :manage, [ScanList, Document, ScanItem]
+      can :manage, [TodoList, Document, TodoItem]
       can :manage, [Term, Course]
       can :manage, AcquisitionRequest
       can :manage, AccessCode
@@ -48,7 +48,7 @@ class Ability
 
       can :read, Document
 
-      can :manage, [ScanList, ScanItem]
+      can :manage, [TodoList, TodoItem]
       can :manage, [Term, Course]
       can :manage, AcquisitionRequest
       can :manage, AccessCode
@@ -62,11 +62,11 @@ class Ability
     elsif user.role == User::PART_TIME
       can :show, :dashboard
 
-      can [:create, :read, :update], [Item, Note, Course, ScanList, ScanItem]
+      can [:create, :read, :update], [Item, Note, Course, TodoList, TodoItem]
       can [:assign_to_students, :assign_many_to_student, :withhold_from_student, :courses], Item
       can [:assign_to_item, :add_item, :remove_item], Course
       can :manage, ItemConnection
-      can :read,  [Student, Term, Course, ScanList, ScanItem]
+      can :read,  [Student, Term, Course, TodoList, TodoItem]
       can :login_as, :student
       can :create, Attachment
       can :get_file, Attachment
