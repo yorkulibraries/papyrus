@@ -30,8 +30,8 @@
               <li class="<%= "active" if controller_name == "items"%>">
                   <a href="<%= items_path %>"><i class="fa fa-fw fa-book"></i> Items</a>
               </li>
-              <li class="<%= "active" if controller_name == "scan_lists" || controller_name == "scan_items"%>">
-                  <a href="<%= scan_lists_path %>"><i class="fa fa-fw fa-list"></i> Scan Lists</a>
+              <li class="<%= "active" if controller_name == "todo_lists" || controller_name == "todo_items"%>">
+                  <a href="<%= todo_lists_path %>"><i class="fa fa-fw fa-list"></i> Todo Lists</a>
               </li>
               <li class="<%= "active" if controller_name == "acquisition_requests" %>">
                   <a href="<%= acquisition_requests_path %>"><i class="fa fa-fw fa-shopping-cart"></i> Acquisitions</a>

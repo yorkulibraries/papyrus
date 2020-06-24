@@ -1,0 +1,26 @@
+<% if @todo_item.errors.size == 0  %>
+  $("#todo_item_<%= @todo_item.id %>").replaceWith('<%=escape_javascript render @todo_item, show: "div" %>');
+<% else %>
+  $("#edit_todo_item_form_holder_<%= @todo_item.id %>").empty();
+  $('#edit_todo_item_form_holder_<%= @todo_item.id %>').prepend('<%=escape_javascript render("todo_items/form") %>');
+<% end %>
+
+$(".todo_list_status").click(function() {
+  $(this).parents('form:first').submit();
+});
+
+
+// Show upload form if status is DONE
+<% if @todo_item.status == TodoItem::STATUS_DONE %>
+  <% @item = @todo_item.item %>
+  $("#upload_form_holder").remove();
+  $("body").append("<div id='upload_form_holder'></div>");
+  $("#upload_form_holder").append("<%= escape_javascript render("attachments/upload_files_modal") %>");
+
+  // setup formstone plugin
+  load_formstone_upload_plugin();
+
+  $("#upload_files_modal").modal('show');
+
+
+<% end %>

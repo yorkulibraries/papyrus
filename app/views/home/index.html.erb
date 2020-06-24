@@ -3,9 +3,9 @@
 
 <div class="row">
 	<div class="col-md-6">
-		<% if @scan_lists.size > 0 %>
-		<%= panel(title: "My Scan Lists", icon: "list") do %>
-				<table class="table" id="scan_lists">
+		<% if @todo_lists.size > 0 %>
+		<%= panel(title: "My Todo Lists", icon: "list") do %>
+				<table class="table" id="todo_lists">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -16,8 +16,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% @scan_lists.each do |scan_list| %>
-							<%= render partial: scan_list, locals: { show: "tr" } %>
+						<% @todo_lists.each do |todo_list| %>
+							<%= render partial: todo_list, locals: { show: "tr" } %>
 						<% end %>
 					</tbody>
 				</table>
@@ -31,9 +31,9 @@
 		<% end %>
 	</div>
 	<div class="col-md-6">
-		<% if @scan_items.size > 0 %>
-			<%= panel(title: "My Scan Items", icon: "list") do %>
-				<table class="table" id="scan_items">
+		<% if @todo_items.size > 0 %>
+			<%= panel(title: "My Todo Items", icon: "list") do %>
+				<table class="table" id="todo_items">
 					<thead>
 						<tr>
 							<th>Summary</th>
@@ -41,8 +41,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% @scan_items.each do |scan_item| %>
-							<%= render partial: scan_item, locals: { show: "tr" } %>
+						<% @todo_items.each do |todo_item| %>
+							<%= render partial: todo_item, locals: { show: "tr" } %>
 						<% end %>
 					</tbody>
 				</table>

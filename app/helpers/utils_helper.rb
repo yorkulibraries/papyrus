@@ -40,10 +40,10 @@ module UtilsHelper
         else
           student_path(associated_id)
         end
-      when "scan_item"
-        scan_list_path(associated_id)
-      when "scan_list"
-        scan_list_path(id)
+      when "todo_item"
+        todo_list_path(associated_id)
+      when "todo_list"
+        todo_list_path(id)
       when "item_connection"
         student_path(associated_id)
       when "item_course_connection"

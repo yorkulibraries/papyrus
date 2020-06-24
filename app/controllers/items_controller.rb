@@ -42,10 +42,10 @@ class ItemsController < AuthenticatedController
     @fulfilled_acquisition_requests = @item.acquisition_requests.fulfilled.limit(5)
   end
 
-  def scan_lists
+  def todo_lists
     @item = Item.find(params[:id])
-    @item_scan_lists = @item.scan_lists.not_completed.group(:id)
-    @scan_lists = ScanList.not_completed
+    @item_todo_lists = @item.todo_lists.not_completed.group(:id)
+    @todo_lists = TodoList.not_completed
   end
 
   def assign_to_students

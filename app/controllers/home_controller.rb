@@ -7,9 +7,9 @@ class HomeController < AuthenticatedController
 
     @work_history = current_user.work_history
 
-    @scan_lists = ScanList.not_completed.where(assigned_to_id: current_user.id)
+    @todo_lists = TodoList.not_completed.where(assigned_to_id: current_user.id)
 
-    @scan_items = ScanItem.not_completed.where(assigned_to_id: current_user.id)
+    @todo_items = TodoItem.not_completed.where(assigned_to_id: current_user.id)
   end
 
   def active_users

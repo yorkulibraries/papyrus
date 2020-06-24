@@ -63,9 +63,9 @@ Papyrus::Application.routes.draw do
   end
 
 
-  # Scan List & Items
-  resources :scan_lists do
-    resources :scan_items, except: :index
+  # Todo List & Items
+  resources :todo_lists do
+    resources :todo_items, except: :index
   end
 
   resource :settings, only: [:update] do
@@ -157,7 +157,7 @@ Papyrus::Application.routes.draw do
     get "audit_trail", on: :member
     get 'zipped_files', on: :member
     get 'acquisition_requests', on: :member
-    get 'scan_lists', on: :member
+    get 'todo_lists', on: :member
     #get 'search', :on => :collection
     #get 'search_vufind', :on => :collection
     resources :attachments, path: "files", except: [:index, :show] do

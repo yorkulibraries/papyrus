@@ -1,0 +1,35 @@
+
+<%= simple_form_for @todo_list, remote: (request.xhr? ? true: false ) do |f| %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :name %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :assigned_to_id, collection: User.not_students.active %>
+      </div>
+      <% unless @todo_list.new_record? %>
+        <div class="col-md-4">
+          <%= f.input :status, collection: TodoList::SCAN_STATUSES %>
+        </div>
+      <% end %>
+    </div>
+
+    <hr/>
+    <%= f.button :submit,  class: 'btn btn-primary' %>
+
+    <% if request.xhr? %>
+      <%= link_to "Cancel", "#", class: "btn btn-default", onclick: "$(this).parents('.form_holder').empty(); return false;" %>
+    <% else %>
+      <%= link_to 'Cancel', @todo_list.new_record? ? todo_lists_path : todo_list_path(@todo_list), class: 'btn btn-default' %>
+    <% end %>
+
+    <br/><br/>
+    <% if @todo_list.new_record? %>
+      <p>Created By <%= @current_user.name %></p>
+    <% else %>
+      <p>Created By <%= @todo_list.creator %></p>
+    <% end %>
+
+
+<% end %>
