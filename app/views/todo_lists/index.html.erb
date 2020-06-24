@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Todo Lists for Items", icon: "list") do %>
+		<%= panel(title: "Todo Lists (EXPERIMENTAL)", icon: "list") do %>
 
 			<% if params[:which] == TodoList::STATUS_DONE %>
 				<%= link_to todo_lists_path(), class: "btn btn-sm btn-link  pull-right" do %>

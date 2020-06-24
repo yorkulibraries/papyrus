@@ -1,14 +1,16 @@
 <% title "Todo List", false %>
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Todo List - #{@todo_list.todo_items.size} Items", icon: "list") do %>
+		<%= panel(title: "Todo List", icon: "list") do %>
 			<div class="text-right">
 				<a href="<%= edit_todo_list_path(@todo_list) %>" data-remote="true" class="btn btn-primary">
 					<i class="fa fa-edit"></i> Make Changes
 				</a>
 			</div>
-			
+
 			<%= render partial: @todo_list, locals: { show: "div" } %>
+
+			
 		<% end %>
 	</div>
 </div>

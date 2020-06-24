@@ -1,10 +1,11 @@
 <div class="list-group todo_list" id="todo_list_<%= todo_list.id %>" data-id="<%= todo_list.id %>">
   <div class="list-group-item">
-      <span class="badge"><%= todo_list.assignee %></span>
+      <span class="badge" style="padding-top: 3px; margin-top: 12px; "><%= todo_list.assignee %></span>
       <h4>
         <a href="<%= todo_list_path(todo_list) %>">
           <%= todo_list.name %>
         </a>
+        <small><%= "COMPLETED" if todo_list.status == TodoList::STATUS_DONE %></small>
       </h4>
   </div>
   <div id="edit_todo_list_form_holder_<%= todo_list.id %>" class="form_holder">
@@ -14,32 +15,37 @@
       <%= render todo_item, show: "div" %>
     <% end %>
   </div>
-  <div class="list-group-item">
+  <div class="list-group-item" style="border:none;">
     <div class="row">
-      <div class="col-md-10">
-        <a href="<%= new_todo_list_todo_item_path(todo_list) %>" data-remote="true">+ Add Item</a>
-
+      <div class="col-md-12">
+        <a href="<%= new_todo_list_todo_item_path(todo_list) %>" data-remote="true" class="btn btn-info">+ Add Item</a>
       </div>
-      <div class="col-md-2 text-right">
 
-        <%= simple_form_for todo_list, html: { remote: true } do |f| %>
-
-          <% if todo_list.status != TodoList::STATUS_DONE %>
-            <i class="todo_list_status fa fa-fw fa-square-o"></i>
-            <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_DONE %>">
-            Mark Done?
-          <% else %>
-            <i class="todo_list_status fa fa-fw fa-check-square-o "></i>
-            <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_IN_PROGRESS %>">
-            Done! Mark as Incomplete
-          <% end %>
-
-        <% end %>
-      </div>
     </div>
 
-    <hr/>
-    <div id="todo_list_<%= todo_list.id %>_item_form_holder" class="form_holder"></div>
+    <div id="todo_list_<%= todo_list.id %>_item_form_holder" class="form_holder" style="margin-top: 20px;"></div>
 
   </div>
+
+  <% if @todo_list.present? %>
+  <div class="text-center" style="margin-top: 20px;">
+    <%= simple_form_for @todo_list, html: { remote: true } do |f| %>
+
+      <% if @todo_list.status != TodoList::STATUS_DONE %>
+        <span class="todo_list_status">
+          <i class="fa fa-fw fa-square-o"></i>
+          <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_DONE %>">
+          Mark Done?
+        </span>
+      <% else %>
+        <span class="todo_list_status">
+          <i class="fa fa-fw fa-check-square-o "></i>
+          <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_IN_PROGRESS %>">
+          Mark as Incomplete
+        </span>
+      <% end %>
+
+    <% end %>
+  </div>
+  <% end %>
 </div>
