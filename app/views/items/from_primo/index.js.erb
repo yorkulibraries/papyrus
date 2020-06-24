@@ -1,28 +1,38 @@
-$("#loading_results").addClass("hide");
-$("#search_primo_button").val('Search');
-$("#search_primo_button").removeClass("disabled");
-$("#primo_results").empty();
-$("#primo_results").append("<%= j render 'primo_results' %>");
+<% if @show_error %>
+  $("#loading_results").addClass("hide");
+  $("#search_primo_button").val('Search');
+  $("#search_primo_button").removeClass("disabled");  
+  $("#primo_results").empty();
+  $("#primo_results").append("<%= j render 'search_error' %>");
+<% else %>
 
-//window.history.replaceState('page1', 'Search Primo'," <%= from_primo_index_path(q: @query) %>");
-// window.history.pushState("page1", 'Search Primo',"<%= from_primo_index_path(q: @query) %>");
-// window.addEventListener('popstate', function(event) {
-//   updateContent(event.state);
-// });
+  $("#loading_results").addClass("hide");
+  $("#search_primo_button").val('Search');
+  $("#search_primo_button").removeClass("disabled");
+  $("#primo_results").empty();
+  $("#primo_results").append("<%= j render 'primo_results' %>");
 
-$('.book-cover').each(function(e){
+  //window.history.replaceState('page1', 'Search Primo'," <%= from_primo_index_path(q: @query) %>");
+  // window.history.pushState("page1", 'Search Primo',"<%= from_primo_index_path(q: @query) %>");
+  // window.addEventListener('popstate', function(event) {
+  //   updateContent(event.state);
+  // });
 
-    var cover_url = $(this).data("book-cover-url");
-    //console.log(cover_url);
-    var image = $(this).find("img:first-child");
-    //console.log(image);
-    $('<img src="'+ cover_url +'">').load(function() {
-      // console.log("loaded image - cover");
-      // console.log($(this).prop("width"));
-      if ($(this).prop("width") > 1) {
-        $(image).replaceWith(this);
-      }
+  $('.book-cover').each(function(e){
 
-    });
+      var cover_url = $(this).data("book-cover-url");
+      //console.log(cover_url);
+      var image = $(this).find("img:first-child");
+      //console.log(image);
+      $('<img src="'+ cover_url +'">').load(function() {
+        // console.log("loaded image - cover");
+        // console.log($(this).prop("width"));
+        if ($(this).prop("width") > 1) {
+          $(image).replaceWith(this);
+        }
 
-});
+      });
+
+  });
+
+<% end %>

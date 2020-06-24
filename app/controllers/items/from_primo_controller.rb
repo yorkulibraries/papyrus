@@ -5,10 +5,14 @@ class Items::FromPrimoController < AuthenticatedController
 
   def index
     @query = params[:q]
-    if @query.present?
-      @results = search_primo(@query)
+    begin
+      if @query.present?
+        @results = search_primo(@query)
+      end
+    rescue StandardError => e
+      @show_error = true
+      @error = e  
     end
-
   end
 
   def new
