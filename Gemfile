@@ -1,8 +1,12 @@
 source 'http://rubygems.org'
 
+## SECURITY FIX ##
+gem "rack", "2.2.3"
+
 ## RAILS and server ##
 gem "rails", "5.1.6.2"
-gem "puma", "~> 3.7"
+gem "puma"
+gem "puma-plugin-systemd"
 
 ## RAILS related ##
 gem 'jbuilder', '~> 2.5'
