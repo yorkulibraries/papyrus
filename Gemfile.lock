@@ -248,7 +248,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.5)
-    puma (3.9.1)
+    puma (3.12.6)
     puma-plugin-systemd (0.1.3)
       json
       puma (~> 3.6)
@@ -436,7 +436,7 @@ DEPENDENCIES
   mysql2 (= 0.4.6)
   populator!
   primo!
-  puma
+  puma (>= 3.12.6)
   puma-plugin-systemd
   rack (= 2.2.3)
   rack-livereload (= 0.3.16)
