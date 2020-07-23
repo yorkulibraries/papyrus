@@ -7,7 +7,7 @@ gem "websocket-extensions", ">= 0.1.5"
 
 ## RAILS and server ##
 gem "rails", "5.1.6.2"
-gem "puma"
+gem "puma", ">= 3.12.6"
 gem "puma-plugin-systemd"
 
 ## RAILS related ##
