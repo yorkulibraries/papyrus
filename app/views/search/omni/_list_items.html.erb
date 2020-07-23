@@ -1,0 +1,14 @@
+
+<div id="omni_items_results">
+  <% if results.size > 0 %>
+    <h5>Item Results <h5>
+
+    <ul class="list-group">
+      <% results.each do |item| %>
+        <li class="list-group-item"><%= link_to item.title, item %> </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No items found for this search.</p>
+  <% end %>
+</div>

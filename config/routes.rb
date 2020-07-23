@@ -60,6 +60,7 @@ Papyrus::Application.routes.draw do
 
   scope "/find" do
     resources :local_items, only: [:new, :index], module: "search", as: "find_items"
+    resource :omni, only: [:new, :show], module: "search", controller: "omni", as: "omni_search"
   end
 
 
@@ -127,6 +128,7 @@ Papyrus::Application.routes.draw do
     resource :student_details, as: :details, path: "details", except: [:index, :destroy]
 
     resource :bulk_renew_items, only: [:new, :create, :show], module: "students"
+    resource :expired_items, only: :show, module: "students"
 
     collection do
       #get "inactive"

@@ -1,0 +1,9 @@
+
+
+$("#omni_search_results").append("<%= j render 'list_items', results: @item_results %> ");
+$("#omni_search_results").append("<%= j render 'list_students', results: @student_results %> ");
+
+
+$("#loading_results").addClass("hide");
+$("#omni_search_button").val("Search");
+$("#omni_search_button").removeClass("disabled");

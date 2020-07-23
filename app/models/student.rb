@@ -1,6 +1,16 @@
 class Student < User
   #attr_accessible :name, :email, :username, :student_details_attributes
 
+  include SearchCop
+
+  search_scope :search do
+    attributes :first_name, :last_name,  :email, :username
+    #attributes student: ["students.first_name", "students.last_name"]
+    #attributes course: "courses.code"
+    attributes sisid: "student_details.student_number"
+  end
+
+
   ## PLUGINS ##
   paginates_per 18
   audited
@@ -150,7 +160,7 @@ class Student < User
       when "format_word"
         hash[:student_details_attributes][:format_word]  =  data[index].try(:downcase) == "true" ? true : false
       when "format_epub"
-        hash[:student_details_attributes][:format_epub]  =  data[index].try(:downcase) == "true" ? true : false      
+        hash[:student_details_attributes][:format_epub]  =  data[index].try(:downcase) == "true" ? true : false
       when "format_other"
         hash[:student_details_attributes][:format_other]  =  data[index].try(:downcase) == "true" ? true : false
       when "format_note"

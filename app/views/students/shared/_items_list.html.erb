@@ -1,8 +1,8 @@
 <%= panel(title: "Assigned Items - #{@items.size}", icon: "book", title_class: "text-center", styles:"panel-info") do %>
 
   <% unless student.inactive? %>
-    <a href="#expired_items" id="show_expired_items_list" class="small trivial pull-right">
-      Show expired items (<%= @expired_items.size %>)
+    <a href="<%= student_expired_items_path(@student) %>" class="btn pull-right">
+      Show Expired Items
     </a>
     <a href="<%= student_path(@student) %>" data-disable-with="Loading current items..."
       id="show_current_items_list" class="small trivial pull-right hide">
@@ -31,7 +31,7 @@
     <% end %>
   </ul>
 
-	<%= render partial: "students/shared/expired_items_list", locals: { student: @student } %>
+	<%# render partial: "students/shared/expired_items_list", locals: { student: @student } %>
 <% end %>
 
 <div id="assign_items_modal" class="modal modal-fade">
