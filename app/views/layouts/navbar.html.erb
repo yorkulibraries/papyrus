@@ -61,8 +61,8 @@
     					<% end %>
 
               <% if can? :read, Item %>
-              <li class="<%= "active" if controller_name == "search" %>">
-                  <a href="<%= search_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
+              <li class="<%= "active" if controller_name == "local_items" %>">
+                  <a href="<%= new_find_item_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
               </li>
               <% end %>
 
