@@ -8,15 +8,12 @@
 
     <% if @student %>
       <div class="pull-right actions">
-      <%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
-        data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm", method: :delete, title: "Remove Access" do %>
-        &times;
-      <% end %>
+        <%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
+          data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm", method: :delete, title: "Remove Access" do %>
+          &times;
+        <% end %>
         <br/>
-        <a href="<%= renew_access_item_path(item, student_id: @student.id)%>" data-remote="true"
-          title="Renew access" class="btn btn-xs btn-success">
-          <i class="fa-recycle fa fa-fw"></i>
-        </a>
+
       </div>
     <% end %>
 
@@ -33,23 +30,31 @@
         <% end %>
         <br/>
         <a href="<%= zipped_files_item_path(item)%>" class="trivial">
-        <i class="fa fa-download"></i> Download <%= pluralize(item.attachments.size, "file")%>
+          <i class="fa fa-download"></i> Download <%= pluralize(item.attachments.size, "file")%>
         </a>
 
         <% if item.expired %>
-          Expired Item
+          <span class='btn'>Expired Item</span>
         <% else %>
           <% connection = item.item_connections.current.find_by_student_id(@student.id) %>
           <% if connection %>
 
-            <span class="trivial">
+            <span class="trivial btn">
               <%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
               <%= "Unlimited Access" unless connection.expires_on %>
             </span>
 
           <% end %>
+
+
         <% end %>
 
+        <% if @student.present? %>
+          <a href="<%= renew_access_item_path(item, student_id: @student.id)%>" data-remote="true"
+            title="Renew access" class="btn text-success">
+            <i class="fa-recycle fa fa-fw"></i> Renew Accesss
+          </a>
+        <% end %>
 
     </div>
 

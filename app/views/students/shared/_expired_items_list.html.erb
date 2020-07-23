@@ -7,8 +7,9 @@
       %>
 
     <% @expired_items.each do |item| %>
+
       <% item.expired = true %>
-      <%= render item, show: "li" %>
+      <%= render "items/item", item: item, show: "li" %>
     <% end %>
   </ul>
 </div>

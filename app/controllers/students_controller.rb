@@ -72,7 +72,7 @@ class StudentsController < AuthenticatedController
   def show
     @student = Student.find(params[:id])
     @items = @student.current_items
-    @expired_items = @student.expired_items
+    #@expired_items = @student.expired_items
     @items_grouped = @items.group_by { |i| i.item_type }
 
     @active_access_codes = @student.access_codes.active

@@ -1,0 +1,14 @@
+
+<div id="omni_students_results">
+  <% if results.size > 0 %>
+    <h5>Students <h5>
+
+    <ul class="list-group">
+      <% results.each do |student| %>
+        <li class="list-group-item"><%= link_to student.name, student %> </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No students found for this search.</p>
+  <% end %>
+</div>

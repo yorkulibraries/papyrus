@@ -1,0 +1,11 @@
+$("#omni_search_modal").remove();
+$("body").append("<%= j render 'new' %>");
+
+$('#omni_search_modal').modal({
+    backdrop: 'static',
+    keyboard: true
+}).modal('show');
+
+$('#omni_search_modal').on('shown.bs.modal', function () {
+  $('#omni_search_field').focus()
+})
