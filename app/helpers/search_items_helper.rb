@@ -26,8 +26,7 @@ module SearchItemsHelper
 
     end
 
-  end
-  alias :format_worldcat_field :format_vufind_field
+  end  
 
   def encode_field(field)
     if field.encoding.name != "UTF-8"

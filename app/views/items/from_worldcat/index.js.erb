@@ -1,0 +1,38 @@
+<% if @show_error %>
+  $("#loading_results").addClass("hide");
+  $("#search_worldcat_button").val('Search');
+  $("#search_worldcat_button").removeClass("disabled");
+  $("#worldcat_results").empty();
+  $("#worldcat_results").append("<%= j render 'search_error' %>");
+<% else %>
+
+  $("#loading_results").addClass("hide");
+  $("#search_worldcat_button").val('Search');
+  $("#search_worldcat_button").removeClass("disabled");
+  $("#worldcat_results").empty();
+  $("#worldcat_results").append("<%= j render 'worldcat_results' %>");
+
+  //window.history.replaceState('page1', 'Search Primo'," <%= from_worldcat_index_path(q: @query) %>");
+  // window.history.pushState("page1", 'Search Primo',"<%= from_worldcat_index_path(q: @query) %>");
+  // window.addEventListener('popstate', function(event) {
+  //   updateContent(event.state);
+  // });
+
+  $('.book-cover').each(function(e){
+
+      var cover_url = $(this).data("book-cover-url");
+      //console.log(cover_url);
+      var image = $(this).find("img:first-child");
+      //console.log(image);
+      $('<img src="'+ cover_url +'">').load(function() {
+        // console.log("loaded image - cover");
+        // console.log($(this).prop("width"));
+        if ($(this).prop("width") > 1) {
+          $(image).replaceWith(this);
+        }
+
+      });
+
+  });
+
+<% end %>
