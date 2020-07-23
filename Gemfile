@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 ## SECURITY FIX ##
 gem "rack", "2.2.3"
+gem "websocket-extensions", ">= 0.1.5"
+
 
 ## RAILS and server ##
 gem "rails", "5.1.6.2"
