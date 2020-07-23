@@ -21,30 +21,7 @@
       <div class="media-body">
           <h3 class="media-heading" style="margin-bottom: 10px;">
             <span class="pull-right">
-            <% unless item.ils_id.blank? %>
-              <a href="<%= new_from_primo_path %>?bib_record_id=<%= item.ils_id %>" data-confirm="Are you sure?" class="btn btn-success">
-                <i class="fa fa-plus-square fa-fw "></i> Alma Item
-              </a>
-            <% else %>
-              <%= form_tag  new_from_primo_path, method: :get do |f| %>
-                <%= hidden_field_tag :primo_id, item.primo_id %>
-                <%= hidden_field_tag :title, item.title %>
-                <%= hidden_field_tag :author, item.author %>
-                <%= hidden_field_tag :callnumber, item.callnumber %>
-                <%= hidden_field_tag :publisher, item.publisher %>
-                <%= hidden_field_tag :publication_date, item.publication_date %>
-                <%= hidden_field_tag :edition, item.edition %>
-                <%= hidden_field_tag :language, item.language %>
-                <%= hidden_field_tag :isbn_issn, item.isbn_issn %>
-                <%= hidden_field_tag :type, item.item_type %>
-                <%= hidden_field_tag :description, item.description %>
-
-                <button type="submit" class="btn btn-info">
-                  <i class="fa fa-plus-square fa-fw "></i> Primo Item
-                </button>
-              <% end %>
-
-            <% end %>
+              <%= render "action_buttons", item: item %>
             </span>
             <%= item.title %>
           </h3>
