@@ -168,6 +168,7 @@ Papyrus::Application.routes.draw do
 
     collection do
       resources :from_primo, only: [:index, :new, :create], module: :items
+      resources :from_worldcat, only: [:index, :new, :create], module: :items
     end
   end
 

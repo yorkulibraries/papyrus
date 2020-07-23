@@ -1,0 +1,96 @@
+<% if !@results.nil? && @results.size > 0 %>
+  <div class="cat-search-results">
+
+    <% @results.each_with_index do |item, index| %>
+
+    <div class="media">
+
+      <div class="pull-left">
+        <% if item.isbn_issn %>
+          <div class="book-cover text-center"
+                data-book-cover-url="<%= "https://syndetics.com/index.php?client=primo&isbn=#{item.isbn_issn}/sc.jpg" %>">
+            <%= image_tag 'book_cover_v1.jpg', class: "book-cover-image" %>
+
+          </div>
+        <% else %>
+          <%= image_tag 'book_cover_v1.jpg', class: "book-cover-image" %>
+        <% end %>
+
+      </div>
+      
+      <div class="media-body">
+          <h3 class="media-heading" style="margin-bottom: 10px;">
+            <span class="pull-right">
+            <% if item["id"].present? %>
+              <a href="<%= new_from_worldcat_path %>?worldcat_id=<%= item[:id] %>" data-confirm="Are you sure?" class="btn btn-success">
+                <i class="fa fa-plus-square fa-fw "></i> Worldcat Item
+              </a>
+            <% else %>
+              <%= form_tag  new_from_worldcat_path, method: :get do |f| %>
+                <%= hidden_field_tag :title, item.title %>
+                <%= hidden_field_tag :author, format_worldcat_field(item.author) %>
+                <%= hidden_field_tag :publisher, item.publisher %>
+                <%= hidden_field_tag :published_date, item.published_date %>
+                <%= hidden_field_tag :edition, item.edition %>
+                <%= hidden_field_tag :isbn, format_worldcat_field(item.isbn) %>
+                <%= hidden_field_tag :physical_description, item.physical_description %>
+
+                <button type="submit" class="btn btn-info">
+                  <i class="fa fa-plus-square fa-fw "></i> Worldcat Item
+                </button>
+              <% end %>
+
+            <% end %>
+            </span>
+            <%= format_worldcat_field item.title %>
+          </h3>
+
+          <ul class="list-unstyled list-info">
+            <li>
+                <span class="fa fa-user fa-fw"></span>
+                <label>Author</label>
+                <span class="text-lg"><%= format_worldcat_field item.author %></span>
+            </li>
+            <li>
+                <span class="fa fa-university fa-fw"></span>
+                <label>Publisher</label>
+                <span class="text-lg"><%= format_worldcat_field item.publisher %></span> <span class="trivial">Published: <%= format_worldcat_field item.published_date %></span>
+            </li>
+            <li>
+                <span class="fa fa-language fa-fw"></span>
+                <label>Edition</label>
+                <span class="text-lg"><%= format_worldcat_field item.edition %></span>
+            </li>
+            <li>
+                <span class="fa fa-barcode fa-fw"></span>
+                <label>ISBN</label>
+                <span class="text-lg"><%= format_worldcat_field item.isbn %></span>
+            </li>
+            <li>
+                <span class="fa fa-file-text fa-fw"></span>
+                <label> Description</label>
+                <span class="text-lg">
+                  <%= format_worldcat_field item.physical_description %>
+                </span>
+            </li>
+            <li>
+                <span class="fa fa-link fa-fw"></span>
+                <label>Link</label>
+                <span class="text-lg">
+                  <%= link_to item.link, item.link %></span>
+            </li>
+          </ul>
+      </div>
+    </div>
+
+    <% end %>
+
+  </div>
+
+<% elsif !@result.nil? && @results.size == 0 %>
+  <div class="blank-slate">
+    <i class="icon-question-sign"></i>
+    <h1>No Search Terms</h1>
+    <p>Please specify a search term in the search box.</p>
+  </div>
+<% end %>

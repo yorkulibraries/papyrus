@@ -1,0 +1,39 @@
+<% title "New Item From Worldcat", false %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= panel(title: "New Item From Worldcat", icon: "search") do %>
+
+    <div class="row" style="margin-bottom: 3.5rem;">
+
+      <div class="col-md-6 col-md-offset-3">
+        <h4 class="text-center">Create New Item From Worldcat</h4>
+        <form action="<%= from_worldcat_index_path %>" id="worldcat_search_form" method="get" data-remote="true">
+          <div class="form-group form-group-lg">
+           <div class="col-sm-10">
+             <input class="form-control" name="q" value="<%= @query %>" type="text" id="formGroupInputLarge" placeholder="Search Worldcat">
+           </div>
+           <div class="col-sm-2">
+             <input id="search_worldcat_button" type="submit" value="Search" class="btn btn-primary btn-lg" style="padding: 8px 16px;"/>
+           </div>
+          </div>
+         </form>
+       </div>
+    </div>
+
+    <div class="hide text-center" id="loading_results">
+      <p class="small cursor-pointer" id="reset_worldcat_search">Reset Worldcat Search</p>
+      <%= image_tag "loading.gif" %>
+    </div>
+
+
+    <div id="worldcat_results">
+      <%= render "worldcat_results" %>
+    </div>
+
+
+    <% end %>
+
+
+  </div>
+</div>
