@@ -1,0 +1,32 @@
+<% unless item.ils_id.blank? %>
+  <div class="btn-group">
+    <a href="<%= new_from_primo_path %>?bib_record_id=<%= item.ils_id %>" data-confirm="Are you sure?" class="btn btn-success">
+      <i class="fa fa-plus-square fa-fw "></i> Alma Item
+    </a>
+    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" style="left: -24px; ">
+      <li>
+        <%= form_tag  new_from_primo_path, method: :get do |f| %>
+          <%= render "form_primo_fields", item: item %>
+
+          <%= link_to "#", onclick: "$(this).closest('form').submit(); return false;", style: "padding: 5px 10px; line-height: 26px;" do %>
+          <i class="fa fa-plus-square fa-fw "></i> Primo Item
+          <% end %>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+
+<% else %>
+  <%= form_tag  new_from_primo_path, method: :get do |f| %>
+    <%= render "form_primo_fields", item: item %>
+
+    <button type="submit" class="btn btn-info">
+      <i class="fa fa-plus-square fa-fw "></i> Primo Item
+    </button>
+  <% end %>
+
+<% end %>
