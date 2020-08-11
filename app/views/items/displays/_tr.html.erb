@@ -1,6 +1,9 @@
 <tr class="item" id="item_<%= item.id %>">
 	<td>
 		<%= link_to item.title, item_path(item) %>
+		<% if item.course_kit? %>
+			<small class="text-muted"> - <%= format_field item.course_code, what: "Course Code Empty" %></small>
+		<% end %>
 	</td>
 	<td>
 		<%= format_field item.author %>

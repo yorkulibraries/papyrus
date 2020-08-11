@@ -1,0 +1,2 @@
+module Items::CourseKitHelper
+end

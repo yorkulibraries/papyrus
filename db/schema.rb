@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200211200316) do
+ActiveRecord::Schema.define(version: 20200811130647) do
 
   create_table "access_codes", force: :cascade do |t|
     t.string "for"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20200211200316) do
     t.datetime "updated_at"
     t.integer "attachments_count", default: 0, null: false
     t.integer "updated_by"
+    t.string "course_code"
     t.index ["unique_id"], name: "index_items_on_unique_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end

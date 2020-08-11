@@ -116,4 +116,11 @@ class Item < ApplicationRecord
       save(validate: false)
     end
   end
+
+
+
+
+  def course_kit?
+    item_type == COURSE_KIT
+  end
 end
