@@ -1,0 +1,104 @@
+<div class="row item">
+	<div class="col-md-12 item" id="item_<%= item.id %>" data-id="<%= item.id %>">
+		<%= panel(title: "Course Kit Details", icon: "book") do %>
+			<div class="item-header row">
+				<div class="col-md-8">
+					<h3>
+						<%= image_tag "icons/item_types/book.png", data: { isbn: isbn_for_image_cover(@item), size: "large"}, class: "google-bookcover", width: "20px" %>
+					<%= item.title %></h3>
+				</div>
+				<div class="col-md-4">
+					<div class="pull-right">
+
+						<a class="btn btn-sm btn-default" data-remote="true" href="<%= todo_lists_item_path(item) %>" title="Todo Lists">
+							<i class="fa fa-list"></i>
+						</a>
+						<a class="btn btn-sm btn-default with-bubble <%= is_action?("acquisition_requests", "btn-primary")%>" data-remote="true" href="<%= new_acquisition_request_path(item_id: item.id) %>" title="Acquisition Requests">
+							<i class="fa fa-shopping-cart"></i>
+							<% if @item.acquisition_requests.open.count > 0 %>
+								<span class="notification-bubble blue">
+									<%= @item.acquisition_requests.open.count %>
+								</span>
+							<% end %>
+						</a>
+						<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_item_path(item) %>" title="Audit Trail">
+							<i class="fa fa-history"></i>
+						</a>
+						<% if is_controller_and_action?("items", "show") && can?(:edit, item) %>
+							<a class="btn btn-sm btn-success" href="<%= edit_course_kit_path(item) %>">
+								<i class="fa fa-edit"></i> Make Changes
+							</a>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<ul class="list-unstyled list-info">
+            <li>
+							<span class="fa fa-university fa-fw"></span>
+							<label>Course</label>
+							<%= format_field item.course_code %>
+						</li>
+						<li>
+							<span class="fa fa-user fa-fw"></span>
+							<label>Author</label>
+							<%= format_field item.author %>
+						</li>
+						<li>
+							<span class="fa fa-barcode fa-fw"></span>
+							<label>Call Number</label>
+							<%= format_field item.callnumber %>
+						</li>
+						<li>
+							<span class="fa fa-university fa-fw"></span>
+							<label>Publisher</label>
+							<%= format_field item.publisher %>
+						</li>
+						<li>
+							<span class="fa fa-sticky-note fa-fw"></span>
+							<label>Edition &amp; Language</label>
+							 <%= format_field item.edition %> / <%= format_field item.language_note %>
+						</li>						
+					</ul>
+				</div>
+
+				<div class="col-md-6">
+					<ul class="list-unstyled list-info">
+						<li>
+							<span class="fa fa-square fa-fw"></span>
+							<label>Unique ID</label>
+							<%= format_field item.unique_id %>
+						</li>
+
+						<li>
+							<span class="fa fa-barcode fa-fw"></span>
+							<label>ISBN</label>
+							<%= format_field item.isbn %>
+						</li>
+
+						<li>
+							<span class="fa fa-calendar fa-fw"></span>
+							<label>Published Date</label>
+							<%= format_field item.published_date %>
+						</li>
+
+						<li>
+							<span class="fa fa-paragraph fa-fw"></span>
+							<label>Physical Description</label>
+							<%= format_field item.physical_description %>
+						</li>
+
+						<li>
+							<span class="fa fa-quote-left fa-fw"></span>
+							<label>Source &amp; Note</label>
+							<%= format_field item.source %> / <%= format_field item.source_note %>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<span class="trivial tiny">Item Created by <%= item.user.name %> </span>
+		<% end %>
+	</div>
+</div>

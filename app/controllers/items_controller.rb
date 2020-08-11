@@ -120,7 +120,7 @@ class ItemsController < AuthenticatedController
 
      if source == BibRecord::PRIMO
        @record = BibRecord::AlmaResult.find_item params[:bib_record_id]
-       @item = BibRecord::AlmaResult.build_item_from_alma_result @record        
+       @item = BibRecord::AlmaResult.build_item_from_alma_result @record
      else
        bib_record = BibRecord.new
        bib_item = bib_record.find_item(params[:bib_record_id], source)
