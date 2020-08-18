@@ -25,7 +25,11 @@
               <li class="<%= "active" if controller_name == "home" %>">
                   <a href="<%= dashboard_path %>"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
               </li>
-
+              <% if can? :read, Item %>
+              <li class="<%= "active" if controller_name == "local_items" %>">
+                  <a href="<%= new_find_item_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
+              </li>
+              <% end %>
 
               <li class="<%= "active" if controller_name == "items"%>">
                   <a href="<%= items_path %>"><i class="fa fa-fw fa-book"></i> Items</a>
@@ -60,11 +64,7 @@
     						</li>
     					<% end %>
 
-              <% if can? :read, Item %>
-              <li class="<%= "active" if controller_name == "local_items" %>">
-                  <a href="<%= new_find_item_path %>"><i class="fa fa-fw fa-search"></i> Search</a>
-              </li>
-              <% end %>
+
 
               <% if can? :manage, :shared_access_codes %>
               <li class="<%= "active" if controller_name == "shared_access_codes" %>">

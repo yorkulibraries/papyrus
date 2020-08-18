@@ -55,7 +55,7 @@ class SearchController < AuthenticatedController
 
       if @search_results == "local"
         format.json { render json:  @results.map { |item| {
-              id: item.id, name: item.title,
+              id: item.id, name: item.title, course_code: item.course_code, item_type: item.item_type,
               edition: item.edition, author: item.author, isbn: item.isbn, callnumber: item.callnumber
             }
           }

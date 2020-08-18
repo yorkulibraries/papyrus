@@ -3,7 +3,10 @@
   <div class="media">
 
     <a href="<%= item_path(item) %>" class="pull-left icon icon-<%= item.item_type %>">
-      <i class="fa fa-file fa-2x fa-fw"></i> <span> <%= item.item_type.humanize %></span>
+      <i class="fa fa-file fa-2x fa-fw"></i>
+      <span>
+        <%= item.item_type.humanize %>
+      </span>
     </a>
 
     <% if @student %>
@@ -23,6 +26,11 @@
         <h4 class="media-heading">
           <%= link_to item.title, item_path(item) %>
         </h4>
+
+        <% if item.course_kit? %>
+          <small class="text-muted"><%= item.course_code %></small>
+        <% end %>
+
         <% if item.callnumber.blank? %>
           <%= item.isbn %>
         <% else %>

@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-2 col-lg-2">
+    <%= form.input :year, collection: Item::CourseKitForm::ACADEMIC_YEARS_FULL, input_html: {  class: "input-sm", id: "request_course_attributes_year" } %>
+  </div>
+  <div class="col-md-2 col-lg-1">
+    <%= form.input :faculty, collection: Item::CourseKitForm::FACULTIES, input_html: { class: "input-sm" } %>
+  </div>
+  <div class="col-md-2 col-lg-2">
+    <%= form.input :subject, collection:  Item::CourseKitForm::SUBJECTS, input_html: { class: "input-sm" } %>
+  </div>
+  <div class="col-md-2 col-lg-2">
+    <%= form.input :course_id, label: "Course Number", input_html: { class: "input-sm" } %>
+  </div>
+  <div class="col-md-1 col-lg-1">
+    <%= form.input :term, collection: Item::CourseKitForm::TERMS, input_html: {  class: "input-sm", id: "request_course_attributes_term" } %>
+  </div>
+  <div class="col-md-1 col-lg-1">
+    <%= form.input :credits, collection: Item::CourseKitForm::TERM_CREDITS, input_html: { class: "input-sm" } %>
+  </div>
+  <div class="col-md-1 col-lg-1">
+    <%= form.input :section, collection: Item::CourseKitForm::SECTIONS, input_html: { class: "input-sm" } %>
+  </div>
+</div>

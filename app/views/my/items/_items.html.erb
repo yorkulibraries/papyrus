@@ -24,7 +24,13 @@
 								</span>
 							<% end %>
 
-							<h4><%= item.title %></h4>
+							<h4>
+								<%= item.title %>
+								<% if item.course_kit? %>
+				          <small class="text-muted"><%= item.course_code %></small>
+				        <% end %>
+							</h4>
+
 								<%= render "items_files" %>
 								<%= render "items_urls" %>
 
