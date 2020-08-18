@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/bionic64"
   config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
   config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
   config.vm.synced_folder ".", "/vagrant", disabled: true
@@ -123,8 +123,8 @@ Vagrant.configure(2) do |config|
   SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
-    rbenv install 2.1.3
-    rbenv global 2.1.3
+    rbenv install 2.5.5
+    rbenv global 2.5.5
   SHELL
 
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL

@@ -55,7 +55,12 @@
 						</div>
 
 						<div class="title" title="Files for <%= item.title %>">
-							<h4><%= item.title %></h4>
+							<h4>
+								<%= item.title %>
+								<% if item.course_kit? %>
+				          <small class="text-muted"><%= item.course_code %></small>
+				        <% end %>
+							</h4>
 
 							<div class="trivial" style="margin-bottom: 10px;">
 								<a href="#" class="trivial" onclick="$('#attachments_<%=item.id %>').toggleClass('hide'); return false;" title="Download files individually">

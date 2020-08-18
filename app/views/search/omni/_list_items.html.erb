@@ -5,7 +5,12 @@
 
     <ul class="list-group">
       <% results.each do |item| %>
-        <li class="list-group-item"><%= link_to item.title, item %> </li>
+        <li class="list-group-item">
+          <%= link_to item.title, item %>
+          <% if item.course_kit? %>
+            <small class="text-muted">course kit</small>
+          <% end %> 
+        </li>
       <% end %>
     </ul>
   <% else %>

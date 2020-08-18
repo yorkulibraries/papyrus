@@ -12,9 +12,9 @@ module ItemsHelper
     end
   end
 
-  def format_field(field)
+  def format_field(field, what: "n/a")
     if field.blank?
-      content_tag(:span, "n/a", class: "not-filled-in")
+      content_tag(:span, what, class: "not-filled-in")
     else
       field
     end
