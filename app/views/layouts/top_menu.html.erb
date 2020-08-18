@@ -15,11 +15,13 @@
         <li>
           <a href="<%= new_item_path %>"><i class="fa-pencil fa"></i> Blank Item</a>
         </li>
+        <% if can? :manage, User %>
         <li>
           <a href="<%= new_course_kit_path %>">
             <i class="fa-book fa"></i> Course Kit
           </a>
         </li>
+        <% end %>
         <li>
           <a href="<%= from_primo_index_path %>">
             <i class="fa-search fa"></i> Primo Item
