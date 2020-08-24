@@ -4,7 +4,8 @@
 //= require jquery.remotipart
 //= require jquery-ui
 //= require best_in_place.jquery-ui
-//= require twitter/bootstrap
+//= require popper
+//= require bootstrap
 //= require_tree ./vendor/
 //= require_tree ./controllers/
 //= require ./vendor/formstone.core.js
