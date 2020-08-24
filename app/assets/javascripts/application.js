@@ -1,11 +1,11 @@
-//= require jquery
+//= require jquery3
+//= require popper
+//= require bootstrap
 //= require best_in_place
-//= require jquery_ujs
+//= require rails-ujs
 //= require jquery.remotipart
 //= require jquery-ui
 //= require best_in_place.jquery-ui
-//= require popper
-//= require bootstrap
 //= require_tree ./vendor/
 //= require_tree ./controllers/
 //= require ./vendor/formstone.core.js
@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 	$("input[placeholder], textarea[placeholder]").enablePlaceholder({"withPlaceholderClass": "light-text"});
 
-	$('.dropdown-toggle').dropdown();
+	//$('.dropdown-toggle').dropdown();
 
 	// disable in browser form validations
 	$('form').find('input').removeAttr('required');

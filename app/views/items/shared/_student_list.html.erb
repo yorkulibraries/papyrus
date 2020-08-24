@@ -1,7 +1,7 @@
-<%= panel(title: "Students With Access", icon: "users", title_class: "text-center", styles:"panel-warning") do %>
+<%= panel(title: "Students With Access", icon: "users", title_class: "text-center bg-warning text-white") do %>
 
   <a class="btn btn-sm btn-primary" data-toggle="modal" href="#assign_students_modal">
-    <i class="fa fa-user-plus"></i> Grant Access To Students?</a>
+    <i class="fas fa-user-plus"></i> Grant Access To Students?</a>
   <hr/>
 
 
@@ -51,7 +51,7 @@
       $("#assign-students-list").tokenInput("<%= search_students_path %>", {
           zindex: 9999999,
           allowTabOut: true,
-          onReady: function() {            
+          onReady: function() {
             $("#token-input-assign-students-list").attr("tabindex", "1");
           }
       });

@@ -70,7 +70,7 @@
         <% end %>
         <% if can? :show, PapyrusSettings %>
           <li class="divider"></li>
-          <li><a href="<%= general_settings_path %>"><strong>Settings</strong></li>
+          <li><a href="<%= general_settings_path %>"><strong>Settings</strong></a></li>
           <li class="<%= "active" if is_controller_and_action?("settings", "general") %>">
             <%= link_to "General", general_settings_path %>
           </li>
