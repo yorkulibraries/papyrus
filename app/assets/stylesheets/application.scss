@@ -1,12 +1,17 @@
+@import "themes/bootstrap45/colors";
 @import "bootstrap";
+/** FONT-AWESOME **/
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 
 @import "vendor/formstone.upload";
 @import "vendor/jquery-token-input/token-input";
 @import "jquery-ui";
 @import "fullcalendar";
 
-@import "themes/bootstrap3/base_theme";
-@import "themes/bootstrap3/layout";
+@import "themes/bootstrap45/base";
+@import "themes/bootstrap45/navbar";
 @import "themes/bootstrap3/components";
 @import "themes/bootstrap3/forms";
 @import "themes/bootstrap3/common";

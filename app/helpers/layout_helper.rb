@@ -40,16 +40,16 @@ module LayoutHelper
      end
   end
 
-  def panel(title: "untitled", title_class: "", icon: 'th', icon_class: '', styles: 'panel-primary', &block)
-    icon_tag = content_tag(:i, "", class: "fa fa-#{icon} #{icon_class}")
+  def panel(title: "untitled", title_class: "bg-primary text-white", icon: 'th', icon_class: '', styles: '', &block)
+    icon_tag = content_tag(:i, "", class: "fas fa-#{icon} #{icon_class}")
     title_tag = content_tag(:strong, icon_tag + " #{title}")
 
-    heading_div = content_tag(:div, title_tag, class: "panel-heading #{title_class}")
-    body_div = content_tag :div, class: "panel-body" do
+    heading_div = content_tag(:h6, title_tag, class: "card-title mb-0 p-3 rounded-top #{title_class}")
+    body_div = content_tag :div, class: "card-body" do
       yield block
     end
 
-    content_tag :div, heading_div + body_div, class: "panel #{styles}"
+    content_tag :div, heading_div + body_div, class: "card shadow-sm mb-3 #{styles}"
 
   end
 

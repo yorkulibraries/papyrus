@@ -8,7 +8,7 @@ $(document).ready(function() {
 	});
 	url = url + "&callback=setup_google_book_covers";
 
-	if ($("img.google-bookcover").size() > 0) {
+	if ($("img.google-bookcover").length > 0) {
 	  var head = document.getElementsByTagName('head').item(0);
 	  var script = document.createElement('script');
 	  script.setAttribute('type', 'text/javascript');

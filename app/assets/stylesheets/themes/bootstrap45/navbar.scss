@@ -1,0 +1,13 @@
+nav.navbar-red {
+  background-color: #4F0101;
+  border-color: #280000;
+  color: #fff;
+
+  .navbar-toggle { border-color: #fff; }
+  .navbar-brand { color: #fff; }
+  .navbar-nav > li.nav-item > a.nav-link { color: #fff; }
+
+  .navbar-nav > li.nav-item.active > a.nav-link,
+  .navbar-nav > li.nav-item.active > a.nav-link:focus,
+  .navbar-nav > li.nav-item.active > a.nav-link:hover  { background-color: #761414; }
+}
