@@ -22,7 +22,6 @@ module Papyrus
     config.assets.paths << Rails.root.join("vendor", "assets", "stylesheets")
     config.assets.paths << Rails.root.join("vendor", "assets", "javascripts")
 
-    config.less.paths << "#{Rails.root}/app/assets/stylesheets"
 
     config.assets.initialize_on_precompile = false
 
