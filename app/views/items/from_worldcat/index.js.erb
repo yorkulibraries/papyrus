@@ -1,12 +1,12 @@
 <% if @show_error %>
-  $("#loading_results").addClass("hide");
+  $("#loading_results").addClass("d-none");
   $("#search_worldcat_button").val('Search');
   $("#search_worldcat_button").removeClass("disabled");
   $("#worldcat_results").empty();
   $("#worldcat_results").append("<%= j render 'search_error' %>");
 <% else %>
 
-  $("#loading_results").addClass("hide");
+  $("#loading_results").addClass("d-none");
   $("#search_worldcat_button").val('Search');
   $("#search_worldcat_button").removeClass("disabled");
   $("#worldcat_results").empty();

@@ -21,19 +21,19 @@
 						<% end %>
 
 						<% unless current_page?(student_path(student)) %>
-							<a class="btn btn-sm btn-default" title="Back to Student Details" href="<%= student_path(student) %>">
+							<a class="btn btn-sm btn-outline-secondary" title="Back to Student Details" href="<%= student_path(student) %>">
 								<i class="fa fa-chevron-left"></i>
 							</a>
 						<% end %>
 
 						<% if can? :login_as, :student %>
-							<a class="btn btn-sm btn-default" title="Login As Student" href="<%= my_login_as_student_path(student) %>">
+							<a class="btn btn-sm btn-outline-secondary" title="Login As Student" href="<%= my_login_as_student_path(student) %>">
 								<i class="fa fa-share"></i>
 							</a>
 						<% end %>
 
 						<% if can? :read, Note %>
-							<a class="btn btn-sm btn-default with-bubble <%= is_action?("notes", "btn-primary") %>"
+							<a class="btn btn-sm btn-outline-secondary with-bubble <%= is_action?("notes", "btn-primary") %>"
 								data-remote="true" href="<%= student_notes_path(student) %>" title="Notes">
 								<i class="fa fa-commenting-o"></i>
 								<% if @student.notes.count > 0 %>
@@ -46,7 +46,7 @@
 						<% end %>
 
 						<% if can? :audit_trail, Student %>
-							<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_student_path(student) %>" title="Audit Trail">
+							<a class="btn btn-sm btn-outline-secondary <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_student_path(student) %>" title="Audit Trail">
 								<i class="fa fa-history"></i>
 							</a>
 						<% end %>

@@ -1,4 +1,4 @@
-$("#edit_document_modal").modal("hide");
+$("#edit_document_modal").modal("d-none");
 $("#edit_document_form_holder").remove();
 
 $("#document_<%= @document.id %>").fadeOut(2000, function(){ $(this).remove();});

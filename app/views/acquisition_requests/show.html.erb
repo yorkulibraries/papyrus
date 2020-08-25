@@ -115,7 +115,7 @@
 							class: "btn btn-primary", data: { remote: true } %>
 					&nbsp; or &nbsp;
 					<%= link_to "Back Order", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_BACK_ORDERED),
-					 		class: "btn btn-sm btn-default", data: { remote: true }  %>
+					 		class: "btn btn-sm btn-outline-secondary", data: { remote: true }  %>
 					</p>
 					<p class="small">All actions on this item are recorded in audit trail</p>
           <%= link_to "Cancel Request", change_status_form_acquisition_request_path(@acquisition_request, status: AcquisitionRequest::STATUS_CANCELLED),

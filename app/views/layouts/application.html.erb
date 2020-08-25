@@ -23,7 +23,7 @@
     <div class="container-fluid">
       <div class="row">
         <%= render "layouts/bootstrap/sidenav" %>
-        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-2">
 
           <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
             <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement'>
@@ -41,7 +41,7 @@
             </div>
           <% end %>
 
-          <div class="py-4 px-1"><%= yield %></div>
+          <div class="py-2 px-1"><%= yield %></div>
 
 
           <div class="row">

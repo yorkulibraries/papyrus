@@ -24,7 +24,7 @@ function setup_course_token_input(id, url, token_limit) {
 
 $(document).ready(function() {
   $("a.term").click(function() {
-    $(this).children("i.fa-spin").removeClass("hide");
+    $(this).children("i.fa-spin").removeClass("d-none");
     history.pushState({}, null, $(this).attr("href"));
   });
 });

@@ -29,8 +29,8 @@ function onStart(e,  files) {
 	for (var i = 0; i < files.length; i++) {
 		html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="progress">Queued</span></li>';
 	}
-	 $(".formstone_upload_queue").show();
-	 $("#uploaded_attachments").removeClass("hide");
+	 $(".formstone_upload_queue").removeClass('d-none');
+	 $("#uploaded_attachments").removeClass("d-none");
 
 	$filequeue.append(html);
 

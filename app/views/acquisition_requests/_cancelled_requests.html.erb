@@ -1,15 +1,18 @@
 <% if @recently_cancelled.size == 0 %>
-  <div class="blank-slate">
-    <i class="icon-bullhorn"></i>
-    <h1>There are no cancelled requests right now.</h1>
-    <p>Items acquisitions can be cancelled through an acquisition request page.</p>
+  <div class="blank-slate text-center">
+
+    <h6><i class="fas fa-bullhorn mr-2"></i> There are no cancelled requests right now.</h6>
+    <p class="text-mute text-center">
+      Items acquisitions can be cancelled through an acquisition request page
+    </p>
   </div>
+
 <% else %>
   <div class="list-group">
     <% @recently_cancelled.each do |r| %>
       <a class="list-group-item" href="<%= acquisition_request_path(r) %>">
 
-        <h5 class="list-group-item-heading small"><%= r.item.title rescue nil %></h5>
+        <h6 class="list-group-item-heading small"><%= r.item.title rescue nil %></h6>
         <div class="row list-group-item-text">
           <div class="col-md-12">
             <span class="fa fa-calendar fa-fw"></span>

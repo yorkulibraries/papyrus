@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 	$("a[data-toggle-visible]").click(function(){
 		var toggle = $(this).data("toggle-visible");
-		$(toggle).toggleClass("hide");return false;
+		$(toggle).toggleClass("d-none");return false;
 	});
 
 	$(".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });

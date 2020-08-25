@@ -2,7 +2,7 @@
   <div class="alert alert-warning">
     <h3>Term Expired</h3>
     <p>This term expired on  <strong><%= @term.end_date.strftime("%b %d, %Y") %></strong>. All courses from this term will not be searchable in the items screen.</p>
-    <%= link_to terms_path, class: "btn btn-default btn-sm" do %>&laquo; All terms<% end %>
+    <%= link_to terms_path, class: "btn btn-outline-secondary btn-sm" do %>&laquo; All terms<% end %>
   </div>
 <% end %>
 

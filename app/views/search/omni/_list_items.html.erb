@@ -1,7 +1,7 @@
 
 <div id="omni_items_results">
   <% if results.size > 0 %>
-    <h5>Item Results <h5>
+    <h6>Item Results <h6>
 
     <ul class="list-group">
       <% results.each do |item| %>
@@ -9,11 +9,11 @@
           <%= link_to item.title, item %>
           <% if item.course_kit? %>
             <small class="text-muted">course kit</small>
-          <% end %> 
+          <% end %>
         </li>
       <% end %>
     </ul>
   <% else %>
-    <p>No items found for this search.</p>
+    <p class="py-4 text-center">No items found for this search.</p>
   <% end %>
 </div>

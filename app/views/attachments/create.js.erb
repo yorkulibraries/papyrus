@@ -3,8 +3,8 @@
   $("#url_form_holder").empty();
   <% if @attachment.errors.size == 0 %>
     $("#attachments").prepend('<%=escape_javascript render @attachment, show: "div" %>')
-    $("#attachments .blank-slate").hide();
-    $("#url_form_holder").addClass("hide");
+    $("#attachments .blank-slate").addClass('d-none');
+    $("#url_form_holder").addClass("d-none");
   <% else %>
     $('#url_form_holder').prepend('<%=escape_javascript render("attachments/form_url") %>');
   <% end %>
@@ -13,7 +13,7 @@
 
   <% if @attachment.errors.size == 0 %>
     $("#uploaded_attachments").append('<%=escape_javascript render @attachment, show: "div" %>')
-    $("#attachments .blank-slate").hide();
+    $("#attachments .blank-slate").addClass('d-none');
   <% else %>
      alert("Failed to upload file: <%= j @attachment.errors.full_messages.join(', ').html_safe %>");
   <% end %>
