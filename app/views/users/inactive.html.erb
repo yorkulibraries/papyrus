@@ -28,7 +28,7 @@
 						<td><%= user.created_at.strftime("%b %d, %Y") %></td>
 						<td>
 							<%= link_to "Unblock User", edit_user_path(user), class: "btn btn-sm btn-danger"%>
-							<%= link_to audit_trail_user_path(user), class: "btn btn-sm btn-default" do %>
+							<%= link_to audit_trail_user_path(user), class: "btn btn-sm btn-outline-secondary" do %>
 								<i class="fa fa-history" title="Audit Trail"></i>
 							<% end %>
 						</td>

@@ -18,21 +18,21 @@ $(document).ready(function() {
 
 
 	$("a.delete_multiple").click(function() {
-		$(".attachment .actions").hide();
-		$(".attachment .select-multiple").removeClass("hide");
-		$(this).hide();
-		$("a.cancel_delete_multiple, a.submit_delete_multiple").removeClass("hide");
-		$("").show();
+		$(".attachment .actions").addClass("d-none");
+		$(".attachment .select-multiple").removeClass("d-none");
+		$(this).addClass("d-none");
+		$("a.cancel_delete_multiple, a.submit_delete_multiple").removeClass("d-none");
+		$("").removeClass('d-none');
 		return false;
 	})
 
 
 	$("a.cancel_delete_multiple").click(function() {
-		$(".attachment .actions").show();
-		$(".attachment .select-multiple").addClass("hide");
+		$(".attachment .actions").removeClass('d-none');
+		$(".attachment .select-multiple").addClass("d-none")
 
-		$("a.delete_multiple").show();
-		$("a.submit_delete_multiple, a.cancel_delete_multiple").addClass("hide");
+		$("a.delete_multiple").removeClass('d-none');
+		$("a.submit_delete_multiple, a.cancel_delete_multiple").addClass("d-none")
 		return false;
 	});
 
@@ -50,19 +50,19 @@ $(document).ready(function() {
 
   $("input[name=create_acquisition_request]").on("click load", function() {
     if (this.checked) {
-      $("#create_acquisition_request").removeClass("hide");
+      $("#create_acquisition_request").removeClass("d-none");
     } else {
-      $("#create_acquisition_request").addClass("hide");
+      $("#create_acquisition_request").addClass("d-none")
     }
 
   });
 
 
   $("#show_expired_items_list").click(function(){
-    $("#items").hide();
-    $("#expired_items").removeClass("hide");
-    $("#show_current_items_list").removeClass("hide");
-    $(this).addClass("hide");
+    $("#items").addClass("d-none");
+    $("#expired_items").removeClass("d-none");
+    $("#show_current_items_list").removeClass("d-none");
+    $(this).addClass("d-none")
     return false;
   });
 

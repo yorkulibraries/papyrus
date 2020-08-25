@@ -1,6 +1,6 @@
 $("#access_code_form_holder").empty();
 <% if @access_code.errors.size == 0 %>
-	$(".access_codes .blank-slate").hide();
+	$(".access_codes .blank-slate").addClass('d-none');
 	$("#current_codes").prepend('<%=escape_javascript render @access_code, show: "li" %>')
 	$("#access_code_<%= @access_code.id %>").effect( "highlight", '', 3000 );
 

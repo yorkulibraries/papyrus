@@ -9,17 +9,17 @@
 			</div>
 		</div>
 		<div class="col-sm-4 col-xs-4">
-			<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == "local" %>" name="type" value="local">
+			<button type="submit" class="btn btn-outline-secondary <%= "btn-primary disabled" if @search_results == "local" %>" name="type" value="local">
 				Papyrus
 			</button>
-			<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::PRIMO %>" name="type" value="<%= BibRecord::PRIMO %>">
+			<button type="submit" class="btn btn-outline-secondary <%= "btn-primary disabled" if @search_results == BibRecord::PRIMO %>" name="type" value="<%= BibRecord::PRIMO %>">
 				 Primo
 			</button>
-			<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::VUFIND %>" name="type" value="<%= BibRecord::VUFIND %>">
+			<button type="submit" class="btn btn-outline-secondary <%= "btn-primary disabled" if @search_results == BibRecord::VUFIND %>" name="type" value="<%= BibRecord::VUFIND %>">
 					<%= bib_search_vufind_label %>
 			</button>
 			<% if !PapyrusSettings.worldcat_key.blank? %>
-				<button type="submit" class="btn btn-default <%= "btn-primary disabled" if @search_results == BibRecord::WORLDCAT %>" name="type" value="<%= BibRecord::WORLDCAT %>">
+				<button type="submit" class="btn btn-outline-secondary <%= "btn-primary disabled" if @search_results == BibRecord::WORLDCAT %>" name="type" value="<%= BibRecord::WORLDCAT %>">
 					<%= bib_search_worldcat_label %>
 				</button>
 			<% end %>

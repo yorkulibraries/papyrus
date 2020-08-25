@@ -12,7 +12,7 @@
     <% if @student %>
       <div class="pull-right actions">
         <%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
-          data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm", method: :delete, title: "Remove Access" do %>
+          data: { confirm: 'Are you sure?' }, class: "btn btn-outline-secondary btn-sm", method: :delete, title: "Remove Access" do %>
           &times;
         <% end %>
         <br/>

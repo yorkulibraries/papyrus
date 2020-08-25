@@ -11,3 +11,7 @@ nav.navbar-red {
   .navbar-nav > li.nav-item.active > a.nav-link:focus,
   .navbar-nav > li.nav-item.active > a.nav-link:hover  { background-color: #761414; }
 }
+
+#sidebar_menu {
+  .nav-item.active { background-color: hsla(213, 9%, 35%, 1); }
+}

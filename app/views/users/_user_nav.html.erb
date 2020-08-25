@@ -1,6 +1,6 @@
-<%= link_to "Active Users", users_path, class: "btn btn-default #{"btn-info " if controller.action_name == "index"}" %>
+<%= link_to "Active Users", users_path, class: "btn btn-outline-secondary #{"btn-info " if controller.action_name == "index"}" %>
 
-<%= link_to "Inactive Users", inactive_users_path, class: "btn btn-default #{"btn-info" if controller.action_name == "inactive"}" %>
+<%= link_to "Inactive Users", inactive_users_path, class: "btn btn-outline-secondary #{"btn-info" if controller.action_name == "inactive"}" %>
 
 <div class="pull-right">
 	<%= link_to new_user_path,  class: "btn btn-primary" do %>

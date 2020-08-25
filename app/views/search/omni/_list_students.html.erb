@@ -1,7 +1,7 @@
 
 <div id="omni_students_results">
   <% if results.size > 0 %>
-    <h5>Students <h5>
+    <h6>Students <h6>
 
     <ul class="list-group">
       <% results.each do |student| %>
@@ -9,6 +9,6 @@
       <% end %>
     </ul>
   <% else %>
-    <p>No students found for this search.</p>
+    <p class="py-4 text-center">No students found for this search.</p>
   <% end %>
 </div>

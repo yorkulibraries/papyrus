@@ -2,7 +2,7 @@ $(document).on('load ajax:success', function() {
 
 
   $("#omni_search_button").click(function() {
-    $("#loading_results").removeClass("hide");
+    $("#loading_results").removeClass("d-none");
     $("#omni_search_results").empty();
 
     $(this).val("Searching....");
@@ -11,7 +11,7 @@ $(document).on('load ajax:success', function() {
   });
 
   $("#reset_omni_search").click(function(){
-    $("#loading_results").addClass("hide");
+    $("#loading_results").addClass("d-none")
     $("#omni_search_button").val("Search");
     $("#omni_search_button").removeClass("disabled");
   });

@@ -73,7 +73,7 @@
 			<p>
 			<input type="checkbox" name="create_acquisition_request" value="yes"/> Send An Acquisitions Request</p>
 
-			<div class="hide row" id="create_acquisition_request">
+			<div class="d-nonerow" id="create_acquisition_request">
 				<div class="col-md-6">
 
 				<%= f.fields_for :acquisition_request do |builder| %>
@@ -88,5 +88,5 @@
 		<hr/>
 
 	 	<%= f.button :submit,  @item.new_record? ? "Create Item" : "Update Item" , class: 'btn-primary' %>
-		<%= link_to 'Cancel', @item.new_record? ? items_path : item_path(@item), class: 'btn btn-default' %>
+		<%= link_to 'Cancel', @item.new_record? ? items_path : item_path(@item), class: 'btn btn-outline-secondary' %>
 <% end %>

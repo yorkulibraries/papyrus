@@ -39,7 +39,7 @@
     <div class="modal-content">
       <%= form_tag assign_many_to_student_items_path(:student_id => @student) do |f| %>
       <div class="modal-header">
-        <h4 class="modal-title">Assign Items To This Student</h4>
+        <h5 class="modal-title">Assign Items To This Student</h5>
       </div>
       <div class="modal-body">
         <p>To assign a new item to this student, search for the item in the search box.</p>
@@ -55,7 +55,7 @@
 
       <div class="modal-footer">
         <%= submit_tag "Assign These Items", class: "btn btn-success" %>
-        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+        <a href="#" class="btn btn-outline-secondary" data-dismiss="modal">Close</a>
       </div>
       <% end %>
     </div>
