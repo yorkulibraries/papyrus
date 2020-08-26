@@ -1,7 +1,7 @@
 <% title "#{params[:status].humanize} Acquistion Requests", false %>
 <div class="row">
   <div class="col-md-12 acquisition_requests">
-    <%= panel(title: "#{params[:status].humanize} Acquistion Requests", icon: "shopping-cart", title_class: "", styles:"panel-default") do %>
+    <%= panel(title: "#{params[:status].humanize} Acquistion Requests", icon: "shopping-cart") do %>
 
       <% if @acquisition_requests.size == 0 %>
         <div class="blank-slate">

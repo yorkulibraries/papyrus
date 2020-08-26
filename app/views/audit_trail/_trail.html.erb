@@ -15,17 +15,17 @@
 
 		<tr class="audit_event">
 			<td class="trivial time"><%= event.created_at.strftime("%R")%></td>
-			<td class="what">
+			<td class="what text-lg">
 				<span class="badge <%= type.underscore.downcase %>">
 					<%= defined?(audit_what) ? audit_what : type.tableize.singularize.humanize %>
 				</span>
 			</td>
-			<td class="audit_comment distinct">
-				<%= event.comment %>
+			<td class="audit_comment distinct lead">
+				<span><%= event.comment %></span>
 				<% begin %>
 					<% if event.audited_changes != nil %>
-						<br/>
-						<small class="trivial hide">
+
+						<div class="details text-muted d-none border-top mt-1 pt-1">
 							<% event.audited_changes.each do |key, value| %>
 								<% if value.kind_of?(Array) %>
 									<strong><%= key %></strong> changed from <em><%= value.first  rescue nil %></em> to <em><%= value.last rescue nil %></em>
@@ -34,10 +34,10 @@
 								<% end %>
 								<br/>
 							<% end %>
-						</small>
+						</div>
 					<% end %>
 				<% rescue %>
-					There was an issue displaying the changes 
+					There was an issue displaying the changes
 				<% end %>
 			</td>
 			<td class="who"><code title="<%= event.action %> "><%= event.user.name if event.user %></code></td>
