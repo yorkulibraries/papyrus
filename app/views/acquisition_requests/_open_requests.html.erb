@@ -5,51 +5,53 @@
     <p>Go to an item you want acquire and click on <strong>Acquisitions</strong> link.</p>
   </div>
 <% else %>
-  <div class="list-group">
-    <div class="nav nav-pills mb-1" role="tablist">
+
+  <ul class="nav nav-pills" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="my-tab" data-toggle="tab"
+          href="#my_requests" role="tab" aria-controls="home" aria-selected="true">
+        My Requests
+      </a>
+    </li>
+    <% @acquisition_requests_grouped.keys.reject{ |r| r[:id] == @current_user.id }.each do |user|  %>
+
       <li class="nav-item" role="presentation">
-        <a href="#my_requests" role="tab" data-toggle="pill" class="nav-link active">My Requests</a>
+        <a class="nav-link" id="created_by_tab_<%= user[:id] %>" data-toggle="tab"
+            href="#created_by_<%= user[:id] %>" role="tab" aria-controls="profile" aria-selected="false">
+          <%= user[:name] %>
+        </a>
       </li>
+    <% end %>
 
-        <% @acquisition_requests_grouped.keys.reject{ |r| r[:id] == @current_user.id }.each do |user|  %>
-          <li class="nav-item" role="presentation">
-            <a href="#created_by_<%= user[:id] %>" class="nav-link" role="tab"
-               data-toggle="pill"><%= user[:name] %></a>
-          </li>
-        <% end %>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="all-tab" data-toggle="tab" href="#all_requests" role="tab" aria-controls="contact" aria-selected="false">
+        All
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active pt-2"
+          id="my_requests" role="tabpanel" aria-labelledby="home-tab">
 
-        <li class="nav-item" role="presentation">
-          <a href="#all_requests" role="tab" class="nav-link" data-toggle="pill">All</a>
-        </li>
-    </div>
+      <%= blank_slate @acquisition_requests.where(requested_by_id: @current_user.id), title: "Acquisiton Requests", description: "There are no acquisition requests created by you", icon: "bullhorn" %>
 
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane fade show active" id="my_requests">
-        <br/>
-        <%= blank_slate @acquisition_requests.where(requested_by_id: @current_user.id), title: "Acquisiton Requests", description: "There are no acquisition requests created by you", icon: "bullhorn" %>
-
-        <% @acquisition_requests.where(requested_by_id:  @current_user.id).each do |request| %>
-          <%= render partial: "acquisition_requests/partials/open_request_info", locals: { request: request } %>
-        <% end %>
-
-      </div>
-
-      <% @acquisition_requests_grouped.keys.reject{ |r| r[:id] == @current_user.id }.each do |user|  %>
-        <div role="tabpanel" class="tab-pane fade" id="created_by_<%= user[:id] %>">
-          <% @acquisition_requests.where(requested_by_id: user[:id]).each do |request| %>
-            <%= render partial: "acquisition_requests/partials/open_request_info", locals: { request: request } %>
-          <% end %>
-        </div>
+      <% @acquisition_requests.where(requested_by_id:  @current_user.id).each do |request| %>
+        <%= render partial: "acquisition_requests/partials/open_request_info", locals: { request: request } %>
       <% end %>
-
-      <div role="tabpanel" class="tab-pane fade" id="all_requests">
-        <% @acquisition_requests.each do |request| %>
-          <%= render partial: "acquisition_requests/partials/open_request_info", locals: { request: request } %>
-        <% end %>
-      </div>
     </div>
-
-
-
+    <% @acquisition_requests_grouped.keys.reject{ |r| r[:id] == @current_user.id }.each do |user|  %>
+    <div class="tab-pane fade pt-2"
+      id="created_by_<%= user[:id] %>" role="tabpanel" aria-labelledby="profile-tab">
+      <% @acquisition_requests.where(requested_by_id: user[:id]).each do |request| %>
+        <%= render partial: "acquisition_requests/partials/open_request_info", locals: { request: request } %>
+      <% end %>
+    </div>
+    <% end %>
+    <div class="tab-pane fade pt-2" id="all_requests" role="tabpanel" aria-labelledby="contact-tab">
+      <% @acquisition_requests.each do |request| %>
+        <%= render partial: "acquisition_requests/partials/open_request_info", locals: { request: request } %>
+      <% end %>
+    </div>
   </div>
+
 <% end %>

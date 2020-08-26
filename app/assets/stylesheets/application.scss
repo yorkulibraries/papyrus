@@ -1,5 +1,11 @@
 @import "themes/bootstrap45/colors";
 @import "bootstrap";
+
+/** JQuery UI **/
+@import 'jquery-ui/core.css';
+@import 'jquery-ui/datepicker.css';
+@import 'jquery-ui/theme.css';
+
 /** FONT-AWESOME **/
 @import "font-awesome-sprockets";
 @import "font-awesome";
