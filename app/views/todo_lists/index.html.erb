@@ -5,28 +5,26 @@
 		<%= panel(title: "Todo Lists (EXPERIMENTAL)", icon: "list") do %>
 
 			<% if params[:which] == TodoList::STATUS_DONE %>
-				<%= link_to todo_lists_path(), class: "btn btn-sm btn-link  pull-right" do %>
-					<i class="fa fa-list"></i> New Todo Lists
-				<% end %>
-				<h4>Completed Lists</h4>
-				<hr/>
-			<% else %>
-				<div class="row">
+				<div class="d-flex justify-content-between align-items-center border-bottom pb-1 mb-3">
+					<h6 class="mb-0">Completed Lists</h6>
+					<%= link_to todo_lists_path(), class: "btn btn-info btn-sm text-right" do %>
+						<i class="fas fa-list"></i> Todo Lists
+					<% end %>
+				</div>
 
-	        <div class="col-sm-4 col-xs-4">
-	          <%= link_to new_todo_list_path, class: "btn btn-sm btn-primary", remote: true do %>
+			<% else %>
+				<div class="d-flex justify-content-between align-items-center border-bottom pb-1 mb-3">
+
+
+	          <%= link_to new_todo_list_path, class: "btn btn-xs btn-primary", remote: true do %>
 	            <i class="fa fa-plus"></i> Add a Todo List
 	          <% end %>
-	        </div>
 
-	        <div class="col-sm-8 col-xs-8">
-	          <%= link_to todo_lists_path(which: TodoList::STATUS_DONE), class: "btn btn-sm btn-link  pull-right" do %>
+	          <%= link_to todo_lists_path(which: TodoList::STATUS_DONE), class: "text-info" do %>
 	            <i class="fa fa-list"></i> Completed Lists
 	          <% end %>
-	        </div>
-	      </div>
 
-	    	<hr/>
+	      </div>
 
 				<div id="todo_list_form_holder" class="form_holder">
 				</div>
