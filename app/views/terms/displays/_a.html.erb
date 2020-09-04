@@ -1,6 +1,11 @@
-<a href="<%= term_path(term) %>" data-remote="truxe"
-  class="list-group-item term <%="active" if @term && @term.id == term.id %>" id="term_<%= term.id %>" data-id="<%= term.id %>">
-  <span class="badge"><%= term.courses.count %></span>
-  <%= term.name %>
-  <i class="fa fa-spinner fa-spin hide"></i>
+<a href="<%= term_path(term) %>" data-remote="true"
+  class="list-group-item no-underline:hover term <%="active" if @term && @term.id == term.id %>" id="term_<%= term.id %>" data-id="<%= term.id %>">
+
+  <div class='d-flex justify-content-between align-items-center'>
+    <div>
+      <%= term.name %>
+      <i class="fa fa-spinner fa-spin d-none"></i>
+    </div>
+    <span class="badge badge-secondary"><%= term.courses.count %></span>
+  </div>
 </a>

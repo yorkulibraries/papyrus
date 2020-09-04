@@ -1,38 +1,43 @@
+<%= form_tag find_items_path, method: :get do %>
 <div class="search-box row">
-  <%= form_tag find_items_path, method: :get do %>
-		<div class="col-sm-6 col-xs-6">
+
+		<div class="col-6">
 			<div class="input-group form-group-lg">
-        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <span class="input-group-prepend">
+           <span class="input-group-text">
+             <i class="fas fa-search"></i>
+           </span>
+        </span>
         <input type="text" placeholder="Search By Title, Author, Unique ID, ISBN, Type" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
 			</div>
 
 		</div>
-    <div class="col-sm-2">
+    <div class="col-2">
       <div class="form-group form-group-lg">
         <%= select_tag "source", options_for_select(PapyrusSettings.item_sources, @source), prompt: "Item Source", include_blank: true, class: "form-control" %>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-2">
       <div class="form-group form-group-lg">
         <%= select_tag "item_type", options_for_select(Item::TYPES, @item_type), prompt: "Item Type", include_blank: true, class: "form-control" %>
       </div>
     </div>
 
-		<div class="col-sm-2 col-xs-2">
-			<button type="submit" class="btn btn-info btn-lg rounded-sm" name="type" value="local">
+		<div class="col-2">
+			<button type="submit" class="btn btn-info rounded-sm" name="type" value="local">
 				Find Items
 			</button>
 		</div>
-	<% end %>
 </div>
-
+<% end %>
 <div class="row">
   <div class="col-md-12">
-    <label>Advanced Search Examples</label>
-
-    <blockquote>
-      <p><small>You can add multiple filters in one query line. </small></p>
-      <p>title: 'Caesar' author: 'Christian Meier' ISBN: '1234567' callnumber: 'AB 123' creator: 'John Smith'</p>
+    <h5>Advanced Search Examples</h5>
+    <p class="text-sm text-muted mb-0">You can add multiple filters in one query line. </small></p>
+    <blockquote class="blockquote">
+      <footer class="blockquote-footer">
+        title: 'Caesar' author: 'Christian Meier' ISBN: '1234567' callnumber: 'AB 123' creator: 'John Smith'
+      </footer>
     </blockquote>
   </div>
 </div>
