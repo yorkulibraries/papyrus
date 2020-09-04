@@ -1,7 +1,7 @@
 <%= simple_form_for [@todo_list, @todo_item], html: { remote: true } do |f| %>
   <div class="row">
     <div class="col-md-8">
-      <%= f.input :summary, label: false, input_html: { placeholder: "Todo Item Summary", class: "text-lg" } %>
+      <%= f.input :summary, label: false, input_html: { autofocus: true, placeholder: "Todo Item Summary", class: "text-lg" } %>
     </div>
     <div class="col-md-2">
       <%= f.input :assigned_to_id, collection: User.active.not_students, label: false, input_html: { placeholder: "Assigned To" }  %>
@@ -11,12 +11,14 @@
     </div>
   </div>
 
-  <%= f.button :submit,  class: 'btn btn-primary' %>
+  <div class="mt-3">
+    <%= f.button :submit,  class: 'btn btn-primary' %>
 
-  <% if request.xhr? %>
-    <%= link_to "Cancel", "#", class: "btn btn-outline-secondary", onclick: "$(this).parents('.form_holder').empty(); return false;" %>
-  <% else %>
-    <%= link_to 'Cancel', @todo_item.new_record? ? todo_lists_path : todo_list_path(@todo_list), class: 'btn btn-outline-secondary' %>
-  <% end %>
+    <% if request.xhr? %>
+      <%= link_to "Cancel", "#", class: "btn btn-outline-secondary", onclick: "$(this).parents('.form_holder').empty(); return false;" %>
+    <% else %>
+      <%= link_to 'Cancel', @todo_item.new_record? ? todo_lists_path : todo_list_path(@todo_list), class: 'btn btn-outline-secondary' %>
+    <% end %>
+  </div>
 
 <% end %>

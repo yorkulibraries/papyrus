@@ -1,9 +1,9 @@
 <% if @todo_list.errors.size == 0  %>
-  $("#todo_list_<%= @todo_list.id %>").replaceWith('<%=escape_javascript render @todo_list, show: "div" %>');
+  $("#todo_list_<%= @todo_list.id %>").replaceWith('<%=j render @todo_list, show: "div" %>');
 
 <% else %>
   $("#edit_todo_list_form_holder_<%= @todo_list.id %>").empty();
-  $('#edit_todo_list_form_holder_<%= @todo_list.id %>').prepend('<%=escape_javascript render("todo_lists/form") %>');
+  $('#edit_todo_list_form_holder_<%= @todo_list.id %>').prepend('<%= j render("todo_lists/form") %>');
 <% end %>
 
 $(".todo_list_status, .todo_item_status").click(function() {
