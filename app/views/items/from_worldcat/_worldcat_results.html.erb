@@ -2,10 +2,8 @@
   <div class="cat-search-results">
 
     <% @results.each_with_index do |item, index| %>
-
-    <div class="media">
-
-      <div class="pull-left">
+    <div class="d-flex justify-content-start">
+      <div class="mr-4">
         <% if item.isbn_issn %>
           <div class="book-cover text-center"
                 data-book-cover-url="<%= "https://syndetics.com/index.php?client=primo&isbn=#{item.isbn_issn}/sc.jpg" %>">
@@ -15,12 +13,12 @@
         <% else %>
           <%= image_tag 'book_cover_v1.jpg', class: "book-cover-image" %>
         <% end %>
-
       </div>
+      <div class="w-full">
+        <h3 class="d-flex justify-content-between" style="margin-bottom: 10px;">
+          <span><%= format_worldcat_field item.title %></span>
 
-      <div class="media-body">
-          <h3 class="media-heading" style="margin-bottom: 10px;">
-            <span class="pull-right">
+          <span style="min-width: 150px;">
             <% if item["id"].present? %>
               <a href="<%= new_from_worldcat_path %>?worldcat_id=<%= item[:id] %>" data-confirm="Are you sure?" class="btn btn-success">
                 <i class="fa fa-plus-square fa-fw "></i> Worldcat Item
@@ -41,45 +39,56 @@
               <% end %>
 
             <% end %>
-            </span>
-            <%= format_worldcat_field item.title %>
-          </h3>
+          </span>
 
-          <ul class="list-unstyled list-info">
-            <li>
-                <span class="fa fa-user fa-fw"></span>
-                <label>Author</label>
-                <span class="text-lg"><%= format_worldcat_field item.author %></span>
-            </li>
-            <li>
-                <span class="fa fa-university fa-fw"></span>
-                <label>Publisher</label>
-                <span class="text-lg"><%= format_worldcat_field item.publisher %></span> <span class="trivial">Published: <%= format_worldcat_field item.published_date %></span>
-            </li>
-            <li>
-                <span class="fa fa-language fa-fw"></span>
-                <label>Edition</label>
-                <span class="text-lg"><%= format_worldcat_field item.edition %></span>
-            </li>
-            <li>
-                <span class="fa fa-barcode fa-fw"></span>
-                <label>ISBN</label>
-                <span class="text-lg"><%= format_worldcat_field item.isbn %></span>
-            </li>
-            <li>
-                <span class="fa fa-file-text fa-fw"></span>
-                <label> Description</label>
-                <span class="text-lg">
-                  <%= format_worldcat_field item.physical_description %>
-                </span>
-            </li>
-            <li>
-                <span class="fa fa-link fa-fw"></span>
-                <label>Link</label>
-                <span class="text-lg">
-                  <%= link_to item.link, item.link, target: "_blank" %></span>
-            </li>
-          </ul>
+        </h3>
+
+        <ul class="list-unstyled list-info">
+          <li>
+              <span class="fa fa-user fa-fw"></span>
+              <label>Author</label>
+              <span class="text-lg"><%= format_worldcat_field item.author %></span>
+          </li>
+          <li>
+              <span class="fa fa-university fa-fw"></span>
+              <label>Publisher</label>
+              <span class="text-lg"><%= format_worldcat_field item.publisher %></span> <span class="trivial">Published: <%= format_worldcat_field item.published_date %></span>
+          </li>
+          <li>
+              <span class="fa fa-language fa-fw"></span>
+              <label>Edition</label>
+              <span class="text-lg"><%= format_worldcat_field item.edition %></span>
+          </li>
+          <li>
+              <span class="fa fa-barcode fa-fw"></span>
+              <label>ISBN</label>
+              <span class="text-lg"><%= format_worldcat_field item.isbn %></span>
+          </li>
+          <li>
+              <span class="fa fa-file-text fa-fw"></span>
+              <label> Description</label>
+              <span class="text-lg">
+                <%= format_worldcat_field item.physical_description %>
+              </span>
+          </li>
+          <li>
+              <span class="fa fa-link fa-fw"></span>
+              <label>Link</label>
+              <span class="text-lg">
+                <%= link_to item.link, item.link, target: "_blank" %></span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="media">
+
+
+
+      <div class="media-body">
+
+
+
       </div>
     </div>
 

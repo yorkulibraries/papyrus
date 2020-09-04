@@ -27,8 +27,8 @@
 
     <% end %>
   </div>
-  <div class="col-md-6">
-    <%= link_to new_term_course_path(@term), id: "new_course", class: "btn btn-sm btn-success pull-right" do %>
+  <div class="col-md-6 text-right">
+    <%= link_to new_term_course_path(@term), id: "new_course", class: "btn btn-sm btn-success" do %>
       <i class="fa fa-plus"></i> Add a new course
     <% end %>
   </div>
@@ -36,7 +36,7 @@
 
 <hr/>
 
-<h4><%= pluralize(@courses.count, "Course") %></h4>
+<h6><%= pluralize(@courses.count, "Course") %></h6>
 <div id="courses">
   <div class="list-group">
     <% @courses.each do |course| %>

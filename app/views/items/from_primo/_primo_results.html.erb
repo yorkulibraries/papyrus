@@ -3,9 +3,8 @@
 
     <% @results.each_with_index do |item, index| %>
 
-    <div class="media">
-
-      <div class="pull-left">
+    <div class="d-flex justify-content-start">
+      <div class="mr-4">
         <% if item.isbn_issn %>
           <div class="book-cover text-center"
                 data-book-cover-url="<%= "https://syndetics.com/index.php?client=primo&isbn=#{item.isbn_issn}/sc.jpg" %>">
@@ -15,51 +14,48 @@
         <% else %>
           <%= image_tag 'book_cover_v1.jpg', class: "book-cover-image" %>
         <% end %>
-
       </div>
+      <div class="w-full">
+        <h3 class="d-flex justify-content-between" >
+          <span><%= item.title %></span>
+          <span style="min-width: 150px;"><%= render "action_buttons", item: item %></span>
+        </h3>
 
-      <div class="media-body">
-          <h3 class="media-heading" style="margin-bottom: 10px;">
-            <span class="pull-right">
-              <%= render "action_buttons", item: item %>
-            </span>
-            <%= item.title %>
-          </h3>
+        <ul class="list-unstyled list-info">
+          <li>
+              <span class="fa fa-user fa-fw"></span>
+              <label>Author</label>
+              <span class="text-lg"><%= item.author %></span>
+          </li>
+          <li>
+              <span class="fa fa-university fa-fw"></span>
+              <label>Publisher</label>
+              <span class="text-lg"><%= item.publisher %></span> <span class="trivial">Published: <%= item.publication_date %></span>
+          </li>
+          <li>
+              <span class="fa fa-tags fa-fw"></span>
+              <label>Subject</label>
+              <span class="text-lg"><%= item.subject %></span>
+          </li>
+          <li>
+              <span class="fa fa-language fa-fw"></span>
+              <label>Edition + Language</label>
+              <span class="text-lg"><%= item.edition %> [<%= item.language %>]</span>
+          </li>
+          <li>
+              <span class="fa fa-barcode fa-fw"></span>
+              <label>ISBN + Call Number</label>
+              <span class="text-lg"><%= item.isbn_issn %> &amp;
+              <%= item.callnumber %></span>
+          </li>
+          <li>
+              <span class="fa fa-file-text fa-fw"></span>
+              <label>Format + Description</label>
+              <span class="text-lg"><%= item.item_type %></span>
+              <span class="trivial">[<%= item.description %>]</span>
+          </li>
+        </ul>
 
-          <ul class="list-unstyled list-info">
-            <li>
-                <span class="fa fa-user fa-fw"></span>
-                <label>Author</label>
-                <span class="text-lg"><%= item.author %></span>
-            </li>
-            <li>
-                <span class="fa fa-university fa-fw"></span>
-                <label>Publisher</label>
-                <span class="text-lg"><%= item.publisher %></span> <span class="trivial">Published: <%= item.publication_date %></span>
-            </li>
-            <li>
-                <span class="fa fa-tags fa-fw"></span>
-                <label>Subject</label>
-                <span class="text-lg"><%= item.subject %></span>
-            </li>
-            <li>
-                <span class="fa fa-language fa-fw"></span>
-                <label>Edition + Language</label>
-                <span class="text-lg"><%= item.edition %> [<%= item.language %>]</span>
-            </li>
-            <li>
-                <span class="fa fa-barcode fa-fw"></span>
-                <label>ISBN + Call Number</label>
-                <span class="text-lg"><%= item.isbn_issn %> &amp;
-                <%= item.callnumber %></span>
-            </li>
-            <li>
-                <span class="fa fa-file-text fa-fw"></span>
-                <label>Format + Description</label>
-                <span class="text-lg"><%= item.item_type %></span>
-                <span class="trivial">[<%= item.description %>]</span>
-            </li>
-          </ul>
       </div>
     </div>
 

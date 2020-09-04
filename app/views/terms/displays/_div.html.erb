@@ -1,19 +1,19 @@
 <div class="term" id="term_<%= term.id %>" data-id="<%= term.id %>">
   <div class="row">
     <div class="col-md-8">
-      <h3 class="title"><%= term.name %>
+      <h4 class="title"><%= term.name %>
         <% if can? :update, @term %>
-          <%= link_to edit_term_path(@term), class: "btn btn-link" do %>
-            <i class="fa fa-edit"></i>
+          <%= link_to edit_term_path(@term), class: "btn btn-link text-muted" do %>
+            <i class="fas fa-edit"></i>
           <% end %>
         <% end %>
-      </h3>
-      <span class="small date"><i class="fa fa-calendar"></i>
+      </h4>
+      <span class="text-sm date"><i class="far fa-calendar"></i>
         Spans <%= term.start_date.strftime("%b %d, %Y") %> - <%= term.end_date.strftime("%b %d, %Y") %>
       </span>
     </div>
     <div class="col-md-4 text-right">
-        <span class="strong title">Active Courses</span><br/>
+        <span class="font-weight-bold title">Active Courses</span><br/>
         <span class="tag-item"><%= pluralize(term.courses.count, "Course") %></span>
     </div>
   </div>
