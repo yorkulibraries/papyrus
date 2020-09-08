@@ -3,9 +3,11 @@
 <div class="row">
 	<div class="col-md-12">
 		<%= panel(title: "Item Usage") do %>
-			<a href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>" class="btn btn-defaul pull-right">
-				<i class="fa fa-table"></i> Download Exel
-			</a>
+			<div class="text-right mb-3">
+				<a href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>" class="btn btn-outline-secondary btn-sm">
+					<i class="fas fa-table "></i> Download Exel
+				</a>
+			</div>
 			<%= render partial: "stats/shared/nav_menu" %>
 
 			<form action="<%= stats_assigned_students_path %>" method="get" class="simple_form">
@@ -14,10 +16,11 @@
 
 			<hr/>
 
-			<h4>Assigned Students <span class="label label-primary"><%= @students.count %></span>
-				<a class="pull-right btn btn-sm" href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>">
-					<i class="fa fa-table"></i> Download Exel </a>
-			</h4>
+			<h5 class="d-flex justify-content-between align-items-center">
+				<span>Assigned Students <span class="alert alert-primary py-0 px-2"><%= @students.count %></span></span>
+				<a class="text-right btn btn-sm" href="<%=stats_assigned_students_path(params: request.query_parameters, format: "xlsx") %>">
+					<i class="fas fa-table"></i> Download Exel </a>
+			</h5>
 
 			<table class="table results">
 				<tr>
@@ -28,7 +31,7 @@
 				<% @students.each do |student| %>
 				<tr>
 					<td><%= student.name %><br/>
-						<small class="weak"><%= student.email %></small> </td>
+						<small class="text-muted"><%= student.email %></small> </td>
 					<td><%= student.details.student_number%></td>
 					<td><%= student.details.cds_counsellor%></td>
 					<td><%= student.created_at.strftime(" %b %d, %Y")%></td>
