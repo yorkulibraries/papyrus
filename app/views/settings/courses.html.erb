@@ -7,7 +7,7 @@
 
 			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
 
-			  <h4 class="black">Course Settings</h4>
+			  <h5 class="text-black">Course Settings</h5>
 
 	      <%= f.label :course_lookup_url, "Course Code Lookup URL"%>
 	      <%= f.input :course_lookup_url, label: false, input_html: { class: "form-control" }%>
@@ -23,7 +23,7 @@
         <%= f.input :course_listing_separator, label: false, input_html: { class: "form-control" }%>
 
 				<hr/>
-				<h4 class="black">For Course Sync: Term Start/End Days</h4>
+				<h5 class="text-black mt-4">For Course Sync: Term Start/End Days</h5>
 				<div class="row">
 					<div class="col-md-6"><%= f.input :term_fall_start, label: "Fall Start Day" %></div>
 					<div class="col-md-6"><%= f.input :term_fall_end, label: "Fall End Day" %></div>
@@ -47,7 +47,7 @@
 
 
 			  <input type="hidden" name="return_to" value="courses"/>
-				<%= f.submit "Save Settings", class: "btn btn-success" %>
+				<%= f.submit "Save Settings", class: "btn btn-success mt-4" %>
 			<% end %>
 		<% end %>
 	</div>

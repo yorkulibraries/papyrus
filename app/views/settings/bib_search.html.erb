@@ -4,24 +4,24 @@
 	<div class="col-md-8">
 		<%= panel(title: "Bib Search Settings", icon: "cog") do %>
 			<p class="alert alert-danger"><strong>Warning:</strong> Changing these values might disable BibCat Search capabilities. Please be careful.</p>
-			
+
 			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
 
 
-				<h4 class="black">VuFIND Settings</h4>
+			<h5 class="text-black">VuFIND Settings</h5>
 
 				<%= f.input :vufind_url, label: "VuFind URL" %>
 				<%= f.input :vufind_id_prefix, label: "ID Prefix For VuFind Items" %>
 				<%= f.input :vufind_label, label: "VuFind Search Label"%>
 
-				<h4 class="black">WORLDCAT Settings</h4>
+			<h5 class="text-black mt-4">WORLDCAT Settings</h5>
 
 				<%= f.input :worldcat_key, label: "API Key" %>
 				<%= f.input :worldcat_id_prefix, label:"ID Prefix for WORLDCAT Items" %>
 				<%= f.input :worldcat_label, label: "WORLDCAT Search Label" %>
 
 				<input type="hidden" name="return_to" value="bib_search"/>
-				<%= f.submit "Save Settings", class: "btn btn-success" %>
+				<%= f.submit "Save Settings", class: "btn btn-success mt-3" %>
 			<% end %>
 		<% end %>
 	</div>

@@ -6,7 +6,7 @@
 			<p class="alert alert-danger"><strong>Warning:</strong> Changing authentication settings might disable your access to Papyrus. Please be careful.</p>
 			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
 
-				<h4 class="black">Authentication Settings</h4>
+				<h5 class="text-black">Authentication Settings</h5>
 
 	      <%= f.input :auth_cas_header, label: "CAS Header", hint: "Name of login header used by CAS" %>
 	      <%= f.input :auth_cas_header_alt, label: "Alternate CAS Header",
@@ -17,7 +17,7 @@
 	      <%= f.input :auth_cas_logout_redirect, label: "Logout Redirect URL" %>
 
 				<hr/>
-				<h4 class="black">Error Notification</h4>
+				<h5 class="text-black mt-4">Error Notification</h5>
 
 		    <%= f.input :errors_email_subject_prefix, label: "Error Email Subject Prerix"%>
 		    <%= f.input :errors_email_from, label: "Error Email From Address" %>
@@ -25,7 +25,7 @@
 				<p class="help-block small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
 				<hr/>
 				<div class='well'>
-				<h4 class="black">EXTERNAL API - Version 1.0</h4>
+				<h5 class="text-black mt-4">EXTERNAL API - Version 1.0</h5>
 				<%= f.input :api_enable, label: "Enable External API v1.0", as: :radio_buttons %>
 
 				<p class="alert alert-danger">
@@ -38,13 +38,13 @@
 				<%= f.input :api_http_auth_pass, label: "HTTP AUTH Passowrd", as: :string %>
 				</div>
 				<hr/>
-				<h4 class="black">Performance Profiling</h4>
+				<h5 class="text-black mt-4">Performance Profiling</h5>
 
 
 				<%= f.input :profiler_enable, label: "Enable Profiler", as: :radio_buttons %>
 
 				<input type="hidden" name="return_to" value="system"/>
-				<%= f.submit "Save Settings", class: "btn btn-success" %>
+				<%= f.submit "Save Settings", class: "btn btn-success mt-4" %>
 			<% end %>
 		<% end %>
 	</div>

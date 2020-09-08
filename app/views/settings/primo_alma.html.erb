@@ -8,7 +8,7 @@
 			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
 
 
-				<h4 class="black">Primo Settings</h4>
+			<h5 class="text-black">Primo Settings</h5>
 
 				<%= f.input :primo_apikey %>
 				<%= f.input :primo_region %>
@@ -19,14 +19,14 @@
 				<%= f.input :primo_pcavailability, as: :radio_buttons %>
 
 
-				<h4 class="black">Alma Settings</h4>
+			<h5 class="text-black mt-4">Alma Settings</h5>
 
 				<%= f.input :alma_apikey %>
 	      <%= f.input :alma_region %>
 
 
 				<input type="hidden" name="return_to" value="primo_alma"/>
-				<%= f.submit "Save Settings", class: "btn btn-success" %>
+				<%= f.submit "Save Settings", class: "btn btn-success mt-4" %>
 			<% end %>
 		<% end %>
 	</div>
