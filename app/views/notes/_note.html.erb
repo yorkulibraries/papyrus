@@ -1,18 +1,18 @@
 <tr id="note_<%= note.id %>">
-	<td width="12%">
-		<span class="strong"><%= note.user.name %></span><br/>
-		<% if note.created_at.to_date == Date.today %>
-			<%= note.created_at.strftime("%I:%M %p")%>
-		<% else %>
-			<span title="<%= note.created_at.strftime("%I:%M %p")%>">
-			<%= note.created_at.strftime("%b %d")%></span><%= note.created_at.strftime(", %Y") if note.created_at.year < Date.today.year %>
-		<% end %>
-	</td>
 	<td class="what">
-		<%= simple_format note.note %>
+		<div class="d-flex justify-content-start text-muted">
+			<span class="strong mr-2">By <%= note.user.name %></span>
+			<% if note.created_at.to_date == Date.today %>
+				<%= note.created_at.strftime("%I:%M %p")%>
+			<% else %>
+				<span title="<%= note.created_at.strftime("%I:%M %p")%>" class="mr-2">
+				<%= note.created_at.strftime("%b %d")%></span> <%= note.created_at.strftime(", %Y") if note.created_at.year < Date.today.year %>
+			<% end %>
+		</div>
+		<div class='text-dark text-lg'><%= simple_format note.note %></div>
 
 		<% if note.editable_time > Time.now %>
-			<span class="label label-info">Important</span> <span class="trivial">You can
+			<span class="alert alert-info py-0 px-2">Important</span> <span class="trivial">You can
 				<%= link_to "Edit note", edit_student_note_path(@student, note), class: "edit", data: { remote: true }%> for the next
 			<%= distance_of_time_in_words(note.editable_time, Time.now) %></span>
 		<% end %>

@@ -7,12 +7,14 @@ table.audit-trail {
 		line-height: 18px; padding: 8px; text-align: left; vertical-align: top;
 		&.time { width: 40px; }
 		&.who { text-align: right; }
+		.badge { background-color: #777; color: white;}
 		&.what { text-align: left; text-transform: lowercase; width: 120px;
 			span.student, span.user {background-color: #C87800;  }
 			span.student_details { background-color: #7A4A77; }
 			span.note { background-color: #6492AC; }
 			span.assigned_item { background-color: #334E7D;  }
 			span.item { background-color: #232323; }
+			span.document, span.student_course { background-color: #535353; }
 		}
 
 		&.audit_comment { cursor: pointer; }

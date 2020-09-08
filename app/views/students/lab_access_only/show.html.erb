@@ -12,18 +12,15 @@
 			</div>
 
 			<hr/>
-			
+
 			<% if @students %>
 				<%= page_entries_info @students %>
 			<% end %>
 
-			<%= paginate @students %>
+		<div class="my-3">	<%= paginate @students %></div>
 
-			<ul class="list-unstyled">
-				<% @students.each do |student| %>
-					<%= render partial: "students/student", locals: { show: "li", show_gravatar: true, student: student } %>
-				<% end %>
-			</ul>
+			<%= render "students/list", students: @students %>
+
 
 			<%= paginate @students %>
 
