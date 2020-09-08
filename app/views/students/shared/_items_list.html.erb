@@ -1,25 +1,31 @@
-<%= panel(title: "Assigned Items - #{@items.size}", icon: "book", title_class: "text-center", styles:"panel-info") do %>
+<%= panel(title: "Assigned Items - #{@items.size}", icon: "book", title_class: "text-center bg-info text-white") do %>
 
-  <% unless student.inactive? %>
-    <a href="<%= student_expired_items_path(@student) %>" class="btn pull-right">
-      Show Expired Items
-    </a>
-    <a href="<%= student_path(@student) %>" data-disable-with="Loading current items..."
-      id="show_current_items_list" class="small trivial pull-right hide">
-      Show current items (<%= @items.size %>)
-    </a>
-    <% if can? :create, ItemConnection %>
-      <a data-toggle="modal" href="#assign_items_modal" class="btn btn-sm btn-primary">
-        <i class="fa-plus fa"></i> Assign Items
-      </a>
+  <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-3">
+    <div class="">
+      <% if can? :create, ItemConnection %>
+        <a data-toggle="modal" href="#assign_items_modal" class="btn btn-sm btn-primary">
+          <i class="fa-plus fa"></i> Assign Items
+        </a>
 
-      <a href="<%= new_student_bulk_renew_items_path(@student) %>" class="btn btn-sm btn-success">
-        <i class="fa-recycle fa"></i> Renew All
-      </a>
-    <% end %>
+        <a href="<%= new_student_bulk_renew_items_path(@student) %>" class="btn btn-sm btn-success">
+          <i class="fa-recycle fa"></i> Renew All
+        </a>
+      <% end %>
+    </div>
+    <div class="">
+      <% unless student.inactive? %>
+        <a href="<%= student_expired_items_path(@student) %>" class="">
+          Show Expired Items
+        </a>
+        <a href="<%= student_path(@student) %>" data-disable-with="Loading current items..."
+          id="show_current_items_list" class="d-none">
+          Show current items (<%= @items.size %>)
+        </a>
+      <% end %>
+    </div>
+  </div>
 
-  <% end %>
-  <hr/>
+
   <ul class="list-unstyled" id="items">
     <%= blank_slate(@items,
         title: "There are no assigned items.", icon: "file red",

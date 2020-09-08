@@ -14,18 +14,18 @@
 <%  if !@student.new_record? && can?(:reactivate, Student) %>
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Deactivate or Reactivate Student", icon: "lock", styles:"panel-danger") do %>
+		<%= panel(title: "Deactivate or Reactivate Student", icon: "lock", title_class: "bg-danger text-white") do %>
 			<p><strong>Deactivate or Reactivate</strong></p>
 			<p>You can deactivate a student. This does not delete the student record, just hides the record from most views in Papyrus.</p>
 
 			<% if ! @student.inactive? %>
-				<p><%= link_to @student, confirm: 'Are you sure?', method: :delete, class: 'btn btn-lg btn-warning' do %>
-					<i class="fa fa-lock"></i> Deactivate Student
+				<p><%= link_to @student, confirm: 'Are you sure?', method: :delete, class: 'btn btn-warning' do %>
+					<i class="fas fa-lock"></i> Deactivate Student
 				<% end %></p>
 			<% else %>
 				<p>
-					<%= link_to reactivate_student_path(@student), confirm: 'Are you sure?', class: 'btn btn-lg btn-warning' do %>
-					<i class="fa fa-unlock"></i> Reactivate Student
+					<%= link_to reactivate_student_path(@student), confirm: 'Are you sure?', class: 'btn btn-warning' do %>
+					<i class="fas fa-unlock"></i> Reactivate Student
 					<% end %>
 				</p>
 			<% end %>
@@ -39,13 +39,13 @@
 
 
 			<% if @student.blocked? %>
-				<p><%= link_to unblock_student_path(@student), confirm: 'Are you sure?', method: :delete, class: 'btn btn-lg btn-warning' do %>
-					<i class="fa fa-unlock"></i> Unblock Student's Access To Papyrus
+				<p><%= link_to unblock_student_path(@student), confirm: 'Are you sure?', method: :delete, class: 'btn btn-warning' do %>
+					<i class="fas fa-unlock"></i> Unblock Student's Access To Papyrus
 				<% end %></p>
 			<% else %>
 				<p>
-					<%= link_to block_student_path(@student), confirm: 'Are you sure?', class: 'btn btn-lg btn-warning' do %>
-					<i class="fa fa-lock"></i> Block Student's Access To Papyrus
+					<%= link_to block_student_path(@student), confirm: 'Are you sure?', class: 'btn btn-warning' do %>
+					<i class="fas fa-lock"></i> Block Student's Access To Papyrus
 					<% end %>
 				</p>
 			<% end %>
@@ -59,7 +59,7 @@
 				<p>This action, permanently deletes Student record from Papyrus. Use at your own risk.</p>
 				<p class="alert alert-danger"><span class="strong">Warning:</span> This action is irreversable.</p>
 
-				<%= link_to students_permanent_delete_path(@student), class: "red" do %>
+				<%= link_to students_permanent_delete_path(@student), class: "text-danger mt-3" do %>
 					<i class="fa fa-trash"></i> Destroy Student Record Permanently?
 				<% end %>
 			<% end %>

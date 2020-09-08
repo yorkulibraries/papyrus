@@ -1,14 +1,14 @@
 <% if course.class.name == "Course" %>
   <div class="course_syllabus_menu">
     <% if course.syllabus == nil %>
-      <%= link_to new_course_document_path(course, name: "Syllabus"), remote: true, class: "btn text-muted text-sm btn-xs" do %>
+      <%= link_to new_course_document_path(course, name: "Syllabus"), remote: true, class: "text-muted text-sm" do %>
         <i class="fas fa-upload" title="Upload Syllabus"></i>
       <% end %>
     <% else %>
-      <%= link_to download_document_path(course.syllabus, filename: course.syllabus.filename), class: "btn text-muted text-sm btn-xs", target: "_blank" do %>
+      <%= link_to download_document_path(course.syllabus, filename: course.syllabus.filename), class: "text-muted text-sm", target: "_blank" do %>
         <i class="fas fa-download" title="Preview/Download Syllabus"></i>
       <% end %>
-      <%= link_to edit_course_document_path(course, course.syllabus), remote: true, class: "btn text-muted text-sm btn-xs" do %>
+      <%= link_to edit_course_document_path(course, course.syllabus), remote: true, class: "text-muted text-sm" do %>
         <i class="fas fa-upload" title="Upload Syllabus"></i>
       <% end %>
     <% end %>
