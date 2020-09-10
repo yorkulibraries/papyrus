@@ -1,0 +1,21 @@
+<% if item.attachments.files.available.size > 0 %>
+  <a class="action" href="<%= zipped_files_item_path(item)%>" title="Download Zipped File">
+    <i class="fas fa-file-archive mr-1"></i> Download Zipped File
+  </a>
+<% elsif item.attachments.urls.available.size > 0 %>
+  <a class="action" href="#" onclick="$('#urls_<%=item.id %>').toggleClass('hide'); return false;" title="Show Links">
+    <i class="fas fa-link mr-1"></i> Links Only
+  </a>
+<% else %>
+  <a class="action" href="#" title="There are no files or links attached to this item yet." onclick="return false;" data-confirm="Files or Links are not ready yet. Check back soon.">
+    <i class="fas fa-ban mr-1"></i> Item Not Ready
+  </a>
+<% end %>
+
+<a href="#" class="ml-3" onclick="$('#attachments_<%=item.id %>').toggleClass('d-none'); return false;" title="Download files individually">
+  <i class="fas fa-file mr-1"></i> Show individual files.
+</a>
+
+<a href="#" class="ml-3" onclick="$('#urls_<%=item.id %>').toggleClass('d-none'); return false;" title="Show Links">
+  <i class="fas fa-link mr-1"></i> Show Links
+</a>

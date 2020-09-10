@@ -1,0 +1,44 @@
+<nav class="navbar navbar-red navbar-expand-md">
+  <a class="navbar-brand" href="<%= root_path %>">
+    My <%= PapyrusSettings.app_name %>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item dropdown mr-3">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bell"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <% Announcement.active.current(nil, @current_user.type).each do |announcement| %>
+            <%= render partial: "announcements/announcement", locals: { show: "li", announcement: announcement } %>
+          <% end %>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user mr-1"></i>
+          <%= @current_user.name if @current_user %>
+        </a>
+        <div class="dropdown-menu">
+          <a href="<%= logout_path%>" class="dropdown-item">
+            <i class="fas fa-fw fa-power-off mr-1"></i> Log out
+          </a>
+          <% if Rails.env.development? %>
+            <div class="dropdown-divider"></div>
+            <h6 class="dropdown-header">Login As</h6>
+            <% User::ROLE_NAMES.each do |role| %>
+              <%=link_to "- #{role}", login_path(:as => role), class: "dropdown-item"%>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</nav>
