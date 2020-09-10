@@ -7,7 +7,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Papyrus" %></title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag "application", :media => "all" %>    
+    <%= stylesheet_link_tag "application", :media => "all" %>
 
     <%= javascript_include_tag "application" %>
 
@@ -36,8 +36,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
-          <%= bootstrap_flash %>
+        <div class="col-lg-9">          
           <%= yield %>
         </div>
         <div class="col-lg-3">
