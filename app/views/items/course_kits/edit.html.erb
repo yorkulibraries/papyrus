@@ -7,3 +7,26 @@
 		<% end %>
 	</div>
 </div>
+
+<% if can?(:destroy, Item) && !@item.new_record?  %>
+	<div class="row">
+		<div class="col-md-12">
+			<%= panel(title: "Remove This Course Kit", icon: "trash", title_class:"bg-danger text-white") do %>
+
+				<p><strong>Removing Items</strong></p>
+				<p>You have the ability to remove this item. Please ensure that you absolutely certain you want to do this.</p>
+				<p class="alert alert-info">
+					<span class="strong">Warning:</span> Removing this item will delete any of the files associated with it. <br/> <strong>This action can't be reversed</strong>.
+				</p>
+				<hr/>
+				<p>
+					<%= link_to  @item, data: { confirm: 'Are you sure you want to do this?' }, method: :delete, class: "btn btn-lg btn-danger" do%>
+						<i class="fa fa-trash"></i> Remove this course kit?
+					<% end %>
+				</p>
+
+			<% end %>
+
+		</div>
+	</div>
+<% end %>
