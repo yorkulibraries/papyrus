@@ -4,7 +4,7 @@ namespace :utils do
     active_students = Student.active.where("last_logged_in_at < ?", 1.year.ago)
     active_students.each do |s|
       s.inactive = true
-      s.audit_comment = "Deactivating inactive students..."
+      s.audit_comment = "Deactivating inactive student because last logged in date is a year ago..."
       s.save(validate: false)
     end
 
