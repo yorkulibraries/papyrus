@@ -26,11 +26,12 @@
         <main class="col-md-9 ml-sm-auto col-lg-10 px-md-2">
 
           <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
-            <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement'>
-              <%= announcement.message %>
+            <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement mt-1'>
+
               <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
                &times;
               <% end %>
+              <%= announcement.message %>
             </div>
           <% end %>
 

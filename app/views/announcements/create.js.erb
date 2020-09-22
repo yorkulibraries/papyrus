@@ -4,9 +4,10 @@ $("#announcement_form_holder").empty();
   $(".blank-slate").addClass('d-none');
 
   $('.submittable').click(function() {
+    console.log("HERE")
     $(this).parents('form:first').submit();
   });
-  
+
 <% else %>
   $('#announcement_form_holder').prepend('<%=escape_javascript render("announcements/form") %>');
 <% end %>
