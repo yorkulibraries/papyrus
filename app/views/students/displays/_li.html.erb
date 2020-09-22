@@ -18,13 +18,13 @@
 					<a href="<%= student_path(student) %>" class="h6"><%= student.name %></a>
 
           <% if student.blocked? %>
-            <span class="label label-danger text-dark  text-sm"> Blocked</span>
+            <span class="alert alert-danger text-dark  text-sm px-2 py-0"> Blocked</span>
           <% end %>
           <% if student.inactive? %>
-            <span class="label label-primary text-dark text-sm"> Inactive</span>
+            <span class="alert alert-primary text-dark text-sm px-2 py-0"> Inactive</span>
           <% end %>
           <% if student.lab_access_only? %>
-            <span class="label label-warning text-dark text-sm"> Lab Access Only</span>
+            <span class="alert alert-warning text-dark text-sm px-2 py-0"> Lab Access Only</span>
           <% end %>
 
 				</div>
@@ -40,7 +40,7 @@
           <div class="col-sm-4 col-md-4">
             <i class="fas fa-phone fa-fw"></i> <%= student.details.preferred_phone %><br/>
             <span title="Assistant">
-              <i class="fas fa-user-circle fa-fw" title="assistant"></i> 
+              <i class="fas fa-user-circle fa-fw" title="assistant"></i>
               <%= format_field student.details.assistant.name rescue nil %></span>
           </div>
 
