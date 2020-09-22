@@ -7,14 +7,13 @@
 		<%= panel(title: "All users", icon: "users") do %>
 
 			<%= render partial: "user_nav" %>
-			<hr/>
 
 
 			<% if @users.size == 0 %>
-				<p>There are not blocked users.</p>
+				<p class="mt-4">There are not blocked users.</p>
 			<% end %>
 
-			<table class="table table-condensed">
+			<table class="table table-condensed mt-4">
 				<tr>
 				  <th>Name</th>
 				  <th>Role</th>
