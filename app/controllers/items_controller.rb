@@ -4,7 +4,8 @@ class ItemsController < AuthenticatedController
   def index
     page_number = params[:page] ||= 1
     @search_results = "local"
-
+    @total_items = Item.all.size
+    
     if params[:order] && params[:order] == "alpha"
       @items = Item.alphabetical.page(page_number)
     else
