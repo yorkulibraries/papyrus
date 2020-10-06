@@ -10,14 +10,14 @@
 				</div>
 
 				<div class="col-12 col-md-6">
-					<%= render partial: "students/list/links.html.erb" %>
+					<%= render partial: "students/list/links" %>
 				</div>
 			</div>
 
 			<div class="my-3"><%= paginate @students %></div>
 
-			<%= render "list", students: @students %>
-		
+			<%= render "students/list", students: @students %>
+
 
 			<%= paginate @students %>
 

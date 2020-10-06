@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Papyrus Items - #{@total_items.size}", icon: "book") do %>
+		<%= panel(title: "Papyrus Items - #{number_with_delimiter @total_items}", icon: "book") do %>			
 			<%= render "list", items: @items %>
 		<% end %>
 	</div>
