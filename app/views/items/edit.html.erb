@@ -11,7 +11,7 @@
 <% if can?(:destroy, Item) && !@item.new_record?  %>
 	<div class="row">
 		<div class="col-md-12">
-			<%= panel(title: "Remove This Item", icon: "trash", styles:"panel-danger") do %>
+			<%= panel(title: "Remove This Item", icon: "trash", title_class:"bg-danger text-white") do %>
 
 				<p><strong>Removing Items</strong></p>
 				<p>You have the ability to remove this item. Please ensure that you absolutely certain you want to do this.</p>

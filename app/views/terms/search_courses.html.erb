@@ -9,7 +9,7 @@
 
 			<%= render "terms/shared/menu" %>
 
-			<div class="hide"><%= @courses.to_sql %></div>
+			<div class="d-none"><%= @courses.to_sql %></div>
 
 			<h5>Found <%= pluralize(@courses.count, "Course") %> for <strong><%= @query%></strong></h5>
 

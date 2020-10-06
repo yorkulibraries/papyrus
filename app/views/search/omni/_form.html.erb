@@ -3,15 +3,15 @@
    <div class="col-sm-10">
      <input class="form-control" name="q" type="text" id="omni_search_field" placeholder="Search Items or Students">
    </div>
-   <div class="col-sm-2" style="padding-top: 3px;">
-     <button id="omni_search_button" type="submit" class="btn btn-primary btn-lg" style="padding: 8px 16px;">
-       <i class="fa-search fa"></i>
+   <div class="col-sm-2">
+     <button id="omni_search_button" type="submit" class="btn btn-primary" style="xpadding: 0px 16px;">
+       <i class="fa-search fas"></i>
       </button>
    </div>
   </div>
 <% end %>
 
-<div class="hide text-center" id="loading_results">
+<div class="d-none text-center" id="loading_results">
   <p class="small cursor-pointer" id="reset_omni_search">Reset Search</p>
   <% image_tag "loading.gif" %>
   <p> Searching....</p>

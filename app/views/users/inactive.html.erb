@@ -7,14 +7,13 @@
 		<%= panel(title: "All users", icon: "users") do %>
 
 			<%= render partial: "user_nav" %>
-			<hr/>
 
 
 			<% if @users.size == 0 %>
-				<p>There are not blocked users.</p>
+				<p class="mt-4">There are not blocked users.</p>
 			<% end %>
 
-			<table class="table table-condensed">
+			<table class="table table-condensed mt-4">
 				<tr>
 				  <th>Name</th>
 				  <th>Role</th>
@@ -28,7 +27,7 @@
 						<td><%= user.created_at.strftime("%b %d, %Y") %></td>
 						<td>
 							<%= link_to "Unblock User", edit_user_path(user), class: "btn btn-sm btn-danger"%>
-							<%= link_to audit_trail_user_path(user), class: "btn btn-sm btn-default" do %>
+							<%= link_to audit_trail_user_path(user), class: "btn btn-sm btn-outline-secondary" do %>
 								<i class="fa fa-history" title="Audit Trail"></i>
 							<% end %>
 						</td>

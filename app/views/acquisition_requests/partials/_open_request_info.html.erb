@@ -1,23 +1,23 @@
-<a class="list-group-item" href="<%= acquisition_request_path(request) %>">
-  <h5 class="list-group-item-heading"><%= request.item.title rescue nil%></h5>
-  <div class="row list-group-item-text">
+<a class="list-group-item no-underline:hover text-dark" href="<%= acquisition_request_path(request) %>">
+  <h6 class="list-group-item-heading"><%= request.item.title rescue nil%></h6>
+  <div class="row list-group-item-text text-muted">
 
     <div class="col-md-2">
-      <span class="fa fa-calendar fa-fw" title="Requested"></span>
+      <span class="fas fa-calendar fa-fw text-warning" title="Requested"></span>
       <%= request.created_at.strftime("%b %e, %Y") %>
     </div>
     <div class="col-md-3">
-      <span class="fa fa-question-circle fa-fw"></span>
+      <span class="fas fa-question-circle fa-fw text-warning"></span>
       <label>Reason:</label>
       <%= request.acquisition_reason %>
     </div>
     <div class="col-md-3">
-      <span class="fa fa-user fa-fw"></span>
+      <span class="fas fa-user fa-fw text-warning"></span>
       <label>By:</label>
       <%= request.requested_by.name %>
     </div>
     <div class="col-md-4">
-      <span class="fa fa-sticky-note fa-fw"></span>
+      <span class="fas fa-sticky-note fa-fw text-warning"></span>
       <%= request.note %>
     </div>
   </div>

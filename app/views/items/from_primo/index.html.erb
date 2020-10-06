@@ -6,24 +6,24 @@
 
     <div class="row" style="margin-bottom: 3.5rem;">
 
-      <div class="col-md-6 col-md-offset-3">
-        <h4 class="text-center">Create New Item From Primo</h4>
+      <div class="col-md-6 offset-md-3">
+        <h4 class="text-center mb-3">Create New Item From Primo</h4>
         <form action="<%= from_primo_index_path %>" id="primo_search_form" method="get" data-remote="true">
-          <div class="form-group form-group-lg">
-           <div class="col-sm-10">
+          <div class="form-group form-group-lg row">
+           <div class="col-10">
              <input class="form-control" name="q" value="<%= @query %>" type="text" id="formGroupInputLarge" placeholder="Search Primo">
            </div>
-           <div class="col-sm-2">
-             <input id="search_primo_button" type="submit" value="Search" class="btn btn-primary btn-lg" style="padding: 8px 16px;"/>
+           <div class="col-2">
+             <input id="search_primo_button" type="submit" value="Search" class="btn btn-primary" xstyle="padding: 8px 16px;"/>
            </div>
           </div>
          </form>
        </div>
     </div>
 
-    <div class="hide text-center" id="loading_results">
+    <div class="d-none text-center" id="loading_results">
       <p class="small cursor-pointer" id="reset_primo_search">Reset Primo Search</p>
-      <%= image_tag "loading.gif" %>      
+      <%= image_tag "loading.gif" %>
     </div>
 
 

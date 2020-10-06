@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   $("#search_primo_button").click(function() {
-    $("#loading_results").removeClass("hide");
+    $("#loading_results").removeClass("d-none");
     $("#primo_results").empty();
 
     $(this).val("Searching....");
@@ -10,7 +10,7 @@ $(document).ready(function() {
   });
 
   $("#reset_primo_search").click(function(){
-    $("#loading_results").addClass("hide");
+    $("#loading_results").addClass("d-none")
     $("#search_primo_button").val("Search");
     $("#search_primo_button").removeClass("disabled");
   });

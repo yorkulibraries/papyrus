@@ -1,0 +1,43 @@
+<div class="rounded border mb-3">
+  <table class="table mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th class="border-top-0">Student</th>
+        <th class="border-top-0">Email</th>
+        <th class="border-top-0">Coordinator</th>
+        <th class="border-top-0 text-center">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% students.each do |student| %>
+        <tr>
+          <td>
+            <div class="d-flex justify-content-start align-items-center">
+              <span class="fa-stack text-muted" style="vertical-align: top;">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-user fa-stack-1x fa-inverse"></i>
+              </span>
+
+              <div class="ml-3 h5 mb-0">
+                <%= link_to student.name, student_path(student) %>
+              </div>
+            </div>
+          </td>
+          <td><%= student.email %></td>
+          <td><%= format_field student.details.coordinator.name rescue nil %></td>
+          <td class='text-center'>
+              <% if student.blocked? %>
+                <span class="alert alert-danger text-sm py-0 px-3"> Blocked</span>
+              <% elsif student.inactive? %>
+                <span class="alert alert-primary text-sm py-0 px-3"> Inactive</span>
+              <% elsif student.lab_access_only? %>
+                <span class="alert alert-warning text-sm py-0 px-3"> Lab Access Only</span>
+              <% else %>
+                <span class="alert alert-success text-sm py-0 px-3"> Active</span>
+              <% end %>
+            </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

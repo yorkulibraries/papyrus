@@ -2,40 +2,45 @@
 	<div class="col-md-12 student" id="student_<%= student.id %>" data-id="<%= student.id %>">
 		<%= panel(title: "Student Details", icon: "user") do %>
 			<div class="student-header row">
-				<div class="col-md-8">
-					<h3>
-						<%= gravatar(student.email, style: "mm", force: true, size: "20") %>
+				<div class="col-md-6 d-flex justify-content-start align-items-center">
+					<span class="fa-stack text-muted" style="vertical-align: top;">
+						<i class="fas fa-circle fa-stack-2x"></i>
+						<i class="fas fa-user fa-stack-1x fa-inverse"></i>
+					</span>
+					<h3 class="ml-3">
 						<%= student.name %>
 					</h3>
 				</div>
-				<div class="col-md-4">
-					<div class="pull-right">
+				<div class="col-md-6">
+					<div class="text-right">
 						<% if student.blocked? %>
-							<span class="btn btn-danger">Blocked</span>
+							<span class="btn btn-danger btn-sm">Blocked</span>
 						<% end %>
 						<% if student.inactive? %>
-							<span class="btn btn-primary">Inactive</span>
+							<span class="btn btn-primary btn-sm">Inactive</span>
 						<% end %>
 						<% if student.lab_access_only? %>
-							<span class="btn btn-warning">Lab Access Only</span>
+							<span class="btn btn-warning btn-sm">Lab Access Only</span>
 						<% end %>
 
 						<% unless current_page?(student_path(student)) %>
-							<a class="btn btn-sm btn-default" title="Back to Student Details" href="<%= student_path(student) %>">
-								<i class="fa fa-chevron-left"></i>
+							<a class="btn btn-sm btn-outline-secondary" title="Back to Student Details" href="<%= student_path(student) %>">
+								<i class="fas fa-chevron-left"></i>
 							</a>
 						<% end %>
 
 						<% if can? :login_as, :student %>
-							<a class="btn btn-sm btn-default" title="Login As Student" href="<%= my_login_as_student_path(student) %>">
-								<i class="fa fa-share"></i>
+							<a class="btn btn-sm btn-outline-secondary"
+								title="Login As Student" href="<%= my_login_as_student_path(student) %>"
+									data-confirm="Are you sure?">
+								<i class="fas fa-share"></i>
 							</a>
 						<% end %>
 
 						<% if can? :read, Note %>
-							<a class="btn btn-sm btn-default with-bubble <%= is_action?("notes", "btn-primary") %>"
+							<a class="btn btn-sm btn-outline-secondary with-bubble <%= is_action?("notes", "btn-primary") %>"
 								data-remote="true" href="<%= student_notes_path(student) %>" title="Notes">
-								<i class="fa fa-commenting-o"></i>
+								<i class="fas fa-comments"></i>
 								<% if @student.notes.count > 0 %>
 									<span class="notification-bubble pink">
 										<%= "9+" if @student.notes.count > 9 %>
@@ -46,7 +51,7 @@
 						<% end %>
 
 						<% if can? :audit_trail, Student %>
-							<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_student_path(student) %>" title="Audit Trail">
+							<a class="btn btn-sm btn-outline-secondary <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_student_path(student) %>" title="Audit Trail">
 								<i class="fa fa-history"></i>
 							</a>
 						<% end %>
@@ -79,7 +84,7 @@
 							<%= format_field student.details.coordinator.name rescue nil %>
 						</li>
 						<li>
-							<span class="fa fa-adn fa-fw"></span>
+							<span class="fa fa-map-signs fa-fw"></span>
 							<label>Assistant</label>
 							<%= format_field student.details.assistant.name rescue nil %>
 						</li>
@@ -99,7 +104,7 @@
 							<%= format_field student.details.cds_counsellor %>
 						</li>
 						<li>
-							<span class="fa fa-envelope-o fa-fw"></span>
+							<span class="fa fa-envelope fa-fw"></span>
 							<label>Counsellor Email</label>
 							<%= format_field student.details.cds_counsellor_email %>
 						</li>

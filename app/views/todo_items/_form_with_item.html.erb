@@ -18,9 +18,9 @@
   <%= f.button :submit,  class: 'btn btn-primary' %>
 
   <% if request.xhr? %>
-    <%= link_to "Cancel", "#", class: "btn btn-default", onclick: "$('#new_todo_item_form_holder').empty(); return false;" %>
+    <%= link_to "Cancel", "#", class: "btn btn-outline-secondary", onclick: "$('#new_todo_item_form_holder').empty(); return false;" %>
   <% else %>
-    <%= link_to 'Cancel', @todo_item.new_record? ? todo_lists_path : todo_list_path(@todo_list), class: 'btn btn-default' %>
+    <%= link_to 'Cancel', @todo_item.new_record? ? todo_lists_path : todo_list_path(@todo_list), class: 'btn btn-outline-secondary' %>
   <% end %>
 
 <% end %>

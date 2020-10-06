@@ -1,0 +1,76 @@
+<nav id="sidebar_menu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+          <% if can? :read, Item %>
+            <li class="nav-item <%= "active" if controller_name == "home" %>">
+                <a href="<%= dashboard_path %>" class="nav-link text-light">
+                  <i class="fas fa-fw fa-tachometer-alt  mr-2"></i> Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item <%= "active" if controller_name == "local_items" %>">
+              <a href="<%= new_find_item_path %>" class="nav-link text-light">
+                <i class="fas fa-fw fa-search mr-2"></i> Search
+              </a>
+            </li>
+
+            <li class="nav-item <%= "active" if controller_name == "items"%>">
+              <a href="<%= items_path %>" class="nav-link text-light">
+                <i class="fas fa-fw fa-book mr-2"></i> Items
+              </a>
+            </li>
+
+          <% end %>
+
+          <% if can? :read, Student %>
+            <li class="nav-item <%= "active" if controller_name == "students" %>">
+              <a href="<%= students_path %>" class="nav-link text-light">
+                <i class="fas fa-fw fa-users mr-2"></i> Students
+              </a>
+            </li>
+
+            <li class="nav-item <%= "active" if controller_name == "todo_lists" || controller_name == "todo_items"%>">
+              <a href="<%= todo_lists_path %>" class="nav-link text-light">
+                <i class="fas fa-fw fa-list mr-2"></i> Todo Lists
+              </a>
+            </li>
+          <% end %>
+
+          <% if can? :read, AcquisitionRequest %>
+            <li class="nav-item <%= "active" if controller_name == "acquisition_requests" %>">
+              <a href="<%= acquisition_requests_path %>" class="nav-link text-light">
+                <i class="fas fa-fw fa-shopping-cart mr-2"></i> Acquisitions
+              </a>
+            </li>
+          <% end %>
+
+
+          <% if can? :read, Term %>
+            <li class="nav-item <%= "active" if controller_name == "terms"%>">
+              <a href="<%= terms_path %>" class="nav-link text-light">
+                <i class="fas fa-fw fa-university mr-2"></i> Terms &amp; Courses
+              </a>
+            </li>
+          <% end %>
+
+
+
+          <% if can? :manage, :shared_access_codes %>
+            <li class="nav-item <%= "active" if controller_name == "shared_access_codes" %>">
+              <a href="<%= shared_access_codes_path %>"  class="nav-link text-light">
+                <i class="fas fa-fw fa-lock mr-2"></i> Shared Access Codes
+              </a>
+            </li>
+          <% end %>
+          <% if can? :show, :stats %>
+            <li class="nav-item <%= "active" if controller_name == "stats" %>">
+              <a href="<%= stats_path %>"  class="nav-link text-light">
+                <i class="fas fa-fw fa-chart-bar mr-2"></i> Reports
+              </a>
+            </li>
+          <% end %>
+
+
+        </ul>
+      </div>
+    </nav>

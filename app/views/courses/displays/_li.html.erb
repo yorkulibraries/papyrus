@@ -1,26 +1,36 @@
-<li id="course_<%= course.id %>" data-id="<%= course.id %>" class="list-group-item">
-  <% if @item %>
-    <%= link_to remove_item_term_course_path(1, course.id, item_id: @item.id), :class=> "close", :method => "post", data: { confirm: 'Are you sure?', remote: true } do%>
-        <span title="Remove item from this course"> &times;</span>
-    <% end %>
-  <% end %>
+<li id="course_<%= course.id %>" data-id="<%= course.id %>" class="list-group-item px-0">
 
-  <% if @student %>
-    <%= link_to withdraw_from_course_student_path(@student, course_id: course.id), class: "close", method: "delete", data: { confirm: 'Are you sure?', remote: true } do%>
-      <span title="Withdraw from course">&times;</span>
-    <% end %>
-  <% end %>
-
-  <div class="title">
-    <% if @term && !@item%>
-      <%= link_to edit_term_course_path(@term, course), class: "pull-right" do %>
-        <i class="fa fa-edit"></i>
+  <div class="d-flex justify-content-between align-items-start">
+    <div class="title w-full">
+      <% if @term && !@item%>
+        <%= link_to edit_term_course_path(@term, course), class: "text-secondary" do %>
+          <i class="fa fa-edit"></i>
+        <% end %>
       <% end %>
-    <% end %>
-    <label><%= course.title %></label><br/>
-    <%= course.code %>
-    <div class="pull-right">
-      <%= render "courses/shared/syllabus_menu", course: course %>
+      <strong><%= course.title %></strong><br/>
+      <%= course.code %>
+
+    </div>
+    <div class="actions">
+      <% if @item %>
+        <%= link_to remove_item_term_course_path(1, course.id, item_id: @item.id), :class=> "close", :method => "post", data: { confirm: 'Are you sure?', remote: true } do%>
+            <span title="Remove item from this course"> &times;</span>
+        <% end %>
+      <% end %>
+
+      <% if @student %>
+        <%= link_to withdraw_from_course_student_path(@student, course_id: course.id), class: "close", method: "delete", data: { confirm: 'Are you sure?', remote: true } do%>
+          <span title="Withdraw from course">&times;</span>
+        <% end %>
+      <% end %>
+
+      <div class="text-right">
+        <%= render "courses/shared/syllabus_menu", course: course %>
+      </div>
     </div>
   </div>
+
+
+
+
 </li>

@@ -1,4 +1,5 @@
 class My::BaseController < AuthenticatedController
+  layout "my_students"
 
   before_action :authorize_controller, :load_student, :sync_courses
 
@@ -10,7 +11,7 @@ class My::BaseController < AuthenticatedController
     ## otherwise show terms
 
     if @student.first_time_login?
-      @student.update_attribute(:first_time_login, false)      
+      @student.update_attribute(:first_time_login, false)
       redirect_to my_details_path(welcome: true)
     else
       redirect_to my_items_path

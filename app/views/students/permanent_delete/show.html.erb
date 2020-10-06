@@ -9,7 +9,7 @@
 
       <center>
         <%= link_to "Yes", students_permanent_delete_path(@student), method: :delete, class: "btn btn-large btn-danger", data: {confirm: "Are you sure?"} %>
-        <%= link_to "No", edit_student_path(@student), class: "btn btn-sm btn-default" %>
+        <%= link_to "No", edit_student_path(@student), class: "btn btn-sm btn-outline-secondary" %>
 
       </center>
 		<% end %>

@@ -6,7 +6,7 @@
 		<%= panel(title: "Acquisitions Settings", icon: "cog") do %>
 
 			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
-			  <h4 class="black">Acquisition Request Settings</h4>
+			  <h5 class="text-black">Acquisition Request Settings</h5>
 
         <%= f.label :acquisition_sources, "Acquisitions Sources"%>
         <%= f.input :acquisition_sources, label: false, as: :array %>
@@ -16,7 +16,7 @@
 	      <p class="small">Press Ctrl-Shift-Del after clicking on the text box to remove the box.</p>
 
         <hr/>
-			  <h4 class="black">Send To Acquisitions Settings</h4>
+			  <h5 class="text-black mt-4">Send To Acquisitions Settings</h5>
 
         <%= f.input :email_acquisitions_to, label: "Acquisitions Email" %>
         <%= f.input :email_acquisitions_to_bookstore, label: "Bookstore Email" %>
@@ -26,7 +26,7 @@
         <p class="small">The email will be sent to the above address and inlcude Acquistion Request, Item and Course details.</p>
 
 			  <input type="hidden" name="return_to" value="acquisitions"/>
-				<%= f.submit "Save Settings", class: "btn btn-success" %>
+				<%= f.submit "Save Settings", class: "btn btn-success mt-4" %>
 			<% end %>
 		<% end %>
 	</div>

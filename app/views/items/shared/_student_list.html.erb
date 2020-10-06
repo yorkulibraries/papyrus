@@ -1,7 +1,7 @@
-<%= panel(title: "Students With Access", icon: "users", title_class: "text-center", styles:"panel-warning") do %>
+<%= panel(title: "Students With Access", icon: "users", title_class: "text-center bg-warning text-white") do %>
 
   <a class="btn btn-sm btn-primary" data-toggle="modal" href="#assign_students_modal">
-    <i class="fa fa-user-plus"></i> Grant Access To Students?</a>
+    <i class="fas fa-user-plus"></i> Grant Access To Students?</a>
   <hr/>
 
 
@@ -22,8 +22,9 @@
     <div class="modal-content">
       <%= form_tag assign_to_students_item_path(@item), remote: true do %>
         <div class="modal-header">
+
+          <h5 class="modal-title">Assign This Item To Students</h5>
           <a class="close" data-dismiss="modal">×</a>
-          <h4 class="modal-title">Assign This Item To Students</h4>
         </div>
         <div class="modal-body">
           <p>Type the name of the student in the box to search for students.</p>
@@ -36,7 +37,7 @@
         </div>
         <div class="modal-footer">
           <%= submit_tag "Give Access To These Students", class: "btn btn-success", tabindex: "3" %>
-          <a href="#" class="btn btn-default" data-dismiss="modal" tabindex="4">Close</a>
+          <a href="#" class="btn btn-outline-secondary" data-dismiss="modal" tabindex="4">Close</a>
         </div>
       <% end %>
   </div>
@@ -51,7 +52,7 @@
       $("#assign-students-list").tokenInput("<%= search_students_path %>", {
           zindex: 9999999,
           allowTabOut: true,
-          onReady: function() {            
+          onReady: function() {
             $("#token-input-assign-students-list").attr("tabindex", "1");
           }
       });

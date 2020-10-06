@@ -20,8 +20,8 @@
         <% c = event.comment.blank? ? "#{event.action}: #{event.auditable_type}" : event.comment %>
         <%= link_to c, audit_type_path(event) %>
       </td>
-      <td class="when">
-        on <%= event.created_at.strftime('%b %e')%>
+      <td class="when" style="width: 100px; ">
+         <%= event.created_at.strftime('%b %e')%>
       </td>
     </tr>
   <% end %>

@@ -63,7 +63,7 @@
 		<a href="#" onclick="$('#message_center').toggle(); return false;" class="btn btn-link"><i class="icon-bullhorn"></i> Message  </a>
 	</p>
 
-	<section id="message_center" class="hide">
+	<section id="message_center" class="d-none">
 		<hr/>
 		<div class="well">
 			<p><strong>Send a Message</strong></p>
@@ -77,7 +77,7 @@
 
 				<p>
 					<%= submit_tag "Send...", :class => "btn" %>
-					or <a href="#" onclick="$('#message_center').hide(); return false;"> Cancel </a>
+					or <a href="#" onclick="$('#message_center').addClass('d-none'); return false;"> Cancel </a>
 				</p>
 
 			<% end %>

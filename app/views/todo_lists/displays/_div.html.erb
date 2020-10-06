@@ -1,16 +1,19 @@
-<div class="list-group todo_list" id="todo_list_<%= todo_list.id %>" data-id="<%= todo_list.id %>">
-  <div class="list-group-item">
-      <span class="badge" style="padding-top: 3px; margin-top: 12px; "><%= todo_list.assignee %></span>
-      <h4>
+<div class="list-group list-group-flush todo_list" id="todo_list_<%= todo_list.id %>" data-id="<%= todo_list.id %>">
+  <div class="list-group-item d-flex justify-content-between align-items-center">
+
+      <h6 class="mb-0">
         <a href="<%= todo_list_path(todo_list) %>">
-          <%= todo_list.name %>
+          <i class="fas fa-list text-sm text-muted mr-2"></i><%= todo_list.name %>
         </a>
         <small><%= "COMPLETED" if todo_list.status == TodoList::STATUS_DONE %></small>
-      </h4>
+      </h6>
+      <span class="badge badge-pill badge-light" style="font-size: 12px;">
+        <%= todo_list.assignee %>
+      </span>
   </div>
   <div id="edit_todo_list_form_holder_<%= todo_list.id %>" class="form_holder">
   </div>
-  <div class="todo_list_items">
+  <div class="todo_list_items list-group list-group-flush">
     <% todo_list.todo_items.each do |todo_item| %>
       <%= render todo_item, show: "div" %>
     <% end %>
@@ -18,7 +21,8 @@
   <div class="list-group-item" style="border:none;">
     <div class="row">
       <div class="col-md-12">
-        <a href="<%= new_todo_list_todo_item_path(todo_list) %>" data-remote="true" class="btn btn-info btn-sm rounded">+ Add Item</a>
+        <a href="<%= new_todo_list_todo_item_path(todo_list) %>" data-remote="true"
+            class="btn btn-outline-secondary btn-xs rounded-pill">+ Add Item</a>
       </div>
 
     </div>
@@ -29,17 +33,17 @@
 
   <% if @todo_list.present? %>
   <div class="text-center" style="margin-top: 20px;">
-    <%= simple_form_for @todo_list, html: { remote: true } do |f| %>
+    <%= simple_form_for @todo_list, remote: true, html: { method: "patch" } do |f| %>
 
       <% if @todo_list.status != TodoList::STATUS_DONE %>
         <span class="todo_list_status">
-          <i class="fa fa-fw fa-square-o"></i>
+          <i class="far fa-fw fa-square"></i>
           <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_DONE %>">
           Mark Done?
         </span>
       <% else %>
         <span class="todo_list_status">
-          <i class="fa fa-fw fa-check-square-o "></i>
+          <i class="far fa-fw fa-check-square"></i>
           <input type="hidden" name="todo_list[status]" autocomplete="off" value="<%= TodoList::STATUS_IN_PROGRESS %>">
           Mark as Incomplete
         </span>

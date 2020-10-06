@@ -1,32 +1,25 @@
 <li class="item" id="item_<%= item.id %>" data-id="<%= item.id %>">
-
-  <div class="media">
-
+  <div class="d-flex justify-content-start align-items-start">
     <a href="<%= item_path(item) %>" class="pull-left icon icon-<%= item.item_type %>">
       <i class="fa fa-file fa-2x fa-fw"></i>
       <span>
         <%= item.item_type.humanize %>
       </span>
     </a>
-
-    <% if @student %>
-      <div class="pull-right actions">
-        <%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
-          data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-sm", method: :delete, title: "Remove Access" do %>
-          &times;
-        <% end %>
-        <br/>
-
-      </div>
-    <% end %>
-
-
-    <div class="media-body">
-
-        <h4 class="media-heading">
+    <div class="w-full ml-2">
+      <div class="d-flex justify-items-between align-items-center">
+        <h5 class="mb-0 w-full">
           <%= link_to item.title, item_path(item) %>
-        </h4>
+        </h5>
+        <% if @student %>
+          <%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
+            data: { confirm: 'Are you sure?' }, class: "btn btn-outline-secondary btn-xs", method: :delete, title: "Remove Access" do %>
+            &times;
+          <% end %>
+        <% end %>
+      </div>
 
+      <div>
         <% if item.course_kit? %>
           <small class="text-muted"><%= item.course_code %></small>
         <% end %>
@@ -36,36 +29,34 @@
         <% else %>
           <%= item.callnumber %>
         <% end %>
-        <br/>
-        <a href="<%= zipped_files_item_path(item)%>" class="trivial">
+      </div>
+
+      <div>
+        <a href="<%= zipped_files_item_path(item)%>" class="mr-3">
           <i class="fa fa-download"></i> Download <%= pluralize(item.attachments.size, "file")%>
         </a>
 
         <% if item.expired %>
-          <span class='btn'>Expired Item</span>
+          <span class='text-muted mr-3'>Expired Item</span>
         <% else %>
           <% connection = item.item_connections.current.find_by_student_id(@student.id) %>
           <% if connection %>
-
-            <span class="trivial btn">
+            <span class="text-muted mr-3">
               <%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
               <%= "Unlimited Access" unless connection.expires_on %>
             </span>
-
           <% end %>
-
-
         <% end %>
 
         <% if @student.present? %>
           <a href="<%= renew_access_item_path(item, student_id: @student.id)%>" data-remote="true"
-            title="Renew access" class="btn text-success">
-            <i class="fa-recycle fa fa-fw"></i> Renew Accesss
+            title="Renew access" class="text-success">
+            <i class="fa-recycle fas fa-fw"></i> Renew Accesss
           </a>
         <% end %>
+      </div>
 
     </div>
-
 
   </div>
 </li>

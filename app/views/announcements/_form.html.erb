@@ -5,16 +5,18 @@
     <%= f.input :ends_at, as: :string, input_html: { class: "form-control datepicker"} %>
     <%= f.input :audience, collection: Announcement::AUDIENCES, input_html: { class: "form-control"} %>
 
-    <%= f.button :submit, "Save Announcement", class: "btn btn-primary" %>
+    <div class="mt-3">
+      <%= f.button :submit, "Save Announcement", class: "btn btn-primary" %>
 
-    <% if request.xhr? %>
-      <%= link_to "Cancel", "#", class: "btn btn-default", onclick: "$('#announcement_form_holder').empty(); return false;" %>
-    <% else %>
-      <%= link_to "Cancel", announcements_path, class: "btn btn-default" %>
-    <% end %>
+      <% if request.xhr? %>
+        <%= link_to "Cancel", "#", class: "btn btn-outline-secondary", onclick: "$('#announcement_form_holder').empty(); return false;" %>
+      <% else %>
+        <%= link_to "Cancel", announcements_path, class: "btn btn-outline-secondary" %>
+      <% end %>
+    </div>
 
     <hr/>
-  
+
 
 
 <% end %>

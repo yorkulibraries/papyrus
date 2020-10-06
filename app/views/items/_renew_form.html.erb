@@ -3,8 +3,9 @@
     <div class="modal-content">
       <%= form_tag assign_many_to_student_items_path(student_id: @student), remote: true do |f| %>
       <div class="modal-header">
+
+        <h5 class="modal-title">Renew Item For Another Term</h5>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Renew Item For Another Term</h4>
       </div>
       <div class="modal-body">
         <p>Renew this item for a another term</p>
@@ -17,7 +18,7 @@
       </div>
       <div class="modal-footer">
         <%= submit_tag "Renew This Item", class: "btn btn-success" %>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
       </div>
       <% end %>
 

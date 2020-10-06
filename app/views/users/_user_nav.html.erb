@@ -1,9 +1,13 @@
-<%= link_to "Active Users", users_path, class: "btn btn-default #{"btn-info " if controller.action_name == "index"}" %>
+<div class="d-flex justify-content-between align-items-center">
+	<div>
+		<%= link_to "Active Users", users_path, class: "btn btn-outline-secondary #{"btn-outline-info " if controller.action_name == "index"}" %>
 
-<%= link_to "Inactive Users", inactive_users_path, class: "btn btn-default #{"btn-info" if controller.action_name == "inactive"}" %>
+		<%= link_to "Inactive Users", inactive_users_path, class: "btn btn-outline-secondary #{"btn-outline-info" if controller.action_name == "inactive"}" %>
+	</div>
 
-<div class="pull-right">
-	<%= link_to new_user_path,  class: "btn btn-primary" do %>
-		<i class="fa fa-plus"></i> New User
-	<% end %>
+	<div class="pull-right">
+		<%= link_to new_user_path,  class: "btn btn-primary" do %>
+			<i class="fa fa-plus"></i> New User
+		<% end %>
+	</div>
 </div>

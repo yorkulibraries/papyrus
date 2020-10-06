@@ -59,7 +59,7 @@
               <% end %>
 
               <% if can? :read, AcquisitionRequest %>
-    						<li class="hide <%= "active" if controller_name == "acquisition_requests" %>">
+    						<li class="d-none<%= "active" if controller_name == "acquisition_requests" %>">
     							<a href="<%= acquisition_requests_path %>"><i class="fa fa-fw fa-shopping-cart"></i> Acquisitions</a>
     						</li>
     					<% end %>

@@ -1,0 +1,13 @@
+.form-array-control { margin-right: 5px; margin-bottom: 3px; }
+
+input[type="radio"].form-control, input[type="checkbox"].form-control {
+  height: inherit; width: inherit;
+}
+
+span.radio label {
+  padding: 6px 12px;
+}
+
+.formstone_upload_queue ol li span.progress {
+  padding: 10px;
+}

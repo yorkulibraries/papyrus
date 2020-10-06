@@ -2,7 +2,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<%= panel(title: "New Course For - #{@term.name}", icon: "university") do %>
-			<%= link_to term_path(@term), class: "btn btn-default btn-sm" do %>&laquo; Term Details<% end %>
+			<%= link_to term_path(@term), class: "btn btn-outline-secondary btn-sm" do %>&laquo; Term Details<% end %>
 			<hr/>
 			<%= render 'form' %>
 		<% end %>

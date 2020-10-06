@@ -1,8 +1,8 @@
-<div id="urls_<%= item.id %>" class="hide">
+<div id="urls_<%= item.id %>" class="d-none">
 	<ol title="Attached Links">
 		<% if item.attachments.urls.available.size > 0 %>
 			<% item.attachments.urls.available.each do |a| %>
-				<li><i class="fa fa-link"></i> <a href="<%= a.url %>" target="_blank"><%= a.url %></a></li>
+				<li><i class="fas fa-link"></i> <a href="<%= a.url %>" target="_blank"><%= a.url %></a></li>
 			<% end %>
 		<% else %>
 				<li>There are no links available for this item.</li>

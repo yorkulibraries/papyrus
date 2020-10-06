@@ -3,9 +3,12 @@
 <div class="row">
 	<div class="col-md-12">
 		<%= panel(title: "Item Usage") do %>
-			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>" class="pull-right btn">
-				<i class="fa fa-table"></i> Download Exel
+		<div class="text-right mb-3">
+			<a href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>" class="btn btn-outline-secondary btn-sm">
+				<i class="fas fa-table "></i> Download Exel
 			</a>
+		</div>
+
 			<%= render partial: "stats/shared/nav_menu" %>
 
 
@@ -16,7 +19,7 @@
 
 			<hr/>
 
-			<h4>Assigned Items <span class="label label-primary"><%= @assigned_items.count %></span></h4>
+			<h5>Assigned Items <span class="alert alert-primary py-0 px-2"><%= @assigned_items.count %></span></h5>
 			<p>Number Of All Items: <strong><%= @items_count%></strong></p>
 			<table class="table table-striped">
 				<tr>
@@ -38,13 +41,13 @@
 			</table>
 			<p class="text-muted small">Showing first 10 items</p>
 
-			<a class="btn" href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
-				<i class="fa fa-table"></i> Download Exel
+			<a class="btn btn-outline-secondary btn-xs" href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
+				<i class="fas fa-table"></i> Download Exel
 			</a>
 
 			<hr/>
 
-			<h4>Not Assigned Items <span class="label label-primary"><%= @unassigned_items.count%></span></h4>
+			<h5>Not Assigned Items <span class="alert alert-primary py-0 px-2"><%= @unassigned_items.count%></span></h5>
 
 			<table class="table table-striped">
 				<tr>
@@ -65,8 +68,8 @@
 
 			<p class="text-muted small">Showing first 10 items</p>
 
-			<a class="btn" href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
-				<i class="fa fa-table"></i> Download Exel
+			<a class="btn btn-outline-secondary btn-xs" href="<%=stats_item_usage_path(params: request.query_parameters, format: "xlsx") %>">
+				<i class="fas fa-table"></i> Download Exel
 			</a>
 
 

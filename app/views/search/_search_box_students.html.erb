@@ -1,20 +1,20 @@
 <div class="search-box row">
-	<form action="<%= search_students_path(type: params[:type]) %>" id="omni_search_form">
-		<div class="col-sm-6 col-xs-6">
-			<div class="input-group">
-        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-				<input type="hidden" name="search_all" value="true"/>
-        <input type="text" placeholder="Search Name or Student Number" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
 
-			</div>
-			<% if @students %>
-				<%= page_entries_info @students %>
-			<% end %>
+	<div class="col-12">
+		<form action="<%= search_students_path(type: params[:type]) %>" id="omni_search_form">
+		<div class="input-group form-group-lg">
+			<span class="input-group-prepend">
+				 <span class="input-group-text">
+					 <i class="fas fa-search"></i>
+				 </span>
+			</span>
+			<input type="hidden" name="search_all" value="true"/>
+			<input type="text" placeholder="Search Name or Student Number" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
 		</div>
-
-    <div class="col-sm-6 col-xs-6">
-			<%= render partial: "students/list/links.html.erb" %>
-    </div>
-	</form>
-
+		<% if @students %>
+			<%= page_entries_info @students %>
+		<% end %>
+		</form>
+	</div>
+	
 </div>

@@ -6,7 +6,7 @@
 		<%= panel(title: "Item Settings", icon: "cog") do %>
 
 			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
-			  <h4 class="black">Item Settings</h4>
+			  	<h5 class="text-black">Item Settings</h5>
 
 	      <%= f.label :item_sources, "Item Sources"%>
 	      <%= f.input :item_sources, label: false, as: :array %>

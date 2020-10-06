@@ -1,0 +1,28 @@
+@import "themes/bootstrap45/colors";
+@import "bootstrap";
+
+/** JQuery UI **/
+@import 'jquery-ui/core.css';
+@import 'jquery-ui/datepicker.css';
+@import 'jquery-ui/theme.css';
+
+/** FONT-AWESOME **/
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
+@import "vendor/formstone.upload";
+@import "vendor/jquery-token-input/token-input";
+@import "jquery-ui";
+@import "fullcalendar";
+
+@import "themes/bootstrap45/bootstrap_overrides";
+@import "themes/bootstrap45/utils";
+@import "themes/bootstrap45/base";
+@import "themes/bootstrap45/nav";
+@import "themes/bootstrap45/components";
+@import "themes/bootstrap45/common";
+@import "themes/bootstrap45/forms";
+//@import "themes/bootstrap3/components";
+//@import "themes/bootstrap3/common";
+@import "themes/bootstrap3/controllers/*";
