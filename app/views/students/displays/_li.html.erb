@@ -1,42 +1,47 @@
 <li class="student" id="student_<%= student.id %>" data-id="<%= student.id %>">
   <div class="media">
-		<a href="<%= student_path(student) %>" class="gravatar pull-left <%= "hide" unless show_gravatar %>">
+		<a href="<%= student_path(student) %>" class="gravatar pull-left <%= "d-none" unless show_gravatar %>">
 	    <%= gravatar(student.email, style: "mm", force: true) %>
 		</a>
 
-    <div class="pull-right">
+    <div class="text-right">
       <% if @current_items_counts %>
-      <a href="<%= student_path(student) %>" title="Items" class="btn btn-sm btn-default ">
-        <i class="fa fa-book"></i> <%= @current_items_counts[student.id] || "0"%>
+      <a href="<%= student_path(student) %>" title="Items" class="btn btn-sm btn-outline-secondary ">
+        <i class="fas fa-book"></i> <%= @current_items_counts[student.id] || "0"%>
       </a>
       <% end %>
     </div>
 
 		<div class="media-body">
 
-				<h4 class="media-heading">
-					<a href="<%= student_path(student) %>"><%= student.name %></a>
+				<div class="d-flex justify-content-between">
+					<a href="<%= student_path(student) %>" class="h6"><%= student.name %></a>
 
           <% if student.blocked? %>
-            <span class="label label-danger black tiny"> Blocked</span>
+            <span class="alert alert-danger text-dark  text-sm px-2 py-0"> Blocked</span>
           <% end %>
           <% if student.inactive? %>
-            <span class="label label-primary black tiny"> Inactive</span>
+            <span class="alert alert-primary text-dark text-sm px-2 py-0"> Inactive</span>
           <% end %>
           <% if student.lab_access_only? %>
-            <span class="label label-warning black tiny"> Lab Access Only</span>
+            <span class="alert alert-warning text-dark text-sm px-2 py-0"> Lab Access Only</span>
           <% end %>
 
-				</h4>
+				</div>
 
 				<div class="row">
           <div class="col-sm-8 col-md-8">
-            <i class="fa fa-envelope fa-fw"></i> <%= student.email %><br/>
-            <span title="Coordinator"><i class="fa fa-map-signs fa-fw"></i> <%= format_field student.details.coordinator.name rescue nil %></span>
+            <i class="fa fa-envelope fa-fw">
+            </i> <%= student.email %><br/>
+            <span title="Coordinator">
+              <i class="fas fa-map-signs fa-fw"></i>
+              <%= format_field student.details.coordinator.name rescue nil %></span>
           </div>
           <div class="col-sm-4 col-md-4">
-            <i class="fa fa-phone fa-fw"></i> <%= student.details.preferred_phone %><br/>
-            <span title="Assistant"><i class="fa fa-adn fa-fw" title="assistant"></i> <%= format_field student.details.assistant.name rescue nil %></span>
+            <i class="fas fa-phone fa-fw"></i> <%= student.details.preferred_phone %><br/>
+            <span title="Assistant">
+              <i class="fas fa-user-circle fa-fw" title="assistant"></i>
+              <%= format_field student.details.assistant.name rescue nil %></span>
           </div>
 
 				</div>

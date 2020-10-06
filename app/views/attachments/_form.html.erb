@@ -6,16 +6,16 @@
 				<hr/>
 				<%= f.label "Attached File" %>
 
-				<div id="file_name" class="<%= "hide" unless @attachment.file? %>">
+				<div id="file_name" class="<%= "d-none" unless @attachment.file? %>">
 
 					<%= File.basename(@attachment.file_url) if @attachment.file? %>
 					<% if @attachment.file? %>
-						<br/><a href="#" onclick="$('#file_upload').removeClass('hide'); $(this).hide();">
+						<br/><a href="#" onclick="$('#file_upload').removeClass('hide'); $(this).addClass('d-none');">
 							Change <i class="fa fa-upload"></i>
 						</a>
 					<% end %>
 				</div>
-				<div id="file_upload" class="<%= "hide" if @attachment.file? %>">
+				<div id="file_upload" class="<%= "d-none" if @attachment.file? %>">
 				   <%= f.file_field :file %>
 
 					<%= f.hidden_field :file_cache %><br/>
@@ -26,6 +26,6 @@
 
 				<hr/>
 				<%= f.button :submit, "Update File", class: "btn btn-primary" %>
-				<%= link_to "Cancel", item_path(@item), class: "btn btn-default"%>
+				<%= link_to "Cancel", item_path(@item), class: "btn btn-outline-secondary"%>
 
 <% end %>

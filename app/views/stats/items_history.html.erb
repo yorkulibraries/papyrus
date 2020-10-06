@@ -3,9 +3,13 @@
 <div class="row">
 	<div class="col-md-12">
 		<%= panel(title: "Reports Home") do %>
-			<a href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>" class="btn pull-right">
-				<i class="fa fa-table"></i> Download Exel
-			</a>
+
+			<div class="text-right mb-3">
+				<a href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>" class="btn btn-outline-secondary btn-sm">
+					<i class="fas fa-table "></i> Download Exel
+				</a>
+			</div>
+
 			<%= render partial: "stats/shared/nav_menu" %>
 
 			<form action="<%= stats_items_history_path %>" method="get" class="simple_form">
@@ -14,8 +18,8 @@
 
 			<hr/>
 
-			<h4>Items Added between [<%= @start_date %> and <%= @end_date %>]
-				<span class="label label-primary"><%= @items.count %></span></h4>
+			<h5>Items Added between [<%= @start_date %> and <%= @end_date %>]
+				<span class="alert alert-primary py-0 px-2"><%= @items.count %></span></h5>
 			<p>Number Of All Items: <strong><%= @items_count%></strong></p>
 			<table class="table table-striped">
 				<tr>
@@ -39,8 +43,8 @@
 			</table>
 			<p class="text-muted small">Showing first 10 items</p>
 
-			<a class="btn" href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>">
-				<i class="fa fa-table"></i> Download Exel
+			<a class="btn btn-outline-secondary btn-xs" href="<%=stats_items_history_path(params: request.query_parameters, format: "xlsx") %>">
+				<i class="fas fa-table"></i> Download Exel
 			</a>
 
 		<% end %>

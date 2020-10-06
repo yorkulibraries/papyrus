@@ -1,10 +1,11 @@
-//= require jquery
+//= require jquery3
+//= require popper
+//= require bootstrap
 //= require best_in_place
-//= require jquery_ujs
+//= require rails-ujs
 //= require jquery.remotipart
 //= require jquery-ui
 //= require best_in_place.jquery-ui
-//= require twitter/bootstrap
 //= require_tree ./vendor/
 //= require_tree ./controllers/
 //= require ./vendor/formstone.core.js
@@ -21,7 +22,7 @@ $(document).ready(function() {
 
 	$("input[placeholder], textarea[placeholder]").enablePlaceholder({"withPlaceholderClass": "light-text"});
 
-	$('.dropdown-toggle').dropdown();
+	//$('.dropdown-toggle').dropdown();
 
 	// disable in browser form validations
 	$('form').find('input').removeAttr('required');
@@ -34,7 +35,7 @@ $(document).ready(function() {
 
 	$("a[data-toggle-visible]").click(function(){
 		var toggle = $(this).data("toggle-visible");
-		$(toggle).toggleClass("hide");return false;
+		$(toggle).toggleClass("d-none");return false;
 	});
 
 	$(".datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });

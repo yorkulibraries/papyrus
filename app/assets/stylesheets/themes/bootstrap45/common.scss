@@ -1,0 +1,24 @@
+/** font-awesome icon bg */
+.fa-bg-success { background-color: #098462; color: #fff; }
+.fa-bg-primary { background-color: #233F7B; color: #fff; }
+.fa-bg-info { background-color: #018692; color: #fff; }
+.fa-bg-danger { background-color: #a31809; color: #fff; }
+.fa-bg-warning { background-color: #D2920B; color: #fff; }
+
+.blank-slate {
+  text-align: center; margin-bottom: 40px;
+
+  .fa { font-size: 50px; }
+  h1,h2,h3,h4 { font-size: 18px; color: #222; }
+  p { font-size: 12px; }
+
+}
+
+
+/** TAGS **/
+.tag, .tag-item {
+  background: #f3f3f4 none repeat scroll 0 0;
+  font-size: 10px;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}

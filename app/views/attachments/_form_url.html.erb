@@ -9,9 +9,9 @@
 		<%= f.button :submit, "Save URL", class: "btn btn-primary" %>
 
 		<% if request.xhr? %>
-			<%= link_to "Cancel", "#", class: "btn btn-default", onclick: "$('#url_form_holder').hide(); return false;" %>
+			<%= link_to "Cancel", "#", class: "btn btn-outline-secondary", onclick: "$('#url_form_holder').addClass('d-none'); return false;" %>
 		<% else %>
-			<%= link_to "Cancel", item_path(@item), class: "btn btn-default" %>
+			<%= link_to "Cancel", item_path(@item), class: "btn btn-outline-secondary" %>
 		<% end %>
 
 <% end %>

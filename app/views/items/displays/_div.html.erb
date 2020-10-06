@@ -11,25 +11,24 @@
 						<%= item.title %></h3>
 					</div>
 					<div class="col-md-4">
-						<div class="pull-right">
-
-							<a class="btn btn-sm btn-default" data-remote="true" href="<%= todo_lists_item_path(item) %>" title="Todo Lists">
-								<i class="fa fa-list"></i>
+						<div class="text-right">
+							<a class="btn btn-sm" data-remote="true" href="<%= todo_lists_item_path(item) %>" title="Todo Lists">
+								<i class="fas fa-list fa-border p-2"></i>
 							</a>
-							<a class="btn btn-sm btn-default with-bubble <%= is_action?("acquisition_requests", "btn-primary")%>" data-remote="true" href="<%= new_acquisition_request_path(item_id: item.id) %>" title="Acquisition Requests">
-								<i class="fa fa-shopping-cart"></i>
+							<a class="btn btn-sm with-bubble <%= is_action?("acquisition_requests", "btn-primary")%>" data-remote="true" href="<%= new_acquisition_request_path(item_id: item.id) %>" title="Acquisition Requests">
+								<i class="fas fa-shopping-cart fa-border p-2"></i>
 								<% if @item.acquisition_requests.open.count > 0 %>
 									<span class="notification-bubble blue">
 										<%= @item.acquisition_requests.open.count %>
 									</span>
 								<% end %>
 							</a>
-							<a class="btn btn-sm btn-default <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_item_path(item) %>" title="Audit Trail">
-								<i class="fa fa-history"></i>
+							<a class="btn btn-sm <%= is_action?("audit_trail", "btn-primary") %>" href="<%= audit_trail_item_path(item) %>" title="Audit Trail">
+								<i class="fas fa-history fa-border  p-2"></i>
 							</a>
 							<% if is_controller_and_action?("items", "show") && can?(:edit, item) %>
 								<a class="btn btn-sm btn-success" href="<%= edit_item_path(item) %>">
-									<i class="fa fa-edit"></i> Make Changes
+									<i class="fas fa-edit"></i> Make Changes
 								</a>
 							<% end %>
 						</div>

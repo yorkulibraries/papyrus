@@ -6,18 +6,18 @@
         <%= f.input :name, input_html: { class: "form-control" }%>
       </div>
     </div>
-    <div class="row">
+    <div class="row mt-3">
       <div class="col-md-6">
-        <%= f.input :start_date, input_html: { class: "form-control" } %>
+        <%= f.input :start_date, input_html: { class: "form-control mb-2" } %>
       </div>
       <div class="col-md-6">
-        <%= f.input :end_date, input_html: { class: "form-control" } %>
+        <%= f.input :end_date, input_html: { class: "form-control mb-2" } %>
       </div>
     </div>
 
     <hr/>
     <%= f.button :submit,  class: 'btn btn-primary' %>
-    <%= link_to 'Cancel', @term.new_record? ? terms_path : term_path(@term), class: 'btn btn-default' %>
+    <%= link_to 'Cancel', @term.new_record? ? terms_path : term_path(@term), class: 'btn btn-outline-secondary' %>
 
 
 <% end %>

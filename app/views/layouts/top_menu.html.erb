@@ -70,7 +70,7 @@
         <% end %>
         <% if can? :show, PapyrusSettings %>
           <li class="divider"></li>
-          <li><a href="<%= general_settings_path %>"><strong>Settings</strong></li>
+          <li><a href="<%= general_settings_path %>"><strong>Settings</strong></a></li>
           <li class="<%= "active" if is_controller_and_action?("settings", "general") %>">
             <%= link_to "General", general_settings_path %>
           </li>
@@ -109,7 +109,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-bell"></i> <b class="caret"></b>
       </a>
-      <ul class="dropdown-menu">
+      <ul class="dropdown-menu" style="width: 300px;">
         <% Announcement.active.current(nil, @current_user.type).each do |announcement| %>
           <%= render partial: "announcements/announcement", locals: { show: "li", announcement: announcement } %>
         <% end %>

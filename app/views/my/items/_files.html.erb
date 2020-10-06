@@ -1,8 +1,8 @@
-<div class="hide individual_files" id="attachments_<%=item.id%>">
+<div class="d-none individual_files" id="attachments_<%=item.id%>">
 	<ol title="Individual Files">
 		<% item.attachments.files.available.full_text.each do |attachment| %>
 		<li>
-			<span title="extension" class="label label-success extension hidden-phone"><%= attachment.file.file.extension %></span>
+			<span title="extension" class="alert alert-success px-2 py-1 extension hidden-phone"><%= attachment.file.file.extension %></span>
 			<a href="<%= get_file_item_attachment_url(item, attachment) if attachment.file? %>" title="Download full text <%= attachment.file.file.extension %> file">
 			 	<%= attachment.name %>
 			</a>
@@ -14,7 +14,7 @@
 
 		<% item.attachments.files.available.not_full_text.each do |attachment| %>
 		<li>
-			<span title="extension" class="label label-success extension  hidden-phone"><%= attachment.file.file.extension %></span>
+			<span title="extension" class="alert alert-success px-2 py-1 extension  hidden-phone"><%= attachment.file.file.extension %></span>
 			<a href="<%= get_file_item_attachment_url(item, attachment) if attachment.file? %>" title="Download <%= attachment.file.file.extension %> file">
 			 	<%= attachment.name %>
 			</a>

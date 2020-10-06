@@ -18,63 +18,42 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-  <div id="wrapper">
+    <%= render "layouts/bootstrap/notices"%>
+    <%= render "layouts/bootstrap/topnav"%>
+    <div class="container-fluid">
+      <div class="row" style="height: 100vh;">
+        <%= render "layouts/bootstrap/sidenav" %>
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-2">
 
-    <%= render template: "layouts/navbar"%>
+          <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
+            <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement mt-1'>
 
-    <div id="page-wrapper">
-      <div class="container-fluid">
-        <!-- Page Heading -->
-        <% if show_title? || content_for?(:title_html) %>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="page-header">
-                  <%= content_tag :h1, yield(:title) if !content_for?(:title_html) %>
-                  <%= yield (:title_html) if content_for?(:title_html)%>
-                </div>
+              <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
+               &times;
+              <% end %>
+              <%= announcement.message %>
             </div>
-        </div>
-        <% end %>
-        <!-- /.row -->
+          <% end %>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
-                  <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement'>
-                    <%= announcement.message %>
-                    <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
-                     &times;
-                    <% end %>
-                  </div>
-                <% end %>
-                <%= bootstrap_flash %>
+          <% if show_title? || content_for?(:title_html) %>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <%= content_tag :h1, yield(:title) if !content_for?(:title_html) %>
+              <%= yield (:title_html) if content_for?(:title_html)%>
             </div>
-        </div>
-        <!-- /.row -->
+          <% end %>
 
-        <div class="row">
-          <div class="col-lg-12">
-            <%= yield %>
+          <div class="py-2 px-1"><%= yield %></div>
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <p class="small help-block"
+              title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user.last_active_at != nil %>">
+                &copy; 2011 - <%= Date.today.year %>. Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> </p>
+            </div>
           </div>
-        </div>
-
-      </div> <!-- container fluid -->
-
-      <footer>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <p class="small help-block"
-            title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user.last_active_at != nil %>">
-              &copy; 2011 - <%= Date.today.year %>. Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> </p>
-
-          </div>
-        </div>
+        </main>
       </div>
-
-      </footer>
-    </div> <!-- page wrapper -->
-  </div>
-
+    </div>
   </body>
 </html>

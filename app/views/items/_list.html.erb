@@ -1,0 +1,19 @@
+
+<%= paginate items %>
+
+<table class="table table-bordered table-striped">
+  <tr class="heading">
+
+    <th>Title</th>
+    <th>Author</th>
+    <th>Edition</th>
+    <th>ISBN</th>
+    <th><i class="fas fa-users"></i></th>
+    <th><i class="fas fa-file"></i></th>
+  </tr>
+  <% items.each_with_index do |item, index| %>
+    <%= render partial: "items/item", locals: { item: item, show: "tr" } %>
+  <% end %>
+
+</table>
+<%= paginate items %>

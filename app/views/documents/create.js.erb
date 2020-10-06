@@ -2,7 +2,7 @@
 
 	$("#documents").append('<%= j render(@document) %>');
 	console.log("Adding a document");
-  $("#new_document_modal").modal("hide");
+  $("#new_document_modal").modal('hide');
   $("#new_document_form_holder").remove();
 
 	$(".blank-slate").remove();
@@ -23,7 +23,7 @@
 	}
 
 <% else %>
-	$("#new_document_modal").modal("hide");
+	$("#new_document_modal").modal("d-none");
 	$("#new_document_form_holder").empty();
 	$("#new_document_form_holder").append('<%= j render("documents/new_modal") %>');
 	$("#new_document_modal").modal({ show: true, backdrop: 'static' });

@@ -6,7 +6,7 @@
 		<%= panel(title: "Student Management Settings", icon: "cog") do %>
 
 			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
-				<h4 class="black">Student Portal</h4>
+					<h5 class="text-black">Student Portal</h5>
 
 				<%= f.label :student_portal_welcome_enable, "Enable Welcome / First Time Login Message?"%>
 				<%= f.input :student_portal_welcome_enable, label: false, as: :radio_buttons %>
@@ -14,7 +14,7 @@
 				<%= f.label :student_portal_welcome_message, "Welcome / First Time Login Message"%>
 				<%= f.input :student_portal_welcome_message, label: false, as: :text %>
 
-				<h4 class="black">Import Settings</h4>
+					<h5 class="text-black mt-4">Import Settings</h5>
 
 	      <%= f.label :import_auto_assign_coordinator, "Auto Assign Coordinator"%>
 	      <%= f.input :import_auto_assign_coordinator, label: false, as: :radio_buttons %>
@@ -29,7 +29,7 @@
 
 
 			  <input type="hidden" name="return_to" value="students"/>
-				<%= f.submit "Save Settings", class: "btn btn-success" %>
+				<%= f.submit "Save Settings", class: "btn btn-success mt-3" %>
 			<% end %>
 		<% end %>
 	</div>

@@ -23,15 +23,16 @@ gem 'sqlite3'
 gem "mysql2", "0.4.6"
 
 ## CSS AND JAVASCRIPT ##
-gem 'therubyracer', "0.12.3", platforms: :ruby
+#gem 'therubyracer', "0.12.3", platforms: :ruby
+gem "mini_racer"
 gem 'jquery-rails', "4.3.1"
 gem 'jquery-ui-rails', "6.0.1"
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
-gem 'twitter-bootstrap-rails', "4.0.0"
-gem "less-rails", "2.8.0"
+gem 'bootstrap', "4.5.2"
+#gem "less-rails", "2.8.0"
 gem "simple_form", "3.5.0"
-gem "font-awesome-rails", '4.7.0.2'
+gem 'font-awesome-sass', '~> 5.13.0'
 gem 'best_in_place', '3.1.1'
 
 ## TOOLS AND UTILITIES ##

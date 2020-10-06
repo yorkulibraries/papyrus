@@ -5,9 +5,8 @@
 		<%= panel(title: "All users", icon: "users") do %>
 
 			<%= render partial: "user_nav" %>
-			<hr/>
 
-			<table class="table">
+			<table class="table mt-4">
 			  <tr>
 				 	<th>Name</th>
 				  <th>Role</th>
@@ -25,7 +24,7 @@
 						<td class="hidden-phone"><%= user.last_logged_in_at.strftime("%b %d, %Y at %I:%M%p") rescue nil %>
 			      <td>
 							<%= link_to edit_user_path(user), class: "btn btn-xs btn-success" do %>
-								<i class="fa fa-pencil" title="Edit Details"></i>
+								<i class="fa fa-edit fa-fw" title="Edit Details"></i> Edit
 							<% end %>
 							<%= link_to audit_trail_user_path(user), class: "btn btn-xs" do %>
 								<i class="fa fa-history" tilte="Audit Trail"></i>

@@ -6,7 +6,7 @@
     <div class="student-header row">
       <div class="col-md-12">
         <h4>
-          <a class="btn btn-sm btn-default" href="<%= student_path(@student) %>" title="Back To Student Details">
+          <a class="btn btn-sm btn-outline-secondary" href="<%= student_path(@student) %>" title="Back To Student Details">
             <i class="fa fa-chevron-left"></i>
           </a> &nbsp;
           <%= @student.name %>
@@ -17,7 +17,7 @@
     <hr/>
 
       <div id="expired_items">
-        <h4>Expired Items</h4>
+        <h5 class="mb-4">Expired Items</h5>
         <ul class="list-unstyled">
           <%= blank_slate(@expired_items,
               title: "There are no expired items.", icon: "file red",

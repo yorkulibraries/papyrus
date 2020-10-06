@@ -1,11 +1,11 @@
-<%= panel(title: "Courses", icon: "university", title_class: "text-center", styles:"panel-success") do %>
+<%= panel(title: "Courses", icon: "university", title_class: "text-center bg-success text-white") do %>
   <% if PapyrusSettings.course_sync_on_login == PapyrusSettings::TRUE %>
     <p class="small">Courses are synced when student logs in</p>
   <% end %>
 
   <ul class="list-unstyled list-info" id="courses">
     <% @courses_grouped.each do |term, courses| %>
-    <li id="term_<%= term[:id] %>"><label class="term"><%= term[:name] %></label></li>
+    <li id="term_<%= term[:id] %>"><label class="text-dark font-weight-bold"><%= term[:name] %></label></li>
       <% courses.each do |course|%>
         <%= render course, show: "li" %>
       <% end %>

@@ -2,10 +2,8 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<%= panel(title: "Papyrus Items", icon: "book") do %>
-			<% render partial: "search/search_box_items" %>
-			<% @results = @items %>
-			<%= render template: "search/papyrus_results"%>
+		<%= panel(title: "Papyrus Items - #{@total_items.size}", icon: "book") do %>
+			<%= render "list", items: @items %>
 		<% end %>
 	</div>
 </div>

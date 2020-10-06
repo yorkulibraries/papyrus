@@ -1,0 +1,109 @@
+<nav class="navbar navbar-red navbar-expand-md">
+  <a class="navbar-brand" href="<%= root_path %>">
+    <%= PapyrusSettings.app_name %>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <% if can? :create, Item %>
+      <li class="nav-item mr-3">
+        <a class="nav-link" href="<%= new_omni_search_path %>" data-remote="true">
+          <i class="fa-search fas"></i>
+        </a>
+      </li>
+
+      <li class="nav-item dropdown mr-3">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-plus-square fas mr-1"></i> New Item
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item"  href="<%= new_item_path %>">
+            <i class="fa-pencil-alt fas mr-1"></i> Blank Item
+          </a>
+          <a class="dropdown-item" href="<%= new_course_kit_path %>">
+            <i class="fa-book fas mr-1"></i> Course Kit
+          </a>
+          <a class="dropdown-item" href="<%= from_primo_index_path %>">
+            <i class="fa-search fas mr-1"></i> Primo Item
+          </a>
+          <a class="dropdown-item" href="<%= from_worldcat_index_path %>">
+            <i class="fa-globe fas mr-1"></i> Worldcat Item
+          </a>
+        </div>
+      </li>
+      <% end %>
+
+      <% if can? :create, Student %>
+        <li class="nav-item mr-3">
+          <a href="<%= new_student_path %>" class="nav-link">
+            <i class="fa-user-plus fas mr-1"></i> Register Student
+          </a>
+        </li>
+      <% end%>
+
+      <% if can? :manage, User %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-cog fas"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="<%= users_path %>" class="dropdown-item">Papyrus Users</a>
+          <div class="dropdown-divider"></div>
+          <%= link_to "Active Users", active_users_path, class: "dropdown-item" %>
+          <%= link_to "Announcements", announcements_path, class: "dropdown-item" %>
+          <%  if can? :show, :stats %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Reports", stats_path, class: "dropdown-item" %>
+          <% end %>
+          <% if can? :show, PapyrusSettings %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "General", general_settings_path, class: "dropdown-item" %>
+            <%= link_to "Item", item_settings_path, class: "dropdown-item" %>
+            <%= link_to "Student Management", students_settings_path, class: "dropdown-item" %>
+            <%= link_to "Courses", courses_settings_path, class: "dropdown-item" %>
+            <%= link_to "Email", email_settings_path, class: "dropdown-item" %>
+            <%= link_to "Bib Search", bib_search_settings_path, class: "dropdown-item" %>
+            <%= link_to "Acquisitions", acquisitions_settings_path, class: "dropdown-item" %>
+            <%= link_to "System", system_settings_path, class: "dropdown-item" %>
+            <%= link_to "Primo Alma", primo_alma_settings_path, class: "dropdown-item" %>
+          <% end %>
+        </div>
+      </li>
+      <% end %>
+
+      <li class="nav-item dropdown mr-3">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bell"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <% Announcement.active.current(nil, @current_user.type).each do |announcement| %>
+            <%= render partial: "announcements/announcement", locals: { show: "li", announcement: announcement } %>
+          <% end %>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user mr-1"></i>
+          <%= @current_user.name if @current_user %>
+        </a>
+        <div class="dropdown-menu">
+          <a href="<%= logout_path%>" class="dropdown-item">
+            <i class="fas fa-fw fa-power-off mr-1"></i> Log out
+          </a>
+          <% if Rails.env.development? %>
+            <div class="dropdown-divider"></div>
+            <h6 class="dropdown-header">Login As</h6>
+            <% User::ROLE_NAMES.each do |role| %>
+              <%=link_to "- #{role}", login_path(:as => role), class: "dropdown-item"%>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</nav>

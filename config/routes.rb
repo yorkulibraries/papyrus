@@ -85,6 +85,7 @@ Papyrus::Application.routes.draw do
   # Anouncements
   resources :announcements do
     get "hide", on: :member
+    resource :activation, only: [:update, :destroy], controller: "announcements/activation"
   end
 
   # match 'announcements/:id/hide', to: 'announcements#hide', as: 'hide_announcement'

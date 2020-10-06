@@ -1,16 +1,14 @@
 <div class="list-group-item course" id="course_<%= course.id %>" data-id="<%= course.id %>">
-	<h5 class="title">
+	<h6 class="d-flex justify-content-between align-items-center mb-0">
 		<% if can? :edit, course %>
 			<%= link_to course.title, edit_term_course_path(course.term, course) %>
 		<% end %>
-		<span class="course_name hide"><%= course.title %></span>
-		<div class="pull-right">
-
+		<span class="course_name d-none"><%= course.title %></span>
+		<div class="text-sm">
 			<%= render "courses/shared/syllabus_menu", course: course %>
-
 		</div>
-	</h5>
-	<div class="code small">
+	</h6>
+	<div class="text-muted">
 		<%= course.code %>
 		<% if can? :edit, course %>
 			&nbsp;&nbsp;	<%= link_to edit_term_course_path(course.term, course) do %>
