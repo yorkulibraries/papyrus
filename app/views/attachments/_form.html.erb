@@ -10,7 +10,7 @@
 
 					<%= File.basename(@attachment.file_url) if @attachment.file? %>
 					<% if @attachment.file? %>
-						<br/><a href="#" onclick="$('#file_upload').removeClass('hide'); $(this).addClass('d-none');">
+						<br/><a href="#" onclick="$('#file_upload').removeClass('d-none'); $(this).addClass('d-none');">
 							Change <i class="fa fa-upload"></i>
 						</a>
 					<% end %>
