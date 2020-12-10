@@ -9,12 +9,14 @@
 				 </span>
 			</span>
 			<input type="hidden" name="search_all" value="true"/>
-			<input type="text" placeholder="Search Name or Student Number" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
+			<input type="submit" name="hidden_submit" class="d-none" aria-label="Search Students">
+			<label for="q" class="d-none">Search</label>
+			<input type="text" placeholder="Search Name or Student Number" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>" aria-label="Search Text Field">
 		</div>
 		<% if @students %>
 			<%= page_entries_info @students %>
 		<% end %>
 		</form>
 	</div>
-	
+
 </div>

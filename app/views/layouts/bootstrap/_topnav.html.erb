@@ -10,7 +10,7 @@
     <ul class="navbar-nav ml-auto">
       <% if can? :create, Item %>
       <li class="nav-item mr-3">
-        <a class="nav-link" href="<%= new_omni_search_path %>" data-remote="true">
+        <a class="nav-link" href="<%= new_omni_search_path %>" data-remote="true" aria-label="Search">
           <i class="fa-search fas"></i>
         </a>
       </li>
@@ -46,7 +46,7 @@
 
       <% if can? :manage, User %>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Settings">
           <i class="fa-cog fas"></i>
         </a>
         <div class="dropdown-menu">
@@ -75,7 +75,7 @@
       <% end %>
 
       <li class="nav-item dropdown mr-3">
-        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
           <i class="fas fa-bell"></i>
         </a>
         <ul class="dropdown-menu">

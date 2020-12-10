@@ -10,6 +10,7 @@
               <i class="todo_list_status far fa-fw fa-check-square"></i>
               <input type="hidden" name="todo_item[status]" autocomplete="off" value="<%= TodoItem::STATUS_NEW %>">
             <% end %>
+            <input type="submit" name="submit" class="d-none" value="" aria-label="complete/uncomplete">
         <% end %>
         <div class="mb-0 ml-3 text-lg">
           <%= in_place_edit [todo_item.todo_list, todo_item], :summary %>
@@ -29,7 +30,7 @@
       </div>
 
       <a href="<%= todo_list_todo_item_path(todo_item.todo_list, todo_item) %>" data-remote="true"
-        data-method="delete" data-confirm="Are you sure?" class="text-sm text-danger">
+        data-method="delete" data-confirm="Are you sure?" class="text-sm text-danger" aria-label="Delete">
         <i class="fas fa-fw fa-times"></i>
       </a>
     </div>
