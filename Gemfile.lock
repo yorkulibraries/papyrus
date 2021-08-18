@@ -234,7 +234,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.6.0)
     mustermann (1.0.3)
-    mysql2 (0.4.6)
+    mysql2 (0.5.3)
     nenv (0.3.0)
     nio4r (2.3.1)
     nokogiri (1.6.8.1)
@@ -435,7 +435,7 @@ DEPENDENCIES
   minitest (= 5.10.2)
   mocha
   momentjs-rails (= 2.17.1)
-  mysql2 (= 0.4.6)
+  mysql2 (= 0.5.3)
   populator!
   primo!
   puma (>= 3.12.6)

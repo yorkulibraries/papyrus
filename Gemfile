@@ -20,7 +20,7 @@ gem "sprockets", ">= 3.7.2"
 
 ## DATABASES ##
 gem 'sqlite3'
-gem "mysql2", "0.4.6"
+gem "mysql2", "0.5.3"
 
 ## CSS AND JAVASCRIPT ##
 #gem 'therubyracer', "0.12.3", platforms: :ruby
