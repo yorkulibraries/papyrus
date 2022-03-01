@@ -17,7 +17,7 @@
     <hr/>
 
       <div id="expired_items">
-        <h5 class="mb-4">Expired Items</h5>
+        <h5 class="mb-4">Expired Items - <%= @expired_items.count %></h5>
         <ul class="list-unstyled">
           <%= blank_slate(@expired_items,
               title: "There are no expired items.", icon: "file red",

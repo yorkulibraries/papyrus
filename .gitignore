@@ -8,3 +8,10 @@ MissingDrawer.tmplugin
 .DS_Store
 .vagrant
 uploads/
+REVISION
+assets_manifest_backup/
+config/secrets.yml
+config/database.yml
+node_modules/
+public/assets/
+yarn.lock

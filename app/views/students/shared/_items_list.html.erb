@@ -15,7 +15,7 @@
     <div class="">
       <% unless student.inactive? %>
         <a href="<%= student_expired_items_path(@student) %>" class="">
-          Show Expired Items
+          Show Expired Items -  <%= @expired_items.count %>
         </a>
         <a href="<%= student_path(@student) %>" data-disable-with="Loading current items..."
           id="show_current_items_list" class="d-none">
