@@ -59,7 +59,7 @@ gem "axlsx", git: 'https://github.com/randym/axlsx.git'
 gem 'axlsx_rails', "0.5.1"
 
 ## UPLOADING AND MANIPULATING FILES ##
-gem "carrierwave", "1.1.0"
+gem "carrierwave", "1.3.2"
 gem "mini_magick", "4.7.1"
 gem "mime-types"
 
