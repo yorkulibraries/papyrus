@@ -3,12 +3,10 @@ source 'http://rubygems.org'
 ## SECURITY FIX ##
 gem "rack", "2.2.3"
 gem "websocket-extensions", ">= 0.1.5"
-
+gem "json", ">= 2.3.0"
 
 ## RAILS and server ##
 gem "rails", "5.1.6.2"
-gem "puma", ">= 3.12.6"
-gem "puma-plugin-systemd"
 
 ## RAILS related ##
 gem 'jbuilder', '~> 2.5'
@@ -20,7 +18,7 @@ gem "sprockets", ">= 3.7.2"
 
 ## DATABASES ##
 gem 'sqlite3'
-gem "mysql2", "0.4.6"
+gem "mysql2", "0.5.3"
 
 ## CSS AND JAVASCRIPT ##
 #gem 'therubyracer', "0.12.3", platforms: :ruby
@@ -117,3 +115,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'mimemagic', '~> 0.3.10'
+gem 'puma'

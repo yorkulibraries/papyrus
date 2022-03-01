@@ -5,9 +5,10 @@
       <span class="input-group-prepend">
         <span class="input-group-text"><i class="fas fa-search"></i></span>
       </span>
-      <input type="text" placeholder="Search Course Code or Name" name="q" class="form-control search-query"  value="<%= params[:q].try(:strip) %>">
+      <input type="text" placeholder="Search Course Code or Name" name="q" aria-label="Search" class="form-control search-query"  value="<%= params[:q].try(:strip) %>">
+      <input type="submit" name="submit" class="d-none" value="" aria-label="submit">
     </div>
-    </form>    
+    </form>
   </div>
 
   <div class="col-8 text-right">
