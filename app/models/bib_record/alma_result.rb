@@ -1,6 +1,13 @@
 class BibRecord::AlmaResult
 
   def self.find_item(id)
+    require 'alma'
+
+Alma.configure do |config|
+  config.apikey = PapyrusSettings.alma_apikey
+  config.region = PapyrusSettings.alma_region
+end
+
     items = Alma::BibItem.find(id)
     return items.first
   end
