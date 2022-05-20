@@ -5,6 +5,18 @@ class BibRecord::PrimoResult
               :catalogue_record, :source, :subject, :language, :primo_id
 
   def self.search(search_string, max_number_of_results = 20)
+    require 'primo'
+
+Primo.configure do |config|
+  config.apikey = PapyrusSettings.primo_apikey
+  config.inst = PapyrusSettings.primo_inst
+  config.vid = PapyrusSettings.primo_vid
+  config.region = PapyrusSettings.primo_region
+  config.enable_loggable = PapyrusSettings.primo_enable_loggable
+  config.scope = PapyrusSettings.primo_scope
+  config.pcavailability = PapyrusSettings.primo_pcavailability
+end
+
     @query =  Primo::Search::Query.new(value: search_string)
 
     records = Primo.find(q: @query , limit: max_number_of_results)
@@ -28,6 +40,18 @@ class BibRecord::PrimoResult
   end
 
   def self.find_by_id(id)
+        require 'primo'
+
+Primo.configure do |config|
+  config.apikey = PapyrusSettings.primo_apikey
+  config.inst = PapyrusSettings.primo_inst
+  config.vid = PapyrusSettings.primo_vid
+  config.region = PapyrusSettings.primo_region
+  config.enable_loggable = PapyrusSettings.primo_enable_loggable
+  config.scope = PapyrusSettings.primo_scope
+  config.pcavailability = PapyrusSettings.primo_pcavailability
+end
+
     record = Primo.find_by_id(id: id, context: :PC)
 
   end
