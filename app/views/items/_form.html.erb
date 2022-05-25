@@ -54,7 +54,11 @@
 
 		<div class="row">
 			<div class="col-md-6">
+                          <% if PapyrusSettings.item_sources.is_a? Enumerable %>
 				<%= f.input :source, collection: PapyrusSettings.item_sources,  label: "Source" %>
+                          <% else %>
+				<%= f.input :source, collection: [],  label: "Source" %>
+		          <% end %>
 			</div>
 			<div class="col-md-6">
 				<%= f.input :source_note, label: "Source Note"%>
@@ -71,7 +75,11 @@
 
 				<%= f.fields_for :acquisition_request do |builder| %>
 
-		    	<%= builder.input :acquisition_reason, collection: PapyrusSettings.acquisition_reasons %>
+                        <% if PapyrusSettings.acquisition_reasons.is_a? Enumerable %>
+		    	  <%= builder.input :acquisition_reason, collection: PapyrusSettings.acquisition_reasons %>
+                        <% else %>
+		    	  <%= builder.input :acquisition_reason, collection: [] %>
+                        <% end %>
 		    	<%= builder.input :note %>
 				<% end %>
 				</div>
