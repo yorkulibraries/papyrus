@@ -1,13 +1,8 @@
+require 'alma'
 class BibRecord::AlmaResult
 
   def self.find_item(id)
-    require 'alma'
-
-Alma.configure do |config|
-  config.apikey = PapyrusSettings.alma_apikey
-  config.region = PapyrusSettings.alma_region
-end
-
+    self.configure
     items = Alma::BibItem.find(id)
     return items.first
   end
@@ -34,18 +29,24 @@ end
     return item
   end
 
-
-    def self.get_value(value)
-      if value == nil
-        return ""
-      elsif value.is_a? Array
-        if value.size > 1
-          return value.join(", ") rescue "n/a"
-        else
-          return value.try :first rescue "n/a"
-        end
+  def self.get_value(value)
+    if value == nil
+      return ""
+    elsif value.is_a? Array
+      if value.size > 1
+        return value.join(", ") rescue "n/a"
       else
-        return value
+        return value.try :first rescue "n/a"
       end
+    else
+      return value
     end
+  end
+
+  def self.configure
+    Alma.configure do |config|
+      config.apikey = PapyrusSettings.alma_apikey
+      config.region = PapyrusSettings.alma_region
+    end
+  end
 end

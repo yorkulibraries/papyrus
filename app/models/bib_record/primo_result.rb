@@ -1,3 +1,5 @@
+require 'primo'
+
 class BibRecord::PrimoResult
   attr_accessor :title, :author, :isbn_issn, :callnumber, :publication_date, :publisher, :edition,
               :item_type, :format, :map_index_num, :journal_title, :volume, :page_number,
@@ -5,17 +7,7 @@ class BibRecord::PrimoResult
               :catalogue_record, :source, :subject, :language, :primo_id
 
   def self.search(search_string, max_number_of_results = 20)
-    require 'primo'
-
-Primo.configure do |config|
-  config.apikey = PapyrusSettings.primo_apikey
-  config.inst = PapyrusSettings.primo_inst
-  config.vid = PapyrusSettings.primo_vid
-  config.region = PapyrusSettings.primo_region
-  config.enable_loggable = PapyrusSettings.primo_enable_loggable
-  config.scope = PapyrusSettings.primo_scope
-  config.pcavailability = PapyrusSettings.primo_pcavailability
-end
+    self.configure
 
     @query =  Primo::Search::Query.new(value: search_string)
 
@@ -40,18 +32,7 @@ end
   end
 
   def self.find_by_id(id)
-        require 'primo'
-
-Primo.configure do |config|
-  config.apikey = PapyrusSettings.primo_apikey
-  config.inst = PapyrusSettings.primo_inst
-  config.vid = PapyrusSettings.primo_vid
-  config.region = PapyrusSettings.primo_region
-  config.enable_loggable = PapyrusSettings.primo_enable_loggable
-  config.scope = PapyrusSettings.primo_scope
-  config.pcavailability = PapyrusSettings.primo_pcavailability
-end
-
+    self.configure
     record = Primo.find_by_id(id: id, context: :PC)
 
   end
@@ -130,6 +111,18 @@ end
     )
 
     json
+  end
+
+  def self.configure
+    Primo.configure do |config|
+      config.apikey = PapyrusSettings.primo_apikey
+      config.inst = PapyrusSettings.primo_inst
+      config.vid = PapyrusSettings.primo_vid
+      config.region = PapyrusSettings.primo_region
+      config.enable_loggable = PapyrusSettings.primo_enable_loggable
+      config.scope = PapyrusSettings.primo_scope
+      config.pcavailability = PapyrusSettings.primo_pcavailability
+    end
   end
 
 end
