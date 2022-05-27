@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 ## SECURITY FIX ##
-gem "rack", "2.2.3"
+gem "rack", "2.2.3.1"
 gem "websocket-extensions", ">= 0.1.5"
 gem "json", ">= 2.3.0"
 

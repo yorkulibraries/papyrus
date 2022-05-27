@@ -253,7 +253,7 @@ GEM
     public_suffix (2.0.5)
     puma (5.6.2)
       nio4r (~> 2.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-livereload (0.3.16)
       rack
     rack-mini-profiler (0.10.5)
@@ -440,7 +440,7 @@ DEPENDENCIES
   populator!
   primo!
   puma
-  rack (= 2.2.3)
+  rack (= 2.2.3.1)
   rack-livereload (= 0.3.16)
   rack-mini-profiler
   rails (= 5.1.6.2)
