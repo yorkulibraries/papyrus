@@ -1,6 +1,9 @@
 
 ignore %r{test/integration/.+_test\.rb$}
 
+guard :bundler do
+  watch('Gemfile')
+end
 
 guard 'livereload' do
   watch(%r{app/views/.+\.(erb|haml|slim)$})

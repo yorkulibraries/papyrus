@@ -90,6 +90,7 @@ group :test do
   gem 'database_cleaner', "1.6.1"
 
   gem "guard-minitest", "2.4.6"
+  gem 'guard-bundler', require: false
 
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
