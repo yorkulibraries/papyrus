@@ -18,7 +18,7 @@ gem "sprockets", ">= 3.7.2"
 
 ## DATABASES ##
 gem 'sqlite3'
-gem "mysql2", "0.5.3"
+gem "mysql2", "0.5.3", group: :production
 
 ## CSS AND JAVASCRIPT ##
 #gem 'therubyracer', "0.12.3", platforms: :ruby
@@ -73,7 +73,6 @@ gem 'rack-mini-profiler', require: false
 
 gem 'guard-livereload', "2.5.2", require: false
 gem "rack-livereload", "0.3.16"
-gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 gem "awesome_print", "1.8.0"
 
 ## CRONJOBS ##
