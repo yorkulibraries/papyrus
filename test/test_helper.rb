@@ -10,6 +10,18 @@ include ActionDispatch::TestProcess
 #rescue LoadError
   #puts 'Install the Turn gem for prettier test output.'
 #end
+require 'database_cleaner/active_record'
+require 'minitest'
+
+DatabaseCleaner.strategy = :transaction
+DatabaseCleaner.clean_with(:truncation)
+
+# with the minitest-around gem, this may be used instead:
+class Minitest::Spec
+  around do |tests|
+    DatabaseCleaner.cleaning(&tests)
+  end
+end
 
 include ActionDispatch::TestProcess
 

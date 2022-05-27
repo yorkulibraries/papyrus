@@ -87,10 +87,12 @@ group :test do
   gem 'shoulda-context'
   gem "mocha", require: false
   gem "ruby-prof", "0.16.2"
-  gem 'database_cleaner', "1.6.1"
+  gem 'database_cleaner-active_record', '~> 2.0', '>= 2.0.1'
+  gem 'minitest-around', '~> 0.5.0'
 
   gem "guard-minitest", "2.4.6"
   gem 'guard-bundler', require: false
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
