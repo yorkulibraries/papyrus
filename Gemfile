@@ -71,7 +71,6 @@ gem 'exception_notification', "4.2.1"
 gem 'rack-mini-profiler', require: false
 
 
-gem 'guard-livereload', "2.5.2", require: false
 gem "rack-livereload", "0.3.16"
 gem "awesome_print", "1.8.0"
 
@@ -105,6 +104,7 @@ end
 
 
 group :development do
+  gem 'guard-livereload', "2.5.2", require: false
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
   #gem "bullet" # Testing SQL queries
