@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20210818135757) do
 
-  create_table "access_codes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "access_codes", id: :integer, force: :cascade do |t|
     t.string "for"
     t.string "code"
     t.date "expires_at"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.boolean "shared", default: false
   end
 
-  create_table "acquisition_requests", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+  create_table "acquisition_requests", id: :integer, force: :cascade do |t|
     t.integer "item_id"
     t.integer "requested_by_id"
     t.text "acquisition_reason"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.integer "back_ordered_by_id"
   end
 
-  create_table "announcements", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "announcements", id: :integer, force: :cascade do |t|
     t.text "message", limit: 16777215
     t.string "audience"
     t.boolean "active", default: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "appointments", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "appointments", id: :integer, force: :cascade do |t|
     t.integer "student_id"
     t.string "title"
     t.integer "user_id"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "attachments", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "attachments", id: :integer, force: :cascade do |t|
     t.string "name"
     t.integer "item_id"
     t.string "file"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["item_id", "deleted"], name: "index_attachments_on_item_id_and_deleted"
   end
 
-  create_table "audits", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "audits", id: :integer, force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
     t.integer "associated_id"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
-  create_table "courses", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "courses", id: :integer, force: :cascade do |t|
     t.string "title"
     t.string "code"
     t.integer "term_id"
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["term_id"], name: "index_courses_on_term_id"
   end
 
-  create_table "documents", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+  create_table "documents", id: :integer, force: :cascade do |t|
     t.string "name"
     t.string "attachment"
     t.integer "attachable_id"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "item_connections", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "item_connections", id: :integer, force: :cascade do |t|
     t.integer "item_id"
     t.integer "student_id"
     t.datetime "created_at"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["student_id", "item_id", "expires_on"], name: "ic_s_i_e_index"
   end
 
-  create_table "item_course_connections", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "item_course_connections", id: :integer, force: :cascade do |t|
     t.integer "item_id"
     t.integer "course_id"
     t.datetime "created_at"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["course_id", "item_id"], name: "icc_c_i_index"
   end
 
-  create_table "items", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "items", id: :integer, force: :cascade do |t|
     t.string "title"
     t.string "unique_id"
     t.string "item_type"
@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["title"], name: "index_items_on_title"
   end
 
-  create_table "notes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "notes", id: :integer, force: :cascade do |t|
     t.text "note", limit: 16777215
     t.integer "student_id"
     t.datetime "created_at"
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["student_id"], name: "index_notes_on_student_id"
   end
 
-  create_table "scan_items", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+  create_table "scan_items", id: :integer, force: :cascade do |t|
     t.string "summary"
     t.integer "item_id"
     t.integer "scan_list_id"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "scan_lists", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+  create_table "scan_lists", id: :integer, force: :cascade do |t|
     t.string "name"
     t.integer "created_by_id"
     t.integer "assigned_to_id"
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "settings", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+  create_table "settings", id: :integer, force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
     t.integer "thing_id"
@@ -210,14 +210,14 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
-  create_table "student_courses", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+  create_table "student_courses", id: :integer, force: :cascade do |t|
     t.integer "student_id"
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "student_details", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "student_details", id: :integer, force: :cascade do |t|
     t.integer "student_id"
     t.integer "student_number"
     t.string "preferred_phone"
@@ -250,7 +250,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["transcription_coordinator_id"], name: "transcription_coordinator_index"
   end
 
-  create_table "students", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "students", id: :integer, force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "username"
@@ -261,7 +261,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.integer "notes_count", default: 0, null: false
   end
 
-  create_table "terms", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "terms", id: :integer, force: :cascade do |t|
     t.string "name"
     t.date "start_date"
     t.date "end_date"
@@ -271,7 +271,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.index ["end_date"], name: "index_terms_on_end_date"
   end
 
-  create_table "todo_items", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "todo_items", id: :integer, force: :cascade do |t|
     t.string "summary"
     t.integer "item_id"
     t.integer "todo_list_id"
@@ -283,7 +283,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "todo_lists", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "todo_lists", id: :integer, force: :cascade do |t|
     t.string "name"
     t.integer "created_by_id"
     t.integer "assigned_to_id"
@@ -292,7 +292,7 @@ ActiveRecord::Schema.define(version: 20210818135757) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci" do |t|
+  create_table "users", id: :integer, force: :cascade do |t|
     t.string "username"
     t.string "last_name"
     t.string "role"
