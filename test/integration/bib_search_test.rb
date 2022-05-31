@@ -2,15 +2,6 @@ require 'test_helper'
 
 class BibSearchTest < ActionDispatch::IntegrationTest
 
-  if ENV["WORLDCAT_KEY"] == nil 
-    puts "To run integration test for Bib Search set the two params"
-    puts  "PREREQ: ENV[WORLDCAT_KEY] is set to a key"
-  else
-
-    PapyrusSettings[:worldcat_key] = ENV["WORLDCAT_KEY"]
-    PapyrusSettings[:solr_url] = ENV["SOLR_PATH"]
-
-
 #    should "search SOLR for multiple items" do
       #search_string = "Caesar"
       #record = BibRecord.new
@@ -28,7 +19,6 @@ class BibSearchTest < ActionDispatch::IntegrationTest
       #assert_equal item_id, item["id"]
 #    end
 
-
     should "search WOLRDCAT for Multiple Items" do
       search_string = "Caesar"
       record = BibRecord.new
@@ -45,10 +35,4 @@ class BibSearchTest < ActionDispatch::IntegrationTest
       assert_not_nil item
       assert_equal item_id, item.id
     end
-
-
-
-  end
-
-
 end
