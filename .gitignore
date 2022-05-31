@@ -11,6 +11,7 @@ REVISION
 assets_manifest_backup/
 config/secrets.yml
 config/database.yml
+config/api_keys.yml
 node_modules/
 public/assets/
 yarn.lock
