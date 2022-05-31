@@ -11,6 +11,7 @@ include ActionDispatch::TestProcess
   #puts 'Install the Turn gem for prettier test output.'
 #end
 
+
 include ActionDispatch::TestProcess
 
 
@@ -20,6 +21,9 @@ class ActiveSupport::TestCase
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
 
+  def setup
+    Rails.application.load_seed
+  end
 
   #fixtures :all
 
