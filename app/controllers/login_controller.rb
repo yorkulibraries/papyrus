@@ -7,7 +7,7 @@ class LoginController < ApplicationController
 
     users = User.unblocked.where("username = ? OR username = ?", username, alt_username)
 
-    if users.size > 0
+    if users.size == 1
 
       user = users.first
 
