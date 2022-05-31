@@ -21,8 +21,8 @@ StudentDetails.create!([
 ])
 end 
 
-if RailsSettings::Settings.count == 0
-RailsSettings::Settings.create!([
+if PapyrusSettings.count == 0
+PapyrusSettings.create!([
   {var: "app_name", value: "Papyrus", thing_id: nil, thing_type: nil},
   {var: "app_owner", value: "York University Libraries", thing_id: nil, thing_type: nil},
   {var: "org_name", value: "York University Libraries", thing_id: nil, thing_type: nil},
@@ -78,7 +78,7 @@ RailsSettings::Settings.create!([
   {var: "import_notify_coordinator", value: "true", thing_id: nil, thing_type: nil},
   {var: "student_portal_welcome_message", value: "Welcome to Papyrus please verify all your account information.", thing_id: nil, thing_type: nil},
   {var: "student_portal_welcome_enable", value: "true", thing_id: nil, thing_type: nil},
-  {var: "api_enable", value: "false", thing_id: nil, thing_type: nil},
+  {var: "api_enable", value: "true", thing_id: nil, thing_type: nil},
   {var: "api_http_auth_enable", value: "true", thing_id: nil, thing_type: nil},
   {var: "api_http_auth_user", value: "papyrus_api", thing_id: nil, thing_type: nil},
   {var: "api_http_auth_pass", value: "secret-api", thing_id: nil, thing_type: nil},
