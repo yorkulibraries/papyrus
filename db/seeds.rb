@@ -8,7 +8,7 @@
 
 
 
-if Rails.env != 'test'
+if Rails.env != 'test' and User.all.count == 0
 User.create!([
   {username: "admin", last_name: "User", role: "admin", inactive: false, type: nil, email: "admin@me.ca", created_by_user_id: nil, email_sent_at: nil, blocked: false, last_logged_in_at: "2022-05-25 14:32:52", first_name: "Admin", last_active_at: "2022-05-25 14:32:52", first_time_login: true},
   {username: "cordinator", last_name: "User", role: "coordinator", inactive: false, type: nil, email: "coordinator@me.ca", created_by_user_id: nil, email_sent_at: nil, blocked: false, last_logged_in_at: nil, first_name: "Coordinator", last_active_at: nil, first_time_login: true},
@@ -21,6 +21,7 @@ StudentDetails.create!([
 ])
 end 
 
+if RailsSettings::Settings.count == 0
 RailsSettings::Settings.create!([
   {var: "app_name", value: "Papyrus", thing_id: nil, thing_type: nil},
   {var: "app_owner", value: "York University Libraries", thing_id: nil, thing_type: nil},
@@ -94,3 +95,4 @@ RailsSettings::Settings.create!([
   {var: "alma_apikey", value: "apikeyhere", thing_id: nil, thing_type: nil},
   {var: "alma_region", value: "https://api-na.hosted.exlibrisgroup.com", thing_id: nil, thing_type: nil}
 ])
+end
