@@ -18,7 +18,7 @@ gem "sprockets", ">= 3.7.2"
 
 ## DATABASES ##
 gem 'sqlite3'
-gem "mysql2", "0.5.3"
+gem "mysql2", "0.5.3", group: :production
 
 ## CSS AND JAVASCRIPT ##
 #gem 'therubyracer', "0.12.3", platforms: :ruby
@@ -71,9 +71,7 @@ gem 'exception_notification', "4.2.1"
 gem 'rack-mini-profiler', require: false
 
 
-gem 'guard-livereload', "2.5.2", require: false
 gem "rack-livereload", "0.3.16"
-gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 gem "awesome_print", "1.8.0"
 
 ## CRONJOBS ##
@@ -88,9 +86,12 @@ group :test do
   gem 'shoulda-context'
   gem "mocha", require: false
   gem "ruby-prof", "0.16.2"
-  gem 'database_cleaner', "1.6.1"
+  gem 'database_cleaner-active_record', '~> 2.0', '>= 2.0.1'
+  gem 'minitest-around', '~> 0.5.0'
 
   gem "guard-minitest", "2.4.6"
+  gem 'guard-bundler', require: false
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
@@ -103,6 +104,7 @@ end
 
 
 group :development do
+  gem 'guard-livereload', "2.5.2", require: false
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
   #gem "bullet" # Testing SQL queries
