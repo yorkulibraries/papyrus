@@ -61,7 +61,7 @@ PapyrusSettings.create!([
   {var: "email_acquisitions_body", value: "Please deliver to Library Accessibility Services Scott Library", thing_id: nil, thing_type: nil},
   {var: "acquisition_sources", value: "", thing_id: nil, thing_type: nil},
   {var: "acquisition_reasons", value: "", thing_id: nil, thing_type: nil},
-  {var: "course_sync_on_login", value: "true", thing_id: nil, thing_type: nil},
+  {var: "course_sync_on_login", value: "false", thing_id: nil, thing_type: nil},
   {var: "course_listing_header", value: "HTTP_PYORK_COURSES", thing_id: nil, thing_type: nil},
   {var: "course_listing_separator", value: ",", thing_id: nil, thing_type: nil},
   {var: "term_fall_start", value: "Sep 1", thing_id: nil, thing_type: nil},
