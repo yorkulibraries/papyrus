@@ -76,4 +76,13 @@ class AttachmentTest < ActiveSupport::TestCase
     assert_equal Attachment.files.size, 2, "Two files"
     assert_equal Attachment.all.size, 3, "All together 3"
   end
+
+
+  def teardown
+    Attachment.all.each do |a|
+      f = "#{Rails.public_path}#{a.file.to_s}"
+      File.delete(f) if File.exist?(f)
+      CarrierWave.clean_cached_files! 1
+    end
+  end
 end
