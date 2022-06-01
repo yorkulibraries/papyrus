@@ -2,22 +2,12 @@ class LoginController < ApplicationController
 
   def new
 
-    if Rails.env.development? || Rails.env.vagrant?
-        if params[:as].nil?
-          username = User::ADMIN
-        else
-          username = params[:as]
-        end
-        alt_username = username
-    else
-       username = request.headers[PapyrusSettings.auth_cas_header]
-       alt_username = request.headers[PapyrusSettings.auth_cas_header_alt]
-    end
-
+    username = request.headers[PapyrusSettings.auth_cas_header]
+    alt_username = request.headers[PapyrusSettings.auth_cas_header_alt]
 
     users = User.unblocked.where("username = ? OR username = ?", username, alt_username)
 
-    if users.size > 0
+    if users.size == 1
 
       user = users.first
 

@@ -1,6 +1,7 @@
 class My::ApiController < My::BaseController
 
   skip_before_action :check_terms_acceptance
+  skip_before_action :sync_courses
   skip_before_action :authorize_controller, only: :login_as_student
   skip_before_action :load_student, only: [:login_as_student, :logout_as_student]
 

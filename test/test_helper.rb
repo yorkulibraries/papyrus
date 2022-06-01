@@ -34,6 +34,22 @@ class ActiveSupport::TestCase
     PapyrusSettings[:alma_api_key] = api_keys[:alma_api_key]
   end
 
+  def teardown
+    Attachment.all.each do |a|
+      f = "#{Rails.public_path}#{a.file.to_s}"
+      File.delete(f) if File.exist?(f) and File.file?(f)
+      if a.deleted
+        f = "#{File.dirname(a.file.file.path)}/deleted/#{a.id}-#{a.file.file.filename}"
+        File.delete(f) if File.exist?(f) and File.file?(f)
+      end
+    end
+    Document.all.each do |a|
+      f = "#{Rails.public_path}#{a.attachment}"
+      File.delete(f) if File.exist?(f)
+    end
+    CarrierWave.clean_cached_files! 0
+  end
+
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
