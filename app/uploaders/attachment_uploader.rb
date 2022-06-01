@@ -25,10 +25,10 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     true
   end
 
-  def cache_dir
+  #def cache_dir
     # should return path to cache dir
-    Rails.root.join 'uploads/cache'
-  end
+    #Rails.root.join 'uploads/cache'
+  #end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
