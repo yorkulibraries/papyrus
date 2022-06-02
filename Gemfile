@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 ## SECURITY FIX ##
-gem "rack", "2.2.3"
+gem "rack", "2.2.3.1"
 gem "websocket-extensions", ">= 0.1.5"
 gem "json", ">= 2.3.0"
 
@@ -59,7 +59,7 @@ gem "axlsx", git: 'https://github.com/randym/axlsx.git'
 gem 'axlsx_rails', "0.5.1"
 
 ## UPLOADING AND MANIPULATING FILES ##
-gem "carrierwave", "1.1.0"
+gem 'carrierwave', '~> 2.2', '>= 2.2.2'
 gem "mini_magick", "4.7.1"
 gem "mime-types"
 
@@ -70,10 +70,7 @@ gem 'exception_notification', "4.2.1"
 ## PROFILING
 gem 'rack-mini-profiler', require: false
 
-
-gem 'guard-livereload', "2.5.2", require: false
 gem "rack-livereload", "0.3.16"
-gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 gem "awesome_print", "1.8.0"
 
 ## CRONJOBS ##
@@ -89,10 +86,12 @@ group :test do
   gem "mocha", require: false
   gem "ruby-prof", "0.16.2"
   gem 'database_cleaner', "1.6.1"
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem "guard-minitest", "2.4.6"
-
+  gem 'guard-bundler', require: false
   gem 'capybara', '~> 2.13'
+  gem 'addressable', '~> 2.8'
   gem 'selenium-webdriver'
 
   gem 'rails-controller-testing' ## KEEP THIS AROUND SINCE IT'S USEFUL FOR TESTS in CONTROLLERS
@@ -103,10 +102,12 @@ end
 
 
 group :development do
+  gem 'guard-livereload', "2.5.2", require: false
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
   #gem "bullet" # Testing SQL queries
 	gem "mailcatcher" # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
+  gem 'sinatra', '~> 2.2', require: false
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'web-console', '>= 3.3.0'
@@ -117,4 +118,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mimemagic', '~> 0.3.10'
-gem 'puma'
+gem 'puma', '~> 5.6', '>= 5.6.4'
