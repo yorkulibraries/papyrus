@@ -89,7 +89,7 @@ group :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem "guard-minitest", "2.4.6"
-  gem 'guard-bundler', require: false
+  gem 'guard-bundler', '~> 2.2', '>= 2.2.1', require: false
   gem 'capybara', '~> 2.13'
   gem 'addressable', '~> 2.8'
   gem 'selenium-webdriver'
