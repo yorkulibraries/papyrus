@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+ruby '2.6.9'
 
 ## SECURITY FIX ##
 gem "rack", "2.2.3.1"
@@ -17,24 +18,21 @@ gem 'coffee-rails', '~> 4.2'
 gem "sprockets", ">= 3.7.2"
 
 ## DATABASES ##
-gem 'sqlite3'
-gem "mysql2", "0.5.3"
+gem "mysql2", "0.5.3", group: :production
 
 ## CSS AND JAVASCRIPT ##
-#gem 'therubyracer', "0.12.3", platforms: :ruby
 gem "mini_racer"
 gem 'jquery-rails', "4.3.1"
 gem 'jquery-ui-rails', "6.0.1"
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
 gem 'bootstrap', "4.5.2"
-#gem "less-rails", "2.8.0"
 gem "simple_form", "3.5.0"
 gem 'font-awesome-sass', '~> 5.13.0'
 gem 'best_in_place', '3.1.1'
 
 ## TOOLS AND UTILITIES ##
-gem "worldcatapi", "1.0.5"
+gem "worldcatapi", "1.0.5", git: "https://github.com/goodfeel/worldcatapi.git"
 gem 'kaminari', "0.17.0"
 gem "cancancan", "2.0.0"
 gem 'liquid', '4.0.0'
@@ -47,7 +45,6 @@ gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
 gem "rubyzip", "~> 1.2.2"
 gem 'search_cop', "1.1.0"
-#gem "nokogiri", "~> 1.8.2"
 
 ## EX LIBRIS INTEGRATION ALMA, PRIMO
 gem "alma"
@@ -70,7 +67,6 @@ gem 'exception_notification', "4.2.1"
 ## PROFILING
 gem 'rack-mini-profiler', require: false
 
-gem "rack-livereload", "0.3.16"
 gem "awesome_print", "1.8.0"
 
 ## CRONJOBS ##
@@ -86,10 +82,9 @@ group :test do
   gem "mocha", require: false
   gem "ruby-prof", "0.16.2"
   gem 'database_cleaner', "1.6.1"
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem "guard-minitest", "2.4.6"
-  gem 'guard-bundler', '~> 2.2', '>= 2.2.1', require: false
+  gem 'guard-bundler', '~> 3.0'
   gem 'capybara', '~> 2.13'
   gem 'addressable', '~> 2.8'
   gem 'selenium-webdriver'
@@ -100,15 +95,19 @@ group :test do
 
 end
 
+group :development, :test do
+  gem 'sqlite3'
+  gem "rack-livereload", "0.3.16"
+  gem 'guard-livereload', "2.5.2", require: false
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
 
 group :development do
-  gem 'guard-livereload', "2.5.2", require: false
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
   #gem "bullet" # Testing SQL queries
 	gem "mailcatcher" # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
   gem 'sinatra', '~> 2.2', require: false
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
