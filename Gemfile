@@ -107,7 +107,7 @@ group :development do
 	gem "faker"
   #gem "bullet" # Testing SQL queries
 	gem "mailcatcher" # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
-  gem 'sinatra', '~> 2.2', require: false
+  gem 'sinatra', '>= 1.2', '< 2.2'
 
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
