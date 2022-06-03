@@ -279,7 +279,7 @@ GEM
       rack
     rack-mini-profiler (0.10.5)
       rack (>= 1.2.0)
-    rack-protection (2.2.0)
+    rack-protection (2.1.0)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -357,10 +357,10 @@ GEM
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
-    sinatra (2.2.0)
+    sinatra (2.1.0)
       mustermann (~> 1.0)
       rack (~> 2.2)
-      rack-protection (= 2.2.0)
+      rack-protection (= 2.1.0)
       tilt (~> 2.0)
     skinny (0.2.4)
       eventmachine (~> 1.0.0)
@@ -389,7 +389,7 @@ GEM
       rack (>= 1.0.0)
     thor (0.20.3)
     thread_safe (0.3.6)
-    tilt (2.0.9)
+    tilt (2.0.10)
     treetop (1.6.10)
       polyglot (~> 0.3)
     tzinfo (1.2.7)
@@ -481,7 +481,7 @@ DEPENDENCIES
   shoulda-context
   shoulda-matchers
   simple_form (= 3.5.0)
-  sinatra (~> 2.2)
+  sinatra (>= 1.2, < 2.2)
   spring (= 2.0.2)
   spring-watcher-listen (~> 2.0.0)
   sprockets (>= 3.7.2)
