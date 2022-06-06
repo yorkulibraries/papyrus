@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.6.9'
+# ruby '2.6.9'
 
 ## SECURITY FIX ##
 gem "rack", "2.2.3.1"
@@ -37,13 +37,13 @@ gem 'kaminari', "0.17.0"
 gem "cancancan", "2.0.0"
 gem 'liquid', '4.0.0'
 gem 'email_validator', "1.6.0"
-gem "rails-settings-cached", "0.4.1"
+gem 'rails-settings-cached', '~> 0.4.2'
 #gem "audited-activerecord", "4.0.0"
 gem "audited", "~> 4.5"
 gem 'remotipart', '1.3.1' # submit files remotely
 gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
-gem "rubyzip", "~> 1.2.2"
+gem 'rubyzip'
 gem 'search_cop', "1.1.0"
 
 ## EX LIBRIS INTEGRATION ALMA, PRIMO
@@ -52,8 +52,7 @@ gem "primo", git: "https://github.com/tulibraries/primo.git"
 
 ## EXEL EXPORT ##
 gem "roo", '~> 2.3.1'
-gem "axlsx", git: 'https://github.com/randym/axlsx.git'
-gem 'axlsx_rails', "0.5.1"
+gem 'caxlsx'
 
 ## UPLOADING AND MANIPULATING FILES ##
 gem 'carrierwave', '~> 2.2', '>= 2.2.2'
@@ -73,7 +72,7 @@ gem "awesome_print", "1.8.0"
 gem 'whenever', require: false
 
 group :test do
-  gem "minitest", "5.10.2"
+  gem 'minitest', '~> 5.15'
   gem 'webrat', "0.7.3"
   gem 'factory_girl_rails', "4.8.0"
   gem 'shoulda', "3.5"
@@ -90,13 +89,12 @@ group :test do
   gem 'selenium-webdriver'
 
   gem 'rails-controller-testing' ## KEEP THIS AROUND SINCE IT'S USEFUL FOR TESTS in CONTROLLERS
-  gem 'spring', "2.0.2"
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
 
 end
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'sqlite3', '~> 1.4', '>= 1.4.2'
   gem "rack-livereload", "0.3.16"
   gem 'guard-livereload', "2.5.2", require: false
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -106,15 +104,17 @@ group :development do
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
   #gem "bullet" # Testing SQL queries
-	gem "mailcatcher" # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
-  gem 'sinatra', '>= 1.2', '< 2.2'
+	#gem 'mailcatcher', '~> 0.8.2' # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
+#  gem 'sinatra', '>= 1.2', '< 2.2'
 
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '~> 3.7', '>= 3.7.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'mimemagic', '~> 0.3.10'
+gem 'mimemagic', '~> 0.4.3'
 gem 'puma', '~> 5.6', '>= 5.6.4'
+gem 'bigdecimal', '1.3.5'
+gem 'psych', '< 4'
