@@ -50,7 +50,10 @@ gem "alma"
 gem "primo", git: "https://github.com/tulibraries/primo.git", branch: 'main'
 
 ## EXEL EXPORT ##
-gem 'caxlsx_rails', '~> 0.6.3'
+gem "roo", '~> 2.3.1'
+gem "axlsx", git: 'https://github.com/randym/axlsx.git'
+gem 'axlsx_rails', "0.5.1"
+
 
 ## UPLOADING AND MANIPULATING FILES ##
 gem 'carrierwave', '~> 2.2', '>= 2.2.2'
