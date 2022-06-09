@@ -57,7 +57,7 @@ class Items::CourseKitsController < AuthenticatedController
       params[:item][:title] = "Course Kit For #{c.year} / #{c.subject}_#{c.course_id}.#{c.credits} #{c.section}"
     end
 
-    if @course_kit_form.valid? && @item.update_attributes(item_params)
+    if @course_kit_form.valid? && @item.update(item_params)
       redirect_to @item
     else
       render :edit

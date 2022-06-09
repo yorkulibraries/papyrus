@@ -61,7 +61,7 @@ class UsersController < AuthenticatedController
   def update
     @user = User.find(params[:id])
     @user.audit_comment = "Updated User Details"
-    if @user.update_attributes(user_params)
+    if @user.update(user_params)
       redirect_to users_path, notice: "Successfully updated user."
     else
       render action: 'edit'

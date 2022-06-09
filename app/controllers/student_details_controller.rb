@@ -28,7 +28,7 @@ class StudentDetailsController < AuthenticatedController
   def update
     @student_details = @student.student_details
     @student_details.audit_comment = "Updated student details"
-    if @student_details.update_attributes(student_details_params)
+    if @student_details.update(student_details_params)
       redirect_to student_details_path(@student), notice:  "Successfully updated additional student details."
     else
       render :action => 'edit'
