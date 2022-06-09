@@ -179,7 +179,7 @@ class StudentsControllerTest <  ActionDispatch::IntegrationTest
   ######### COMPLETE ORIENTATION ######
   should "complete student orientation field" do
     student = create(:student, name: "Terry Jones", username: "terryjones", email: "tj@yorku.ca", inactive: false)
-    student.details.update_attributes(orientation_completed: false, orientation_completed_at: nil)
+    student.details.update(orientation_completed: false, orientation_completed_at: nil)
 
     get complete_orientation_student_path(student)
     assert_response :redirect
