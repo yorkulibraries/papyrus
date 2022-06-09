@@ -164,7 +164,7 @@ class ItemsController < AuthenticatedController
   def update
     @item = Item.find(params[:id])
     @item.audit_comment = "Updated an existing item."
-    if @item.update_attributes(item_params)
+    if @item.update(item_params)
       redirect_to @item, notice:  "Successfully updated item."
     else
       render action: 'edit'

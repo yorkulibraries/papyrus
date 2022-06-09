@@ -94,7 +94,7 @@ class AttachmentsController < AuthenticatedController
     @attachment = @item.attachments.find(params[:id])
     @attachment.user = @current_user
     @attachment.audit_comment = "Updated an existing file"
-    if @attachment.update_attributes(attachment_params)
+    if @attachment.update(attachment_params)
       redirect_to @item, notice: "Successfully updated a file."
     else
       render :action => 'edit'

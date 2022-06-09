@@ -45,7 +45,7 @@ class TermsController < AuthenticatedController
 
   def update
     @term = Term.find(params[:id])
-    if @term.update_attributes(term_params)
+    if @term.update(term_params)
       redirect_to @term, notice: "Successfully updated term."
     else
       render action: 'edit'

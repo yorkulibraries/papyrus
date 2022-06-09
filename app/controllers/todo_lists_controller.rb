@@ -42,7 +42,7 @@ class TodoListsController < AuthenticatedController
   def update
 
     @todo_list.audit_comment = "Updating Todo List"
-    if @todo_list.update_attributes(todo_list_params)
+    if @todo_list.update(todo_list_params)
       respond_to do |format|
         format.html { redirect_to  @todo_list, notice: "Successfully updated scan list." }
         format.js

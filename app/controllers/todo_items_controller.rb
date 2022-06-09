@@ -36,7 +36,7 @@ class TodoItemsController < AuthenticatedController
     @todo_item = @todo_list.todo_items.find(params[:id])
     @todo_item.audit_comment = "Updating Todo Item"
 
-    if @todo_item.update_attributes(todo_item_params)
+    if @todo_item.update(todo_item_params)
       respond_to do |format|
         format.html { redirect_to  [@todo_list, @todo_item], notice: "Successfully updated scan item." }
         format.js
