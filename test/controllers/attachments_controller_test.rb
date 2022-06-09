@@ -134,7 +134,7 @@ class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal "binary", response.headers["Content-Transfer-Encoding"]
-    assert_equal "attachment; filename=\"#{File.basename(attachment.file_url)}\"", response.headers["Content-Disposition"]
+    assert_equal "attachment; filename=\"#{File.basename(attachment.file_url)}\"; filename*=UTF-8''#{File.basename(attachment.file_url)}", response.headers["Content-Disposition"]
 
     mime_type = MIME::Types.type_for(attachment.file.path).first.content_type
     assert_equal mime_type, response.headers["Content-Type"]

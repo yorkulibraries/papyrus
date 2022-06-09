@@ -73,7 +73,7 @@ class AttachmentTest < ActiveSupport::TestCase
     create_list(:attachment, 2, is_url: false)
 
     assert_equal Attachment.urls.size, 1, "1 URL"
-    assert_equal Attachment.files.size, 2, "Two files"
+    assert_equal Attachment.where(url: nil).count, 2, "Two files"
     assert_equal Attachment.all.size, 3, "All together 3"
   end
 end
