@@ -37,7 +37,7 @@ class AnnouncementsController < AuthenticatedController
   def update
     @announcement = Announcement.find(params[:id])
     @announcement.audit_comment = "Updating announcement"
-    if @announcement.update_attributes(announcement_params)
+    if @announcement.update(announcement_params)
       pp @annoucement
       respond_to do |format|
         format.html { redirect_to announcements_path, notice: "Successfully updated announcement." }

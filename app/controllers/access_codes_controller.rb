@@ -46,7 +46,7 @@ class AccessCodesController < AuthenticatedController
     @access_code =  @student.access_codes.find(params[:id])
     @access_code.audit_comment = "Updating access code information"
 
-    if @access_code.update_attributes(access_code_params)
+    if @access_code.update(access_code_params)
       redirect_to @access_code, notice: "Successfully updated access code."
     else
       render  action: 'edit'
