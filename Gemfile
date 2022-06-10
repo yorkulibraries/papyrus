@@ -7,7 +7,7 @@ gem "websocket-extensions", ">= 0.1.5"
 gem "json", ">= 2.3.0"
 
 ## RAILS and server ##
-gem 'rails', '~> 6.1.6'
+gem 'rails', '~> 6.0'
 
 ## RAILS related ##
 gem 'jbuilder', '~> 2.5'
