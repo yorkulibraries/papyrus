@@ -171,7 +171,7 @@ GEM
     ezwadl (0.1.0)
       httparty (~> 0.14)
       nokogiri (~> 1.6)
-    factory_girl (4.8.1)
+    factory_girl (4.8.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
@@ -442,6 +442,7 @@ DEPENDENCIES
   database_cleaner (= 1.6.1)
   email_validator (= 1.6.0)
   exception_notification (~> 4.4.0)
+  factory_girl (= 4.8.0)
   factory_girl_rails (= 4.8.0)
   faker
   font-awesome-sass (~> 5.13.0)

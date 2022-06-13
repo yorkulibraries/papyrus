@@ -73,6 +73,7 @@ group :test do
   gem "minitest", "5.10.2"
   gem 'webrat', "0.7.3"
   gem 'factory_girl_rails', "4.8.0"
+  gem "factory_girl", "4.8.0"
   gem 'shoulda', "3.5"
   gem 'shoulda-matchers'
   gem 'shoulda-context'
