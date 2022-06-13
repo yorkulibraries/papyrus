@@ -1,4 +1,4 @@
-Papyrus::Application.routes.draw do
+Rails.application.routes.draw do
 
 
   ## API V1 routes

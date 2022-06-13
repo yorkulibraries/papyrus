@@ -34,7 +34,8 @@ module Papyrus
     config.time_zone = 'Eastern Time (US & Canada)'
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 6.0
+    config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob" 
 
     config.filter_parameters += [:password]
 
