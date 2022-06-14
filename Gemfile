@@ -90,6 +90,7 @@ group :test do
   gem 'rails-controller-testing' ## KEEP THIS AROUND SINCE IT'S USEFUL FOR TESTS in CONTROLLERS
   gem 'spring', "2.0.2"
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'minitest-around'
 end
 
 group :development, :test do
