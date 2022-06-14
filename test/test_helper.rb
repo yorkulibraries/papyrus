@@ -9,6 +9,7 @@ include ActionDispatch::TestProcess
 #rescue LoadError
   #puts 'Install the Turn gem for prettier test output.'
 #end
+require 'database_cleaner'
 
 include ActionDispatch::TestProcess
 
