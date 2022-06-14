@@ -43,5 +43,6 @@ module Papyrus
 
     config.i18n.enforce_available_locales = false
 
+    config.active_record.belongs_to_required_by_default = false
   end
 end
