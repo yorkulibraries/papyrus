@@ -40,4 +40,7 @@ Rails.application.configure do
   config.log_tags = [:uuid, :remote_ip]
 
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+
+  config.web_console.permissions = '192.168.168.1/16'
+  config.hosts << "papyrus.me.ca"
 end
