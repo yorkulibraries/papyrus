@@ -25,7 +25,7 @@ class User < ApplicationRecord
 
   ## RELATIONS
 
-  belongs_to :created_by, foreign_key: "created_by_user_id", optional: true
+  belongs_to :created_by, foreign_key: "created_by_user_id"
 
 
   ## VALIDATIONS

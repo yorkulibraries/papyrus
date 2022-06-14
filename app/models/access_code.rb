@@ -4,7 +4,7 @@ class AccessCode < ApplicationRecord
 
   ## RELATIONS
 
-  belongs_to :student, optional: true
+  belongs_to :student
   belongs_to :created_by, class_name: "User"
 
   ## AUDIT TRAIL
