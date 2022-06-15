@@ -7,7 +7,7 @@ gem "websocket-extensions", ">= 0.1.5"
 gem "json", ">= 2.3.0"
 
 ## RAILS and server ##
-gem 'rails', '~> 6.1.6'
+gem 'rails', '~> 7.0.3'
 
 ## RAILS related ##
 gem 'jbuilder', '~> 2.5'
@@ -38,7 +38,7 @@ gem "cancancan", "2.0.0"
 gem 'liquid', '4.0.0'
 gem 'email_validator', "1.6.0"
 gem "rails-settings-cached", "0.4.1"
-gem "audited", "~> 4.5"
+gem 'audited', '~> 5.0'
 gem 'remotipart', '1.3.1' # submit files remotely
 gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
@@ -62,7 +62,7 @@ gem "mime-types"
 
 # NOTIFICATIONS
 
-gem 'exception_notification', '~> 4.4.0'
+gem 'exception_notification', '~> 4.4', '>= 4.4.1'
 
 gem "awesome_print", "1.8.0"
 
@@ -88,8 +88,6 @@ group :test do
   gem 'selenium-webdriver'
 
   gem 'rails-controller-testing' ## KEEP THIS AROUND SINCE IT'S USEFUL FOR TESTS in CONTROLLERS
-  gem 'spring', "2.0.2"
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'minitest-around'
 end
 
