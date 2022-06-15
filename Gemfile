@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.7.0'
+ruby '3.1.2'
 
 ## SECURITY FIX ##
 gem "rack", "2.2.3.1"
@@ -104,7 +104,6 @@ group :development do
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
