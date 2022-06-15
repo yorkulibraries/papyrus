@@ -13,9 +13,9 @@ Prepare the CSV file similar to the lines below:
 
 ```
 student_no,firstname,lastname,studentemail,counsellorname,counselloremail,Date consent form signed,Access to Library Accessible Lab,Book retrieval from stacks,Alternate Format Transcription,PDF,Large Print,Daisy Audio,Braille,Word,Other (specify),Other (Please do not exceed 160 characters):,Additional Information
-"987654321","Test","Tester","papyrus@mailinator.com","Ads, Katherine","papyrus-stu1@mailinator.com","Oct 24 2014  9:05AM","True","True","True","True","","","True","","","","This is additional information"
-"999999999","test","test","papyrus@mailinator.com","DSS, Judith","papyrus-stu1@mailinator.com","Oct  2 2014  3:48PM","True","True","True","True","True","True","True","True","True","mp3",""
-"111222333","John","Smith","papyrus@mailinator.com","Done, Sean","papyrus-stu1@mailinator.com","Oct 27 2014  2:07PM","","","True","True","","","","","","","Student requires 16 point font or larger"
+"987654321","Test","Tester","student1@mailinator.com","Ads, Katherine","co1@mailinator.com","Oct 24 2014  9:05AM","True","True","True","True","","","True","","","","This is additional information"
+"999999999","test","test","student2@mailinator.com","DSS, Judith","co2@mailinator.com","Oct  2 2014  3:48PM","True","True","True","True","True","True","True","True","True","mp3",""
+"111222333","John","Smith","student3@mailinator.com","Done, Sean","co3@mailinator.com","Oct 27 2014  2:07PM","","","True","True","","","","","","","Student requires 16 point font or larger"
 ```
 
 Find the user ID of the Coordinator from the Papyrus Users screen and enter in the command below.
