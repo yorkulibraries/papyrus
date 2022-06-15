@@ -7,7 +7,7 @@ gem "websocket-extensions", ">= 0.1.5"
 gem "json", ">= 2.3.0"
 
 ## RAILS and server ##
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.1.6'
 
 ## RAILS related ##
 gem 'jbuilder', '~> 2.5'
@@ -97,7 +97,7 @@ group :development, :test do
   gem 'sqlite3'
   gem "rack-livereload", "0.3.16"
   gem 'guard-livereload', "2.5.2", require: false
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug'
   ## PROFILING
   gem 'rack-mini-profiler', require: false
 end
