@@ -1,14 +1,11 @@
 class LoginController < ApplicationController
-
   def new
-
     username = request.headers[PapyrusSettings.auth_cas_header]
     alt_username = request.headers[PapyrusSettings.auth_cas_header_alt]
 
     users = User.unblocked.where("username = ? OR username = ?", username, alt_username)
 
     if users.size == 1
-
       user = users.first
 
       session[:user_id] = user.id
@@ -38,9 +35,6 @@ class LoginController < ApplicationController
     cookies.delete("mayaauth", domain: PapyrusSettings.auth_cookies_domain)
     cookies.delete("pybpp", domain: PapyrusSettings.auth_cookies_domain)
 
-    redirect_to PapyrusSettings.auth_cas_logout_redirect || "http://www.google.ca"
+    redirect_to PapyrusSettings.auth_cas_logout_redirect, allow_other_host: true
   end
-
-
-
 end
