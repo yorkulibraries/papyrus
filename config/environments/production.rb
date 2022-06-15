@@ -47,7 +47,11 @@ Rails.application.configure do
 
   # set delivery method to :smtp, :sendmail or :test
   config.action_mailer.delivery_method = :sendmail
-  config.action_mailer.default_url_options = { :host => "www.library.yorku.ca" }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {from: 'no-reply@library.yorku.ca'}
+  config.action_mailer.default_url_options = { host: "papyrus.library.yorku.ca" }
+
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
