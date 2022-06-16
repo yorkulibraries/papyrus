@@ -111,4 +111,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mimemagic', '~> 0.3.10'
 gem 'puma', '~> 5.6', '>= 5.6.4'
-gem 'bigdecimal', '1.3.5'
+gem 'bigdecimal', '~> 3.1', '>= 3.1.2'
