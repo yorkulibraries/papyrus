@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.7.0'
+ruby '3.1.2'
 
 ## SECURITY FIX ##
 gem "rack", "2.2.3.1"
@@ -7,7 +7,7 @@ gem "websocket-extensions", ">= 0.1.5"
 gem "json", ">= 2.3.0"
 
 ## RAILS and server ##
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 7.0.3'
 
 ## RAILS related ##
 gem 'jbuilder', '~> 2.5'
@@ -38,7 +38,7 @@ gem "cancancan", "2.0.0"
 gem 'liquid', '4.0.0'
 gem 'email_validator', "1.6.0"
 gem "rails-settings-cached", "0.4.1"
-gem "audited", "~> 4.5"
+gem 'audited', '~> 5.0'
 gem 'remotipart', '1.3.1' # submit files remotely
 gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
@@ -62,7 +62,7 @@ gem "mime-types"
 
 # NOTIFICATIONS
 
-gem 'exception_notification', '~> 4.4.0'
+gem 'exception_notification', '~> 4.4', '>= 4.4.1'
 
 gem "awesome_print", "1.8.0"
 
@@ -88,8 +88,6 @@ group :test do
   gem 'selenium-webdriver'
 
   gem 'rails-controller-testing' ## KEEP THIS AROUND SINCE IT'S USEFUL FOR TESTS in CONTROLLERS
-  gem 'spring', "2.0.2"
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'minitest-around'
 end
 
@@ -97,7 +95,7 @@ group :development, :test do
   gem 'sqlite3'
   gem "rack-livereload", "0.3.16"
   gem 'guard-livereload', "2.5.2", require: false
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug'
   ## PROFILING
   gem 'rack-mini-profiler', require: false
 end
@@ -106,7 +104,6 @@ group :development do
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -114,4 +111,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mimemagic', '~> 0.3.10'
 gem 'puma', '~> 5.6', '>= 5.6.4'
-gem 'bigdecimal', '1.3.5'
+gem 'bigdecimal', '~> 3.1', '>= 3.1.2'
