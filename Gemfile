@@ -74,8 +74,7 @@ group :test do
   gem 'webrat', "0.7.3"
   gem 'factory_girl_rails', "4.8.0"
   gem "factory_girl", "4.8.0"
-  gem 'shoulda', "3.5"
-  gem 'shoulda-matchers'
+  gem 'shoulda', '~> 3.6'
   gem 'shoulda-context'
   gem "mocha", require: false
   gem "ruby-prof", "0.16.2"
@@ -111,4 +110,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'mimemagic', '~> 0.3.10'
 gem 'puma', '~> 5.6', '>= 5.6.4'
-gem 'bigdecimal', '~> 3.1', '>= 3.1.2'
