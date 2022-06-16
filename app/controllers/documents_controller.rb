@@ -51,7 +51,7 @@ class DocumentsController < AuthenticatedController
     @document.audit_comment = "Updated an existing document"
 
     respond_to do |format|
-      if @document.update_attributes(document_params)
+      if @document.update(document_params)
         format.js
       else
         format.js

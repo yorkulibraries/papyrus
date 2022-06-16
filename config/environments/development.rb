@@ -1,4 +1,6 @@
-Papyrus::Application.configure do
+require "active_support/core_ext/integer/time"
+
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   config.eager_load = false
@@ -38,4 +40,7 @@ Papyrus::Application.configure do
   config.log_tags = [:uuid, :remote_ip]
 
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+
+  config.web_console.permissions = '192.168.168.1/16'
+  config.hosts << "papyrus.me.ca"
 end

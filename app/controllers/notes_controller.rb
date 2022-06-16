@@ -43,7 +43,7 @@ class NotesController < AuthenticatedController
 
       respond_to do |format|
 
-        if @note.update_attributes(note_params)
+        if @note.update(note_params)
           format.js
           format.html { redirect_to student_notes_path(@student), notice: "Successfully updated note." }
         else

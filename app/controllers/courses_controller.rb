@@ -72,7 +72,7 @@ class CoursesController < AuthenticatedController
 
   def update
     @course = @term.courses.find(params[:id])
-    if @course.update_attributes(course_params)
+    if @course.update(course_params)
       redirect_to  @term, notice: "Successfully updated course."
     else
       render action: 'edit'
