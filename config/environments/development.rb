@@ -25,7 +25,7 @@ Rails.application.configure do
   # set delivery method to :smtp, :sendmail or :test
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
-  config.action_mailer.default_url_options = { host: "localhost:3000" }
+  config.action_mailer.default_url_options = { host: "papyrus.me.ca" }
 
   # Expands the lines which load the assets
   config.assets.debug = true
