@@ -1,7 +1,6 @@
-require 'test_helper'
+require "test_helper"
 
-class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
-
+class AttachmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user)
     log_user_in(@user)
@@ -19,14 +18,11 @@ class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
   end
 
   should "show new url form if params[url]" do
-
     get new_item_attachment_path(@item), params: { url: true }
     assert_response :success
   end
 
-
   should "show edit form" do
-
     attachment = create(:attachment, item: @item)
 
     get edit_item_attachment_path(@item, attachment)
@@ -44,7 +40,6 @@ class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
 
   ######### CREATING AND UPDATING ############
   should "create one new attachment" do
-
     assert_difference "Attachment.count", 1 do
       post item_attachments_url(@item), params: { attachment: attributes_for(:attachment) }
     end
@@ -53,13 +48,11 @@ class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
     assert_equal @user.id, attachment.user_id, "current user is the uploaded"
     assert_equal @item.id, attachment.item_id, "The item id is set"
     assert_redirected_to item_path(@item), "Redirects to item after success"
-
   end
 
   should "createa a URL attachment" do
-
     assert_difference "Attachment.count", 1 do
-      post item_attachments_url(@item),params: { attachment: { name: "NAME", url: "http:://wwwo.com", access_code_required: true } }
+      post item_attachments_url(@item), params: { attachment: { name: "NAME", url: "http:://wwwo.com", access_code_required: true } }
       attachment = assigns(:attachment)
       assert_equal 0, attachment.errors.size, "No errors should be"
       assert attachment.is_url?, "SHould be a URL"
@@ -68,16 +61,14 @@ class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
   end
 
   should "update an existing file" do
-
     attachment = create(:attachment, name: "woot", item: @item)
 
-    patch item_attachment_url(@item, attachment), params: { attachment: { name: "new"} }
+    patch item_attachment_url(@item, attachment), params: { attachment: { name: "new" } }
 
     a = assigns(:attachment)
     assert_equal "new", a.name, "Name changed"
 
-
-    patch item_attachment_url(@item, attachment), params: { attachment: { file: fixture_file_upload("test_picture.jpg", "image/jpg") } }
+    patch item_attachment_url(@item, attachment), params: { attachment: { file: fixture_file_upload("../test_picture.jpg", "image/jpg") } }
 
     attachment = assigns(:attachment)
 
@@ -86,13 +77,9 @@ class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
     assert_redirected_to item_url(@item), "Redirects back to item"
   end
 
-
-
-
   ##### DESTROYING ATTACHMENTS ######
 
   should "not destroy but set to deleted, but rename the file" do
-
     attachment = create(:attachment, name: "woot", item: @item)
 
     old_filename = attachment.file.file.filename
@@ -108,9 +95,7 @@ class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
     assert_redirected_to item_url(@item), "Redirects back to item"
   end
 
-
   should "delete multiple attachments" do
-
     list = create_list(:attachment, 5, item: @item, deleted: false)
 
     assert_no_difference "Attachment.count" do
@@ -123,23 +108,18 @@ class AttachmentsControllerTest <  ActionDispatch::IntegrationTest
     assert_equal @item.attachments.available.size, 2, "Two not deleted"
   end
 
-
   ##### DOWNLOADING ATTACHMENT ########
 
   should "let you download attachment" do
-
-    attachment = create(:attachment, name: "woot", item: @item, file: fixture_file_upload("test_picture.jpg", "image/jpg") )
+    attachment = create(:attachment, name: "woot", item: @item, file: fixture_file_upload("../test_picture.jpg", "image/jpg"))
 
     get get_file_item_attachment_url(@item, attachment)
 
     assert_response :success
     assert_equal "binary", response.headers["Content-Transfer-Encoding"]
-    assert_equal "attachment; filename=\"#{File.basename(attachment.file_url)}\"", response.headers["Content-Disposition"]
+    assert_equal "attachment; filename=\"#{File.basename(attachment.file_url)}\"; filename*=UTF-8''#{File.basename(attachment.file_url)}", response.headers["Content-Disposition"]
 
     mime_type = MIME::Types.type_for(attachment.file.path).first.content_type
     assert_equal mime_type, response.headers["Content-Type"]
-
   end
-
-
 end

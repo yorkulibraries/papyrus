@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.6.9'
+ruby '3.1.2'
 
 ## SECURITY FIX ##
 gem "rack", "2.2.3.1"
@@ -7,12 +7,12 @@ gem "websocket-extensions", ">= 0.1.5"
 gem "json", ">= 2.3.0"
 
 ## RAILS and server ##
-gem "rails", "5.1.6.2"
+gem 'rails', '~> 7.0.3'
 
 ## RAILS related ##
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt-ruby', '~> 3.1.2'
-gem 'sass-rails', '5.0.6'
+gem 'sass-rails', '5.0.8'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem "sprockets", ">= 3.7.2"
@@ -27,19 +27,18 @@ gem 'jquery-ui-rails', "6.0.1"
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
 gem 'bootstrap', "4.5.2"
-gem "simple_form", "3.5.0"
+gem "simple_form", "4.0.0"
 gem 'font-awesome-sass', '~> 5.13.0'
-gem 'best_in_place', '3.1.1'
+gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
 
 ## TOOLS AND UTILITIES ##
-gem "worldcatapi", "1.0.5", git: "https://github.com/goodfeel/worldcatapi.git"
+gem "worldcatapi", git: "https://github.com/taras-yorku/worldcatapi.git", ref: 'ed6d0cb849e86a032dc84741a5d169da19b8e385'
 gem 'kaminari', "0.17.0"
 gem "cancancan", "2.0.0"
 gem 'liquid', '4.0.0'
 gem 'email_validator', "1.6.0"
 gem "rails-settings-cached", "0.4.1"
-#gem "audited-activerecord", "4.0.0"
-gem "audited", "~> 4.5"
+gem 'audited', '~> 5.0'
 gem 'remotipart', '1.3.1' # submit files remotely
 gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
@@ -48,12 +47,13 @@ gem 'search_cop', "1.1.0"
 
 ## EX LIBRIS INTEGRATION ALMA, PRIMO
 gem "alma"
-gem "primo", git: "https://github.com/tulibraries/primo.git"
+gem "primo", git: "https://github.com/tulibraries/primo.git", branch: 'main'
 
 ## EXEL EXPORT ##
 gem "roo", '~> 2.3.1'
 gem "axlsx", git: 'https://github.com/randym/axlsx.git'
 gem 'axlsx_rails', "0.5.1"
+
 
 ## UPLOADING AND MANIPULATING FILES ##
 gem 'carrierwave', '~> 2.2', '>= 2.2.2'
@@ -62,10 +62,7 @@ gem "mime-types"
 
 # NOTIFICATIONS
 
-gem 'exception_notification', "4.2.1"
-
-## PROFILING
-gem 'rack-mini-profiler', require: false
+gem 'exception_notification', '~> 4.4', '>= 4.4.1'
 
 gem "awesome_print", "1.8.0"
 
@@ -76,8 +73,8 @@ group :test do
   gem "minitest", "5.10.2"
   gem 'webrat', "0.7.3"
   gem 'factory_girl_rails', "4.8.0"
-  gem 'shoulda', "3.5"
-  gem 'shoulda-matchers'
+  gem "factory_girl", "4.8.0"
+  gem 'shoulda', '~> 3.6'
   gem 'shoulda-context'
   gem "mocha", require: false
   gem "ruby-prof", "0.16.2"
@@ -90,27 +87,22 @@ group :test do
   gem 'selenium-webdriver'
 
   gem 'rails-controller-testing' ## KEEP THIS AROUND SINCE IT'S USEFUL FOR TESTS in CONTROLLERS
-  gem 'spring', "2.0.2"
-  gem 'spring-watcher-listen', '~> 2.0.0'
-
+  gem 'minitest-around'
 end
 
 group :development, :test do
   gem 'sqlite3'
   gem "rack-livereload", "0.3.16"
   gem 'guard-livereload', "2.5.2", require: false
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug'
+  ## PROFILING
+  gem 'rack-mini-profiler', require: false
 end
 
 group :development do
 	gem "populator", git: "https://github.com/ryanb/populator.git"
 	gem "faker"
-  #gem "bullet" # Testing SQL queries
-	gem "mailcatcher" # FOR TESTING MAIL. Run mailcatcher, then go to localhost:1080
-  gem 'sinatra', '>= 1.2', '< 2.2'
-
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

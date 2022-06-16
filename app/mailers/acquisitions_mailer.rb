@@ -1,7 +1,7 @@
 class AcquisitionsMailer < ActionMailer::Base
   default from: PapyrusSettings.email_from
 
-  add_template_helper(ItemsHelper)
+  helper ItemsHelper
 
   def send_acquisition_request(acquisition_request, current_user, bookstore = false)
     @template = Liquid::Template.parse(PapyrusSettings.email_acquisitions_body)
@@ -18,12 +18,11 @@ class AcquisitionsMailer < ActionMailer::Base
     end
 
     #if PapyrusSettings.email_allow && ! email.blank?
-      mail to: email, cc: current_user.email, subject: PapyrusSettings.email_acquisitions_subject
+    mail to: email, cc: current_user.email, subject: PapyrusSettings.email_acquisitions_subject
     #end
   end
 
   def test
     mail to: "whoot@wooot.com", subject: "WOOT THERE IS", body: "whehreoodfhoasdhfoas"
   end
-
 end

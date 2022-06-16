@@ -8,9 +8,9 @@
 <br/>
 
 <style>
-<%= Papyrus::Application.assets.find_asset('vendor/bootstrap.min.css').to_s %>
-<%= Papyrus::Application.assets.find_asset('themes/bootstrap3/common.css').to_s %>
-<%= Papyrus::Application.assets.find_asset('themes/bootstrap3/controllers/items.css').to_s %>
+<%= Rails.application.assets.find_asset('vendor/bootstrap.min.css').to_s %>
+<%= Rails.application.assets.find_asset('themes/bootstrap3/common.css').to_s %>
+<%= Rails.application.assets.find_asset('themes/bootstrap3/controllers/items.css').to_s %>
 
 .field { display: block; }
 td { valign: top; }

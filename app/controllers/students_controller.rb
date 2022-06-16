@@ -145,7 +145,7 @@ class StudentsController < AuthenticatedController
     @student = Student.find(params[:id])
     @student.audit_comment = "Updated the student"
     @student.student_details.audit_comment = "Updated student details."
-    if @student.update_attributes(student_params)
+    if @student.update(student_params)
       redirect_to @student, notice:  "Successfully updated student."
     else
       render :action => 'edit'
