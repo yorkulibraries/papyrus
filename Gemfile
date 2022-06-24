@@ -44,6 +44,7 @@ gem 'fullcalendar-rails', "3.0.0.0"
 gem 'momentjs-rails', "2.17.1"
 gem "rubyzip", "~> 1.2.2"
 gem 'search_cop', "1.1.0"
+gem 'ruby-saml', '~> 1.14'
 
 ## EX LIBRIS INTEGRATION ALMA, PRIMO
 gem "alma"
