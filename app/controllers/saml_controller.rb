@@ -3,7 +3,7 @@ class SamlController < ApplicationController
 
   def login
     request = OneLogin::RubySaml::Authrequest.new
-    redirect_to(request.create(saml_settings))
+    redirect_to(request.create(saml_settings), allow_other_host: true)
   end
 
   def consume
