@@ -179,10 +179,7 @@ Rails.application.routes.draw do
   match 'search/students(/:type)' => 'search#students', as: 'search_students', via: :get, defaults: { type: 'active' }
   match 'search' => 'search#index', as: 'search', via: :get
 
-  get 'saml/login', to: 'saml#login', as: 'login_sam'
-  post 'saml/consume',  to: 'saml#consume'
-  get 'saml/metadata',  to: 'saml#metadata'
-
   # Root
   root to: 'home#index'
+  devise_for :users
 end
