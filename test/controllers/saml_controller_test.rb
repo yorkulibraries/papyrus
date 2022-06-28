@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'webmock/minitest'
 
 class SamlControllerTest < ActionDispatch::IntegrationTest
   context 'Sending values for authentication' do
