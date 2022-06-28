@@ -1,2 +1,11 @@
-<h1>Invalid Login</h1>
-<p>This application requires <%= username_hint %> Authentication. If you see this, you have not been authenticated properly.</p>
+<div class="card">
+  <div class="card-header">
+    Invalid Login
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">This application requires <%= username_hint %> Authentication.</h5>
+    <p class="card-text">If you see this, you have not been authenticated properly.</p>
+    <%= link_to "Sign in", new_saml_user_session_path, class: "btn btn-primary" %>
+
+  </div>
+</div>
