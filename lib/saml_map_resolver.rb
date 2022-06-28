@@ -1,5 +1,5 @@
 #  app/lib/my_attribute_map_resolver
-class SamlMapResolverYork < DeviseSamlAuthenticatable::DefaultAttributeMapResolver
+class SamlMapResolver < DeviseSamlAuthenticatable::DefaultAttributeMapResolver
   def attribute_map
     issuer = saml_response.issuers.first
     case issuer
