@@ -33,7 +33,7 @@ gem 'simple_form', '4.0.0'
 
 ## TOOLS AND UTILITIES ##
 gem 'audited', '~> 5.0'
-gem 'cancancan', '2.0.0'
+gem 'cancancan', '~> 3.4'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'devise_saml_authenticatable', '1.9.0', github: 'apokalipto/devise_saml_authenticatable'
 gem 'email_validator', '1.6.0'
