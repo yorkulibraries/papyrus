@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   audited
-  devise :saml_authenticatable,
+  devise :database_authenticatable,
+         :saml_authenticatable,
          :registerable,
          :validatable
 
