@@ -182,4 +182,5 @@ Rails.application.routes.draw do
   # Root
   root to: 'home#index'
   devise_for :users
+  post 'login', to: 'login#create'
 end
