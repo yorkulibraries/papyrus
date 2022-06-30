@@ -74,12 +74,22 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
   end
 
   context 'Login and password authentication' do
-    should 'User creation and login in' do
+    setup do
       Rails.configuration.is_using_login_password_authentication = true
-      user = create(:user, username: 'someuser', password: '12345678')
+      @user = create(:user, username: 'someuser', password: '12345678')
       get login_path
+    end
+
+    should 'User creation and login in' do
       assert_response :success
-      post login_path, params: { email: user.email, password: '12345678' }
+      post login_path, params: { email: @user.email, password: '12345678' }
+      assert_equal 'Logged in!', flash[:notice]
+      assert_response :redirect
+    end
+
+    should 'invalid login in' do
+      assert_response :success
+      post login_path, params: { email: @user.email, password: '12345679' }
       assert_equal 'Logged in!', flash[:notice]
       assert_response :redirect
     end
