@@ -25,7 +25,7 @@ module Papyrus
     config.assets.paths << Rails.root.join('vendor', 'assets', 'javascripts')
 
     config.assets.initialize_on_precompile = false
-    config.saml_authentication = true
+    config.is_using_login_password_authentication = false
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W[#{config.root}/lib]

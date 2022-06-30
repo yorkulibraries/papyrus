@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :validatable
 
   def password_required?
-    false
+    Rails.configuration.is_using_login_password_authentication
   end
   ## CONTSTANTS
 
