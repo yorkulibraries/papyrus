@@ -87,10 +87,10 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
       assert_response :redirect
     end
 
-    should 'invalid login in' do
+    should 'invalid login in - adding number 9 at the end' do
       assert_response :success
       post login_path, params: { email: @user.email, password: '12345679' }
-      assert_equal 'Logged in!', flash[:notice]
+      assert_equal 'Email or password is invalid', flash[:notice]
       assert_response :redirect
     end
   end
