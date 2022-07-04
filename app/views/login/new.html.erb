@@ -5,7 +5,21 @@
   <div class="card-body">
     <h5 class="card-title">This application requires <%= username_hint %> Authentication.</h5>
     <p class="card-text">If you see this, you have not been authenticated properly.</p>
-    <%= link_to "Sign in", new_saml_user_session_path, class: "btn btn-primary" %>
 
+    <% if Rails.configuration.is_using_login_password_authentication %>
+      <%= form_tag login_path do %>
+          <div class="field">
+          <%= label_tag :email %><br />
+          <%= text_field_tag :email, params[:email] %>
+          </div>
+          <div class="field">
+          <%= label_tag :password %><br />
+          <%= password_field_tag :password %>
+          </div>
+          <div class="actions"><%= submit_tag "Log In" %></div>
+      <% end %>
+    <% else %>
+      <%= link_to "Sign in", new_saml_user_session_path, class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
