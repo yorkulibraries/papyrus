@@ -255,6 +255,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_30_182701) do
     t.integer "user_id", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "encrypted_password"
   end
 
   create_table "terms", force: :cascade do |t|
