@@ -6,6 +6,7 @@
 		<%= f.input :last_name, required: false %>
 	  <%= f.input :username, hint: username_hint, required: false %>
 		<%= f.input :email, hint:  email_hint, required: false %>
+		<%= f.input :password, required: Rails.configuration.is_using_login_password_authentication if Rails.configuration.is_using_login_password_authentication %>
 
 	  <%= f.input :role, collection: User::ROLES, required: false %>
 		<hr/>

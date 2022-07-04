@@ -1,11 +1,12 @@
 class User < ApplicationRecord
   audited
-  devise :saml_authenticatable,
+  devise :database_authenticatable,
+         :saml_authenticatable,
          :registerable,
          :validatable
 
   def password_required?
-    false
+    Rails.configuration.is_using_login_password_authentication
   end
   ## CONTSTANTS
 

@@ -10,7 +10,6 @@ gem 'websocket-extensions', '>= 0.1.5'
 gem 'rails', '~> 7.0.3'
 
 ## RAILS related ##
-gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'sass-rails', '5.0.8'

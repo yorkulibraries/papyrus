@@ -38,6 +38,16 @@ class LoginController < ApplicationController
     end
   end
 
+  def create
+    user = User.find_by_email(params[:email])
+    if Rails.configuration.is_using_login_password_authentication && user && user.valid_password?(params[:password])
+      session[:user_id] = user.id
+      redirect_to root_url, notice: 'Logged in!'
+    else
+      redirect_to login_url, notice: 'Email or password is invalid'
+    end
+  end
+
   private
 
   def authenticated_with_saml?

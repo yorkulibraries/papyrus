@@ -2,12 +2,11 @@ class StudentsController < AuthenticatedController
   authorize_resource
 
   def index
-     page_number = params[:page] ||= 1
+    page_number = params[:page] ||= 1
 
-     @students = Student.active.includes(:student_details).page(page_number)
-     @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
+    @students = Student.active.includes(:student_details).page(page_number)
+    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, 'current')
   end
-
 
   def notify
     if params[:students]
@@ -16,16 +15,15 @@ class StudentsController < AuthenticatedController
         StudentMailer.notification_email(student, current_user, params[:message]).deliver_later
         student.save(validate: false)
       end
-      redirect_to item_path(params[:item]),  notice: "Notification Sent" if params[:item]
-      redirect_to student_path(params[:student]),  notice: "Message Sent" if params[:student]
+      redirect_to item_path(params[:item]), notice: 'Notification Sent' if params[:item]
+      redirect_to student_path(params[:student]), notice: 'Message Sent' if params[:student]
 
     else
 
-      redirect_to item_path(params[:item]),  alert: "No Student was selected" if params[:item]
-      redirect_to student_path(params[:student]),  alert: "No Student was selected" if params[:student]
+      redirect_to item_path(params[:item]), alert: 'No Student was selected' if params[:item]
+      redirect_to student_path(params[:student]), alert: 'No Student was selected' if params[:student]
 
     end
-
 
     redirect_to root_url unless params[:item] or params[:student]
   end
@@ -39,11 +37,11 @@ class StudentsController < AuthenticatedController
   end
 
   def unblock
-   @student = Student.find(params[:id])
-   @student.blocked = false
-   @student.audit_comment = "Student unblocked by #{@current_user.name}"
-   @student.save(:validate => false)
-   redirect_to @student
+    @student = Student.find(params[:id])
+    @student.blocked = false
+    @student.audit_comment = "Student unblocked by #{@current_user.name}"
+    @student.save(validate: false)
+    redirect_to @student
   end
 
   def search
@@ -53,21 +51,17 @@ class StudentsController < AuthenticatedController
     @searching = true
     @query = query
 
-    @students = Student.where("users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ?",
+    @students = Student.where('users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ?',
                               "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")
-                        .where(inactive: inactive_status).page page_number
+                       .where(inactive: inactive_status).page page_number
 
-
-
-    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
+    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, 'current')
 
     respond_to do |format|
-      format.json { render :json => @students.map { |student| {:id => student.id, :name => student.name } } }
-      format.html {  render :template => "students/index" }
+      format.json { render json: @students.map { |student| { id: student.id, name: student.name } } }
+      format.html { render template: 'students/index' }
     end
-
   end
-
 
   def show
     @student = Student.find(params[:id])
@@ -89,18 +83,16 @@ class StudentsController < AuthenticatedController
     @audits = @student.audits | @student.associated_audits
     @audits.sort! { |a, b| a.created_at <=> b.created_at }
 
-
     @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
 
     respond_to do |format|
       format.html
-      format.xlsx {
-        response.headers['Content-Disposition'] = "attachment; filename=\"#{@student.details.student_number}_audit_trail.xlsx\""
-      }
-
+      format.xlsx do
+        response.headers['Content-Disposition'] =
+          "attachment; filename=\"#{@student.details.student_number}_audit_trail.xlsx\""
+      end
     end
   end
-
 
   def new
     @student = Student.new
@@ -109,32 +101,32 @@ class StudentsController < AuthenticatedController
 
   def create
     @student = Student.new(student_params)
-    @student.role = "student" # default hidden role
+    @student.role = 'student' # default hidden role
     @student.created_by = @current_user
-    @student.audit_comment = "Registered the student"
-    @student.student_details.audit_comment = "Saved student details."
+    @student.audit_comment = 'Registered the student'
+    @student.student_details.audit_comment = 'Saved student details.'
 
     if @student.save
-      redirect_to @student, notice: "Successfully registered a student."
+      redirect_to @student, notice: 'Successfully registered a student.'
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
   def send_welcome_email
     @student = Student.find(params[:id])
-    @student.audit_comment = "Sending welcome email."
+    @student.audit_comment = 'Sending welcome email.'
     StudentMailer.welcome_email(@student, current_user).deliver_later
     @student.email_sent_at = Time.zone.now
     @student.save!
 
-    redirect_to @student, notice: "Sent welcome email."
+    redirect_to @student, notice: 'Sent welcome email.'
   end
 
   def complete_orientation
     @student = Student.find(params[:id])
     @student.details.complete_orientation
-    redirect_to @student, notice: "Orientation has been completed"
+    redirect_to @student, notice: 'Orientation has been completed'
   end
 
   def edit
@@ -143,19 +135,19 @@ class StudentsController < AuthenticatedController
 
   def update
     @student = Student.find(params[:id])
-    @student.audit_comment = "Updated the student"
-    @student.student_details.audit_comment = "Updated student details."
+    @student.audit_comment = 'Updated the student'
+    @student.student_details.audit_comment = 'Updated student details.'
     if @student.update(student_params)
-      redirect_to @student, notice:  "Successfully updated student."
+      redirect_to @student, notice: 'Successfully updated student.'
     else
-      render :action => 'edit'
+      render action: 'edit'
     end
   end
 
   def destroy
     @student = Student.find(params[:id])
     @student.inactive = true
-    @student.audit_comment = "Set Student account to INACTIVE"
+    @student.audit_comment = 'Set Student account to INACTIVE'
     @student.save(validate: false)
     redirect_to @student, notice: "This student's access has been disabled."
   end
@@ -163,14 +155,13 @@ class StudentsController < AuthenticatedController
   def reactivate
     @student = Student.find(params[:id])
     @student.inactive = false
-    @student.audit_comment = "Set Student account to ACTIVE"
+    @student.audit_comment = 'Set Student account to ACTIVE'
     @student.save
 
     respond_to do |format|
-      format.html { redirect_to @student, notice: "Student has been reactivated, and can now use Papyrus" }
+      format.html { redirect_to @student, notice: 'Student has been reactivated, and can now use Papyrus' }
       format.js
     end
-
   end
 
   ## COURSE ENROLLMENT
@@ -179,7 +170,7 @@ class StudentsController < AuthenticatedController
 
     course_ids = params[:course_ids]
 
-    course_ids.split(",").each do |id|
+    course_ids.split(',').each do |id|
       course = Course.find(id)
       course.enroll_student(@student)
     end
@@ -194,15 +185,21 @@ class StudentsController < AuthenticatedController
     @course.withdraw_student(@student) unless @course.blank?
   end
 
-
   private
+
   def student_params
-    params.require(:student).permit( :first_name, :last_name, :name, :email, :username,
-          student_details_attributes: [  :student_number, :preferred_phone, :request_form_signed_on,
-                           :format_large_print, :format_pdf, :format_epub, :format_kurzweil, :format_daisy, :format_braille, :format_word, :format_note, :format_other,
-                           :transcription_coordinator_id, :transcription_assistant_id, :cds_counsellor, :cds_counsellor_email, :book_retrieval,
-                           :requires_orientation, :orientation_completed, :orientation_completed_at, :accessibility_lab_access, :alternate_format_required
-                                      ]
-                                    )
+    if Rails.configuration.is_using_login_password_authentication
+      params.require(:student).permit(:first_name, :last_name, :name, :email, :username, :password,
+                                      student_details_attributes: %i[student_number preferred_phone request_form_signed_on
+                                                                     format_large_print format_pdf format_epub format_kurzweil format_daisy format_braille format_word format_note format_other
+                                                                     transcription_coordinator_id transcription_assistant_id cds_counsellor cds_counsellor_email book_retrieval
+                                                                     requires_orientation orientation_completed orientation_completed_at accessibility_lab_access alternate_format_required])
+    else
+      params.require(:student).permit(:first_name, :last_name, :name, :email, :username,
+                                      student_details_attributes: %i[student_number preferred_phone request_form_signed_on
+                                                                     format_large_print format_pdf format_epub format_kurzweil format_daisy format_braille format_word format_note format_other
+                                                                     transcription_coordinator_id transcription_assistant_id cds_counsellor cds_counsellor_email book_retrieval
+                                                                     requires_orientation orientation_completed orientation_completed_at accessibility_lab_access alternate_format_required])
+    end
   end
 end
