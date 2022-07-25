@@ -28,7 +28,7 @@ gem 'mini_racer'
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
 gem 'bootstrap', '4.5.2'
 gem 'font-awesome-sass', '~> 5.13.0'
-gem 'simple_form', '4.0.0'
+gem 'simple_form', '~> 5.1'
 
 ## TOOLS AND UTILITIES ##
 gem 'audited', '~> 5.0'
@@ -43,7 +43,7 @@ gem 'momentjs-rails', '2.17.1'
 gem 'rails-settings-cached', '0.4.1'
 gem 'remotipart', '1.3.1' # submit files remotely
 gem 'ruby-saml', '~> 1.14'
-gem 'rubyzip', '~> 1.2.2'
+gem 'rubyzip', '~> 1.3.0'
 gem 'search_cop', '1.1.0'
 gem 'worldcatapi', git: 'https://github.com/taras-yorku/worldcatapi.git',
                    ref: 'ed6d0cb849e86a032dc84741a5d169da19b8e385'
