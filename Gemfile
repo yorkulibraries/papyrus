@@ -53,8 +53,8 @@ gem 'alma'
 gem 'primo', git: 'https://github.com/tulibraries/primo.git', branch: 'main'
 
 ## EXEL EXPORT ##
-gem 'axlsx', git: 'https://github.com/randym/axlsx.git'
-gem 'axlsx_rails', '0.5.1'
+gem 'caxlsx', '3.2.0'
+gem 'caxlsx_rails', '0.6.3'
 gem 'roo', '~> 2.3.1'
 
 ## UPLOADING AND MANIPULATING FILES ##
