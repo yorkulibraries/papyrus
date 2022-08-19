@@ -8,5 +8,4 @@ FactoryGirl.define do
     due_date nil
     status TodoItem::STATUS_NEW
   end
-
 end

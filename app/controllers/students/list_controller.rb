@@ -1,9 +1,7 @@
 class Students::ListController < AuthenticatedController
-
   before_action do
     authorize! :show, :dashboard
   end
-
 
   def never_logged_in
     @students = Student.never_logged_in.includes(:student_details).reject { |s| s.lab_access_only? }
@@ -18,5 +16,4 @@ class Students::ListController < AuthenticatedController
     page_number = params[:page] ||= 1
     @students = Student.blocked.includes(:student_details).page(page_number)
   end
-
 end

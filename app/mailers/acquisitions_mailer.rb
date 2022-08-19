@@ -8,21 +8,21 @@ class AcquisitionsMailer < ActionMailer::Base
 
     @acquisition_request = acquisition_request
     @item = acquisition_request.item
-    @courses = @item.courses.joins(:term).where("terms.end_date >= ?", Date.today)
+    @courses = @item.courses.joins(:term).where('terms.end_date >= ?', Date.today)
     @user = current_user
 
-    if bookstore
-      email = PapyrusSettings.email_acquisitions_to_bookstore
-    else
-      email = PapyrusSettings.email_acquisitions_to
-    end
+    email = if bookstore
+              PapyrusSettings.email_acquisitions_to_bookstore
+            else
+              PapyrusSettings.email_acquisitions_to
+            end
 
-    #if PapyrusSettings.email_allow && ! email.blank?
+    # if PapyrusSettings.email_allow && ! email.blank?
     mail to: email, cc: current_user.email, subject: PapyrusSettings.email_acquisitions_subject
-    #end
+    # end
   end
 
   def test
-    mail to: "whoot@wooot.com", subject: "WOOT THERE IS", body: "whehreoodfhoasdhfoas"
+    mail to: 'whoot@wooot.com', subject: 'WOOT THERE IS', body: 'whehreoodfhoasdhfoas'
   end
 end

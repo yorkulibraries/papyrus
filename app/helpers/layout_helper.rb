@@ -26,56 +26,51 @@ module LayoutHelper
     content_for(:head) { javascript_include_tag(*args) }
   end
 
-
   def splash_section(&block)
-     content_for (:splash_section) do
-         yield block
-     end
+    content_for(:splash_section) do
+      yield block
+    end
   end
-
 
   def sidebar(&block)
-     content_for (:sidebar) do
-         yield block
-     end
+    content_for(:sidebar) do
+      yield block
+    end
   end
 
-  def panel(title: "untitled", title_class: "bg-primary text-white", icon: 'th', icon_class: '', styles: '', &block)
-    icon_tag = content_tag(:i, "", class: "fas fa-#{icon} #{icon_class}")
+  def panel(title: 'untitled', title_class: 'bg-primary text-white', icon: 'th', icon_class: '', styles: '', &block)
+    icon_tag = content_tag(:i, '', class: "fas fa-#{icon} #{icon_class}")
     title_tag = content_tag(:strong, icon_tag + " #{title}")
 
     heading_div = content_tag(:h6, title_tag, class: "card-title mb-0 p-3 rounded-top #{title_class}")
-    body_div = content_tag :div, class: "card-body" do
+    body_div = content_tag :div, class: 'card-body' do
       yield block
     end
 
     content_tag :div, heading_div + body_div, class: "card shadow-sm mb-3 #{styles}"
-
   end
-
 
   def field_format(field, simple_format = false)
     # If field is blank, print out blank message
     if field.blank?
-      content_tag(:span, "Not filled in...", class: "empty-field")
+      content_tag(:span, 'Not filled in...', class: 'empty-field')
+    elsif field.is_a? Date
+      field.strftime('%B %d, %Y')
     else
-      if field.is_a? Date
-        field.strftime("%B %d, %Y")
-      else
-        simple_format ? simple_format(field) : field
-      end
+      simple_format ? simple_format(field) : field
     end
   end
 
   ## WRAPPER FOR BEST_IN_PLACE WITH SOME DEFAULTS
-  def in_place_edit( object, field, *args)
-    ok = "\u2713";  cancel = "\u2A09"
+  def in_place_edit(object, field, *args)
+    ok = "\u2713"
+    cancel = "\u2A09"
     defaults = {
-      place_holder: "Click me to add content!",
-      inner_class: "field",
-      ok_button: ok , ok_button_class: "btn btn-link green",
+      place_holder: 'Click me to add content!',
+      inner_class: 'field',
+      ok_button: ok, ok_button_class: 'btn btn-link green',
       cancel_button: cancel,
-      cancel_button_class: "btn btn-link red"
+      cancel_button_class: 'btn btn-link red'
     }
 
     options = args.extract_options!

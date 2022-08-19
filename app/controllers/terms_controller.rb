@@ -4,14 +4,17 @@ class TermsController < AuthenticatedController
   def search_courses
     @query = params[:q].strip
     @courses = Course.search(@query)
-    #Course.joins(:term).where("terms.end_date >= '#{Date.today}'").where("courses.title like \"%#{@query}%\" || courses.code like \"%#{@query}%\" ")
+    # Course.joins(:term).where("terms.end_date >= '#{Date.today}'").where("courses.title like \"%#{@query}%\" || courses.code like \"%#{@query}%\" ")
 
-      respond_to do |format|
-        format.json { render json: @courses.map { |course| { id: course.id, name: "#{course.title}", term: "#{course.term.name}" } } }
-        format.html
+    respond_to do |format|
+      format.json do
+        render json: @courses.map { |course|
+                       { id: course.id, name: "#{course.title}", term: "#{course.term.name}" }
+                     }
       end
+      format.html
+    end
   end
-
 
   def index
     @terms = Term.active
@@ -29,11 +32,10 @@ class TermsController < AuthenticatedController
   end
 
   def create
-
     @term = Term.new(term_params)
 
     if @term.save
-      redirect_to @term, notice: "Successfully created term."
+      redirect_to @term, notice: 'Successfully created term.'
     else
       render action: 'new'
     end
@@ -46,7 +48,7 @@ class TermsController < AuthenticatedController
   def update
     @term = Term.find(params[:id])
     if @term.update(term_params)
-      redirect_to @term, notice: "Successfully updated term."
+      redirect_to @term, notice: 'Successfully updated term.'
     else
       render action: 'edit'
     end
@@ -55,11 +57,12 @@ class TermsController < AuthenticatedController
   def destroy
     @term = Term.find(params[:id])
     @term.destroy
-    redirect_to terms_path, notice: "Successfully destroyed term."
+    redirect_to terms_path, notice: 'Successfully destroyed term.'
   end
 
   private
+
   def term_params
-      params.require(:term).permit( :name, :start_date, :end_date)
+    params.require(:term).permit(:name, :start_date, :end_date)
   end
 end

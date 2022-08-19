@@ -22,7 +22,6 @@ class CreateItems < ActiveRecord::Migration[4.2]
     add_index :items, :user_id
   end
 
-
   def self.down
     drop_table :items
   end

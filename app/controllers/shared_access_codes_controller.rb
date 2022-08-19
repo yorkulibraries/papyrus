@@ -11,14 +11,14 @@ class SharedAccessCodesController < AuthenticatedController
   end
 
   def create
-    @access_code =  AccessCode.new(access_code_params)
+    @access_code = AccessCode.new(access_code_params)
     @access_code.shared = true
     @access_code.created_by = current_user
-    @access_code.audit_comment = "Adding a new Shared Access Code"
+    @access_code.audit_comment = 'Adding a new Shared Access Code'
 
     if @access_code.save
       respond_to do |format|
-        format.html { redirect_to shared_access_codes_path, notice: "Successfully created shared access code." }
+        format.html { redirect_to shared_access_codes_path, notice: 'Successfully created shared access code.' }
         format.js
       end
     else
@@ -27,17 +27,15 @@ class SharedAccessCodesController < AuthenticatedController
         format.js
       end
     end
-
   end
 
   def destroy
-    @access_code =  AccessCode.shared.find(params[:id])
+    @access_code = AccessCode.shared.find(params[:id])
     @access_code.audit_comment = "Removed Shared Access Code For #{@access_code.for}"
     @access_code.destroy
 
-
     respond_to do |format|
-      format.html { redirect_to shared_access_codes_path, notice: "Successfully removed shared access code." }
+      format.html { redirect_to shared_access_codes_path, notice: 'Successfully removed shared access code.' }
       format.js
     end
   end
@@ -47,8 +45,8 @@ class SharedAccessCodesController < AuthenticatedController
   end
 
   private
-  def authorize_check
-     authorize! :manage, :shared_access_codes
-  end
 
+  def authorize_check
+    authorize! :manage, :shared_access_codes
+  end
 end

@@ -15,6 +15,5 @@ class CreateAcquisitionRequests < ActiveRecord::Migration[4.2]
       t.text :acquisition_source_name
       t.timestamps
     end
-
   end
 end

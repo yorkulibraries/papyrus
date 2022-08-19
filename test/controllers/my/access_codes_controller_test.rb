@@ -6,7 +6,7 @@ class My::AccessCodesControllerTest < ActionDispatch::IntegrationTest
     log_user_in(@student)
   end
 
-  should "show access codes page" do
+  should 'show access codes page' do
     patch my_terms_path
     get my_access_codes_path
 
@@ -14,10 +14,9 @@ class My::AccessCodesControllerTest < ActionDispatch::IntegrationTest
     assert assigns(:student)
   end
 
-  should "redirect to terms page if terms not accepted" do
+  should 'redirect to terms page if terms not accepted' do
     get my_access_codes_path
 
     assert_redirected_to my_terms_path
   end
-
 end

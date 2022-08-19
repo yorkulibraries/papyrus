@@ -7,7 +7,7 @@ gem 'rack', '2.2.3.1'
 gem 'websocket-extensions', '>= 0.1.5'
 
 ## RAILS and server ##
-gem 'rails', '~> 7.0.3'
+gem 'rails', '~> 7.0', '>= 7.0.3.1'
 
 ## RAILS related ##
 gem 'coffee-rails', '~> 4.2'

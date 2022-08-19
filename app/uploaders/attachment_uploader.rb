@@ -1,7 +1,4 @@
-# encoding: utf-8
-
 class AttachmentUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or ImageScience support:
   # include CarrierWave::RMagick
   # include CarrierWave::ImageScience
@@ -13,7 +10,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     "uploads/items/#{model.item.item_type}/#{model.item.unique_id}"
   end
 
@@ -25,10 +22,10 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     true
   end
 
-  #def cache_dir
-    # should return path to cache dir
-    #Rails.root.join 'uploads/cache'
-  #end
+  # def cache_dir
+  # should return path to cache dir
+  # Rails.root.join 'uploads/cache'
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -43,9 +40,9 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   end
 
   protected
+
   def timestamp
     var = :"@#{mounted_as}_timestamp"
     model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.to_i)
   end
-
 end

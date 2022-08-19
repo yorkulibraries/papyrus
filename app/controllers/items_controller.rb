@@ -3,15 +3,14 @@ class ItemsController < AuthenticatedController
 
   def index
     page_number = params[:page] ||= 1
-    @search_results = "local"
+    @search_results = 'local'
     @total_items = Item.all.size
-    
-    if params[:order] && params[:order] == "alpha"
-      @items = Item.alphabetical.page(page_number)
-    else
-      @items = Item.by_date.page(page_number)
-    end
 
+    @items = if params[:order] && params[:order] == 'alpha'
+               Item.alphabetical.page(page_number)
+             else
+               Item.by_date.page(page_number)
+             end
   end
 
   def audit_trail
@@ -19,15 +18,13 @@ class ItemsController < AuthenticatedController
     @audits = @item.audits | @item.associated_audits
     @audits.sort! { |a, b| a.created_at <=> b.created_at }
 
-
     @audits_grouped = @audits.reverse.group_by { |a| a.created_at.at_beginning_of_day }
 
     respond_to do |format|
       format.html
-      format.xlsx {
+      format.xlsx do
         response.headers['Content-Disposition'] = "attachment; filename=\"#{@item.id}_audit_trail.xlsx\""
-      }
-
+      end
     end
   end
 
@@ -54,17 +51,17 @@ class ItemsController < AuthenticatedController
     student_ids = params[:student_ids]
     date = params[:expires_on][:date] if params[:expires_on]
 
-    student_ids.split(",").each do |id|
+    student_ids.split(',').each do |id|
       student = Student.new
       student.id = id
       @item.assign_to_student(student, date)
       StudentMailer.items_assigned_email(student, [@item], current_user).deliver_later
     end
 
-    @students = Student.where("id IN (?)", student_ids)
+    @students = Student.where('id IN (?)', student_ids)
 
     respond_to do |format|
-      format.html { redirect_to @item, notice:  "Assigned this item to students" }
+      format.html { redirect_to @item, notice: 'Assigned this item to students' }
       format.js
     end
   end
@@ -74,14 +71,13 @@ class ItemsController < AuthenticatedController
     @item = Item.find(params[:id])
   end
 
-
   def assign_many_to_student
     @student = Student.active.find(params[:student_id])
     item_ids = params[:item_ids]
     date = params[:expires_on][:date] if params[:expires_on]
 
-    @items = Array.new
-    item_ids.split(",").each do |id|
+    @items = []
+    item_ids.split(',').each do |id|
       i = Item.find_by_id(id)
       i.assign_to_student(@student, date)
       @items << i
@@ -90,7 +86,7 @@ class ItemsController < AuthenticatedController
     StudentMailer.items_assigned_email(@student, @items, current_user).deliver_later
 
     respond_to do |format|
-      format.html { redirect_to @student, notice: "Assigned items to this student" }
+      format.html { redirect_to @student, notice: 'Assigned items to this student' }
       format.js
     end
   end
@@ -101,39 +97,37 @@ class ItemsController < AuthenticatedController
 
     item.withhold_from_student(student)
 
-    redirect_to item, notice: "Removed student access" unless params[:return_to_student]
-    redirect_to student, notice: "Removed item access" if params[:return_to_student]
+    redirect_to item, notice: 'Removed student access' unless params[:return_to_student]
+    redirect_to student, notice: 'Removed item access' if params[:return_to_student]
   end
-
 
   def show
     @item = Item.find(params[:id])
-    #@courses_grouped = @item.courses.group_by { |c| { name: c.term.name, id: c.term.id, end_date: c.term.end_date } }
-    @courses_grouped = @item.courses.joins(:term).where("terms.end_date >= ?", Date.today).group_by { |c| { name: c.term.name, id: c.term.id, end_date: c.term.end_date } }
+    # @courses_grouped = @item.courses.group_by { |c| { name: c.term.name, id: c.term.id, end_date: c.term.end_date } }
+    @courses_grouped = @item.courses.joins(:term).where('terms.end_date >= ?', Date.today).group_by do |c|
+      { name: c.term.name, id: c.term.id, end_date: c.term.end_date }
+    end
   end
 
   def new
-
     @item = Item.new
     if params[:bib_record_id]
-     source = params[:source] || BibRecord::VUFIND
+      source = params[:source] || BibRecord::VUFIND
 
-
-     if source == BibRecord::PRIMO
-       @record = BibRecord::AlmaResult.find_item params[:bib_record_id]
-       @item = BibRecord::AlmaResult.build_item_from_alma_result @record
-     else
-       bib_record = BibRecord.new
-       bib_item = bib_record.find_item(params[:bib_record_id], source)
-       @item = bib_record.build_item_from_search_result(bib_item, Item::BOOK, source)
-     end
+      if source == BibRecord::PRIMO
+        @record = BibRecord::AlmaResult.find_item params[:bib_record_id]
+        @item = BibRecord::AlmaResult.build_item_from_alma_result @record
+      else
+        bib_record = BibRecord.new
+        bib_item = bib_record.find_item(params[:bib_record_id], source)
+        @item = bib_record.build_item_from_search_result(bib_item, Item::BOOK, source)
+      end
     end
-
   end
 
   def create
     ## Check if we need to create an acquisition request, if yes make it, but don't save it yet
-    if params[:create_acquisition_request] == "yes"
+    if params[:create_acquisition_request] == 'yes'
       @acquisition_request = AcquisitionRequest.new
       @acquisition_request.requested_by = @current_user
       @acquisition_request.acquisition_reason = params[:item][:acquisition_request][:acquisition_reason]
@@ -142,16 +136,16 @@ class ItemsController < AuthenticatedController
 
     @item = Item.new(item_params)
     @item.user = @current_user
-    @item.audit_comment = "Creating a new item."
+    @item.audit_comment = 'Creating a new item.'
     if @item.save
       ## Only save if the object is created
-      unless @acquisition_request == nil
+      unless @acquisition_request.nil?
         @acquisition_request.item = @item
         @acquisition_request.audit_comment = "Created an acquisition request for #{@item.title}"
         @acquisition_request.save(validate: false)
       end
 
-      redirect_to @item, notice:  "Successfully created item."
+      redirect_to @item, notice: 'Successfully created item.'
     else
       render action: 'new'
     end
@@ -163,9 +157,9 @@ class ItemsController < AuthenticatedController
 
   def update
     @item = Item.find(params[:id])
-    @item.audit_comment = "Updated an existing item."
+    @item.audit_comment = 'Updated an existing item.'
     if @item.update(item_params)
-      redirect_to @item, notice:  "Successfully updated item."
+      redirect_to @item, notice: 'Successfully updated item.'
     else
       render action: 'edit'
     end
@@ -173,53 +167,50 @@ class ItemsController < AuthenticatedController
 
   def destroy
     @item = Item.find(params[:id])
-    @item.audit_comment = "Removed the item."
+    @item.audit_comment = 'Removed the item.'
     @item.destroy
-    redirect_to items_path, notice:  "Successfully destroyed item."
+    redirect_to items_path, notice: 'Successfully destroyed item.'
   end
 
-
   def zipped_files
-      #require 'zip/zip'
+    # require 'zip/zip'
 
-      @item = Item.find(params[:id])
-      file_name = "#{@item.unique_id}.zip"
-      show_file_name = "#{@item.title.parameterize}.zip"
+    @item = Item.find(params[:id])
+    file_name = "#{@item.unique_id}.zip"
+    show_file_name = "#{@item.title.parameterize}.zip"
 
-      if file_name.length > 150
-       file_name = file_name[0..150]
-      end
+    file_name = file_name[0..150] if file_name.length > 150
 
-      # zipfile_name = "/tmp/papyrus-#{file_name}"
-      # File.delete(zipfile_name) if File.exists?(zipfile_name)
-      begin
-        temp_file = Tempfile.new("temp-papyrus-#{file_name}")
+    # zipfile_name = "/tmp/papyrus-#{file_name}"
+    # File.delete(zipfile_name) if File.exists?(zipfile_name)
+    begin
+      temp_file = Tempfile.new("temp-papyrus-#{file_name}")
 
-        #Initialize the temp file as a zip file
-        Zip::OutputStream.open(temp_file) { |zos| }
+      # Initialize the temp file as a zip file
+      Zip::OutputStream.open(temp_file) { |zos| }
 
-        counter = 0
-        Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
-          @item.attachments.files.available.each do |filename|
-            # Two arguments:
-            # - The name of the file as it will appear in the archive
-            # - The original file, including the path to find it
-            zipfile.add("#{counter}-" + File.basename(filename.file_url), "#{filename.file.path}")
-            counter += 1
-          end
+      counter = 0
+      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
+        @item.attachments.files.available.each do |filename|
+          # Two arguments:
+          # - The name of the file as it will appear in the archive
+          # - The original file, including the path to find it
+          zipfile.add("#{counter}-" + File.basename(filename.file_url), "#{filename.file.path}")
+          counter += 1
         end
-
-        send_data File.read(temp_file), type: 'application/zip', disposition: 'attachment', filename: show_file_name
-      ensure
-        temp_file.close
-        temp_file.unlink
       end
+
+      send_data File.read(temp_file), type: 'application/zip', disposition: 'attachment', filename: show_file_name
+    ensure
+      temp_file.close
+      temp_file.unlink
+    end
   end
 
   private
-  def item_params
-    params.require(:item).permit( :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
-                                  :language_note, :edition, :physical_description, :source, :source_note, acquisition_request: [:acquisition_reason, :note])
-  end
 
+  def item_params
+    params.require(:item).permit(:title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
+                                 :language_note, :edition, :physical_description, :source, :source_note, acquisition_request: %i[acquisition_reason note])
+  end
 end

@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
@@ -9,7 +9,6 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   config.eager_load = false
-
 
   # The test environment is used exclusively to run your application's
   # test suite.  You never need to work with it otherwise.  Remember that
@@ -25,7 +24,7 @@ Rails.application.configure do
   config.action_dispatch.show_exceptions = false
 
   # Disable request forgery protection in test environment
-  config.action_controller.allow_forgery_protection    = false
+  config.action_controller.allow_forgery_protection = false
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
@@ -40,20 +39,17 @@ Rails.application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
-
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_files = true
-  config.static_cache_control = "public, max-age=3600"
+  config.static_cache_control = 'public, max-age=3600'
 
+  config.active_support.test_order = :sorted
 
-   config.active_support.test_order = :sorted
+  config.cache_store = :memory_store
 
-   config.cache_store = :memory_store
+  # Enable stdout logger
+  config.logger = Logger.new(STDOUT)
 
-   # Enable stdout logger
-   config.logger = Logger.new(STDOUT)
-
-   # Set log level
+  # Set log level
   config.log_level = :ERROR
-
 end
