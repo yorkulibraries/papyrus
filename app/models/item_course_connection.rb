@@ -1,5 +1,4 @@
-class ItemCourseConnection < ApplicationRecord 
-
+class ItemCourseConnection < ApplicationRecord
   ## RELATIONSHIPS ##
   belongs_to :item
   belongs_to :course, counter_cache: :items_count
@@ -9,5 +8,4 @@ class ItemCourseConnection < ApplicationRecord
 
   ## Audited ##
   audited associated_with: :item
-
 end

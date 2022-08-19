@@ -6,12 +6,10 @@ class Items::FromPrimoController < AuthenticatedController
   def index
     @query = params[:q]
     begin
-      if @query.present?
-        @results = search_primo(@query)
-      end
+      @results = search_primo(@query) if @query.present?
     rescue StandardError => e
       @show_error = true
-      @error = e  
+      @error = e
     end
   end
 
@@ -35,12 +33,10 @@ class Items::FromPrimoController < AuthenticatedController
     end
   end
 
-  def create
-
-  end
-
+  def create; end
 
   private
+
   def search_primo(query)
     BibRecord::PrimoResult.search query
   end

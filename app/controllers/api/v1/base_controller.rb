@@ -1,11 +1,9 @@
 class Api::V1::BaseController < ApplicationController
-  #skip_authorization_check ## skip authorization, this will use it's own
-  #skip_before_filter :login_required
+  # skip_authorization_check ## skip authorization, this will use it's own
+  # skip_before_filter :login_required
 
   ## BASE CONTROLLER REQUIRING AUTHENTICATION - BASIC HTTP
   ## IT CHECKS IF API ACCESS IS ENABLED
-
-
 
   before_action :authenticate, except: [:info]
 
@@ -18,11 +16,11 @@ class Api::V1::BaseController < ApplicationController
   end
 
   private
+
   def authenticate
-    @realm = "Papyrus API v1.0"
+    @realm = 'Papyrus API v1.0'
 
     users = { PapyrusSettings.api_http_auth_user => PapyrusSettings.api_http_auth_pass }
-
 
     if PapyrusSettings.api_enable == PapyrusSettings::TRUE
 
@@ -37,6 +35,5 @@ class Api::V1::BaseController < ApplicationController
     else
       redirect_to api_v1_info_url(disabled: true)
     end
-
   end
 end

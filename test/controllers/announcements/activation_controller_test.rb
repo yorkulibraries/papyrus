@@ -6,8 +6,7 @@ class Announcements::ActivationControllerTest < ActionDispatch::IntegrationTest
     log_user_in(@manager_user)
   end
 
-
-  should "show different announcement" do
+  should 'show different announcement' do
     a = create(:announcement, active: false)
 
     assert !a.active?
@@ -23,6 +22,5 @@ class Announcements::ActivationControllerTest < ActionDispatch::IntegrationTest
 
     a.reload
     assert !a.active?
-
   end
 end

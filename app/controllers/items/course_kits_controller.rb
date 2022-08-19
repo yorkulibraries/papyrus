@@ -6,14 +6,13 @@ class Items::CourseKitsController < AuthenticatedController
     @course_kit_form = Item::CourseKitForm.new
   end
 
-
   def create
     @course_kit_form = Item::CourseKitForm.new code_params
 
     @item = Item.new item_params
     @item.item_type = Item::COURSE_KIT
     @item.user = @current_user
-    @item.audit_comment = "Creating a new course kit."
+    @item.audit_comment = 'Creating a new course kit.'
     @item.course_code = @course_kit_form.code
 
     if @item.title.blank?
@@ -23,7 +22,7 @@ class Items::CourseKitsController < AuthenticatedController
 
     if @course_kit_form.valid? && @item.save
 
-      if params[:create_acquisition_request] == "yes"
+      if params[:create_acquisition_request] == 'yes'
         @acquisition_request = AcquisitionRequest.new
         @acquisition_request.requested_by = @current_user
         @acquisition_request.acquisition_reason = params[:item][:acquisition_request][:acquisition_reason]
@@ -49,7 +48,7 @@ class Items::CourseKitsController < AuthenticatedController
     @course_kit_form = Item::CourseKitForm.new code_params
 
     @item = Item.find params[:id]
-    @item.audit_comment = "Updating Course Kit Details"
+    @item.audit_comment = 'Updating Course Kit Details'
     @item.course_code = @course_kit_form.code
 
     if params[:item][:title].blank?
@@ -65,12 +64,13 @@ class Items::CourseKitsController < AuthenticatedController
   end
 
   private
+
   def code_params
     params.require(:code).permit(:year, :faculty, :subject, :term, :credits, :section, :course_id)
   end
 
   def item_params
-    params.require(:item).permit( :title, :unique_id, :callnumber, :author, :isbn, :publisher, :published_date,
-                                  :language_note, :edition, :physical_description, :source, :source_note, acquisition_request: [:acquisition_reason, :note])
+    params.require(:item).permit(:title, :unique_id, :callnumber, :author, :isbn, :publisher, :published_date,
+                                 :language_note, :edition, :physical_description, :source, :source_note, acquisition_request: %i[acquisition_reason note])
   end
 end

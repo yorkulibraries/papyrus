@@ -1,10 +1,7 @@
 class My::TermsController < My::BaseController
-
   skip_before_action :check_terms_acceptance
 
-  def show
-
-  end
+  def show; end
 
   def update
     session[:terms_accepted] = true

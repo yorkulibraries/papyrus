@@ -6,9 +6,7 @@ class Items::FromWorldcatController < AuthenticatedController
   def index
     @query = params[:q]
     begin
-      if @query.present?
-        @results = search_worldcat(@query)
-      end
+      @results = search_worldcat(@query) if @query.present?
     rescue StandardError => e
       @show_error = true
       @error = e
@@ -33,18 +31,14 @@ class Items::FromWorldcatController < AuthenticatedController
     end
   end
 
-
   private
-  def search_worldcat(query)
 
+  def search_worldcat(query)
     bib_record = BibRecord.new
     @bib_search = true
 
     @docs = bib_record.search_items(query, BibRecord::WORLDCAT)
 
-    return @docs
+    @docs
   end
-
-
-
 end

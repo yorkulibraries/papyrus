@@ -2,7 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
     user ||= User.new
 
     if user.role == User::ADMIN
@@ -32,9 +31,10 @@ class Ability
       can :manage, [Term, Course]
       can :manage, AcquisitionRequest
       can :manage, AccessCode
-      can [:read, :create, :update], [Note]
+      can %i[read create update], [Note]
       can :manage, [Item, Attachment, ItemConnection]
-      can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail, :reactivate, :inactive, :destroy], Student
+      can %i[read create update items notify send_welcome_email audit_trail reactivate inactive destroy],
+          Student
       can :login_as, :student
 
       can :manage, :shared_access_codes
@@ -52,9 +52,10 @@ class Ability
       can :manage, [Term, Course]
       can :manage, AcquisitionRequest
       can :manage, AccessCode
-      can [:read, :create, :update], [Note]
+      can %i[read create update], [Note]
       can :manage, [Item, Attachment, ItemConnection]
-      can [:read, :create, :update, :items, :notify, :send_welcome_email, :audit_trail, :reactivate, :inactive, :destroy], Student
+      can %i[read create update items notify send_welcome_email audit_trail reactivate inactive destroy],
+          Student
       can :login_as, :student
 
       can :manage, :shared_access_codes
@@ -62,11 +63,11 @@ class Ability
     elsif user.role == User::PART_TIME
       can :show, :dashboard
 
-      can [:create, :read, :update], [Item, Note, Course, TodoList, TodoItem]
-      can [:assign_to_students, :assign_many_to_student, :withhold_from_student, :courses], Item
-      can [:assign_to_item, :add_item, :remove_item], Course
+      can %i[create read update], [Item, Note, Course, TodoList, TodoItem]
+      can %i[assign_to_students assign_many_to_student withhold_from_student courses], Item
+      can %i[assign_to_item add_item remove_item], Course
       can :manage, ItemConnection
-      can :read,  [Student, Term, Course, TodoList, TodoItem]
+      can :read, [Student, Term, Course, TodoList, TodoItem]
       can :login_as, :student
       can :create, Attachment
       can :get_file, Attachment
@@ -83,7 +84,7 @@ class Ability
     can :hide, Announcement
 
     # global search
-    can [:search, :search_courses], :all
+    can %i[search search_courses], :all
 
     # Define abilities for the passed in user here. For example:
     #
