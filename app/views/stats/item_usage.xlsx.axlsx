@@ -1,28 +1,24 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: "Assigned Items") do |sheet|
+wb.add_worksheet(name: 'Assigned Items') do |sheet|
+  sheet.add_row ['Item Title', 'Source', 'Callnumber', 'ISBN', 'Assigned Count']
+  @assigned_items.each do |item|
+    count = item['assigned_count']
 
-  sheet.add_row ["Item Title", "Source", "Callnumber", "ISBN", "Assigned Count"]
-  @assigned_items.each do |item |
-    count = item["assigned_count"]
-
-    sheet.add_row [item["title"], item["source"], item["callnumber"], item["isbn"], count]
+    sheet.add_row [item['title'], item['source'], item['callnumber'], item['isbn'], count]
   end
 
   sheet.add_row []
-  sheet.add_row ["Date Range:", @start_date, "to", @end_date ]
-
-
+  sheet.add_row ['Date Range:', @start_date, 'to', @end_date]
 end
-wb.add_worksheet(name: "Unassigned Items") do |sheet|
-  sheet.add_row ["Item Title", "Source", "Callnumber", "ISBN", "Assigned Count"]
+wb.add_worksheet(name: 'Unassigned Items') do |sheet|
+  sheet.add_row ['Item Title', 'Source', 'Callnumber', 'ISBN', 'Assigned Count']
 
-  @unassigned_items.each do |item |
-    count = item["assigned_count"]
+  @unassigned_items.each do |item|
+    count = item['assigned_count']
 
-    sheet.add_row [item["title"], item["source"], item["callnumber"], item["isbn"], count]
+    sheet.add_row [item['title'], item['source'], item['callnumber'], item['isbn'], count]
   end
 
   sheet.add_row []
-  sheet.add_row ["Date Range:", @start_date, "to", @end_date ]
-
+  sheet.add_row ['Date Range:', @start_date, 'to', @end_date]
 end

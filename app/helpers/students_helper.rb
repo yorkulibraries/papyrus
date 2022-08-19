@@ -1,4 +1,2 @@
 module StudentsHelper
-  
-
 end

@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every '5 6 * * 6' do
-  rake "utils:deactivate_students"
+  rake 'utils:deactivate_students'
 end

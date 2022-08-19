@@ -1,23 +1,21 @@
 require 'test_helper'
 
 class My::TermsControllerTest < ActionDispatch::IntegrationTest
-
   setup do
     @student = create(:student)
     log_user_in(@student)
   end
 
-  should "show terms page" do
+  should 'show terms page' do
     get my_terms_path
-    assert_response :success    
+    assert_response :success
   end
 
-  should "accept terms and redirect to items page" do
+  should 'accept terms and redirect to items page' do
     patch my_terms_path
 
-    assert  session[:terms_accepted], "Should be accepted terms"
+    assert session[:terms_accepted], 'Should be accepted terms'
 
     assert_redirected_to my_items_path
   end
-
 end

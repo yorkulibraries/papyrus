@@ -1,17 +1,15 @@
 module UtilsHelper
   def pp(object)
-    begin
-      (ap object).html_safe
-    rescue
-    end
+    (ap object).html_safe
+  rescue StandardError
   end
 
-  def blank_slate(list = nil, title: "No items found", description: "Click on new button to add new item.", icon: nil)
-    if list == nil || list.size == 0
-      fa = icon == nil ? "" : content_tag(:i, "", class: "fas fa-#{icon} fa-3x")
-      h4 = content_tag(:h4, title.html_safe, class: "mt-4")
+  def blank_slate(list = nil, title: 'No items found', description: 'Click on new button to add new item.', icon: nil)
+    if list.nil? || list.size == 0
+      fa = icon.nil? ? '' : content_tag(:i, '', class: "fas fa-#{icon} fa-3x")
+      h4 = content_tag(:h4, title.html_safe, class: 'mt-4')
       p = content_tag(:p, description.html_safe)
-      content_tag(:div, fa.html_safe + h4 + p, class: "blank-slate")
+      content_tag(:div, fa.html_safe + h4 + p, class: 'blank-slate')
     end
   end
 
@@ -24,50 +22,50 @@ module UtilsHelper
     begin
       case type.tableize.singularize
 
-      when "access_code"
+      when 'access_code'
         if associated_id
           student_path(associated_id)
         else
           shared_access_codes_path
         end
-      when "announcement"
+      when 'announcement'
         announcements_path
-      when "attachment"
+      when 'attachment'
         item_path(associated_id)
-      when "document"
-        if associated_type == "Course"
+      when 'document'
+        if associated_type == 'Course'
           course_path(associated_id)
         else
           student_path(associated_id)
         end
-      when "todo_item"
+      when 'todo_item'
         todo_list_path(associated_id)
-      when "todo_list"
+      when 'todo_list'
         todo_list_path(id)
-      when "item_connection"
+      when 'item_connection'
         student_path(associated_id)
-      when "item_course_connection"
+      when 'item_course_connection'
         item_path(associated_id)
-      when "item"
+      when 'item'
         item_path(id)
-      when "acquisition_request"
+      when 'acquisition_request'
         acquisition_request(id)
-      when "note"
-      when "student"
+      when 'note'
+      when 'student'
         student_path(associated_id)
-      when "student_details"
+      when 'student_details'
         student_path(associated_id)
-      when "user"
+      when 'user'
         user_path(id)
-      when "course"
+      when 'course'
         course_path(id)
-      when "term"
+      when 'term'
         term_path(id)
       else
         root_path
       end
-    rescue
-      return root_path
+    rescue StandardError
+      root_path
     end
   end
 end

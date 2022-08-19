@@ -1,6 +1,4 @@
 class My::DetailsController < My::BaseController
-
-
   def show
     @student_details = @student.student_details
 
@@ -9,7 +7,5 @@ class My::DetailsController < My::BaseController
     @courses = request.headers[PapyrusSettings.course_listing_header]
 
     @welcome_details = true if params[:welcome]
-
   end
-
 end

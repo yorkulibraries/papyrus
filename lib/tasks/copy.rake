@@ -1,8 +1,7 @@
-
 namespace :copy do
-  desc "Papyrus Copying Tasks"
+  desc 'Papyrus Copying Tasks'
 
-  task :student_number_to_username => :environment do
+  task student_number_to_username: :environment do
     students = Student.all
 
     students.each do |s|

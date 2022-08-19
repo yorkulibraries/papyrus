@@ -1,4 +1,4 @@
-require "active_support/core_ext/integer/time"
+require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb
@@ -10,7 +10,6 @@ Rails.application.configure do
   # since you don't have to restart the webserver when you make code changes.
   config.cache_classes = false
 
-
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
@@ -21,11 +20,10 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
-
   # set delivery method to :smtp, :sendmail or :test
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
-  config.action_mailer.default_url_options = { host: "papyrus.me.ca" }
+  config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
+  config.action_mailer.default_url_options = { host: 'papyrus.me.ca' }
 
   # Expands the lines which load the assets
   config.assets.debug = true
@@ -37,10 +35,10 @@ Rails.application.configure do
 
   config.cache_store = :memory_store
 
-  config.log_tags = [:uuid, :remote_ip]
+  config.log_tags = %i[uuid remote_ip]
 
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload unless ENV['RACK_ENV']
 
   config.web_console.permissions = '192.168.168.1/16'
-  config.hosts << "papyrus.me.ca"
+  config.hosts << 'papyrus.me.ca'
 end

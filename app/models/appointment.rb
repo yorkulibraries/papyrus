@@ -1,5 +1,4 @@
-class Appointment < ApplicationRecord 
-
+class Appointment < ApplicationRecord
   ## RELATIONSHIPS
   belongs_to :student
   belongs_to :user
@@ -9,5 +8,4 @@ class Appointment < ApplicationRecord
 
   ## SCOPES
   default_scope { order(:at) }
-
 end
