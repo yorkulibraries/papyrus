@@ -6,8 +6,6 @@ class ImporterTaskTest < ActiveSupport::TestCase
     load Rails.root.join('lib', 'tasks', 'importer.rake')
     Rake::Task.define_task(:environment)
 
-    ENV["DEBUG"]="true"
+    ENV['DEBUG'] = 'true'
   end
-
-
 end

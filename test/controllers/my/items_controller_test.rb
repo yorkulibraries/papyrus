@@ -7,18 +7,14 @@ class My::ItemsControllerTest < ActionDispatch::IntegrationTest
     patch my_terms_path
   end
 
-  should "only show current items" do
-    create_list(:item_connection, 3, student:  @student, :expires_on => Date.today - 1.year)
-    create_list(:item_connection, 6, student:  @student, :expires_on => Date.today + 1.year)
-
+  should 'only show current items' do
+    create_list(:item_connection, 3, student:  @student, expires_on: Date.today - 1.year)
+    create_list(:item_connection, 6, student:  @student, expires_on: Date.today + 1.year)
 
     get my_items_path
 
     items = assigns(:items)
     assert items
     assert_equal 6, items.size
-
   end
-
-
 end

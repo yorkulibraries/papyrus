@@ -15,9 +15,8 @@ class CreateUsers < ActiveRecord::Migration[4.2]
 
     add_index :users, :inactive
     add_index :users, :username
-    add_index :users, [:type, :inactive]
+    add_index :users, %i[type inactive]
   end
-
 
   def self.down
     drop_table :users

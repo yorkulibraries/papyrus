@@ -1,13 +1,9 @@
 class SearchController < AuthenticatedController
-
-
   before_action do
     authorize! :search, :items
   end
 
-  def index
-  end
-
+  def index; end
 
   def students
     page_number = params[:page] ||= 1
@@ -17,60 +13,62 @@ class SearchController < AuthenticatedController
     @query = query
 
     @students = Student.joins(:student_details)
-                .where("users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ? or student_details.student_number = ?",
+                       .where('users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ? or student_details.student_number = ?',
                               "%#{query}%", "%#{query}%", "#{query}", "%#{query}%", "#{query}")
 
-    if params[:search_all]
-      @students = @students.page page_number
-    else
-      @students = @students.where(inactive: inactive_status).page page_number
-    end
+    @students = if params[:search_all]
+                  @students.page page_number
+                else
+                  @students.where(inactive: inactive_status).page page_number
+                end
 
-
-    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, "current")
+    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, 'current')
 
     respond_to do |format|
-      format.json { render :json => @students.map { |student| {:id => student.id, :name => "#{student.name} - #{student.details.student_number}" } } }
-      format.html {  render :template => "students/index" }
+      format.json do
+        render json: @students.map { |student|
+                       { id: student.id, name: "#{student.name} - #{student.details.student_number}" }
+                     }
+      end
+      format.html { render template: 'students/index' }
     end
   end
 
   def items
-    @search_results = params[:type] || "local"
+    @search_results = params[:type] || 'local'
     @page_number = params[:page] ||= 1
 
-    case params[:type]
-    when BibRecord::WORLDCAT
-      @results = search_worldcat(params[:q])
-    when BibRecord::VUFIND
-      @results = search_vufind(params[:q])
-    when BibRecord::PRIMO
-      @results = search_primo(params[:q])
-    else
-      @results = search_local_items(params[:q])
-    end
-
+    @results = case params[:type]
+               when BibRecord::WORLDCAT
+                 search_worldcat(params[:q])
+               when BibRecord::VUFIND
+                 search_vufind(params[:q])
+               when BibRecord::PRIMO
+                 search_primo(params[:q])
+               else
+                 search_local_items(params[:q])
+               end
 
     respond_to do |format|
-
-      if @search_results == "local"
-        format.json { render json:  @results.map { |item| {
-              id: item.id, name: item.title, course_code: item.course_code, item_type: item.item_type,
-              edition: item.edition, author: item.author, isbn: item.isbn, callnumber: item.callnumber
-            }
-          }
-        }
+      if @search_results == 'local'
+        format.json do
+          render json: @results.map { |item|
+                         {
+                           id: item.id, name: item.title, course_code: item.course_code, item_type: item.item_type,
+                           edition: item.edition, author: item.author, isbn: item.isbn, callnumber: item.callnumber
+                         }
+                       }
+        end
       else
-        format.json { render json:  ActiveSupport::JSON.encode(@docs, {} ) }
+        format.json { render json: ActiveSupport::JSON.encode(@docs, {}) }
       end
 
       format.html
     end
-
   end
 
-
   private
+
   def search_primo(query)
     bib_record = BibRecord.new
     @bib_search = true
@@ -83,17 +81,16 @@ class SearchController < AuthenticatedController
 
     @docs = bib_record.search_items(query, BibRecord::VUFIND)
 
-    return @docs
+    @docs
   end
 
   def search_worldcat(query)
-
     bib_record = BibRecord.new
     @bib_search = true
 
     @docs = bib_record.search_items(query, BibRecord::WORLDCAT)
 
-    return @docs
+    @docs
   end
 
   def search_local_items(query)
@@ -101,18 +98,15 @@ class SearchController < AuthenticatedController
 
     query = query.strip unless query.blank?
 
-
-    @items = Item.where("title like ? OR isbn like ? or unique_id = ? or author like ?",
+    @items = Item.where('title like ? OR isbn like ? or unique_id = ? or author like ?',
                         "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")
 
     unless params[:books].nil? && params[:articles].nil? && params[:course_kits].nil?
-      @items = @items.where({ format: params[:books]} | {format: params[:articles]} | {format: params[:course_kits]})
+      @items = @items.where({ format: params[:books] } | { format: params[:articles] } | { format: params[:course_kits] })
     end
 
     @items = @items.page page_number
 
-    return @items
+    @items
   end
-
-
 end
