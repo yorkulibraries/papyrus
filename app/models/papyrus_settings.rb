@@ -1,5 +1,4 @@
 class PapyrusSettings < RailsSettings::CachedSettings
-
-  TRUE = "true"
-  FALSE = "false"
+  TRUE = 'true'
+  FALSE = 'false'
 end

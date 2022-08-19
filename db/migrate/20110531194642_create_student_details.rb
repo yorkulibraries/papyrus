@@ -29,7 +29,7 @@ class CreateStudentDetails < ActiveRecord::Migration[4.2]
       t.text :pf_note
       t.string :wrms_ref_number
       t.integer :transcription_coordinator_id
-      t.integer  :transcription_assistant_id
+      t.integer :transcription_assistant_id
       t.date :request_form_signed_on
       t.date :intake_appointment_on
       t.date :responsibilities_document_signed_on

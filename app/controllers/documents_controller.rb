@@ -9,17 +9,18 @@ class DocumentsController < AuthenticatedController
 
     begin
       mime_type = MIME::Types.type_for(file).first.content_type
-    rescue
-      mime_type = "unknown"
+    rescue StandardError
+      mime_type = 'unknown'
     end
 
-    if ["pdf", "jpg", "png", "gif", "jpeg"].include?(ext.downcase)
-      disposition = "inline"
-    else
-      disposition = "attachment"
-    end
+    disposition = if %w[pdf jpg png gif jpeg].include?(ext.downcase)
+                    'inline'
+                  else
+                    'attachment'
+                  end
 
-    send_data File.read(file), type: mime_type, disposition: disposition, filename: "#{File.basename(@document.attachment_url)}"
+    send_data File.read(file), type: mime_type, disposition:,
+                               filename: "#{File.basename(@document.attachment_url)}"
   end
 
   def new
@@ -30,7 +31,7 @@ class DocumentsController < AuthenticatedController
   def create
     @document = @attachable.documents.build(document_params)
     @document.user = @current_user
-    @document.audit_comment = "Uploaded a new document"
+    @document.audit_comment = 'Uploaded a new document'
 
     respond_to do |format|
       if @document.save
@@ -48,7 +49,7 @@ class DocumentsController < AuthenticatedController
   def update
     @document = @attachable.documents.find(params[:id])
     @document.user = @current_user
-    @document.audit_comment = "Updated an existing document"
+    @document.audit_comment = 'Updated an existing document'
 
     respond_to do |format|
       if @document.update(document_params)
@@ -62,17 +63,17 @@ class DocumentsController < AuthenticatedController
   def destroy
     @document = @attachable.documents.find(params[:id])
     @document.user = @current_user
-    @document.audit_comment = "Deleted a document"
+    @document.audit_comment = 'Deleted a document'
 
     @document.deleted = true
     @document.save(validate: false)
-
   end
 
   private
+
   def load_attachable
-    klass = [Student, Course].detect{|c| params["#{c.name.underscore}_id"]}
-    @attachable= klass.find(params["#{klass.name.underscore}_id"])
+    klass = [Student, Course].detect { |c| params["#{c.name.underscore}_id"] }
+    @attachable = klass.find(params["#{klass.name.underscore}_id"])
   end
 
   def document_params

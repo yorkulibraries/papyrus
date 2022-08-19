@@ -1,11 +1,9 @@
 class Search::LocalItemsController < AuthenticatedController
-
   before_action do
     authorize! :search, :items
   end
 
-  def new
-  end
+  def new; end
 
   def index
     page_number = params[:page] ||= 1
@@ -21,6 +19,6 @@ class Search::LocalItemsController < AuthenticatedController
 
     @results = @results.page page_number
 
-    render action: "new"
+    render action: 'new'
   end
 end

@@ -1,16 +1,13 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "#{@item.id} Audit Trail") do |sheet|
+  sheet.add_row ['Date', 'Time', 'Object', 'Action', 'Changes', 'Reponsible User']
 
-  sheet.add_row ["Date", "Time", "Object", "Action", "Changes", "Reponsible User"]
-
-  render partial: 'audit_trail/trail', format: "xlsx", locals: { audits_grouped: @audits_grouped, sheet: sheet }
+  render partial: 'audit_trail/trail', format: 'xlsx', locals: { audits_grouped: @audits_grouped, sheet: }
 
   sheet.add_row []
   sheet.add_row []
 
   @item.attributes.each do |key, value|
-    sheet.add_row [key ,"#{value}"]    
+    sheet.add_row [key, "#{value}"]
   end
-
-
 end

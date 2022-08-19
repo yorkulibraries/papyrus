@@ -8,6 +8,6 @@ class AddCounterCaches < ActiveRecord::Migration[4.2]
   def down
     remove_column :items, :attachments_count
     remove_column :terms, :courses_count
-    remove_column :courses, :items_count            
+    remove_column :courses, :items_count
   end
 end

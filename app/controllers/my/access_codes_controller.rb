@@ -1,10 +1,3 @@
 class My::AccessCodesController < My::BaseController
-
-
-
-  def show
-
-  end
-
-
+  def show; end
 end

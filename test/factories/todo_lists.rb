@@ -5,5 +5,4 @@ FactoryGirl.define do
     assigned_to nil
     status TodoList::STATUS_NEW
   end
-
 end
