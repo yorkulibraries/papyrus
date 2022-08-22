@@ -10,9 +10,9 @@ include ActionDispatch::TestProcess
 class ActiveSupport::TestCase
   def setup
     api_keys = Rails.application.config_for :api_keys
-    PapyrusSettings[:worldcat_key] = api_keys[:worldcat_api_key]
-    PapyrusSettings[:primo_api_key] = api_keys[:primo_api_key]
-    PapyrusSettings[:alma_api_key] = api_keys[:alma_api_key]
+    PapyrusSettings.worldcat_key = api_keys[:worldcat_api_key]
+    PapyrusSettings.primo_apikey = api_keys[:primo_api_key]
+    PapyrusSettings.alma_apikey = api_keys[:alma_api_key]
     Rails.configuration.is_using_login_password_authentication = false
   end
 
@@ -46,7 +46,7 @@ class ActiveSupport::TestCase
 end
 
 class ActionDispatch::IntegrationTest
-  PapyrusSettings.expire_cache
+  # PapyrusSettings.expire_cache
 
   def log_user_in(user)
     # session[:user_id] = user.id
