@@ -6,13 +6,12 @@ gem 'json', '~> 2.6', '>= 2.6.2'
 gem 'puma', '~> 5.6', '>= 5.6.4'
 gem 'rack', '2.2.3.1'
 gem 'rails', '~> 7.0', '>= 7.0.3.1'
-gem 'websocket-extensions', '>= 0.1.5'
 
 ## RAILS related ##
 gem 'coffee-rails', '~> 4.2'
-gem 'sass-rails', '5.0.8'
-gem 'sprockets', '>= 3.7.2'
-gem 'uglifier', '>= 1.3.0'
+gem 'sass-rails', '~> 6.0'
+gem 'sprockets-rails', '~> 3.4', '>= 3.4.2'
+gem 'uglifier', '~> 4.2'
 
 ## DATABASES ##
 gem 'mysql2', '0.5.3', group: :production
@@ -53,7 +52,7 @@ gem 'primo', git: 'https://github.com/tulibraries/primo.git', branch: 'main'
 ## EXEL EXPORT ##
 gem 'caxlsx', '3.2.0'
 gem 'caxlsx_rails', '0.6.3'
-gem 'roo', '~> 2.3.1'
+gem 'roo', '~> 2.9'
 
 ## UPLOADING AND MANIPULATING FILES ##
 gem 'carrierwave', '~> 2.2', '>= 2.2.2'
@@ -73,23 +72,15 @@ group :test do
   gem 'guard-bundler', '~> 3.0'
   gem 'guard-minitest', '2.4.6'
   gem 'minitest', '~> 5.16', '>= 5.16.3'
-  gem 'minitest-around'
-  gem 'mocha', require: false
-  gem 'rails-controller-testing'
-  gem 'ruby-prof', '0.16.2'
-  gem 'selenium-webdriver'
+  gem 'minitest-around', '~> 0.5.0'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'shoulda', '~> 3.6'
-  gem 'shoulda-context'
-  gem 'webrat', '0.7.3'
 end
 
 group :development, :test do
   gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem 'guard-livereload', '2.5.2', require: false
-  gem 'rack-livereload', '0.3.16'
-  gem 'sqlite3'
-  ## PROFILING
-  gem 'rack-mini-profiler', require: false
+  gem 'sqlite3', '~> 1.4', '>= 1.4.4'
 end
 
 group :development do
