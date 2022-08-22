@@ -10,7 +10,6 @@ gem 'rails', '~> 7.0', '>= 7.0.3.1'
 ## RAILS related ##
 gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 6.0'
-gem 'sprockets-rails', '~> 3.4', '>= 3.4.2'
 gem 'uglifier', '~> 4.2'
 
 ## DATABASES ##
@@ -37,7 +36,7 @@ gem 'fullcalendar-rails', '3.0.0.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 gem 'liquid', '~> 5.4'
 gem 'momentjs-rails', '2.17.1'
-gem 'rails-settings-cached', '0.4.1'
+gem 'rails-settings-cached', '~> 2.8', '>= 2.8.2'
 gem 'remotipart', '1.3.1' # submit files remotely
 gem 'ruby-saml', '~> 1.14'
 gem 'rubyzip', '~> 1.3.0'
@@ -64,7 +63,7 @@ gem 'mime-types', '~> 3.4', '>= 3.4.1'
 gem 'exception_notification', '~> 4.5'
 
 ## CRONJOBS ##
-gem 'whenever', require: false
+gem 'whenever', '~> 1.0', require: false
 
 group :test do
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
@@ -74,7 +73,7 @@ group :test do
   gem 'minitest', '~> 5.16', '>= 5.16.3'
   gem 'minitest-around', '~> 0.5.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
-  gem 'shoulda', '~> 3.6'
+  gem 'shoulda', '~> 4.0'
 end
 
 group :development, :test do
@@ -86,7 +85,7 @@ end
 group :development do
   gem 'faker', '~> 2.22'
   gem 'populator', git: 'https://github.com/ryanb/populator.git'
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '~> 4.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
