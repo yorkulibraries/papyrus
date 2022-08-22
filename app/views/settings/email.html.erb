@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<%= panel(title: "Email Settings", icon: "cog") do %>
-			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+			<%= simple_form_for PapyrusSettings.new, url: settings_path, method: :patch do |f| %>
 
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active">

@@ -5,7 +5,7 @@
 	<div class="col-md-8">
 		<%= panel(title: "Student Management Settings", icon: "cog") do %>
 
-			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+			<%= simple_form_for PapyrusSettings.new, url: settings_path, method: :patch do |f| %>
 					<h5 class="text-black">Student Portal</h5>
 
 				<%= f.label :student_portal_welcome_enable, "Enable Welcome / First Time Login Message?"%>
