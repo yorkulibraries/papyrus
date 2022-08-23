@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Students::ExpiredItemsController < AuthenticatedController
   before_action :load_student
 

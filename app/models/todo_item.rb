@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TodoItem < ApplicationRecord
   # Fields: :summary, :item_id, :todo_list_id, :assigned_to_id, :created_by_id, :due_date, :status
 
@@ -14,7 +16,7 @@ class TodoItem < ApplicationRecord
   STATUS_NEW = 'new'
   STATUS_DONE = 'done'
 
-  SCAN_STATUSES = [STATUS_NEW, STATUS_DONE]
+  SCAN_STATUSES = [STATUS_NEW, STATUS_DONE].freeze
 
   ## VALIDATIONS
   validates_presence_of :status, :created_by, :todo_list

@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 module ItemsHelper
   def display_icon(type)
-    if type == Item::BOOK
+    case type
+    when Item::BOOK
       'book'
-    elsif type == Item::ARTICLE
+    when Item::ARTICLE
       'file-text-alt'
-    elsif type == Item::COURSE_KIT
+    when Item::COURSE_KIT
       'paperclip'
     else
       'flag'

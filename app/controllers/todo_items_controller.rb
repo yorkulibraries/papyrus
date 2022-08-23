@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TodoItemsController < AuthenticatedController
   authorize_resource
   before_action :load_todo_list

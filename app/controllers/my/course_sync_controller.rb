@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class My::CourseSyncController < My::BaseController
   skip_before_action :check_terms_acceptance, :sync_courses
 
@@ -11,12 +13,10 @@ class My::CourseSyncController < My::BaseController
     course_code_parser = Papyrus::YorkuCourseCodeParser.new
 
     list = course_code_parser.unique_codes_only(course_list, PapyrusSettings.course_listing_separator)
-    current_list = @student.courses.collect { |c| c.code }
+    current_list = @student.courses.collect(&:code)
 
-    if list.size == 0
-      @student.courses.delete_all
-    else
-      @student.courses.delete_all
+    @student.courses.delete_all
+    unless list.size.zero?
 
       list.each do |code|
         course = Course.find_by_code(code)
@@ -60,7 +60,7 @@ class My::CourseSyncController < My::BaseController
   end
 
   def notify_coordinator(student, courses_added, courses_removed)
-    if courses_added.size > 0 || courses_removed.size > 0
+    if courses_added.size.positive? || courses_removed.size.positive?
       coordinator = student.details.transcription_coordinator || User.new(email: 'noreply@library.yorku.ca')
       assistant = student.details.transcription_assistant || User.new
 
@@ -69,11 +69,11 @@ class My::CourseSyncController < My::BaseController
 
         The list of courses, which #{student.name} is enrolled in, has been updated. Please review below:
 
-        #{"Added:\n" if courses_added.size > 0}
-        #{courses_added.join("\n") if courses_added.size > 0}
+        #{"Added:\n" if courses_added.size.positive?}
+        #{courses_added.join("\n") if courses_added.size.positive?}
 
-        #{"Removed:\n" if courses_removed.size > 0}
-        #{courses_removed.join("\n") if courses_removed.size > 0}
+        #{"Removed:\n" if courses_removed.size.positive?}
+        #{courses_removed.join("\n") if courses_removed.size.positive?}
 
       HEREDOC
 

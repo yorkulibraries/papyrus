@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -6,7 +8,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-if Rails.env != 'test' and User.all.count == 0
+if (Rails.env != 'test') && User.all.count.zero?
   User.create!([
                  { username: 'admin', last_name: 'User', role: 'admin', inactive: false, type: nil, email: 'admin@me.ca',
                    created_by_user_id: nil, email_sent_at: nil, blocked: false, last_logged_in_at: '2022-05-25 14:32:52', first_name: 'Admin', last_active_at: '2022-05-25 14:32:52', first_time_login: true },

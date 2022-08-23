@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Papyrus
   ## SAMPLE 2016_AP_POLS_Y_1000__6_C_EN_A_LECT_01, 2016_AP_POLS_Y_1000__6_C_EN_A_TUTR_04, 2016_AP_HRM_F_3422__3_B_EN_A_LECT_01
   # 2016_GS_CDIS_F_5110__3_A_EN_A_SEMR_01,
@@ -15,7 +17,7 @@ module Papyrus
     ## Simple string length and underscore count checks.
     def valid?(code)
       ## nil or empty return false right away
-      return false if code.nil? || code.size == 0
+      return false if code.nil? || code.size.zero?
 
       return true if code.count('_') >= FULL_UNDERSCORE_COUNT && code.count('_') <= EXTENDED_UNDERSCORE_COUNT
 

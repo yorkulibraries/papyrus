@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LoginController < ApplicationController
   def new
     username = request.headers[PapyrusSettings.auth_cas_header]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTodoItems < ActiveRecord::Migration[4.2]
   def change
     create_table :todo_items do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class LoginControllerTest < ActionDispatch::IntegrationTest
@@ -12,7 +14,7 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
     should 'FOR CAS: create a new session and log user in if valid user' do
       user = create(:user, username: 'someuser')
 
-      get login_url, headers: { "#{@cas_header}" => user.username }
+      get login_url, headers: { @cas_header.to_s => user.username }
 
       user.reload
       assert Date.today >= user.last_logged_in_at.to_date, 'Logged in date should be set'
@@ -24,7 +26,7 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
     should 'FOR CAS: redirect Student to student view section if valid student' do
       student = create(:student)
 
-      get login_url, headers: { "#{@cas_header}" => student.username }
+      get login_url, headers: { @cas_header.to_s => student.username }
 
       student.reload
       assert Date.today >= student.last_logged_in_at.to_date, 'Logged in date should be set'
@@ -34,7 +36,7 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
     end
 
     should 'Show invalid login page if user is not found' do
-      get login_url, headers: { "#{@cas_header}" => 'somecooldude' }
+      get login_url, headers: { @cas_header.to_s => 'somecooldude' }
 
       assert_nil session[:user_id], 'Session user id was not set'
       assert_equal 'Invalid email or password', flash[:alert]
@@ -42,7 +44,7 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
 
     should 'destroy the session when logging out' do
       user = create(:user)
-      get login_url, headers: { "#{@cas_header}" => user.username }
+      get login_url, headers: { @cas_header.to_s => user.username }
       assert_equal user.id, session[:user_id]
 
       get logout_url
@@ -54,7 +56,7 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
     should 'check the alternate CAS Header if main CAS Header failed' do
       student = create(:student)
 
-      get login_url, headers: { "#{@cas_alt_header}" => student.username }
+      get login_url, headers: { @cas_alt_header.to_s => student.username }
 
       assert_redirected_to my_student_portal_path, 'Redirects to student view url'
       assert_equal student.id, session[:user_id], "Session user id is student's id"
@@ -63,7 +65,7 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
     should 'only lookup users who are not blocked' do
       blocked = create(:user, blocked: true)
 
-      get login_url, headers: { "#{@cas_alt_header}" => blocked.username }
+      get login_url, headers: { @cas_alt_header.to_s => blocked.username }
 
       assert_nil session[:user_id], 'Session user id was not set'
       assert_equal 'Invalid email or password', flash[:alert]

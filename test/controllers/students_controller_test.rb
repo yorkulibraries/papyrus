@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class StudentsControllerTest < ActionDispatch::IntegrationTest
@@ -208,9 +210,7 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
       courses = create_list(:course, 4)
 
       assert_difference 'StudentCourse.count', courses.size do
-        post enroll_in_courses_student_path(student), xhr: true, params: { course_ids: courses.collect do |c|
-                                                                                         c.id
-                                                                                       end.join(',') }
+        post enroll_in_courses_student_path(student), xhr: true, params: { course_ids: courses.collect(&:id).join(',') }
         assert_response :success
       end
     end

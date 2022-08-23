@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "#{@item.id} Audit Trail") do |sheet|
   sheet.add_row ['Date', 'Time', 'Object', 'Action', 'Changes', 'Reponsible User']
@@ -8,6 +10,6 @@ wb.add_worksheet(name: "#{@item.id} Audit Trail") do |sheet|
   sheet.add_row []
 
   @item.attributes.each do |key, value|
-    sheet.add_row [key, "#{value}"]
+    sheet.add_row [key, value.to_s]
   end
 end

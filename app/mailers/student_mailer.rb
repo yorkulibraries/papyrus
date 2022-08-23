@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class StudentMailer < ActionMailer::Base
   default from: PapyrusSettings.email_from
 
   def notification_email(student, sender, message)
-    @template = Liquid::Template.parse(PapyrusSettings.email_notification_body)  # Parses and compiles the template
+    @template = Liquid::Template.parse(PapyrusSettings.email_notification_body) # Parses and compiles the template
 
     @student = student
     @sender = sender
@@ -55,7 +57,7 @@ class StudentMailer < ActionMailer::Base
     @template = Liquid::Template.parse(PapyrusSettings.email_item_assigned_body) # Parses and compiles the template
 
     @student = student
-    @items = items.map { |i| i.title }.join("\n ")
+    @items = items.map(&:title).join("\n ")
     @url  = PapyrusSettings.org_app_url
 
     ## extra setup variables
