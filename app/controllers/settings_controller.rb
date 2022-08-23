@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SettingsController < AuthenticatedController
   authorize_resource PapyrusSettings
 
@@ -21,7 +23,7 @@ class SettingsController < AuthenticatedController
     settings = params[:papyrus_settings]
 
     settings.each do |key, value|
-      PapyrusSettings[key] = value
+      PapyrusSettings.send("#{key}=", value)
     end
 
     case params[:return_to]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AcquisitionRequestsController < AuthenticatedController
   before_action :set_request,
                 only: %i[show edit update destroy change_status_form change_status send_to_acquisitions]
@@ -50,11 +52,10 @@ class AcquisitionRequestsController < AuthenticatedController
           redirect_to acquisition_request_path(@acquisition_request),
                       notice: 'Acquisition Request was successfully created.'
         end
-        format.js
       else
         format.html { render action: 'new' }
-        format.js
       end
+      format.js
     end
   end
 
@@ -66,11 +67,10 @@ class AcquisitionRequestsController < AuthenticatedController
           redirect_to acquisition_request_path(@acquisition_request),
                       notice: 'Acquisition Request was successfully updated.'
         end
-        format.js
       else
         format.html { render action: 'edit' }
-        format.js
       end
+      format.js
     end
   end
 
@@ -93,7 +93,8 @@ class AcquisitionRequestsController < AuthenticatedController
   end
 
   def change_status
-    if params[:status] == AcquisitionRequest::STATUS_ACQUIRED
+    case params[:status]
+    when AcquisitionRequest::STATUS_ACQUIRED
       @acquisition_request.status = AcquisitionRequest::STATUS_ACQUIRED
       @acquisition_request.acquired_at = Time.now
       @acquisition_request.acquired_by = current_user
@@ -101,7 +102,7 @@ class AcquisitionRequestsController < AuthenticatedController
 
       result = @acquisition_request.update(acquisition_request_params)
 
-    elsif params[:status] == AcquisitionRequest::STATUS_CANCELLED
+    when AcquisitionRequest::STATUS_CANCELLED
       @acquisition_request.status = AcquisitionRequest::STATUS_CANCELLED
       @acquisition_request.cancelled_at = Time.now
       @acquisition_request.cancelled_by = current_user
@@ -109,7 +110,7 @@ class AcquisitionRequestsController < AuthenticatedController
       @acquisition_request.cancellation_reason = acquisition_request_params[:cancellation_reason]
 
       result = @acquisition_request.save(validate: false)
-    elsif params[:status] == AcquisitionRequest::STATUS_BACK_ORDERED
+    when AcquisitionRequest::STATUS_BACK_ORDERED
       @acquisition_request.back_ordered_by = current_user
       @acquisition_request.status = AcquisitionRequest::STATUS_BACK_ORDERED
       @acquisition_request.audit_comment = "Changed status to #{AcquisitionRequest::STATUS_BACK_ORDERED}"

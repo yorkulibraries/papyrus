@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :copy do
   desc 'Papyrus Copying Tasks'
 

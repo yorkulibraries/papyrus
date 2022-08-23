@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AttachmentsController < AuthenticatedController
   authorize_resource
   before_action :load_item
@@ -138,7 +140,7 @@ class AttachmentsController < AuthenticatedController
 
   def get_file
     @attachment = @item.attachments.find(params[:id])
-    file = "#{@attachment.file.path}"
+    file = @attachment.file.path.to_s
 
     begin
       mime_type = MIME::Types.type_for(file).first.content_type
@@ -147,7 +149,7 @@ class AttachmentsController < AuthenticatedController
     end
 
     send_data File.read(file), type: mime_type, disposition: 'attachment',
-                               filename: "#{File.basename(@attachment.file_url)}"
+                               filename: File.basename(@attachment.file_url).to_s
   end
 
   private

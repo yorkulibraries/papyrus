@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UtilsHelper
   def pp(object)
     (ap object).html_safe
@@ -5,7 +7,7 @@ module UtilsHelper
   end
 
   def blank_slate(list = nil, title: 'No items found', description: 'Click on new button to add new item.', icon: nil)
-    if list.nil? || list.size == 0
+    if list.nil? || list.size.zero?
       fa = icon.nil? ? '' : content_tag(:i, '', class: "fas fa-#{icon} fa-3x")
       h4 = content_tag(:h4, title.html_safe, class: 'mt-4')
       p = content_tag(:p, description.html_safe)

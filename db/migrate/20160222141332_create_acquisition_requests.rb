@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAcquisitionRequests < ActiveRecord::Migration[4.2]
   def change
     create_table :acquisition_requests do |t|

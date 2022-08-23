@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFirstTimeLoginToUsers < ActiveRecord::Migration[5.1]
   def change
     add_column :users, :first_time_login, :boolean, default: true

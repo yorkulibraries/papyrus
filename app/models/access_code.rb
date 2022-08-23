@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccessCode < ApplicationRecord
   # attr_accessible :for, :code, :expires_at
 

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class DocumentsController < AuthenticatedController
   authorize_resource
   before_action :load_attachable, except: :download
 
   def download
     @document = Document.find(params[:id])
-    file = "#{@document.attachment.path}"
+    file = @document.attachment.path.to_s
     ext = @document.attachment.file.extension
 
     begin
@@ -20,7 +22,7 @@ class DocumentsController < AuthenticatedController
                   end
 
     send_data File.read(file), type: mime_type, disposition:,
-                               filename: "#{File.basename(@document.attachment_url)}"
+                               filename: File.basename(@document.attachment_url).to_s
   end
 
   def new
@@ -32,13 +34,9 @@ class DocumentsController < AuthenticatedController
     @document = @attachable.documents.build(document_params)
     @document.user = @current_user
     @document.audit_comment = 'Uploaded a new document'
-
+    @document.save
     respond_to do |format|
-      if @document.save
-        format.js
-      else
-        format.js
-      end
+      format.js
     end
   end
 
@@ -50,13 +48,9 @@ class DocumentsController < AuthenticatedController
     @document = @attachable.documents.find(params[:id])
     @document.user = @current_user
     @document.audit_comment = 'Updated an existing document'
-
+    @document.update(document_params)
     respond_to do |format|
-      if @document.update(document_params)
-        format.js
-      else
-        format.js
-      end
+      format.js
     end
   end
 

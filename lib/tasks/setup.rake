@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :app do
   task set_alma_api_key: :environment do
     setting = PapyrusSettings.find_by! var: 'primo_apikey'

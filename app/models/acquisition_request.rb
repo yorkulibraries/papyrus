@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AcquisitionRequest < ApplicationRecord
   ##### DB Fields for reference (update if changes)
   # "id", "item_id", "requested_by_id", "acquisition_reason", "status", "location_id",
@@ -17,7 +19,7 @@ class AcquisitionRequest < ApplicationRecord
   STATUS_BACK_ORDERED = 'back_ordered'
   STATUS_ACQUIRED = 'acquired'
   STATUS_CANCELLED = 'cancelled'
-  STATUSES = [STATUS_ACQUIRED, STATUS_CANCELLED, STATUS_BACK_ORDERED]
+  STATUSES = [STATUS_ACQUIRED, STATUS_CANCELLED, STATUS_BACK_ORDERED].freeze
 
   ## RELATIONS
   belongs_to :item

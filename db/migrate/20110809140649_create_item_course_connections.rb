@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateItemCourseConnections < ActiveRecord::Migration[4.2]
   def self.up
     create_table :item_course_connections do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStudentDetails < ActiveRecord::Migration[4.2]
   def self.up
     create_table :student_details do |t|

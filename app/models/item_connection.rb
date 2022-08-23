@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ItemConnection < ApplicationRecord
   # extra field  "expires_on"
 

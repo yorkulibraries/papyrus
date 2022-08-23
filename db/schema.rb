@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_630_182_701) do
+ActiveRecord::Schema[7.0].define(version: 20_220_822_184_425) do
   create_table 'access_codes', force: :cascade do |t|
     t.string 'for'
     t.string 'code'
@@ -202,11 +204,9 @@ ActiveRecord::Schema[7.0].define(version: 20_220_630_182_701) do
   create_table 'settings', force: :cascade do |t|
     t.string 'var', null: false
     t.text 'value'
-    t.integer 'thing_id'
-    t.string 'thing_type', limit: 30
-    t.datetime 'created_at'
-    t.datetime 'updated_at'
-    t.index %w[thing_type thing_id var], name: 'index_settings_on_thing_type_and_thing_id_and_var', unique: true
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['var'], name: 'index_settings_on_var', unique: true
   end
 
   create_table 'student_courses', force: :cascade do |t|

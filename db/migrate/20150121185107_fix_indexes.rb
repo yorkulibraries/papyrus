@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FixIndexes < ActiveRecord::Migration[4.2]
   def change
     # remove long named indexes

@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 class Ability
   include CanCan::Ability
 
   def initialize(user)
     user ||= User.new
 
-    if user.role == User::ADMIN
+    case user.role
+    when User::ADMIN
       can :manage, :all
-    elsif user.role == User::MANAGER
+    when User::MANAGER
       can :perma_destroy, :student
       can :show, :dashboard
       can :manage, [Announcement, AcquisitionRequest]
@@ -20,7 +23,7 @@ class Ability
 
       can :login_as, :student
 
-    elsif user.role == User::COORDINATOR
+    when User::COORDINATOR
       can :show, :dashboard
       can :show, :stats
       can :manage, Announcement
@@ -39,7 +42,7 @@ class Ability
 
       can :manage, :shared_access_codes
 
-    elsif user.role == User::STAFF
+    when User::STAFF
       can :show, :dashboard
 
       can :manage, Document do |d|
@@ -60,7 +63,7 @@ class Ability
 
       can :manage, :shared_access_codes
 
-    elsif user.role == User::PART_TIME
+    when User::PART_TIME
       can :show, :dashboard
 
       can %i[create read update], [Item, Note, Course, TodoList, TodoItem]
@@ -71,7 +74,7 @@ class Ability
       can :login_as, :student
       can :create, Attachment
       can :get_file, Attachment
-    elsif user.role == User::STUDENT_VIEW
+    when User::STUDENT_VIEW
       can :show, :dashboard
       can :read, Student
     else

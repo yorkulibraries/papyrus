@@ -1,2 +1,0 @@
-module Students::ListHelper
-end

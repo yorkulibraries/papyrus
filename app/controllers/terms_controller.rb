@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TermsController < AuthenticatedController
   authorize_resource
 
@@ -9,7 +11,7 @@ class TermsController < AuthenticatedController
     respond_to do |format|
       format.json do
         render json: @courses.map { |course|
-                       { id: course.id, name: "#{course.title}", term: "#{course.term.name}" }
+                       { id: course.id, name: course.title.to_s, term: course.term.name.to_s }
                      }
       end
       format.html

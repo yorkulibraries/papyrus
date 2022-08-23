@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 wb = xlsx_package.workbook
 wb.add_worksheet(name: 'Items History') do |sheet|
   sheet.add_row ['Item Title', 'Source', 'Callnumber', 'ISBN', 'Creator', 'Date Added']

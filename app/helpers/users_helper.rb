@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def username_hint
     PapyrusSettings.auth_cas_user_id_label
