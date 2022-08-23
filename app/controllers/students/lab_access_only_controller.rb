@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Students::LabAccessOnlyController < AuthenticatedController
   before_action do
     authorize! :show, :dashboard

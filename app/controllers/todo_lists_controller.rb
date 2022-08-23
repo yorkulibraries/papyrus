@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TodoListsController < AuthenticatedController
   authorize_resource
   before_action :load_todo_list, except: %i[index create new]

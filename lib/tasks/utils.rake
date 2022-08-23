@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :utils do
   desc 'Papyrus Utilities Tasks'
   task deactivate_students: :environment do

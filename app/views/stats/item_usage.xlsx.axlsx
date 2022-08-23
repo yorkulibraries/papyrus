@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 wb = xlsx_package.workbook
 wb.add_worksheet(name: 'Assigned Items') do |sheet|
   sheet.add_row ['Item Title', 'Source', 'Callnumber', 'ISBN', 'Assigned Count']

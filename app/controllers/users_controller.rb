@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < AuthenticatedController
   authorize_resource
 

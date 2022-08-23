@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAccessCodes < ActiveRecord::Migration[4.2]
   def self.up
     create_table :access_codes do |t|

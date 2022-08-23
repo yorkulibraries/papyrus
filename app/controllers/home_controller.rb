@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HomeController < AuthenticatedController
   before_action :authorize_controller
 

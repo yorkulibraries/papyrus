@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StudentsController < AuthenticatedController
   authorize_resource
 
@@ -5,7 +7,7 @@ class StudentsController < AuthenticatedController
     page_number = params[:page] ||= 1
 
     @students = Student.active.includes(:student_details).page(page_number)
-    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, 'current')
+    @current_items_counts = Student.item_counts(@students.collect(&:id), 'current')
   end
 
   def notify
@@ -25,7 +27,7 @@ class StudentsController < AuthenticatedController
 
     end
 
-    redirect_to root_url unless params[:item] or params[:student]
+    redirect_to root_url unless params[:item] || params[:student]
   end
 
   def block
@@ -52,10 +54,10 @@ class StudentsController < AuthenticatedController
     @query = query
 
     @students = Student.where('users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ?',
-                              "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")
+                              "%#{query}%", "%#{query}%", query.to_s, "%#{query}%")
                        .where(inactive: inactive_status).page page_number
 
-    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, 'current')
+    @current_items_counts = Student.item_counts(@students.collect(&:id), 'current')
 
     respond_to do |format|
       format.json { render json: @students.map { |student| { id: student.id, name: student.name } } }
@@ -67,7 +69,7 @@ class StudentsController < AuthenticatedController
     @student = Student.find(params[:id])
     @items = @student.current_items
     @expired_items = @student.expired_items
-    @items_grouped = @items.group_by { |i| i.item_type }
+    @items_grouped = @items.group_by(&:item_type)
 
     @active_access_codes = @student.access_codes.active
     @shared_codes = AccessCode.shared.active

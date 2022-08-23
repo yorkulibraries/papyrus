@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportMailer < ActionMailer::Base
   default from: PapyrusSettings.email_from
 

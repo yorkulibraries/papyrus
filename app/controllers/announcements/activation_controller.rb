@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Announcements::ActivationController < AuthenticatedController
   before_action :load_announcement
   authorize_resource Announcement

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchController < AuthenticatedController
   before_action do
     authorize! :search, :items
@@ -14,7 +16,7 @@ class SearchController < AuthenticatedController
 
     @students = Student.joins(:student_details)
                        .where('users.first_name like ? or users.last_name like ? or users.username = ? or users.email like ? or student_details.student_number = ?',
-                              "%#{query}%", "%#{query}%", "#{query}", "%#{query}%", "#{query}")
+                              "%#{query}%", "%#{query}%", query.to_s, "%#{query}%", query.to_s)
 
     @students = if params[:search_all]
                   @students.page page_number
@@ -22,7 +24,7 @@ class SearchController < AuthenticatedController
                   @students.where(inactive: inactive_status).page page_number
                 end
 
-    @current_items_counts = Student.item_counts(@students.collect { |s| s.id }, 'current')
+    @current_items_counts = Student.item_counts(@students.collect(&:id), 'current')
 
     respond_to do |format|
       format.json do
@@ -99,7 +101,7 @@ class SearchController < AuthenticatedController
     query = query.strip unless query.blank?
 
     @items = Item.where('title like ? OR isbn like ? or unique_id = ? or author like ?',
-                        "%#{query}%", "%#{query}%", "#{query}", "%#{query}%")
+                        "%#{query}%", "%#{query}%", query.to_s, "%#{query}%")
 
     unless params[:books].nil? && params[:articles].nil? && params[:course_kits].nil?
       @items = @items.where({ format: params[:books] } | { format: params[:articles] } | { format: params[:course_kits] })

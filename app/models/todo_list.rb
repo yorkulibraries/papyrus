@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TodoList < ApplicationRecord
   # Fields : name, status, created_by, assigned_to
 
@@ -15,7 +17,7 @@ class TodoList < ApplicationRecord
   STATUS_IN_PROGRESS = 'in_progress'
   STATUS_DONE = 'done'
 
-  SCAN_STATUSES = [STATUS_IN_PROGRESS, STATUS_DONE]
+  SCAN_STATUSES = [STATUS_IN_PROGRESS, STATUS_DONE].freeze
 
   ## VALIDATIONS
   validates_presence_of :name, :status, :created_by

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'alma'
 class BibRecord::AlmaResult
   def self.find_item(id)

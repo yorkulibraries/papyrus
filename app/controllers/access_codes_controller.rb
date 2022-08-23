@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AccessCodesController < AuthenticatedController
   authorize_resource
   before_action :load_student

@@ -5,7 +5,7 @@
 		<%= panel(title: "Bib Search Settings", icon: "cog") do %>
 			<p class="alert alert-danger"><strong>Warning:</strong> Changing these values might disable BibCat Search capabilities. Please be careful.</p>
 
-			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+			<%= simple_form_for PapyrusSettings.new, url: settings_path, method: :patch do |f| %>
 
 
 			<h5 class="text-black">VuFIND Settings</h5>

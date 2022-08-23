@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Students::ListController < AuthenticatedController
   before_action do
     authorize! :show, :dashboard
   end
 
   def never_logged_in
-    @students = Student.never_logged_in.includes(:student_details).reject { |s| s.lab_access_only? }
+    @students = Student.never_logged_in.includes(:student_details).reject(&:lab_access_only?)
   end
 
   def inactive

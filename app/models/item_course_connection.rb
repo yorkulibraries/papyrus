@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ItemCourseConnection < ApplicationRecord
   ## RELATIONSHIPS ##
   belongs_to :item

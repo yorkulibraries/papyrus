@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ignore %r{test/integration/.+_test\.rb$}
 
 guard :bundler do

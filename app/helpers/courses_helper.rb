@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CoursesHelper
   def short_course_code(code)
     if code

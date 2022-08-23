@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item::CourseKitForm
   include ActiveModel::Validations
 
@@ -5,7 +7,7 @@ class Item::CourseKitForm
   # YEAR_FACULTY_SUBJECT_TERM_COURSEID__CREDITS_SECTION    i.e. 2013_GL_ECON_S1_2500__3_A ignoring EN_A_LECT_01
 
   # CONSTANTS
-  FACULTIES = %w[AP ED ES FA GL GS HH LE LIB LW S SB SC SCS YUL]
+  FACULTIES = %w[AP ED ES FA GL GS HH LE LIB LW S SB SC SCS YUL].freeze
   SECTIONS = ('A'..'Z')
 
   ACADEMIC_YEARS = if Date.today.month > 8
@@ -16,10 +18,10 @@ class Item::CourseKitForm
 
   ACADEMIC_YEARS_FULL = ACADEMIC_YEARS.collect { |year| ["#{year}/#{year + 1}", year] }
 
-  TERMS = %w[F W FW Y S SU S1 S2]
-  TERM_NAMES = %w[Fall Winter Fall/Winter Year Summer Summer1 Summer2]
-  TERM_CREDITS = %w[1 3 4 6 9]
-  SUBJECTS ||= IO.readlines("#{Rails.root}/lib/course_subjects.txt").collect { |s| s.strip }
+  TERMS = %w[F W FW Y S SU S1 S2].freeze
+  TERM_NAMES = %w[Fall Winter Fall/Winter Year Summer Summer1 Summer2].freeze
+  TERM_CREDITS = %w[1 3 4 6 9].freeze
+  SUBJECTS ||= IO.readlines("#{Rails.root}/lib/course_subjects.txt").collect(&:strip)
 
   attr_accessor :code
 

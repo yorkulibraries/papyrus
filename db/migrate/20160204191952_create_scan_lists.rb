@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateScanLists < ActiveRecord::Migration[4.2]
   def change
     create_table :scan_lists do |t|

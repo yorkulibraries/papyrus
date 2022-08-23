@@ -1,2 +1,0 @@
-module My::DetailsHelper
-end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Items::FromWorldcatHelper
   def format_worldcat_field(field, field_name = nil)
     if field.blank?
@@ -7,7 +9,7 @@ module Items::FromWorldcatHelper
         content_tag(:span, "#{field_name} not provided...", class: 'weak')
       end
     elsif field.is_a?(Array)
-      field.reject { |i| i.blank? }.join(', ')
+      field.reject(&:blank?).join(', ')
     else
       field = begin
         encode_field(field)

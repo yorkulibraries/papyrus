@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :item do
     # :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date, :language_note, :edition, :physical_description

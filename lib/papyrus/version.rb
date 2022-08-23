@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Papyrus
   class Version
     def version

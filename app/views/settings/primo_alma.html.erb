@@ -5,7 +5,7 @@
 		<%= panel(title: "Promo Alma", icon: "cog") do %>
 			<p class="alert alert-danger"><strong>Warning:</strong> Changing these values might disable Primo/Alma Search capabilities. Please be careful.</p>
 
-			<%= simple_form_for PapyrusSettings, url: settings_path, method: :patch do |f| %>
+			<%= simple_form_for PapyrusSettings.new, url: settings_path, method: :patch do |f| %>
 
 
 			<h5 class="text-black">Primo Settings</h5>
