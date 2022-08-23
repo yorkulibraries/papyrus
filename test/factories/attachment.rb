@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :attachment do
     sequence(:name) { |n| "Some Name of Attachment #{n}" }

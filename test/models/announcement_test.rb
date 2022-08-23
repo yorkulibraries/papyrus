@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class AnnouncementTest < ActiveSupport::TestCase
@@ -40,8 +42,8 @@ class AnnouncementTest < ActiveSupport::TestCase
     s = create(:announcement, audience: Announcement::AUDIENCE_STUDENT)
     u = create(:announcement, audience: Announcement::AUDIENCE_USER)
 
-    assert_equal 1, Announcement.current("#{s.id}").size, 'Should only be one'
-    assert_equal u.id, Announcement.current("#{s.id}").first.id, "Should be user's announcement"
+    assert_equal 1, Announcement.current(s.id.to_s).size, 'Should only be one'
+    assert_equal u.id, Announcement.current(s.id.to_s).first.id, "Should be user's announcement"
   end
 
   should 'show expired annoucemments' do

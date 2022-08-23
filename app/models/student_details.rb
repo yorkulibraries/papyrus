@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StudentDetails < ApplicationRecord
   # attr_accessible  :student_number, :preferred_phone, :request_form_signed_on,
   #                 :format_large_print, :format_pdf, :format_kurzweil, :format_daisy, :format_braille, :format_word, :format_note, :format_other,

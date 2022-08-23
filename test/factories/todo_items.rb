@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :todo_item do
     sequence(:summary) { |n| "Todo List #{n}" }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SharedAccessCodesController < AuthenticatedController
   before_action :authorize_check
 

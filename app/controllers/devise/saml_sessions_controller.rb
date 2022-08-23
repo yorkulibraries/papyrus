@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ruby-saml'
 class Devise::SamlSessionsController < Devise::SessionsController
   include DeviseSamlAuthenticatable::SamlConfig

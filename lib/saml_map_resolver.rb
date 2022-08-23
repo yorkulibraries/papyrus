@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  app/lib/my_attribute_map_resolver
 class SamlMapResolver < DeviseSamlAuthenticatable::DefaultAttributeMapResolver
   def attribute_map

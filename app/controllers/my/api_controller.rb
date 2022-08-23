@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class My::ApiController < My::BaseController
   skip_before_action :check_terms_acceptance
   skip_before_action :sync_courses

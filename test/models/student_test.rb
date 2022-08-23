@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class StudentTest < ActiveSupport::TestCase
@@ -73,15 +75,15 @@ class StudentTest < ActiveSupport::TestCase
       create_list(:item_connection, 5, expires_on: 1.year.ago, student:)
     end
 
-    current_counts = Student.item_counts(students.collect { |s| s.id }, 'current')
+    current_counts = Student.item_counts(students.collect(&:id), 'current')
 
     assert_equal 4, current_counts.size, 'Should be 4 count entries'
     assert_equal 10, current_counts[students.first.id], 'should be 10 current items'
 
-    current_counts = Student.item_counts(students.collect { |s| s.id }, 'expired')
+    current_counts = Student.item_counts(students.collect(&:id), 'expired')
     assert_equal 5, current_counts[students.first.id], 'should be 5 expired items'
 
-    current_counts = Student.item_counts(students.collect { |s| s.id }, 'all')
+    current_counts = Student.item_counts(students.collect(&:id), 'all')
     assert_equal 15, current_counts[students.first.id], 'should be 15 all items'
   end
 

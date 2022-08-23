@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Announcement < ApplicationRecord
   # attr_accessible :ends_at, :message, :starts_at, :audience, :active
 
@@ -7,7 +9,7 @@ class Announcement < ApplicationRecord
   ## CONSTANTS
   AUDIENCE_STUDENT = 'Student'
   AUDIENCE_USER = 'User'
-  AUDIENCES = [AUDIENCE_USER, AUDIENCE_STUDENT]
+  AUDIENCES = [AUDIENCE_USER, AUDIENCE_STUDENT].freeze
 
   ## RELATIONS
   belongs_to :user
@@ -27,9 +29,10 @@ class Announcement < ApplicationRecord
     result = result.where('id not in (?)', hidden_ids) if hidden_ids.present?
 
     # taylor to different audiences
-    if audience == AUDIENCE_USER
+    case audience
+    when AUDIENCE_USER
       result = result.where('audience = ?', AUDIENCE_USER)
-    elsif audience == AUDIENCE_STUDENT
+    when AUDIENCE_STUDENT
       result = result.where('audience = ?', AUDIENCE_STUDENT)
     end
 

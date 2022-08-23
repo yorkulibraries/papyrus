@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Students::PermanentDeleteController < AuthenticatedController
   before_action do
     authorize! :perma_destroy, :student

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   audited
   devise :database_authenticatable,
@@ -19,9 +21,9 @@ class User < ApplicationRecord
   PART_TIME = 'part_time_staff'
   STUDENT_VIEW = 'student_view_only'
   STUDENT_USER = 'student'
-  ROLE_NAMES = [ADMIN, MANAGER, COORDINATOR, STAFF, PART_TIME, STUDENT_VIEW, STUDENT_USER]
+  ROLE_NAMES = [ADMIN, MANAGER, COORDINATOR, STAFF, PART_TIME, STUDENT_VIEW, STUDENT_USER].freeze
   ROLES = [[ADMIN.titleize, ADMIN], [MANAGER.titleize, MANAGER], [COORDINATOR.titleize, COORDINATOR], [STAFF.titleize, STAFF],
-           [PART_TIME.titleize, PART_TIME], [STUDENT_VIEW.titleize, STUDENT_VIEW]]
+           [PART_TIME.titleize, PART_TIME], [STUDENT_VIEW.titleize, STUDENT_VIEW]].freeze
 
   # Activity Names
   ACTIVITY_GENERAL = 'general'

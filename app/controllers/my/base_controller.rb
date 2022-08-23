@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class My::BaseController < AuthenticatedController
   layout 'my_students'
 

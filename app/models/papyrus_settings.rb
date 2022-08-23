@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PapyrusSettings < RailsSettings::Base
   cache_prefix { 'v1' }
 

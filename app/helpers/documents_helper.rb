@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DocumentsHelper
   def edit_document_path(attachable, document)
     return '' if attachable.nil? || document.nil?

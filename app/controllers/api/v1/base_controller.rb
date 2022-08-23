@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::BaseController < ApplicationController
   # skip_authorization_check ## skip authorization, this will use it's own
   # skip_before_filter :login_required
