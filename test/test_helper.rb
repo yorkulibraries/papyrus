@@ -30,6 +30,7 @@ class ActiveSupport::TestCase
       File.delete(f) if File.exist?(f)
     end
     CarrierWave.clean_cached_files! 0
+    PapyrusSettings.clear_cache
   end
 
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
@@ -46,8 +47,6 @@ class ActiveSupport::TestCase
 end
 
 class ActionDispatch::IntegrationTest
-  # PapyrusSettings.expire_cache
-
   def log_user_in(user)
     # session[:user_id] = user.id
     get login_url, headers: { "#{PapyrusSettings.auth_cas_header}" => user.username }
