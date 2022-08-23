@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Search::OmniController < AuthenticatedController
   before_action do
     authorize! :search, :items

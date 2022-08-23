@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :db do
   desc 'Papyrus Related Tasks'
 
@@ -14,7 +16,7 @@ namespace :db do
 
     User.populate User::ROLE_NAMES.size do |user|
       user.username = User::ROLE_NAMES[index]
-      user.first_name = "#{User::ROLE_NAMES[index].titleize}"
+      user.first_name = User::ROLE_NAMES[index].titleize.to_s
       user.last_name = 'User'
       user.email = "#{user.username}@utest.yorku.ca"
       user.inactive = false
@@ -79,7 +81,7 @@ namespace :db do
         sd.student_number = 100_000_000..900_000_000
         sd.preferred_phone = 5_551_111_111..5_559_999_999
         sd.cds_counsellor = Faker::Name.name
-        sd.cds_counsellor_email = "#{Faker::Internet.email}"
+        sd.cds_counsellor_email = Faker::Internet.email.to_s
         sd.student_id = student.id
         sd.transcription_coordinator_id = 1
         sd.transcription_assistant_id = 1

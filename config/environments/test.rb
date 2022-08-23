@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/integer/time'
 
 # The test environment is used exclusively to run your application's
@@ -48,7 +50,7 @@ Rails.application.configure do
   config.cache_store = :memory_store
 
   # Enable stdout logger
-  config.logger = Logger.new(STDOUT)
+  config.logger = Logger.new($stdout)
 
   # Set log level
   config.log_level = :ERROR

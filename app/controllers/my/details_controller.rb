@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class My::DetailsController < My::BaseController
   def show
     @student_details = @student.student_details

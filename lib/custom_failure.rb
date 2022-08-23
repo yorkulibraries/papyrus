@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CustomFailure < Devise::FailureApp
   def redirect_url
     new_user_session_url(subdomain: 'secure')

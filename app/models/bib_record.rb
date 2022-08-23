@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ostruct'
 
 class BibRecord
@@ -10,11 +12,12 @@ class BibRecord
 
   ## COMMON INTERFACE
   def search_items(search_string, source = VUFIND)
-    if source == VUFIND
+    case source
+    when VUFIND
       search_vufind_items(search_string)
-    elsif source == WORLDCAT
+    when WORLDCAT
       search_worldcat_items(search_string)
-    elsif source == PRIMO
+    when PRIMO
       BibRecord::PrimoResult.search search_string
     else
       ['No Results Found']
@@ -22,11 +25,12 @@ class BibRecord
   end
 
   def find_item(item_id, source = VUFIND)
-    if source == VUFIND
+    case source
+    when VUFIND
       find_vufind_item(item_id)
-    elsif source == WORLDCAT
+    when WORLDCAT
       find_worldcat_item(item_id)
-    elsif source == PRIMO
+    when PRIMO
       BibRecord::AlmaResult.build_item_from_alma_result(item_id)
     else
       'Record Not Found'
@@ -34,13 +38,11 @@ class BibRecord
   end
 
   def build_item_from_search_result(result, item_type, source = VUFIND)
-    if source == VUFIND
+    case source
+    when VUFIND
       BibRecord.build_item_from_vufind_result(result, item_type, PapyrusSettings.vufind_id_prefix)
-    elsif source == WORLDCAT
+    when WORLDCAT
       BibRecord.build_item_from_worldcat_result(result, item_type, PapyrusSettings.worldcat_id_prefix)
-    elsif source == PRIMO
-
-    else
       "Item Can't be built"
     end
   end
@@ -56,9 +58,9 @@ class BibRecord
            end
 
     url = "#{PapyrusSettings.vufind_url}?#{type}json=true&view=rss&lookfor=#{URI.encode(query.squish)}"
-    results = JSON.load(open(url))
+    results = JSON.parse(open(url))
 
-    if results.size > 0
+    if results.size.positive?
       results
     else
       []
@@ -69,9 +71,9 @@ class BibRecord
     query = "id:#{item_id}"
 
     url = "#{PapyrusSettings.vufind_url}?json=true&view=rss&lookfor=#{URI.encode(query.squish)}"
-    results = JSON.load(open(url))
+    results = JSON.parse(open(url))
 
-    if results.size > 0
+    if results.size.positive?
       results.first
     else
       []
@@ -85,7 +87,7 @@ class BibRecord
     client = WORLDCATAPI::Client.new(key: PapyrusSettings.worldcat_key, debug: false)
     response = client.SRUSearch(query: "\"#{query}\"")
 
-    if response.records.size > 0
+    if response.records.size.positive?
       response.records
     else
       []

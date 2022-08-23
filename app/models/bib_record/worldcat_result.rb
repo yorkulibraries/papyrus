@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BibRecord::WorldcatResult
   def self.find_item(id)
     require 'worldcatapi'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 namespace :reports do
@@ -9,7 +11,7 @@ namespace :reports do
 
     select_item_fields = 'items.title, items.id, items.callnumber, items.isbn, items.source'
     select_item_connections_fields = 'count(item_connections.student_id) as assigned_count, item_connections.created_at as assigned_at'
-    select_fields = select_item_connections_fields + ', ' + select_item_fields
+    select_fields = "#{select_item_connections_fields}, #{select_item_fields}"
     where_clause = "where item_connections.created_at >= '#{start_date}' AND item_connections.created_at < '#{end_date + 1.day}'"
 
     sql = "SELECT #{select_fields} FROM item_connections INNER JOIN items ON item_connections.item_id = items.id #{where_clause} GROUP BY item_connections.item_id"

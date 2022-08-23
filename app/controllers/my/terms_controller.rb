@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class My::TermsController < My::BaseController
   skip_before_action :check_terms_acceptance
 

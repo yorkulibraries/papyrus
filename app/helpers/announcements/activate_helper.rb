@@ -1,2 +1,0 @@
-module Announcements::ActivateHelper
-end

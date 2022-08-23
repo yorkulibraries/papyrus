@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Student < User
   # attr_accessible :name, :email, :username, :student_details_attributes
 
@@ -104,7 +106,7 @@ class Student < User
   end
 
   def lab_access_only?
-    formats_array.size == 0
+    formats_array.size.zero?
   end
 
   def self.item_counts(student_ids, type = 'current')

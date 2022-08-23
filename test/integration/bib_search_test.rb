@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class BibSearchTest < ActionDispatch::IntegrationTest
@@ -23,7 +25,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
     record = BibRecord.new
     results = record.search_items(search_string, BibRecord::WORLDCAT)
 
-    assert results.size > 0, 'At least one result should happen'
+    assert results.size.positive?, 'At least one result should happen'
   end
 
   should 'search WORLDCAT for single item' do

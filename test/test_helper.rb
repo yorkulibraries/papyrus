@@ -1,55 +1,46 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
-include ActionDispatch::TestProcess
-
 require 'database_cleaner'
 
-include ActionDispatch::TestProcess
+module ActiveSupport
+  class TestCase
+    include ActionDispatch::TestProcess
+    def setup
+      api_keys = Rails.application.config_for :api_keys
+      PapyrusSettings.worldcat_key = api_keys[:worldcat_api_key]
+      PapyrusSettings.primo_apikey = api_keys[:primo_api_key]
+      PapyrusSettings.alma_apikey = api_keys[:alma_api_key]
+      Rails.configuration.is_using_login_password_authentication = false
+    end
 
-class ActiveSupport::TestCase
-  def setup
-    api_keys = Rails.application.config_for :api_keys
-    PapyrusSettings[:worldcat_key] = api_keys[:worldcat_api_key]
-    PapyrusSettings[:primo_api_key] = api_keys[:primo_api_key]
-    PapyrusSettings[:alma_api_key] = api_keys[:alma_api_key]
-    Rails.configuration.is_using_login_password_authentication = false
-  end
-
-  def teardown
-    Attachment.all.each do |a|
-      f = "#{Rails.public_path}#{a.file}"
-      File.delete(f) if File.exist?(f) and File.file?(f)
-      if a.deleted
-        f = "#{File.dirname(a.file.file.path)}/deleted/#{a.id}-#{a.file.file.filename}"
-        File.delete(f) if File.exist?(f) and File.file?(f)
+    def teardown
+      Attachment.all.each do |a|
+        f = "#{Rails.public_path}#{a.file}"
+        File.delete(f) if File.exist?(f) && File.file?(f)
+        if a.deleted
+          f = "#{File.dirname(a.file.file.path)}/deleted/#{a.id}-#{a.file.file.filename}"
+          File.delete(f) if File.exist?(f) && File.file?(f)
+        end
       end
+      Document.all.each do |a|
+        f = "#{Rails.public_path}#{a.attachment}"
+        File.delete(f) if File.exist?(f)
+      end
+      CarrierWave.clean_cached_files! 0
+      PapyrusSettings.clear_cache
     end
-    Document.all.each do |a|
-      f = "#{Rails.public_path}#{a.attachment}"
-      File.delete(f) if File.exist?(f)
-    end
-    CarrierWave.clean_cached_files! 0
+    include FactoryGirl::Syntax::Methods
+    include ActiveJob::TestHelper
   end
-
-  # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
-  #
-  # Note: You'll currently still have to declare fixtures explicitly in integration tests
-  # -- they do not yet inherit this setting
-
-  # fixtures :all
-
-  # Add more helper methods to be used by all tests here...
-  include FactoryGirl::Syntax::Methods
-
-  include ActiveJob::TestHelper
 end
 
-class ActionDispatch::IntegrationTest
-  PapyrusSettings.expire_cache
-
-  def log_user_in(user)
-    # session[:user_id] = user.id
-    get login_url, headers: { "#{PapyrusSettings.auth_cas_header}" => user.username }
+module ActionDispatch
+  class IntegrationTest
+    def log_user_in(user)
+      get login_url, headers: { PapyrusSettings.auth_cas_header.to_s => user.username }
+    end
   end
 end

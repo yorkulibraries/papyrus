@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AttachmentUploader < CarrierWave::Uploader::Base
   # Include RMagick or ImageScience support:
   # include CarrierWave::RMagick

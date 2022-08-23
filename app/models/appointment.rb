@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Appointment < ApplicationRecord
   ## RELATIONSHIPS
   belongs_to :student

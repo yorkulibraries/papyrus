@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 audits_grouped.each do |date, events|
   date = date.strftime('%b %e, %Y')
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'ostruct'
 require 'csv'
 require Rails.root.join('lib', 'papyrus', 'student_loader.rb')
@@ -39,7 +41,7 @@ namespace :import do
     else
       report 'Import: STDIN'
 
-      STDIN.each_line do |line|
+      $stdin.each_line do |line|
         data = CSV.parse(line).first
         students.push data
       end
@@ -49,11 +51,11 @@ namespace :import do
     status = loader.from_list(students)
 
     report '-----------'
-    if status[:errors].count > 0
+    if status[:errors].count.positive?
       report "Errors: #{status[:errors].count}"
       status[:errors].each do |e|
         report '<<<<<< IMPORT ERROR >>>>>>>'
-        report "#{e.first.join(' | ')}"
+        report e.first.join(' | ').to_s
         e.last.each_pair do |k, v|
           report "ERROR: #{k} -- #{v.join(' and ')}"
         end
@@ -96,7 +98,7 @@ namespace :import do
 
     if ENV['EMAIL_REPORT_LOG_TO']
       subject = 'Papyrus Student Import Report'
-      subject << '- IMPORT ERRORS' if status[:errors].count > 0
+      subject << '- IMPORT ERRORS' if status[:errors].count.positive?
       ReportMailer.mail_report(ENV['EMAIL_REPORT_LOG_TO'], @report_log.join("\n"), subject).deliver
     end
   end

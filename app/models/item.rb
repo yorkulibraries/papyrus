@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   # attr_accessible :title, :unique_id, :item_type, :callnumber, :author, :isbn, :publisher, :published_date,
   #                :language_note, :edition, :physical_description, :source, :source_note
@@ -63,7 +65,7 @@ class Item < ApplicationRecord
   BOOK = 'book'
   COURSE_KIT = 'course_kit'
   ARTICLE = 'article'
-  TYPES = [[BOOK.titleize, BOOK], [COURSE_KIT.titleize, COURSE_KIT], [ARTICLE.titleize, ARTICLE]]
+  TYPES = [[BOOK.titleize, BOOK], [COURSE_KIT.titleize, COURSE_KIT], [ARTICLE.titleize, ARTICLE]].freeze
 
   ## ACCESSORS
   attr_accessor :acquisition_request, :expired

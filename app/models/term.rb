@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Term < ApplicationRecord
   # attr_accessible :name, :start_date, :end_date
 

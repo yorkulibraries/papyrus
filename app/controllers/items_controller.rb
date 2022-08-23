@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ItemsController < AuthenticatedController
   authorize_resource
 
@@ -195,7 +197,7 @@ class ItemsController < AuthenticatedController
           # Two arguments:
           # - The name of the file as it will appear in the archive
           # - The original file, including the path to find it
-          zipfile.add("#{counter}-" + File.basename(filename.file_url), "#{filename.file.path}")
+          zipfile.add("#{counter}-" + File.basename(filename.file_url), filename.file.path.to_s)
           counter += 1
         end
       end

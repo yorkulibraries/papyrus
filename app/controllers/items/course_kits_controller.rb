@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Items::CourseKitsController < AuthenticatedController
   authorize_resource Item
 
