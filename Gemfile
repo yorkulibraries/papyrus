@@ -4,9 +4,7 @@ source 'http://rubygems.org'
 ruby '3.1.2'
 
 ## SECURITY FIX ##
-gem 'json', '~> 2.6', '>= 2.6.2'
 gem 'puma', '~> 5.6', '>= 5.6.5'
-gem 'rack', '2.2.3.1'
 gem 'rails', '~> 7.0', '>= 7.0.3.1'
 
 ## RAILS related ##
@@ -18,7 +16,7 @@ gem 'uglifier', '~> 4.2'
 gem 'mysql2', '0.5.3', group: :production
 
 ## CSS AND JAVASCRIPT ##
-gem 'jquery-rails', '4.3.1'
+gem 'jquery-rails', '4.5.0'
 gem 'jquery-ui-rails', '6.0.1'
 gem 'mini_racer', '~> 0.6.3'
 
@@ -80,13 +78,13 @@ end
 
 group :development, :test do
   gem 'byebug', '~> 11.1', '>= 11.1.3'
+  gem 'faker', '~> 2.22'
   gem 'guard-livereload', '2.5.2', require: false
+  gem 'populator', git: 'https://github.com/ryanb/populator.git'
   gem 'sqlite3', '~> 1.4', '>= 1.4.4'
 end
 
 group :development do
-  gem 'faker', '~> 2.22'
-  gem 'populator', git: 'https://github.com/ryanb/populator.git'
   gem 'web-console', '~> 4.2'
 end
 
