@@ -4,9 +4,7 @@ source 'http://rubygems.org'
 ruby '3.1.2'
 
 ## SECURITY FIX ##
-gem 'json', '~> 2.6', '>= 2.6.2'
 gem 'puma', '~> 5.6', '>= 5.6.5'
-gem 'rack', '2.2.3.1'
 gem 'rails', '~> 7.0', '>= 7.0.3.1'
 
 ## RAILS related ##
