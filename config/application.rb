@@ -19,13 +19,7 @@ Bundler.require(*Rails.groups)
 
 module Papyrus
   class Application < Rails::Application
-    config.generators.assets = false
-
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'stylesheets')
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'javascripts')
-
     config.assets.initialize_on_precompile = false
     config.is_using_login_password_authentication = false
 
@@ -40,7 +34,6 @@ module Papyrus
     config.load_defaults 7.0
 
     config.filter_parameters += [:password]
-
     config.active_record.legacy_connection_handling = false
 
     config.i18n.enforce_available_locales = false
