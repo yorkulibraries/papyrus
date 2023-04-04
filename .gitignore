@@ -1,5 +1,5 @@
 db/*.sqlite3
-log/*.log
+log/*.log.*
 tmp/
 public/uploads/**/*
 MissingDrawer.tmplugin
@@ -16,3 +16,4 @@ public/assets/
 yarn.lock
 *.log
 .bundle
+config/api_keys.yml
