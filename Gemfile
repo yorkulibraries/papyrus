@@ -22,7 +22,7 @@ gem 'mini_racer', '~> 0.6.3'
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
-gem 'bootstrap', '4.5.2'
+gem 'bootstrap', '~> 5.3', '>= 5.3.2'
 gem 'font-awesome-sass', '~> 5.13.0'
 gem 'simple_form', '~> 5.1'
 
