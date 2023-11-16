@@ -20,16 +20,16 @@
   %>
 
   <% if flash_type.to_sym != :timedout %>
-    <div aria-live="polite" aria-atomic="true" class="my-4 mr-4" style="width: 400px; z-index:9999; top: 0; right: 0; position: absolute;">
+    <div aria-live="polite" aria-atomic="true" class="my-4 me-4" style="width: 400px; z-index:9999; top: 0; right: 0; position: absolute;">
       <!-- Position it -->
       <div  class="w-full">
 
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="toast-header">
-            <%= icon "far", icon, class: "text-#{type} mr-1" %>
-            <strong class="mr-auto"><%= type_name.humanize %></strong>
+            <%= icon "far", icon, class: "text-#{type} me-1" %>
+            <strong class="me-auto"><%= type_name.humanize %></strong>
             <small><%= time_ago_in_words(Time.now) %> ago</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <button type="button" class="ms-2 mb-1 close" data-dismiss="toast" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

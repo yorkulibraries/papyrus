@@ -6,7 +6,7 @@
         <%= item.item_type.humanize %>
       </span>
     </a>
-    <div class="w-full ml-2">
+    <div class="w-full ms-2">
       <div class="d-flex justify-items-between align-items-center">
         <h5 class="mb-0 w-full">
           <%= link_to item.title, item_path(item) %>
@@ -32,16 +32,16 @@
       </div>
 
       <div>
-        <a href="<%= zipped_files_item_path(item)%>" class="mr-3">
+        <a href="<%= zipped_files_item_path(item)%>" class="me-3">
           <i class="fa fa-download"></i> Download <%= pluralize(item.attachments.size, "file")%>
         </a>
 
         <% if item.expired %>
-          <span class='text-muted mr-3'>Expired Item</span>
+          <span class='text-muted me-3'>Expired Item</span>
         <% else %>
           <% connection = item.item_connections.current.find_by_student_id(@student.id) %>
           <% if connection %>
-            <span class="text-muted mr-3">
+            <span class="text-muted me-3">
               <%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
               <%= "Unlimited Access" unless connection.expires_on %>
             </span>

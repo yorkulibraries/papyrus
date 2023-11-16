@@ -1,11 +1,11 @@
 <tr id="note_<%= note.id %>">
 	<td class="what">
 		<div class="d-flex justify-content-start text-muted">
-			<span class="strong mr-2">By <%= note.user.name %></span>
+			<span class="strong me-2">By <%= note.user.name %></span>
 			<% if note.created_at.to_date == Date.today %>
 				<%= note.created_at.strftime("%I:%M %p")%>
 			<% else %>
-				<span title="<%= note.created_at.strftime("%I:%M %p")%>" class="mr-2">
+				<span title="<%= note.created_at.strftime("%I:%M %p")%>" class="me-2">
 				<%= note.created_at.strftime("%b %d")%></span> <%= note.created_at.strftime(", %Y") if note.created_at.year < Date.today.year %>
 			<% end %>
 		</div>

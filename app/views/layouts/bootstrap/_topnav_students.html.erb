@@ -7,9 +7,9 @@
   </button>
 
   <div class="collapse navbar-collapse">
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ms-auto">
 
-      <li class="nav-item dropdown mr-3">
+      <li class="nav-item dropdown me-3">
         <a class="nav-link dropdown-toggle" name="notification navigation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
           <i class="fas fa-bell"></i>
         </a>
@@ -22,12 +22,12 @@
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user mr-1"></i>
+          <i class="fas fa-user me-1"></i>
           <%= @current_user.name if @current_user %>
         </a>
         <div class="dropdown-menu">
           <a href="<%= logout_path%>" class="dropdown-item">
-            <i class="fas fa-fw fa-power-off mr-1"></i> Log out
+            <i class="fas fa-fw fa-power-off me-1"></i> Log out
           </a>
           <% if Rails.env.development? %>
             <div class="dropdown-divider"></div>
