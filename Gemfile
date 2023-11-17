@@ -74,6 +74,8 @@ group :test do
   gem 'minitest-around', '~> 0.5.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'shoulda', '~> 4.0'
+  gem 'capybara', '~> 3.39', '>= 3.39.2'
+  gem 'selenium-webdriver', '4.08'
 end
 
 group :development, :test do

@@ -4,10 +4,16 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
 require 'database_cleaner'
+require 'capybara/rails'
+require 'capybara/minitest'
 
 module ActiveSupport
   class TestCase
     include ActionDispatch::TestProcess
+      # Make the Capybara DSL available in all integration tests
+  include Capybara::DSL
+  # Make `assert_*` methods behave like Minitest assertions
+  include Capybara::Minitest::Assertions
     def setup
       api_keys = Rails.application.config_for :api_keys
       PapyrusSettings.worldcat_key = api_keys[:worldcat_api_key]
@@ -17,6 +23,23 @@ module ActiveSupport
     end
 
     def teardown
+      Capybara.reset_sessions!
+      # Capybara.use_default_driver
+      Capybara.default_driver = :selenium
+
+      # capabilities = Selenium::WebDriver::Chrome::Options.new(
+      #   args: %w[--headless --no-sandbox --disable-gpu],
+      #   binary: ENV.fetch('GOOGLE_CHROME_SHIM', nil),
+      # )
+
+      # Capybara.register_driver :headless do |app|
+      #   Capybara::Selenium::Driver.new(
+      #     app,
+      #     browser: :chrome,
+      #     options: capabilities # change keyword
+      #   )
+      # end
+
       Attachment.all.each do |a|
         f = "#{Rails.public_path}#{a.file}"
         File.delete(f) if File.exist?(f) && File.file?(f)
