@@ -19,7 +19,7 @@
 				<!-- Tab panes -->
 				<div class="tab-content mt-4">
 					<div class="tab-pane active" id="general_email_settings">
-						<%= f.input :email_allow, as: :radio_buttons, label: "Enable Email Communication?" %>
+						<%= f.input :email_allow, as: :radio_buttons, label: "Enable Email Communication?", input_html: { class: 'form-check-input' } %>
 						<%= f.input :email_from, label: "From Address", input_html: { class: "form-control" } %>
 					</div>
 					<div class="tab-pane" id="welcome_email_settings">
@@ -31,7 +31,7 @@
 					</div>
 					<div class="tab-pane" id="lab_access_email_settings">
 						<h5 class="text-black">Lab Access Email</h5>
-						<%= f.input :email_lab_access_enable, as: :radio_buttons, label: "Enable Lab Access Welcome Email?" %>
+						<%= f.input :email_lab_access_enable, as: :radio_buttons, label: "Enable Lab Access Welcome Email?", input_html: { class: 'form-check-input' } %>
 
 						<%= f.input :email_lab_access_subject, label: "Subject", input_html: { class: "form-control" } %>
 						<p class="help-block small">Available Body Tags:

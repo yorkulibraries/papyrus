@@ -14,9 +14,9 @@
 				<%= f.input :primo_region %>
 				<%= f.input :primo_inst %>
 				<%= f.input :primo_vid %>
-				<%= f.input :primo_enable_loggable, as: :radio_buttons %>
+				<%= f.input :primo_enable_loggable, as: :radio_buttons, input_html: { class: 'form-check-input' } %>
 				<%= f.input :primo_scope %>
-				<%= f.input :primo_pcavailability, as: :radio_buttons %>
+				<%= f.input :primo_pcavailability, as: :radio_buttons, input_html: { class: 'form-check-input' } %>
 
 
 			<h5 class="text-black mt-4">Alma Settings</h5>
