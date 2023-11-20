@@ -1,16 +1,14 @@
-<nav class="navbar navbar-expand-md navbar-red fixed-top">
+<nav class="navbar navbar-expand-md navbar-red">
   <div class="container-fluid">
-    <a class="navbar-brand" href=<%=root_path %>"><%= PapyrusSettings.app_name %></a>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+    <a class="navbar-brand" href="<%=root_path %>"><%= PapyrusSettings.app_name %></a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+      <ul class="navbar-nav">
 
       <% if can? :create, Item %>
         <li class="nav-item me-3">
-          <%# <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false"> %>
-
+          <a class="nav-link" href="<%= new_omni_search_path %>" data-remote="true" aria-label="Search">
             <i class="fa-search fas"></i>
-            <%# </a> %>
+          </a>
         </li>
         <li class="nav-item dropdown me-3">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-plus-square fas me-1"></i> New Item</a>
