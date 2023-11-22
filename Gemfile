@@ -18,7 +18,9 @@ gem "mysql2", "0.5.3", group: :production
 ## CSS AND JAVASCRIPT ##
 gem "jquery-rails", "4.5.0"
 gem "jquery-ui-rails", "6.0.1"
-gem "mini_racer", "~> 0.8.0"
+gem "mini_racer", "~> 0.8.0" do
+  gem "libv8-node", "18.16.0.0", platform: :ruby, require: false
+end
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
 gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
@@ -30,7 +32,7 @@ gem "simple_form", "~> 5.1"
 gem "audited", "~> 5.0", ">= 5.0.2"
 gem "cancancan", "~> 3.4"
 gem "devise", "~> 4.8", ">= 4.8.1"
-gem "devise_saml_authenticatable", "1.9.0", github: "apokalipto/devise_saml_authenticatable"
+gem "devise_saml_authenticatable", "~> 1.9", ">= 1.9.1"
 gem "email_validator", "~> 2.2", ">= 2.2.3"
 gem "fullcalendar-rails", "3.0.0.0"
 gem "kaminari", "~> 1.2", ">= 1.2.2"

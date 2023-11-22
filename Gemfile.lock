@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/apokalipto/devise_saml_authenticatable.git
-  revision: f95fc95224a274ebeabc0fc4b8ae707a4f5c57a7
-  specs:
-    devise_saml_authenticatable (1.9.0)
-      devise (> 2.0.0)
-      ruby-saml (~> 1.7)
-
-GIT
   remote: https://github.com/mmotherwell/best_in_place
   revision: 88eb3052623a9a6cd346864d2aca05021c2f80d0
   specs:
@@ -172,6 +164,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_saml_authenticatable (1.9.1)
+      devise (> 2.0.0)
+      ruby-saml (~> 1.7)
     digest (3.1.0)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
@@ -255,7 +250,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    libv8-node (18.16.0.0-x86_64-linux)
+    libv8-node (18.16.0.0)
     liquid (5.4.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -459,7 +454,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   database_cleaner (~> 2.0, >= 2.0.1)
   devise (~> 4.8, >= 4.8.1)
-  devise_saml_authenticatable (= 1.9.0)!
+  devise_saml_authenticatable (~> 1.9, >= 1.9.1)
   email_validator (~> 2.2, >= 2.2.3)
   exception_notification (~> 4.5)
   factory_girl_rails (= 4.8.0)
@@ -506,4 +501,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.3.16
+   2.4.22
