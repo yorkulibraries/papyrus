@@ -108,12 +108,12 @@ class Item::CourseKitForm
   ####### HELPER METHODS #########
 
   def get_value_from_code(position)
-    self.code = '_______'   if code.blank?
+    self.code = '_______' if code.blank?
     code.split('_')[position]
   end
 
   def insert_into_code(position, value)
-    self.code = '_______'   if code.blank?
+    self.code = '_______' if code.blank?
     broken = code.split('_')
     broken[position] = value
     self.code = broken.join('_')

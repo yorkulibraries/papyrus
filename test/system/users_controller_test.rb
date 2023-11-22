@@ -10,7 +10,7 @@ class UsersControllerTest < ApplicationSystemTestCase
   end
   test "visiting the index" do
     visit root_path
-  
+
     # assert_selector "h1", text: "ConsistentDesign"
   end
 end
