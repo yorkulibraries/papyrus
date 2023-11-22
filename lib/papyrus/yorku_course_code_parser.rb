@@ -109,7 +109,7 @@ module Papyrus
     private
 
     def get_value_from_code(code, position)
-      code = '_______'   if code.blank?
+      code = '_______' if code.blank?
       code.split('_')[position]
     end
   end
