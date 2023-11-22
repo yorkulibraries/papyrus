@@ -1,7 +1,7 @@
 <section class="items">
 	<h2>Assigned Items
 		<% unless @student.inactive? %>
-			<a data-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-right">
+			<a data-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-end">
 				<i class="icon-plus-sign icon-white"></i> Assign Items</a>
 		<% end %>
 	</h2>
@@ -28,7 +28,7 @@
 
 				<% connection = item.item_connections.current.find_by_student_id(@student.id) %>
 				<% if connection %>
-				<span class="trivial float-right">
+				<span class="trivial float-end">
 					<%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
 					<%= "Unlimited Access" unless connection.expires_on %>
 				</span>

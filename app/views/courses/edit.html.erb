@@ -38,7 +38,7 @@
 			</p>
 			<hr/>
 			<% unless @course.new_record? %>
-				<div class="float-right">
+				<div class="float-end">
 					<%= link_to "Delete This Course ?", [@term, @course], confirm: 'Are you sure?', method: :delete, class: "btn btn-danger" %>
 				</div>
 			<% end %>
