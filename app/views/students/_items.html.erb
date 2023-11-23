@@ -1,7 +1,7 @@
 <section class="items">
 	<h2>Assigned Items
 		<% unless @student.inactive? %>
-			<a data-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-end">
+			<a data-bs-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-end">
 				<i class="icon-plus-sign icon-white"></i> Assign Items</a>
 		<% end %>
 	</h2>
@@ -44,7 +44,7 @@
 		<div class="blank-slate">
 			<i class="icon-info-sign"></i>
 			<h1>No Items Assigned</h1>
-			<p>Click <a data-toggle="modal" href="#assign_items_modal">Assign Items</a>  to begin assigning items.</p>
+			<p>Click <a data-bs-toggle="modal" href="#assign_items_modal">Assign Items</a>  to begin assigning items.</p>
 		</div>
 	<% end %>
 </section>
@@ -69,7 +69,7 @@
 	</div>
 
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 	</div>
 </div>
 
