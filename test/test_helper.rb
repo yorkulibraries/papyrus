@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-ENV["RAILS_ENV"] = "test"
-require File.expand_path("../config/environment", __dir__)
-require "rails/test_help"
-require "database_cleaner"
-require "capybara/rails"
-require "capybara/minitest"
+ENV['RAILS_ENV'] = 'test'
+require File.expand_path('../config/environment', __dir__)
+require 'rails/test_help'
+require 'database_cleaner'
+require 'capybara/rails'
+require 'capybara/minitest'
 
 module ActiveSupport
   class TestCase
@@ -16,9 +16,9 @@ module ActiveSupport
     include Capybara::Minitest::Assertions
 
     def setup
-      PapyrusSettings.worldcat_key = ENV["WORLDCAT_API_KEY"]
-      PapyrusSettings.primo_apikey = ENV["PRIMO_API_KEY"]
-      PapyrusSettings.alma_apikey = ENV["ALMA_API_KEY"]
+      PapyrusSettings.worldcat_key = ENV['WORLDCAT_API_KEY']
+      PapyrusSettings.primo_apikey = ENV['PRIMO_API_KEY']
+      PapyrusSettings.alma_apikey = ENV['ALMA_API_KEY']
       Rails.configuration.is_using_login_password_authentication = false
     end
 
