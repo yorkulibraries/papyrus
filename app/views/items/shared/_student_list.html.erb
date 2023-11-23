@@ -1,6 +1,6 @@
 <%= panel(title: "Students With Access", icon: "users", title_class: "text-center bg-warning text-white") do %>
 
-  <a class="btn btn-sm btn-primary" data-toggle="modal" href="#assign_students_modal">
+  <a class="btn btn-sm btn-primary" data-bs-toggle="modal" href="#assign_students_modal">
     <i class="fas fa-user-plus"></i> Grant Access To Students?</a>
   <hr/>
 
@@ -24,7 +24,7 @@
         <div class="modal-header">
 
           <h5 class="modal-title">Assign This Item To Students</h5>
-          <a class="close" data-dismiss="modal">×</a>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <p>Type the name of the student in the box to search for students.</p>
@@ -37,7 +37,7 @@
         </div>
         <div class="modal-footer">
           <%= submit_tag "Give Access To These Students", class: "btn btn-success", tabindex: "3" %>
-          <a href="#" class="btn btn-outline-secondary" data-dismiss="modal" tabindex="4">Close</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       <% end %>
   </div>
