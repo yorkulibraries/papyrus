@@ -72,8 +72,7 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-
-	$("#assign_items_modal").modal({show: false}).on('shown.bs.modal', function (e) {
+  $("#assign_items_modal").modal({ show: false }).on('shown.bs.modal', function (e) {
     setup_item_token_input("#assign-items-list", "<%= search_items_path %>");
   });
 });
