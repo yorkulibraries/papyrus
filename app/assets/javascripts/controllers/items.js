@@ -68,34 +68,38 @@ $(document).ready(function() {
 
 });
 
+var tokenInputInstance;
 function setup_item_token_input(id, url, token_limit) {
-  $(id).tokenInput(url, {
-    tokenLimit: token_limit,
-    hintText: "Type the title of your item to search",
-    zindex: 9999999,
-    allowTabOut: true,
-    onReady: function() {
-      $("#token-input-" + id).attr("tabindex", "1");
-    },
-    resultsFormatter: function(item) {
-      var line1 = "<div class='item-token-view results-view'>" + item.name + "<br/>";
-      var line2 = "<span class='meta'>" + safe(item.author) + " | " + safe(item.isbn) +  " | " + safe(item.callnumber) + "</span>";
-      var line3 = "</div>"
-      if (item.item_type == "course_kit"){
-        line2 = "<span class='meta'>" + safe(item.course_code) + "</span>";
-      }
+  if (!tokenInputInstance) {
+    tokenInputInstance = $(id).tokenInput(url, {
+      tokenLimit: token_limit,
+      hintText: "Type the title of your item to search",
+      zindex: 9999999,
+      allowTabOut: true,
+      onReady: function () {
+        $("#token-input-" + id).attr("tabindex", "1");
+      },
+      resultsFormatter: function (item) {
+        var line1 = "<div class='item-token-view results-view'>" + item.name + "<br/>";
+        var line2 =
+          "<span class='meta'>" + safe(item.author) + " | " + safe(item.isbn) + " | " + safe(item.callnumber) + "</span>";
+        var line3 = "</div>";
+        if (item.item_type == "course_kit") {
+          line2 = "<span class='meta'>" + safe(item.course_code) + "</span>";
+        }
 
-
-      return "<li>" +  line1 + line2 + line3 + "</li>";
-    },
-    tokenFormatter: function(item) {
-      var line1 = "<div class='item-token-view'>" + item.name + "<br/>";
-      var line2 = "<span class='meta'>" + safe(item.author) + " | " + safe(item.isbn) +  " | " + safe(item.callnumber) + "</span>";
-      var line3 = "</div>"
-      if (item.item_type == "course_kit"){
-        line2 = "<span class='meta'>" + safe(item.course_code) + "</span>";
-      }
-      return "<li>" +  line1 + line2 + line3 + "</li>";
-    }
-  });
+        return "<li>" + line1 + line2 + line3 + "</li>";
+      },
+      tokenFormatter: function (item) {
+        var line1 = "<div class='item-token-view'>" + item.name + "<br/>";
+        var line2 =
+          "<span class='meta'>" + safe(item.author) + " | " + safe(item.isbn) + " | " + safe(item.callnumber) + "</span>";
+        var line3 = "</div>";
+        if (item.item_type == "course_kit") {
+          line2 = "<span class='meta'>" + safe(item.course_code) + "</span>";
+        }
+        return "<li>" + line1 + line2 + line3 + "</li>";
+      },
+    });
+  }
 }
