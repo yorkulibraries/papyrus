@@ -47,15 +47,8 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-
     $("#assign_students_modal").modal({show: false}).on('shown.bs.modal', function (e) {
-      $("#assign-students-list").tokenInput("<%= search_students_path %>", {
-          zindex: 9999999,
-          allowTabOut: true,
-          onReady: function() {
-            $("#token-input-assign-students-list").attr("tabindex", "1");
-          }
-      });
+      student_list_items("#assign-students-list", "<%= search_students_path %>");
     });
 
 

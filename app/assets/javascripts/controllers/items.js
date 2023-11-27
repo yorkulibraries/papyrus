@@ -68,6 +68,19 @@ $(document).ready(function() {
 
 });
 
+var studentTokenInputInstance;
+function student_list_items(id, url) {
+  if (!studentTokenInputInstance) {
+    studentTokenInputInstance = $(id).tokenInput(url, {
+      zindex: 9999999,
+      allowTabOut: true,
+      onReady: function() {
+        $("#token-input-assign-students-list").attr("tabindex", "1");
+      }
+    });
+  }
+}
+
 var tokenInputInstance;
 function setup_item_token_input(id, url, token_limit) {
   if (!tokenInputInstance) {
