@@ -75,6 +75,10 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
+    if ($("#assign-items-list").data("tokenInputObject")) {
+      $("#assign-items-list").tokenInput("clear");
+      $("#assign-items-list").tokenInput("destroy");
+    }
     $("#assign-items-list").tokenInput("<%= search_items_path %>");
 	$("#assign_items_modal").modal({show: false});
 });

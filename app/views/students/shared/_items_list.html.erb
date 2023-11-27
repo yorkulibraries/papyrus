@@ -73,6 +73,10 @@
 <script type="text/javascript">
 $(document).ready(function () {
   $("#assign_items_modal").modal({ show: false }).on('shown.bs.modal', function (e) {
+    if ($("#assign-items-list").data("tokenInputObject")) {
+      $("#assign-items-list").tokenInput("clear");
+      $("#assign-items-list").tokenInput("destroy");
+    }
     setup_item_token_input("#assign-items-list", "<%= search_items_path %>");
   });
 });
