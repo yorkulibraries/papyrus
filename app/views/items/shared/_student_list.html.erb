@@ -48,9 +48,19 @@
 <script type="text/javascript">
   $(document).ready(function () {
     $("#assign_students_modal").modal({show: false}).on('shown.bs.modal', function (e) {
-      student_list_items("#assign-students-list", "<%= search_students_path %>");
-    });
+      if ($("#assign-students-list").data("tokenInputObject")) {
+        $("#assign-students-list").tokenInput("clear");
+        $("#assign-students-list").tokenInput("destroy");
+      }
 
+      $("#assign-students-list").tokenInput("<%= search_students_path %>", {
+        zindex: 9999999,
+        allowTabOut: true,
+        onReady: function() {
+          $("#token-input-assign-students-list").attr("tabindex", "1");
+        }
+      });
+    });
 
     $(".tooltips").tooltip();
   });
