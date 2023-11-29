@@ -73,7 +73,7 @@ group :test do
   gem 'minitest', '~> 5.16', '>= 5.16.3'
   gem 'minitest-around', '~> 0.5.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
-  gem 'selenium-webdriver', '4.08'
+  gem 'selenium-webdriver', '~> 4.15'
   gem 'shoulda', '~> 4.0'
 end
 

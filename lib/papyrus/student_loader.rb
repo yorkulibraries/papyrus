@@ -96,7 +96,7 @@ module Papyrus
           end
 
           student.details.preferred_phone = 'not provided'
-          student.created_by_user_id = @options[:created_by_id]
+          student.created_by_user_id = student.details.transcription_coordinator_id
 
           if student.save
             status[:created].push student.id
@@ -104,7 +104,8 @@ module Papyrus
 
             if PapyrusSettings.import_send_welcome_email_to_student == PapyrusSettings::TRUE
               student.audit_comment = 'Sending welcome email.'
-              StudentMailer.welcome_email(student, student.created_by).deliver_later
+              sender = User.find(student.created_by_user_id)
+              StudentMailer.welcome_email(student, sender).deliver_later
               student.email_sent_at = Time.zone.now
               student.save
             end
