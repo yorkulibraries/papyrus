@@ -20,25 +20,11 @@ module ActiveSupport
       PapyrusSettings.primo_apikey = ENV['PRIMO_API_KEY']
       PapyrusSettings.alma_apikey = ENV['ALMA_API_KEY']
       Rails.configuration.is_using_login_password_authentication = false
+      Capybara.use_default_driver
     end
 
     def teardown
       Capybara.reset_sessions!
-      # Capybara.use_default_driver
-      Capybara.default_driver = :selenium
-
-      # capabilities = Selenium::WebDriver::Chrome::Options.new(
-      #   args: %w[--headless --no-sandbox --disable-gpu],
-      #   binary: ENV.fetch('GOOGLE_CHROME_SHIM', nil),
-      # )
-
-      # Capybara.register_driver :headless do |app|
-      #   Capybara::Selenium::Driver.new(
-      #     app,
-      #     browser: :chrome,
-      #     options: capabilities # change keyword
-      #   )
-      # end
 
       Attachment.all.each do |a|
         f = "#{Rails.public_path}#{a.file}"

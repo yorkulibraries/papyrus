@@ -50,7 +50,7 @@ class PapyrusSettings < RailsSettings::Base
   field :email_acquisitions_body,
         default: (ENV['email_acquisitions_body'] || 'Please deliver to Library Accessibility Services Scott Library')
   field :acquisition_sources, default: (ENV['acquisition_sources'] || '')
-  field :acquisition_reasons, default: (ENV['acquisition_reasons'] || '')
+  field :acquisition_reasons, default: (ENV['acquisition_reasons'] || [])
   field :course_sync_on_login, default: (ENV['course_sync_on_login'] || false)
   field :course_listing_header, default: (ENV['course_listing_header'] || 'HTTP_PYORK_COURSES')
   field :course_listing_separator, default: (ENV['course_listing_separator'] || ',')
