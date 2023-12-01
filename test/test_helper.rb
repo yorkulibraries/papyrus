@@ -7,10 +7,10 @@ require 'database_cleaner'
 require 'capybara/rails'
 require 'capybara/minitest'
 
-Capybara.server_host = "0.0.0.0"
+Capybara.server_host = '0.0.0.0'
 Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
 Capybara.register_driver :custom_headers_driver do |app|
-  Capybara::RackTest::Driver.new(app, headers: { PapyrusSettings.auth_cas_header.to_s => "TEST" })
+  Capybara::RackTest::Driver.new(app, headers: { PapyrusSettings.auth_cas_header.to_s => 'TEST' })
 end
 
 module ActiveSupport
@@ -29,6 +29,8 @@ module ActiveSupport
     end
 
     def teardown
+      Capybara.reset_sessions!
+      Capybara.use_default_driver
       Attachment.all.each do |a|
         f = "#{Rails.public_path}#{a.file}"
         File.delete(f) if File.exist?(f) && File.file?(f)

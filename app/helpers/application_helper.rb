@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def is_controller_and_action?(c, a, output = nil)
-    result = (controller.controller_name == c && controller.action_name == a)
+    result = controller.controller_name == c && controller.action_name == a
     !output.nil? && result ? output : result
   end
 

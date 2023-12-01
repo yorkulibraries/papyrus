@@ -29,7 +29,7 @@ gem 'simple_form', '~> 5.1'
 gem 'audited', '~> 5.0', '>= 5.0.2'
 gem 'cancancan', '~> 3.4'
 gem 'devise', '~> 4.8', '>= 4.8.1'
-gem "devise_saml_authenticatable", "1.9.1"
+gem 'devise_saml_authenticatable', '1.9.1'
 gem 'email_validator', '~> 2.2', '>= 2.2.3'
 gem 'fullcalendar-rails', '3.0.0.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
