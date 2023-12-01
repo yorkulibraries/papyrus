@@ -29,7 +29,7 @@ class BibSearchTest < ActionDispatch::IntegrationTest
   end
 
   should 'search WORLDCAT for single item' do
-    item_id = '671660984'  # Julius Caesar by Shakespear
+    item_id = '671660984' # Julius Caesar by Shakespear
     record = BibRecord.new
     item = record.find_item(item_id, BibRecord::WORLDCAT)
 
