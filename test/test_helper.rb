@@ -9,6 +9,9 @@ require 'capybara/minitest'
 
 Capybara.server_host = "0.0.0.0"
 Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
+Capybara.register_driver :custom_headers_driver do |app|
+  Capybara::RackTest::Driver.new(app, headers: { PapyrusSettings.auth_cas_header.to_s => "TEST" })
+end
 
 module ActiveSupport
   class TestCase
