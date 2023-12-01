@@ -7,6 +7,9 @@ require 'database_cleaner'
 require 'capybara/rails'
 require 'capybara/minitest'
 
+Capybara.server_host = "0.0.0.0"
+Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
+
 module ActiveSupport
   class TestCase
     include ActionDispatch::TestProcess
@@ -20,12 +23,9 @@ module ActiveSupport
       PapyrusSettings.primo_apikey = ENV['PRIMO_API_KEY']
       PapyrusSettings.alma_apikey = ENV['ALMA_API_KEY']
       Rails.configuration.is_using_login_password_authentication = false
-      Capybara.use_default_driver
     end
 
     def teardown
-      Capybara.reset_sessions!
-
       Attachment.all.each do |a|
         f = "#{Rails.public_path}#{a.file}"
         File.delete(f) if File.exist?(f) && File.file?(f)
