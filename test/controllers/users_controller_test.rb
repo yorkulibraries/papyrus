@@ -5,7 +5,7 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   context 'User with login and pw' do
     setup do
-      Rails.configuration.is_using_login_password_authentication = true
+      Rails.configuration.is_authentication_method = :devise
       @manager_user = create(:user, role: User::MANAGER, password: '12345678')
       log_user_in(@manager_user)
     end

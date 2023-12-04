@@ -78,7 +78,7 @@ class UsersController < AuthenticatedController
   private
 
   def user_params
-    if Rails.configuration.is_using_login_password_authentication
+    if Rails.configuration.is_authentication_method == :devise
       params.require(:user).permit(:username, :first_name, :last_name, :role, :email, :password)
     else
       params.require(:user).permit(:username, :first_name, :last_name, :role, :email)

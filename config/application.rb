@@ -21,7 +21,11 @@ module Papyrus
   class Application < Rails::Application
     # Version of your assets, change this if you want to expire all your assets
     config.assets.initialize_on_precompile = false
-    config.is_using_login_password_authentication = ENV.fetch('IDP_SSO_SERVICE_URL', true).to_s.downcase == 'true'
+    # values available for "is_authentication_method" are
+    # :devise (login and pw)
+    # :saml (use an IdPs)
+    # :header (only yorku setup)
+    config.is_authentication_method = :devise
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W[#{config.root}/lib]

@@ -19,6 +19,15 @@
     </div>
   </div>
 
+  <%= if Rails.configuration.is_authentication_method == :devise %>
+    <%= content_tag(:div, class: "row") do -%>
+      <div class="col-md-6">&nbsp;</div>
+      <div class="col-md-6">
+        <%= f.input :password, required: true if Rails.configuration.is_authentication_method == :devise %>
+      </div>
+    <% end -%>
+  <% end %>
+
   <%= f.fields_for :student_details do |builder| %>
     <div class="row">
       <div class="col-md-6">

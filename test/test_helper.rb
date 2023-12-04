@@ -9,9 +9,6 @@ require 'capybara/minitest'
 
 Capybara.server_host = '0.0.0.0'
 Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
-Capybara.register_driver :custom_headers_driver do |app|
-  Capybara::RackTest::Driver.new(app, headers: { PapyrusSettings.auth_cas_header.to_s => 'TEST' })
-end
 
 module ActiveSupport
   class TestCase
@@ -25,7 +22,7 @@ module ActiveSupport
       PapyrusSettings.worldcat_key = ENV['WORLDCAT_API_KEY']
       PapyrusSettings.primo_apikey = ENV['PRIMO_API_KEY']
       PapyrusSettings.alma_apikey = ENV['ALMA_API_KEY']
-      Rails.configuration.is_using_login_password_authentication = false
+      Rails.configuration.is_authentication_method = :header
     end
 
     def teardown

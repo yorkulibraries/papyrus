@@ -6,7 +6,7 @@
     <h5 class="card-title">This application requires <%= username_hint %> Authentication.</h5>
     <p class="card-text">If you see this, you have not been authenticated properly.</p>
 
-    <% if Rails.configuration.is_using_login_password_authentication %>
+    <% if Rails.configuration.is_authentication_method == :devise %>
       <%= form_tag login_path do %>
           <div class="field">
           <%= label_tag :email %><br />
