@@ -3,20 +3,19 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  context 'User with login and pw' do
+  context 'Creating User with login and pw' do
     setup do
       Rails.configuration.is_authentication_method = :devise
-      @manager_user = create(:user, role: User::MANAGER, password: '12345678')
-      log_user_in(@manager_user)
+      @manager_user = create(:user, role: User::MANAGER, email: 'test@test.com', password: '12345678')
     end
 
     should 'create a new user' do
-      post users_path, params: { user: attributes_for(:user, password: '12345678') }
-      assert_equal 2, User.count
+      post users_path, params: { user: attributes_for(:user, email: 'test@test.com', password: '12345678') }
+      assert_equal 1, User.count
     end
   end
 
-  context 'User with SAML or Headers' do
+  context 'Creating User with headers' do
     setup do
       @manager_user = create(:user, role: User::MANAGER)
       log_user_in(@manager_user)
