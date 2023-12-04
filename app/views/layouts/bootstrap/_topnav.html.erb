@@ -67,7 +67,7 @@
           </div>
         </li>
       <% end %>
-
+      <% if @current_user && Announcement.count > 0 %>
         <li class="nav-item dropdown me-3">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -80,6 +80,7 @@
                 <% end %>
           </ul>
         </li>
+      <% end %>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

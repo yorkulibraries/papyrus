@@ -7,6 +7,14 @@ Papyrus is an accessible content delivery and student management application. It
 ## Getting started
 Take a look at [Vagrant Papyrus](https://github.com/yorkulibraries/vagrant-papyrus) to quickly deploy an instance of Papyrus.
 
+## Authentication
+
+Values available for "is_authentication_method" are :devise (login and pw), :saml (use an IdPs), :header (only yorku setup). Currently is devise by default.
+
+```
+config.is_authentication_method = :devise
+```
+
 ## Importing students from CSV
 
 Prepare the CSV file similar to the lines below:
