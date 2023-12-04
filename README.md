@@ -12,6 +12,7 @@ Take a look at [Vagrant Papyrus](https://github.com/yorkulibraries/vagrant-papyr
 Values available for "is_authentication_method" are :devise (login and pw), :saml (use an IdPs), :header (only yorku setup). Currently is devise by default.
 
 ```
+# config/application.rb
 config.is_authentication_method = :devise
 ```
 
