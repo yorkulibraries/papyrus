@@ -6,6 +6,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     url: "http://#{ENV.fetch('SELENIUM_SERVER')}:4444"
   }
   def setup
-    @user = create(:user, username: 'TEST')
+    Rails.configuration.is_authentication_method = :devise
   end
 end

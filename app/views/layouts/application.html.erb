@@ -25,6 +25,7 @@
         <%= render "layouts/bootstrap/sidenav" %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
 
+        <% if Announcement.count > 0 && @current_user %>
           <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
             <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement mt-1'>
 
@@ -34,6 +35,7 @@
               <%= announcement.message %>
             </div>
           <% end %>
+        <% end %>
 
           <% if show_title? || content_for?(:title_html) %>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -48,7 +50,7 @@
           <div class="row">
             <div class="col-md-12">
               <p class="small help-block"
-              title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user.last_active_at != nil %>">
+              title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user && @current_user.last_active_at != nil %>">
                 &copy; 2011 - <%= Date.today.year %>. Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> </p>
             </div>
           </div>
