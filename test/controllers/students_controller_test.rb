@@ -3,11 +3,10 @@
 require 'test_helper'
 
 class StudentsControllerTest < ActionDispatch::IntegrationTest
-  context 'Student with login and pw authentication' do
+  context 'Creating Student with login and pw authentication' do
     setup do
       Rails.configuration.is_authentication_method = :devise
-      @user = create(:user, role: User::ADMIN, password: '12345678')
-      log_user_in(@user)
+      @user = create(:user, role: User::ADMIN, email: 'test@test.com', password: '12345678')
     end
 
     should 'create a new student' do
@@ -26,7 +25,7 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  context 'with SAML or Header authetication' do
+  context 'Creating Student with Header authetication' do
     setup do
       @user = create(:user, role: User::ADMIN)
       log_user_in(@user)
