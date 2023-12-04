@@ -8,7 +8,7 @@ class User < ApplicationRecord
          :validatable
 
   def password_required?
-    Rails.configuration.is_using_login_password_authentication
+    Rails.configuration.is_authentication_method == :devise
   end
   ## CONTSTANTS
 

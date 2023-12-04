@@ -5,7 +5,7 @@ require 'test_helper'
 class StudentsControllerTest < ActionDispatch::IntegrationTest
   context 'Student with login and pw authentication' do
     setup do
-      Rails.configuration.is_using_login_password_authentication = true
+      Rails.configuration.is_authentication_method = :devise
       @user = create(:user, role: User::ADMIN, password: '12345678')
       log_user_in(@user)
     end
