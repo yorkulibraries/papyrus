@@ -110,7 +110,7 @@
         <i class="fa fa-bell"></i> <b class="caret"></b>
       </a>
       <ul class="dropdown-menu" style="width: 300px;">
-        <% Announcement.active.current(nil, @current_user.type).each do |announcement| %>
+        <% Announcement.current(nil, @current_user.role).each do |announcement| %>
           <%= render partial: "announcements/announcement", locals: { show: "li", announcement: announcement } %>
         <% end %>
       </ul>

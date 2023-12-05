@@ -25,17 +25,13 @@
         <%= render "layouts/bootstrap/sidenav" %>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
 
-        <% if @current_user && Announcement.count > 0 %>
-          <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
-            <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement mt-1'>
-
-              <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
-               &times;
-              <% end %>
+          <% @current_user && Announcement.current(session[:hidden_announcement_ids], @current_user.role).each do |announcement| %>
+            <div id="display_announcement_<%= announcement.id %>" class="alert alert-warning alert-dismissible fade show mt-1" role="alert">
               <%= announcement.message %>
+              <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "btn-close", title: "Hide this announcement" do %>
+               <% end %>
             </div>
           <% end %>
-        <% end %>
 
           <% if show_title? || content_for?(:title_html) %>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">

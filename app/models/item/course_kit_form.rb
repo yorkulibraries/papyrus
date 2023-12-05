@@ -35,15 +35,15 @@ class Item::CourseKitForm
   validates_numericality_of :credits, message: 'Credits must be a number'
 
   def initialize(attrs = nil)
-    unless attrs.nil?
-      self.year = attrs[:year]
-      self.faculty = attrs[:faculty]
-      self.subject = attrs[:subject]
-      self.term = attrs[:term]
-      self.credits = attrs[:credits]
-      self.section = attrs[:section]
-      self.course_id = attrs[:course_id]
-    end
+    return if attrs.nil?
+
+    self.year = attrs[:year]
+    self.faculty = attrs[:faculty]
+    self.subject = attrs[:subject]
+    self.term = attrs[:term]
+    self.credits = attrs[:credits]
+    self.section = attrs[:section]
+    self.course_id = attrs[:course_id]
   end
 
   # SPECIAL ACCESSORS TO BREAK UP THE CODE

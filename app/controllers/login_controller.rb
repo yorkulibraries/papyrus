@@ -2,25 +2,25 @@
 
 class LoginController < ApplicationController
   def new
-    if Rails.configuration.is_authentication_method == :header
-      username = request.headers[PapyrusSettings.auth_cas_header]
-      alt_username = request.headers[PapyrusSettings.auth_cas_header_alt]
-      user = User.unblocked.find_by('username = ? OR username = ?', username, alt_username)
+    return unless Rails.configuration.is_authentication_method == :header
 
-      if user.present?
-        session[:user_id] = user.id
-        session[:username] = user.name
-        user.active_now!(User::ACTIVITY_LOGIN)
+    username = request.headers[PapyrusSettings.auth_cas_header]
+    alt_username = request.headers[PapyrusSettings.auth_cas_header_alt]
+    user = User.unblocked.find_by('username = ? OR username = ?', username, alt_username)
 
-        if user.role == User::STUDENT_USER
-          redirect_to my_student_portal_path
-        else
-          redirect_to root_url, notice: 'Logged in!'
-        end
+    if user.present?
+      session[:user_id] = user.id
+      session[:username] = user.name
+      user.active_now!(User::ACTIVITY_LOGIN)
+
+      if user.role == User::STUDENT_USER
+        redirect_to my_student_portal_path
       else
-        flash.now.alert = 'Invalid email or password'
-        render layout: 'simple'
+        redirect_to root_url, notice: 'Logged in!'
       end
+    else
+      flash.now.alert = 'Invalid email or password'
+      render layout: 'simple'
     end
   end
 

@@ -13,8 +13,7 @@
         </h5>
         <% if @student %>
           <%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
-            data: { confirm: 'Are you sure?' }, class: "btn btn-outline-secondary btn-xs", method: :delete, title: "Remove Access" do %>
-            &times;
+            data: { confirm: 'Are you sure?' }, class: "btn btn-outline-secondary btn-xs btn-close", method: :delete, title: "Remove Access" do %>
           <% end %>
         <% end %>
       </div>

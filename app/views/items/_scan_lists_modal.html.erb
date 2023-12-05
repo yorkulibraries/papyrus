@@ -17,7 +17,7 @@
         </ul>
         <hr/>
         <strong>Add to another list: </strong>
-        <select id="todo_list_selector">
+        <select id="todo_list_selector" class="form-select">
           <option>-- choose a list --</option>
           <% @todo_lists.each do |list| %>
             <option value='<%= list.id %>'><%= list.name %></option>

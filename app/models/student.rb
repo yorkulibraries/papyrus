@@ -83,13 +83,7 @@ class Student < User
   end
 
   def details
-    if student_details.blank?
-      return StudentDetails.new
-    else
-      return student_details
-    end
-
-    student_details
+    student_details.blank? ? StudentDetails.new : student_details
   end
 
   def formats_array

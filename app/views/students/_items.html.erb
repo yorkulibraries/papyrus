@@ -15,8 +15,7 @@
 
 				<% if @student %>
 					<%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
-						data: { confirm: 'Are you sure?' }, class: "close", method: :delete, title: "Remove Access" do %>
-						&times;
+						data: { confirm: 'Are you sure?' }, class: "close btn btn-danger btn-close", method: :delete, title: "Remove Access" do %>
 					<% end %>
 				<% end %>
 			</div>
