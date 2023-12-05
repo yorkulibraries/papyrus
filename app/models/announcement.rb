@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Announcement < ApplicationRecord
-  # attr_accessible :ends_at, :message, :starts_at, :audience, :active
-
   ## AUDIT TRAIL
   audited associated_with: :user
 
@@ -21,21 +19,26 @@ class Announcement < ApplicationRecord
   ## SCOPES
   scope :expired, -> {  where('ends_at < ?', Date.today) }
   scope :non_expired, -> { where('ends_at >= ?', Date.today) }
-  scope :active, -> { where('active = ?', true) }
+  scope :activated, lambda {
+    where('(active = TRUE) AND (starts_at <= :now AND ends_at >= :now)', now: Time.zone.now)
+  }
+  scope :visible, -> { activated.count }
 
   ## INSTANCE METHODS
   def self.current(hidden_ids = nil, audience = nil)
-    result = where('starts_at <= :now and ends_at >= :now', now: Time.zone.now)
+    result = activated
     result = result.where('id not in (?)', hidden_ids) if hidden_ids.present?
 
     # taylor to different audiences
-    case audience
-    when AUDIENCE_USER
-      result = result.where('audience = ?', AUDIENCE_USER)
+    case audience&.capitalize
     when AUDIENCE_STUDENT
-      result = result.where('audience = ?', AUDIENCE_STUDENT)
+      result.where('audience = ?', AUDIENCE_STUDENT)
+    when 'Student_view_only'
+      result.where('audience = ?', AUDIENCE_STUDENT)
+    when AUDIENCE_USER
+      result.where('audience = ?', AUDIENCE_USER)
+    else
+      result.where('audience = ? OR audience = ?', AUDIENCE_USER, AUDIENCE_STUDENT)
     end
-
-    result
   end
 end

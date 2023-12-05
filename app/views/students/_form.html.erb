@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <%= if Rails.configuration.is_authentication_method == :devise %>
+  <% if Rails.configuration.is_authentication_method == :devise %>
     <%= content_tag(:div, class: "row") do -%>
       <div class="col-md-6">&nbsp;</div>
       <div class="col-md-6">

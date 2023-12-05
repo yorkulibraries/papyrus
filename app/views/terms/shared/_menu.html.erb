@@ -1,10 +1,8 @@
 <div class="row">
   <div class="col-4 col-md-4">
     <form action="<%= search_courses_terms_path %>" class="form-search">
-    <div class="input-group">
-      <span class="input-group-prepend">
-        <span class="input-group-text"><i class="fas fa-search"></i></span>
-      </span>
+    <div class="input-group form-group-lg">
+      <span class="input-group-text"><i class="fas fa-search"></i></span>
       <input type="text" placeholder="Search Course Code or Name" name="q" aria-label="Search" class="form-control search-query"  value="<%= params[:q].try(:strip) %>">
       <input type="submit" name="submit" class="d-none" value="" aria-label="submit">
     </div>

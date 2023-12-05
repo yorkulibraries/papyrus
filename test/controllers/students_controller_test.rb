@@ -7,6 +7,11 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     setup do
       Rails.configuration.is_authentication_method = :devise
       @user = create(:user, role: User::ADMIN, email: 'test@test.com', password: '12345678')
+      post login_path(email: @user.email, password: @user.password)
+    end
+
+    def teardown
+      Rails.configuration.is_authentication_method = :header
     end
 
     should 'create a new student' do

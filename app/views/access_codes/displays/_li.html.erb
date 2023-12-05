@@ -18,12 +18,10 @@
       <i class="fas fa-lock ms-1"></i>
 
       <% if can?(:manage, access_code) && !access_code.shared?  && !access_code.expired? %>
-        <%= link_to student_access_code_path(@student, access_code), method: :delete, class: "ms-2 remove text-danger", data: {remote: true, confirm: "Are you sure?"} do %>
-          &times;
+        <%= link_to student_access_code_path(@student, access_code), method: :delete, class: "ms-2 remove text-danger btn btn-danger btn-close", data: {remote: true, confirm: "Are you sure?"} do %>
         <% end %>
       <% elsif can?(:manage, access_code) && is_controller?("shared_access_codes") && !access_code.expired?  %>
-  			<%= link_to shared_access_code_path(access_code), method: :delete, class: "ms-2 text-danger remove", data: {remote: true, confirm: "Are you sure?"} do %>
-  				&times;
+  			<%= link_to shared_access_code_path(access_code), method: :delete, class: "ms-2 text-danger remove btn btn-danger btn-close", data: {remote: true, confirm: "Are you sure?"} do %>
   			<% end %>
       <% end %>
     </div>

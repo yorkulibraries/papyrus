@@ -3,11 +3,7 @@
 	<div class="col-12">
 		<form action="<%= search_students_path(type: params[:type]) %>" id="omni_search_form">
 		<div class="input-group form-group-lg">
-			<span class="input-group-prepend">
-				 <span class="input-group-text">
-					 <i class="fas fa-search"></i>
-				 </span>
-			</span>
+			<span class="input-group-text"><i class="fas fa-search"></i></span>
 			<input type="hidden" name="search_all" value="true"/>
 			<input type="submit" name="hidden_submit" class="d-none" aria-label="Search Students">
 			<label for="q" class="d-none">Search</label>

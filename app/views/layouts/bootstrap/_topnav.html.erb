@@ -67,14 +67,14 @@
           </div>
         </li>
       <% end %>
-      <% if @current_user && Announcement.count > 0 %>
+      <% if Announcement.visible > 0 %>
         <li class="nav-item dropdown me-3">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             <i class="fas fa-bell"></i>
           </a>
           <ul class="dropdown-menu">
-            <% Announcement.active.current(nil, @current_user.type).each do |announcement| %>
+            <% @current_user && Announcement.non_expired.current(nil, @current_user.role).each do |announcement| %>
               <%= render partial: "announcements/announcement" , locals: { show: "li" , announcement:
                 announcement } %>
                 <% end %>
@@ -92,13 +92,6 @@
             <a href="<%= logout_path%>" class="dropdown-item">
               <i class="fas fa-fw fa-power-off me-1"></i> Log out
             </a>
-            <% if Rails.env.development? %>
-              <div class="dropdown-divider"></div>
-              <h6 class="dropdown-header">Login As</h6>
-              <% User::ROLE_NAMES.each do |role| %>
-                <%=link_to "- #{role}" , login_path(:as=> role), class: "dropdown-item"%>
-              <% end %>
-            <% end %>
           </div>
         </li>
       </ul>
