@@ -6,7 +6,7 @@
 
       <% if can? :create, Item %>
         <li class="nav-item me-3">
-          <a class="nav-link" href="<%= new_omni_search_path %>" data-remote="true" aria-label="Search">
+          <a id="global_search" class="nav-link" href="<%= new_omni_search_path %>" data-remote="true" aria-label="Search">
             <i class="fa-search fas"></i>
           </a>
         </li>
