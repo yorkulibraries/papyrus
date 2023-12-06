@@ -10,7 +10,7 @@ gem 'rails', '~> 7.0', '= 7.0.4.1'
 ## RAILS related ##
 gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 6.0'
-gem 'uglifier', '~> 4.2'
+gem 'terser', '~> 1.1', '>= 1.1.20'
 
 ## DATABASES ##
 gem 'mysql2', '0.5.3'

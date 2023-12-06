@@ -20,7 +20,7 @@ Bundler.require(*Rails.groups)
 module Papyrus
   class Application < Rails::Application
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = true
 
     # values available for "is_authentication_method" are
     # 'devise' (login and pw)
@@ -46,5 +46,7 @@ module Papyrus
     config.active_record.belongs_to_required_by_default = false
     config.active_record.yaml_column_permitted_classes = [Date, ActiveSupport::TimeWithZone, Time,
                                                           ActiveSupport::TimeZone]
+    config.assets.js_compressor = :terser
+    config.assets.css_compressor = :sass
   end
 end
