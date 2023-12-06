@@ -3,10 +3,9 @@
   <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-3">
     <div class="">
       <% if can? :create, ItemConnection %>
-        <a data-toggle="modal" href="#assign_items_modal" class="btn btn-sm btn-primary">
+        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#assign_items_modal">
           <i class="fa-plus fa"></i> Assign Items
-        </a>
-
+        </button>
         <a href="<%= new_student_bulk_renew_items_path(@student) %>" class="btn btn-sm btn-success">
           <i class="fa-recycle fa"></i> Renew All
         </a>
@@ -40,12 +39,13 @@
 	<%# render partial: "students/shared/expired_items_list", locals: { student: @student } %>
 <% end %>
 
-<div id="assign_items_modal" class="modal modal-fade">
+<div id="assign_items_modal" class="modal modal-fade" data-bs-backdrop="static" aria-hidden="true" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <%= form_tag assign_many_to_student_items_path(:student_id => @student) do |f| %>
       <div class="modal-header">
-        <h5 class="modal-title">Assign Items To This Student</h5>
+        <h5 class="modal-title fs-5">Assign Items To This Student</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>To assign a new item to this student, search for the item in the search box.</p>
@@ -61,7 +61,7 @@
 
       <div class="modal-footer">
         <%= submit_tag "Assign These Items", class: "btn btn-success" %>
-        <a href="#" class="btn btn-outline-secondary" data-dismiss="modal">Close</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
       <% end %>
     </div>
@@ -72,8 +72,11 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-
-	$("#assign_items_modal").modal({show: false}).on('shown.bs.modal', function (e) {
+  $("#assign_items_modal").modal({ show: false }).on('shown.bs.modal', function (e) {
+    if ($("#assign-items-list").data("tokenInputObject")) {
+      $("#assign-items-list").tokenInput("clear");
+      $("#assign-items-list").tokenInput("destroy");
+    }
     setup_item_token_input("#assign-items-list", "<%= search_items_path %>");
   });
 });

@@ -9,7 +9,7 @@
 					<h5 class="text-black">Student Portal</h5>
 
 				<%= f.label :student_portal_welcome_enable, "Enable Welcome / First Time Login Message?"%>
-				<%= f.input :student_portal_welcome_enable, label: false, as: :radio_buttons %>
+				<%= f.input :student_portal_welcome_enable, label: false, as: :radio_buttons, input_html: { class: 'form-check-input' } %>
 
 				<%= f.label :student_portal_welcome_message, "Welcome / First Time Login Message"%>
 				<%= f.input :student_portal_welcome_message, label: false, as: :text %>
@@ -17,15 +17,15 @@
 					<h5 class="text-black mt-4">Import Settings</h5>
 
 	      <%= f.label :import_auto_assign_coordinator, "Auto Assign Coordinator"%>
-	      <%= f.input :import_auto_assign_coordinator, label: false, as: :radio_buttons %>
+	      <%= f.input :import_auto_assign_coordinator, label: false, as: :radio_buttons, input_html: { class: 'form-check-input' } %>
 
         <hr/>
 
         <%= f.label :import_send_welcome_email_to_student, "Send Welcome Email To Student"%>
-	      <%= f.input :import_send_welcome_email_to_student, label: false, as: :radio_buttons %>
+	      <%= f.input :import_send_welcome_email_to_student, label: false, as: :radio_buttons, input_html: { class: 'form-check-input' } %>
 
         <%= f.label :import_notify_coordinator, "Notify Coordinator, when new student is created"%>
-	      <%= f.input :import_notify_coordinator, label: false, as: :radio_buttons %>
+	      <%= f.input :import_notify_coordinator, label: false, as: :radio_buttons, input_html: { class: 'form-check-input' } %>
 
 
 			  <input type="hidden" name="return_to" value="students"/>

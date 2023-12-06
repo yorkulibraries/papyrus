@@ -17,12 +17,12 @@ class StudentMailer < ActionMailer::Base
     @app_name = PapyrusSettings.app_name
     @org_name = PapyrusSettings.org_name
 
-    if PapyrusSettings.email_allow && !student.email.nil?
-      mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_notification_subject)
+    return unless PapyrusSettings.email_allow && !student.email.nil?
 
-      @student.audit_comment = "Sent Notification Email to #{@student.email}"
-      @student.save
-    end
+    mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_notification_subject)
+
+    @student.audit_comment = "Sent Notification Email to #{@student.email}"
+    @student.save
   end
 
   def welcome_email(student, sender)
@@ -45,12 +45,12 @@ class StudentMailer < ActionMailer::Base
       @template = Liquid::Template.parse(PapyrusSettings.email_welcome_body) # Parses and compiles the template
     end
 
-    if PapyrusSettings.email_allow && !student.email.nil?
-      mail(to: student.email, cc: sender.email, bcc: @counsellor_email, subject: @subject)
+    return unless PapyrusSettings.email_allow && !student.email.nil?
 
-      @student.audit_comment = "Sent to #{@student.email}"
-      @student.save
-    end
+    mail(to: student.email, cc: sender.email, bcc: @counsellor_email, subject: @subject)
+
+    @student.audit_comment = "Sent to #{@student.email}"
+    @student.save
   end
 
   def items_assigned_email(student, items, sender)
@@ -66,11 +66,11 @@ class StudentMailer < ActionMailer::Base
     @app_name = PapyrusSettings.app_name
     @org_name = PapyrusSettings.org_name
 
-    if PapyrusSettings.email_allow && !student.email.nil?
-      mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_item_assigned_subject)
+    return unless PapyrusSettings.email_allow && !student.email.nil?
 
-      @student.audit_comment = "Sent Assigned Items Notice to #{@student.email}"
-      @student.save
-    end
+    mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_item_assigned_subject)
+
+    @student.audit_comment = "Sent Assigned Items Notice to #{@student.email}"
+    @student.save
   end
 end

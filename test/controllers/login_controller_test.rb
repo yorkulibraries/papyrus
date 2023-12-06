@@ -5,7 +5,7 @@ require 'test_helper'
 class LoginControllerTest < ActionDispatch::IntegrationTest
   context 'headers authentication' do
     setup do
-      Rails.configuration.is_using_login_password_authentication = false
+      Rails.configuration.is_authentication_method = :header
       @cas_header = PapyrusSettings.auth_cas_header
       @cas_alt_header = PapyrusSettings.auth_cas_header_alt
       PapyrusSettings.course_sync_on_login = PapyrusSettings::FALSE
@@ -77,7 +77,7 @@ class LoginControllerTest < ActionDispatch::IntegrationTest
 
   context 'Login and password authentication' do
     setup do
-      Rails.configuration.is_using_login_password_authentication = true
+      Rails.configuration.is_authentication_method = :devise
       @user = create(:user, username: 'someuser', password: '12345678')
       get login_path
     end
