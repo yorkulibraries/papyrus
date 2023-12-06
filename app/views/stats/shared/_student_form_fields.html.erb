@@ -3,26 +3,29 @@
     <th>
       <h6>Coordinator</h6>
 
-      <select name="coordinator">
+      <select name="coordinator" class="form-select">
         <option value="any">Any</option>
         <%= options_from_collection_for_select(User.transcription_assitants, 'id', 'name' , @coordinator.try(:id)) %>
       </select>
     </th>
     <th>
       <h6>Assistant</h6>
-      <select name="assistant">
+      <select name="assistant" class="form-select">
         <option value="any">Any</option>
         <%= options_from_collection_for_select(User.transcription_assitants, 'id', 'name' , @assistant.try(:id)) %>
       </select>
     </th>
     <th>
-      <h6>Date Range [start - end]</h6>
-      <input type="text" name="start_date" value="<%= @start_date %>" class="datepicker"/> -
-      <input type="text" name="end_date" value="<%= @end_date %>" class="datepicker"/>
+      <h6>Date start</h6>
+      <input type="text" name="start_date" value="<%= @start_date %>" class="datepicker form-control"/>
+    </th>
+    <th>
+      <h6>Date end</h6>
+      <input type="text" name="end_date" value="<%= @end_date %>" class="datepicker form-control"/>
     </th>
     <th>
       <h6>Status</h6>
-      <select name="status">
+      <select name="status" class="form-select">
         <%= options_for_select([ "Any", "Active", "Inactive" ], params[:status]) %>
       </select>
     </th>

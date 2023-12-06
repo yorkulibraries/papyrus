@@ -7,8 +7,7 @@
       <i class="fa fa-bullhorn"></i> <%= announcement.audience %>s
       <% if announcement.ends_at > Date.today %>
         &nbsp;&nbsp;
-        <%= link_to announcement_path(announcement), method: :delete, class: "red remove", title: "Remove", data: {remote: true, confirm: "Are you sure?"} do %>
-         &times;
+        <%= link_to announcement_path(announcement), method: :delete, class: "btn btn-danger btn-close", title: "Remove", data: {remote: true, confirm: "Are you sure?"} do %>
         <% end %>
       <% end %>
     </div>

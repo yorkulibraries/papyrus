@@ -4,31 +4,31 @@
           <% if session[:return_to_user_id]%>
           	<li class="nav-item border-bottom mb-2">
           		<a href="<%= my_logout_as_student_path %>"  class="nav-link text-light">
-          			<i class="fas fa-fw fa-reply mr-2"></i> Papyrus Admin
+          			<i class="fas fa-fw fa-reply me-2"></i> Papyrus Admin
           		</a>
           	</li>
           <% end %>
 
           <li class="nav-item <%= "active" if controller_name == "terms" && action_name =="show"%>">
           	<a href="<%= my_terms_path %>"  class="nav-link text-light">
-              <i class="fas fa-fw fa-gavel mr-2"></i>Terms of Use
+              <i class="fas fa-fw fa-gavel me-2"></i>Terms of Use
             </a>
           </li>
 
           <% if session[:terms_accepted]%>
           	<li class="nav-item <%= "active" if controller_name == "items" && action_name =="show"%>">
           		<a href="<%= my_items_path %>"  class="nav-link text-light">
-                <i class="fas fa-fw fa-book mr-2"></i> My Items
+                <i class="fas fa-fw fa-book me-2"></i> My Items
               </a>
           	</li>
           	<li class="nav-item <%= "active" if controller_name == "details" && action_name =="show"%>">
           		<a href="<%= my_details_path %>"  class="nav-link text-light">
-                <i class="fas fa-fw fa-users mr-2"></i> My Details
+                <i class="fas fa-fw fa-users me-2"></i> My Details
               </a>
           	</li>
           	<li class="nav-item <%= "active" if controller_name == "access_codes" && action_name =="show"%>">
           		<a href="<%= my_access_codes_path %>"  class="nav-link text-light">
-                <i class="fas fa-fw fa-lock mr-2"></i> My Access Codes
+                <i class="fas fa-fw fa-lock me-2"></i> My Access Codes
               </a>
           	</li>
           <% end %>

@@ -37,18 +37,18 @@
 
 		<div class="d-flex justify-content-end align-items-start">
 			<% if attachment.is_url? %>
-				<a class="btn btn-outline-secondary btn-sm mr-2" href="<%= attachment.url %>" title="Go to this URL">
+				<a class="btn btn-outline-secondary btn-sm me-2" href="<%= attachment.url %>" title="Go to this URL">
 					<i class="fa fa-link"></i>
 				</a>
 			<% else %>
-				<a class="btn btn-sm btn-outline-secondary mr-2" title="Download this file"
+				<a class="btn btn-sm btn-outline-secondary me-2" title="Download this file"
 						href="<%= get_file_item_attachment_url(attachment.item, attachment) if attachment.file? %>">
 					<i class="fa fa-download"></i>
 				</a>
 			<% end %>
 
 			<% if can? :update, Attachment %>
-				<a class="btn btn-sm btn-outline-secondary mr-2" title="Edit File or URL"
+				<a class="btn btn-sm btn-outline-secondary me-2" title="Edit File or URL"
 						href="<%= edit_item_attachment_path(attachment.item, attachment) %>">
 					<i class="fa fa-edit"></i>
 				</a>

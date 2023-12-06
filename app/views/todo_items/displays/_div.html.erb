@@ -12,7 +12,7 @@
             <% end %>
             <input type="submit" name="submit" class="d-none" value="" aria-label="complete/uncomplete">
         <% end %>
-        <div class="mb-0 ml-3 text-lg">
+        <div class="mb-0 ms-3 text-lg">
           <%= in_place_edit [todo_item.todo_list, todo_item], :summary %>
         </div>
 
@@ -20,12 +20,12 @@
 
     </div>
     <div class="col-md-4 d-flex justify-content-end align-items-center">
-      <div class="mr-3">
-        <i class="fas fa-user mr-1"></i>
+      <div class="me-3">
+        <i class="fas fa-user me-1"></i>
         <%= in_place_edit [todo_item.todo_list, todo_item], :assigned_to_id, display_as: :assignee,  as: :select, collection:  TodoItem.assignees(true) %>
       </div>
-      <div class="mr-3">
-        <i class="far fa-calendar mr-1"></i>
+      <div class="me-3">
+        <i class="far fa-calendar me-1"></i>
         <%= in_place_edit [todo_item.todo_list, todo_item], :due_date,  as: :date, inner_class: "datepicker", place_holder: "No Due Date" %>
       </div>
 

@@ -23,15 +23,13 @@
     <div class="container-fluid">
       <div class="row" style="height: 100vh;">
         <%= render "layouts/bootstrap/sidenav" %>
-        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-2">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
 
-          <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
-            <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement mt-1'>
-
-              <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
-               &times;
-              <% end %>
+          <% @current_user && Announcement.current(session[:hidden_announcement_ids], @current_user.role).each do |announcement| %>
+            <div id="display_announcement_<%= announcement.id %>" class="alert alert-warning alert-dismissible fade show mt-1" role="alert">
               <%= announcement.message %>
+              <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "btn-close", title: "Hide this announcement" do %>
+               <% end %>
             </div>
           <% end %>
 
@@ -48,7 +46,7 @@
           <div class="row">
             <div class="col-md-12">
               <p class="small help-block"
-              title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user.last_active_at != nil %>">
+              title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user && @current_user.last_active_at != nil %>">
                 &copy; 2011 - <%= Date.today.year %>. Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> </p>
             </div>
           </div>

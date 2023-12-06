@@ -3,7 +3,7 @@
 		<%= f.input :name, required: true %>
 		<%= f.input :url, required: true %>
 		<%= f.label :access_code_required, "Access Code Required? "%>
-		<%= f.input :access_code_required, label: false, as: :radio_buttons %>
+		<%= f.input :access_code_required, label: false, as: :radio_buttons, input_html: { class: 'form-check-input' } %>
 
 	<hr/>
 		<%= f.button :submit, "Save URL", class: "btn btn-primary" %>

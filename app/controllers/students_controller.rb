@@ -190,7 +190,7 @@ class StudentsController < AuthenticatedController
   private
 
   def student_params
-    if Rails.configuration.is_using_login_password_authentication
+    if Rails.configuration.is_authentication_method == :devise
       params.require(:student).permit(:first_name, :last_name, :name, :email, :username, :password,
                                       student_details_attributes: %i[student_number preferred_phone request_form_signed_on
                                                                      format_large_print format_pdf format_epub format_kurzweil format_daisy format_braille format_word format_note format_other

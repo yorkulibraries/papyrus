@@ -5,61 +5,68 @@
 		<%= panel(title: "Email Settings", icon: "cog") do %>
 			<%= simple_form_for PapyrusSettings.new, url: settings_path, method: :patch do |f| %>
 
-				<ul class="nav nav-tabs" role="tablist">
-					<li class="active">
-						<a href="#general_email_settings" role="tab" data-toggle="tab" class="nav-link active">General</a>
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="general_email_settings-tab" data-bs-toggle="tab" data-bs-target="#general_email_settings-tab-pane" type="button" role="tab" aria-controls="general_email_settings-tab-pane" aria-selected="true">General</button>
 					</li>
-					<li><a href="#welcome_email_settings" role="tab" data-toggle="tab" class="nav-link">Welcome </a></li>
-					<li><a href="#lab_access_email_settings" role="tab" data-toggle="tab" class="nav-link">Lab Access </a></li>
-					<li><a href="#notification_email_settings" role="tab" data-toggle="tab" class="nav-link">Notification </a></li>
-					<li><a href="#item_assigned_email_settings" role="tab" data-toggle="tab" class="nav-link">Item Assigned </a></li>
-					<li><a href="#helpful_tags_settings" role="tab" data-toggle="tab" class="nav-link">Helpful Tags</a></li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="welcome_email_settings-tab" data-bs-toggle="tab" data-bs-target="#welcome_email_settings-tab-pane" type="button" role="tab" aria-controls="welcome_email_settings-tab-pane" aria-selected="false">Welcome</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="lab_access_email_settings-tab" data-bs-toggle="tab" data-bs-target="#lab_access_email_settings-tab-pane" type="button" role="tab" aria-controls="lab_access_email_settings-tab-pane" aria-selected="false">Lab Access</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="notification_email_settings-tab" data-bs-toggle="tab" data-bs-target="#notification_email_settings-tab-pane" type="button" role="tab" aria-controls="notification_email_settings-tab-pane" aria-selected="false">Notification</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="item_assigned_email_settings-tab" data-bs-toggle="tab" data-bs-target="#item_assigned_email_settings-tab-pane" type="button" role="tab" aria-controls="item_assigned_email_settings-tab-pane" aria-selected="false">Item Assigned</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="helpful_tags_settings-tab" data-bs-toggle="tab" data-bs-target="#helpful_tags_settings-tab-pane" type="button" role="tab" aria-controls="helpful_tags_settings-tab-pane" aria-selected="false">Helpful Tags</button>
+					</li>
 				</ul>
 
 				<!-- Tab panes -->
-				<div class="tab-content mt-4">
-					<div class="tab-pane active" id="general_email_settings">
-						<%= f.input :email_allow, as: :radio_buttons, label: "Enable Email Communication?" %>
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active" id="general_email_settings-tab-pane" role="tabpanel" aria-labelledby="general_email_settings-tab" tabindex="0">
+						<%= f.input :email_allow, as: :radio_buttons, label: "Enable Email Communication?", input_html: { class: 'form-check-input' } %>
 						<%= f.input :email_from, label: "From Address", input_html: { class: "form-control" } %>
 					</div>
-					<div class="tab-pane" id="welcome_email_settings">
+					<div class="tab-pane fade" id="welcome_email_settings-tab-pane" role="tabpanel" aria-labelledby="welcome_email_settings-tab" tabindex="0">
 						<h5 class="text-black">Welcome Email</h5>
 						<%= f.input :email_welcome_subject, label: "Subject", input_html: { class: "form-control" } %>
 						<p class="help-block small">Available Body Tags:
 							{{sender_name}} | {{student_name}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
 						<%= f.input :email_welcome_body, as: :text, label: "Body", input_html: { rows: 20, class: "form-control"  } %>
 					</div>
-					<div class="tab-pane" id="lab_access_email_settings">
+					<div class="tab-pane fade" id="lab_access_email_settings-tab-pane" role="tabpanel" aria-labelledby="lab_access_email_settings-tab" tabindex="0">
 						<h5 class="text-black">Lab Access Email</h5>
-						<%= f.input :email_lab_access_enable, as: :radio_buttons, label: "Enable Lab Access Welcome Email?" %>
+						<%= f.input :email_lab_access_enable, as: :radio_buttons, label: "Enable Lab Access Welcome Email?", input_html: { class: 'form-check-input' } %>
 
 						<%= f.input :email_lab_access_subject, label: "Subject", input_html: { class: "form-control" } %>
 						<p class="help-block small">Available Body Tags:
 							{{sender_name}} | {{student_name}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
 						<%= f.input :email_lab_access_body, as: :text, label: "Body", input_html: { rows: 20, class: "form-control"  } %>
 					</div>
-				<div class="tab-pane" id="notification_email_settings">
-						<h5 class="text-black">Notification Email</h5>
+					<div class="tab-pane fade" id="notification_email_settings-tab-pane" role="tabpanel" aria-labelledby="notification_email_settings-tab" tabindex="0">
+					<h5 class="text-black">Notification Email</h5>
 						<%= f.input :email_notification_subject, label: "Subject", input_html: { class: "form-control" }  %>
 						<p class="help-block small">Available Body Tags:
 							{{sender_name}} | {{student_name}} | {{message}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
 						<%= f.input :email_notification_body, as: :text, label: "Body", input_html: { rows: 20, class: "form-control" } %>
-
-				</div>
-				<div class="tab-pane" id="item_assigned_email_settings">
-						<h5 class="text-black">Item Assigned Email</h5>
+					</div>
+					<div class="tab-pane fade" id="item_assigned_email_settings-tab-pane" role="tabpanel" aria-labelledby="item_assigned_email_settings-tab" tabindex="0">
+					<h5 class="text-black">Item Assigned Email</h5>
 						<%= f.input :email_item_assigned_subject, label: "Subject", input_html: { class: "form-control" } %>
 						<p class="help-block small">Available Body Tags:
 							{{student_name}} | {{items}} | {{date}} | {{date-short}} | {{application_url}} | {{application_name}} | {{organization_name}}</p>
 						<%= f.input :email_item_assigned_body, as: :text, label: "Body", input_html: { rows: 20, class: "form-control" } %>
+					</div>
+					<div class="tab-pane fade" id="helpful_tags_settings-tab-pane" role="tabpanel" aria-labelledby="helpful_tags_settings-tab" tabindex="0">
+						<h5 class="text-black">Useful Tags For Email Text</h5>
+						<p>These tags will be processed and replaced with the actual value before the email is sent out.</p>
+					</div>
 				</div>
-				<div class="tab-pane" id="helpful_tags_settings">
-					<h5 class="text-black">Useful Tags For Email Text</h5>
-					<p>These tags will be processed and replaced with the actual value before the email is sent out.</p>
-
-				</div>
-				</div>
-
 
 				<input type="hidden" name="return_to" value="email"/>
 				<%= f.submit "Save Settings", class: "btn btn-success mt-3" %>

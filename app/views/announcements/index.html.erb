@@ -6,12 +6,12 @@
       <%= link_to  new_announcement_path, class: "btn btn-sm btn-primary", data: { remote: true } do %>
         <i class="fa fa-plus"></i> New Announcement
       <% end %>
-      <hr/>
 
       <div id="announcement_form_holder"></div>
 
       <div id="current_announcements">
         <% @announcements.each do |announcement| %>
+          <hr />
           <%= render announcement, show: "div" %>
         <% end %>
 

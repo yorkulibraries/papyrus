@@ -17,7 +17,7 @@
 
 		<% if can?(:manage, access_code) && !access_code.shared? %>
 			<span class="type">Individual Code</span>
-			<%= link_to student_access_code_path(@student, access_code), method: :delete, class: "grey small remove float-right", data: {remote: true, confirm: "Are you sure?"} do %>
+			<%= link_to student_access_code_path(@student, access_code), method: :delete, class: "grey small remove float-end", data: {remote: true, confirm: "Are you sure?"} do %>
 				remove <i class="icon-remove"></i>
 			<% end %>
 		<% end %>
