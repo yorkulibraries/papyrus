@@ -53,7 +53,7 @@ gem 'caxlsx_rails', '0.6.3'
 gem 'roo', '~> 2.9'
 
 ## UPLOADING AND MANIPULATING FILES ##
-gem 'carrierwave', '~> 2.2', '>= 2.2.2'
+gem 'carrierwave', '~> 2.2', '>= 2.2.5'
 gem 'image_processing', '~> 1.12', '>= 1.12.2'
 gem 'mime-types', '~> 3.4', '>= 3.4.1'
 
