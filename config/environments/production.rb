@@ -30,8 +30,8 @@ Rails.application.configure do
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = true
+  config.assets.js_compressor = :terser
   config.assets.css_compressor = :sass
-  config.assets.js_compressor = :uglifier
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -63,8 +63,4 @@ Rails.application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-
-  config.assets.compressor = :uglifier
-
-  config.log_level = :info
 end

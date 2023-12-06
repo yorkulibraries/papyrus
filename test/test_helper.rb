@@ -4,19 +4,30 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rails/test_help'
 require 'database_cleaner'
+require 'capybara/rails'
+require 'capybara/minitest'
+
+Capybara.server_host = '0.0.0.0'
+Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
 
 module ActiveSupport
   class TestCase
     include ActionDispatch::TestProcess
+    # Make the Capybara DSL available in all integration tests
+    include Capybara::DSL
+    # Make `assert_*` methods behave like Minitest assertions
+    include Capybara::Minitest::Assertions
+
     def setup
-      api_keys = Rails.application.config_for :api_keys
-      PapyrusSettings.worldcat_key = api_keys[:worldcat_api_key]
-      PapyrusSettings.primo_apikey = api_keys[:primo_api_key]
-      PapyrusSettings.alma_apikey = api_keys[:alma_api_key]
-      Rails.configuration.is_using_login_password_authentication = false
+      PapyrusSettings.worldcat_key = ENV['WORLDCAT_API_KEY']
+      PapyrusSettings.primo_apikey = ENV['PRIMO_API_KEY']
+      PapyrusSettings.alma_apikey = ENV['ALMA_API_KEY']
+      Rails.configuration.is_authentication_method = :header
     end
 
     def teardown
+      Capybara.reset_sessions!
+      Capybara.use_default_driver
       Attachment.all.each do |a|
         f = "#{Rails.public_path}#{a.file}"
         File.delete(f) if File.exist?(f) && File.file?(f)
@@ -32,6 +43,7 @@ module ActiveSupport
       CarrierWave.clean_cached_files! 0
       PapyrusSettings.clear_cache
     end
+
     include FactoryGirl::Syntax::Methods
     include ActiveJob::TestHelper
   end

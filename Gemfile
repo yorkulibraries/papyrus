@@ -4,21 +4,20 @@ source 'http://rubygems.org'
 ruby '3.1.2'
 
 ## SECURITY FIX ##
-gem 'puma', '~> 5.6', '>= 5.6.5'
-gem 'rails', '~> 7.0', '>= 7.0.3.1'
+gem 'puma', '~> 6.4'
+gem 'rails', '~> 7.0', '= 7.0.4.1'
 
 ## RAILS related ##
 gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 6.0'
-gem 'uglifier', '~> 4.2'
+gem 'terser', '~> 1.1', '>= 1.1.20'
 
 ## DATABASES ##
-gem 'mysql2', '0.5.3', group: :production
+gem 'mysql2', '0.5.3'
 
 ## CSS AND JAVASCRIPT ##
 gem 'jquery-rails', '4.5.0'
 gem 'jquery-ui-rails', '6.0.1'
-gem 'mini_racer', '~> 0.6.3'
 
 ## BOOTSTRAP && SIMPLE_FORM && FLASH UPLOAD ##
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
@@ -30,7 +29,7 @@ gem 'simple_form', '~> 5.1'
 gem 'audited', '~> 5.0', '>= 5.0.2'
 gem 'cancancan', '~> 3.4'
 gem 'devise', '~> 4.8', '>= 4.8.1'
-gem 'devise_saml_authenticatable', '1.9.0', github: 'apokalipto/devise_saml_authenticatable'
+gem 'devise_saml_authenticatable', '1.9.1'
 gem 'email_validator', '~> 2.2', '>= 2.2.3'
 gem 'fullcalendar-rails', '3.0.0.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
@@ -54,7 +53,7 @@ gem 'caxlsx_rails', '0.6.3'
 gem 'roo', '~> 2.9'
 
 ## UPLOADING AND MANIPULATING FILES ##
-gem 'carrierwave', '~> 2.2', '>= 2.2.2'
+gem 'carrierwave', '~> 2.2', '>= 2.2.5'
 gem 'image_processing', '~> 1.12', '>= 1.12.2'
 gem 'mime-types', '~> 3.4', '>= 3.4.1'
 
@@ -66,6 +65,7 @@ gem 'exception_notification', '~> 4.5'
 gem 'whenever', '~> 1.0', require: false
 
 group :test do
+  gem 'capybara', '~> 3.39', '>= 3.39.2'
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   gem 'factory_girl_rails', '4.8.0'
   gem 'guard-bundler', '~> 3.0'
@@ -73,6 +73,7 @@ group :test do
   gem 'minitest', '~> 5.16', '>= 5.16.3'
   gem 'minitest-around', '~> 0.5.0'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
+  gem 'selenium-webdriver', '~> 4.15'
   gem 'shoulda', '~> 4.0'
 end
 
@@ -81,7 +82,6 @@ group :development, :test do
   gem 'faker', '~> 2.22'
   gem 'guard-livereload', '2.5.2', require: false
   gem 'populator', git: 'https://github.com/ryanb/populator.git'
-  gem 'sqlite3', '~> 1.4', '>= 1.4.4'
 end
 
 group :development do

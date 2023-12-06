@@ -8,7 +8,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-if (Rails.env != 'test') && User.all.count.zero?
+if (Rails.env == 'development') && User.all.count.zero?
   User.create!([
                  { username: 'admin', last_name: 'User', role: 'admin', inactive: false, type: nil, email: 'admin@me.ca',
                    created_by_user_id: nil, email_sent_at: nil, blocked: false, last_logged_in_at: '2022-05-25 14:32:52', first_name: 'Admin', last_active_at: '2022-05-25 14:32:52', first_time_login: true },
@@ -23,4 +23,7 @@ if (Rails.env != 'test') && User.all.count.zero?
                            { student_id: 3, student_number: 3_333_333, preferred_phone: '33333333', cds_counsellor: '', format_pdf: true,
                              format_kurzweil: false, format_daisy: false, format_braille: false, format_note: '', transcription_coordinator_id: 2, request_form_signed_on: nil, transcription_assistant_id: 2, format_word: false, format_large_print: false, requires_orientation: true, orientation_completed: false, orientation_completed_at: nil, book_retrieval: false, accessibility_lab_access: false, cds_counsellor_email: 'counsellor@me.ca', alternate_format_required: true, format_other: false, format_epub: false }
                          ])
+
+  User.create(email: 'test@test.com', password: '12345678', role: User::MANAGER, username: 'test',
+              first_name: 'test_f', last_name: 'test_l')
 end

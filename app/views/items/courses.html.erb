@@ -21,6 +21,10 @@
 
 	<script type="text/javascript">
 	$(document).ready(function () {
+		if ($("#assign-to-course-list").data("tokenInputObject")) {
+			$("#assign-to-course-list").tokenInput("clear");
+			$("#assign-to-course-list").tokenInput("destroy");
+		}
 	    $("#assign-to-course-list").tokenInput("<%= search_courses_terms_path %>");
 	});
 	</script>

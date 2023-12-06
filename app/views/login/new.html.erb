@@ -3,22 +3,26 @@
     Invalid Login
   </div>
   <div class="card-body">
-    <h5 class="card-title">This application requires <%= username_hint %> Authentication.</h5>
+    <h5 class="card-title">This application requires authentication.</h5>
     <p class="card-text">If you see this, you have not been authenticated properly.</p>
 
-    <% if Rails.configuration.is_using_login_password_authentication %>
+    <% if Rails.configuration.is_authentication_method == :devise %>
       <%= form_tag login_path do %>
-          <div class="field">
-          <%= label_tag :email %><br />
-          <%= text_field_tag :email, params[:email] %>
+        <div class="mb-3 row">
+          <%= label_tag :email, nil, class: 'col-sm-1 col-form-label' %>
+          <div class="col-sm-6">
+            <%= text_field_tag :email, nil, class: 'form-control' %>
           </div>
-          <div class="field">
-          <%= label_tag :password %><br />
-          <%= password_field_tag :password %>
+        </div>
+        <div class="mb-3 row">
+          <%= label_tag :password, nil, class: 'col-sm-1 col-form-label' %>
+          <div class="col-sm-6">
+            <%= password_field_tag :password, nil, class: 'form-control' %>
           </div>
-          <div class="actions"><%= submit_tag "Log In" %></div>
+        </div>
+        <%= submit_tag "Log In", class: "btn btn-primary" %>
       <% end %>
-    <% else %>
+    <% elsif Rails.configuration.is_authentication_method == :saml %>
       <%= link_to "Sign in", new_saml_user_session_path, class: "btn btn-primary" %>
     <% end %>
   </div>

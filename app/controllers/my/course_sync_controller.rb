@@ -60,11 +60,12 @@ class My::CourseSyncController < My::BaseController
   end
 
   def notify_coordinator(student, courses_added, courses_removed)
-    if courses_added.size.positive? || courses_removed.size.positive?
-      coordinator = student.details.transcription_coordinator || User.new(email: 'noreply@library.yorku.ca')
-      assistant = student.details.transcription_assistant || User.new
+    return unless courses_added.size.positive? || courses_removed.size.positive?
 
-      message = <<-HEREDOC
+    coordinator = student.details.transcription_coordinator || User.new(email: 'noreply@library.yorku.ca')
+    assistant = student.details.transcription_assistant || User.new
+
+    message = <<-HEREDOC
         Hello,
 
         The list of courses, which #{student.name} is enrolled in, has been updated. Please review below:
@@ -75,10 +76,9 @@ class My::CourseSyncController < My::BaseController
         #{"Removed:\n" if courses_removed.size.positive?}
         #{courses_removed.join("\n") if courses_removed.size.positive?}
 
-      HEREDOC
+    HEREDOC
 
-      ReportMailer.mail_report([coordinator.email, assistant.email], message,
-                               "Course List Updated: #{student.name}").deliver_later
-    end
+    ReportMailer.mail_report([coordinator.email, assistant.email], message,
+                             "Course List Updated: #{student.name}").deliver_later
   end
 end

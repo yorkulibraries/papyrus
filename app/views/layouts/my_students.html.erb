@@ -23,13 +23,12 @@
     <div class="container-fluid">
       <div class="row" style="height: 100vh;">
         <%= render "layouts/bootstrap/sidenav_students" %>
-        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-2">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-2">
 
-          <% Announcement.active.current(session[:hidden_announcement_ids], @current_user.type).each do |announcement| %>
+          <% Announcement.current(session[:hidden_announcement_ids], @current_user.role).each do |announcement| %>
             <div id="display_announcement_<%= announcement.id %>" class='alert alert-info display_announcement'>
               <%= announcement.message %>
-              <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close", title: "Hide this announcement" do %>
-               &times;
+              <%= link_to hide_announcement_path(announcement), data: {remote: true },  class: "close btn btn-danger btn-close", title: "Hide this announcement" do %>
               <% end %>
             </div>
           <% end %>

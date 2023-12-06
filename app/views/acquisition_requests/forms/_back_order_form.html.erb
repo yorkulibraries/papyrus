@@ -4,7 +4,7 @@
       <%= simple_form_for @acquisition_request, url: change_status_acquisition_request_path(@acquisition_request) do |f| %>
       <div class="modal-header">
         <h5 class="modal-title">Back Order Request</h5>
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <input type="hidden" name="status" value="<%= AcquisitionRequest::STATUS_BACK_ORDERED %>"/>
@@ -14,7 +14,7 @@
         <p class="small">All fields are required.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
          <%= f.button :submit, class: "btn btn-success", value: "Back Order This Request",  data: { confirm: "Are you sure?" }  %>
       </div>
       <% end %>

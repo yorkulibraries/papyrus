@@ -16,7 +16,7 @@
       <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
-              <% if @current_user.type == Student.to_s %>
+              <% if @current_user.role == Student.to_s %>
                 <%= render partial: "my/shared/student_menu" %>
               <% end %>
 
