@@ -1,4 +1,7 @@
 $("#new_document_form_holder").remove();
 $("body").append("<div id='new_document_form_holder'></div>");
-$("#new_document_form_holder").append("'<%= j render("documents/new_modal") %>'")
-$("#new_document_modal").modal({ show: true, backdrop: 'static' });
+$("#new_document_form_holder").append('<%= j render("documents/new_modal") %>');
+var myModal = new bootstrap.Modal(document.getElementById('new_document_modal'), {
+    backdrop: 'static'
+});
+myModal.show();

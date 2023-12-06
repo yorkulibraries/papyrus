@@ -3,7 +3,7 @@
 
     <% @results.each_with_index do |item, index| %>
     <div class="d-flex justify-content-start">
-      <div class="mr-4">
+      <div class="me-4">
         <% if item.isbn_issn %>
           <div class="book-cover text-center"
                 data-book-cover-url="<%= "https://syndetics.com/index.php?client=primo&isbn=#{item.isbn_issn}/sc.jpg" %>">

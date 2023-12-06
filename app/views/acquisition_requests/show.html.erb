@@ -36,7 +36,7 @@
 				</div>
 
 			</div>
-			<div class="col-md-4 left-border">
+			<div class="col-md-4 start-border">
 				<% if @acquisition_request.status == AcquisitionRequest::STATUS_ACQUIRED %>
 					<div class="field">
 						<span class="fa fa-user fa-fw"></span>
@@ -125,7 +125,7 @@
 
 			</div>
 
-			<div class="col-md-4 left-border">
+			<div class="col-md-4 start-border">
 				<% if can?(:send_to_acquisitions, @acquisition_request) && @acquisition_request.status != AcquisitionRequest::STATUS_CANCELLED %>
 					<p>Send an email request to Acquistions or Bookstore: </p>
 

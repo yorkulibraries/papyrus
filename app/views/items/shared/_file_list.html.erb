@@ -3,17 +3,17 @@
 		<div>
 			<a id="upload_files_button" href="#" class="btn btn-sm btn-primary"
 				data-toggle-visible="#upload_form_holder">
-					<i class="fas fa-upload mr-2"></i> Upload Files
+					<i class="fas fa-upload me-2"></i> Upload Files
 			</a>
 
 			<a href="<%= url_for new_item_attachment_path(@item, url: true) %>" class="btn btn-sm btn-outline-secondary" data-remote="true">
-				<i class="fas fa-link mr-2"></i> Add a URL
+				<i class="fas fa-link me-2"></i> Add a URL
 			</a>
 		</div>
 
 
 		<a href="<%= zipped_files_item_path(@item) %>" class="btn btn-sm btn-outline-secondary">
-			<i class="fas fa-download mr-2"></i> Download Zipped
+			<i class="fas fa-download me-2"></i> Download Zipped
 		</a>
 
 
@@ -44,11 +44,11 @@
 	<hr/>
 	<div class="text-right">
 		<a href="#" class="delete_multiple btn btn-link text-danger">
-			<i class="fas fa-trash mr-2"></i> Delete multiple files
+			<i class="fas fa-trash me-2"></i> Delete multiple files
 		</a>
 
 		<a href="#" class="submit_delete_multiple d-none btn btn-link text-danger">
-			<i class="fas fa-trash  mr-2"></i> Delete these files?</a>
+			<i class="fas fa-trash  me-2"></i> Delete these files?</a>
 		<a href="#" class="cancel_delete_multiple d-none btn btn-link text-success">&times; Cancel</a>
 
 	</div>

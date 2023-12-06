@@ -1,24 +1,18 @@
-<div id="omni_search_modal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+<div id="omni_search_modal" class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header" style="padding: 10px 15px;">        
-        <h5 class="modal-title">Quick Search</h5>
-        <button type="button" class="close" style="padding-top: 8px;"
-          data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Quick Search</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
         <%= render "search/omni/form" %>
-
         <div id="omni_search_results">
-
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>

@@ -40,5 +40,6 @@ Rails.application.configure do
   config.log_tags = %i[uuid remote_ip]
 
   config.web_console.permissions = '192.168.168.1/16'
-  config.hosts << 'papyrus.me.ca'
+  config.logger = Logger.new(STDOUT)
+  config.log_level = :debug
 end

@@ -127,7 +127,7 @@ class StudentTest < ActiveSupport::TestCase
   end
 
   should 'list the most recent students' do
-    s1 = create(:student)
+    create(:student)
     s2 = create(:student)
     s3 = create(:student)
 

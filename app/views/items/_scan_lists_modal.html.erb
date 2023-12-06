@@ -4,7 +4,7 @@
       <div class="modal-header">
 
         <h5 class="modal-title">Todo Lists - Item</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>This item is part of the following Todo Lists</p>
@@ -17,7 +17,7 @@
         </ul>
         <hr/>
         <strong>Add to another list: </strong>
-        <select id="todo_list_selector">
+        <select id="todo_list_selector" class="form-select">
           <option>-- choose a list --</option>
           <% @todo_lists.each do |list| %>
             <option value='<%= list.id %>'><%= list.name %></option>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

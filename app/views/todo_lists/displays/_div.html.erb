@@ -3,7 +3,7 @@
 
       <h6 class="mb-0">
         <a href="<%= todo_list_path(todo_list) %>">
-          <i class="fas fa-list text-sm text-muted mr-2"></i><%= todo_list.name %>
+          <i class="fas fa-list text-sm text-muted me-2"></i><%= todo_list.name %>
         </a>
         <small><%= "COMPLETED" if todo_list.status == TodoList::STATUS_DONE %></small>
       </h6>

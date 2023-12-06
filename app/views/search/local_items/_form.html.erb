@@ -3,11 +3,7 @@
 
 		<div class="col-6">
 			<div class="input-group form-group-lg">
-        <span class="input-group-prepend">
-           <span class="input-group-text">
-             <i class="fas fa-search"></i>
-           </span>
-        </span>
+        <span class="input-group-text"><i class="fas fa-search"></i></span>
         <input type="text" placeholder="Search By Title, Author, Unique ID, ISBN, Type" name="q" class="form-control"  value="<%= params[:q].try(:strip) %>">
 			</div>
 
@@ -31,13 +27,15 @@
 </div>
 <% end %>
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-12 mt-2">
     <h5>Advanced Search Examples</h5>
     <p class="text-sm text-muted mb-0">You can add multiple filters in one query line. </small></p>
-    <blockquote class="blockquote">
-      <footer class="blockquote-footer">
-        title: 'Caesar' author: 'Christian Meier' ISBN: '1234567' callnumber: 'AB 123' creator: 'John Smith'
-      </footer>
-    </blockquote>
+    <p>
+      <blockquote class="blockquote">
+        <footer class="blockquote-footer">
+          title: 'Caesar' author: 'Christian Meier' ISBN: '1234567' callnumber: 'AB 123' creator: 'John Smith'
+        </footer>
+      </blockquote>
+    </p>
   </div>
 </div>

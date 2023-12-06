@@ -83,13 +83,7 @@ class Student < User
   end
 
   def details
-    if student_details.blank?
-      return StudentDetails.new
-    else
-      return student_details
-    end
-
-    student_details
+    student_details.blank? ? StudentDetails.new : student_details
   end
 
   def formats_array
@@ -172,9 +166,9 @@ class Student < User
       when 'format_kurzweil'
         hash[:student_details_attributes][:format_kurzweil] = data[index].try(:downcase) == 'true'
       when 'format_word'
-        hash[:student_details_attributes][:format_word]  =  data[index].try(:downcase) == 'true'
+        hash[:student_details_attributes][:format_word] = data[index].try(:downcase) == 'true'
       when 'format_epub'
-        hash[:student_details_attributes][:format_epub]  =  data[index].try(:downcase) == 'true'
+        hash[:student_details_attributes][:format_epub] = data[index].try(:downcase) == 'true'
       when 'format_other'
         hash[:student_details_attributes][:format_other] = data[index].try(:downcase) == 'true'
       when 'format_note'

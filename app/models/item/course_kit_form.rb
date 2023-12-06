@@ -35,15 +35,15 @@ class Item::CourseKitForm
   validates_numericality_of :credits, message: 'Credits must be a number'
 
   def initialize(attrs = nil)
-    unless attrs.nil?
-      self.year = attrs[:year]
-      self.faculty = attrs[:faculty]
-      self.subject = attrs[:subject]
-      self.term = attrs[:term]
-      self.credits = attrs[:credits]
-      self.section = attrs[:section]
-      self.course_id = attrs[:course_id]
-    end
+    return if attrs.nil?
+
+    self.year = attrs[:year]
+    self.faculty = attrs[:faculty]
+    self.subject = attrs[:subject]
+    self.term = attrs[:term]
+    self.credits = attrs[:credits]
+    self.section = attrs[:section]
+    self.course_id = attrs[:course_id]
   end
 
   # SPECIAL ACCESSORS TO BREAK UP THE CODE
@@ -108,12 +108,12 @@ class Item::CourseKitForm
   ####### HELPER METHODS #########
 
   def get_value_from_code(position)
-    self.code = '_______'   if code.blank?
+    self.code = '_______' if code.blank?
     code.split('_')[position]
   end
 
   def insert_into_code(position, value)
-    self.code = '_______'   if code.blank?
+    self.code = '_______' if code.blank?
     broken = code.split('_')
     broken[position] = value
     self.code = broken.join('_')

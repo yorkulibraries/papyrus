@@ -1,7 +1,7 @@
 <section class="items">
 	<h2>Assigned Items
 		<% unless @student.inactive? %>
-			<a data-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-right">
+			<a data-bs-toggle="modal" href="#assign_items_modal" class="btn btn-small btn-primary float-end">
 				<i class="icon-plus-sign icon-white"></i> Assign Items</a>
 		<% end %>
 	</h2>
@@ -15,8 +15,7 @@
 
 				<% if @student %>
 					<%= link_to withhold_from_student_item_path(item, student_id: @student.id, return_to_student: true),
-						data: { confirm: 'Are you sure?' }, class: "close", method: :delete, title: "Remove Access" do %>
-						&times;
+						data: { confirm: 'Are you sure?' }, class: "close btn btn-danger btn-close", method: :delete, title: "Remove Access" do %>
 					<% end %>
 				<% end %>
 			</div>
@@ -28,7 +27,7 @@
 
 				<% connection = item.item_connections.current.find_by_student_id(@student.id) %>
 				<% if connection %>
-				<span class="trivial float-right">
+				<span class="trivial float-end">
 					<%= connection.expires_on.strftime("Expires after %b %d, %Y") if connection.expires_on%>
 					<%= "Unlimited Access" unless connection.expires_on %>
 				</span>
@@ -44,7 +43,7 @@
 		<div class="blank-slate">
 			<i class="icon-info-sign"></i>
 			<h1>No Items Assigned</h1>
-			<p>Click <a data-toggle="modal" href="#assign_items_modal">Assign Items</a>  to begin assigning items.</p>
+			<p>Click <a data-bs-toggle="modal" href="#assign_items_modal">Assign Items</a>  to begin assigning items.</p>
 		</div>
 	<% end %>
 </section>
@@ -69,12 +68,16 @@
 	</div>
 
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 	</div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function () {
+    if ($("#assign-items-list").data("tokenInputObject")) {
+      $("#assign-items-list").tokenInput("clear");
+      $("#assign-items-list").tokenInput("destroy");
+    }
     $("#assign-items-list").tokenInput("<%= search_items_path %>");
 	$("#assign_items_modal").modal({show: false});
 });
