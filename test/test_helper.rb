@@ -18,14 +18,11 @@ module ActiveSupport
     # Make `assert_*` methods behave like Minitest assertions
     include Capybara::Minitest::Assertions
 
-    def setup
-      PapyrusSettings.worldcat_key = ENV['WORLDCAT_API_KEY']
-      PapyrusSettings.primo_apikey = ENV['PRIMO_API_KEY']
-      PapyrusSettings.alma_apikey = ENV['ALMA_API_KEY']
+    setup do
       Rails.configuration.is_authentication_method = :header
     end
 
-    def teardown
+    teardown do
       Capybara.reset_sessions!
       Capybara.use_default_driver
       Attachment.all.each do |a|
