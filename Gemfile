@@ -5,7 +5,7 @@ ruby '3.1.2'
 
 ## SECURITY FIX ##
 gem 'puma', '~> 6.4'
-gem 'rails', '~> 7.0', '= 7.0.4.1'
+gem 'rails', '~> 7.0', '= 7.0.7.1'
 
 ## RAILS related ##
 gem 'coffee-rails', '~> 4.2'

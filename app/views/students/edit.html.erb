@@ -39,7 +39,7 @@
 
 
 			<% if @student.blocked? %>
-				<p><%= link_to unblock_student_path(@student), confirm: 'Are you sure?', method: :delete, class: 'btn btn-warning' do %>
+				<p><%= link_to unblock_student_path(@student), confirm: 'Are you sure?', method: :get, class: 'btn btn-warning' do %>
 					<i class="fas fa-unlock"></i> Unblock Student's Access To Papyrus
 				<% end %></p>
 			<% else %>
