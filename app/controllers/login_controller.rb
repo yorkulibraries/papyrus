@@ -25,16 +25,10 @@ class LoginController < ApplicationController
   end
 
   def destroy
-    saml_sign_out = authenticated_with_saml?
     cookies.delete('mayaauth', domain: PapyrusSettings.auth_cookies_domain)
     cookies.delete('pybpp', domain: PapyrusSettings.auth_cookies_domain)
     reset_session
-    if saml_sign_out
-      redirect_to destroy_saml_user_session_path
-    else
-      # redirect_to root_path
-      redirect_to PapyrusSettings.auth_cas_logout_redirect, allow_other_host: true
-    end
+    redirect_to PapyrusSettings.auth_cas_logout_redirect, allow_other_host: true
   end
 
   def create
@@ -47,11 +41,4 @@ class LoginController < ApplicationController
     end
   end
 
-  private
-
-  def authenticated_with_saml?
-    Rails.configuration.is_authentication_method == :saml && warden.session(:user)[:strategy] == :saml_authenticatable
-  rescue Warden::NotAuthenticated
-    false
-  end
 end
