@@ -24,9 +24,8 @@ module Papyrus
 
     # values available for "is_authentication_method" are
     # 'devise' (login and pw)
-    # 'saml' (use an IdPs)
     # 'header' (only yorku setup)
-    config.is_authentication_method = ENV.fetch('AUTH_METHOD', 'devise').to_sym
+    config.is_authentication_method = ENV.fetch('AUTH_METHOD', 'header').to_sym
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W[#{config.root}/lib]
