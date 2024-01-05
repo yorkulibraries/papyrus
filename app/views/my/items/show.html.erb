@@ -11,7 +11,7 @@
 				<% @courses_grouped.sort.each do |group,  courses| %>
 				<li class="nav-item dropdown ">
 					<a class="dropdown-toggle nav-link <%= "active" if !params[:course].blank? && params[:course].split("_").first == group %>"
-						data-toggle="dropdown" href="#select_courses" title="Select a <%= group %> course">	<%= group %>
+						data-bs-toggle="dropdown" href="#select_courses" title="Select a <%= group %> course">	<%= group %>
 						<i class="caret"></i>
 					</a>
 					<ul class="dropdown-menu">
