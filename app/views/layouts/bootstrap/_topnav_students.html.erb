@@ -1,4 +1,5 @@
 <nav class="navbar navbar-red navbar-expand-md">
+<div class="container-fluid">
   <a class="navbar-brand" href="<%= root_path %>">
     My <%= PapyrusSettings.app_name %>
   </a>
@@ -22,7 +23,7 @@
     <% end %>
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fas fa-user me-1"></i>
           <%= @current_user.name if @current_user %>
         </a>
@@ -34,5 +35,6 @@
       </li>
 
     </ul>
+  </div>
   </div>
 </nav>
