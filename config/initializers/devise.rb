@@ -308,33 +308,4 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-
-  config.saml_route_helper_prefix = 'saml'
-  config.saml_create_user = false
-
-  config.saml_default_user_key = :email
-  config.saml_session_index_key = :session_index
-
-  # # You can set this value to use Subject or SAML assertion as info to which email will be compared.
-  # # If you don't set it then email will be extracted from SAML assertion attributes.
-  config.saml_use_subject = true
-
-  config.saml_attribute_map_resolver = 'SamlMapResolver'
-
-  config.saml_configure do |settings|
-    settings.assertion_consumer_service_url = "#{ENV['CALLBACK_DOMAIN']}/users/saml/auth"
-    settings.assertion_consumer_service_binding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
-    settings.name_identifier_format = 'urn:oasis:names:tc:SAML:2.0:nameid-format:emailAddress'
-    settings.issuer = "#{ENV['CALLBACK_DOMAIN']}/users/saml/metadata"
-    settings.authn_context = ''
-    # NOTE: set the idp_slo_target_url if you need to support Single Logout
-    settings.idp_slo_target_url = ''
-    settings.idp_sso_target_url = ENV['IDP_SSO_SERVICE_URL']
-    settings.idp_cert_fingerprint = ENV['IDP_CERT_FINGERPRINT']
-    settings.idp_cert_fingerprint_algorithm = ENV['IDP_CERT_FINGERPRINT-ALGORITHM']
-  end
-
-  config.warden do |manager|
-    manager.failure_app = CustomFailure
-  end
 end

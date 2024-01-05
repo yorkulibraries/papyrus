@@ -1,10 +1,8 @@
-# frozen_string_literal: true
-
 class StudentMailer < ActionMailer::Base
   default from: PapyrusSettings.email_from
 
   def notification_email(student, sender, message)
-    @template = Liquid::Template.parse(PapyrusSettings.email_notification_body) # Parses and compiles the template
+    @template = Liquid::Template.parse(PapyrusSettings.email_notification_body)  # Parses and compiles the template
 
     @student = student
     @sender = sender
@@ -17,12 +15,12 @@ class StudentMailer < ActionMailer::Base
     @app_name = PapyrusSettings.app_name
     @org_name = PapyrusSettings.org_name
 
-    return unless PapyrusSettings.email_allow && !student.email.nil?
+    if PapyrusSettings.email_allow && !student.email.nil?
+      mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_notification_subject)
 
-    mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_notification_subject)
-
-    @student.audit_comment = "Sent Notification Email to #{@student.email}"
-    @student.save
+      @student.audit_comment = "Sent Notification Email to #{@student.email}"
+      @student.save
+    end
   end
 
   def welcome_email(student, sender)
@@ -45,19 +43,19 @@ class StudentMailer < ActionMailer::Base
       @template = Liquid::Template.parse(PapyrusSettings.email_welcome_body) # Parses and compiles the template
     end
 
-    return unless PapyrusSettings.email_allow && !student.email.nil?
+    if PapyrusSettings.email_allow && !student.email.nil?
+      mail(to: student.email, cc: sender.email, bcc: @counsellor_email, subject: @subject)
 
-    mail(to: student.email, cc: sender.email, bcc: @counsellor_email, subject: @subject)
-
-    @student.audit_comment = "Sent to #{@student.email}"
-    @student.save
+      @student.audit_comment = "Sent to #{@student.email}"
+      @student.save
+    end
   end
 
   def items_assigned_email(student, items, sender)
     @template = Liquid::Template.parse(PapyrusSettings.email_item_assigned_body) # Parses and compiles the template
 
     @student = student
-    @items = items.map(&:title).join("\n ")
+    @items = items.map { |i| i.title }.join("\n ")
     @url  = PapyrusSettings.org_app_url
 
     ## extra setup variables
@@ -66,11 +64,11 @@ class StudentMailer < ActionMailer::Base
     @app_name = PapyrusSettings.app_name
     @org_name = PapyrusSettings.org_name
 
-    return unless PapyrusSettings.email_allow && !student.email.nil?
+    if PapyrusSettings.email_allow && !student.email.nil?
+      mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_item_assigned_subject)
 
-    mail(to: student.email, cc: sender.email, subject: PapyrusSettings.email_item_assigned_subject)
-
-    @student.audit_comment = "Sent Assigned Items Notice to #{@student.email}"
-    @student.save
+      @student.audit_comment = "Sent Assigned Items Notice to #{@student.email}"
+      @student.save
+    end
   end
 end

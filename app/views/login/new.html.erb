@@ -22,8 +22,6 @@
         </div>
         <%= submit_tag "Log In", class: "btn btn-primary" %>
       <% end %>
-    <% elsif Rails.configuration.is_authentication_method == :saml %>
-      <%= link_to "Sign in", new_saml_user_session_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
