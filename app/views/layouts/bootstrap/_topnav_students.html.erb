@@ -3,7 +3,7 @@
   <a class="navbar-brand" href="<%= root_path %>">
     My <%= PapyrusSettings.app_name %>
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -11,7 +11,7 @@
     <ul class="navbar-nav ms-auto">
     <% if Announcement.visible > 0 %>
       <li class="nav-item dropdown me-3">
-        <a class="nav-link dropdown-toggle" name="notification navigation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
+        <a class="nav-link dropdown-toggle" name="notification navigation" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
           <i class="fas fa-bell"></i>
         </a>
         <ul class="dropdown-menu">
@@ -22,7 +22,7 @@
       </li>
     <% end %>
 
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown dropstart">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fas fa-user me-1"></i>
           <%= @current_user.name if @current_user %>
