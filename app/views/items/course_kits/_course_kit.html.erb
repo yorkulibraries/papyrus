@@ -10,9 +10,6 @@
 				<div class="col-md-4">
 					<div class="text-right">
 
-						<a class="btn btn-sm" data-remote="true" href="<%= todo_lists_item_path(item) %>" title="Todo Lists">
-							<i class="fas fa-list fa-border p-2"></i>
-						</a>
 						<a class="btn btn-sm with-bubble <%= is_action?("acquisition_requests", "btn-primary")%>" data-remote="true" href="<%= new_acquisition_request_path(item_id: item.id) %>" title="Acquisition Requests">
 							<i class="fas fa-shopping-cart fa-border p-2"></i>
 							<% if @item.acquisition_requests.open.count > 0 %>
