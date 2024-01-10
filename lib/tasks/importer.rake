@@ -98,7 +98,7 @@ namespace :import do
 
     if ENV['EMAIL_REPORT_LOG_TO']
       subject = 'Papyrus Student Import Report'
-      subject << '- IMPORT ERRORS' if status[:errors].count.positive?
+      subject += '- IMPORT ERRORS' if status[:errors].count.positive?
       ReportMailer.mail_report(ENV['EMAIL_REPORT_LOG_TO'], @report_log.join("\n"), subject).deliver
     end
   end
