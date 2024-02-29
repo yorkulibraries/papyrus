@@ -7,6 +7,9 @@ Papyrus is an accessible content delivery and student management application. It
 ## Getting started
 Take a look at [Vagrant Papyrus](https://github.com/yorkulibraries/vagrant-papyrus) to quickly deploy an instance of Papyrus.
 
+## Docker
+This is a basic RoR project, so for docker use refer to the official documentation with step-by-step instructions here: https://hub.docker.com/_/ruby + Dockerfile include in this project.
+
 ## Authentication
 
 Values available for "is_authentication_method" are "devise" (login and pw), "header" (only yorku setup). Currently "header" is by default on "config/application.rb". You can use AUTH_METHOD env to chance devise as authentication mode.
