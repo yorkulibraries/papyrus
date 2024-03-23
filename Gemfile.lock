@@ -397,6 +397,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.7.3-x86_64-linux)
     ssrf_filter (1.1.2)
     terser (1.1.20)
       execjs (>= 0.3.0, < 3)
@@ -479,6 +480,7 @@ DEPENDENCIES
   selenium-webdriver (~> 4.15)
   shoulda (~> 4.0)
   simple_form (~> 5.1)
+  sqlite3 (~> 1.7)
   terser (~> 1.1, >= 1.1.20)
   tzinfo-data
   web-console (~> 4.2)
