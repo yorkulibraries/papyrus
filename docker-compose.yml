@@ -1,0 +1,32 @@
+version: '3.6'
+services:
+  web:
+    build:
+      context: .
+      args:
+        - NODE_VER=${NODE_VER:-lts}
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: sh -c "yarn install && bundle exec rake db:create && bundle exec rake db:migrate && bundle exec rake db:seed && bundle exec rake assets:precompile && rm -f tmp/pids/server.pid && bundle exec rails server -b '0.0.0.0'"
+    ports:
+      - ${PORT:-4004}:${PORT:-4004}
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - PORT=${PORT:-4004}
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - DATABASE_URL=mysql2://root:mypasswd@db/${COMPOSE_PROJECT_NAME}_${RAILS_ENV:-development}
+      - RAILS_SERVE_STATIC_FILES=true
+      - NODE_OPTIONS=--openssl-legacy-provider
+
+  db:
+    image: mysql
+    command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: mypasswd
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
