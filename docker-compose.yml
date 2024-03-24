@@ -21,7 +21,9 @@ services:
       - DATABASE_URL=mysql2://root:mypasswd@db/${COMPOSE_PROJECT_NAME}_${RAILS_ENV:-development}
       - RAILS_SERVE_STATIC_FILES=true
       - NODE_OPTIONS=--openssl-legacy-provider
-
+      - ALMA_API_KEY=${ALMA_API_KEY}
+      - PRIMO_API_KEY=${PRIMO_API_KEY}
+      - WORLDCAT_API_KEY=${WORLDCAT_API_KEY}
   db:
     image: mysql
     command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
