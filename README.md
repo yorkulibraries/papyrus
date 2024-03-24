@@ -5,17 +5,73 @@ Papyrus
 Papyrus is an accessible content delivery and student management application. Its core purpose is to provide a delivery system for online books, articles and course kits to students with disabilities. Another prominent function of Papyrus is to keep track of and help manage student accessibility information, as well as act as a repository for electronic books, articles and course kits.
 
 ## Getting started
-Take a look at [Vagrant Papyrus](https://github.com/yorkulibraries/vagrant-papyrus) to quickly deploy an instance of Papyrus.
-
-## Docker
-This is a basic RoR project, so for docker use refer to the official documentation with step-by-step instructions here: https://hub.docker.com/_/ruby + Dockerfile include in this project.
-
-## Authentication
-
-Values available for "is_authentication_method" are "devise" (login and pw), "header" (only yorku setup). Currently "header" is by default on "config/application.rb". You can use AUTH_METHOD env to chance devise as authentication mode.
 
 ```
-export AUTH_METHOD=devise
+git clone https://github.com/yorkulibraries/papyrus.git
+cd papyrus
+docker compose up --build
+```
+
+There are 2 containers created: **web** and **db**
+
+# Access the front end web app in DEVELOPMENT 
+
+By default, the application will listen on port 3005 and runs with RAILS_ENV=development.
+
+To access the application in Chrome browser, you will need to add the ModHeader extension to your Chrome browser.
+
+Header: PYORK_USER
+Value: admin (or manager or whatever user you want to mimic)
+
+For convenience, you can import the ModHeader profile from the included ModHeader_admin.json. 
+
+
+# What if I want to use a different port?
+
+If you wish to use a different port, you can set the PORT environment or change PORT in .env file.
+
+```
+PORT=4005 docker compose up --build
+```
+
+# Run tests
+
+Start the containers if you haven't started them yet.
+
+```
+docker compose up --build
+```
+
+Run all the tests
+
+```
+docker compose exec web rt 
+```
+
+Run a specific test
+```
+docker compose exec web rt test/controllers/users_controller_test.rb
+```
+
+# Access the containers
+
+DB container
+```
+docker compose exec db bash
+```
+
+Webapp container
+```
+docker compose exec web bash
+```
+
+
+## Authentication configuration
+
+Values available for "is_authentication_method" are "devise" (login and pw), "header" (only yorku setup). Currently "header" is by default on "config/application.rb". You can use AUTH_METHOD env to change devise as authentication mode.
+
+```
+AUTH_METHOD=devise docker compose up --build
 ```
 
 ## Importing students from CSV
@@ -34,11 +90,11 @@ Find the user ID of the Coordinator from the Papyrus Users screen and enter in t
 Suppose the Coordinator ID is 2 and the user running this command ID is 1.
 
 ```
-RAILS_ENV=production bundle exec rake import:students COORDINATOR_ID=2 CREATOR_ID=1 EMAIL_REPORT_LOG_TO=me@me.ca FILE=/path/to/students.csv
+docker compose exec web bundle exec rake import:students COORDINATOR_ID=2 CREATOR_ID=1 EMAIL_REPORT_LOG_TO=me@me.ca FILE=/path/to/students.csv
 ```
 
 ## Deactivating students
 
 ```
-RAILS_ENV=production bundle exec rake utils:deactivate_students
+docker compose exec web bundle exec rake utils:deactivate_students
 ```
