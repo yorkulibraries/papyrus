@@ -33,7 +33,7 @@ services:
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
 
-  mailcatcher:
+  mail:
     image: dockage/mailcatcher
     ports:
       - ${MAILCATCHER_HTTP:-4084}:1080
