@@ -1,5 +1,6 @@
 db/*.sqlite3
-log/*.log
+log/*
+!log/.keep
 tmp/
 public/uploads/**/*
 MissingDrawer.tmplugin
