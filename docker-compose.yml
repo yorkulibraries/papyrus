@@ -32,3 +32,9 @@ services:
       MYSQL_ROOT_PASSWORD: mypasswd
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+
+  mailcatcher:
+    image: dockage/mailcatcher
+    ports:
+      - ${MAILCATCHER_HTTP:-4084}:1080
+
