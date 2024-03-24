@@ -1,8 +1,8 @@
-<% title "Primo/Alama Settings", false %>
+<% title "Primo/Alma Settings", false %>
 
 <div class="row">
 	<div class="col-md-8">
-		<%= panel(title: "Promo Alma", icon: "cog") do %>
+		<%= panel(title: "Primo/Alma", icon: "cog") do %>
 			<p class="alert alert-danger"><strong>Warning:</strong> Changing these values might disable Primo/Alma Search capabilities. Please be careful.</p>
 
 			<%= simple_form_for PapyrusSettings.new, url: settings_path, method: :patch do |f| %>
@@ -43,7 +43,7 @@
 				<dt>Alma ApiKey</dt>
 				<dd>A unique key that allows Papyrus to access Alma records.</dd>
 				<dt>Alma Region</dt>
-				<dd>The url to the regional instance where Alama lives</dd>
+				<dd>The url to the regional instance where Alma lives</dd>
 			</dl>
 		<% end %>
 	</div>
