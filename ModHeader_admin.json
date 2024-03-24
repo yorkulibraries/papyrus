@@ -1,0 +1,1 @@
+[{"headers":[{"enabled":true,"name":"PYORK_USER","value":"admin"}],"shortTitle":"1","title":"PYORK admin","urlFilters":[{"enabled":true,"urlRegex":".*://localhost:300.*"}],"version":2}]
