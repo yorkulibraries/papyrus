@@ -16,7 +16,7 @@ There are 3 containers created: **web**, **db** and **mailcatcher**
 
 # Access the front end web app in DEVELOPMENT 
 
-(http://localhost:3005/)
+http://localhost:3005/
 
 
 By default, the application will listen on port 3005 and runs with RAILS_ENV=development.
@@ -30,7 +30,7 @@ For convenience, you can import the ModHeader profile from the included ModHeade
 
 # Access mailcatcher web app
 
-(http://localhost:3085/)
+http://localhost:3085/
 
 
 # What if I want to use a different port?
