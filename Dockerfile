@@ -16,6 +16,7 @@ RUN npm install --global yarn
 
 ADD Gemfil[e] /app/
 ADD Gemfile.loc[k] /app/
+ADD .ruby-versio[n] /app/
 
 RUN if [ -f Gemfile ] ; then bundle install ; fi
 RUN if [ ! -f Gemfile ] ; then gem install rails ; fi

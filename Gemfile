@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'http://rubygems.org'
-ruby '3.1.4'
+ruby File.read('.ruby-version').strip
 
 ## SECURITY FIX ##
 gem 'puma', '~> 6.4'
