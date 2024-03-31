@@ -14,7 +14,7 @@ docker compose up --build
 
 There are 3 containers created: **web**, **db** and **mailcatcher**
 
-# Access the front end web app in DEVELOPMENT 
+# Access the front end
 
 http://localhost:3005/
 
