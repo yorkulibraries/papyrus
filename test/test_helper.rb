@@ -7,6 +7,9 @@ require 'database_cleaner'
 require 'capybara/rails'
 require 'capybara/minitest'
 
+DatabaseCleaner.url_allowlist = [
+  %r{.*test.*}
+]
 DatabaseCleaner.strategy = :truncation
 
 Capybara.server_host = '0.0.0.0'
