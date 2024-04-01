@@ -5,8 +5,6 @@ default: &default
   reconnect: true
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 10000
-  variables:
-    sql_mode: "NO_ENGINE_SUBSTITUTION"
 
 development:
   <<: *default

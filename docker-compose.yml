@@ -19,11 +19,14 @@ services:
       - RAILS_ENV=${RAILS_ENV:-development}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
       - DATABASE_URL=mysql2://root:mypasswd@db/${COMPOSE_PROJECT_NAME}_${RAILS_ENV:-development}
+      - TEST_DATABASE_URL=sqlite3:db/test.sqlite3
       - RAILS_SERVE_STATIC_FILES=true
       - NODE_OPTIONS=--openssl-legacy-provider
-      - ALMA_API_KEY=${ALMA_API_KEY}
-      - PRIMO_API_KEY=${PRIMO_API_KEY}
-      - WORLDCAT_API_KEY=${WORLDCAT_API_KEY}
+      - SELENIUM_SERVER=chrome-server
+    env_file:
+      - path: ./override.env
+        required: false
+
   db:
     image: mysql
     command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
@@ -37,4 +40,9 @@ services:
     image: dockage/mailcatcher
     ports:
       - ${MAILCATCHER_HTTP:-4084}:1080
+
+  chrome-server:
+    image: selenium/standalone-chrome:96.0
+    ports:
+      - ${VNC_HTTP:-7904}:7900
 
