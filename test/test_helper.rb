@@ -7,6 +7,8 @@ require 'database_cleaner'
 require 'capybara/rails'
 require 'capybara/minitest'
 
+DatabaseCleaner.strategy = :truncation
+
 Capybara.server_host = '0.0.0.0'
 Capybara.app_host = "http://#{Socket.gethostname}:#{Capybara.server_port}"
 
@@ -20,6 +22,7 @@ module ActiveSupport
 
     setup do
       Rails.configuration.is_authentication_method = :header
+      DatabaseCleaner.start
     end
 
     teardown do
@@ -39,6 +42,7 @@ module ActiveSupport
       end
       CarrierWave.clean_cached_files! 0
       PapyrusSettings.clear_cache
+      DatabaseCleaner.clean
     end
 
     include FactoryGirl::Syntax::Methods

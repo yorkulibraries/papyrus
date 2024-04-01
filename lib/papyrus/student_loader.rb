@@ -38,7 +38,7 @@ module Papyrus
       students_list.shift if @options[:ignore_first_line]
 
       ## GET COORDINATOR LIST, for later processing
-      coordinator_list = User.active.coordinators.collect { |u| u.id }
+      coordinator_list = User.active.coordinators.order(id: :desc).collect { |u| u.id }
       ## ENSURE first id in the list is not the most recent assigned coordinator
       if Student.most_recent_students(1).size > 0
         last_assigned_coordinator_id = Student.most_recent_students(1).first.details.transcription_coordinator_id

@@ -79,10 +79,13 @@ module Papyrus
       PapyrusSettings.import_auto_assign_coordinator = PapyrusSettings::TRUE
       @loader.from_list(sample_data)
 
-      students = Student.all.to_ary
-      assert_equal c1.id, students.at(0).details.transcription_coordinator.id, 'Should be first coordinator'
-      assert_equal c2.id, students.at(1).details.transcription_coordinator.id, 'Should be second coordinator'
-      assert_equal c1.id, students.at(2).details.transcription_coordinator.id, 'Should be first coordinator'
+      student1 = Student.find_by_username '111111'
+      student2 = Student.find_by_username '222222'
+      student3 = Student.find_by_username '333333'
+
+      assert_equal c1.id, student1.details.transcription_coordinator.id, 'Should be first coordinator'
+      assert_equal c2.id, student2.details.transcription_coordinator.id, 'Should be second coordinator'
+      assert_equal c1.id, student3.details.transcription_coordinator.id, 'Should be first coordinator'
     end
 
     should 'not assign coordinaor first, if it was last assigned' do
@@ -102,11 +105,14 @@ module Papyrus
       PapyrusSettings.import_auto_assign_coordinator = PapyrusSettings::TRUE
       @loader.from_list(sample_data)
 
-      students = Student.all.to_ary
-      assert_equal c1.id, students.at(0).details.transcription_coordinator.id, 'Should be first coordinator'
-      assert_equal c2.id, students.at(1).details.transcription_coordinator.id, 'Should be second coordinator'
-      assert_equal c1.id, students.at(2).details.transcription_coordinator.id, 'Should be first coordinator'
-      assert_equal c2.id, students.at(3).details.transcription_coordinator.id, 'Should be second coordinator'
+      student1 = Student.find_by_username '111111'
+      student2 = Student.find_by_username '222222'
+      student3 = Student.find_by_username '333333'
+
+      assert_equal c1.id, student.details.transcription_coordinator.id, 'Should be first coordinator'
+      assert_equal c2.id, student1.details.transcription_coordinator.id, 'Should be second coordinator'
+      assert_equal c1.id, student2.details.transcription_coordinator.id, 'Should be first coordinator'
+      assert_equal c2.id, student3.details.transcription_coordinator.id, 'Should be second coordinator'
     end
 
     should 'send an welcome email to student upon creation if setting is enabled' do

@@ -21,19 +21,23 @@ class BibSearchTest < ActionDispatch::IntegrationTest
   #    end
 
   should 'search WOLRDCAT for Multiple Items' do
-    search_string = 'Caesar'
-    record = BibRecord.new
-    results = record.search_items(search_string, BibRecord::WORLDCAT)
+    if !ENV['WORLDCAT_API_KEY'].nil?
+      search_string = 'Caesar'
+      record = BibRecord.new
+      results = record.search_items(search_string, BibRecord::WORLDCAT)
 
-    assert results.size.positive?, 'At least one result should happen'
+      assert results.size.positive?, 'At least one result should happen'
+    end
   end
 
   should 'search WORLDCAT for single item' do
-    item_id = '671660984' # Julius Caesar by Shakespear
-    record = BibRecord.new
-    item = record.find_item(item_id, BibRecord::WORLDCAT)
+    if !ENV['WORLDCAT_API_KEY'].nil?
+      item_id = '671660984' # Julius Caesar by Shakespear
+      record = BibRecord.new
+      item = record.find_item(item_id, BibRecord::WORLDCAT)
 
-    assert_not_nil item
-    assert_equal item_id, item.id
+      assert_not_nil item
+      assert_equal item_id, item.id
+    end
   end
 end

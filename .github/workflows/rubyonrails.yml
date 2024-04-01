@@ -1,0 +1,57 @@
+name: "Ruby on Rails CI"
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+jobs:
+  build_and_run_tests:
+    name: Build and run tests
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: mysql
+          MYSQL_DATABASE: test
+          MYSQL_USER: test
+          MYSQL_PASSWORD: test
+        # Set health checks to wait until mysql has started
+        options: >-
+          --health-cmd "mysqladmin ping -h 127.0.0.1 -u root -p$$MYSQL_ROOT_PASSWORD"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      chrome-server:
+        image: selenium/standalone-chrome:96.0
+        ports:
+          - 4444:4444
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run tests with sqlite3
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: sqlite3:db/test.sqlite3
+          SELENIUM_SERVER: 127.0.0.1
+        run: |
+          bundle exec rake db:reset
+          bundle exec rake test
+          bundle exec rake test:system
+      - name: Run tests with mysql
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: mysql2://test:test@127.0.0.1:3306/test
+          SELENIUM_SERVER: 127.0.0.1
+        run: |
+          bundle exec rake db:reset
+          bundle exec rake test
+          bundle exec rake test:system
