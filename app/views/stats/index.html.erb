@@ -15,15 +15,15 @@
 							<span class="strong text-black">Item Statistics</span>
 						</li>
 					  <li class="list-group-item">
-					    <span class="badge badge-secondary"><%= Item.count %></span>
+					    <span class="badge bg-secondary"><%= Item.count %></span>
 					    Total Number of Items
 					  </li>
 						<li class="list-group-item">
-					    <span class="badge badge-secondary"><%= @has_attachments_count %></span>
+					    <span class="badge bg-secondary"><%= @has_attachments_count %></span>
 					    Items with Files Attached
 					  </li>
 						<li class="list-group-item">
-					    <span class="badge badge-secondary"><%= @has_students_count %></span>
+					    <span class="badge bg-secondary"><%= @has_students_count %></span>
 					    Items Assigned to Students
 					  </li>
 					</ul>
@@ -36,15 +36,15 @@
 							<span class="strong text-black">Student Statistics</span>
 						</li>
 						<li class="list-group-item">
-							<span class="badge badge-secondary"><%= Student.count %></span>
+							<span class="badge bg-secondary"><%= Student.count %></span>
 							Total Number of Students
 						</li>
 						<li class="list-group-item">
-							<span class="badge badge-secondary"><%= Student.active.count %></span>
+							<span class="badge bg-secondary"><%= Student.active.count %></span>
 							Active Students
 						</li>
 						<li class="list-group-item">
-							<span class="badge badge-secondary"><%= Student.inactive.count %></span>
+							<span class="badge bg-secondary"><%= Student.inactive.count %></span>
 							Inactive Students
 						</li>
 					</ul>
@@ -57,15 +57,15 @@
 							<span class="strong text-black">Miscellaneous Statistics</span>
 						</li>
 						<li class="list-group-item">
-							<span class="badge badge-secondary"><%=  User.not_students.active.count %></span>
+							<span class="badge bg-secondary"><%=  User.not_students.active.count %></span>
 				 			Active Papyrus Users
 						</li>
 						<li class="list-group-item">
-							<span class="badge badge-secondary"><%= User.not_students.inactive.count %></span>
+							<span class="badge bg-secondary"><%= User.not_students.inactive.count %></span>
 							Inactive Papyrus Users
 						</li>
 						<li class="list-group-item">
-							<span class="badge badge-secondary"> <%= Term.count %> | <%= Course.count %> </span>
+							<span class="badge bg-secondary"> <%= Term.count %> | <%= Course.count %> </span>
 							Terms and Courses
 						</li>
 					</ul>

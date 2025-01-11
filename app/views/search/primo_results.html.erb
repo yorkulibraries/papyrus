@@ -24,7 +24,7 @@
       <div class="media-body">
           <h4 class="media-heading">
             <% unless item.ils_id.blank? %>
-            <span class="badge badge-success">
+            <span class="badge bg-success">
               <a href="<%= new_item_path %>?bib_record_id=<%= item.ils_id %>&amp;source=<%= BibRecord::PRIMO %>" data-confirm="Are you sure?" class="hidden-phone">
                 <i class="fa fa-plus-square fa-fw "></i> item
               </a>
