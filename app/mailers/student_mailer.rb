@@ -35,7 +35,8 @@ class StudentMailer < ActionMailer::Base
     @org_name = PapyrusSettings.org_name
     @counsellor_email = student.details.cds_counsellor_email
 
-    if PapyrusSettings.email_lab_access_enable && @student.lab_access_only?
+    #if PapyrusSettings.email_lab_access_enable && @student.lab_access_only?
+    if PapyrusSettings.email_lab_access_enable.to_s.casecmp('true').zero? && @student.lab_access_only?
       @subject = PapyrusSettings.email_lab_access_subject
       @template = Liquid::Template.parse(PapyrusSettings.email_lab_access_body) # Parses and compiles the template
     else

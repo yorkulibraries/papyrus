@@ -10,14 +10,18 @@ namespace :utils do
       s.save(validate: false)
     end
 
+    lab_only_deactivated_count = 0
     lab_access_only_students = Student.lab_access_only
     lab_access_only_students.each do |s|
-      s.inactive = true
-      s.audit_comment = 'Deactivating Lab Access Only students....'
-      s.save(validate: false)
+      if !s.inactive
+        s.inactive = true
+        s.audit_comment = 'Deactivating Lab Access Only students....'
+        s.save(validate: false)
+        lab_only_deactivated_count += 1
+      end
     end
 
-    puts "Dectivated #{active_students.size} inactive students and #{lab_access_only_students.size} lab only students"
+    puts "Dectivated #{active_students.size} inactive students and #{lab_only_deactivated_count} lab only students"
   end
 
   task block_lab_only_students: :environment do
