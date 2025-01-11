@@ -2,7 +2,6 @@ default: &default
   encoding: utf8
   adapter: <%= ENV["DB_ADAPTER"] || "mysql2" %>
   url: <%= ENV["DATABASE_URL"] %>
-  reconnect: true
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 10000
   variables:

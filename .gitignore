@@ -19,3 +19,6 @@ yarn.lock
 .bundle
 .byebug_history
 *.env
+*.sql
+*.gz
+
