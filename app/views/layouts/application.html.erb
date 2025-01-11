@@ -47,7 +47,7 @@
             <div class="col-md-12">
               <p class="small help-block"
               title="<%= @current_user.last_active_at.strftime("Last recorded activity at %I:%M:%S %p") if @current_user && @current_user.last_active_at != nil %>">
-                &copy; 2011 - <%= Date.today.year %>. Papyrus - <%= papyrus_institution %>. v.<%= papyrus_version %> </p>
+                &copy; 2011 - <%= Date.today.year %>. Papyrus - <%= papyrus_institution %>. (Version: <%= Rails.application.config.git_commit_hash %>) </p>
             </div>
           </div>
         </main>
