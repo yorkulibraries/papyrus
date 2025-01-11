@@ -50,10 +50,10 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # set delivery method to :smtp, :sendmail or :test
-  config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_options = { from: 'no-reply@library.yorku.ca' }
-  config.action_mailer.default_url_options = { host: 'papyrus.library.yorku.ca' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { address: ENV['SMTP_HOST'], port: ENV['SMTP_PORT'] }
+  config.action_mailer.default_url_options = { host: ENV['HOST'] }
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
