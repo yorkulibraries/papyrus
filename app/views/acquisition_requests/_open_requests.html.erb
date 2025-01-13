@@ -8,7 +8,7 @@
 
   <ul class="nav nav-pills" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <a class="nav-link active" id="my-tab" data-toggle="tab"
+      <a class="nav-link active" id="my-tab" data-bs-toggle="tab"
           href="#my_requests" role="tab" aria-controls="home" aria-selected="true">
         My Requests
       </a>
@@ -16,7 +16,7 @@
     <% @acquisition_requests_grouped.keys.reject{ |r| r[:id] == @current_user.id }.each do |user|  %>
 
       <li class="nav-item" role="presentation">
-        <a class="nav-link" id="created_by_tab_<%= user[:id] %>" data-toggle="tab"
+        <a class="nav-link" id="created_by_tab_<%= user[:id] %>" data-bs-toggle="tab"
             href="#created_by_<%= user[:id] %>" role="tab" aria-controls="profile" aria-selected="false">
           <%= user[:name] %>
         </a>
@@ -24,7 +24,7 @@
     <% end %>
 
     <li class="nav-item" role="presentation">
-      <a class="nav-link" id="all-tab" data-toggle="tab" href="#all_requests" role="tab" aria-controls="contact" aria-selected="false">
+      <a class="nav-link" id="all-tab" data-bs-toggle="tab" href="#all_requests" role="tab" aria-controls="contact" aria-selected="false">
         All
       </a>
     </li>
